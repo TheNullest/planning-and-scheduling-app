@@ -4,7 +4,7 @@ import 'package:zamaan/core/common/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 
 void main() {
-  final entity = UserEntity.empty();
+  final entity = UserEntity.forTest();
   final testModel = LocalUserModel.fromEntity(entity);
   test('[hiveUserModel] must be a subclass of [UserEntity] ', () {
     // Arrange => testModel

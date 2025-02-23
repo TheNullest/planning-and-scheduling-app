@@ -7,4 +7,4 @@ bool isValidUUID(String uuid) {
   return regex.hasMatch(uuid);
 }
 
-String uuidGenerator() => const Uuid().v4();
+String get uuidGenerator => const Uuid().v4();

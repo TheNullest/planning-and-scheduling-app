@@ -1,0 +1,8 @@
+import 'package:zamaan/core/usecases/update_entity_usecase.dart';
+import 'package:zamaan/features/goal/domain/entities/goal_entity.dart';
+import 'package:zamaan/features/goal/domain/repositories/goal_repository.dart';
+
+class UpdateGoalUsecase
+    extends UpdateEntityUseCase<GoalEntity, GoalRepository> {
+  UpdateGoalUsecase(super.repository);
+}

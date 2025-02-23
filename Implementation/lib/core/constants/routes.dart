@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_up_view.dart';
 import 'package:zamaan/features/settings/presentation/views/settings_view.dart';
-import 'package:zamaan/features/task/presentation/views/main_task_view.dart';
+import 'package:zamaan/features/shell/presentation/views/shell_view.dart';
 
 class Routes {
   Routes._();
@@ -13,7 +13,7 @@ class Routes {
   static const String signUpStringRoute = '/sign-up';
   static const String signInStringRoute = '/sign-in';
   static const String settingsStringRoute = '/settings';
-  static const String mainTaskStringRoute = '/main-task';
+  static const String shellStringRoute = '/shell';
 
 // Material routes
   static MaterialPageRoute signUpMaterialRoute(BuildContext context) =>
@@ -25,8 +25,8 @@ class Routes {
   static MaterialPageRoute settingsMaterialRoute(BuildContext context) =>
       _materialPageRoute(context, const SettingsView());
 
-  static MaterialPageRoute mainTaskMaterialRoute(BuildContext context) =>
-      _materialPageRoute(context, const MaintTaskView());
+  static MaterialPageRoute shellMaterialRoute(BuildContext context) =>
+      _materialPageRoute(context, const ShellView());
 
   static MaterialPageRoute<T> _materialPageRoute<T>(
     BuildContext context,

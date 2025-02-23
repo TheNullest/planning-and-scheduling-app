@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/common/providers/user_provider.dart';
+import 'package:zamaan/core/config/themes/app_dark_theme.dart';
 import 'package:zamaan/core/services/init_dependencies.dart';
 
 import 'package:zamaan/core/services/router.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
-import 'package:zamaan/features/task/presentation/views/main_task_view.dart';
+import 'package:zamaan/features/shell/presentation/views/shell_view.dart';
 
 void main() async {
   await intiDependencies();
@@ -45,12 +46,13 @@ class _ZamaanState extends State<Zamaan> {
     return ChangeNotifierProvider(
       create: (_) => UserProvider(),
       child: MaterialApp(
+        theme: AppTheme.darkThemeMode,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: generateRoute,
         home: BlocSelector<AppUserCubit, AppUserState, bool>(
           selector: (state) => state is AppUserSignedInState,
           builder: (context, userSignedIn) =>
-              userSignedIn ? const MaintTaskView() : const SignInView(),
+              userSignedIn ? const ShellView() : const SignInView(),
         ),
       ),
     );

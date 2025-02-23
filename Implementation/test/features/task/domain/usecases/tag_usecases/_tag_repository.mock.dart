@@ -1,4 +1,4 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:zamaan/features/task/domain/repositories/tag_repository.dart';
+import 'package:zamaan/features/tag/domain/repositories/tag_repository.dart';
 
 class MockTagRepo extends Mock implements TagRepository {}

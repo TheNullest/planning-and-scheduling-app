@@ -13,6 +13,8 @@ class _UiTexts {
   final String signIn = 'Sign In.';
   final String dontHaveAccount = "Don't have an account? ";
   final String haveAccount = 'Already have an account? ';
+  final String resetPasswordSuccess =
+      'Password reset link successfully sent to your email.';
 }
 
 class _WidgetTexts {

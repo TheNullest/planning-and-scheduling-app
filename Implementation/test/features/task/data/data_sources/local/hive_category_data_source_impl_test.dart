@@ -8,8 +8,8 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/core/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/task/data/data_sources/hive/hive_category_data_source_impl.dart';
-import 'package:zamaan/features/task/data/models/local/category_local_model.dart';
+import 'package:zamaan/features/category/data/sources/hive_category_data_source_impl.dart';
+import 'package:zamaan/features/category/data/models/category_local_model.dart';
 
 class MockHiveInit extends Mock implements HiveServices<CategoryLocalModel> {}
 

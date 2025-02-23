@@ -1,10 +1,9 @@
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/data/data_sources/hive/hive_sub_task_data_source_impl.dart';
-import 'package:zamaan/features/task/data/models/local/sub_task_local_model.dart';
-import 'package:zamaan/features/task/domain/entities/sub_task_entity.dart';
-
+import 'package:zamaan/features/sub_task/data/sources/hive_sub_task_data_source_impl.dart';
+import 'package:zamaan/features/sub_task/data/models/sub_task_local_model.dart';
+import 'package:zamaan/features/sub_task/domain/entities/sub_task_entity.dart';
 
 class MockDataSource extends Mock implements HiveSubTaskDataSourceImpl {}
 

@@ -22,7 +22,7 @@ class LocalUserModel extends UserEntity {
   });
 
   // For the purpose of testing
-  LocalUserModel.empty() : super.empty();
+  LocalUserModel.empty() : super.forTest();
 
   factory LocalUserModel.fromEntity(UserEntity entity) => LocalUserModel(
         id: entity.id,

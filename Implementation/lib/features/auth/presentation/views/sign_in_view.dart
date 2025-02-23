@@ -42,11 +42,14 @@ class _SignInViewState extends State<SignInView> {
             if (state is AuthFailureState) {
               showSnackBar(context, state.message);
             }
+            if (state is AuthUserPasswordSuccessState) {
+              showSnackBar(context, AppTexts.uiTexts.resetPasswordSuccess);
+            }
             if (state is AuthSuccessState) {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.mainTaskStringRoute);
+              navigatorPushRemoveUntil(context, Routes.shellStringRoute);
             }
           },
           builder: (context, state) {
@@ -112,6 +115,19 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                     ),
+                  ),
+                  30.sizedBoxHeight,
+                  ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<AuthBloc>().add(
+                              AuthResetPasswordEvent(
+                                emailController.text.trim(),
+                              ),
+                            );
+                      }
+                    },
+                    child: const Text('Reset Password'),
                   ),
                 ],
               ),

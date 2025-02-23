@@ -17,13 +17,26 @@ class AppTheme {
       color: WidgetStatePropertyAll(AppPallete.backgroundColor),
       side: BorderSide.none,
     ),
-    scaffoldBackgroundColor: AppPallete.backgroundColor,
+    scaffoldBackgroundColor: AppPallete.gradient1,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.yellow,
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: AppPallete.error,
+      ),
+      titleTextStyle: const TextStyle(
+        color: AppPallete.grey,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+    primaryColor: AppPallete.gradient3,
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.all(27),
       border: _border(),
       enabledBorder: _border(),
       focusedBorder: _border(borderColor: AppPallete.focusedBorderColor),
-      errorBorder: _border(borderColor: AppPallete.errorColor),
+      errorBorder: _border(borderColor: AppPallete.error),
     ),
   );
 }

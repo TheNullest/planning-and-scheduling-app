@@ -1,0 +1,8 @@
+import 'package:zamaan/core/usecases/get_entities_usecase.dart';
+import 'package:zamaan/features/measurement_unit/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/features/measurement_unit/domain/repositories/measurement_unit_repository.dart';
+
+class GetMeasurementUnitsUsecase extends GetEntitiesUseCase<
+    MeasurementUnitRepository, MeasurementUnitEntity> {
+  GetMeasurementUnitsUsecase(super.repository);
+}

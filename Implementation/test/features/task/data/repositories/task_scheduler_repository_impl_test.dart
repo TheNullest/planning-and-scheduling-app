@@ -1,11 +1,10 @@
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/data/data_sources/hive/hive_task_scheduler_data_source_impl.dart';
-import 'package:zamaan/features/task/data/models/local/task_scheduler_local_model.dart';
-import 'package:zamaan/features/task/domain/entities/task_scheduler_entity.dart';
-import 'package:zamaan/features/task/domain/params/get_by_task_ids_and_date_range_params.dart';
-
+import 'package:zamaan/features/task_scheduler/data/sources/hive_task_scheduler_data_source_impl.dart';
+import 'package:zamaan/features/task_scheduler/data/models/task_scheduler_local_model.dart';
+import 'package:zamaan/features/task_scheduler/domain/entities/task_scheduler_entity.dart';
+import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
 
 class MockDataSource extends Mock implements HiveTaskSchedulerDataSourceImpl {}
 

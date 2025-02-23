@@ -18,7 +18,7 @@ class UserEntity extends BaseEntityAbstraction {
   });
 
 // For the purpose of testing
-  UserEntity.empty()
+  UserEntity.forTest()
       : this(
           userName: '_empty.userName',
           firstName: '_empty.firstName',

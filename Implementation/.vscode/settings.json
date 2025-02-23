@@ -3,5 +3,6 @@
   "errorLens.codeLensEnabled": false,
   "errorLens.codeLensOnClick": "showQuickFix",
   "errorLens.borderRadius": "0.2em",
-  "errorLens.codeLensTemplate": "$severity $message $code"
+  "errorLens.codeLensTemplate": "$severity $message $code",
+  "cmake.sourceDirectory": "E:/Flutter.Dart/Zamaan/Implementation/linux"
 }

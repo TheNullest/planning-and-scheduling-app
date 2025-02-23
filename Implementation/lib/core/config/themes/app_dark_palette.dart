@@ -8,7 +8,7 @@ class AppPallete {
   static const Color enableBorderColor = Color.fromRGBO(52, 51, 67, 1);
   static const Color focusedBorderColor = Color.fromRGBO(251, 109, 169, 1);
   static const Color disabledBorderColor = Color.fromRGBO(41, 41, 41, 1);
-  static const Color whiteColor = Colors.white;
-  static const Color greyColor = Colors.grey;
-  static const Color errorColor = Colors.redAccent;
+  static const Color white = Colors.white;
+  static const Color grey = Colors.grey;
+  static const Color error = Colors.redAccent;
 }

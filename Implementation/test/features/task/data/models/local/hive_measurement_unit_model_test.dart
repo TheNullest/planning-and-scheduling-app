@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/features/task/data/models/local/measurement_unit_local_model.dart';
-import 'package:zamaan/features/task/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/features/measurement_unit/data/models/measurement_unit_local_model.dart';
+import 'package:zamaan/features/measurement_unit/domain/entities/measurement_unit_entity.dart';
 
 void main() {
   final entity = MeasurementUnitEntity.empty();

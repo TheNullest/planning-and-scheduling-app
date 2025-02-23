@@ -57,6 +57,9 @@ void _initAuth() {
     ..registerFactory(() => SignUpUsecase(serviceLocator()))
     ..registerFactory(() => SignInUsecase(serviceLocator()))
     ..registerFactory(() => SignOutUsecase(serviceLocator()))
+    ..registerFactory(() => ChangePasswordUsecase(serviceLocator()))
+    ..registerFactory(() => ResetPasswordUsecase(serviceLocator()))
+    ..registerFactory(() => DeleteAccountUsecase(serviceLocator()))
 
     // AuthBloc
     ..registerLazySingleton(
@@ -66,6 +69,9 @@ void _initAuth() {
         currentUserUsecase: serviceLocator(),
         signOutUsecase: serviceLocator(),
         appUserCubit: serviceLocator(),
+        changePasswordUseCase: serviceLocator(),
+        resetPasswordUsecase: serviceLocator(),
+        deleteAccountUsecase: serviceLocator(),
       ),
     );
 }

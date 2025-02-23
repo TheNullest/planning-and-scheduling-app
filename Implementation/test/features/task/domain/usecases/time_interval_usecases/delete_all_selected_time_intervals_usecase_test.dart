@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/time_interval_usecases/delete_all_selected_time_intervals_usecase.dart';
+import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
+import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/delete_all_selected_time_intervals_usecase.dart';
 
 import '_time_interval_repository.mock.dart';
 

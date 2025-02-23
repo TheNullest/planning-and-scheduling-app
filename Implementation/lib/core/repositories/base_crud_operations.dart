@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/core/data_sources/base_data_source_abstraction.dart';
+import 'package:zamaan/core/sources/base_data_source_abstraction.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 

@@ -25,7 +25,7 @@ void main() {
     useCase = CreateUserUseCase(repository);
   });
 
-  final params = UserEntity.empty();
+  final params = UserEntity.forTest();
   group('user.createUsecase', () {
     test('[user.createUsecase] must call the [AuthRepo.createEntity]',
         () async {

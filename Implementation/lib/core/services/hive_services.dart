@@ -10,8 +10,12 @@ import 'package:zamaan/core/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
-
-import 'package:zamaan/features/task/data/models/local/local_models.dart';
+import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
+import 'package:zamaan/features/main_task/data/models/main_task_local_model.dart';
+import 'package:zamaan/features/measurement_unit/data/models/measurement_unit_local_model.dart';
+import 'package:zamaan/features/sub_task/data/models/sub_task_local_model.dart';
+import 'package:zamaan/features/tag/data/models/tag_local_model.dart';
+import 'package:zamaan/features/time_interval/data/models/local/time_interval_local_model.dart';
 
 class HiveServices<HiveModel extends BaseEntityAbstraction> {
   static Future<void> init() async {

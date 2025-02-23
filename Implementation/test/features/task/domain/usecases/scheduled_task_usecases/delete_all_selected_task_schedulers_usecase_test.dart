@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/task_scheduler_usecases/delete_all_selected_task_schedulers_usecase.dart';
+import 'package:zamaan/features/task_scheduler/domain/repositories/task_scheduler_repository.dart';
+import 'package:zamaan/features/task_scheduler/domain/usecases/delete_all_selected_task_schedulers_usecase.dart';
 
 import '_task_scheduler_repository.mock.dart';
 

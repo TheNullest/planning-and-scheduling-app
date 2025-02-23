@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     repository = MockAuthRepo();
     useCase = GetUserUsecase(repository);
-    param = UserEntity.empty();
+    param = UserEntity.forTest();
   });
 
   test(

@@ -25,7 +25,7 @@ abstract class BaseEntityAbstraction extends HiveObject with EquatableMixin {
     DateTime? updatedAt,
     this.userId,
     this.description,
-  })  : id = id ?? uuidGenerator(),
+  })  : id = id ?? uuidGenerator,
         createdAt = createdAt ?? DateTime.now(),
         updatedAt = updatedAt ?? DateTime.now();
 
@@ -33,7 +33,7 @@ abstract class BaseEntityAbstraction extends HiveObject with EquatableMixin {
   ///
   /// This field is automatically generated using `uuidGenerator` if not provided.
   @HiveField(0)
-  final String id;
+  late String id;
 
   /// The ID of the creator of the entity, if any.
   @HiveField(1)

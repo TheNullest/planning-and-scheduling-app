@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/entities/tag_entity.dart';
-import 'package:zamaan/features/task/domain/repositories/tag_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/tag_usecases/create_tag_usecase.dart';
+import 'package:zamaan/features/tag/domain/entities/tag_entity.dart';
+import 'package:zamaan/features/tag/domain/repositories/tag_repository.dart';
+import 'package:zamaan/features/tag/domain/usecases/create_tag_usecase.dart';
 
 import '_tag_repository.mock.dart';
 

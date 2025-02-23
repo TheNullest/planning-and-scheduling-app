@@ -8,8 +8,8 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/core/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/task/data/data_sources/hive/hive_time_interval_data_source_impl.dart';
-import 'package:zamaan/features/task/data/models/local/time_interval_local_model.dart';
+import 'package:zamaan/features/shell/data/sources/hive/hive_time_interval_data_source_impl.dart';
+import 'package:zamaan/features/shell/data/models/local/time_interval_local_model.dart';
 
 class MockHiveInit extends Mock
     implements HiveServices<TimeIntervalLocalModel> {}

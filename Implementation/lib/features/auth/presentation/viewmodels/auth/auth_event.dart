@@ -36,3 +36,30 @@ final class AuthSignOutEvent extends AuthEvent {
   @override
   List<Object> get props => [state];
 }
+
+final class AuthChangePasswordEvent extends AuthEvent {
+  const AuthChangePasswordEvent(this.params);
+
+  final ChangePasswordParams params;
+
+  @override
+  List<Object> get props => [params];
+}
+
+final class AuthResetPasswordEvent extends AuthEvent {
+  const AuthResetPasswordEvent(this.email);
+
+  final String email;
+
+  @override
+  List<Object> get props => [email];
+}
+
+final class AuthDeleteAccountEvent extends AuthEvent {
+  const AuthDeleteAccountEvent(this.params);
+
+  final UserSignInParams params;
+
+  @override
+  List<Object> get props => [params];
+}

@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/repositories/category_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/category_usecases/delete_all_selected_categories_usecase.dart';
+import 'package:zamaan/features/category/domain/repositories/category_repository.dart';
+import 'package:zamaan/features/category/domain/usecases/delete_all_selected_categories_usecase.dart';
 
 import '_category_repository.mock.dart';
 

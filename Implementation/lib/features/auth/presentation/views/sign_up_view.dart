@@ -52,7 +52,7 @@ class _SignUpViewState extends State<SignUpView> {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.mainTaskStringRoute);
+              navigatorPushRemoveUntil(context, Routes.shellStringRoute);
             }
           },
           builder: (context, state) {
@@ -109,7 +109,7 @@ class _SignUpViewState extends State<SignUpView> {
                       if (formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
                               AuthSignUpEvent(
-                                user: UserEntity.empty().copyWith(
+                                user: UserEntity.forTest().copyWith(
                                   userName: userNameController.text,
                                   firstName: firstNameController.text,
                                   lastName: lastNameController.text,

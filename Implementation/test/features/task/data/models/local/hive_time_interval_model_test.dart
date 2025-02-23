@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/features/task/data/models/local/time_interval_local_model.dart';
-import 'package:zamaan/features/task/domain/entities/time_interval_entity.dart';
+import 'package:zamaan/features/shell/data/models/local/time_interval_local_model.dart';
+import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 
 void main() {
   final entity = TimeIntervalEntity.empty();

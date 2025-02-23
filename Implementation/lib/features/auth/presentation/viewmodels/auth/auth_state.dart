@@ -29,3 +29,7 @@ final class AuthFailureState extends AuthState {
 }
 
 final class AuthUserSignedOutState extends AuthState {}
+
+final class AuthUserAccountDeletedState extends AuthState {}
+
+final class AuthUserPasswordSuccessState extends AuthState {}

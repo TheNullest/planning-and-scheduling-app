@@ -1,0 +1,13 @@
+import 'package:zamaan/core/usecases/base_usecase.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
+import 'package:zamaan/features/auth/domain/repositories/authentication_repository.dart';
+
+class ChangePasswordUsecase extends UseCaseWithParams<AuthenticationRepository,
+    void, ChangePasswordParams> {
+  ChangePasswordUsecase(super.repository);
+
+  @override
+  ResultFutureVoid call(ChangePasswordParams params) async =>
+      repository.changePassword(params);
+}

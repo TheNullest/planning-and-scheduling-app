@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/features/task/data/models/local/tag_local_model.dart';
-import 'package:zamaan/features/task/domain/entities/tag_entity.dart';
+import 'package:zamaan/features/tag/data/models/tag_local_model.dart';
+import 'package:zamaan/features/tag/domain/entities/tag_entity.dart';
 
 void main() {
   final entity = TagEntity.empty();

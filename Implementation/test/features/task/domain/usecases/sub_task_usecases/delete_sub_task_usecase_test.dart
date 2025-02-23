@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/entities/goal_entity.dart';
-import 'package:zamaan/features/task/domain/repositories/sub_task_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/sub_task_usecases/delete_sub_task_usecase.dart';
+import 'package:zamaan/features/goal/domain/entities/goal_entity.dart';
+import 'package:zamaan/features/sub_task/domain/repositories/sub_task_repository.dart';
+import 'package:zamaan/features/sub_task/domain/usecases/delete_sub_task_usecase.dart';
 
 import '_sub_task_repository.mock.dart';
 

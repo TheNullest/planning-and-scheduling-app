@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/task/domain/repositories/goal_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/goal_usecases/delete_all_selected_goals_usecase.dart';
+import 'package:zamaan/features/goal/domain/repositories/goal_repository.dart';
+import 'package:zamaan/features/goal/domain/usecases/delete_all_selected_goals_usecase.dart';
 
 import '_goal_repository.mock.dart';
 
