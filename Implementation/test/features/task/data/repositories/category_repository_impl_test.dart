@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/category/data/sources/hive_category_data_source_impl.dart';
 import 'package:zamaan/features/category/data/models/category_local_model.dart';
+import 'package:zamaan/features/category/data/sources/hive_category_data_source_impl.dart';
 import 'package:zamaan/features/category/domain/entities/category_entity.dart';
 
 class MockDataSource extends Mock implements HiveCategoryDataSourceImpl {}

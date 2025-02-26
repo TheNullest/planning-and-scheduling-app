@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/core/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/config/themes/app_dark_palette.dart';
 import 'package:zamaan/core/constants/routes.dart';
 

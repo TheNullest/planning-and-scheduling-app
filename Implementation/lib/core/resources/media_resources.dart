@@ -9,7 +9,7 @@ class MediaResources {
 
 class _Images {
   static const String _baseImage = 'assets/images';
-  final String newImage = 'NewImage';
+  final String newImage = '$_baseImage/NewImage';
 }
 
 class _Lotties {

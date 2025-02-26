@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
 import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
+import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
 import 'package:zamaan/features/goal/domain/entities/goal_entity.dart';
 
 class MockDataSource extends Mock implements HiveGoalDataSourceImpl {}

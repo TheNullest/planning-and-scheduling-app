@@ -6,8 +6,8 @@ import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/services/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 
 /// A local data source implementation for authentication-related operations.
 ///

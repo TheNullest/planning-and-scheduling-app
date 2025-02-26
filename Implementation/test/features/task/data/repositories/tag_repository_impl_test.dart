@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/tag/data/sources/hive_tag_data_source_impl.dart';
 import 'package:zamaan/features/tag/data/models/tag_local_model.dart';
+import 'package:zamaan/features/tag/data/sources/hive_tag_data_source_impl.dart';
 import 'package:zamaan/features/tag/domain/entities/tag_entity.dart';
 
 class MockDataSource extends Mock implements HiveTagDataSourceImpl {}
