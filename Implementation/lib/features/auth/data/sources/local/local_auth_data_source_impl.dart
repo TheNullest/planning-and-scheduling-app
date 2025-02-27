@@ -3,7 +3,7 @@ import 'package:zamaan/core/constants/app_texts.dart';
 import 'package:zamaan/core/constants/hive_box_names.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
-import 'package:zamaan/core/services/hive_services.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';

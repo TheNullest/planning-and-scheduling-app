@@ -7,7 +7,7 @@ import 'package:zamaan/core/constants/hive_box_names.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/core/services/hive_services.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/features/task_scheduler/data/sources/hive_task_scheduler_data_source_impl.dart';
 import 'package:zamaan/features/task_scheduler/data/models/task_scheduler_local_model.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/features/category/data/models/category_local_model.dart';
-import 'package:zamaan/features/category/domain/entities/category_entity.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/category_local_model.dart';
+import 'package:zamaan/domain/entities/category_entity.dart';
 
 void main() {
   final entity = CategoryEntity.empty();

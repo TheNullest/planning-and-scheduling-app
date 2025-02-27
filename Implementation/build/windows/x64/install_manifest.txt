@@ -24,4 +24,5 @@ E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutte
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/packages/iconly/fonts/IconlyBold.ttf
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/packages/iconly/fonts/IconlyBroken.ttf
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/packages/iconly/fonts/IconlyLight.ttf
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/secrets/.env
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

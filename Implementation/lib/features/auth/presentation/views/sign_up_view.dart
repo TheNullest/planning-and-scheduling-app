@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/core/common/entities/user_entity.dart';
-import 'package:zamaan/core/common/widgets/loader.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/presentation_shared/widgets/loader.dart';
 import 'package:zamaan/core/constants/app_texts.dart';
 import 'package:zamaan/core/constants/routes.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
@@ -52,7 +52,7 @@ class _SignUpViewState extends State<SignUpView> {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.shellStringRoute);
+              navigatorPushRemoveUntil(context, Routes.mainViewStringRoute);
             }
           },
           builder: (context, state) {

@@ -1,8 +1,0 @@
-import 'package:zamaan/core/usecases/get_entities_usecase.dart';
-import 'package:zamaan/features/time_interval/domain/entities/time_interval_entity.dart';
-import 'package:zamaan/features/time_interval/domain/repositories/time_interval_repository.dart';
-
-class GetTimeIntervalsUsecase
-    extends GetEntitiesUseCase<TimeIntervalRepository, TimeIntervalEntity> {
-  GetTimeIntervalsUsecase(super.repository);
-}

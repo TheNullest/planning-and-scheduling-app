@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:zamaan/core/common/cubits/user/app_user_cubit.dart';
-import 'package:zamaan/core/common/providers/user_provider.dart';
-import 'package:zamaan/core/config/themes/app_dark_theme.dart';
-import 'package:zamaan/core/services/init_dependencies.dart';
-
-import 'package:zamaan/core/services/router.dart';
+import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
+import 'package:zamaan/common/providers/user_provider.dart';
+import 'package:zamaan/core/theme/app_dark_theme.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
-import 'package:zamaan/features/shell/presentation/views/shell_view.dart';
+import 'package:zamaan/features/navigation/presentation/views/main_view.dart';
+import 'package:zamaan/infrastructure/di/init_dependencies.dart';
+import 'package:zamaan/infrastructure/services/router.dart';
 
 void main() async {
   await intiDependencies();
@@ -52,7 +51,7 @@ class _ZamaanState extends State<Zamaan> {
         home: BlocSelector<AppUserCubit, AppUserState, bool>(
           selector: (state) => state is AppUserSignedInState,
           builder: (context, userSignedIn) =>
-              userSignedIn ? const ShellView() : const SignInView(),
+              userSignedIn ? const MainView() : const SignInView(),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/features/main_task/data/models/main_task_local_model.dart';
-import 'package:zamaan/features/main_task/domain/entities/main_task_entity.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/main_task_local_model.dart';
+import 'package:zamaan/domain/entities/main_task_entity.dart';
 
 void main() {
   final entity = MainTaskEntity.empty();

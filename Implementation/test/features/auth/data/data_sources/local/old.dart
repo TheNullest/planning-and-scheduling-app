@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-import 'package:zamaan/core/services/hive_services.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';

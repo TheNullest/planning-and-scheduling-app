@@ -1,5 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/network/connection_checker.dart';
+import 'package:zamaan/infrastructure/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source_impl.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 

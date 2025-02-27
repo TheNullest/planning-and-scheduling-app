@@ -4,6 +4,9 @@
 # This is dynamic in a monorepo
 bin/internal/engine.version
 
+# Secrets
+secrets/
+
 # Miscellaneous
 *.class
 *.lock

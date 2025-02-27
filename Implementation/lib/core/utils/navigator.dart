@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/core/services/router.dart';
+import 'package:zamaan/infrastructure/services/router.dart';
 
 /// Navigates to a new route and removes all previous routes until
 /// the predicate returns true.

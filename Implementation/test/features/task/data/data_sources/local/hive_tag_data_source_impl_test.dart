@@ -6,7 +6,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/constants/hive_box_names.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/core/services/hive_services.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/features/tag/data/sources/hive_tag_data_source_impl.dart';
 import 'package:zamaan/features/tag/data/models/tag_local_model.dart';

@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
+import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/repositories/authentication_repository_impl.dart';
+import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
+import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
+import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
+import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source_impl.dart';
+import 'package:zamaan/features/auth/domain/repositories/authentication_repository.dart';
+import 'package:zamaan/features/auth/domain/usecases/change_password_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/current_user_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/delete_account_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/reset_password_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/sign_in_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/sign_out_usecase.dart';
+import 'package:zamaan/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
+import 'package:zamaan/infrastructure/config/app_config.dart';
+import 'package:zamaan/infrastructure/network/connection_checker.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
+
+part 'init_dependencies.main.dart';
