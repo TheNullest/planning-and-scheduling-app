@@ -1,4 +1,4 @@
-import 'package:zamaan/core/constants/hive_box_names.dart';
+import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
 import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
 import 'package:zamaan/core/utils/typedef.dart';

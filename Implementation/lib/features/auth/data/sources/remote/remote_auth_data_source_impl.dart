@@ -5,7 +5,7 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
@@ -65,7 +65,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
 
           // Throw an exception if the user is not signed in
           throw RemoteException(
-            message: AppTexts.errors.userNotSignedIn,
+            message: AuthTexts.errors.userNotSignedIn,
             statusCode: '401',
           );
         },

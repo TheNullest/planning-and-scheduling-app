@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
+import 'package:zamaan/core/routes/route_constants.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
@@ -112,7 +112,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event.confirmPassword.compareTo(event.user.password) != 0) {
       emit(
         AuthFailureState(
-          message: AppTexts.errors
+          message: AuthTexts.errors
               .passwordMismatch, // Emit failure state if passwords do not match
         ),
       );
@@ -170,7 +170,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ); // Emit signed-out state if sign-out is successful
         navigatorPushRemoveUntil(
           event.state.context,
-          Routes.signInStringRoute,
+          RouteConstants.signInStringRoute,
         ); // Navigate to sign-in route
       },
     );

@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/common/providers/user_provider.dart';
+import 'package:zamaan/core/routes/app_router.dart';
 import 'package:zamaan/core/theme/app_dark_theme.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/navigation/presentation/views/main_view.dart';
 import 'package:zamaan/infrastructure/di/init_dependencies.dart';
-import 'package:zamaan/infrastructure/services/router.dart';
 
 void main() async {
   await intiDependencies();
@@ -47,7 +47,7 @@ class _ZamaanState extends State<Zamaan> {
       child: MaterialApp(
         theme: AppTheme.darkThemeMode,
         debugShowCheckedModeBanner: false,
-        onGenerateRoute: generateRoute,
+        onGenerateRoute: serviceLocator<AppRouter>().generateRoute,
         home: BlocSelector<AppUserCubit, AppUserState, bool>(
           selector: (state) => state is AppUserSignedInState,
           builder: (context, userSignedIn) =>

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/presentation_shared/widgets/loader.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
+import 'package:zamaan/core/routes/route_constants.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/core/extensions/int_to_space_extension.dart';
 import 'package:zamaan/core/utils/navigator.dart';
@@ -43,13 +43,14 @@ class _SignInViewState extends State<SignInView> {
               showSnackBar(context, state.message);
             }
             if (state is AuthUserPasswordSuccessState) {
-              showSnackBar(context, AppTexts.uiTexts.resetPasswordSuccess);
+              showSnackBar(context, AuthTexts.uiTexts.resetPasswordSuccess);
             }
             if (state is AuthSuccessState) {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.mainViewStringRoute);
+              navigatorPushRemoveUntil(
+                  context, RouteConstants.mainViewStringRoute);
             }
           },
           builder: (context, state) {
@@ -68,13 +69,13 @@ class _SignInViewState extends State<SignInView> {
                   30.sizedBoxHeight,
                   AuthFieldWidget(
                     textController: emailController,
-                    hintText: AppTexts.hints.email,
+                    hintText: AuthTexts.hints.email,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
                     isObsecured: true,
                     textController: paswordController,
-                    hintText: AppTexts.hints.password,
+                    hintText: AuthTexts.hints.password,
                   ),
                   30.sizedBoxHeight,
                   ElevatedButton(
@@ -97,11 +98,11 @@ class _SignInViewState extends State<SignInView> {
                     child: GestureDetector(
                       onTap: () => navigatorPushRemoveUntil(
                         context,
-                        Routes.signUpStringRoute,
+                        RouteConstants.signUpStringRoute,
                       ),
                       child: RichText(
                         text: TextSpan(
-                          text: AppTexts.uiTexts.dontHaveAccount,
+                          text: AuthTexts.uiTexts.dontHaveAccount,
                           style: Theme.of(context).textTheme.titleMedium,
                           children: [
                             TextSpan(

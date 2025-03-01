@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/presentation_shared/widgets/loader.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
+import 'package:zamaan/core/routes/route_constants.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/core/extensions/int_to_space_extension.dart';
 import 'package:zamaan/core/utils/navigator.dart';
@@ -52,7 +52,8 @@ class _SignUpViewState extends State<SignUpView> {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.mainViewStringRoute);
+              navigatorPushRemoveUntil(
+                  context, RouteConstants.mainViewStringRoute);
             }
           },
           builder: (context, state) {
@@ -65,7 +66,7 @@ class _SignUpViewState extends State<SignUpView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppTexts.uiTexts.signUp,
+                    AuthTexts.uiTexts.signUp,
                     style: const TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
@@ -73,33 +74,33 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   30.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.userName,
+                    hintText: AuthTexts.hints.userName,
                     textController: userNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.firstName,
+                    hintText: AuthTexts.hints.firstName,
                     textController: firstNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.lastName,
+                    hintText: AuthTexts.hints.lastName,
                     textController: lastNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.email,
+                    hintText: AuthTexts.hints.email,
                     textController: emailController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.password,
+                    hintText: AuthTexts.hints.password,
                     isObsecured: true,
                     textController: passwordController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.confirmPassword,
+                    hintText: AuthTexts.hints.confirmPassword,
                     isObsecured: true,
                     textController: confirmPasswordController,
                   ),
@@ -121,7 +122,7 @@ class _SignUpViewState extends State<SignUpView> {
                             );
                       }
                     },
-                    child: Text(AppTexts.widgetTexts.signUp),
+                    child: Text(AuthTexts.widgetTexts.signUp),
                   ),
                   15.sizedBoxHeight,
                   MouseRegion(
@@ -129,15 +130,15 @@ class _SignUpViewState extends State<SignUpView> {
                     child: GestureDetector(
                       onTap: () => navigatorPushRemoveUntil(
                         context,
-                        Routes.signInStringRoute,
+                        RouteConstants.signInStringRoute,
                       ),
                       child: RichText(
                         text: TextSpan(
-                          text: AppTexts.uiTexts.haveAccount,
+                          text: AuthTexts.uiTexts.haveAccount,
                           style: Theme.of(context).textTheme.titleMedium,
                           children: [
                             TextSpan(
-                              text: AppTexts.widgetTexts.signIn,
+                              text: AuthTexts.widgetTexts.signIn,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!

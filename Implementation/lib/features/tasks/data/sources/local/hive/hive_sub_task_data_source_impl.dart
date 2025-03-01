@@ -1,4 +1,4 @@
-import 'package:zamaan/core/constants/hive_box_names.dart';
+import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
 import 'package:zamaan/core/enums/priority_enum.dart';
 import 'package:zamaan/core/enums/status_enum.dart';
 import 'package:zamaan/infrastructure/services/hive_services.dart';

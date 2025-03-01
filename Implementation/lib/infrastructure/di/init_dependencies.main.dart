@@ -23,6 +23,23 @@ Future<void> intiDependencies() async {
     ..registerFactory(InternetConnection.new)
     ..registerFactory<ConnectionChecker>(
       () => ConnectionCheckerImpl(serviceLocator()),
+    )
+
+    // navigation
+    ..registerLazySingleton(
+      () => AppRouter(
+        views: {
+          RouteConstants.signInStringRoute: const SignInView(),
+          RouteConstants.signUpStringRoute: const SignInView(),
+          RouteConstants.mainViewStringRoute: const MainView(),
+          RouteConstants.accomplishmentTasksStringRoute:
+              const AccomplishmentTasksView(),
+          RouteConstants.activeTasksStringRoute: const ActiveTasksView(),
+          RouteConstants.todayTasksStringRoute: const TodayTasksView(),
+          RouteConstants.reportsStringRoute: const ReportsView(),
+          RouteConstants.settingsStringRoute: const SettingsView(),
+        },
+      ),
     );
 }
 

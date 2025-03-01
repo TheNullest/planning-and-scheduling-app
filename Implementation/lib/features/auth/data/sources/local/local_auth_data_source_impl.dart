@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
-import 'package:zamaan/core/constants/hive_box_names.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
+import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/infrastructure/services/hive_services.dart';
@@ -57,7 +57,7 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
                   box.values.where((u) => u.userName == user.userName);
               if (existing.isNotEmpty) {
                 throw Exception(
-                  user.userName + AppTexts.errors.entityExistsInDatabase,
+                  user.userName + AuthTexts.errors.entityExistsInDatabase,
                 );
               }
               await box.add(user);

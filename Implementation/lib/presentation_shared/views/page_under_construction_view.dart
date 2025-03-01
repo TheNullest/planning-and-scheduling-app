@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/core/routes/route_constants.dart';
 import 'package:zamaan/core/resources/media_resources.dart';
 
 class PageUnderConstruction extends StatelessWidget {
@@ -20,7 +20,7 @@ class PageUnderConstruction extends StatelessWidget {
               ElevatedButton(
                 onPressed: () => Navigator.pushReplacementNamed(
                   context,
-                  Routes.signUpStringRoute,
+                  RouteConstants.signUpStringRoute,
                 ),
                 child: const Text('To signup'),
               ),

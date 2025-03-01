@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/presentation_shared/widgets/loader.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/core/routes/route_constants.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_sliver_app_bar_widget.dart';
+import 'package:zamaan/presentation_shared/widgets/loader.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -41,7 +41,7 @@ class _MainViewState extends State<MainView> {
                 showSnackBar(context, 'User Account Deleted');
                 navigatorPushRemoveUntil(
                   context,
-                  Routes.signInStringRoute,
+                  RouteConstants.signInStringRoute,
                 );
               }
             },
