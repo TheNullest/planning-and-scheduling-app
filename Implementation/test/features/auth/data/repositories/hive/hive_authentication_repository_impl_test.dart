@@ -1,9 +1,9 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 import 'package:zamaan/features/auth/data/repositories/authentication_repository_impl.dart';
+import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
 
 class MockAuthDataSource extends Mock implements LocalAuthDataSourceImpl {}
 

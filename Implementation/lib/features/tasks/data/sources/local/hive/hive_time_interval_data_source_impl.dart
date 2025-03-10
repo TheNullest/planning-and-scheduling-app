@@ -1,9 +1,9 @@
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
-import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
+import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
 import 'package:zamaan/features/tasks/data/models/local/hive/time_interval_local_model.dart';
 import 'package:zamaan/features/tasks/data/sources/bases/local/hive/time_interval_data_source.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 class HiveTimeIntervalDataSourceImpl
     extends BaseLocalDataSourceAbstraction<TimeIntervalLocalModel>

@@ -1,14 +1,14 @@
 // ignore_for_file: void_checks
 
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/core/utils/uuid.dart';
+import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 /// The **[HiveModel]** has to be **[HiveModel]** class not the **[~~Entity class~~]**
 abstract class BaseLocalDataSourceAbstraction<

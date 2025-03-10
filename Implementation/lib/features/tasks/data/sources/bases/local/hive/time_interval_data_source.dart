@@ -1,5 +1,5 @@
-import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
 import 'package:zamaan/domain/entities/time_interval_entity.dart';
 
 abstract class TimeIntervalDataSource<

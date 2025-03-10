@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/infrastructure/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/infrastructure/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'measurement_unit_local_model.g.dart';
 

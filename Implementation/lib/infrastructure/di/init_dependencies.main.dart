@@ -3,6 +3,7 @@ part of 'init_dependencies.dart';
 final serviceLocator = GetIt.instance;
 Future<void> intiDependencies() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await dotenv.load(fileName: 'secrets/.env');
 
   await HiveServices.init();
@@ -10,8 +11,8 @@ Future<void> intiDependencies() async {
   _initAuth();
 
   final supabase = await Supabase.initialize(
-    url: AppConfig.supabaseUrl,
-    anonKey: AppConfig.supabaseAnonKey,
+    url: SupabaseConfig.supabaseUrl,
+    anonKey: SupabaseConfig.supabaseAnonKey,
   );
 
   serviceLocator
@@ -23,21 +24,59 @@ Future<void> intiDependencies() async {
     ..registerFactory(InternetConnection.new)
     ..registerFactory<ConnectionChecker>(
       () => ConnectionCheckerImpl(serviceLocator()),
-    )
+    );
 
-    // navigation
-    ..registerLazySingleton(
+  _navigation();
+}
+
+void _navigation() {
+  serviceLocator
+    ..registerFactory(() => const SignInView())
+    ..registerFactory(() => const SignUpView())
+    ..registerFactory(() => const TodayTasksView())
+    ..registerFactory(() => const ActiveTasksView())
+    ..registerFactory(() => const AccomplishmentTasksView())
+    ..registerFactory(() => const ReportsView())
+    ..registerFactory(() => const ReminderView())
+    ..registerFactory(() => const CalendarView())
+    ..registerFactory(() => const SettingsView())
+    ..registerFactory(
+      () => HomeView(
+        tabItems: [
+          TabItem(
+            view: serviceLocator<TodayTasksView>(),
+            tabDetail: AppRouteConfigs.todayTasks,
+          ),
+          TabItem(
+            view: serviceLocator<ActiveTasksView>(),
+            tabDetail: AppRouteConfigs.activeTasks,
+          ),
+          TabItem(
+            view: serviceLocator<AccomplishmentTasksView>(),
+            tabDetail: AppRouteConfigs.accomplishmentTasks,
+          ),
+          TabItem(
+            view: serviceLocator<CalendarView>(),
+            tabDetail: AppRouteConfigs.calendar,
+          ),
+          TabItem(
+            view: serviceLocator<ReportsView>(),
+            tabDetail: AppRouteConfigs.reports,
+          ),
+          TabItem(
+            view: serviceLocator<ReminderView>(),
+            tabDetail: AppRouteConfigs.reminder,
+          ),
+        ],
+      ),
+    )
+    ..registerFactory(
       () => AppRouter(
         views: {
-          RouteConstants.signInStringRoute: const SignInView(),
-          RouteConstants.signUpStringRoute: const SignInView(),
-          RouteConstants.mainViewStringRoute: const MainView(),
-          RouteConstants.accomplishmentTasksStringRoute:
-              const AccomplishmentTasksView(),
-          RouteConstants.activeTasksStringRoute: const ActiveTasksView(),
-          RouteConstants.todayTasksStringRoute: const TodayTasksView(),
-          RouteConstants.reportsStringRoute: const ReportsView(),
-          RouteConstants.settingsStringRoute: const SettingsView(),
+          AppRoutes.signIn: serviceLocator<SignInView>(),
+          AppRoutes.signUp: serviceLocator<SignUpView>(),
+          AppRoutes.home: serviceLocator<HomeView>(),
+          AppRoutes.settings: serviceLocator<SettingsView>(),
         },
       ),
     );

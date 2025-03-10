@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/core/enums/enums.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 class MainTaskEntity extends BaseEntityAbstraction {
   MainTaskEntity({

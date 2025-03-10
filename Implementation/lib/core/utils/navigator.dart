@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/core/routes/app_router.dart';
+import 'package:zamaan/core/navigation/app_router.dart';
 import 'package:zamaan/infrastructure/di/init_dependencies.dart';
 
 /// Navigates to a new route and removes all previous routes until

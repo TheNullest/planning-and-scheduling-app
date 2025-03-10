@@ -1,6 +1,6 @@
-import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
 import 'package:zamaan/domain/usecases/base_usecase.dart';
 
 abstract class UpdateEntityUseCase<Entity extends BaseEntityAbstraction,

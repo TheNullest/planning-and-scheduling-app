@@ -5,7 +5,6 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
@@ -15,6 +14,7 @@ import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 
 /// Implementation of the RemoteAuthDataSource interface
 ///

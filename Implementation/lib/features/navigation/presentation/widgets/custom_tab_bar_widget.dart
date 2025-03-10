@@ -5,16 +5,12 @@ class CustomTabBarWidget extends StatefulWidget {
   const CustomTabBarWidget({
     required this.tabController,
     required this.icons,
-    required this.selectedIndex,
-    required this.onTap,
-    required this.bottomBarDisplay,
+    this.bottomBarDisplay = true,
     super.key,
     this.isBottomIndicator = false,
   });
   final bool bottomBarDisplay;
   final List<IconData> icons;
-  final int selectedIndex;
-  final int Function(int) onTap;
   final bool isBottomIndicator;
   final TabController tabController;
 
@@ -25,6 +21,8 @@ class CustomTabBarWidget extends StatefulWidget {
 class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = widget.tabController.index;
+
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       height: widget.bottomBarDisplay ? 60 : 0,
@@ -66,7 +64,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
                 index,
                 Tab(
                   icon: Icon(
-                    shadows: index == widget.selectedIndex
+                    shadows: index == selectedIndex
                         ? [
                             const Shadow(
                               color: AppPallete.grey,
@@ -76,7 +74,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
                           ]
                         : null,
                     icon,
-                    color: index == widget.selectedIndex
+                    color: index == selectedIndex
                         ? AppPallete.gradient3
                         : AppPallete.grey,
                   ),
@@ -85,7 +83,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
             )
             .values
             .toList(),
-        onTap: (index) => widget.onTap(index),
+        onTap: (index) => widget.tabController.index = index,
       ),
     );
   }

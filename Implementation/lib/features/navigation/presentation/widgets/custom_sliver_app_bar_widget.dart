@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/theme/app_dark_palette.dart';
-import 'package:zamaan/core/routes/route_constants.dart';
+import 'package:zamaan/features/settings/presentation/views/settings_view.dart';
 
 class CustomSliverAppBarWidget extends StatefulWidget {
   const CustomSliverAppBarWidget({
@@ -70,7 +68,7 @@ class _CustomSliverAppBarWidgetState extends State<CustomSliverAppBarWidget>
               icon: const Icon(Icons.settings),
               onPressed: () => Navigator.push(
                 context,
-                RouteConstants.settingsMaterialRoute(context),
+                MaterialPageRoute(builder: (context) => const SettingsView()),
               ),
             ),
           ),

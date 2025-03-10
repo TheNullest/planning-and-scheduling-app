@@ -24,7 +24,7 @@ class AppTheme {
       iconTheme: IconThemeData(
         color: AppPallete.error,
       ),
-      titleTextStyle: const TextStyle(
+      titleTextStyle: TextStyle(
         color: AppPallete.grey,
         fontSize: 20,
         fontWeight: FontWeight.bold,

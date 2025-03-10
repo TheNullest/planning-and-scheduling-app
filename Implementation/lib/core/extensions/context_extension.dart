@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zamaan/common/providers/user_provider.dart';
+import 'package:zamaan/core/providers/user_provider.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 
 /// Extension on BuildContext to provide convenient access to common properties and methods.

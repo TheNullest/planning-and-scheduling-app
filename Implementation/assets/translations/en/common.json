@@ -1,0 +1,27 @@
+{
+  "common": {
+    "messages": {
+      "loading": "Loading...",
+      "saving": "Saving...",
+      "deleting": "Deleting...",
+      "success": "Operation completed successfully",
+      "error": "Something went wrong",
+      "confirm_delete": "Are you sure you want to delete this item?",
+      "unsaved_changes": "You have unsaved changes",
+      "no_data": "No data available."
+    },
+    "errors": {
+      "generic": "An error occurred",
+      "timeout": "Request timed out",
+      "server_error": "Server unavailable. Please try again later",
+      "validation_failed": "Please fix the errors below",
+      "not_found": "Item not found."
+    },
+    "formatting": {
+      "due_date": "Due %{date}",
+      "created_at": "Created %{date}",
+      "updated_at": "Updated %{date}",
+      "time": "%{hour}:%{minute}"
+    }
+  }
+}

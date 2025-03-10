@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/common/cubits/user/app_user_cubit.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
-import 'package:zamaan/core/routes/route_constants.dart';
+import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 import 'package:zamaan/features/auth/domain/usecases/change_password_usecase.dart';
@@ -18,6 +16,8 @@ import 'package:zamaan/features/auth/domain/usecases/reset_password_usecase.dart
 import 'package:zamaan/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:zamaan/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:zamaan/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
+import 'package:zamaan/presentation_shared/cubits/user/app_user_cubit.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -170,7 +170,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ); // Emit signed-out state if sign-out is successful
         navigatorPushRemoveUntil(
           event.state.context,
-          RouteConstants.signInStringRoute,
+          AppRouteConfigs.signIn.route,
         ); // Navigate to sign-in route
       },
     );

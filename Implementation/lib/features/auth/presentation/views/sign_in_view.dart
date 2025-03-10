@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/presentation_shared/widgets/loader.dart';
-import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
-import 'package:zamaan/core/routes/route_constants.dart';
+import 'package:zamaan/core/constants/routes/app_routes.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/core/extensions/int_to_space_extension.dart';
+import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/widgets/auth_field.dart';
+import 'package:zamaan/presentation_shared/widgets/loader.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -49,8 +50,7 @@ class _SignInViewState extends State<SignInView> {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(
-                  context, RouteConstants.mainViewStringRoute);
+              navigatorPushRemoveUntil(context, AppRoutes.home);
             }
           },
           builder: (context, state) {
@@ -62,20 +62,23 @@ class _SignInViewState extends State<SignInView> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Sign In.',
-                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  Text(
+                    AppLocaleKeys.uiElements.titles.signIn,
+                    style: const TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   30.sizedBoxHeight,
                   AuthFieldWidget(
                     textController: emailController,
-                    hintText: AuthTexts.hints.email,
+                    hintText: AppLocaleKeys.uiElements.hints.email,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
                     isObsecured: true,
                     textController: paswordController,
-                    hintText: AuthTexts.hints.password,
+                    hintText: AppLocaleKeys.uiElements.hints.password,
                   ),
                   30.sizedBoxHeight,
                   ElevatedButton(
@@ -98,7 +101,7 @@ class _SignInViewState extends State<SignInView> {
                     child: GestureDetector(
                       onTap: () => navigatorPushRemoveUntil(
                         context,
-                        RouteConstants.signUpStringRoute,
+                        AppRoutes.signUp,
                       ),
                       child: RichText(
                         text: TextSpan(

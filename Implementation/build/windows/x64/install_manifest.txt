@@ -13,6 +13,12 @@ E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutte
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/lotties/lottie_under_construction.json
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/lotties/lottie_under_construction2.json
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/lotties/lottie_user.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/auth.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/common.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/settings.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/tasks.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/ui_elements.json
+E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/assets/translations/en/validation.json
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
 E:/Flutter.Dart/Zamaan/Implementation/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin

@@ -5,7 +5,6 @@ import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
-import 'package:zamaan/infrastructure/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
@@ -16,6 +15,7 @@ import 'package:zamaan/features/tasks/data/models/local/hive/measurement_unit_lo
 import 'package:zamaan/features/tasks/data/models/local/hive/sub_task_local_model.dart';
 import 'package:zamaan/features/tasks/data/models/local/hive/tag_local_model.dart';
 import 'package:zamaan/features/tasks/data/models/local/hive/time_interval_local_model.dart';
+import 'package:zamaan/infrastructure/hive_type_adapter/hive_base_type_adapter.dart';
 
 class HiveServices<HiveModel extends BaseEntityAbstraction> {
   static Future<void> init() async {

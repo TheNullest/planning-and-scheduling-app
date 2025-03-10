@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/shell/data/sources/hive/hive_time_interval_data_source_impl.dart';
 import 'package:zamaan/features/shell/data/models/local/time_interval_local_model.dart';
+import 'package:zamaan/features/shell/data/sources/hive/hive_time_interval_data_source_impl.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
 

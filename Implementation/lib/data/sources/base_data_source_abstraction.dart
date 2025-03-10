@@ -1,5 +1,5 @@
-import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 abstract class BaseDataSourceAbstraction<Model extends BaseEntityAbstraction> {
   ResultFutureVoid createEntity({required Model newEntity});
