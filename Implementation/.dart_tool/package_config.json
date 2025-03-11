@@ -291,7 +291,7 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///C:/Users/Moien%20M.Janlou/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-9.0.0",
+      "rootUri": "file:///C:/Users/Moien%20M.Janlou/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-9.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -1118,7 +1118,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2025-03-10T18:46:03.281505Z",
+  "generated": "2025-03-11T07:59:47.911075Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///C:/FlutterDev/Flutter",
