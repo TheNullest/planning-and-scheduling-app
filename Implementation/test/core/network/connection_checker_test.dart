@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zamaan/core/network/connection_checker.dart';
+import 'package:zamaan/infrastructure/network/connection_checker.dart';
 
 class MockConnectionChecker extends Mock implements ConnectionChecker {}
 

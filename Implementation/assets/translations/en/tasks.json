@@ -1,0 +1,54 @@
+{ "tasks": {
+    "status": {
+      "completed": "Completed",
+      "overdue": "Overdue",
+      "pending": "Pending",
+      "scheduled": "Scheduled",
+      "in_progress": "In Progress",
+      "canceled": "Canceled",
+      "paused": "Paused"
+    },
+    "empty_states": {
+      "no_tasks": "No tasks found",
+      "no_completed": "No completed tasks yet",
+      "no_results": "No matching tasks found",
+      "no_scheduled": "No scheduled tasks.",
+      "no_overdue": "No overdue tasks.",
+      "no_canceled": "No canceled tasks.",
+      "no_paused": "No paused tasks."
+    },
+    "errors": {
+      "empty_title": "Task title cannot be empty",
+      "invalid_date": "Please select a valid date",
+      "invalid_priority": "Please select a priority",
+      "invalid_category": "Please select a category",
+      "invalid_goal": "Please select a goal",
+      "invalid_measurement_unit": "Please select a measurement unit",
+      "invalid_start_date": "Please select a valid start date",
+      "invalid_end_date": "Please select a valid end date",
+      "start_date_after_end_date": "Start date cannot be after end date",
+      "invalid_time": "Please select a valid time",
+      "invalid_repeat_interval": "Please select a valid repeat interval",
+      "invalid_repeat_until": "Please select a valid repeat until date"
+    },
+    "messages": {
+      "task_created": "Task created successfully",
+      "task_updated": "Task updated successfully",
+      "task_deleted": "Task deleted successfully",
+      "task_completed": "Task marked as completed",
+      "task_reopened": "Task reopened",
+      "subtask_added": "Subtask added",
+      "subtask_removed": "Subtask removed",
+      "tag_added": "Tag added",
+      "tag_removed": "Tag removed",
+      "goal_added": "Goal added",
+      "goal_removed": "Goal removed",
+      "category_added": "Category added",
+      "category_removed": "Category removed",
+      "measurement_unit_added": "Measurement unit added",
+      "measurement_unit_removed": "Measurement unit removed",
+      "task_canceled": "Task canceled",
+      "task_paused": "Task paused"
+    }
+  }
+}

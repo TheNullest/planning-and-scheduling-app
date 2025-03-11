@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:zamaan/core/common/entities/base_entity_abstraction.dart';
-import 'package:zamaan/core/common/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 

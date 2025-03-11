@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/core/common/entities/user_entity.dart';
-import 'package:zamaan/core/common/widgets/loader.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
-import 'package:zamaan/core/constants/routes.dart';
+import 'package:zamaan/core/constants/routes/app_routes.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/core/extensions/int_to_space_extension.dart';
+import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/widgets/auth_field.dart';
+import 'package:zamaan/presentation_shared/widgets/loader.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -52,7 +52,7 @@ class _SignUpViewState extends State<SignUpView> {
               showSnackBar(context, state.user.userName);
               context.userProvider
                   .initUser(LocalUserModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, Routes.shellStringRoute);
+              navigatorPushRemoveUntil(context, AppRoutes.home);
             }
           },
           builder: (context, state) {
@@ -65,7 +65,7 @@ class _SignUpViewState extends State<SignUpView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppTexts.uiTexts.signUp,
+                    AppLocaleKeys.uiElements.titles.signUp,
                     style: const TextStyle(
                       fontSize: 50,
                       fontWeight: FontWeight.bold,
@@ -73,33 +73,33 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   30.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.userName,
+                    hintText: AppLocaleKeys.uiElements.hints.userName,
                     textController: userNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.firstName,
+                    hintText: AppLocaleKeys.uiElements.hints.firstName,
                     textController: firstNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.lastName,
+                    hintText: AppLocaleKeys.uiElements.hints.lastName,
                     textController: lastNameController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.email,
+                    hintText: AppLocaleKeys.uiElements.hints.email,
                     textController: emailController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.password,
+                    hintText: AppLocaleKeys.uiElements.hints.password,
                     isObsecured: true,
                     textController: passwordController,
                   ),
                   15.sizedBoxHeight,
                   AuthFieldWidget(
-                    hintText: AppTexts.hints.confirmPassword,
+                    hintText: AppLocaleKeys.uiElements.hints.confirmPassword,
                     isObsecured: true,
                     textController: confirmPasswordController,
                   ),
@@ -121,7 +121,7 @@ class _SignUpViewState extends State<SignUpView> {
                             );
                       }
                     },
-                    child: Text(AppTexts.widgetTexts.signUp),
+                    child: Text(AppLocaleKeys.uiElements.buttons.signUp),
                   ),
                   15.sizedBoxHeight,
                   MouseRegion(
@@ -129,15 +129,15 @@ class _SignUpViewState extends State<SignUpView> {
                     child: GestureDetector(
                       onTap: () => navigatorPushRemoveUntil(
                         context,
-                        Routes.signInStringRoute,
+                        AppRoutes.signIn,
                       ),
                       child: RichText(
                         text: TextSpan(
-                          text: AppTexts.uiTexts.haveAccount,
+                          text: AppLocaleKeys.auth.cta.haveAccount,
                           style: Theme.of(context).textTheme.titleMedium,
                           children: [
                             TextSpan(
-                              text: AppTexts.widgetTexts.signIn,
+                              text: AppLocaleKeys.uiElements.titles.signIn,
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!

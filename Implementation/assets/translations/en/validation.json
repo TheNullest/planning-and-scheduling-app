@@ -1,0 +1,19 @@
+{
+  "validation": {
+   "required": "%{field} is required",
+    "min_length": "Must be at least %{count} characters",
+    "max_length": "Cannot exceed %{count} characters",
+    "invalid_format": "Invalid format",
+    "numeric": "%{field} must be a number",
+    "positive": "%{field} must be a positive number",
+    "negative": "%{field} must be a negative number",
+    "email": "Please enter a valid email address",
+    "url": "Please enter a valid URL",
+    "date": "Please enter a valid date",
+    "time": "Please enter a valid time",
+    "date_range": "Please enter a valid date range",
+    "time_range": "Please enter a valid time range",
+    "password_match": "Passwords must match",
+    "strong_password": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+  }
+}

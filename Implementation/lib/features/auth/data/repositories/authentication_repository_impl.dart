@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/common/entities/user_entity.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
-import 'package:zamaan/core/network/connection_checker.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
@@ -12,6 +11,7 @@ import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 import 'package:zamaan/features/auth/domain/repositories/authentication_repository.dart';
+import 'package:zamaan/infrastructure/network/connection_checker.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl({
