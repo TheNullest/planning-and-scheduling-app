@@ -1,5 +1,5 @@
-import 'package:zamaan/core/common/entities/user_entity.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/core/common/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
+import 'package:zamaan/presentation_shared/cubits/user/app_user_cubit.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});

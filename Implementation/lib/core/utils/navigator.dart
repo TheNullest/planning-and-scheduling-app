@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/core/services/router.dart';
+import 'package:zamaan/core/navigation/app_router.dart';
+import 'package:zamaan/infrastructure/di/init_dependencies.dart';
 
 /// Navigates to a new route and removes all previous routes until
 /// the predicate returns true.
@@ -23,7 +24,7 @@ Future navigatorPushRemoveUntil(
   Object? arguments,
 }) async =>
     Navigator.of(context).pushAndRemoveUntil(
-      generateRoute(
+      serviceLocator<AppRouter>().generateRoute(
         RouteSettings(name: route, arguments: arguments),
       ),
       (route) => predicate,

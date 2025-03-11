@@ -3,13 +3,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:zamaan/core/constants/hive_box_names.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/core/services/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
+<<<<<<< HEAD
 import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
 import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
+=======
+import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
+import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
+import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
+import 'package:zamaan/infrastructure/services/hive_services.dart';
+>>>>>>> temp-branch
 
 class MockHiveInit extends Mock implements HiveServices<GoalLocalModel> {}
 

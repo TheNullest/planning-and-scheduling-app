@@ -1,0 +1,14 @@
+{ "settings": {
+    "account": "Account Settings",
+    "notifications": "Notifications",
+    "theme": "App Theme",
+    "language": "Language",
+    "help": "Help & Support",
+    "about": "About App",
+    "options": {
+      "light_theme": "Light",
+      "dark_theme": "Dark",
+      "system_theme": "System Default"
+    }
+  }
+}

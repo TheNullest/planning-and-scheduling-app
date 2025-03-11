@@ -5,10 +5,8 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/constants/app_texts.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
-import 'package:zamaan/core/network/connection_checker.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
@@ -16,6 +14,7 @@ import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
+import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 
 /// Implementation of the RemoteAuthDataSource interface
 ///
@@ -26,16 +25,11 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   /// Constructor to initialize the connection checker and Supabase client
   ///
   /// - Parameters:
-  ///   - connectionChecker: An instance of `ConnectionChecker` to check network connectivity.
   ///   - supabaseClient: An instance of `SupabaseClient` to interact with the Supabase service.
-  RemoteAuthDataSourceImpl({
-    required ConnectionChecker connectionChecker,
-    required SupabaseClient supabaseClient,
-  })  : _connectionChecker = connectionChecker,
-        _supabaseClient = supabaseClient;
+  RemoteAuthDataSourceImpl(
+    SupabaseClient supabaseClient,
+  ) : _supabaseClient = supabaseClient;
 
-  // Private fields for connection checker and Supabase client
-  final ConnectionChecker _connectionChecker;
   final SupabaseClient _supabaseClient;
 
   // Getter for the authentication client
@@ -71,7 +65,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
 
           // Throw an exception if the user is not signed in
           throw RemoteException(
-            message: AppTexts.errors.userNotSignedIn,
+            message: AuthTexts.errors.userNotSignedIn,
             statusCode: '401',
           );
         },

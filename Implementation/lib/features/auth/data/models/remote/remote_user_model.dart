@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_dynamic_calls
 
 import 'dart:convert';
+
 import 'package:intl/intl.dart';
-import 'package:zamaan/core/common/entities/user_entity.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 
 /// A model class representing a remote user.
