@@ -11,21 +11,21 @@
 
 // class SubTaskRepositoryImpl extends BaseCRUDOperations<
 //     SubTaskEntity,
-//     SubTaskLocalModel,
-//     SubTaskDataSource<SubTaskLocalModel>> implements SubTaskRepository {
+//     SubTaskHiveModel,
+//     SubTaskDataSource<SubTaskHiveModel>> implements SubTaskRepository {
 //   SubTaskRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
 //   final SubTaskDataSource _localDataSource;
 
 //   @override
-//   SubTaskLocalModel fromEntity(SubTaskEntity entity) =>
-//       SubTaskLocalModel.fromEntity(entity);
+//   SubTaskHiveModel fromEntity(SubTaskEntity entity) =>
+//       SubTaskHiveModel.fromEntity(entity);
 
 //   @override
-//   SubTaskEntity toEntity(SubTaskLocalModel model) => model.toEntity();
+//   SubTaskEntity toEntity(SubTaskHiveModel model) => model.toEntity();
 
 //   Either<Failure, List<SubTaskEntity>> toEntities(
-//     Either<Failure, List<SubTaskLocalModel>> models,
+//     Either<Failure, List<SubTaskHiveModel>> models,
 //   ) =>
 //       models.map(
 //         (taskModels) => taskModels
@@ -39,7 +39,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getSubTasksByMainTaskId(mainTaskId)
-//             as Either<Failure, List<SubTaskLocalModel>>,
+//             as Either<Failure, List<SubTaskHiveModel>>,
 //       );
 
 //   @override
@@ -48,13 +48,13 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getSubTasksByPriority(priority)
-//             as Either<Failure, List<SubTaskLocalModel>>,
+//             as Either<Failure, List<SubTaskHiveModel>>,
 //       );
 
 //   @override
 //   ResultFuture<List<SubTaskEntity>> getSubTasksByStatus(Status status) async =>
 //       toEntities(
 //         await _localDataSource.getSubTasksByStatus(status)
-//             as Either<Failure, List<SubTaskLocalModel>>,
+//             as Either<Failure, List<SubTaskHiveModel>>,
 //       );
 // }

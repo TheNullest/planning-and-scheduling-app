@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 
 import '../../../../../fixtures/fixture_reader.dart';
@@ -17,7 +17,7 @@ void main() {
     // Arrange => testModel
 
     // Assert
-    expect(testModel, isA<LocalUserModel>());
+    expect(testModel, isA<UserHiveModel>());
     expect(testModel, isA<UserEntity>());
     expect(testModel, isA<BaseEntityAbstraction>());
   });

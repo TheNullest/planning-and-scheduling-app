@@ -1,13 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/di/init_dependencies.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 /// A local data source implementation for authentication-related operations.
 ///
@@ -19,23 +20,23 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   /// The [hiveBox] parameter is the Hive service used for local storage operations.
   /// If not provided, a default instance of [HiveServices<LocalUserModel>] is used.
   LocalAuthDataSourceImpl({
-    HiveServices<LocalUserModel>? hiveBox,
-  }) : _hiveBox = hiveBox ?? HiveServices<LocalUserModel>();
+    HiveServices<UserHiveModel>? hiveBox,
+  }) : _hiveBox = hiveBox ?? serviceLocator<HiveServices<UserHiveModel>>();
 
   /// The name of the Hive box used for storing user data.
-  final String _boxName = HiveBoxConstants.USERS_BOX;
+  final String _boxName = HiveBoxConstants.usersBox;
 
   /// The Hive service used for local storage operations.
-  final HiveServices<LocalUserModel> _hiveBox;
+  final HiveServices<UserHiveModel> _hiveBox;
 
   /// Retrieves the current user from the local storage.
   ///
-  /// Returns a [ResultFuture] containing the [LocalUserModel] of the current user
+  /// Returns a [ResultFuture] containing the [UserHiveModel] of the current user
   /// or a [Failure] if an error occurs.
   @override
-  ResultFuture<LocalUserModel> getCurrentUser() async =>
-      tryCatchEither<LocalUserModel>(
-        action: () async => _hiveBox.operator<LocalUserModel>(
+  ResultFuture<UserHiveModel> getCurrentUser() async =>
+      tryCatchEither<UserHiveModel>(
+        action: () async => _hiveBox.operator<UserHiveModel>(
           job: (box) async => box.values.first,
           boxName: _boxName,
         ),
@@ -44,12 +45,11 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
 
   /// Stores the current user in the local storage.
   ///
-  /// The [user] parameter is the [LocalUserModel] object representing the user to be stored.
+  /// The [user] parameter is the [UserHiveModel] object representing the user to be stored.
   ///
   /// Returns a [ResultFutureVoid] indicating the success or failure of the operation.
   @override
-  ResultFutureVoid storeCurrentUser(LocalUserModel user) async =>
-      tryCatchEither(
+  ResultFutureVoid storeCurrentUser(UserHiveModel user) async => tryCatchEither(
         action: () async {
           await _hiveBox.operator(
             job: (box) async {
@@ -71,11 +71,11 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
 
   /// Updates the current user in the local storage.
   ///
-  /// The [user] parameter is the [LocalUserModel] object representing the user to be updated.
+  /// The [user] parameter is the [UserHiveModel] object representing the user to be updated.
   ///
   /// Returns a [ResultFutureVoid] indicating the success or failure of the operation.
   @override
-  ResultFutureVoid updateCurrentUser(LocalUserModel user) async =>
+  ResultFutureVoid updateCurrentUser(UserHiveModel user) async =>
       storeCurrentUser(user);
 
   /// Signs out the current user by clearing the local storage.

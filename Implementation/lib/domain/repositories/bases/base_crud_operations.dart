@@ -1,19 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
+import 'package:zamaan/data/sources/local/base/base_data_source_abstraction.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 abstract class BaseCRUDOperations<
     Entity extends BaseEntityAbstraction,
-    LocalModel extends Entity,
-    LocalDataSource extends BaseDataSourceAbstraction<LocalModel>> {
+    HiveModel extends Entity,
+    LocalDataSource extends BaseDataSourceAbstraction<HiveModel>> {
   BaseCRUDOperations(LocalDataSource localDataSource)
       : _localDataSource = localDataSource;
   final LocalDataSource _localDataSource;
 
-  LocalModel fromEntity(Entity entity);
-  Entity toEntity(LocalModel model);
+  HiveModel fromEntity(Entity entity);
+  Entity toEntity(HiveModel model);
 
   ResultFutureVoid createEntity({required Entity newEntity}) async {
     return tryCatchEither(

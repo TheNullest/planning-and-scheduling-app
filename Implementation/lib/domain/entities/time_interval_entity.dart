@@ -5,6 +5,7 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 ///
 /// This class extends `BaseEntityAbstraction` and includes additional fields
 /// for task IDs, start and end times, and calculated spent time.
+
 class TimeIntervalEntity extends BaseEntityAbstraction {
   /// Creates a new `TimeIntervalEntity` with the specified properties.
   ///
@@ -36,19 +37,19 @@ class TimeIntervalEntity extends BaseEntityAbstraction {
       : this(mainTaskId: '1', subTaskId: '2', startAt: DateTime(2024));
 
   /// The ID of the main task associated with this time interval.
-  @HiveField(4)
+  @HiveField(5)
   final String mainTaskId;
 
   /// The ID of the sub-task associated with this time interval.
-  @HiveField(5)
+  @HiveField(6)
   final String subTaskId;
 
   /// The start time of the time interval.
-  @HiveField(6)
+  @HiveField(7)
   final DateTime startAt;
 
   /// The end time of the time interval, if any.
-  @HiveField(7)
+  @HiveField(8)
   final DateTime? endAt;
 
   /// The calculated spent time based on the difference between `startAt` and `endAt`.
@@ -56,7 +57,7 @@ class TimeIntervalEntity extends BaseEntityAbstraction {
   /// If `endAt` is provided and is after `startAt`, the `spentTime` field will be
   /// automatically calculated as the difference between `startAt` and `endAt`.
   /// If `endAt` is not set, `spentTime` remains null.
-  @HiveField(8)
+  @HiveField(9)
   final Duration? spentTime;
 
   @override
@@ -103,11 +104,7 @@ class TimeIntervalEntity extends BaseEntityAbstraction {
   /// `TimeIntervalEntity`.
   @override
   List<Object?> get props => [
-        id,
-        updatedAt,
-        createdAt,
-        userId,
-        description,
+        ...super.props,
         mainTaskId,
         subTaskId,
         startAt,

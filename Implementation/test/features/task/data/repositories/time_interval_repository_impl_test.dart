@@ -10,7 +10,7 @@ class MockDataSource extends Mock implements HiveTimeIntervalDataSourceImpl {}
 void main() {
   late HiveTimeIntervalDataSourceImpl mockDataSource;
   late TimeIntervalRepositoryImpl timeIntervalRepo;
-  late TimeIntervalLocalModel model;
+  late TimeIntervalHiveModel model;
   late TimeIntervalEntity entity;
   late DateTime startAt;
   late DateTime endAt;
@@ -19,7 +19,7 @@ void main() {
     mockDataSource = MockDataSource();
     timeIntervalRepo = TimeIntervalRepositoryImpl(mockDataSource);
     entity = TimeIntervalEntity.empty();
-    model = TimeIntervalLocalModel.fromEntity(entity);
+    model = TimeIntervalHiveModel.fromEntity(entity);
     startAt = DateTime(2022);
     endAt = DateTime.now();
     params = GetByTaskIdsAndDateRangeParams(
@@ -35,7 +35,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TimeIntervalLocalModel.fromEntity(entity),
+          newEntity: TimeIntervalHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -45,7 +45,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TimeIntervalLocalModel.fromEntity(entity),
+          newEntity: TimeIntervalHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -56,7 +56,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TimeIntervalLocalModel.fromEntity(entity),
+          newEntity: TimeIntervalHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -66,7 +66,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TimeIntervalLocalModel.fromEntity(entity),
+          newEntity: TimeIntervalHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

@@ -1,9 +1,9 @@
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 abstract class LocalAuthDataSource {
-  ResultFuture<LocalUserModel> getCurrentUser();
-  ResultFutureVoid storeCurrentUser(LocalUserModel user);
-  ResultFutureVoid updateCurrentUser(LocalUserModel user);
+  ResultFuture<UserHiveModel> getCurrentUser();
+  ResultFutureVoid storeCurrentUser(UserHiveModel user);
+  ResultFutureVoid updateCurrentUser(UserHiveModel user);
   ResultFutureVoid signOut();
 }

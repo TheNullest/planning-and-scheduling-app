@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zamaan/core/constants/routes/app_routes.dart';
 import 'package:zamaan/core/localization/app_locale_keys.dart';
-import 'package:zamaan/core/models/route_config.dart';
+import 'package:zamaan/presentation_shared/models/route_config.dart';
 
 abstract class AppRouteConfigs {
   static final RouteConfig error = RouteConfig(

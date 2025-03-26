@@ -100,7 +100,7 @@ class MainTaskEntity extends BaseEntityAbstraction {
     List<String>? tagIds,
     DateTime? dueDate,
     Duration? totalSpentTime,
-    String? taskSchedulerEntityId,
+    String? taskSchedulerId,
   }) =>
       MainTaskEntity(
         id: id ?? this.id,
@@ -118,7 +118,7 @@ class MainTaskEntity extends BaseEntityAbstraction {
         tagIds: tagIds ?? this.tagIds,
         dueDate: dueDate ?? this.dueDate,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        taskSchedulerId: taskSchedulerEntityId ?? taskSchedulerId,
+        taskSchedulerId: taskSchedulerId ?? taskSchedulerId,
       );
 
   @override

@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/tag_entity.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/tag_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/local/hive/hive_tag_data_source_impl.dart';
 
 class MockDataSource extends Mock implements HiveTagDataSourceImpl {}
@@ -9,13 +9,13 @@ class MockDataSource extends Mock implements HiveTagDataSourceImpl {}
 void main() {
   late HiveTagDataSourceImpl mockDataSource;
   late TagRepositoryImpl tagRepo;
-  late TagLocalModel model;
+  late TagHiveModel model;
   late TagEntity entity;
   setUp(() {
     mockDataSource = MockDataSource();
     tagRepo = TagRepositoryImpl(mockDataSource);
     entity = TagEntity.empty();
-    model = TagLocalModel.fromEntity(entity);
+    model = TagHiveModel.fromEntity(entity);
   });
 
   group('createEntity', () {
@@ -24,7 +24,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TagLocalModel.fromEntity(entity),
+          newEntity: TagHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -34,7 +34,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TagLocalModel.fromEntity(entity),
+          newEntity: TagHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -45,7 +45,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TagLocalModel.fromEntity(entity),
+          newEntity: TagHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -55,7 +55,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TagLocalModel.fromEntity(entity),
+          newEntity: TagHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

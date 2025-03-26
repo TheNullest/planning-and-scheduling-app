@@ -6,14 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 /// A model class representing a remote user.
 ///
 /// This class extends `LocalUserModel` and provides additional functionality
 /// for handling remote user data, including conversion from and to JSON,
 /// and creating instances from various data sources.
-class RemoteUserModel extends LocalUserModel {
+class RemoteUserModel extends UserHiveModel {
   /// Constructs a `RemoteUserModel` instance.
   ///
   /// - Parameters:

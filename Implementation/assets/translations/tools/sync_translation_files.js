@@ -7,15 +7,22 @@ const fse = require('fs-extra');
 // Configuration
 const CONFIG = {
   baseLang: 'en',
-  targetLangs: ['ar', 'fa',],
-  translationsDir: path.join(__dirname, '../'), // Adjust path as needed
+  targetLangs: ['ar', 'fa'],
+  translationsDir: path.join(__dirname, '../'),
   placeholder: 'TRANSLATION_NEEDED',
   dryRun: false,
   autoTranslate: true,
   translationServices: ['mymemory', 'libretranslate'],
-  rateLimitDelay: 2000,
-  maxRetries: 3
+  rateLimitDelay: 3000, // Increased delay
+  maxRetries: 5,
+  cacheFile: path.join(__dirname, 'translation-cache.json') // Added cache
 };
+
+// Initialize translation cache
+let translationCache = {};
+if (fse.existsSync(CONFIG.cacheFile)) {
+  translationCache = fse.readJsonSync(CONFIG.cacheFile);
+}
 
 // Configure services with valid parameters
 const SERVICES = {
@@ -24,7 +31,7 @@ const SERVICES = {
     params: (text, targetLang) => ({
       q: text,
       langpair: `en|${targetLang}`,
-      de: 'moien.janlou@outlook.com' // REPLACE WITH REAL EMAIL
+      de: 'moien.janlou@outlook.com'
     }),
     extract: (data) => data.responseData?.translatedText
   },
@@ -44,7 +51,6 @@ const SERVICES = {
     extract: (data) => data.translatedText
   }
 };
-
 class TranslationService {
   constructor() {
     this.serviceIndex = 0;
@@ -52,6 +58,13 @@ class TranslationService {
   }
 
   async translate(text, targetLang) {
+    const cacheKey = `${targetLang}:${text}`;
+
+    // Check cache first
+    if (translationCache[cacheKey]) {
+      return translationCache[cacheKey];
+    }
+
     if (!text || typeof text !== 'string') {
       console.error('Invalid translation text:', text);
       return null;
@@ -61,7 +74,7 @@ class TranslationService {
     while (attempts < CONFIG.maxRetries) {
       const serviceName = CONFIG.translationServices[this.serviceIndex];
       const service = SERVICES[serviceName];
-      
+
       try {
         console.log(`Attempting translation via ${serviceName}:`, text.substring(0, 50));
         const response = await this.makeRequest(service, text, targetLang);
@@ -70,6 +83,9 @@ class TranslationService {
         const translated = service.extract(response.data);
         if (translated && translated !== text) {
           console.log(`Translated: ${text.substring(0, 30)} → ${translated.substring(0, 30)}`);
+          // Save to cache
+          translationCache[cacheKey] = translated;
+          fse.writeJsonSync(CONFIG.cacheFile, translationCache, { spaces: 2 });
           return translated;
         }
       } catch (error) {
@@ -78,7 +94,7 @@ class TranslationService {
 
       this.rotateService();
       attempts++;
-      await new Promise(resolve => setTimeout(resolve, CONFIG.rateLimitDelay));
+      await new Promise(resolve => setTimeout(resolve, CONFIG.rateLimitDelay * (attempts + 1)));
     }
     return null;
   }
@@ -91,7 +107,7 @@ class TranslationService {
     const config = {
       method: service.method || 'get',
       url: service.url,
-      timeout: 10000,
+      timeout: 15000, // Increased timeout
       headers: service.headers || {}
     };
 
@@ -102,6 +118,28 @@ class TranslationService {
     }
 
     return axios(config);
+  }
+}
+
+async function translateMissingKeys(content, missingKeys, targetLang, currentFile) {
+  const translator = new TranslationService();
+
+  for (const key of missingKeys) {
+    const baseValue = getBaseValue(key, currentFile);
+    if (!baseValue || baseValue === CONFIG.placeholder) {
+      continue;
+    }
+
+    // Skip if already has valid translation
+    if (get(content, key) !== CONFIG.placeholder) continue;
+
+    try {
+      const translated = await translator.translate(baseValue, targetLang);
+      set(content, key, translated || `${CONFIG.placeholder}_FAILED`);
+      await new Promise(resolve => setTimeout(resolve, CONFIG.rateLimitDelay));
+    } catch (error) {
+      console.error(`Failed to translate "${baseValue.substring(0, 30)}...": ${error.message}`);
+    }
   }
 }
 
@@ -169,7 +207,7 @@ async function processFile(lang, file, langPath) {
   const langFilePath = path.join(langPath, file);
 
   console.log(`\nProcessing: ${file}`);
-  
+
   const baseContent = await fse.readJson(baseFilePath);
   let langContent = await fse.readJson(langFilePath).catch(() => ({}));
 
@@ -187,39 +225,18 @@ async function processFile(lang, file, langPath) {
   }
 }
 
-async function translateMissingKeys(content, missingKeys, targetLang, currentFile) {
-  const translator = new TranslationService();
-  
-  for (const key of missingKeys) {
-    const baseValue = getBaseValue(key, currentFile);
-    if (!baseValue || baseValue === CONFIG.placeholder) {
-      console.log(`Skipping invalid key: ${key}`);
-      continue;
-    }
-
-    let translated = null;
-    try {
-      translated = await translator.translate(baseValue, targetLang);
-    } catch (error) {
-      console.error(`Translation failed for "${baseValue.substring(0, 30)}...": ${error.message}`);
-    }
-
-    set(content, key, translated || `${CONFIG.placeholder}_FAILED`);
-    await new Promise(resolve => setTimeout(resolve, CONFIG.rateLimitDelay));
-  }
-}
 
 function getBaseValue(key, currentFile) {
   const baseFilePath = path.join(CONFIG.translationsDir, CONFIG.baseLang, currentFile);
   try {
     const baseContent = require(baseFilePath);
     const value = get(baseContent, key);
-    
+
     if (typeof value !== 'string') {
       console.warn(`Invalid base value for ${key}:`, typeof value);
       return null;
     }
-    
+
     return value.trim();
   } catch (error) {
     console.error(`Error loading base file ${currentFile}: ${error.message}`);

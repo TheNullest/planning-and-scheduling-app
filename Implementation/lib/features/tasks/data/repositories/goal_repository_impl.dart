@@ -6,18 +6,18 @@
 // import 'package:zamaan/features/task/domain/entities/goal_entity.dart';
 // import 'package:zamaan/features/task/domain/repositories/goal_repository.dart';
 
-// class GoalRepositoryImpl extends BaseCRUDOperations<GoalEntity, GoalLocalModel,
-//     GoalDataSource<GoalLocalModel>> implements GoalRepository {
+// class GoalRepositoryImpl extends BaseCRUDOperations<GoalEntity, GoalHiveModel,
+//     GoalDataSource<GoalHiveModel>> implements GoalRepository {
 //   GoalRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
 //   final GoalDataSource _localDataSource;
 
 //   @override
-//   GoalLocalModel fromEntity(GoalEntity entity) =>
-//       GoalLocalModel.fromEntity(entity);
+//   GoalHiveModel fromEntity(GoalEntity entity) =>
+//       GoalHiveModel.fromEntity(entity);
 
 //   @override
-//   GoalEntity toEntity(GoalLocalModel model) => model.toEntity();
+//   GoalEntity toEntity(GoalHiveModel model) => model.toEntity();
 
 //   @override
 //   ResultFuture<List<GoalEntity>> getGoalsByMainTaskId(
@@ -28,7 +28,7 @@
 //             await _localDataSource.getGoalsByMainTaskId(mainTaskId);
 //         return entities.map(
 //           (either) => either
-//               .map<GoalEntity>((model) => toEntity(model as GoalLocalModel))
+//               .map<GoalEntity>((model) => toEntity(model as GoalHiveModel))
 //               .toList(),
 //         );
 //       });
@@ -38,6 +38,6 @@
 //       tryCatchEither<GoalEntity>(() async {
 //         final entity = await _localDataSource.getGoalBySubTaskId(subTaskId);
 //         return entity
-//             .map<GoalEntity>((model) => toEntity(model as GoalLocalModel));
+//             .map<GoalEntity>((model) => toEntity(model as GoalHiveModel));
 //       });
 // }

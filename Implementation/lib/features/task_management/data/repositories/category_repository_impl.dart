@@ -6,14 +6,14 @@
 
 // class CategoryRepositoryImpl extends BaseCRUDOperations<
 //     CategoryEntity,
-//     CategoryLocalModel,
-//     CategoryDataSource<CategoryLocalModel>> implements CategoryRepository {
+//     CategoryHiveModel,
+//     CategoryDataSource<CategoryHiveModel>> implements CategoryRepository {
 //   CategoryRepositoryImpl(super.dataSource);
 
 //   @override
-//   CategoryLocalModel fromEntity(CategoryEntity entity) =>
-//       CategoryLocalModel.fromEntity(entity);
+//   CategoryHiveModel fromEntity(CategoryEntity entity) =>
+//       CategoryHiveModel.fromEntity(entity);
 
 //   @override
-//   CategoryEntity toEntity(CategoryLocalModel model) => model.toEntity();
+//   CategoryEntity toEntity(CategoryHiveModel model) => model.toEntity();
 // }

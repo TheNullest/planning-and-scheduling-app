@@ -1,14 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 
 /// A class representing a remote failure or error.
 class RemoteException extends Failure {
-  /// Creates a [RemoteException] with the given [message], [errorLocation], [code], and [statusCode].
   RemoteException({
     required super.message,
     super.errorLocation,
     this.code,
     this.statusCode,
+    this.requestedUrl,
+    super.timestamp,
   });
 
   /// An optional code representing the error.
@@ -17,15 +19,22 @@ class RemoteException extends Failure {
   /// An optional status code representing the error.
   final String? statusCode;
 
+  final Uri? requestedUrl;
+
   @override
   FailureType get failureType => FailureType.remote;
 
   /// Returns a list of properties to be used for value comparison.
   @override
-  List<Object?> get props => super.props..addAll([code, statusCode]);
+  List<Object?> get props => [
+        ...super.props,
+        code,
+        statusCode,
+      ];
 
   /// Provides a string representation of the [RemoteException].
   @override
-  String toString() =>
-      '${super.toString()}\n - Code: $code\n - Status Code: $statusCode';
+  String toString() => kReleaseMode
+      ? super.toString()
+      : '${super.toString()}\n - Code: $code\n - Status Code: $statusCode\n - Requested URL: $requestedUrl';
 }

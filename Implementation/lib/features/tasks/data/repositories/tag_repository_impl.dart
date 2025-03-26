@@ -4,14 +4,14 @@
 // import 'package:zamaan/features/task/domain/entities/tag_entity.dart';
 // import 'package:zamaan/features/task/domain/repositories/tag_repository.dart';
 
-// class TagRepositoryImpl extends BaseCRUDOperations<TagEntity, TagLocalModel,
-//     TagDataSource<TagLocalModel>> implements TagRepository {
+// class TagRepositoryImpl extends BaseCRUDOperations<TagEntity, TagHiveModel,
+//     TagDataSource<TagHiveModel>> implements TagRepository {
 //   TagRepositoryImpl(super.localDataSource);
 
 //   @override
-//   TagLocalModel fromEntity(TagEntity entity) =>
-//       TagLocalModel.fromEntity(entity);
+//   TagHiveModel fromEntity(TagEntity entity) =>
+//       TagHiveModel.fromEntity(entity);
 
 //   @override
-//   TagEntity toEntity(TagLocalModel model) => model.toEntity();
+//   TagEntity toEntity(TagHiveModel model) => model.toEntity();
 // }

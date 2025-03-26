@@ -5,6 +5,7 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 /// Represents a task scheduler entity with various repetition patterns.
 /// This class is used to define the scheduling details of a task, including
 /// its start time, end time, and repetition patterns.
+
 class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// Constructor for creating a `TaskSchedulerEntity`.
   ///
@@ -40,16 +41,16 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
         );
 
   /// The ID of the main task associated with this schedule.
-  @HiveField(4)
+  @HiveField(5)
   final String mainTaskId;
 
-  @HiveField(5)
+  @HiveField(6)
   final String? goalId;
 
   /// The start time of the task.\
   /// This field indicates when the task is scheduled to start.\
   /// If the task has a specific start time, it should be set here.
-  @HiveField(6)
+  @HiveField(7)
   final DateTime? willStartAt;
 
   /// Retrieves scheduled times by their repetition type.
@@ -60,7 +61,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// - `1.RepetitionType.per`: Repeats per a specified interval and time unit.
   /// - `2.RepetitionType.interval`: Repeats at regular intervals of the specified time unit.
   /// - `3.RepetitionType.specificDateTimes`: Repeats on specific dateTimes.
-  @HiveField(7)
+  @HiveField(8)
   final int repetitionType;
 
   /// The unit of time for the repetition (default: TimeUnit.day).
@@ -72,14 +73,14 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// - `3.TimeUnit.week`: Represents a week.
   /// - `4.TimeUnit.month`: Represents a month.
   /// - `5.TimeUnit.year`: Represents a year.
-  @HiveField(8)
+  @HiveField(9)
   final int timeUnit;
 
   /// The specific times for the repetition (optional).
   ///
   /// - For `RepetitionType.every`: Specifies times like [10, 12, 16] o'clock every 2 days.
   /// - For `RepetitionType.specificDays`: Specifies days like [2, 3, 5] of each week or [10, 20, 25] of each month.
-  @HiveField(9)
+  @HiveField(10)
   final List<int>? specificTimes;
 
   /// **Conditional End Time:**
@@ -89,7 +90,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   ///   This signifies a fixed duration for the task.
   /// - If the task has no predefined end time, `endAt` will be set later
   ///   when the task is actually completed. This indicates a dynamic duration.
-  @HiveField(10)
+  @HiveField(11)
   final DateTime? endAt;
 
   @override
@@ -140,11 +141,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// Returns a list of properties for equality comparison.
   @override
   List<Object?> get props => [
-        id,
-        updatedAt,
-        createdAt,
-        userId,
-        description,
+        ...super.props,
         mainTaskId,
         goalId,
         willStartAt,

@@ -1,30 +1,31 @@
+import 'package:zamaan/core/di/init_dependencies.dart';
 import 'package:zamaan/core/enums/enums.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_local_model.dart';
+import 'package:zamaan/data/sources/local/hive/base_hive_data_source_abstraction.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/bases/local/hive/main_task_data_source.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 class HiveMainTaskDataSourceImpl
-    extends BaseLocalDataSourceAbstraction<MainTaskLocalModel>
-    implements MainTaskDataSource<MainTaskLocalModel> {
+    extends BaseLocalDataSourceAbstraction<MainTaskHiveModel>
+    implements MainTaskDataSource<MainTaskHiveModel> {
   // Just to add the testablity feature to the class,
-  // we need to inject the [HiveInitializer<MainTaskLocalModel>] like this
-  HiveMainTaskDataSourceImpl({HiveServices<MainTaskLocalModel>? hiveBox})
-      : _hiveBox = hiveBox ?? HiveServices<MainTaskLocalModel>(),
-        super(hiveBox: hiveBox, HiveBoxConstants.MAINTASKS_BOX);
-  final String _boxName = HiveBoxConstants.MAINTASKS_BOX;
-  final HiveServices<MainTaskLocalModel> _hiveBox;
+  // we need to inject the [HiveInitializer<MainTaskHiveModel>] like this
+  HiveMainTaskDataSourceImpl({HiveServices<MainTaskHiveModel>? hiveBox})
+      : _hiveBox = hiveBox ?? serviceLocator<HiveServices<MainTaskHiveModel>>(),
+        super(hiveServices: hiveBox, HiveBoxConstants.mainTasksBox);
+  final String _boxName = HiveBoxConstants.mainTasksBox;
+  final HiveServices<MainTaskHiveModel> _hiveBox;
 
   @override
-  ResultFuture<List<MainTaskLocalModel>> getMainTasksByCategories(
+  ResultFuture<List<MainTaskHiveModel>> getMainTasksByCategories(
     List<String> categoryIds,
   ) async =>
-      _hiveBox.operator<List<MainTaskLocalModel>>(
+      _hiveBox.operator<List<MainTaskHiveModel>>(
         job: (box) async => box.values
             .where(
-              (item) => item.categoryIds!
+              (item) => item.categoryIds
                   .any((categoryId) => categoryIds.contains(categoryId)),
             )
             .toList(),
@@ -32,10 +33,10 @@ class HiveMainTaskDataSourceImpl
       );
 
   @override
-  ResultFuture<List<MainTaskLocalModel>> getMainTasksByDueDate(
+  ResultFuture<List<MainTaskHiveModel>> getMainTasksByDueDate(
     DateTime dueDate,
   ) async =>
-      _hiveBox.operator<List<MainTaskLocalModel>>(
+      _hiveBox.operator<List<MainTaskHiveModel>>(
         job: (box) async => box.values
             .where((item) => item.dueDate!.compareTo(dueDate) <= 0)
             .toList(),
@@ -43,10 +44,10 @@ class HiveMainTaskDataSourceImpl
       );
 
   @override
-  ResultFuture<List<MainTaskLocalModel>> getMainTasksByPriority(
+  ResultFuture<List<MainTaskHiveModel>> getMainTasksByPriority(
     Priority priority,
   ) async =>
-      _hiveBox.operator<List<MainTaskLocalModel>>(
+      _hiveBox.operator<List<MainTaskHiveModel>>(
         job: (box) async => box.values
             .where((item) => item.priority == (priority.index))
             .toList(),
@@ -54,19 +55,19 @@ class HiveMainTaskDataSourceImpl
       );
 
   @override
-  ResultFuture<List<MainTaskLocalModel>> getMainTasksByStatus(
+  ResultFuture<List<MainTaskHiveModel>> getMainTasksByStatus(
     Status status,
   ) async =>
-      _hiveBox.operator<List<MainTaskLocalModel>>(
+      _hiveBox.operator<List<MainTaskHiveModel>>(
         job: (box) async =>
             box.values.where((item) => item.status == (status.index)).toList(),
         boxName: _boxName,
       );
   @override
-  ResultFuture<List<MainTaskLocalModel>> getMainTasksByTags(
+  ResultFuture<List<MainTaskHiveModel>> getMainTasksByTags(
     List<String> tagIds,
   ) async =>
-      _hiveBox.operator<List<MainTaskLocalModel>>(
+      _hiveBox.operator<List<MainTaskHiveModel>>(
         job: (box) async => box.values
             .where(
               (task) => task.tagIds!.any((tagId) => tagIds.contains(tagId)),
@@ -76,10 +77,10 @@ class HiveMainTaskDataSourceImpl
       );
 
   @override
-  ResultFuture<MainTaskLocalModel> getMainTaskByTaskSchedulerId(
+  ResultFuture<MainTaskHiveModel> getMainTaskByTaskSchedulerId(
     String schedulerId,
   ) async =>
-      _hiveBox.operator<MainTaskLocalModel>(
+      _hiveBox.operator<MainTaskHiveModel>(
         job: (box) async => box.values
             .firstWhere((item) => item.taskSchedulerId == schedulerId),
         boxName: _boxName,

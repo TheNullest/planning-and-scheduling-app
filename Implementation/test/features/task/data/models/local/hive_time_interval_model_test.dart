@@ -5,7 +5,7 @@ import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart'
 
 void main() {
   final entity = TimeIntervalEntity.empty();
-  final testModel = TimeIntervalLocalModel.fromEntity(entity);
+  final testModel = TimeIntervalHiveModel.fromEntity(entity);
   test('[hiveTimeIntervalModel] must be a subclass of [TimeIntervalEntity] ',
       () {
     // Arrange => testModel
@@ -27,11 +27,11 @@ void main() {
     });
 
     test(
-        '[hiveTimeIntervalModel.fromEntity] must return a [TimeIntervalLocalModel] with the right data',
+        '[hiveTimeIntervalModel.fromEntity] must return a [TimeIntervalHiveModel] with the right data',
         () {
       // Arrange => testModel
       // Act
-      final actual = TimeIntervalLocalModel.fromEntity(entity);
+      final actual = TimeIntervalHiveModel.fromEntity(entity);
       // Assert
       expect(actual, testModel);
     });

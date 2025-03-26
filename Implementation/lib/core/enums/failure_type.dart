@@ -1,4 +1,5 @@
 enum FailureType {
+  validation,
   local,
   remote,
   authentication,
@@ -7,6 +8,8 @@ enum FailureType {
   @override
   String toString() {
     switch (this) {
+      case FailureType.validation:
+        return 'validation';
       case FailureType.local:
         return 'local';
       case FailureType.remote:

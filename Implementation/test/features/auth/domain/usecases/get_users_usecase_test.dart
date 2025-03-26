@@ -6,7 +6,7 @@
 // Answer -- Using the [Mocktail]'s APIs
 
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/domain/usecases/get_users_usecase.dart';
 
 import '_authentication_repository.mock.dart';
@@ -14,7 +14,7 @@ import '_authentication_repository.mock.dart';
 void main() {
   late GetUsersUsecase useCase;
   late AuthenticationRepository repository;
-  late List<LocalUserModel> entities;
+  late List<UserHiveModel> entities;
   setUp(() {
     repository = MockAuthRepo();
     useCase = GetUsersUsecase(repository);

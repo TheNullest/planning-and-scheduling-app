@@ -10,21 +10,21 @@
 
 // class MainTaskRepositoryImpl extends BaseCRUDOperations<
 //     MainTaskEntity,
-//     MainTaskLocalModel,
-//     MainTaskDataSource<MainTaskLocalModel>> implements MainTaskRepository {
+//     MainTaskHiveModel,
+//     MainTaskDataSource<MainTaskHiveModel>> implements MainTaskRepository {
 //   MainTaskRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
 //   final MainTaskDataSource _localDataSource;
 
 //   @override
-//   MainTaskLocalModel fromEntity(MainTaskEntity entity) =>
-//       MainTaskLocalModel.fromEntity(entity);
+//   MainTaskHiveModel fromEntity(MainTaskEntity entity) =>
+//       MainTaskHiveModel.fromEntity(entity);
 
 //   @override
-//   MainTaskEntity toEntity(MainTaskLocalModel model) => model.toEntity();
+//   MainTaskEntity toEntity(MainTaskHiveModel model) => model.toEntity();
 
 //   Either<Failure, List<MainTaskEntity>> toEntities(
-//     Either<Failure, List<MainTaskLocalModel>> models,
+//     Either<Failure, List<MainTaskHiveModel>> models,
 //   ) =>
 //       models.map(
 //         (taskModels) => taskModels
@@ -38,7 +38,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getMainTasksByCategories(categoryIds)
-//             as Either<Failure, List<MainTaskLocalModel>>,
+//             as Either<Failure, List<MainTaskHiveModel>>,
 //       );
 
 //   @override
@@ -47,7 +47,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getMainTasksByDueDate(dueDate)
-//             as Either<Failure, List<MainTaskLocalModel>>,
+//             as Either<Failure, List<MainTaskHiveModel>>,
 //       );
 
 //   @override
@@ -56,7 +56,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getMainTasksByPriority(priority)
-//             as Either<Failure, List<MainTaskLocalModel>>,
+//             as Either<Failure, List<MainTaskHiveModel>>,
 //       );
 
 //   @override
@@ -65,7 +65,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getMainTasksByStatus(status)
-//             as Either<Failure, List<MainTaskLocalModel>>,
+//             as Either<Failure, List<MainTaskHiveModel>>,
 //       );
 
 //   @override
@@ -74,7 +74,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getMainTasksByTags(tagIds)
-//             as Either<Failure, List<MainTaskLocalModel>>,
+//             as Either<Failure, List<MainTaskHiveModel>>,
 //       );
 
 //   @override
@@ -83,6 +83,6 @@
 //   ) async {
 //     final result =
 //         await _localDataSource.getMainTaskByTaskSchedulerId(schedulerId);
-//     return result.map((model) => toEntity(model as MainTaskLocalModel));
+//     return result.map((model) => toEntity(model as MainTaskHiveModel));
 //   }
 // }

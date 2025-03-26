@@ -6,29 +6,27 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-<<<<<<< HEAD
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/main_task/data/models/main_task_local_model.dart';
 import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-=======
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
 import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_local_model.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
 >>>>>>> temp-branch
 
-class MockHiveInit extends Mock implements HiveServices<MainTaskLocalModel> {}
+class MockHiveInit extends Mock implements HiveServices<MainTaskHiveModel> {}
 
 void main() {
   late HiveMainTaskDataSourceImpl dataSource;
-  late HiveServices<MainTaskLocalModel> mockHiveInit;
-  late MainTaskLocalModel model;
+  late HiveServices<MainTaskHiveModel> mockHiveInit;
+  late MainTaskHiveModel model;
   late List<String> keys;
-  const boxName = HiveBoxConstants.MAINTASKS_BOX;
+  const boxName = HiveBoxConstants.mainTasksBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveMainTaskDataSourceImpl(hiveBox: mockHiveInit);
-    model = MainTaskLocalModel.empty();
+    model = MainTaskHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -90,7 +88,7 @@ void main() {
         '[mainTaskDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -101,10 +99,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -116,7 +114,7 @@ void main() {
         '[mainTaskDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -128,13 +126,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -143,10 +141,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getEntity] should retrieve entity by id from the box and returns [Right(MainTaskLocalModel)] data',
+        '[mainTaskDataSource.getEntity] should retrieve entity by id from the box and returns [Right(MainTaskHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -155,9 +153,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, MainTaskLocalModel>(model)));
+      expect(result, equals(Right<Failure, MainTaskHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -169,7 +167,7 @@ void main() {
         '[mainTaskDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -180,10 +178,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, MainTaskLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, MainTaskHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -330,10 +328,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTasksByCategories] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTasksByCategories] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -344,10 +342,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -359,7 +357,7 @@ void main() {
         '[mainTaskDataSource.getMainTasksByCategories.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -371,13 +369,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -386,10 +384,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTasksByDueDate] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTasksByDueDate] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -400,10 +398,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -415,7 +413,7 @@ void main() {
         '[mainTaskDataSource.getMainTasksByDueDate.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -427,13 +425,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -442,10 +440,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTasksByPriority] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTasksByPriority] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -456,10 +454,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -471,7 +469,7 @@ void main() {
         '[mainTaskDataSource.getMainTasksByPriority.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -483,13 +481,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -498,10 +496,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTasksByStatus] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTasksByStatus] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -512,10 +510,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -527,7 +525,7 @@ void main() {
         '[mainTaskDataSource.getMainTasksByStatus.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -539,13 +537,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -554,10 +552,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTasksByTags] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTasksByTags] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -568,10 +566,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MainTaskLocalModel>>([])),
+        equals(const Right<Failure, List<MainTaskHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -583,7 +581,7 @@ void main() {
         '[mainTaskDataSource.getMainTasksByTags.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -595,13 +593,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MainTaskLocalModel>>(
+          const Left<Failure, List<MainTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MainTaskLocalModel>>(
+        () => mockHiveInit.operator<List<MainTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -610,10 +608,10 @@ void main() {
     });
 
     test(
-        '[mainTaskDataSource.getMainTaskByTaskSchedulerId] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskLocalModel>)] data',
+        '[mainTaskDataSource.getMainTaskByTaskSchedulerId] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -622,9 +620,9 @@ void main() {
       final result = await dataSource.getMainTaskByTaskSchedulerId('1');
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, MainTaskLocalModel>(model)));
+      expect(result, equals(Right<Failure, MainTaskHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -636,7 +634,7 @@ void main() {
         '[mainTaskDataSource.getMainTaskByTaskSchedulerId.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -647,10 +645,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, MainTaskLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, MainTaskHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<MainTaskLocalModel>(
+        () => mockHiveInit.operator<MainTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

@@ -14,13 +14,13 @@ class MeasurementUnitEntity extends BaseEntityAbstraction {
   });
 
   MeasurementUnitEntity.empty() : this(title: 'title', iconCode: 2);
-  @HiveField(4)
+  @HiveField(5)
   final String title;
 
-  @HiveField(5)
+  @HiveField(6)
   final bool isDouble;
 
-  @HiveField(6)
+  @HiveField(7)
   final int iconCode;
 
   MeasurementUnitEntity toEntity() => MeasurementUnitEntity(
@@ -58,11 +58,7 @@ class MeasurementUnitEntity extends BaseEntityAbstraction {
 
   @override
   List<Object?> get props => [
-        id,
-        createdAt,
-        updatedAt,
-        userId,
-        description,
+        ...super.props,
         title,
         isDouble,
         iconCode,

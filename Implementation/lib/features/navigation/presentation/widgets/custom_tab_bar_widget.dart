@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/core/theme/app_dark_palette.dart';
+import 'package:zamaan/presentation_shared/theme/app_dark_palette.dart';
 
 class CustomTabBarWidget extends StatefulWidget {
   const CustomTabBarWidget({

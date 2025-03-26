@@ -5,25 +5,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/measurement_unit/data/models/measurement_unit_local_model.dart';
 import 'package:zamaan/features/measurement_unit/data/sources/hive_measurement_unit_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 class MockHiveInit extends Mock
-    implements HiveServices<MeasurementUnitLocalModel> {}
+    implements HiveServices<MeasurementUnitHiveModel> {}
 
 void main() {
   late HiveMeasurementUnitDataSourceImpl dataSource;
-  late HiveServices<MeasurementUnitLocalModel> mockHiveInit;
-  late MeasurementUnitLocalModel model;
+  late HiveServices<MeasurementUnitHiveModel> mockHiveInit;
+  late MeasurementUnitHiveModel model;
   late List<String> keys;
-  const boxName = HiveBoxConstants.MEASUREMENT_UNITS_BOX;
+  const boxName = HiveBoxConstants.measurementUnitsBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveMeasurementUnitDataSourceImpl(hiveBox: mockHiveInit);
-    model = MeasurementUnitLocalModel.empty();
+    model = MeasurementUnitHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -85,7 +85,7 @@ void main() {
         '[measurementUnitDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<MeasurementUnitLocalModel>>(
+        () => mockHiveInit.operator<List<MeasurementUnitHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -96,10 +96,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<MeasurementUnitLocalModel>>([])),
+        equals(const Right<Failure, List<MeasurementUnitHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<MeasurementUnitLocalModel>>(
+        () => mockHiveInit.operator<List<MeasurementUnitHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -111,7 +111,7 @@ void main() {
         '[measurementUnitDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<MeasurementUnitLocalModel>>(
+        () => mockHiveInit.operator<List<MeasurementUnitHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -123,13 +123,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<MeasurementUnitLocalModel>>(
+          const Left<Failure, List<MeasurementUnitHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<MeasurementUnitLocalModel>>(
+        () => mockHiveInit.operator<List<MeasurementUnitHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -138,10 +138,10 @@ void main() {
     });
 
     test(
-        '[measurementUnitDataSource.getEntity] should retrieve entity by id from the box and returns [Right(MeasurementUnitLocalModel)] data',
+        '[measurementUnitDataSource.getEntity] should retrieve entity by id from the box and returns [Right(MeasurementUnitHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<MeasurementUnitLocalModel>(
+        () => mockHiveInit.operator<MeasurementUnitHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -150,9 +150,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, MeasurementUnitLocalModel>(model)));
+      expect(result, equals(Right<Failure, MeasurementUnitHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<MeasurementUnitLocalModel>(
+        () => mockHiveInit.operator<MeasurementUnitHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -164,7 +164,7 @@ void main() {
         '[measurementUnitDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<MeasurementUnitLocalModel>(
+        () => mockHiveInit.operator<MeasurementUnitHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -176,13 +176,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, MeasurementUnitLocalModel>(
+          const Left<Failure, MeasurementUnitHiveModel>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<MeasurementUnitLocalModel>(
+        () => mockHiveInit.operator<MeasurementUnitHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

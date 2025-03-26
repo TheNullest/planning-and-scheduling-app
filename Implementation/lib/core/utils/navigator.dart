@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/core/navigation/app_router.dart';
-import 'package:zamaan/infrastructure/di/init_dependencies.dart';
+import 'package:zamaan/core/di/init_dependencies.dart';
+import 'package:zamaan/presentation_shared/navigation/app_router.dart';
 
 /// Navigates to a new route and removes all previous routes until
 /// the predicate returns true.

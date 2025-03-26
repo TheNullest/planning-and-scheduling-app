@@ -58,48 +58,32 @@ class _HomeViewState extends State<HomeView>
               ),
             ];
           },
-          body: NotificationListener<UserScrollNotification>(
-            onNotification: (UserScrollNotification notification) {
-              setState(() {});
-              return true;
-            },
-            child: Scaffold(
-              body: TabBarView(
-                controller: _tabController,
-                children: widget.tabItems.map((item) => item.view).toList(),
+          body: Scaffold(
+            body: TabBarView(
+              controller: _tabController,
+              children: widget.tabItems.map((item) => item.view).toList(),
+            ),
+            bottomNavigationBar: SizedBox(
+              height: 50,
+              child: CustomTabBarWidget(
+                tabController: _tabController,
+                icons:
+                    widget.tabItems.map((item) => item.tabDetail.icon).toList(),
               ),
-              bottomNavigationBar: SizedBox(
-                height: 50,
-                child: CustomTabBarWidget(
-                  tabController: _tabController,
-                  icons: widget.tabItems
-                      .map((item) => item.tabDetail.icon)
-                      .toList(),
+            ),
+
+            // Add new task
+            floatingActionButton: SizedBox(
+              child: FloatingActionButton(
+                onPressed: () {},
+                shape: const CircleBorder(),
+                child: const Icon(
+                  Icons.add_task,
                 ),
               ),
-              // BlocConsumer<AuthBloc, AuthState>(
-              //   listener: (context, state) {
-              //     if (state is AuthFailureState) {
-              //       showSnackBar(context, state.message);
-              //     }
-              //     if (state is AuthUserAccountDeletedState) {
-              //       showSnackBar(context, 'User Account Deleted');
-              //       navigatorPushRemoveUntil(
-              //         context,
-              //         RouteConstants.signInStringRoute,
-              //       );
-              //     }
-              //   },
-              //   builder: (context, state) {
-              //     if (state is AuthLoadingState) {
-              //       return const LoaderWidget();
-              //     }
-              //     return const Center(
-              //       child: Text('Shell'),
-              //     );
-              //   },
-              // ),
             ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
           ),
         ),
       ),

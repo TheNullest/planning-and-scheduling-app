@@ -2,7 +2,7 @@ import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/sub_task_entity.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/sub_task_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/local/hive/hive_sub_task_data_source_impl.dart';
 
 class MockDataSource extends Mock implements HiveSubTaskDataSourceImpl {}
@@ -10,13 +10,13 @@ class MockDataSource extends Mock implements HiveSubTaskDataSourceImpl {}
 void main() {
   late HiveSubTaskDataSourceImpl mockDataSource;
   late SubTaskRepositoryImpl subTaskRepo;
-  late SubTaskLocalModel model;
+  late SubTaskHiveModel model;
   late SubTaskEntity entity;
   setUp(() {
     mockDataSource = MockDataSource();
     subTaskRepo = SubTaskRepositoryImpl(mockDataSource);
     entity = SubTaskEntity.empty();
-    model = SubTaskLocalModel.fromEntity(entity);
+    model = SubTaskHiveModel.fromEntity(entity);
   });
 
   group('createEntity', () {
@@ -25,7 +25,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: SubTaskLocalModel.fromEntity(entity),
+          newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -35,7 +35,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: SubTaskLocalModel.fromEntity(entity),
+          newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -46,7 +46,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: SubTaskLocalModel.fromEntity(entity),
+          newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -56,7 +56,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: SubTaskLocalModel.fromEntity(entity),
+          newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

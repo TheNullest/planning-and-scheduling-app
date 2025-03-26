@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/category_entity.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/category_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/category_hive_model.dart';
 
 void main() {
   final entity = CategoryEntity.empty();
-  final testModel = CategoryLocalModel.fromEntity(entity);
+  final testModel = CategoryHiveModel.fromEntity(entity);
   test('[hiveCategoryModel] must be a subclass of [CategoryEntity] ', () {
     // Arrange => testModel
 
@@ -26,11 +26,11 @@ void main() {
     });
 
     test(
-        '[hiveCategoryModel.fromEntity] must return a [CategoryLocalModel] with the right data',
+        '[hiveCategoryModel.fromEntity] must return a [CategoryHiveModel] with the right data',
         () {
       // Arrange => testModel
       // Act
-      final actual = CategoryLocalModel.fromEntity(entity);
+      final actual = CategoryHiveModel.fromEntity(entity);
       // Assert
       expect(actual, testModel);
     });

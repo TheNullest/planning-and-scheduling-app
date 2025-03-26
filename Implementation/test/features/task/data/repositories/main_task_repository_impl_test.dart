@@ -3,21 +3,21 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/main_task_entity.dart';
 import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
 
 class MockDataSource extends Mock implements HiveMainTaskDataSourceImpl {}
 
 void main() {
   late HiveMainTaskDataSourceImpl mockDataSource;
   late MainTaskRepositoryImpl mainTaskRepo;
-  late MainTaskLocalModel model;
+  late MainTaskHiveModel model;
   late MainTaskEntity entity;
   late DateTime dueDate;
   setUp(() {
     mockDataSource = MockDataSource();
     mainTaskRepo = MainTaskRepositoryImpl(mockDataSource);
     entity = MainTaskEntity.empty();
-    model = MainTaskLocalModel.fromEntity(entity);
+    model = MainTaskHiveModel.fromEntity(entity);
     dueDate = DateTime.now();
   });
 
@@ -27,7 +27,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: MainTaskLocalModel.fromEntity(entity),
+          newEntity: MainTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -37,7 +37,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: MainTaskLocalModel.fromEntity(entity),
+          newEntity: MainTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -48,7 +48,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: MainTaskLocalModel.fromEntity(entity),
+          newEntity: MainTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -58,7 +58,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: MainTaskLocalModel.fromEntity(entity),
+          newEntity: MainTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -231,7 +231,7 @@ void main() {
 
   group('getMainTasksByCategories', () {
     test(
-        '[mainTaskRepo.getMainTasksByCategories] must call the [getMainTasksByCategories] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTasksByCategories] must call the [getMainTasksByCategories] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTasksByCategories([]))
           .thenAnswer((_) async => Right([model]));
@@ -269,7 +269,7 @@ void main() {
 
   group('getMainTasksByDueDate', () {
     test(
-        '[mainTaskRepo.getMainTasksByDueDate] must call the [getMainTasksByDueDate] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTasksByDueDate] must call the [getMainTasksByDueDate] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTasksByDueDate(dueDate))
           .thenAnswer((_) async => const Right([]));
@@ -306,7 +306,7 @@ void main() {
 
   group('getMainTasksByPriority', () {
     test(
-        '[mainTaskRepo.getMainTasksByPriority] must call the [getMainTasksByPriority] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTasksByPriority] must call the [getMainTasksByPriority] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTasksByPriority(Priority.high))
           .thenAnswer((_) async => const Right([]));
@@ -343,7 +343,7 @@ void main() {
 
   group('getMainTasksByStatus', () {
     test(
-        '[mainTaskRepo.getMainTasksByStatus] must call the [getMainTasksByStatus] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTasksByStatus] must call the [getMainTasksByStatus] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTasksByStatus(Status.inProgress))
           .thenAnswer((_) async => const Right([]));
@@ -380,7 +380,7 @@ void main() {
 
   group('getMainTasksByTags', () {
     test(
-        '[mainTaskRepo.getMainTasksByTags] must call the [getMainTasksByTags] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTasksByTags] must call the [getMainTasksByTags] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTasksByTags([]))
           .thenAnswer((_) async => const Right([]));
@@ -417,7 +417,7 @@ void main() {
 
   group('getMainTaskByTaskSchedulerId', () {
     test(
-        '[mainTaskRepo.getMainTaskByTaskSchedulerId] must call the [getMainTaskByTaskSchedulerId] of the [dataSource] then returns [Right(List<MainTaskLocalModel>)] data'
+        '[mainTaskRepo.getMainTaskByTaskSchedulerId] must call the [getMainTaskByTaskSchedulerId] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
       when(() => mockDataSource.getMainTaskByTaskSchedulerId('1'))
           .thenAnswer((_) async => Right(model));

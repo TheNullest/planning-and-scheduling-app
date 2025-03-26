@@ -9,21 +9,21 @@
 // import 'package:zamaan/features/task/domain/repositories/time_interval_repository.dart';
 
 // class TimeIntervalRepositoryImpl extends BaseCRUDOperations<TimeIntervalEntity,
-//         TimeIntervalLocalModel, TimeIntervalDataSource<TimeIntervalLocalModel>>
+//         TimeIntervalHiveModel, TimeIntervalDataSource<TimeIntervalHiveModel>>
 //     implements TimeIntervalRepository {
 //   TimeIntervalRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
 //   final TimeIntervalDataSource _localDataSource;
 
 //   @override
-//   TimeIntervalLocalModel fromEntity(TimeIntervalEntity entity) =>
-//       TimeIntervalLocalModel.fromEntity(entity);
+//   TimeIntervalHiveModel fromEntity(TimeIntervalEntity entity) =>
+//       TimeIntervalHiveModel.fromEntity(entity);
 
 //   @override
-//   TimeIntervalEntity toEntity(TimeIntervalLocalModel model) => model.toEntity();
+//   TimeIntervalEntity toEntity(TimeIntervalHiveModel model) => model.toEntity();
 
 //   Either<Failure, List<TimeIntervalEntity>> toEntities(
-//     Either<Failure, List<TimeIntervalLocalModel>> models,
+//     Either<Failure, List<TimeIntervalHiveModel>> models,
 //   ) =>
 //       models.map(
 //         (taskModels) => taskModels
@@ -41,7 +41,7 @@
 //               mainTaskIds: params.mainTaskIds,
 //               startAt: params.startAt,
 //               endAt: params.endAt,
-//             ) as Either<Failure, List<TimeIntervalLocalModel>>,
+//             ) as Either<Failure, List<TimeIntervalHiveModel>>,
 //           );
 
 //   @override
@@ -50,6 +50,6 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTimeIntervalBySubTaskId(subTaskId)
-//             as Either<Failure, List<TimeIntervalLocalModel>>,
+//             as Either<Failure, List<TimeIntervalHiveModel>>,
 //       );
 // }

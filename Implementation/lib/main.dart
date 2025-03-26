@@ -2,15 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
+import 'package:zamaan/core/di/init_dependencies.dart';
 import 'package:zamaan/core/localization/multi_assets_loader.dart';
-import 'package:zamaan/core/navigation/app_router.dart';
 import 'package:zamaan/core/providers/user_provider.dart';
-import 'package:zamaan/core/theme/app_dark_theme.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/navigation/presentation/views/home_view.dart';
-import 'package:zamaan/infrastructure/di/init_dependencies.dart';
-import 'package:zamaan/presentation_shared/cubits/user/app_user_cubit.dart';
+import 'package:zamaan/presentation_shared/navigation/app_router.dart';
+import 'package:zamaan/presentation_shared/theme/app_dark_theme.dart';
 
 void main() async {
   await intiDependencies();

@@ -9,6 +9,7 @@ import 'package:zamaan/domain/entities/category_entity.dart';
 ///
 /// The choice of tags is entirely up to the user and can vary based on their individual\
 /// workflow and organizational preferences.
+
 class TagEntity extends CategoryEntity {
   TagEntity({
     required super.title,

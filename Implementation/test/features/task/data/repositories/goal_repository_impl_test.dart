@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal_entity.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/goal_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/local/hive/hive_goal_data_source_impl.dart';
 
 class MockDataSource extends Mock implements HiveGoalDataSourceImpl {}
@@ -9,13 +9,13 @@ class MockDataSource extends Mock implements HiveGoalDataSourceImpl {}
 void main() {
   late HiveGoalDataSourceImpl mockDataSource;
   late GoalRepositoryImpl goalRepo;
-  late GoalLocalModel model;
+  late GoalHiveModel model;
   late GoalEntity entity;
   setUp(() {
     mockDataSource = MockDataSource();
     goalRepo = GoalRepositoryImpl(mockDataSource);
     entity = GoalEntity.empty();
-    model = GoalLocalModel.fromEntity(entity);
+    model = GoalHiveModel.fromEntity(entity);
   });
 
   group('createEntity', () {
@@ -24,7 +24,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: GoalLocalModel.fromEntity(entity),
+          newEntity: GoalHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -34,7 +34,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: GoalLocalModel.fromEntity(entity),
+          newEntity: GoalHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -45,7 +45,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: GoalLocalModel.fromEntity(entity),
+          newEntity: GoalHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -55,7 +55,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: GoalLocalModel.fromEntity(entity),
+          newEntity: GoalHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

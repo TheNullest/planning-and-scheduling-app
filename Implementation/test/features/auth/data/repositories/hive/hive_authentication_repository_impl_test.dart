@@ -1,7 +1,7 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/repositories/authentication_repository_impl.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
 
@@ -10,13 +10,13 @@ class MockAuthDataSource extends Mock implements LocalAuthDataSourceImpl {}
 void main() {
   late LocalAuthDataSourceImpl mockDataSource;
   late AuthenticationRepositoryImpl authRepo;
-  late LocalUserModel model;
+  late UserHiveModel model;
   late UserEntity entity;
   setUp(() {
     mockDataSource = MockAuthDataSource();
     authRepo = AuthenticationRepositoryImpl(mockDataSource);
     entity = UserEntity.empty();
-    model = LocalUserModel.fromEntity(entity);
+    model = UserHiveModel.fromEntity(entity);
   });
 
   group('createEntity', () {
@@ -25,7 +25,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: LocalUserModel.fromEntity(entity),
+          newEntity: UserHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -35,7 +35,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: LocalUserModel.fromEntity(entity),
+          newEntity: UserHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -46,7 +46,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: LocalUserModel.fromEntity(entity),
+          newEntity: UserHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -56,7 +56,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: LocalUserModel.fromEntity(entity),
+          newEntity: UserHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

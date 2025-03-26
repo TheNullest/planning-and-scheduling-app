@@ -6,24 +6,24 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/sub_task/data/models/sub_task_local_model.dart';
 import 'package:zamaan/features/sub_task/data/sources/hive_sub_task_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
-class MockHiveInit extends Mock implements HiveServices<SubTaskLocalModel> {}
+class MockHiveInit extends Mock implements HiveServices<SubTaskHiveModel> {}
 
 void main() {
   late HiveSubTaskDataSourceImpl dataSource;
-  late HiveServices<SubTaskLocalModel> mockHiveInit;
-  late SubTaskLocalModel model;
+  late HiveServices<SubTaskHiveModel> mockHiveInit;
+  late SubTaskHiveModel model;
   late List<String> keys;
-  const boxName = HiveBoxConstants.SUB_TASKS_BOX;
+  const boxName = HiveBoxConstants.subTasksBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveSubTaskDataSourceImpl(hiveBox: mockHiveInit);
-    model = SubTaskLocalModel.empty();
+    model = SubTaskHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -85,7 +85,7 @@ void main() {
         '[subTaskDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -94,9 +94,9 @@ void main() {
       final result = await dataSource.getEntities();
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<SubTaskLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<SubTaskHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -108,7 +108,7 @@ void main() {
         '[subTaskDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -120,13 +120,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<SubTaskLocalModel>>(
+          const Left<Failure, List<SubTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -135,10 +135,10 @@ void main() {
     });
 
     test(
-        '[subTaskDataSource.getEntity] should retrieve entity by id from the box and returns [Right(SubTaskLocalModel)] data',
+        '[subTaskDataSource.getEntity] should retrieve entity by id from the box and returns [Right(SubTaskHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<SubTaskLocalModel>(
+        () => mockHiveInit.operator<SubTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -147,9 +147,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, SubTaskLocalModel>(model)));
+      expect(result, equals(Right<Failure, SubTaskHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<SubTaskLocalModel>(
+        () => mockHiveInit.operator<SubTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -161,7 +161,7 @@ void main() {
         '[subTaskDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<SubTaskLocalModel>(
+        () => mockHiveInit.operator<SubTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -172,10 +172,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, SubTaskLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, SubTaskHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<SubTaskLocalModel>(
+        () => mockHiveInit.operator<SubTaskHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -325,7 +325,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByPriority] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -334,9 +334,9 @@ void main() {
       final result = await dataSource.getSubTasksByPriority(Priority.high);
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<SubTaskLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<SubTaskHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -348,7 +348,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByPriority.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -360,13 +360,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<SubTaskLocalModel>>(
+          const Left<Failure, List<SubTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -378,7 +378,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByStatus] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -387,9 +387,9 @@ void main() {
       final result = await dataSource.getSubTasksByStatus(Status.notStarted);
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<SubTaskLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<SubTaskHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -401,7 +401,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByStatus.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -413,13 +413,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<SubTaskLocalModel>>(
+          const Left<Failure, List<SubTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -431,7 +431,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByMainTaskId] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -440,9 +440,9 @@ void main() {
       final result = await dataSource.getSubTasksByMainTaskId('1');
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<SubTaskLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<SubTaskHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -454,7 +454,7 @@ void main() {
         '[subTaskDataSource.getSubTasksByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -466,13 +466,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<SubTaskLocalModel>>(
+          const Left<Failure, List<SubTaskHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<SubTaskLocalModel>>(
+        () => mockHiveInit.operator<List<SubTaskHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

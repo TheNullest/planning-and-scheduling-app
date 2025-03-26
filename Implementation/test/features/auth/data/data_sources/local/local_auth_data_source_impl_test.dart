@@ -3,63 +3,57 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-<<<<<<< HEAD
-import 'package:zamaan/core/services/hive_services.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
-=======
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
-import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
->>>>>>> temp-branch
 
-class MockHiveServices extends Mock implements HiveServices<LocalUserModel> {}
+class MockHiveServices extends Mock implements HiveServices<UserHiveModel> {}
 
 void main() {
   late LocalAuthDataSourceImpl dataSource;
   late MockHiveServices mockHiveServices;
-  late LocalUserModel testUser;
+  late UserHiveModel testUser;
 
   setUp(() {
     mockHiveServices = MockHiveServices();
     dataSource = LocalAuthDataSourceImpl(hiveBox: mockHiveServices);
-    testUser = LocalUserModel.empty();
+    testUser = UserHiveModel.empty();
   });
 
   group('LocalAuthDataSourceImpl', () {
     test('getCurrentUser returns user on success', () async {
       when(
-        () => mockHiveServices.operator<Either<Failure, LocalUserModel>>(
+        () => mockHiveServices.operator<UserHiveModel>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenAnswer((_) async => Right(testUser));
 
       final result = await dataSource.getCurrentUser();
 
-      expect(result, equals(testUser));
+      expect(result, equals(Right(testUser)));
       verify(
-        () => mockHiveServices.operator<LocalUserModel>(
+        () => mockHiveServices.operator<UserHiveModel>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });
 
     test('getCurrentUser throws exception on failure', () async {
       when(
-        () => mockHiveServices.operator<Either<Failure, LocalUserModel>>(
+        () => mockHiveServices.operator<UserHiveModel>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenAnswer((_) async => Left(LocalException(message: 'Error')));
 
       expect(() => dataSource.getCurrentUser(), throwsA(isA<LocalException>()));
       verify(
-        () => mockHiveServices.operator<Either<Failure, LocalUserModel>>(
+        () => mockHiveServices.operator<Either<Failure, UserHiveModel>>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });
@@ -68,7 +62,7 @@ void main() {
       when(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -78,7 +72,7 @@ void main() {
       verify(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });
@@ -87,7 +81,7 @@ void main() {
       when(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenThrow(Exception('testUser already exists in database'));
 
@@ -98,7 +92,7 @@ void main() {
       verify(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });
@@ -107,7 +101,7 @@ void main() {
       when(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -117,7 +111,7 @@ void main() {
       verify(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });
@@ -126,7 +120,7 @@ void main() {
       when(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).thenAnswer((_) async => Left(LocalException(message: 'Error')));
 
@@ -134,7 +128,7 @@ void main() {
       verify(
         () => mockHiveServices.operator<void>(
           job: any(named: 'job'),
-          boxName: HiveBoxConstants.USERS_BOX,
+          boxName: HiveBoxConstants.usersBox,
         ),
       ).called(1);
     });

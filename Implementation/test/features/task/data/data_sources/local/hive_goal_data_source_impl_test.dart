@@ -5,29 +5,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-<<<<<<< HEAD
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
 import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
 import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
-=======
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/features/goal/data/models/goal_local_model.dart';
 import 'package:zamaan/features/goal/data/sources/hive_goal_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 >>>>>>> temp-branch
 
-class MockHiveInit extends Mock implements HiveServices<GoalLocalModel> {}
+class MockHiveInit extends Mock implements HiveServices<GoalHiveModel> {}
 
 void main() {
   late HiveGoalDataSourceImpl dataSource;
-  late HiveServices<GoalLocalModel> mockHiveInit;
-  late GoalLocalModel model;
+  late HiveServices<GoalHiveModel> mockHiveInit;
+  late GoalHiveModel model;
   late List<String> keys;
-  const boxName = HiveBoxConstants.GOALS_BOX;
+  const boxName = HiveBoxConstants.goalsBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveGoalDataSourceImpl(hiveBox: mockHiveInit);
-    model = GoalLocalModel.empty();
+    model = GoalHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -89,7 +87,7 @@ void main() {
         '[goalDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -98,9 +96,9 @@ void main() {
       final result = await dataSource.getEntities();
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<GoalLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<GoalHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -112,7 +110,7 @@ void main() {
         '[goalDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -124,11 +122,11 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<GoalLocalModel>>(HiveFailure('Error')),
+          const Left<Failure, List<GoalHiveModel>>(HiveFailure('Error')),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -137,10 +135,10 @@ void main() {
     });
 
     test(
-        '[goalDataSource.getEntity] should retrieve entity by id from the box and returns [Right(GoalLocalModel)] data',
+        '[goalDataSource.getEntity] should retrieve entity by id from the box and returns [Right(GoalHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -149,9 +147,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, GoalLocalModel>(model)));
+      expect(result, equals(Right<Failure, GoalHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -163,7 +161,7 @@ void main() {
         '[goalDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -174,10 +172,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, GoalLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, GoalHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -186,10 +184,10 @@ void main() {
     });
 
     test(
-        '[goalDataSource.getGoalBySubTaskId] should retrieve entity by id from the box and returns [Right(GoalLocalModel)] data',
+        '[goalDataSource.getGoalBySubTaskId] should retrieve entity by id from the box and returns [Right(GoalHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -198,9 +196,9 @@ void main() {
       final result = await dataSource.getGoalBySubTaskId('1');
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, GoalLocalModel>(model)));
+      expect(result, equals(Right<Failure, GoalHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -212,7 +210,7 @@ void main() {
         '[goalDataSource.getGoalBySubTaskId.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -223,10 +221,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, GoalLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, GoalHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<GoalLocalModel>(
+        () => mockHiveInit.operator<GoalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -235,10 +233,10 @@ void main() {
     });
 
     test(
-        '[goalDataSource.getGoalsByMainTaskId] should retrieve entity by id from the box and returns [Right(List<GoalLocalModel>)] data',
+        '[goalDataSource.getGoalsByMainTaskId] should retrieve entity by id from the box and returns [Right(List<GoalHiveModel>)] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -247,9 +245,9 @@ void main() {
       final result = await dataSource.getGoalsByMainTaskId('1');
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<GoalLocalModel>>([])));
+      expect(result, equals(const Right<Failure, List<GoalHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -261,7 +259,7 @@ void main() {
         '[goalDataSource.getGoalsByMainTaskId.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -273,11 +271,11 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<GoalLocalModel>>(HiveFailure('Error')),
+          const Left<Failure, List<GoalHiveModel>>(HiveFailure('Error')),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<GoalLocalModel>>(
+        () => mockHiveInit.operator<List<GoalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

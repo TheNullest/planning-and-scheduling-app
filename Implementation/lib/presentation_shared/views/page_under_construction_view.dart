@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:zamaan/core/constants/routes/app_route_configs.dart';
-import 'package:zamaan/core/resources/media_resources.dart';
+import 'package:zamaan/presentation_shared/resources/media_resources.dart';
 
 class PageUnderConstruction extends StatelessWidget {
   const PageUnderConstruction({super.key});

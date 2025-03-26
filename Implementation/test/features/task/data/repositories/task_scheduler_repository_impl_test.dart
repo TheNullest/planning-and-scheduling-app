@@ -3,7 +3,7 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/task_scheduler_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/task_scheduler_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/local/hive/hive_task_scheduler_data_source_impl.dart';
 
 class MockDataSource extends Mock implements HiveTaskSchedulerDataSourceImpl {}
@@ -11,7 +11,7 @@ class MockDataSource extends Mock implements HiveTaskSchedulerDataSourceImpl {}
 void main() {
   late HiveTaskSchedulerDataSourceImpl mockDataSource;
   late TaskSchedulerRepositoryImpl taskSchedulerRepo;
-  late TaskSchedulerLocalModel model;
+  late TaskSchedulerHiveModel model;
   late TaskSchedulerEntity entity;
   late DateTime startAt;
   late DateTime endAt;
@@ -21,7 +21,7 @@ void main() {
     taskSchedulerRepo = TaskSchedulerRepositoryImpl(mockDataSource);
     entity = TaskSchedulerEntity.empty();
 
-    model = TaskSchedulerLocalModel.fromEntity(entity);
+    model = TaskSchedulerHiveModel.fromEntity(entity);
     startAt = DateTime(2022);
     endAt = DateTime.now();
     params = GetByTaskIdsAndDateRangeParams(
@@ -37,7 +37,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TaskSchedulerLocalModel.fromEntity(entity),
+          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -47,7 +47,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TaskSchedulerLocalModel.fromEntity(entity),
+          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -58,7 +58,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: TaskSchedulerLocalModel.fromEntity(entity),
+          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -68,7 +68,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: TaskSchedulerLocalModel.fromEntity(entity),
+          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

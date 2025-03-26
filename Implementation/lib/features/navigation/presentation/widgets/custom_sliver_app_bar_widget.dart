@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:Implementation/lib/features/shell/presentation/widgets/navigation/custom_sliver_app_bar_widget.dart
-import 'package:zamaan/core/config/themes/app_dark_palette.dart';
-import 'package:zamaan/core/constants/routes.dart';
-=======
-import 'package:zamaan/core/theme/app_dark_palette.dart';
 import 'package:zamaan/features/settings/presentation/views/settings_view.dart';
->>>>>>> temp-branch:Implementation/lib/features/navigation/presentation/widgets/custom_sliver_app_bar_widget.dart
+import 'package:zamaan/presentation_shared/theme/app_dark_palette.dart';
 
 class CustomSliverAppBarWidget extends StatefulWidget {
   const CustomSliverAppBarWidget({

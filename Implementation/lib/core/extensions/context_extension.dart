@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/providers/user_provider.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 /// Extension on BuildContext to provide convenient access to common properties and methods.
 ///
@@ -48,5 +48,5 @@ extension ContextExt on BuildContext {
   ///
   /// This getter returns the current user information from the `UserProvider`, which
   /// can be used to display user-specific data or perform user-specific actions.
-  LocalUserModel? get currentUser => userProvider.user;
+  UserHiveModel? get currentUser => userProvider.user;
 }

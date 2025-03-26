@@ -21,43 +21,43 @@ class GoalEntity extends BaseEntityAbstraction {
 
   GoalEntity.empty()
       : this(mainTaskId: '1', measurementUnitId: '2', measurementValue: 1);
-  @HiveField(4)
+  @HiveField(5)
   final String mainTaskId;
 
-  @HiveField(5)
+  @HiveField(6)
   final String? subTaskId;
 
   /// The unit of measurment chosen to create the target and goal
-  @HiveField(6)
+  @HiveField(7)
   final String measurementUnitId;
 
   /// MeasurementValue enum
-  @HiveField(7)
+  @HiveField(8)
   final int measurementValue;
 
   /// The minimum amount determined per hour\
   /// based on the desired measurement unit of the current task
-  @HiveField(8)
+  @HiveField(9)
   final double perActiveHour;
 
   /// The minimum amount determined per day\
   /// based on the desired measurement unit of the current task
-  @HiveField(9)
+  @HiveField(10)
   final double perActiveDay;
 
   /// The minimum amount determined per week\
   /// based on the desired measurement unit of the current task
-  @HiveField(10)
+  @HiveField(11)
   final double perActiveWeek;
 
   /// The minimum amount determined per month\
   /// based on the desired measurement unit of the current task
-  @HiveField(11)
+  @HiveField(12)
   final double perActiveMonth;
 
   /// The minimum amount determined per year\
   /// based on the desired measurement unit of the current task
-  @HiveField(12)
+  @HiveField(13)
   final double perActiveYear;
 
   GoalEntity toEntity() => GoalEntity(
@@ -113,11 +113,7 @@ class GoalEntity extends BaseEntityAbstraction {
 
   @override
   List<Object?> get props => [
-        id,
-        updatedAt,
-        createdAt,
-        userId,
-        description,
+        ...super.props,
         mainTaskId,
         measurementUnitId,
         measurementValue,

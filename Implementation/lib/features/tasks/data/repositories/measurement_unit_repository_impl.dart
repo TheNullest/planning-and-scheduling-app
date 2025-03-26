@@ -6,16 +6,16 @@
 
 // class MeasurementUnitRepositoryImpl extends BaseCRUDOperations<
 //         MeasurementUnitEntity,
-//         MeasurementUnitLocalModel,
-//         MeasurementUnitDataSource<MeasurementUnitLocalModel>>
+//         MeasurementUnitHiveModel,
+//         MeasurementUnitDataSource<MeasurementUnitHiveModel>>
 //     implements MeasurementUnitRepository {
 //   MeasurementUnitRepositoryImpl(super.localDataSource);
 
 //   @override
-//   MeasurementUnitLocalModel fromEntity(MeasurementUnitEntity entity) =>
-//       MeasurementUnitLocalModel.fromEntity(entity);
+//   MeasurementUnitHiveModel fromEntity(MeasurementUnitEntity entity) =>
+//       MeasurementUnitHiveModel.fromEntity(entity);
 
 //   @override
-//   MeasurementUnitEntity toEntity(MeasurementUnitLocalModel model) =>
+//   MeasurementUnitEntity toEntity(MeasurementUnitHiveModel model) =>
 //       model.toEntity();
 // }

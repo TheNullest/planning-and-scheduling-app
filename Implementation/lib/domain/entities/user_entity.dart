@@ -30,25 +30,25 @@ class UserEntity extends BaseEntityAbstraction {
           birthDate: DateTime(1989, 12, 23, 16, 53, 37, 532, 444),
         );
 
-  @HiveField(4)
+  @HiveField(5)
   final String userName;
 
-  @HiveField(5)
+  @HiveField(6)
   final String password;
 
-  @HiveField(6)
+  @HiveField(7)
   final String firstName;
 
-  @HiveField(7)
+  @HiveField(8)
   final String lastName;
 
-  @HiveField(8)
+  @HiveField(9)
   final String emailAddress;
 
-  @HiveField(9)
+  @HiveField(10)
   final DateTime? birthDate;
 
-  @HiveField(10)
+  @HiveField(11)
   final String? avatarPath;
 
   @override
@@ -96,16 +96,13 @@ class UserEntity extends BaseEntityAbstraction {
 
   @override
   List<Object?> get props => [
-        id,
+        ...super.props,
         userName,
         password,
         firstName,
         lastName,
         birthDate,
         emailAddress,
-        description,
         avatarPath,
-        createdAt,
-        updatedAt,
       ];
 }

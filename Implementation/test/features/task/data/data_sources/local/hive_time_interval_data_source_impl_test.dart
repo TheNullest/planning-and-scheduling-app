@@ -5,27 +5,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/shell/data/models/local/time_interval_local_model.dart';
 import 'package:zamaan/features/shell/data/sources/hive/hive_time_interval_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 class MockHiveInit extends Mock
-    implements HiveServices<TimeIntervalLocalModel> {}
+    implements HiveServices<TimeIntervalHiveModel> {}
 
 void main() {
   late HiveTimeIntervalDataSourceImpl dataSource;
-  late HiveServices<TimeIntervalLocalModel> mockHiveInit;
-  late TimeIntervalLocalModel model;
+  late HiveServices<TimeIntervalHiveModel> mockHiveInit;
+  late TimeIntervalHiveModel model;
   late List<String> keys;
   late DateTime startAt;
   late DateTime endAt;
-  const boxName = HiveBoxConstants.TIME_INTERVAL_BOX;
+  const boxName = HiveBoxConstants.timeIntervalsBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveTimeIntervalDataSourceImpl(hiveBox: mockHiveInit);
-    model = TimeIntervalLocalModel.empty();
+    model = TimeIntervalHiveModel.empty();
     startAt = DateTime(2024);
     endAt = DateTime.now();
     keys = [
@@ -89,7 +89,7 @@ void main() {
         '[timeIntervalDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -100,10 +100,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TimeIntervalLocalModel>>([])),
+        equals(const Right<Failure, List<TimeIntervalHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -115,7 +115,7 @@ void main() {
         '[timeIntervalDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -127,13 +127,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TimeIntervalLocalModel>>(
+          const Left<Failure, List<TimeIntervalHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -142,10 +142,10 @@ void main() {
     });
 
     test(
-        '[timeIntervalDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TimeIntervalLocalModel)] data',
+        '[timeIntervalDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TimeIntervalHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<TimeIntervalLocalModel>(
+        () => mockHiveInit.operator<TimeIntervalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -154,9 +154,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, TimeIntervalLocalModel>(model)));
+      expect(result, equals(Right<Failure, TimeIntervalHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<TimeIntervalLocalModel>(
+        () => mockHiveInit.operator<TimeIntervalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -168,7 +168,7 @@ void main() {
         '[timeIntervalDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<TimeIntervalLocalModel>(
+        () => mockHiveInit.operator<TimeIntervalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -180,13 +180,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, TimeIntervalLocalModel>(
+          const Left<Failure, TimeIntervalHiveModel>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<TimeIntervalLocalModel>(
+        () => mockHiveInit.operator<TimeIntervalHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -336,7 +336,7 @@ void main() {
         '[timeIntervalDataSource.getScheduledTimesByMainTaskId] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -347,10 +347,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TimeIntervalLocalModel>>([])),
+        equals(const Right<Failure, List<TimeIntervalHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -362,7 +362,7 @@ void main() {
         '[timeIntervalDataSource.getScheduledTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -374,13 +374,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TimeIntervalLocalModel>>(
+          const Left<Failure, List<TimeIntervalHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -392,7 +392,7 @@ void main() {
         '[timeIntervalDataSource.getTimeIntervalByMainTaskIdAndDateRange] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -407,10 +407,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TimeIntervalLocalModel>>([])),
+        equals(const Right<Failure, List<TimeIntervalHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -422,7 +422,7 @@ void main() {
         '[timeIntervalDataSource.getScheduledTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -438,13 +438,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TimeIntervalLocalModel>>(
+          const Left<Failure, List<TimeIntervalHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -456,7 +456,7 @@ void main() {
         '[timeIntervalDataSource.getTimeIntervalBySubTaskId] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -467,10 +467,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TimeIntervalLocalModel>>([])),
+        equals(const Right<Failure, List<TimeIntervalHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -482,7 +482,7 @@ void main() {
         '[timeIntervalDataSource.getTimeIntervalBySubTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -494,13 +494,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TimeIntervalLocalModel>>(
+          const Left<Failure, List<TimeIntervalHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TimeIntervalLocalModel>>(
+        () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

@@ -1,5 +1,5 @@
-import 'package:zamaan/core/usecases/delete_entities_usecase.dart';
-import 'package:zamaan/features/main_task/domain/repositories/main_task_repository.dart';
+import 'package:zamaan/domain/repositories/main_task_repository.dart';
+import 'package:zamaan/domain/usecases/delete_entities_usecase.dart';
 
 class DeleteAllSelectedMainTasksUsecase
     extends DeleteEntitiesUseCase<MainTaskRepository> {

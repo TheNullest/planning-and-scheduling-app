@@ -3,25 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
-<<<<<<< HEAD
-=======
-import 'package:zamaan/infrastructure/services/hive_services.dart';
->>>>>>> temp-branch
 
-class MockHiveInit extends Mock implements HiveServices<LocalUserModel> {}
+class MockHiveInit extends Mock implements HiveServices<UserHiveModel> {}
 
 void main() {
   late LocalAuthDataSourceImpl dataSource;
-  late HiveServices<LocalUserModel> mockHiveInit;
-  late LocalUserModel model;
+  late HiveServices<UserHiveModel> mockHiveInit;
+  late UserHiveModel model;
   late List<String> keys;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = LocalAuthDataSourceImpl();
-    model = LocalUserModel.empty();
+    model = UserHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -83,7 +80,7 @@ void main() {
         '[authDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<LocalUserModel>>(
+        () => mockHiveInit.operator<List<UserHiveModel>>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -92,9 +89,9 @@ void main() {
       final result = await dataSource.getEntities();
 
       expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<LocalUserModel>>([])));
+      expect(result, equals(const Right<Failure, List<UserHiveModel>>([])));
       verify(
-        () => mockHiveInit.operator<List<LocalUserModel>>(
+        () => mockHiveInit.operator<List<UserHiveModel>>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -106,7 +103,7 @@ void main() {
         '[authDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<LocalUserModel>>(
+        () => mockHiveInit.operator<List<UserHiveModel>>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -122,7 +119,7 @@ void main() {
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<LocalUserModel>>(
+        () => mockHiveInit.operator<List<UserHiveModel>>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -134,7 +131,7 @@ void main() {
         '[authDataSource.getEntity] should retrieve entity by id from the box and returns [Right(HiveUserModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<LocalUserModel>(
+        () => mockHiveInit.operator<UserHiveModel>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -143,9 +140,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, LocalUserModel>(model)));
+      expect(result, equals(Right<Failure, UserHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<LocalUserModel>(
+        () => mockHiveInit.operator<UserHiveModel>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -157,7 +154,7 @@ void main() {
         '[authDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<LocalUserModel>(
+        () => mockHiveInit.operator<UserHiveModel>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),
@@ -169,13 +166,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, LocalUserModel>(
+          const Left<Failure, UserHiveModel>(
             LocalException(message: 'Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<LocalUserModel>(
+        () => mockHiveInit.operator<UserHiveModel>(
           job: any(named: 'job'),
           boxName: 'usersBox',
         ),

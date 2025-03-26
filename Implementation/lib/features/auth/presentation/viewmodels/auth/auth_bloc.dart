@@ -4,9 +4,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/core/constants/routes/app_route_configs.dart';
+import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 import 'package:zamaan/features/auth/domain/usecases/change_password_usecase.dart';
@@ -17,7 +19,6 @@ import 'package:zamaan/features/auth/domain/usecases/sign_in_usecase.dart';
 import 'package:zamaan/features/auth/domain/usecases/sign_out_usecase.dart';
 import 'package:zamaan/features/auth/domain/usecases/sign_up_usecase.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
-import 'package:zamaan/presentation_shared/cubits/user/app_user_cubit.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -45,6 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required ResetPasswordUsecase resetPasswordUsecase,
     required DeleteAccountUsecase deleteAccountUsecase,
     required AppUserCubit appUserCubit,
+    required ConnectionChecker connectionChecker,
   })  : _signUpUsecase = signUpUsecase,
         _signInUsecase = signInUsecase,
         _deleteAccountUsecase = deleteAccountUsecase,
@@ -53,6 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _changePasswordUseCase = changePasswordUseCase,
         _resetPasswordUsecase = resetPasswordUsecase,
         _appUserCubit = appUserCubit,
+        _connectionChecker = connectionChecker,
         super(AuthInitialState()) {
     on<AuthEvent>(
       (event, emit) =>
@@ -83,6 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ChangePasswordUsecase _changePasswordUseCase;
   final ResetPasswordUsecase _resetPasswordUsecase;
   final AppUserCubit _appUserCubit;
+  final ConnectionChecker _connectionChecker;
 
   // Checks if a user is signed in.
   FutureVoid _isUserSignedIn(

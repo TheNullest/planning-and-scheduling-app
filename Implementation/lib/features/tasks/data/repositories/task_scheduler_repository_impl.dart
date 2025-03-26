@@ -11,23 +11,23 @@
 
 // class TaskSchedulerRepositoryImpl extends BaseCRUDOperations<
 //         TaskSchedulerEntity,
-//         TaskSchedulerLocalModel,
-//         TaskSchedulerDataSource<TaskSchedulerLocalModel>>
+//         TaskSchedulerHiveModel,
+//         TaskSchedulerDataSource<TaskSchedulerHiveModel>>
 //     implements TaskSchedulerRepository {
 //   TaskSchedulerRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
 //   final TaskSchedulerDataSource _localDataSource;
 
 //   @override
-//   TaskSchedulerLocalModel fromEntity(TaskSchedulerEntity entity) =>
-//       TaskSchedulerLocalModel.fromEntity(entity);
+//   TaskSchedulerHiveModel fromEntity(TaskSchedulerEntity entity) =>
+//       TaskSchedulerHiveModel.fromEntity(entity);
 
 //   @override
-//   TaskSchedulerEntity toEntity(TaskSchedulerLocalModel model) =>
+//   TaskSchedulerEntity toEntity(TaskSchedulerHiveModel model) =>
 //       model.toEntity();
 
 //   Either<Failure, List<TaskSchedulerEntity>> toEntities(
-//     Either<Failure, List<TaskSchedulerLocalModel>> models,
+//     Either<Failure, List<TaskSchedulerHiveModel>> models,
 //   ) =>
 //       models.map(
 //         (taskModels) => taskModels
@@ -45,7 +45,7 @@
 //               mainTaskIds: params.mainTaskIds,
 //               startAt: params.startAt,
 //               endAt: params.endAt,
-//             ) as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             ) as Either<Failure, List<TaskSchedulerHiveModel>>,
 //           );
 
 //   @override
@@ -54,7 +54,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersByEndTime(endTime)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -63,7 +63,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersByMainTaskId(mainTaskId)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -72,7 +72,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersByRepetitionType(repetitionType)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -81,7 +81,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersBySpecificTimes(specificTimes)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -90,7 +90,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersByStartTime(startTime)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -99,7 +99,7 @@
 //   ) async =>
 //       toEntities(
 //         await _localDataSource.getTaskSchedulersByTimeUnit(timeUnit)
-//             as Either<Failure, List<TaskSchedulerLocalModel>>,
+//             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 
 //   @override
@@ -111,6 +111,6 @@
 //         await _localDataSource.getTaskSchedulersWithinDateRange(
 //           startDate: startDate,
 //           endDate: endDate,
-//         ) as Either<Failure, List<TaskSchedulerLocalModel>>,
+//         ) as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 // }

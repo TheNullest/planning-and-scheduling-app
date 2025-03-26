@@ -5,29 +5,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-<<<<<<< HEAD
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/category/data/models/category_local_model.dart';
 import 'package:zamaan/features/category/data/models/category_local_model.dart';
 import 'package:zamaan/features/category/data/sources/hive_category_data_source_impl.dart';
-=======
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/features/category/data/models/category_local_model.dart';
 import 'package:zamaan/features/category/data/sources/hive_category_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 >>>>>>> temp-branch
 
-class MockHiveInit extends Mock implements HiveServices<CategoryLocalModel> {}
+class MockHiveInit extends Mock implements HiveServices<CategoryHiveModel> {}
 
 void main() {
   late HiveCategoryDataSourceImpl dataSource;
-  late HiveServices<CategoryLocalModel> mockHiveInit;
-  late CategoryLocalModel model;
+  late HiveServices<CategoryHiveModel> mockHiveInit;
+  late CategoryHiveModel model;
   late List<String> keys;
-  const boxName = HiveBoxConstants.CATEGOREIS_BOX;
+  const boxName = HiveBoxConstants.categoriesBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveCategoryDataSourceImpl(hiveBox: mockHiveInit);
-    model = CategoryLocalModel.empty();
+    model = CategoryHiveModel.empty();
     keys = [
       uuidGenerator(),
       uuidGenerator(),
@@ -89,7 +87,7 @@ void main() {
         '[categoryDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<CategoryLocalModel>>(
+        () => mockHiveInit.operator<List<CategoryHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -100,10 +98,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<CategoryLocalModel>>([])),
+        equals(const Right<Failure, List<CategoryHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<CategoryLocalModel>>(
+        () => mockHiveInit.operator<List<CategoryHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -115,7 +113,7 @@ void main() {
         '[categoryDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<CategoryLocalModel>>(
+        () => mockHiveInit.operator<List<CategoryHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -127,13 +125,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<CategoryLocalModel>>(
+          const Left<Failure, List<CategoryHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<CategoryLocalModel>>(
+        () => mockHiveInit.operator<List<CategoryHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -142,10 +140,10 @@ void main() {
     });
 
     test(
-        '[categoryDataSource.getEntity] should retrieve entity by id from the box and returns [Right(CategoryLocalModel)] data',
+        '[categoryDataSource.getEntity] should retrieve entity by id from the box and returns [Right(CategoryHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<CategoryLocalModel>(
+        () => mockHiveInit.operator<CategoryHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -154,9 +152,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, CategoryLocalModel>(model)));
+      expect(result, equals(Right<Failure, CategoryHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<CategoryLocalModel>(
+        () => mockHiveInit.operator<CategoryHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -168,7 +166,7 @@ void main() {
         '[categoryDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<CategoryLocalModel>(
+        () => mockHiveInit.operator<CategoryHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -179,10 +177,10 @@ void main() {
       expect(result.isLeft(), true);
       expect(
         result,
-        equals(const Left<Failure, CategoryLocalModel>(HiveFailure('Error'))),
+        equals(const Left<Failure, CategoryHiveModel>(HiveFailure('Error'))),
       );
       verify(
-        () => mockHiveInit.operator<CategoryLocalModel>(
+        () => mockHiveInit.operator<CategoryHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

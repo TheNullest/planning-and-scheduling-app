@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/measurement_unit_local_model.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/measurement_unit_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/local/hive/hive_measurement_unit_data_source_impl.dart';
 
 class MockDataSource extends Mock
@@ -10,13 +10,13 @@ class MockDataSource extends Mock
 void main() {
   late HiveMeasurementUnitDataSourceImpl mockDataSource;
   late MeasurementUnitRepositoryImpl measurementUnitRepo;
-  late MeasurementUnitLocalModel model;
+  late MeasurementUnitHiveModel model;
   late MeasurementUnitEntity entity;
   setUp(() {
     mockDataSource = MockDataSource();
     measurementUnitRepo = MeasurementUnitRepositoryImpl(mockDataSource);
     entity = MeasurementUnitEntity.empty();
-    model = MeasurementUnitLocalModel.fromEntity(entity);
+    model = MeasurementUnitHiveModel.fromEntity(entity);
   });
 
   group('createEntity', () {
@@ -25,7 +25,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: MeasurementUnitLocalModel.fromEntity(entity),
+          newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
@@ -35,7 +35,7 @@ void main() {
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: MeasurementUnitLocalModel.fromEntity(entity),
+          newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -46,7 +46,7 @@ void main() {
         () async {
       when(
         () => mockDataSource.createEntity(
-          newEntity: MeasurementUnitLocalModel.fromEntity(entity),
+          newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
@@ -56,7 +56,7 @@ void main() {
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntity(
-          newEntity: MeasurementUnitLocalModel.fromEntity(entity),
+          newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);

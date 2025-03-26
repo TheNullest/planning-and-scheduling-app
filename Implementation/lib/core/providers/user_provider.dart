@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 /// A provider class for managing user data and notifying listeners of changes.
 ///
@@ -7,12 +7,12 @@ import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
 /// the user data. It also notifies listeners when the user data changes.
 class UserProvider extends ChangeNotifier {
   // Private field to store the user data
-  LocalUserModel? _user;
+  UserHiveModel? _user;
 
   /// Getter for the user data.
   ///
   /// This getter returns the current user data.
-  LocalUserModel? get user => _user;
+  UserHiveModel? get user => _user;
 
   /// Initializes the user data.
   ///
@@ -21,7 +21,7 @@ class UserProvider extends ChangeNotifier {
   ///
   /// - Parameters:
   ///   - user: The `LocalUserModel` containing the user data to initialize.
-  void initUser(LocalUserModel? user) {
+  void initUser(UserHiveModel? user) {
     if (_user != user) {
       _user = user;
     }
@@ -34,7 +34,7 @@ class UserProvider extends ChangeNotifier {
   ///
   /// - Parameters:
   ///   - user: The `LocalUserModel` containing the new user data.
-  set user(LocalUserModel? user) {
+  set user(UserHiveModel? user) {
     if (_user != user) {
       _user = user;
       // Notify listeners of changes after the current frame

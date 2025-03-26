@@ -17,20 +17,22 @@ class SubTaskEntity extends BaseEntityAbstraction {
         status = status ?? Status.notStarted.index;
 
   SubTaskEntity.empty() : this(mainTaskId: '1', title: 'title');
-  @HiveField(4)
-  final String mainTaskId;
 
   @HiveField(5)
-  final int priority;
+  final String mainTaskId;
 
   @HiveField(6)
+  final int priority;
+
+  @HiveField(7)
   final String title;
 
   /// Status == 0 => notStarted\
   /// Status == 1 => inProgress\
   /// Status == 2 => completed
-  @HiveField(7)
+  @HiveField(8)
   final int status;
+
   SubTaskEntity toEntity() => SubTaskEntity(
         id: id,
         updatedAt: updatedAt,
@@ -69,11 +71,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
 
   @override
   List<Object?> get props => [
-        id,
-        updatedAt,
-        createdAt,
-        userId,
-        description,
+        ...super.props,
         mainTaskId,
         title,
         priority,

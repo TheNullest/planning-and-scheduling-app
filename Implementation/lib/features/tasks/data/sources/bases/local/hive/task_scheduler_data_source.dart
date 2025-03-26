@@ -1,12 +1,7 @@
 import 'package:zamaan/core/enums/enums.dart';
-<<<<<<< HEAD:Implementation/lib/features/task_scheduler/data/sources/task_scheduler_data_source.dart
-import 'package:zamaan/core/sources/base_data_source_abstraction.dart';
-import 'package:zamaan/core/sources/base_local_data_source_abstraction.dart';
-=======
->>>>>>> temp-branch:Implementation/lib/features/tasks/data/sources/bases/local/hive/task_scheduler_data_source.dart
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/base_data_source_abstraction.dart';
-import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
+import 'package:zamaan/data/sources/local/base/base_data_source_abstraction.dart';
+import 'package:zamaan/data/sources/local/hive/base_hive_data_source_abstraction.dart';
 import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
 
 /// A data source implementation for managing task scheduling data using Hive.

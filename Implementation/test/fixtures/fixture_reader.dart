@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 
 String fixtures(String fileName) =>
@@ -20,10 +20,10 @@ List<RemoteUserModel> getRemoteUserModels() {
   return models;
 }
 
-List<LocalUserModel> getHiveUserModels() {
-  final hiveModels = <LocalUserModel>[];
+List<UserHiveModel> getHiveUserModels() {
+  final hiveModels = <UserHiveModel>[];
   for (final item in getRemoteUserModels()) {
-    hiveModels.add(LocalUserModel.fromEntity(item.toEntity()));
+    hiveModels.add(UserHiveModel.fromEntity(item.toEntity()));
   }
   return hiveModels;
 }

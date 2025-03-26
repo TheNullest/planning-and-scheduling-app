@@ -17,13 +17,13 @@ class CategoryEntity extends BaseEntityAbstraction {
 
   CategoryEntity.empty() : this(title: 'title', colorCode: 1, iconCode: 2);
 
-  @HiveField(4)
+  @HiveField(5)
   final String title;
 
-  @HiveField(5)
+  @HiveField(6)
   final int colorCode;
 
-  @HiveField(6)
+  @HiveField(7)
   final int iconCode;
 
   CategoryEntity toEntity() => CategoryEntity(
@@ -61,11 +61,7 @@ class CategoryEntity extends BaseEntityAbstraction {
 
   @override
   List<Object?> get props => [
-        id,
-        createdAt,
-        userId,
-        updatedAt,
-        description,
+        ...super.props,
         title,
         colorCode,
         iconCode,

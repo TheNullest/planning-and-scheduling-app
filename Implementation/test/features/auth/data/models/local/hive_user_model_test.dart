@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 void main() {
   final entity = UserEntity.forTest();
-  final testModel = LocalUserModel.fromEntity(entity);
+  final testModel = UserHiveModel.fromEntity(entity);
   test('[hiveUserModel] must be a subclass of [UserEntity] ', () {
     // Arrange => testModel
 
@@ -30,7 +30,7 @@ void main() {
         () {
       // Arrange => testModel
       // Act
-      final actual = LocalUserModel.fromEntity(entity);
+      final actual = UserHiveModel.fromEntity(entity);
       // Assert
       expect(actual, testModel);
     });

@@ -2,6 +2,15 @@ import 'package:hive/hive.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
+/// Represents a main task in the todo application
+///
+/// {@template main_task_entity}
+/// Contains all core properties of a task including:
+/// - Title and description
+/// - Visual identifiers (color/icon)
+/// - Categorization (categories/tags)
+/// - Temporal information (due date/time spent)
+/// {@endtemplate}
 class MainTaskEntity extends BaseEntityAbstraction {
   MainTaskEntity({
     required this.title,
@@ -23,45 +32,52 @@ class MainTaskEntity extends BaseEntityAbstraction {
   })  : priority = priority ?? Priority.optional.index,
         status = status ?? Status.notStarted.index;
 
+  /// A default, empty instance for initial values or testing.
   MainTaskEntity.empty()
-      : this(title: 'title', categoryIds: [], colorCode: 1, iconCode: 2);
-  @HiveField(4)
+      : this(
+          title: 'title',
+          categoryIds: [],
+          colorCode: 1,
+          iconCode: 2,
+        );
+
+  @HiveField(5)
   final String title;
 
   /// Store the color value as an integer
-  @HiveField(5)
+  @HiveField(6)
   final int colorCode;
 
   ///Instead of saving the entire icon, save its IconData
-  @HiveField(6)
+  @HiveField(7)
   final int iconCode;
 
-  @HiveField(7)
+  @HiveField(8)
   final int priority;
 
-  @HiveField(8)
+  @HiveField(9)
   final DateTime? dueDate;
 
   /// Groups such as : sporting, reading, working, fun ,...
-  @HiveField(11)
-  final List<String>? categoryIds;
+  @HiveField(10)
+  final List<String> categoryIds;
 
-  @HiveField(12)
+  @HiveField(11)
   final List<String>? fixedTagIds;
 
-  @HiveField(13)
+  @HiveField(12)
   final List<String>? tagIds;
 
-  @HiveField(14)
+  @HiveField(13)
   final Duration? totalSpentTime;
 
   /// Status == 0 => notStarted\
   /// Status == 1 => inProgress\
   /// Status == 2 => completed
-  @HiveField(15)
+  @HiveField(14)
   final int status;
 
-  @HiveField(16)
+  @HiveField(15)
   final String? taskSchedulerId;
 
   MainTaskEntity toEntity() => MainTaskEntity(
@@ -100,7 +116,7 @@ class MainTaskEntity extends BaseEntityAbstraction {
     List<String>? tagIds,
     DateTime? dueDate,
     Duration? totalSpentTime,
-    String? taskSchedulerEntityId,
+    String? taskSchedulerId,
   }) =>
       MainTaskEntity(
         id: id ?? this.id,
@@ -111,22 +127,24 @@ class MainTaskEntity extends BaseEntityAbstraction {
         title: title ?? this.title,
         colorCode: colorCode ?? this.colorCode,
         iconCode: iconCode ?? this.iconCode,
-        categoryIds: categoryIds ?? this.categoryIds,
+        categoryIds: categoryIds ?? this.categoryIds.toList(),
         priority: priority ?? this.priority,
         status: status ?? this.status,
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         tagIds: tagIds ?? this.tagIds,
         dueDate: dueDate ?? this.dueDate,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        taskSchedulerId: taskSchedulerEntityId ?? taskSchedulerId,
+        taskSchedulerId: taskSchedulerId ?? this.taskSchedulerId,
       );
+
+// validations
+  bool get _isValid => title.isNotEmpty && categoryIds.isNotEmpty;
+
+  bool get _isOverdue => dueDate?.isBefore(DateTime.now()) ?? false;
 
   @override
   List<Object?> get props => [
-        id,
-        updatedAt,
-        userId,
-        description,
+        ...super.props,
         title,
         categoryIds,
         createdAt,

@@ -6,27 +6,27 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/task_scheduler/data/models/task_scheduler_local_model.dart';
 import 'package:zamaan/features/task_scheduler/data/sources/hive_task_scheduler_data_source_impl.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 class MockHiveInit extends Mock
-    implements HiveServices<TaskSchedulerLocalModel> {}
+    implements HiveServices<TaskSchedulerHiveModel> {}
 
 void main() {
   late HiveTaskSchedulerDataSourceImpl dataSource;
-  late HiveServices<TaskSchedulerLocalModel> mockHiveInit;
-  late TaskSchedulerLocalModel model;
+  late HiveServices<TaskSchedulerHiveModel> mockHiveInit;
+  late TaskSchedulerHiveModel model;
   late List<String> keys;
   late DateTime startAt;
   late DateTime endAt;
-  const boxName = HiveBoxConstants.TASK_SCHEDULERS_BOX;
+  const boxName = HiveBoxConstants.taskSchedulersBox;
   setUp(() {
     mockHiveInit = MockHiveInit();
     dataSource = HiveTaskSchedulerDataSourceImpl(hiveBox: mockHiveInit);
-    model = TaskSchedulerLocalModel.empty();
+    model = TaskSchedulerHiveModel.empty();
     startAt = DateTime(2024);
     endAt = DateTime.now();
     keys = [
@@ -90,7 +90,7 @@ void main() {
         '[taskSchedulersDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -101,10 +101,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -116,7 +116,7 @@ void main() {
         '[taskSchedulersDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -128,13 +128,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -143,10 +143,10 @@ void main() {
     });
 
     test(
-        '[taskSchedulersDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TaskSchedulerLocalModel)] data',
+        '[taskSchedulersDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TaskSchedulerHiveModel)] data',
         () async {
       when(
-        () => mockHiveInit.operator<TaskSchedulerLocalModel>(
+        () => mockHiveInit.operator<TaskSchedulerHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -155,9 +155,9 @@ void main() {
       final result = await dataSource.getEntity(id: model.id);
 
       expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, TaskSchedulerLocalModel>(model)));
+      expect(result, equals(Right<Failure, TaskSchedulerHiveModel>(model)));
       verify(
-        () => mockHiveInit.operator<TaskSchedulerLocalModel>(
+        () => mockHiveInit.operator<TaskSchedulerHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -169,7 +169,7 @@ void main() {
         '[taskSchedulersDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockHiveInit.operator<TaskSchedulerLocalModel>(
+        () => mockHiveInit.operator<TaskSchedulerHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -181,13 +181,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, TaskSchedulerLocalModel>(
+          const Left<Failure, TaskSchedulerHiveModel>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<TaskSchedulerLocalModel>(
+        () => mockHiveInit.operator<TaskSchedulerHiveModel>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -337,7 +337,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskIdsAndDateRange] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -353,10 +353,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -368,7 +368,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskIdsAndDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -385,13 +385,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -403,7 +403,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByEndTime] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -414,10 +414,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -429,7 +429,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByEndTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -441,13 +441,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -459,7 +459,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskId] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -470,10 +470,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -485,7 +485,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -497,13 +497,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -515,7 +515,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByRepetitionType] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -527,10 +527,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -542,7 +542,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByRepetitionType.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -555,13 +555,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -573,7 +573,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersBySpecificTimes] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -584,10 +584,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -599,7 +599,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersBySpecificTimes.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -611,13 +611,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -629,7 +629,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByStartTime] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -640,10 +640,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -655,7 +655,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByStartTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -667,13 +667,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -685,7 +685,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByTimeUnit] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -696,10 +696,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -711,7 +711,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersByTimeUnit.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -723,13 +723,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -741,7 +741,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersWithinDateRange] should retrieve all entities from the box [Right([])] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -755,10 +755,10 @@ void main() {
       expect(result.isRight(), true);
       expect(
         result,
-        equals(const Right<Failure, List<TaskSchedulerLocalModel>>([])),
+        equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -770,7 +770,7 @@ void main() {
         '[taskSchedulersDataSource.getTaskSchedulersWithinDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
         () async {
       when(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),
@@ -785,13 +785,13 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, List<TaskSchedulerLocalModel>>(
+          const Left<Failure, List<TaskSchedulerHiveModel>>(
             HiveFailure('Error'),
           ),
         ),
       );
       verify(
-        () => mockHiveInit.operator<List<TaskSchedulerLocalModel>>(
+        () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
           job: any(named: 'job'),
           boxName: boxName,
         ),

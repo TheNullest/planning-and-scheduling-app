@@ -1,29 +1,31 @@
+import 'package:zamaan/core/di/init_dependencies.dart';
 import 'package:zamaan/core/enums/enums.dart';
+import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/base_local_data_source_abstraction.dart';
-import 'package:zamaan/features/auth/presentation/constants/hive_box_constants.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/task_scheduler_local_model.dart';
+import 'package:zamaan/data/sources/local/hive/base_hive_data_source_abstraction.dart';
+import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/features/tasks/data/models/local/hive/task_scheduler_hive_model.dart';
 import 'package:zamaan/features/tasks/data/sources/bases/local/hive/task_scheduler_data_source.dart';
-import 'package:zamaan/infrastructure/services/hive_services.dart';
 
 /// A data source implementation for managing task scheduling data using Hive.
 ///
 /// This class extends [BaseLocalDataSourceAbstraction] to leverage common data operations
 /// and provides additional methods for specific task-related queries.
 class HiveTaskSchedulerDataSourceImpl
-    extends BaseLocalDataSourceAbstraction<TaskSchedulerLocalModel>
-    implements TaskSchedulerDataSource<TaskSchedulerLocalModel> {
+    extends BaseLocalDataSourceAbstraction<TaskSchedulerHiveModel>
+    implements TaskSchedulerDataSource<TaskSchedulerHiveModel> {
   /// Constructor for [HiveTaskSchedulerDataSourceImpl].
   ///
   /// The [hiveBox] parameter is optional and allows for dependency injection
   /// to facilitate testing. If not provided, a default [HiveServices] is used.
   HiveTaskSchedulerDataSourceImpl({
-    HiveServices<TaskSchedulerLocalModel>? hiveBox,
-  })  : _hiveBox = hiveBox ?? HiveServices<TaskSchedulerLocalModel>(),
-        _boxName = HiveBoxConstants.TASK_SCHEDULERS_BOX,
-        super(hiveBox: hiveBox, HiveBoxConstants.TASK_SCHEDULERS_BOX);
+    HiveServices<TaskSchedulerHiveModel>? hiveBox,
+  })  : _hiveBox =
+            hiveBox ?? serviceLocator<HiveServices<TaskSchedulerHiveModel>>(),
+        _boxName = HiveBoxConstants.taskSchedulersBox,
+        super(hiveServices: hiveBox, HiveBoxConstants.taskSchedulersBox);
   final String _boxName;
-  final HiveServices<TaskSchedulerLocalModel> _hiveBox;
+  final HiveServices<TaskSchedulerHiveModel> _hiveBox;
 
   /// Retrieves tasks based on main task IDs and a date range.
   ///
@@ -31,15 +33,15 @@ class HiveTaskSchedulerDataSourceImpl
   /// [startAt] - Start date for the date range filter.
   /// [endAt] - End date for the date range filter.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>>
+  ResultFuture<List<TaskSchedulerHiveModel>>
       getTaskSchedulersByMainTaskIdsAndDateRange({
     required List<String> mainTaskIds,
     required DateTime? startAt,
     required DateTime? endAt,
   }) async =>
-          _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+          _hiveBox.operator<List<TaskSchedulerHiveModel>>(
             job: (box) async => box.values.where((task) {
               final isWithinDateRange =
                   (startAt == null || task.willStartAt!.isAfter(startAt)) &&
@@ -54,12 +56,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [endAt] - The end time to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersByEndTime(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByEndTime(
     DateTime endAt,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async =>
           box.values.where((task) => task.endAt!.isBefore(endAt)).toList(),
       boxName: _boxName,
@@ -70,12 +72,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [mainTaskId] - The main task ID to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersByMainTaskId(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByMainTaskId(
     String mainTaskId,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async =>
           box.values.where((task) => task.mainTaskId == mainTaskId).toList(),
       boxName: _boxName,
@@ -86,12 +88,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [repetitionType] - The repetition type to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersByRepetitionType(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByRepetitionType(
     RepetitionType repetitionType,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async => box.values
           .where((task) => task.repetitionType == repetitionType.index)
           .toList(),
@@ -103,12 +105,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [specificTimes] - List of specific times to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersBySpecificTimes(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersBySpecificTimes(
     List<int> specificTimes,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async => box.values
           .where(
             (task) => specificTimes
@@ -123,12 +125,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [startAt] - The start time to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersByStartTime(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByStartTime(
     DateTime startAt,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async => box.values
           .where((task) => task.willStartAt!.isAfter(startAt))
           .toList(),
@@ -140,12 +142,12 @@ class HiveTaskSchedulerDataSourceImpl
   ///
   /// [timeUnit] - The time unit to filter the tasks.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersByTimeUnit(
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByTimeUnit(
     TimeUnit timeUnit,
   ) async {
-    return _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+    return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async =>
           box.values.where((task) => task.timeUnit == timeUnit.index).toList(),
       boxName: _boxName,
@@ -157,13 +159,13 @@ class HiveTaskSchedulerDataSourceImpl
   /// [startDate] - The start date for the date range filter.
   /// [endDate] - The end date for the date range filter.
   ///
-  /// Returns a [ResultFuture] containing a list of [TaskSchedulerLocalModel] objects.
+  /// Returns a [ResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  ResultFuture<List<TaskSchedulerLocalModel>> getTaskSchedulersWithinDateRange({
+  ResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersWithinDateRange({
     required DateTime startDate,
     required DateTime endDate,
   }) async =>
-      _hiveBox.operator<List<TaskSchedulerLocalModel>>(
+      _hiveBox.operator<List<TaskSchedulerHiveModel>>(
         job: (box) async => box.values
             .where(
               (task) =>

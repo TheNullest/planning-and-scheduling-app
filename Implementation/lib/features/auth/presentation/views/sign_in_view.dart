@@ -6,7 +6,7 @@ import 'package:zamaan/core/extensions/int_to_space_extension.dart';
 import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
-import 'package:zamaan/features/auth/data/models/local/local_user_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
@@ -49,7 +49,7 @@ class _SignInViewState extends State<SignInView> {
             if (state is AuthSuccessState) {
               showSnackBar(context, state.user.userName);
               context.userProvider
-                  .initUser(LocalUserModel.fromEntity(state.user));
+                  .initUser(UserHiveModel.fromEntity(state.user));
               navigatorPushRemoveUntil(context, AppRoutes.home);
             }
           },
