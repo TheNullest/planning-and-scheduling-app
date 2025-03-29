@@ -46,7 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required ResetPasswordUsecase resetPasswordUsecase,
     required DeleteAccountUsecase deleteAccountUsecase,
     required AppUserCubit appUserCubit,
-    required ConnectionChecker connectionChecker,
+    required NetworkConnectivityMonitor connectionChecker,
   })  : _signUpUsecase = signUpUsecase,
         _signInUsecase = signInUsecase,
         _deleteAccountUsecase = deleteAccountUsecase,
@@ -86,7 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final ChangePasswordUsecase _changePasswordUseCase;
   final ResetPasswordUsecase _resetPasswordUsecase;
   final AppUserCubit _appUserCubit;
-  final ConnectionChecker _connectionChecker;
+  final NetworkConnectivityMonitor _connectionChecker;
 
   // Checks if a user is signed in.
   FutureVoid _isUserSignedIn(

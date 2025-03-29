@@ -5,7 +5,8 @@ import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source
 
 import '../../../domain/usecases/_authentication_repository.mock.dart';
 
-class MockConnectionChecker extends Mock implements ConnectionChecker {}
+class MockConnectionChecker extends Mock
+    implements NetworkConnectivityMonitor {}
 
 class MockSupabaseClient extends Mock implements SupabaseClient {}
 

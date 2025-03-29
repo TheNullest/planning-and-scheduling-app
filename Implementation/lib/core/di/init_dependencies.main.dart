@@ -22,12 +22,14 @@ Future<void> intiDependencies() async {
     ..registerLazySingleton(AppUserCubit.new)
     ..registerFactory(InternetConnection.new)
     ..registerFactory(Connectivity.new)
-    ..registerLazySingleton<ConnectionChecker>(
-      () => ConnectionCheckerImpl(
+    ..registerLazySingleton<NetworkConnectivityMonitor>(
+      () => NetworkConnectivityMonitorrImpl(
         internetConnection: serviceLocator(),
         connectivity: serviceLocator(),
       ),
-    );
+    )
+    ..registerLazySingleton(
+        () => NetworkConnectivityMonitorCubit(serviceLocator()));
 
   _navigation();
 }

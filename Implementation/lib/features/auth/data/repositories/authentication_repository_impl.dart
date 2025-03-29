@@ -17,14 +17,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   AuthenticationRepositoryImpl({
     required RemoteAuthDataSource remoteDataSource,
     required LocalAuthDataSource localDataSource,
-    required ConnectionChecker connectionChecker,
+    required NetworkConnectivityMonitor connectionChecker,
   })  : _remoteDataSource = remoteDataSource,
         _localDataSource = localDataSource,
         _connectionChecker = connectionChecker;
 
   final RemoteAuthDataSource _remoteDataSource;
   final LocalAuthDataSource _localDataSource;
-  final ConnectionChecker _connectionChecker;
+  final NetworkConnectivityMonitor _connectionChecker;
 
   @override
   ResultFuture<UserEntity> getCurrentUser() async => tryCatchEither<UserEntity>(
