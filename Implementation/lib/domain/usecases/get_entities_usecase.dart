@@ -9,5 +9,5 @@ abstract class GetEntitiesUseCase<
     extends UseCaseWithoutParams<Repo, List<Entity>?> {
   GetEntitiesUseCase(super.repository);
   @override
-  ResultFuture<List<Entity>?> call() async => repository.getEntities();
+  EResultFuture<List<Entity>?> call() async => repository.getEntities();
 }

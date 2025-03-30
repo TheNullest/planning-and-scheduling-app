@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/core/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
 

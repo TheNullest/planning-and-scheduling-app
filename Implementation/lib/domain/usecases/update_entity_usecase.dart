@@ -8,6 +8,6 @@ abstract class UpdateEntityUseCase<Entity extends BaseEntityAbstraction,
     extends UseCaseWithParams<Repo, void, Entity> {
   UpdateEntityUseCase(super.repository);
   @override
-  ResultFutureVoid call(Entity params) async =>
+  EResultFutureVoid call(Entity params) async =>
       repository.updateEntity(entity: params);
 }

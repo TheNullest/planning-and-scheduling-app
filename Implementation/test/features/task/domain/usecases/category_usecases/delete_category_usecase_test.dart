@@ -5,7 +5,7 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/category_entity.dart';
 import 'package:zamaan/domain/repositories/category_repository.dart';
-import 'package:zamaan/features/tasks/domain/usecases/category/delete_category_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/category/delete_category_usecase.dart';
 
 import '_category_repository.mock.dart';
 

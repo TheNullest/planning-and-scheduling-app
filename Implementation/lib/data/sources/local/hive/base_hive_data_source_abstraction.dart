@@ -26,7 +26,7 @@ abstract class BaseLocalDataSourceAbstraction<
 
   /// #### Saves the `[item]` to the Hive box conditionally.
   @override
-  ResultFutureVoid createEntity({
+  EResultFutureVoid createEntity({
     required HiveModel newEntity,
   }) async =>
       _hiveServices.operator(
@@ -36,7 +36,7 @@ abstract class BaseLocalDataSourceAbstraction<
 
   /// Retrieves all items from the Hive box.
   @override
-  ResultFuture<List<HiveModel>> getEntities() async =>
+  EResultFuture<List<HiveModel>> getEntities() async =>
       _hiveServices.operator<List<HiveModel>>(
         job: (box) async => box.values.toList(),
         boxName: _boxName,
@@ -44,7 +44,7 @@ abstract class BaseLocalDataSourceAbstraction<
 
   /// Retrieves an item from the Hive box based on its **ID**.
   @override
-  ResultFuture<HiveModel> getEntity({required String id}) async =>
+  EResultFuture<HiveModel> getEntity({required String id}) async =>
       tryCatchEither(
         action: () async => _hiveServices.operator<HiveModel>(
           job: (box) async => box.values.firstWhere((item) => item.id == id),
@@ -60,12 +60,12 @@ abstract class BaseLocalDataSourceAbstraction<
   ///
   /// for this reason, the [createEntity] function is used again
   @override
-  ResultFutureVoid updateEntity({required HiveModel entity}) async =>
+  EResultFutureVoid updateEntity({required HiveModel entity}) async =>
       createEntity(newEntity: entity);
 
   /// Deletes an item from the Hive box by key.
   @override
-  ResultFutureVoid deleteEntity({required String id}) async {
+  EResultFutureVoid deleteEntity({required String id}) async {
     if (!isValidUUID(id)) {
       throw LocalException(
         message: 'This $id is not a valid [UUID] ',
@@ -80,7 +80,7 @@ abstract class BaseLocalDataSourceAbstraction<
 
   /// Deletes an item from the Hive box by key.
   @override
-  ResultFutureVoid deleteAllSelected(List<String> keys) async {
+  EResultFutureVoid deleteAllSelected(List<String> keys) async {
     final invalidKeys = <String>[];
 
     for (final key in keys) {

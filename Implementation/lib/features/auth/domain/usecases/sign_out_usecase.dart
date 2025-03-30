@@ -7,5 +7,5 @@ class SignOutUsecase
   SignOutUsecase(super.repository);
 
   @override
-  ResultFutureVoid call() async => repository.signOut();
+  EResultFutureVoid call() async => repository.signOut();
 }

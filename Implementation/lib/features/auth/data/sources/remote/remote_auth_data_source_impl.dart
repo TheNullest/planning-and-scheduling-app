@@ -46,7 +46,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  ResultFuture<RemoteUserModel> getCurrentUser() async =>
+  EResultFuture<RemoteUserModel> getCurrentUser() async =>
       tryCatchEither<RemoteUserModel>(
         action: () async {
           if (currentUserSession != null) {
@@ -81,7 +81,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  ResultFuture<RemoteUserModel> signIn(UserSignInParams params) async =>
+  EResultFuture<RemoteUserModel> signIn(UserSignInParams params) async =>
       _getUser(
         () async => _auth.signInWithPassword(
           password: params.password,
@@ -98,7 +98,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  ResultFuture<RemoteUserModel> signUp(RemoteUserModel userModel) async =>
+  EResultFuture<RemoteUserModel> signUp(RemoteUserModel userModel) async =>
       _getUser(
         () async => _auth.signUp(
           password: userModel.password,
@@ -113,7 +113,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing `true` if successful, or an error.
   @override
-  ResultFuture<bool> signOut() async => tryCatchEither(
+  EResultFuture<bool> signOut() async => tryCatchEither(
         action: () async {
           await _auth.signOut();
           return const Right(true);
@@ -130,7 +130,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  ResultFuture<RemoteUserModel> updateUser(RemoteUserModel entity) async =>
+  EResultFuture<RemoteUserModel> updateUser(RemoteUserModel entity) async =>
       tryCatchEither<RemoteUserModel>(
         action: () async {
           // Update the user's information
@@ -151,7 +151,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
       );
 
   @override
-  ResultFutureVoid changePassword(ChangePasswordParams params) async =>
+  EResultFutureVoid changePassword(ChangePasswordParams params) async =>
       tryCatchEither(
         action: () async {
           // Verify the user's credentials by signing in with the provided email and password
@@ -170,7 +170,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   // - Use a secure method to generate a new password instead of hardcoding it.
   // - Ensure proper error handling and logging.
   @override
-  ResultFutureVoid resetPassword(String email) async => tryCatchEither(
+  EResultFutureVoid resetPassword(String email) async => tryCatchEither(
         action: () async {
           final response = await _supabaseClient
               .from('profiles')
@@ -200,7 +200,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing `true` if successful, or an error.
   @override
-  ResultFuture<bool> deleteUserAccount(UserSignInParams params) =>
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params) =>
       tryCatchEither<bool>(
         action: () async {
           // Sign in the user with the provided email and password to verify their credentials
@@ -230,7 +230,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///   - fn: The function to execute.
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
-  ResultFuture<RemoteUserModel> _getUser(
+  EResultFuture<RemoteUserModel> _getUser(
     Future<AuthResponse> Function() fn,
   ) async =>
       tryCatchEither<RemoteUserModel>(

@@ -9,6 +9,6 @@ abstract class CreateEntityUseCase<
     extends UseCaseWithParams<Repo, void, Entity> {
   CreateEntityUseCase(super.repository);
   @override
-  ResultFutureVoid call(Entity params) async =>
+  EResultFutureVoid call(Entity params) async =>
       repository.createEntity(newEntity: params);
 }

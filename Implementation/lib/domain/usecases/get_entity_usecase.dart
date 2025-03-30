@@ -8,6 +8,6 @@ abstract class GetEntityUseCase<Repo extends BaseRepositoryAbstraction<Entity>,
     extends UseCaseWithParams<Repo, Entity?, String> {
   GetEntityUseCase(super.repository);
   @override
-  ResultFuture<Entity?> call(String params) async =>
+  EResultFuture<Entity?> call(String params) async =>
       repository.getEntity(id: params);
 }

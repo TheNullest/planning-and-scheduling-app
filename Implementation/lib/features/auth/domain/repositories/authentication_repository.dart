@@ -4,12 +4,12 @@ import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 
 abstract class AuthenticationRepository {
-  ResultFuture<UserEntity> getCurrentUser();
-  ResultFuture<UserEntity> signUp(UserEntity user);
-  ResultFuture<UserEntity> signIn(UserSignInParams params);
-  ResultFuture<UserEntity> update(UserEntity user);
-  ResultFutureVoid changePassword(ChangePasswordParams params);
-  ResultFutureVoid resetPassword(String email);
-  ResultFuture<bool> deleteUserAccount(UserSignInParams params);
-  ResultFutureVoid signOut();
+  EResultFuture<UserEntity> getCurrentUser();
+  EResultFuture<UserEntity> signUp(UserEntity user);
+  EResultFuture<UserEntity> signIn(UserSignInParams params);
+  EResultFuture<UserEntity> update(UserEntity user);
+  EResultFutureVoid changePassword(ChangePasswordParams params);
+  EResultFutureVoid resetPassword(String email);
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params);
+  EResultFutureVoid signOut();
 }

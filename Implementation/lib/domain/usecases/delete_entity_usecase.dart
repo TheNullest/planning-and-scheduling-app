@@ -6,6 +6,6 @@ abstract class DeleteEntityUseCase<Repo extends BaseRepositoryAbstraction>
     extends UseCaseWithParams<Repo, void, String> {
   DeleteEntityUseCase(super.repository);
   @override
-  ResultFutureVoid call(String params) async =>
+  EResultFutureVoid call(String params) async =>
       repository.deleteEntity(id: params);
 }

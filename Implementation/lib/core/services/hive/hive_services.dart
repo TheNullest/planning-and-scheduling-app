@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
-import 'package:zamaan/core/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/core/platform/directory_wrapper.dart';
 import 'package:zamaan/core/platform/path_provider_wrapper.dart';
 import 'package:zamaan/core/platform/platform_wrapper.dart';
@@ -14,14 +14,14 @@ import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/category_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/goal_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/measurement_unit_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/sub_task_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/tag_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/task_scheduler_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/time_interval_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/time_interval_hive_model.dart';
 
 /// A generic service class for working with Hive boxes. It is parameterized
 /// by [HiveModel], which must extend [BaseEntityAbstraction].
@@ -85,7 +85,7 @@ class HiveServices<HiveModel extends BaseEntityAbstraction> {
   /// **Note:** Hive boxes are generally intended to be long‑lived. Closing
   /// after each access may not always be optimal; consider managing the box's
   /// lifecycle at a higher level if performance is a concern.
-  ResultFuture<T> operator<T>({
+  EResultFuture<T> operator<T>({
     required String boxName,
     required Future<T> Function(Box<HiveModel> box) job,
   }) async {

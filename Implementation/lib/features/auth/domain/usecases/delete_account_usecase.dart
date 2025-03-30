@@ -8,6 +8,6 @@ class DeleteAccountUsecase extends UseCaseWithParams<AuthenticationRepository,
   DeleteAccountUsecase(super.repository);
 
   @override
-  ResultFuture<bool> call(UserSignInParams params) async =>
+  EResultFuture<bool> call(UserSignInParams params) async =>
       repository.deleteUserAccount(params);
 }

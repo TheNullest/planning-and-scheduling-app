@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/sub_task_entity.dart';
 import 'package:zamaan/domain/repositories/sub_task_repository.dart';
-import 'package:zamaan/features/tasks/domain/usecases/sub_task/get_sub_tasks_by_main_task_id_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_sub_tasks_by_main_task_id_usecase.dart';
 
 import '_sub_task_repository.mock.dart';
 

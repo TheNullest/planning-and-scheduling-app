@@ -45,8 +45,8 @@ import 'package:zamaan/core/utils/typedef.dart';
 ///   (value) => print('Value: $value'),
 /// );
 /// ```
-ResultFuture<T> tryCatchEither<T>({
-  required ResultFuture<T> Function() action,
+EResultFuture<T> tryCatchEither<T>({
+  required EResultFuture<T> Function() action,
   FailureType? failureType,
   String? customMessage,
   Future Function()? onFinally,

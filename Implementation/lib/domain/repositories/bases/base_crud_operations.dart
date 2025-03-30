@@ -15,7 +15,7 @@ abstract class BaseCRUDOperations<
   HiveModel fromEntity(Entity entity);
   Entity toEntity(HiveModel model);
 
-  ResultFutureVoid createEntity({required Entity newEntity}) async {
+  EResultFutureVoid createEntity({required Entity newEntity}) async {
     return tryCatchEither(
       action: () async => _localDataSource
           .createEntity(newEntity: fromEntity(newEntity))
@@ -23,7 +23,7 @@ abstract class BaseCRUDOperations<
     );
   }
 
-  ResultFuture<List<Entity>?> getEntities() async {
+  EResultFuture<List<Entity>?> getEntities() async {
     return tryCatchEither<List<Entity>?>(
       action: () async {
         final models = await _localDataSource.getEntities();
@@ -32,7 +32,7 @@ abstract class BaseCRUDOperations<
     );
   }
 
-  ResultFuture<Entity?> getEntity({required String id}) async =>
+  EResultFuture<Entity?> getEntity({required String id}) async =>
       tryCatchEither<Entity?>(
         action: () async {
           final model = await _localDataSource.getEntity(id: id);
@@ -40,20 +40,21 @@ abstract class BaseCRUDOperations<
         },
       );
 
-  ResultFutureVoid updateEntity({required Entity entity}) async =>
+  EResultFutureVoid updateEntity({required Entity entity}) async =>
       tryCatchEither(
         action: () async => _localDataSource
             .updateEntity(entity: fromEntity(entity))
             .then((_) => const Right(null)),
       );
 
-  ResultFutureVoid deleteEntity({required String id}) async => tryCatchEither(
+  EResultFutureVoid deleteEntity({required String id}) async => tryCatchEither(
         action: () async => _localDataSource
             .deleteEntity(id: id)
             .then((_) => const Right(null)),
       );
 
-  ResultFutureVoid deleteAllSelected(List<String> keys) async => tryCatchEither(
+  EResultFutureVoid deleteAllSelected(List<String> keys) async =>
+      tryCatchEither(
         action: () async => _localDataSource
             .deleteAllSelected(keys)
             .then((_) => const Right(null)),

@@ -6,7 +6,7 @@ abstract class UseCaseWithParams<Repo, ResultType, Params> {
 
   Repo get repository => _repository;
 
-  ResultFuture<ResultType> call(Params params);
+  EResultFuture<ResultType> call(Params params);
 }
 
 abstract class UseCaseWithoutParams<Repo, ResultType> {
@@ -15,5 +15,5 @@ abstract class UseCaseWithoutParams<Repo, ResultType> {
 
   Repo get repository => _repository;
 
-  ResultFuture<ResultType> call();
+  EResultFuture<ResultType> call();
 }

@@ -8,6 +8,6 @@ class SignUpUsecase extends UseCaseWithParams<AuthenticationRepository,
   SignUpUsecase(super.repository);
 
   @override
-  ResultFuture<UserEntity> call(UserEntity params) async =>
+  EResultFuture<UserEntity> call(UserEntity params) async =>
       repository.signUp(params);
 }

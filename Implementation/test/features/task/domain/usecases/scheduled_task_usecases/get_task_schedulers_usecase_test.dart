@@ -4,7 +4,7 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/tasks/domain/usecases/task_scheduler/get_task_schedulers_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_schedulers_usecase.dart';
 
 import '_task_scheduler_repository.mock.dart';
 

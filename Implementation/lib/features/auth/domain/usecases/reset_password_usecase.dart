@@ -7,6 +7,6 @@ class ResetPasswordUsecase
   ResetPasswordUsecase(super.repository);
 
   @override
-  ResultFutureVoid call(String params) async =>
+  EResultFutureVoid call(String params) async =>
       repository.resetPassword(params);
 }

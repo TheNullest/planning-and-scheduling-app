@@ -8,5 +8,5 @@ class CurrentUserUsecase
   CurrentUserUsecase(super.repository);
 
   @override
-  ResultFuture<UserEntity> call() async => repository.getCurrentUser();
+  EResultFuture<UserEntity> call() async => repository.getCurrentUser();
 }

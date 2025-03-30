@@ -31,10 +31,10 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
 
   /// Retrieves the current user from the local storage.
   ///
-  /// Returns a [ResultFuture] containing the [UserHiveModel] of the current user
+  /// Returns a [EResultFuture] containing the [UserHiveModel] of the current user
   /// or a [Failure] if an error occurs.
   @override
-  ResultFuture<UserHiveModel> getCurrentUser() async =>
+  EResultFuture<UserHiveModel> getCurrentUser() async =>
       tryCatchEither<UserHiveModel>(
         action: () async => _hiveBox.operator<UserHiveModel>(
           job: (box) async => box.values.first,
@@ -47,9 +47,10 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   ///
   /// The [user] parameter is the [UserHiveModel] object representing the user to be stored.
   ///
-  /// Returns a [ResultFutureVoid] indicating the success or failure of the operation.
+  /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
-  ResultFutureVoid storeCurrentUser(UserHiveModel user) async => tryCatchEither(
+  EResultFutureVoid storeCurrentUser(UserHiveModel user) async =>
+      tryCatchEither(
         action: () async {
           await _hiveBox.operator(
             job: (box) async {
@@ -73,16 +74,16 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   ///
   /// The [user] parameter is the [UserHiveModel] object representing the user to be updated.
   ///
-  /// Returns a [ResultFutureVoid] indicating the success or failure of the operation.
+  /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
-  ResultFutureVoid updateCurrentUser(UserHiveModel user) async =>
+  EResultFutureVoid updateCurrentUser(UserHiveModel user) async =>
       storeCurrentUser(user);
 
   /// Signs out the current user by clearing the local storage.
   ///
-  /// Returns a [ResultFutureVoid] indicating the success or failure of the operation.
+  /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
-  ResultFutureVoid signOut() async => tryCatchEither(
+  EResultFutureVoid signOut() async => tryCatchEither(
         action: () async {
           await _hiveBox.operator(
             job: (box) async => box.clear(),

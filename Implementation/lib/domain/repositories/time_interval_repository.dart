@@ -5,11 +5,11 @@ import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dar
 
 abstract interface class TimeIntervalRepository
     extends BaseRepositoryAbstraction<TimeIntervalEntity> {
-  ResultFuture<List<TimeIntervalEntity>>
+  EResultFuture<List<TimeIntervalEntity>>
       getTimeIntervalByMainTaskIdAndDateRange(
     GetByTaskIdsAndDateRangeParams params,
   );
-  ResultFuture<List<TimeIntervalEntity>> getTimeIntervalBySubTaskId(
+  EResultFuture<List<TimeIntervalEntity>> getTimeIntervalBySubTaskId(
     String subTaskId,
   );
 }

@@ -8,6 +8,6 @@ class ChangePasswordUsecase extends UseCaseWithParams<AuthenticationRepository,
   ChangePasswordUsecase(super.repository);
 
   @override
-  ResultFutureVoid call(ChangePasswordParams params) async =>
+  EResultFutureVoid call(ChangePasswordParams params) async =>
       repository.changePassword(params);
 }

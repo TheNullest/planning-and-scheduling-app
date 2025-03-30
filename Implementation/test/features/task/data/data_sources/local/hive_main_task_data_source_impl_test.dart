@@ -12,7 +12,7 @@ import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/main_task/data/models/main_task_local_model.dart';
 import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
 import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
 >>>>>>> temp-branch
 
 class MockHiveInit extends Mock implements HiveServices<MainTaskHiveModel> {}

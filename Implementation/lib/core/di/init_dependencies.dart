@@ -39,9 +39,9 @@ import 'package:zamaan/features/navigation/presentation/views/home_view.dart';
 import 'package:zamaan/features/reminder/presentation/views/reminder_view.dart';
 import 'package:zamaan/features/reports/presentation/views/reports_view.dart';
 import 'package:zamaan/features/settings/presentation/views/settings_view.dart';
-import 'package:zamaan/features/tasks/presentation/accomplishments/views/accomplishment_tasks_view.dart';
-import 'package:zamaan/features/tasks/presentation/actives/views/active_tasks_view.dart';
-import 'package:zamaan/features/tasks/presentation/today/views/today_tasks_view.dart';
+import 'package:zamaan/features/tasks_management/presentation/accomplishments/views/accomplishment_tasks_view.dart';
+import 'package:zamaan/features/tasks_management/presentation/actives/views/active_tasks_view.dart';
+import 'package:zamaan/features/tasks_management/presentation/today/views/today_tasks_view.dart';
 import 'package:zamaan/presentation_shared/models/tab_item.dart';
 import 'package:zamaan/presentation_shared/navigation/app_router.dart';
 

@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"gen-l10n"
+			],
+			"problemMatcher": [],
+			"label": "flutter: flutter gen-l10n",
+			"detail": ""
+		}
+	]
+}

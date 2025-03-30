@@ -12,7 +12,7 @@ import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/services/hive/hive_wrapper.dart';
 import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/tasks/data/models/local/hive/main_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
 
 class MockHiveWrapper extends Mock implements HiveWrapper {}
 

@@ -5,7 +5,7 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
-import 'package:zamaan/features/tasks/domain/usecases/measurement_unit/get_measurement_unit_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/get_measurement_unit_usecase.dart';
 
 import '_measurement_unit_repository.mock.dart';
 

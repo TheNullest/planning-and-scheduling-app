@@ -6,12 +6,12 @@ import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 
 abstract class RemoteAuthDataSource {
   Session? get currentUserSession;
-  ResultFuture<RemoteUserModel> getCurrentUser();
-  ResultFuture<RemoteUserModel> signUp(RemoteUserModel userModel);
-  ResultFuture<RemoteUserModel> signIn(UserSignInParams params);
-  ResultFuture<RemoteUserModel> updateUser(RemoteUserModel entity);
-  ResultFutureVoid changePassword(ChangePasswordParams params);
-  ResultFutureVoid resetPassword(String email);
-  ResultFuture<bool> deleteUserAccount(UserSignInParams params);
-  ResultFuture<bool> signOut();
+  EResultFuture<RemoteUserModel> getCurrentUser();
+  EResultFuture<RemoteUserModel> signUp(RemoteUserModel userModel);
+  EResultFuture<RemoteUserModel> signIn(UserSignInParams params);
+  EResultFuture<RemoteUserModel> updateUser(RemoteUserModel entity);
+  EResultFutureVoid changePassword(ChangePasswordParams params);
+  EResultFutureVoid resetPassword(String email);
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params);
+  EResultFuture<bool> signOut();
 }

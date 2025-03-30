@@ -1,0 +1,18 @@
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/time_interval_entity.dart';
+import 'package:zamaan/domain/params/get_by_task_ids_and_date_range_params.dart';
+import 'package:zamaan/domain/repositories/time_interval_repository.dart';
+import 'package:zamaan/domain/usecases/base_usecase.dart';
+
+class GetTimeIntevalByMainTaskIdsAndDateRangeUsecase extends UseCaseWithParams<
+    TimeIntervalRepository,
+    List<TimeIntervalEntity>,
+    GetByTaskIdsAndDateRangeParams> {
+  GetTimeIntevalByMainTaskIdsAndDateRangeUsecase(super.repository);
+
+  @override
+  EResultFuture<List<TimeIntervalEntity>> call(
+    GetByTaskIdsAndDateRangeParams params,
+  ) async =>
+      repository.getTimeIntervalByMainTaskIdAndDateRange(params);
+}

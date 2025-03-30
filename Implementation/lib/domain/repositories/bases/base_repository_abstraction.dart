@@ -2,15 +2,15 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 abstract class BaseRepositoryAbstraction<Entity extends BaseEntityAbstraction> {
-  ResultFutureVoid createEntity({required Entity newEntity});
+  EResultFutureVoid createEntity({required Entity newEntity});
 
-  ResultFuture<List<Entity>?> getEntities();
+  EResultFuture<List<Entity>?> getEntities();
 
-  ResultFuture<Entity?> getEntity({required String id});
+  EResultFuture<Entity?> getEntity({required String id});
 
-  ResultFutureVoid updateEntity({required Entity entity});
+  EResultFutureVoid updateEntity({required Entity entity});
 
-  ResultFutureVoid deleteEntity({required String id});
+  EResultFutureVoid deleteEntity({required String id});
 
-  ResultFutureVoid deleteAllSelected(List<String> keys);
+  EResultFutureVoid deleteAllSelected(List<String> keys);
 }

@@ -9,6 +9,6 @@ class SignInUsecase extends UseCaseWithParams<AuthenticationRepository,
   SignInUsecase(super.repository);
 
   @override
-  ResultFuture<UserEntity> call(UserSignInParams params) async =>
+  EResultFuture<UserEntity> call(UserSignInParams params) async =>
       repository.signIn(params);
 }

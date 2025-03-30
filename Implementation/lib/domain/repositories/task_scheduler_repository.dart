@@ -15,7 +15,7 @@ abstract interface class TaskSchedulerRepository
   /// - [startAt] - The optional start date of the range.
   /// - [endAt] - The optional end date of the range.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>>
+  EResultFuture<List<TaskSchedulerEntity>>
       getTaskSchedulersByMainTaskIdsAndDateRange(
     GetByTaskIdsAndDateRangeParams params,
   );
@@ -24,7 +24,7 @@ abstract interface class TaskSchedulerRepository
   ///
   /// - [mainTaskId] - The ID of the main task.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByMainTaskId(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByMainTaskId(
     String mainTaskId,
   );
 
@@ -32,7 +32,7 @@ abstract interface class TaskSchedulerRepository
   ///
   /// - [startTime] - The start time of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByStartTime(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByStartTime(
     DateTime startTime,
   );
 
@@ -40,7 +40,7 @@ abstract interface class TaskSchedulerRepository
   ///
   /// - [repetitionType] - The repetition type of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByRepetitionType(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByRepetitionType(
     RepetitionType repetitionType,
   );
 
@@ -56,7 +56,7 @@ abstract interface class TaskSchedulerRepository
   /// - `5.TimeUnit.year`: Represents a year.
   ///
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTimeUnit(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTimeUnit(
     TimeUnit timeUnit,
   );
 
@@ -64,7 +64,7 @@ abstract interface class TaskSchedulerRepository
   ///
   /// [specificTimes] - The specific times of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersBySpecificTimes(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersBySpecificTimes(
     List<int> specificTimes,
   );
 
@@ -72,7 +72,7 @@ abstract interface class TaskSchedulerRepository
   ///
   /// - [endTime] - The end time of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByEndTime(
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByEndTime(
     DateTime endTime,
   );
 
@@ -81,7 +81,7 @@ abstract interface class TaskSchedulerRepository
   /// - [startDate] - The start date of the range.
   /// - [endDate] - The end date of the range.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersWithinDateRange({
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersWithinDateRange({
     required DateTime startDate,
     required DateTime endDate,
   });

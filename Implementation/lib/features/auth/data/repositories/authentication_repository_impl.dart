@@ -27,7 +27,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final NetworkConnectivityMonitor _connectionChecker;
 
   @override
-  ResultFuture<UserEntity> getCurrentUser() async => tryCatchEither<UserEntity>(
+  EResultFuture<UserEntity> getCurrentUser() async =>
+      tryCatchEither<UserEntity>(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async => _remoteDataSource.getCurrentUser(),
           onNotConnectedAction: () async => _localDataSource.getCurrentUser(),
@@ -35,7 +36,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFuture<UserEntity> signIn(UserSignInParams params) async =>
+  EResultFuture<UserEntity> signIn(UserSignInParams params) async =>
       tryCatchEither(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
@@ -57,7 +58,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFutureVoid signOut() async => tryCatchEither(
+  EResultFutureVoid signOut() async => tryCatchEither(
         action: () async => _executeBasedOnConnection<void>(
           onConnectedAction: () async {
             await _remoteDataSource.signOut();
@@ -69,7 +70,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFuture<UserEntity> signUp(UserEntity user) async => tryCatchEither(
+  EResultFuture<UserEntity> signUp(UserEntity user) async => tryCatchEither(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource
@@ -88,7 +89,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFuture<bool> deleteUserAccount(UserSignInParams params) async =>
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params) async =>
       tryCatchEither(
         action: () async => _executeBasedOnConnection<bool>(
           onConnectedAction: () async {
@@ -101,7 +102,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFuture<UserEntity> update(UserEntity user) async => tryCatchEither(
+  EResultFuture<UserEntity> update(UserEntity user) async => tryCatchEither(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.updateUser(
@@ -121,7 +122,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFutureVoid changePassword(ChangePasswordParams params) async =>
+  EResultFutureVoid changePassword(ChangePasswordParams params) async =>
       tryCatchEither<void>(
         action: () async => _executeBasedOnConnection<void>(
           onConnectedAction: () async {
@@ -133,16 +134,16 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  ResultFutureVoid resetPassword(String email) async => tryCatchEither<void>(
+  EResultFutureVoid resetPassword(String email) async => tryCatchEither<void>(
         action: () async => _executeBasedOnConnection<void>(
           onConnectedAction: () async => _remoteDataSource.resetPassword(email),
           onNotConnectedAction: () => _throwNoConnectionException('update'),
         ),
       );
 
-  ResultFuture<T> _executeBasedOnConnection<T>({
-    required ResultFuture<T> Function() onConnectedAction,
-    required ResultFuture<T> Function() onNotConnectedAction,
+  EResultFuture<T> _executeBasedOnConnection<T>({
+    required EResultFuture<T> Function() onConnectedAction,
+    required EResultFuture<T> Function() onNotConnectedAction,
   }) async {
     // TODO: improve this method for displaying an appropriate message when not connected to the internet and no exception is thrown
     final isConnected = await _connectionChecker.isConnected;

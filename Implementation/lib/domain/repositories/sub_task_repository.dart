@@ -5,7 +5,7 @@ import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dar
 
 abstract interface class SubTaskRepository
     extends BaseRepositoryAbstraction<SubTaskEntity> {
-  ResultFuture<List<SubTaskEntity>> getSubTasksByMainTaskId(String mainTaskId);
-  ResultFuture<List<SubTaskEntity>> getSubTasksByStatus(Status status);
-  ResultFuture<List<SubTaskEntity>> getSubTasksByPriority(Priority priority);
+  EResultFuture<List<SubTaskEntity>> getSubTasksByMainTaskId(String mainTaskId);
+  EResultFuture<List<SubTaskEntity>> getSubTasksByStatus(Status status);
+  EResultFuture<List<SubTaskEntity>> getSubTasksByPriority(Priority priority);
 }
