@@ -6,7 +6,7 @@ part of 'main_task_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MainTaskHiveModelAdapter extends HiveBaseTypeAdapter<MainTaskHiveModel> {
+class MainTaskHiveModelAdapter extends TypeAdapter<MainTaskHiveModel> {
   @override
   final int typeId = 1;
 
@@ -17,22 +17,22 @@ class MainTaskHiveModelAdapter extends HiveBaseTypeAdapter<MainTaskHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MainTaskHiveModel(
-      title: fields[5] as String,
-      categoryIds: (fields[10] as List).cast<String>(),
-      colorCode: fields[6] as int,
-      iconCode: fields[7] as int,
+      title: fields[11] as String,
+      categoryIds: (fields[16] as List).cast<String>(),
+      colorCode: fields[12] as String,
+      iconCode: fields[13] as String,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       userId: fields[1] as String?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
-      priority: fields[8] as int?,
-      status: fields[14] as int?,
-      fixedTagIds: (fields[11] as List?)?.cast<String>(),
-      tagIds: (fields[12] as List?)?.cast<String>(),
-      dueDate: fields[9] as DateTime?,
-      totalSpentTime: fields[13] as Duration?,
-      taskSchedulerId: fields[15] as String?,
+      priority: fields[14] as int?,
+      status: fields[20] as int?,
+      fixedTagIds: (fields[17] as List?)?.cast<String>(),
+      tagIds: (fields[18] as List?)?.cast<String>(),
+      dueDate: fields[15] as DateTime?,
+      totalSpentTime: fields[19] as Duration?,
+      taskSchedulerId: fields[21] as String?,
     );
   }
 
@@ -40,27 +40,27 @@ class MainTaskHiveModelAdapter extends HiveBaseTypeAdapter<MainTaskHiveModel> {
   void write(BinaryWriter writer, MainTaskHiveModel obj) {
     writer
       ..writeByte(16)
-      ..writeByte(5)
-      ..write(obj.title)
-      ..writeByte(6)
-      ..write(obj.colorCode)
-      ..writeByte(7)
-      ..write(obj.iconCode)
-      ..writeByte(8)
-      ..write(obj.priority)
-      ..writeByte(9)
-      ..write(obj.dueDate)
-      ..writeByte(10)
-      ..write(obj.categoryIds)
       ..writeByte(11)
-      ..write(obj.fixedTagIds)
+      ..write(obj.title)
       ..writeByte(12)
-      ..write(obj.tagIds)
+      ..write(obj.colorCode)
       ..writeByte(13)
-      ..write(obj.totalSpentTime)
+      ..write(obj.iconCode)
       ..writeByte(14)
-      ..write(obj.status)
+      ..write(obj.priority)
       ..writeByte(15)
+      ..write(obj.dueDate)
+      ..writeByte(16)
+      ..write(obj.categoryIds)
+      ..writeByte(17)
+      ..write(obj.fixedTagIds)
+      ..writeByte(18)
+      ..write(obj.tagIds)
+      ..writeByte(19)
+      ..write(obj.totalSpentTime)
+      ..writeByte(20)
+      ..write(obj.status)
+      ..writeByte(21)
       ..write(obj.taskSchedulerId)
       ..writeByte(0)
       ..write(obj.id)

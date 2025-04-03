@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/category_entity.dart';
 
 part 'category_hive_model.g.dart';
@@ -44,8 +43,8 @@ class CategoryHiveModel extends CategoryEntity with HiveObjectMixin {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       CategoryHiveModel(
         id: id ?? this.id,

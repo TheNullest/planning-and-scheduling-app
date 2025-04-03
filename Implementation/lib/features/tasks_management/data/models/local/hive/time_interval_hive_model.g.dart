@@ -6,8 +6,7 @@ part of 'time_interval_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TimeIntervalHiveModelAdapter
-    extends HiveBaseTypeAdapter<TimeIntervalHiveModel> {
+class TimeIntervalHiveModelAdapter extends TypeAdapter<TimeIntervalHiveModel> {
   @override
   final int typeId = 8;
 
@@ -18,16 +17,16 @@ class TimeIntervalHiveModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TimeIntervalHiveModel(
-      mainTaskId: fields[5] as String,
-      subTaskId: fields[6] as String,
-      startAt: fields[7] as DateTime,
+      mainTaskId: fields[11] as String,
+      subTaskId: fields[12] as String,
+      startAt: fields[13] as DateTime,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      endAt: fields[8] as DateTime?,
-      spentTime: fields[9] as Duration?,
+      endAt: fields[14] as DateTime?,
+      spentTime: fields[15] as Duration?,
     );
   }
 
@@ -35,15 +34,15 @@ class TimeIntervalHiveModelAdapter
   void write(BinaryWriter writer, TimeIntervalHiveModel obj) {
     writer
       ..writeByte(10)
-      ..writeByte(5)
+      ..writeByte(11)
       ..write(obj.mainTaskId)
-      ..writeByte(6)
+      ..writeByte(12)
       ..write(obj.subTaskId)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.startAt)
-      ..writeByte(8)
+      ..writeByte(14)
       ..write(obj.endAt)
-      ..writeByte(9)
+      ..writeByte(15)
       ..write(obj.spentTime)
       ..writeByte(0)
       ..write(obj.id)

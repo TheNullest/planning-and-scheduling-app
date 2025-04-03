@@ -37,19 +37,19 @@ class TimeIntervalEntity extends BaseEntityAbstraction {
       : this(mainTaskId: '1', subTaskId: '2', startAt: DateTime(2024));
 
   /// The ID of the main task associated with this time interval.
-  @HiveField(5)
+  @HiveField(11)
   final String mainTaskId;
 
   /// The ID of the sub-task associated with this time interval.
-  @HiveField(6)
+  @HiveField(12)
   final String subTaskId;
 
   /// The start time of the time interval.
-  @HiveField(7)
+  @HiveField(13)
   final DateTime startAt;
 
   /// The end time of the time interval, if any.
-  @HiveField(8)
+  @HiveField(14)
   final DateTime? endAt;
 
   /// The calculated spent time based on the difference between `startAt` and `endAt`.
@@ -57,7 +57,7 @@ class TimeIntervalEntity extends BaseEntityAbstraction {
   /// If `endAt` is provided and is after `startAt`, the `spentTime` field will be
   /// automatically calculated as the difference between `startAt` and `endAt`.
   /// If `endAt` is not set, `spentTime` remains null.
-  @HiveField(9)
+  @HiveField(15)
   final Duration? spentTime;
 
   @override

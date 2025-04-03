@@ -12,6 +12,8 @@ abstract interface class MainTaskRepository
     List<String> categoryIds,
   );
   EResultFuture<List<MainTaskEntity>> getMainTasksByTags(List<String> tagIds);
+
   EResultFuture<MainTaskEntity> getMainTaskByTaskSchedulerId(
-      String schedulerId);
+    String schedulerId,
+  );
 }

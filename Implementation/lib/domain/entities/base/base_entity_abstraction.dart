@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 
 /// An abstract base class for entities, providing common fields and functionality.
@@ -34,12 +35,14 @@ abstract class BaseEntityAbstraction with EquatableMixin {
   final String id;
 
   /// The ID of the creator of the entity, if authenticated and signed in.
+  @JsonKey(name: 'user_id')
   @HiveField(1)
   final String? userId;
 
   /// The timestamp when the entity was created.
   ///
   /// This field is automatically set to the current date and time if not provided.
+  @JsonKey(name: 'created_at')
   @HiveField(2)
   final DateTime createdAt;
 
@@ -51,6 +54,7 @@ abstract class BaseEntityAbstraction with EquatableMixin {
   ///
   /// This field can be null if the entity has not been updated since creation,
   /// it should be set when the entity is updated.
+  @JsonKey(name: 'updated_at')
   @HiveField(4)
   final DateTime? updatedAt;
 

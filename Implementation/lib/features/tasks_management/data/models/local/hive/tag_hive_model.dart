@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/tag_entity.dart';
 
 part 'tag_hive_model.g.dart'; // Include for code generation
@@ -52,8 +51,8 @@ class TagHiveModel extends TagEntity with HiveObjectMixin {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       TagHiveModel(
         id: id ?? this.id,

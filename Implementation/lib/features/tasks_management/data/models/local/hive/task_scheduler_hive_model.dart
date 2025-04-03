@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
 
 part 'task_scheduler_hive_model.g.dart';

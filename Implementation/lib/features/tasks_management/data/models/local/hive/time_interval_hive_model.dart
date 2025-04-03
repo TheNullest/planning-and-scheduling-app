@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/time_interval_entity.dart';
 
 part 'time_interval_hive_model.g.dart'; // Include for code generation

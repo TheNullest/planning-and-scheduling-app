@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
@@ -37,47 +38,52 @@ class MainTaskEntity extends BaseEntityAbstraction {
       : this(
           title: 'title',
           categoryIds: [],
-          colorCode: 1,
-          iconCode: 2,
+          colorCode: '1',
+          iconCode: '2',
         );
 
-  @HiveField(5)
+  @HiveField(11)
   final String title;
 
-  /// Store the color value as an integer
-  @HiveField(6)
-  final int colorCode;
+  /// Store the color value as an String
+  @JsonKey(name: 'color_code')
+  @HiveField(12)
+  final String colorCode;
 
   ///Instead of saving the entire icon, save its IconData
-  @HiveField(7)
-  final int iconCode;
+  @JsonKey(name: 'icon_code')
+  @HiveField(13)
+  final String iconCode;
 
-  @HiveField(8)
+  @HiveField(14)
   final int priority;
 
-  @HiveField(9)
+  @JsonKey(name: 'due_date')
+  @HiveField(15)
   final DateTime? dueDate;
 
   /// Groups such as : sporting, reading, working, fun ,...
-  @HiveField(10)
+  @HiveField(16)
   final List<String> categoryIds;
 
-  @HiveField(11)
+  @HiveField(17)
   final List<String>? fixedTagIds;
 
-  @HiveField(12)
+  @HiveField(18)
   final List<String>? tagIds;
 
-  @HiveField(13)
+  @JsonKey(name: 'total_spent_time')
+  @HiveField(19)
   final Duration? totalSpentTime;
 
   /// Status == 0 => notStarted\
   /// Status == 1 => inProgress\
   /// Status == 2 => completed
-  @HiveField(14)
+  @HiveField(20)
   final int status;
 
-  @HiveField(15)
+  @JsonKey(name: 'task_scheduler_id')
+  @HiveField(21)
   final String? taskSchedulerId;
 
   MainTaskEntity toEntity() => MainTaskEntity(
@@ -107,8 +113,8 @@ class MainTaskEntity extends BaseEntityAbstraction {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
     List<String>? categoryIds,
     int? priority,
     int? status,

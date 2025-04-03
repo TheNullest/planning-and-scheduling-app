@@ -29,7 +29,7 @@ Future<void> intiDependencies() async {
       ),
     )
     ..registerLazySingleton(
-        () => NetworkConnectivityMonitorCubit(serviceLocator()));
+        () => NetworkConnectivityMonitorCubit(serviceLocator()),);
 
   _navigation();
 }

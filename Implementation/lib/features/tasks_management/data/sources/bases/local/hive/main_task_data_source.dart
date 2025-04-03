@@ -12,5 +12,6 @@ abstract class MainTaskDataSource<MainTaskModel extends MainTaskEntity>
   EResultFuture<List<MainTaskModel>> getMainTasksByPriority(Priority priority);
   EResultFuture<List<MainTaskModel>> getMainTasksByStatus(Status status);
   EResultFuture<List<MainTaskModel>> getMainTasksByTags(List<String> tagIds);
+
   EResultFuture<MainTaskModel> getMainTaskByTaskSchedulerId(String schedulerId);
 }

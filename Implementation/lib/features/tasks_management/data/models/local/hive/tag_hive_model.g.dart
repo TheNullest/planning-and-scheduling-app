@@ -6,7 +6,7 @@ part of 'tag_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
+class TagHiveModelAdapter extends TypeAdapter<TagHiveModel> {
   @override
   final int typeId = 7;
 
@@ -17,9 +17,9 @@ class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TagHiveModel(
-      title: fields[5] as String,
-      colorCode: fields[6] as int,
-      iconCode: fields[7] as int,
+      title: fields[11] as String,
+      colorCode: fields[12] as String,
+      iconCode: fields[13] as String,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
@@ -32,11 +32,11 @@ class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
   void write(BinaryWriter writer, TagHiveModel obj) {
     writer
       ..writeByte(8)
-      ..writeByte(5)
+      ..writeByte(11)
       ..write(obj.title)
-      ..writeByte(6)
+      ..writeByte(12)
       ..write(obj.colorCode)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.iconCode)
       ..writeByte(0)
       ..write(obj.id)

@@ -7,7 +7,7 @@ part of 'task_scheduler_hive_model.dart';
 // **************************************************************************
 
 class TaskSchedulerHiveModelAdapter
-    extends HiveBaseTypeAdapter<TaskSchedulerHiveModel> {
+    extends TypeAdapter<TaskSchedulerHiveModel> {
   @override
   final int typeId = 5;
 
@@ -18,18 +18,18 @@ class TaskSchedulerHiveModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskSchedulerHiveModel(
-      mainTaskId: fields[5] as String,
+      mainTaskId: fields[11] as String,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      goalId: fields[6] as String?,
-      willStartAt: fields[7] as DateTime?,
-      endAt: fields[11] as DateTime?,
-      repetitionType: fields[8] as int?,
-      timeUnit: fields[9] as int?,
-      specificTimes: (fields[10] as List?)?.cast<int>(),
+      goalId: fields[12] as String?,
+      willStartAt: fields[13] as DateTime?,
+      endAt: fields[17] as DateTime?,
+      repetitionType: fields[14] as int?,
+      timeUnit: fields[15] as int?,
+      specificTimes: (fields[16] as List?)?.cast<int>(),
     );
   }
 
@@ -37,19 +37,19 @@ class TaskSchedulerHiveModelAdapter
   void write(BinaryWriter writer, TaskSchedulerHiveModel obj) {
     writer
       ..writeByte(12)
-      ..writeByte(5)
-      ..write(obj.mainTaskId)
-      ..writeByte(6)
-      ..write(obj.goalId)
-      ..writeByte(7)
-      ..write(obj.willStartAt)
-      ..writeByte(8)
-      ..write(obj.repetitionType)
-      ..writeByte(9)
-      ..write(obj.timeUnit)
-      ..writeByte(10)
-      ..write(obj.specificTimes)
       ..writeByte(11)
+      ..write(obj.mainTaskId)
+      ..writeByte(12)
+      ..write(obj.goalId)
+      ..writeByte(13)
+      ..write(obj.willStartAt)
+      ..writeByte(14)
+      ..write(obj.repetitionType)
+      ..writeByte(15)
+      ..write(obj.timeUnit)
+      ..writeByte(16)
+      ..write(obj.specificTimes)
+      ..writeByte(17)
       ..write(obj.endAt)
       ..writeByte(0)
       ..write(obj.id)

@@ -25,7 +25,7 @@ void main() async {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => serviceLocator<NetworkConnectivityMonitorCubit>()),
+              create: (_) => serviceLocator<NetworkConnectivityMonitorCubit>(),),
           BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
           BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         ],

@@ -18,19 +18,19 @@ class SubTaskEntity extends BaseEntityAbstraction {
 
   SubTaskEntity.empty() : this(mainTaskId: '1', title: 'title');
 
-  @HiveField(5)
+  @HiveField(11)
   final String mainTaskId;
 
-  @HiveField(6)
+  @HiveField(12)
   final int priority;
 
-  @HiveField(7)
+  @HiveField(13)
   final String title;
 
   /// Status == 0 => notStarted\
   /// Status == 1 => inProgress\
   /// Status == 2 => completed
-  @HiveField(8)
+  @HiveField(14)
   final int status;
 
   SubTaskEntity toEntity() => SubTaskEntity(

@@ -21,43 +21,44 @@ class GoalEntity extends BaseEntityAbstraction {
 
   GoalEntity.empty()
       : this(mainTaskId: '1', measurementUnitId: '2', measurementValue: 1);
-  @HiveField(5)
+
+  @HiveField(11)
   final String mainTaskId;
 
-  @HiveField(6)
+  @HiveField(12)
   final String? subTaskId;
 
   /// The unit of measurment chosen to create the target and goal
-  @HiveField(7)
+  @HiveField(13)
   final String measurementUnitId;
 
   /// MeasurementValue enum
-  @HiveField(8)
+  @HiveField(14)
   final int measurementValue;
 
   /// The minimum amount determined per hour\
   /// based on the desired measurement unit of the current task
-  @HiveField(9)
+  @HiveField(15)
   final double perActiveHour;
 
   /// The minimum amount determined per day\
   /// based on the desired measurement unit of the current task
-  @HiveField(10)
+  @HiveField(16)
   final double perActiveDay;
 
   /// The minimum amount determined per week\
   /// based on the desired measurement unit of the current task
-  @HiveField(11)
+  @HiveField(17)
   final double perActiveWeek;
 
   /// The minimum amount determined per month\
   /// based on the desired measurement unit of the current task
-  @HiveField(12)
+  @HiveField(18)
   final double perActiveMonth;
 
   /// The minimum amount determined per year\
   /// based on the desired measurement unit of the current task
-  @HiveField(13)
+  @HiveField(19)
   final double perActiveYear;
 
   GoalEntity toEntity() => GoalEntity(

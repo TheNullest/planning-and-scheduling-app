@@ -6,7 +6,7 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
@@ -74,12 +74,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource
-                .signUp(RemoteUserModel.fromEntity(user));
+                .signUp(UserSupabaseModel.fromEntity(user));
             final userEntity =
-                foldEither<RemoteUserModel>(result).toEntity().toEntity();
+                foldEither<UserSupabaseModel>(result).toEntity().toEntity();
             await _localDataSource.storeCurrentUser(
               UserHiveModel.fromRemote(
-                foldEither<RemoteUserModel>(result),
+                foldEither<UserSupabaseModel>(result),
               ),
             );
             return Right(userEntity);
@@ -106,13 +106,13 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.updateUser(
-              RemoteUserModel.fromEntity(user),
+              UserSupabaseModel.fromEntity(user),
             );
             final userEntity =
-                foldEither<RemoteUserModel>(result).toEntity().toEntity();
+                foldEither<UserSupabaseModel>(result).toEntity().toEntity();
             await _localDataSource.storeCurrentUser(
               UserHiveModel.fromRemote(
-                foldEither<RemoteUserModel>(result),
+                foldEither<UserSupabaseModel>(result),
               ),
             );
             return Right(userEntity);
