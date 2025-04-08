@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/time_interval_entity.dart';
+import 'package:zamaan/domain/entities/task_activity.dart';
 
 part 'time_interval_hive_model.g.dart'; // Include for code generation
 
@@ -8,9 +8,9 @@ part 'time_interval_hive_model.g.dart'; // Include for code generation
 // Since HiveObjectMixin contains mutable fields,
 // we ignore the immutability check for this class.
 // ignore: must_be_immutable
-class TimeIntervalHiveModel extends TimeIntervalEntity with HiveObjectMixin {
-  TimeIntervalHiveModel({
-    required super.mainTaskId,
+class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
+  TaskActivityHiveModel({
+    required super.taskId,
     required super.subTaskId,
     required super.startAt,
     super.id,
@@ -20,15 +20,16 @@ class TimeIntervalHiveModel extends TimeIntervalEntity with HiveObjectMixin {
     super.userId,
     super.endAt,
     super.spentTime,
+    super.isPaused,
   }) : super();
-  factory TimeIntervalHiveModel.fromEntity(TimeIntervalEntity entity) =>
-      TimeIntervalHiveModel(
+  factory TaskActivityHiveModel.fromEntity(TaskActivityEntity entity) =>
+      TaskActivityHiveModel(
         id: entity.id,
         updatedAt: entity.updatedAt,
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        mainTaskId: entity.mainTaskId,
+        taskId: entity.taskId,
         subTaskId: entity.subTaskId,
         startAt: entity.startAt,
         endAt: entity.endAt,
@@ -36,30 +37,32 @@ class TimeIntervalHiveModel extends TimeIntervalEntity with HiveObjectMixin {
       );
 
   // For the purpose of testing
-  TimeIntervalHiveModel.empty() : super.empty();
+  TaskActivityHiveModel.empty() : super.empty();
 
   @override
-  TimeIntervalHiveModel copyWith({
+  TaskActivityHiveModel copyWith({
     String? id,
     int? order,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
+    String? taskId,
     String? subTaskId,
     DateTime? startAt,
     DateTime? endAt,
+    bool? isPaused,
   }) =>
-      TimeIntervalHiveModel(
+      TaskActivityHiveModel(
         id: id ?? this.id,
         updatedAt: updatedAt ?? this.updatedAt,
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         subTaskId: subTaskId ?? this.subTaskId,
         startAt: startAt ?? this.startAt,
         endAt: endAt ?? this.endAt,
+        isPaused: isPaused ?? this.isPaused,
       );
 }

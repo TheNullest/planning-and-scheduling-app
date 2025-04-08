@@ -6,78 +6,78 @@ import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/time_interval_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/local/hive/time_interval_data_source.dart';
 
-class HiveTimeIntervalDataSourceImpl
-    extends BaseLocalDataSourceAbstraction<TimeIntervalHiveModel>
-    implements TimeIntervalDataSource<TimeIntervalHiveModel> {
+class HiveTaskActivityDataSourceImpl
+    extends BaseLocalDataSourceAbstraction<TaskActivityHiveModel>
+    implements TaskActivityDataSource<TaskActivityHiveModel> {
   // Just to add the testability feature to the class,
-  // we need to inject the [HiveInitializer<TimeIntervalHiveModel>] like this
-  HiveTimeIntervalDataSourceImpl({
-    HiveServices<TimeIntervalHiveModel>? hiveBox,
+  // we need to inject the [HiveInitializer<TaskActivityHiveModel>] like this
+  HiveTaskActivityDataSourceImpl({
+    HiveServices<TaskActivityHiveModel>? hiveBox,
   })  : _hiveBox =
-            hiveBox ?? serviceLocator<HiveServices<TimeIntervalHiveModel>>(),
-        _boxName = HiveBoxConstants.timeIntervalsBox,
+            hiveBox ?? serviceLocator<HiveServices<TaskActivityHiveModel>>(),
+        _boxName = HiveBoxConstants.taskActivitysBox,
         super(
-          HiveBoxConstants.timeIntervalsBox,
+          HiveBoxConstants.taskActivitysBox,
           hiveServices: hiveBox,
         );
   final String _boxName;
-  final HiveServices<TimeIntervalHiveModel> _hiveBox;
+  final HiveServices<TaskActivityHiveModel> _hiveBox;
 
   /// Retrieves tasks based on a specific main task ID.
   ///
-  /// [mainTaskId] - The main task ID to filter the tasks.
+  /// [taskId] - The main task ID to filter the tasks.
   ///
-  /// Returns a [EResultFuture] containing a list of [TimeIntervalHiveModel] objects.
+  /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel] objects.
   @override
-  EResultFuture<List<TimeIntervalHiveModel>> getScheduledTimesByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<TaskActivityHiveModel>> getScheduledTimesByTaskId(
+    String taskId,
   ) async {
-    return _hiveBox.operator<List<TimeIntervalHiveModel>>(
+    return _hiveBox.operator<List<TaskActivityHiveModel>>(
       job: (box) async =>
-          box.values.where((task) => task.mainTaskId == mainTaskId).toList(),
+          box.values.where((task) => task.taskId == taskId).toList(),
       boxName: _boxName,
     );
   }
 
-  /// Retrieves a list of [TimeIntervalHiveModel] by main task IDs and date range.
+  /// Retrieves a list of [TaskActivityHiveModel] by main task IDs and date range.
   ///
   /// [mainTaskIds] - List of main task IDs to filter the time intervals.
   /// [startAt] - Start date of the date range.
   /// [endAt] - End date of the date range.
-  /// Returns a [EResultFuture] containing a list of [TimeIntervalHiveModel].
+  /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel].
   @override
-  EResultFuture<List<TimeIntervalHiveModel>>
-      getTimeIntervalByMainTaskIdAndDateRange({
+  EResultFuture<List<TaskActivityHiveModel>>
+      getTaskActivityByTaskIdAndDateRange({
     required List<String> mainTaskIds,
     required DateTime? startAt,
     required DateTime? endAt,
   }) async {
-    return _hiveBox.operator<List<TimeIntervalHiveModel>>(
+    return _hiveBox.operator<List<TaskActivityHiveModel>>(
       job: (box) async {
-        return box.values.where((timeInterval) {
+        return box.values.where((taskActivity) {
           final isInDateRange =
-              (startAt == null || timeInterval.startAt.isAfter(startAt)) &&
-                  (endAt == null || timeInterval.endAt!.isBefore(endAt));
-          final isInMainTaskIds = mainTaskIds.contains(timeInterval.mainTaskId);
-          return isInDateRange && isInMainTaskIds;
+              (startAt == null || taskActivity.startAt.isAfter(startAt)) &&
+                  (endAt == null || taskActivity.endAt!.isBefore(endAt));
+          final isInTaskIds = mainTaskIds.contains(taskActivity.taskId);
+          return isInDateRange && isInTaskIds;
         }).toList();
       },
       boxName: _boxName,
     );
   }
 
-  /// Retrieves a list of [TimeIntervalHiveModel] by sub task ID.
+  /// Retrieves a list of [TaskActivityHiveModel] by sub task ID.
   ///
   /// [subTaskId] - Sub task ID to filter the time intervals.
-  /// Returns a [EResultFuture] containing a list of [TimeIntervalHiveModel].
+  /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel].
   @override
-  EResultFuture<List<TimeIntervalHiveModel>> getTimeIntervalBySubTaskId(
+  EResultFuture<List<TaskActivityHiveModel>> getTaskActivityBySubTaskId(
     String subTaskId,
   ) async {
-    return _hiveBox.operator<List<TimeIntervalHiveModel>>(
+    return _hiveBox.operator<List<TaskActivityHiveModel>>(
       job: (box) async {
         return box.values
-            .where((timeInterval) => timeInterval.subTaskId == subTaskId)
+            .where((taskActivity) => taskActivity.subTaskId == subTaskId)
             .toList();
       },
       boxName: _boxName,

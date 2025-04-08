@@ -4,8 +4,8 @@ import 'package:zamaan/domain/entities/goal_entity.dart';
 
 abstract class GoalDataSource<GoalModel extends GoalEntity>
     extends BaseDataSourceAbstraction<GoalModel> {
-  EResultFuture<List<GoalModel>> getGoalsByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<GoalModel>> getGoalsByTaskId(
+    String taskId,
   );
   EResultFuture<GoalModel> getGoalBySubTaskId(String subTaskId);
 }

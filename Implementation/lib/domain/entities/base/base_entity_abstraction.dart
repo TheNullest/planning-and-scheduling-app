@@ -6,7 +6,6 @@ import 'package:zamaan/core/utils/uuid.dart';
 ///
 /// It includes the following fields:
 /// - `id`: The unique identifier for the entity, automatically generated if not provided.
-/// - `order`: An integer value used for organizing and prioritizing sub items.
 /// - `userId`: The ID of the creator of the entity, if any.
 /// - `createdAt`: The timestamp when the entity was created, automatically set if not provided.
 /// - `description`: A description of the entity, if any.

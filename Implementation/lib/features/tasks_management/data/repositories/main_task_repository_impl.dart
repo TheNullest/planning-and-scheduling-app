@@ -2,87 +2,84 @@ import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/main_task_entity.dart';
+import 'package:zamaan/domain/entities/task_entity.dart';
 import 'package:zamaan/domain/repositories/bases/base_crud_operations.dart';
 import 'package:zamaan/domain/repositories/main_task_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/local/hive/main_task_data_source.dart';
 
-class MainTaskRepositoryImpl extends BaseCRUDOperations<
-    MainTaskEntity,
-    MainTaskHiveModel,
-    MainTaskDataSource<MainTaskHiveModel>> implements MainTaskRepository {
-  MainTaskRepositoryImpl(super.localDataSource)
+class TaskRepositoryImpl extends BaseCRUDOperations<TaskEntity, TaskHiveModel,
+    TaskDataSource<TaskHiveModel>> implements TaskRepository {
+  TaskRepositoryImpl(super.localDataSource)
       : _localDataSource = localDataSource;
-  final MainTaskDataSource _localDataSource;
+  final TaskDataSource _localDataSource;
 
   @override
-  MainTaskHiveModel fromEntity(MainTaskEntity entity) =>
-      MainTaskHiveModel.fromEntity(entity);
+  TaskHiveModel fromEntity(TaskEntity entity) =>
+      TaskHiveModel.fromEntity(entity);
 
   @override
-  MainTaskEntity toEntity(MainTaskHiveModel model) => model.toEntity();
+  TaskEntity toEntity(TaskHiveModel model) => model.toEntity();
 
-  EResult<List<MainTaskEntity>> toEntities(
-    Either<Failure, List<MainTaskHiveModel>> models,
+  EResult<List<TaskEntity>> toEntities(
+    Either<Failure, List<TaskHiveModel>> models,
   ) =>
       models.map(
         (taskModels) => taskModels
-            .map<MainTaskEntity>((taskModel) => taskModel.toEntity())
+            .map<TaskEntity>((taskModel) => taskModel.toEntity())
             .toList(),
       );
 
   @override
-  EResultFuture<List<MainTaskEntity>> getMainTasksByCategories(
+  EResultFuture<List<TaskEntity>> getTasksByCategories(
     List<String> categoryIds,
   ) async =>
       toEntities(
-        await _localDataSource.getMainTasksByCategories(categoryIds)
-            as Either<Failure, List<MainTaskHiveModel>>,
+        await _localDataSource.getTasksByCategories(categoryIds)
+            as Either<Failure, List<TaskHiveModel>>,
       );
 
   @override
-  EResultFuture<List<MainTaskEntity>> getMainTasksByDueDate(
+  EResultFuture<List<TaskEntity>> getTasksByDueDate(
     DateTime dueDate,
   ) async =>
       toEntities(
-        await _localDataSource.getMainTasksByDueDate(dueDate)
-            as Either<Failure, List<MainTaskHiveModel>>,
+        await _localDataSource.getTasksByDueDate(dueDate)
+            as Either<Failure, List<TaskHiveModel>>,
       );
 
   @override
-  EResultFuture<List<MainTaskEntity>> getMainTasksByPriority(
+  EResultFuture<List<TaskEntity>> getTasksByPriority(
     Priority priority,
   ) async =>
       toEntities(
-        await _localDataSource.getMainTasksByPriority(priority)
-            as Either<Failure, List<MainTaskHiveModel>>,
+        await _localDataSource.getTasksByPriority(priority)
+            as Either<Failure, List<TaskHiveModel>>,
       );
 
   @override
-  EResultFuture<List<MainTaskEntity>> getMainTasksByStatus(
+  EResultFuture<List<TaskEntity>> getTasksByStatus(
     Status status,
   ) async =>
       toEntities(
-        await _localDataSource.getMainTasksByStatus(status)
-            as Either<Failure, List<MainTaskHiveModel>>,
+        await _localDataSource.getTasksByStatus(status)
+            as Either<Failure, List<TaskHiveModel>>,
       );
 
   @override
-  EResultFuture<List<MainTaskEntity>> getMainTasksByTags(
+  EResultFuture<List<TaskEntity>> getTasksByTags(
     List<String> tagIds,
   ) async =>
       toEntities(
-        await _localDataSource.getMainTasksByTags(tagIds)
-            as Either<Failure, List<MainTaskHiveModel>>,
+        await _localDataSource.getTasksByFixedTags(tagIds)
+            as Either<Failure, List<TaskHiveModel>>,
       );
 
   @override
-  EResultFuture<MainTaskEntity> getMainTaskByTaskSchedulerId(
+  EResultFuture<TaskEntity> getTaskByTaskSchedulerId(
     String schedulerId,
   ) async {
-    final result =
-        await _localDataSource.getMainTaskByTaskSchedulerId(schedulerId);
-    return result.map((model) => toEntity(model as MainTaskHiveModel));
+    final result = await _localDataSource.getTaskByTaskSchedulerId(schedulerId);
+    return result.map((model) => toEntity(model as TaskHiveModel));
   }
 }

@@ -3,7 +3,7 @@
 part of 'sub_task_hive_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// HiveBaseTypeAdapterGenerator
 // **************************************************************************
 
 class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
@@ -17,15 +17,15 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SubTaskHiveModel(
-      mainTaskId: fields[5] as String,
-      title: fields[7] as String,
+      taskId: fields[11] as String,
+      title: fields[13] as String,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      priority: fields[6] as int?,
-      status: fields[8] as int?,
+      priority: fields[12] as int,
+      status: fields[14] as int,
     );
   }
 
@@ -33,13 +33,13 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
   void write(BinaryWriter writer, SubTaskHiveModel obj) {
     writer
       ..writeByte(9)
-      ..writeByte(5)
-      ..write(obj.mainTaskId)
-      ..writeByte(6)
+      ..writeByte(11)
+      ..write(obj.taskId)
+      ..writeByte(12)
       ..write(obj.priority)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.title)
-      ..writeByte(8)
+      ..writeByte(14)
       ..write(obj.status)
       ..writeByte(0)
       ..write(obj.id)

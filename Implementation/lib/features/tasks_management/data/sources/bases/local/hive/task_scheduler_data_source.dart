@@ -21,7 +21,7 @@ abstract class TaskSchedulerDataSource<
   /// Returns a [EResultFuture] containing a list of [TaskSchedulerModel]
   /// objects.
   EResultFuture<List<TaskSchedulerModel>>
-      getTaskSchedulersByMainTaskIdsAndDateRange({
+      getTaskSchedulersByTaskIdsAndDateRange({
     required List<String> mainTaskIds,
     required DateTime? startAt,
     required DateTime? endAt,
@@ -39,12 +39,12 @@ abstract class TaskSchedulerDataSource<
 
   /// Retrieves tasks based on a specific main task ID.
   ///
-  /// [mainTaskId] - The main task ID to filter the tasks.
+  /// [taskId] - The main task ID to filter the tasks.
   ///
   /// Returns a [EResultFuture] containing a list of [TaskSchedulerModel]
   /// objects.
-  EResultFuture<List<TaskSchedulerModel>> getTaskSchedulersByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<TaskSchedulerModel>> getTaskSchedulersByTaskId(
+    String taskId,
   );
 
   /// Retrieves tasks based on a repetition type.

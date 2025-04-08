@@ -14,13 +14,13 @@ class MeasurementUnitEntity extends BaseEntityAbstraction {
   });
 
   MeasurementUnitEntity.empty() : this(title: 'title', iconCode: 2);
-  @HiveField(5)
+  @HiveField(11)
   final String title;
 
-  @HiveField(6)
+  @HiveField(12)
   final bool isDouble;
 
-  @HiveField(7)
+  @HiveField(13)
   final int iconCode;
 
   MeasurementUnitEntity toEntity() => MeasurementUnitEntity(

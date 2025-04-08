@@ -4,6 +4,6 @@ import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dar
 
 abstract interface class GoalRepository
     extends BaseRepositoryAbstraction<GoalEntity> {
-  EResultFuture<List<GoalEntity>> getGoalsByMainTaskId(String mainTaskId);
+  EResultFuture<List<GoalEntity>> getGoalsByTaskId(String taskId);
   EResultFuture<GoalEntity> getGoalBySubTaskId(String subTaskId);
 }
