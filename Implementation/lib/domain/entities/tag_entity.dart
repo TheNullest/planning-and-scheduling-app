@@ -32,8 +32,8 @@ class TagEntity extends CategoryEntity {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       TagEntity(
         id: id ?? this.id,

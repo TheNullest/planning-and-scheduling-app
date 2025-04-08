@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/main_task_entity.dart';
+import 'package:zamaan/domain/entities/task_entity.dart';
 
 part 'main_task_hive_model.g.dart';
 
@@ -8,8 +8,8 @@ part 'main_task_hive_model.g.dart';
 // Since HiveObjectMixin contains mutable fields,
 // we ignore the immutability check for this class.
 // ignore: must_be_immutable
-class MainTaskHiveModel extends MainTaskEntity with HiveObjectMixin {
-  MainTaskHiveModel({
+class TaskHiveModel extends TaskEntity with HiveObjectMixin {
+  TaskHiveModel({
     required super.title,
     required super.categoryIds,
     required super.colorCode,
@@ -22,16 +22,14 @@ class MainTaskHiveModel extends MainTaskEntity with HiveObjectMixin {
     super.priority,
     super.status,
     super.fixedTagIds,
-    super.tagIds,
     super.dueDate,
     super.totalSpentTime,
     super.taskSchedulerId,
   });
 
-  MainTaskHiveModel.empty() : super.empty();
+  TaskHiveModel.empty() : super.empty();
 
-  factory MainTaskHiveModel.fromEntity(MainTaskEntity entity) =>
-      MainTaskHiveModel(
+  factory TaskHiveModel.fromEntity(TaskEntity entity) => TaskHiveModel(
         id: entity.id,
         updatedAt: entity.updatedAt,
         description: entity.description,
@@ -44,22 +42,21 @@ class MainTaskHiveModel extends MainTaskEntity with HiveObjectMixin {
         priority: entity.priority,
         status: entity.status,
         fixedTagIds: entity.fixedTagIds,
-        tagIds: entity.tagIds,
         dueDate: entity.dueDate,
         totalSpentTime: entity.totalSpentTime,
         taskSchedulerId: entity.taskSchedulerId,
       );
 
   @override
-  MainTaskHiveModel copyWith({
+  TaskHiveModel copyWith({
     String? id,
     DateTime? updatedAt,
     DateTime? createdAt,
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
     List<String>? categoryIds,
     int? priority,
     int? status,
@@ -69,7 +66,7 @@ class MainTaskHiveModel extends MainTaskEntity with HiveObjectMixin {
     Duration? totalSpentTime,
     String? taskSchedulerId,
   }) =>
-      MainTaskHiveModel(
+      TaskHiveModel(
         id: id ?? this.id,
         updatedAt: updatedAt ?? this.updatedAt,
         description: description ?? this.description,
@@ -82,7 +79,6 @@ class MainTaskHiveModel extends MainTaskEntity with HiveObjectMixin {
         priority: priority ?? this.priority,
         status: status ?? this.status,
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
-        tagIds: tagIds ?? this.tagIds,
         dueDate: dueDate ?? this.dueDate,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
         taskSchedulerId: taskSchedulerId ?? taskSchedulerId,

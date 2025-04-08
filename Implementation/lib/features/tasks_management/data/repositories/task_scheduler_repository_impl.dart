@@ -37,11 +37,11 @@
 
 //   @override
 //   ResultFuture<List<TaskSchedulerEntity>>
-//       getTaskSchedulersByMainTaskIdsAndDateRange(
+//       getTaskSchedulersByTaskIdsAndDateRange(
 //     GetByTaskIdsAndDateRangeParams params,
 //   ) async =>
 //           toEntities(
-//             await _localDataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+//             await _localDataSource.getTaskSchedulersByTaskIdsAndDateRange(
 //               mainTaskIds: params.mainTaskIds,
 //               startAt: params.startAt,
 //               endAt: params.endAt,
@@ -58,11 +58,11 @@
 //       );
 
 //   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByMainTaskId(
-//     String mainTaskId,
+//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTaskId(
+//     String taskId,
 //   ) async =>
 //       toEntities(
-//         await _localDataSource.getTaskSchedulersByMainTaskId(mainTaskId)
+//         await _localDataSource.getTaskSchedulersByTaskId(taskId)
 //             as Either<Failure, List<TaskSchedulerHiveModel>>,
 //       );
 

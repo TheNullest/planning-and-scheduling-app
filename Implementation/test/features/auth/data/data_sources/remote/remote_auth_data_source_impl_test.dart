@@ -1,6 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source_impl.dart';
 
 import '../../../domain/usecases/_authentication_repository.mock.dart';
@@ -19,16 +19,16 @@ void main() {
   late MockGoTrueClient mockGoTrueClient;
   late Session mockCurrentUserSession;
   late User mockUser;
-  late RemoteUserModel tRemoteUserModel;
+  late UserSupabaseModel tRemoteUserModel;
   setUp(() {
     mockConnectionChecker = MockConnectionChecker();
     mockSupabaseClient = MockSupabaseClient();
     mockGoTrueClient = MockGoTrueClient();
-    tRemoteUserModel = RemoteUserModel.empty();
+    tRemoteUserModel = UserSupabaseModel.empty();
     mockUser = User(
       id: tRemoteUserModel.id,
       email: tRemoteUserModel.emailAddress,
-      userMetadata: tRemoteUserModel.toSupabaseDataMap(),
+      userMetadata: tRemoteUserModel.toMetaData(),
       appMetadata: {},
       aud: '',
       createdAt: tRemoteUserModel.createdAt.toIso8601String(),
@@ -51,7 +51,7 @@ void main() {
       when(() => mockSupabaseClient.auth).thenReturn(mockGoTrueClient);
       when(
         () async => Right(
-          RemoteUserModel.fromJson(
+          UserSupabaseModel.fromJson(
             await mockSupabaseClient
                 .from('profiles')
                 .select()

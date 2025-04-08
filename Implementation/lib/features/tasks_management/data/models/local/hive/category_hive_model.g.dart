@@ -3,7 +3,7 @@
 part of 'category_hive_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// HiveBaseTypeAdapterGenerator
 // **************************************************************************
 
 class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
@@ -17,9 +17,9 @@ class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoryHiveModel(
-      title: fields[5] as String,
-      colorCode: fields[6] as int,
-      iconCode: fields[7] as int,
+      title: fields[11] as String,
+      colorCode: fields[12] as String,
+      iconCode: fields[13] as String,
       id: fields[0] as String?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
@@ -32,11 +32,11 @@ class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
   void write(BinaryWriter writer, CategoryHiveModel obj) {
     writer
       ..writeByte(8)
-      ..writeByte(5)
+      ..writeByte(11)
       ..write(obj.title)
-      ..writeByte(6)
+      ..writeByte(12)
       ..write(obj.colorCode)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.iconCode)
       ..writeByte(0)
       ..write(obj.id)

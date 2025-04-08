@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 
 part 'user_hive_model.g.dart';
 
@@ -37,7 +37,7 @@ class UserHiveModel extends UserEntity {
         avatarPath: entity.avatarPath,
         emailAddress: entity.emailAddress,
       );
-  factory UserHiveModel.fromRemote(RemoteUserModel entity) => UserHiveModel(
+  factory UserHiveModel.fromRemote(UserSupabaseModel entity) => UserHiveModel(
         id: entity.id,
         userName: entity.userName,
         password: entity.password,
@@ -62,6 +62,7 @@ class UserHiveModel extends UserEntity {
     DateTime? birthDate,
     DateTime? createdAt,
     DateTime? updatedAt,
+    bool? isSynced,
     String? description,
     String? avatarPath,
     String? emailAddress,

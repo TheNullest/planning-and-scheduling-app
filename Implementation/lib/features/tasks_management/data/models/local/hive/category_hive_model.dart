@@ -44,8 +44,8 @@ class CategoryHiveModel extends CategoryEntity with HiveObjectMixin {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       CategoryHiveModel(
         id: id ?? this.id,

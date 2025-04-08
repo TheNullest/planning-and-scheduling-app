@@ -16,16 +16,16 @@ abstract interface class TaskSchedulerRepository
   /// - [endAt] - The optional end date of the range.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
   EResultFuture<List<TaskSchedulerEntity>>
-      getTaskSchedulersByMainTaskIdsAndDateRange(
+      getTaskSchedulersByTaskIdsAndDateRange(
     GetByTaskIdsAndDateRangeParams params,
   );
 
   /// Retrieves scheduled times by the main task ID.
   ///
-  /// - [mainTaskId] - The ID of the main task.
+  /// - [taskId] - The ID of the main task.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTaskId(
+    String taskId,
   );
 
   /// Retrieves scheduled times by their start time.

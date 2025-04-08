@@ -24,7 +24,7 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   }) : _hiveBox = hiveBox ?? serviceLocator<HiveServices<UserHiveModel>>();
 
   /// The name of the Hive box used for storing user data.
-  final String _boxName = HiveBoxConstants.usersBox;
+  String get _boxName => HiveBoxConstants.usersBox;
 
   /// The Hive service used for local storage operations.
   final HiveServices<UserHiveModel> _hiveBox;
@@ -54,8 +54,11 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
         action: () async {
           await _hiveBox.operator(
             job: (box) async {
-              final existing =
-                  box.values.where((u) => u.userName == user.userName);
+              // Check if the user already exists in the database
+              // and throw an exception if it does.
+              // Otherwise, add the user to the database or update the existing user info.
+              final existing = box.values
+                  .where((u) => u.userName == user.userName && u.id != user.id);
               if (existing.isNotEmpty) {
                 throw Exception(
                   user.userName + AuthTexts.errors.entityExistsInDatabase,
@@ -77,7 +80,15 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
   EResultFutureVoid updateCurrentUser(UserHiveModel user) async =>
-      storeCurrentUser(user);
+      tryCatchEither(
+        action: () async => _hiveBox.operator(
+          job: (box) async {
+            await box.put(user.id, user);
+          },
+          boxName: _boxName,
+        ),
+        failureType: FailureType.local,
+      );
 
   /// Signs out the current user by clearing the local storage.
   ///

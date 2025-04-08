@@ -1,8 +1,7 @@
-import 'package:zamaan/domain/entities/main_task_entity.dart';
+import 'package:zamaan/domain/entities/task_entity.dart';
 import 'package:zamaan/domain/repositories/main_task_repository.dart';
 import 'package:zamaan/domain/usecases/get_entity_usecase.dart';
 
-class GetMainTaskUsecase
-    extends GetEntityUseCase<MainTaskRepository, MainTaskEntity> {
-  GetMainTaskUsecase(super.repository);
+class GetTaskUsecase extends GetEntityUseCase<TaskRepository, TaskEntity> {
+  GetTaskUsecase(super.repository);
 }

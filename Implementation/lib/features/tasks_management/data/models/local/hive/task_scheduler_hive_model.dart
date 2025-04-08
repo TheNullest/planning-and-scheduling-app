@@ -10,7 +10,7 @@ part 'task_scheduler_hive_model.g.dart';
 // ignore: must_be_immutable
 class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
   TaskSchedulerHiveModel({
-    required super.mainTaskId,
+    required super.taskId,
     super.id,
     super.updatedAt,
     super.description,
@@ -34,7 +34,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        mainTaskId: entity.mainTaskId,
+        taskId: entity.taskId,
         willStartAt: entity.willStartAt,
         goalId: entity.goalId,
         endAt: entity.endAt,
@@ -51,7 +51,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
+    String? taskId,
     String? goalId,
     DateTime? willStartAt,
     DateTime? endAt,
@@ -65,7 +65,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         goalId: goalId ?? this.goalId,
         willStartAt: willStartAt ?? this.willStartAt,
         endAt: endAt ?? this.endAt,

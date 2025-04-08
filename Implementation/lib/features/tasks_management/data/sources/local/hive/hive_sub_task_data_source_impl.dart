@@ -16,7 +16,7 @@ class HiveSubTaskDataSourceImpl
   HiveSubTaskDataSourceImpl({HiveServices<SubTaskHiveModel>? hiveBox})
       : _hiveBox = hiveBox ?? serviceLocator<HiveServices<SubTaskHiveModel>>(),
         super(hiveServices: hiveBox, HiveBoxConstants.subTasksBox);
-  final String _boxName = HiveBoxConstants.subTasksBox;
+  String get _boxName => HiveBoxConstants.subTasksBox;
   final HiveServices<SubTaskHiveModel> _hiveBox;
 
   @override
@@ -41,12 +41,12 @@ class HiveSubTaskDataSourceImpl
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getSubTasksByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<SubTaskHiveModel>> getSubTasksByTaskId(
+    String taskId,
   ) async =>
       _hiveBox.operator<List<SubTaskHiveModel>>(
         job: (box) async =>
-            box.values.where((item) => item.mainTaskId == mainTaskId).toList(),
+            box.values.where((item) => item.taskId == taskId).toList(),
         boxName: _boxName,
       );
 }
