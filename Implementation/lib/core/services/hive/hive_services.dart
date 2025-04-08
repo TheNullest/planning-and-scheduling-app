@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
-import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/core/platform/directory_wrapper.dart';
 import 'package:zamaan/core/platform/path_provider_wrapper.dart';
 import 'package:zamaan/core/platform/platform_wrapper.dart';
@@ -12,8 +11,11 @@ import 'package:zamaan/core/services/hive/hive_encryptions_service.dart';
 import 'package:zamaan/core/services/hive/hive_wrapper.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
+import 'package:zamaan/features/log/data/models/local/hive/device.dart';
+import 'package:zamaan/features/log/data/models/local/hive/log.dart';
+import 'package:zamaan/features/log/data/models/local/hive/sync_log.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
@@ -24,8 +26,7 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/task_sch
 import 'package:zamaan/features/tasks_management/data/models/local/hive/time_interval_hive_model.dart';
 
 /// A generic service class for working with Hive boxes. It is parameterized
-/// by [HiveModel], which must extend [BaseEntityAbstraction].
-class HiveServices<HiveModel extends BaseEntityAbstraction> {
+class HiveServices<HiveModel> {
   HiveServices({
     required HiveWrapper hive,
     required PlatformWrapper platform,
@@ -57,14 +58,17 @@ class HiveServices<HiveModel extends BaseEntityAbstraction> {
 
     final adapters = <HiveBaseTypeAdapter>[
       UserHiveModelAdapter(),
-      MainTaskHiveModelAdapter(),
+      TaskHiveModelAdapter(),
       CategoryHiveModelAdapter(),
       GoalHiveModelAdapter(),
       MeasurementUnitHiveModelAdapter(),
       TaskSchedulerHiveModelAdapter(),
       SubTaskHiveModelAdapter(),
       TagHiveModelAdapter(),
-      TimeIntervalHiveModelAdapter(),
+      TaskActivityHiveModelAdapter(),
+      LogHiveModelAdapter(),
+      SyncLogHiveModelAdapter(),
+      DeviceHiveModelAdapter(),
     ];
 
     for (final adapter in adapters) {

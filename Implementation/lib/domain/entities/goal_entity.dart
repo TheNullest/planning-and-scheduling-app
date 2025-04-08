@@ -3,9 +3,9 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 class GoalEntity extends BaseEntityAbstraction {
   GoalEntity({
-    required this.mainTaskId,
+    required this.taskId,
     required this.measurementUnitId,
-    required this.measurementValue,
+    required this.measurementUnitValue,
     super.id,
     super.createdAt,
     super.updatedAt,
@@ -20,44 +20,45 @@ class GoalEntity extends BaseEntityAbstraction {
   });
 
   GoalEntity.empty()
-      : this(mainTaskId: '1', measurementUnitId: '2', measurementValue: 1);
-  @HiveField(5)
-  final String mainTaskId;
+      : this(taskId: '1', measurementUnitId: '2', measurementUnitValue: 1);
 
-  @HiveField(6)
+  @HiveField(11)
+  final String taskId;
+
+  @HiveField(12)
   final String? subTaskId;
 
   /// The unit of measurment chosen to create the target and goal
-  @HiveField(7)
+  @HiveField(13)
   final String measurementUnitId;
 
   /// MeasurementValue enum
-  @HiveField(8)
-  final int measurementValue;
+  @HiveField(14)
+  final int measurementUnitValue;
 
   /// The minimum amount determined per hour\
   /// based on the desired measurement unit of the current task
-  @HiveField(9)
+  @HiveField(15)
   final double perActiveHour;
 
   /// The minimum amount determined per day\
   /// based on the desired measurement unit of the current task
-  @HiveField(10)
+  @HiveField(16)
   final double perActiveDay;
 
   /// The minimum amount determined per week\
   /// based on the desired measurement unit of the current task
-  @HiveField(11)
+  @HiveField(17)
   final double perActiveWeek;
 
   /// The minimum amount determined per month\
   /// based on the desired measurement unit of the current task
-  @HiveField(12)
+  @HiveField(18)
   final double perActiveMonth;
 
   /// The minimum amount determined per year\
   /// based on the desired measurement unit of the current task
-  @HiveField(13)
+  @HiveField(19)
   final double perActiveYear;
 
   GoalEntity toEntity() => GoalEntity(
@@ -66,9 +67,9 @@ class GoalEntity extends BaseEntityAbstraction {
         description: description,
         createdAt: createdAt,
         userId: userId,
-        mainTaskId: mainTaskId,
+        taskId: taskId,
         measurementUnitId: measurementUnitId,
-        measurementValue: measurementValue,
+        measurementUnitValue: measurementUnitValue,
         subTaskId: subTaskId,
         perActiveHour: perActiveHour,
         perActiveDay: perActiveDay,
@@ -84,10 +85,10 @@ class GoalEntity extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
-    String? measurementUnitId,
-    int? measurementValue,
+    String? taskId,
     String? subTaskId,
+    String? measurementUnitId,
+    int? measurementUnitValue,
     double? perActiveHour,
     double? perActiveDay,
     double? perActiveWeek,
@@ -100,10 +101,10 @@ class GoalEntity extends BaseEntityAbstraction {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         subTaskId: subTaskId ?? this.subTaskId,
         measurementUnitId: measurementUnitId ?? this.measurementUnitId,
-        measurementValue: measurementValue ?? this.measurementValue,
+        measurementUnitValue: measurementUnitValue ?? this.measurementUnitValue,
         perActiveHour: perActiveHour ?? this.perActiveHour,
         perActiveDay: perActiveDay ?? this.perActiveDay,
         perActiveWeek: perActiveWeek ?? this.perActiveWeek,
@@ -114,9 +115,9 @@ class GoalEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        mainTaskId,
+        taskId,
         measurementUnitId,
-        measurementValue,
+        measurementUnitValue,
         subTaskId,
         perActiveHour,
         perActiveDay,

@@ -10,20 +10,20 @@ class HiveGoalDataSourceImpl
     extends BaseLocalDataSourceAbstraction<GoalHiveModel>
     implements GoalDataSource<GoalHiveModel> {
   // Just to add the testablity feature to the class,
-  // we need to inject the [HiveInitializer<MainTaskHiveModel>] like this
+  // we need to inject the [HiveInitializer<TaskHiveModel>] like this
   HiveGoalDataSourceImpl({HiveServices<GoalHiveModel>? hiveBox})
       : _hiveBox = hiveBox ?? serviceLocator<HiveServices<GoalHiveModel>>(),
         super(hiveServices: hiveBox, HiveBoxConstants.goalsBox);
-  final String _boxName = HiveBoxConstants.goalsBox;
+  String get _boxName => HiveBoxConstants.goalsBox;
   final HiveServices<GoalHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<GoalHiveModel>> getGoalsByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<GoalHiveModel>> getGoalsByTaskId(
+    String taskId,
   ) async =>
       _hiveBox.operator<List<GoalHiveModel>>(
         job: (box) async => box.values
-            .where((goalModel) => goalModel.mainTaskId == mainTaskId)
+            .where((goalModel) => goalModel.taskId == taskId)
             .toList(),
         boxName: _boxName,
       );

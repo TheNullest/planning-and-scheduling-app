@@ -34,11 +34,11 @@
 //       );
 
 //   @override
-//   ResultFuture<List<SubTaskEntity>> getSubTasksByMainTaskId(
-//     String mainTaskId,
+//   ResultFuture<List<SubTaskEntity>> getSubTasksByTaskId(
+//     String taskId,
 //   ) async =>
 //       toEntities(
-//         await _localDataSource.getSubTasksByMainTaskId(mainTaskId)
+//         await _localDataSource.getSubTasksByTaskId(taskId)
 //             as Either<Failure, List<SubTaskHiveModel>>,
 //       );
 

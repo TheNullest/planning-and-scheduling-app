@@ -1,8 +1,8 @@
-import 'package:zamaan/domain/entities/time_interval_entity.dart';
+import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/repositories/time_interval_repository.dart';
 import 'package:zamaan/domain/usecases/update_entity_usecase.dart';
 
-class UpdateTimeIntervalUsecase
-    extends UpdateEntityUseCase<TimeIntervalEntity, TimeIntervalRepository> {
-  UpdateTimeIntervalUsecase(super.repository);
+class UpdateTaskActivityUsecase
+    extends UpdateEntityUseCase<TaskActivityEntity, TaskActivityRepository> {
+  UpdateTaskActivityUsecase(super.repository);
 }

@@ -8,9 +8,8 @@ enum TimeUnit {
   month('ماه'),
   year('سال');
 
-  final String _inPersian;
-
   const TimeUnit(this._inPersian);
+  final String _inPersian;
 
   static String toStringCustome(int index, {bool inPersian = false}) {
     if (inPersian) {

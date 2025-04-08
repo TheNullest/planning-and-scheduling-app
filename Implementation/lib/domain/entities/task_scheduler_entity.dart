@@ -9,7 +9,7 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// Constructor for creating a `TaskSchedulerEntity`.
   ///
-  /// - [mainTaskId] is the ID of the main task.
+  /// - [taskId] is the ID of the main task.
   /// - [goalId] is the ID of the goal.
   /// - [willStartAt] is the start time of the task.
   /// - [repetitionType] is the type of repetition (default: RepetitionType.every).
@@ -17,7 +17,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// - [specificTimes] are the specific times for the repetition (optional).
   /// - [endAt] is the end time of the task (**Conditional**).
   TaskSchedulerEntity({
-    required this.mainTaskId,
+    required this.taskId,
     super.id,
     super.updatedAt,
     super.createdAt,
@@ -35,22 +35,22 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// Creates an empty `TaskSchedulerEntity` with default values.
   TaskSchedulerEntity.empty()
       : this(
-          mainTaskId: '1',
+          taskId: '1',
           willStartAt: DateTime(2024, 08),
           endAt: DateTime(2024, 10),
         );
 
   /// The ID of the main task associated with this schedule.
-  @HiveField(5)
-  final String mainTaskId;
+  @HiveField(11)
+  final String taskId;
 
-  @HiveField(6)
+  @HiveField(12)
   final String? goalId;
 
   /// The start time of the task.\
   /// This field indicates when the task is scheduled to start.\
   /// If the task has a specific start time, it should be set here.
-  @HiveField(7)
+  @HiveField(13)
   final DateTime? willStartAt;
 
   /// Retrieves scheduled times by their repetition type.
@@ -61,7 +61,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// - `1.RepetitionType.per`: Repeats per a specified interval and time unit.
   /// - `2.RepetitionType.interval`: Repeats at regular intervals of the specified time unit.
   /// - `3.RepetitionType.specificDateTimes`: Repeats on specific dateTimes.
-  @HiveField(8)
+  @HiveField(14)
   final int repetitionType;
 
   /// The unit of time for the repetition (default: TimeUnit.day).
@@ -73,14 +73,14 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   /// - `3.TimeUnit.week`: Represents a week.
   /// - `4.TimeUnit.month`: Represents a month.
   /// - `5.TimeUnit.year`: Represents a year.
-  @HiveField(9)
+  @HiveField(15)
   final int timeUnit;
 
   /// The specific times for the repetition (optional).
   ///
   /// - For `RepetitionType.every`: Specifies times like [10, 12, 16] o'clock every 2 days.
   /// - For `RepetitionType.specificDays`: Specifies days like [2, 3, 5] of each week or [10, 20, 25] of each month.
-  @HiveField(10)
+  @HiveField(16)
   final List<int>? specificTimes;
 
   /// **Conditional End Time:**
@@ -90,7 +90,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   ///   This signifies a fixed duration for the task.
   /// - If the task has no predefined end time, `endAt` will be set later
   ///   when the task is actually completed. This indicates a dynamic duration.
-  @HiveField(11)
+  @HiveField(17)
   final DateTime? endAt;
 
   @override
@@ -100,7 +100,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
+    String? taskId,
     String? goalId,
     DateTime? willStartAt,
     DateTime? endAt,
@@ -114,7 +114,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         goalId: goalId ?? this.goalId,
         willStartAt: willStartAt ?? this.willStartAt,
         endAt: endAt ?? this.endAt,
@@ -129,7 +129,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
         description: description,
         createdAt: createdAt,
         userId: userId,
-        mainTaskId: mainTaskId,
+        taskId: taskId,
         goalId: goalId,
         willStartAt: willStartAt,
         endAt: endAt,
@@ -142,7 +142,7 @@ class TaskSchedulerEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        mainTaskId,
+        taskId,
         goalId,
         willStartAt,
         endAt,

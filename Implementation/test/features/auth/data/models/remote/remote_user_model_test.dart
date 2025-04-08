@@ -4,13 +4,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 
 import '../../../../../fixtures/fixture_reader.dart';
 
 void main() {
   // Arrange
-  final testModel = RemoteUserModel.empty();
+  final testModel = UserSupabaseModel.empty();
   test(
       '[remoteUserModel] must be a subclass of [UserEntity] and [HiveUserModel]',
       () {
@@ -28,8 +28,8 @@ void main() {
         () {
       // Arrange => testModel
       // Act
-      final actual = RemoteUserModel.fromSupabaseUserJson(
-        getRemoteUserModels()[0].toMap(),
+      final actual = UserSupabaseModel.fromJson(
+        getRemoteUserModels()[0].toSupabaseMap(),
       );
       // Assert
       expect(actual, equals(getRemoteUserModels()[0]));
@@ -39,14 +39,14 @@ void main() {
         () {
       // Arrange => testModel
       // Act
-      final testJson = testModel.toMap();
-      final actual = RemoteUserModel.fromSupabaseUserJson(testJson);
+      final testJson = testModel.toSupabaseMap();
+      final actual = UserSupabaseModel.fromJson(testJson);
       expect(actual, equals(testModel));
     });
     test('[remoteUserModel.toMap] must return a [Map] with the right data', () {
       // Arrange => testModel
       // Act
-      final actual = getRemoteUserModels()[2].toMap();
+      final actual = getRemoteUserModels()[2].toSupabaseMap();
       expect(actual, equals(testMaps[2]));
     });
     test('[remoteUserModel.toJson] must return a [Json] with the right data',
@@ -54,7 +54,7 @@ void main() {
       // Arrange => testModel
       // Act
       final actual = testModel.toJson();
-      final tJson = jsonEncode(testModel.toMap());
+      final tJson = jsonEncode(testModel.toSupabaseMap());
       // Assert
       expect(actual, equals(tJson));
     });

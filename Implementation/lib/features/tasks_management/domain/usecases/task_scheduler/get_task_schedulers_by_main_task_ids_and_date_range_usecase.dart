@@ -14,5 +14,5 @@ class GetTaskSchedulerByTaskIdsAndDateRangeUsecase extends UseCaseWithParams<
   EResultFuture<List<TaskSchedulerEntity>> call(
     GetByTaskIdsAndDateRangeParams params,
   ) async =>
-      repository.getTaskSchedulersByMainTaskIdsAndDateRange(params);
+      repository.getTaskSchedulersByTaskIdsAndDateRange(params);
 }

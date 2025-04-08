@@ -30,31 +30,30 @@ class UserEntity extends BaseEntityAbstraction {
           birthDate: DateTime(1989, 12, 23, 16, 53, 37, 532, 444),
         );
 
-  @HiveField(5)
+  @HiveField(11)
   final String userName;
 
-  @HiveField(6)
+  @HiveField(12)
   final String password;
 
-  @HiveField(7)
+  @HiveField(13)
   final String firstName;
 
-  @HiveField(8)
+  @HiveField(14)
   final String lastName;
 
-  @HiveField(9)
+  @HiveField(15)
   final String emailAddress;
 
-  @HiveField(10)
+  @HiveField(16)
   final DateTime? birthDate;
 
-  @HiveField(11)
+  @HiveField(17)
   final String? avatarPath;
 
   @override
   UserEntity copyWith({
     String? id,
-    int? order,
     String? userName,
     String? password,
     String? firstName,

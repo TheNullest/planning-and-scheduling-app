@@ -15,16 +15,16 @@ class CategoryEntity extends BaseEntityAbstraction {
     super.description,
   });
 
-  CategoryEntity.empty() : this(title: 'title', colorCode: 1, iconCode: 2);
+  CategoryEntity.empty() : this(title: 'title', colorCode: '1', iconCode: '2');
 
-  @HiveField(5)
+  @HiveField(11)
   final String title;
 
-  @HiveField(6)
-  final int colorCode;
+  @HiveField(12)
+  final String colorCode;
 
-  @HiveField(7)
-  final int iconCode;
+  @HiveField(13)
+  final String iconCode;
 
   CategoryEntity toEntity() => CategoryEntity(
         id: id,
@@ -45,8 +45,8 @@ class CategoryEntity extends BaseEntityAbstraction {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       CategoryEntity(
         id: id ?? this.id,

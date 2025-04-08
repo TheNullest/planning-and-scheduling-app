@@ -8,48 +8,48 @@
 // import 'package:zamaan/features/task/domain/params/get_by_task_ids_and_date_range_params.dart';
 // import 'package:zamaan/features/task/domain/repositories/time_interval_repository.dart';
 
-// class TimeIntervalRepositoryImpl extends BaseCRUDOperations<TimeIntervalEntity,
-//         TimeIntervalHiveModel, TimeIntervalDataSource<TimeIntervalHiveModel>>
-//     implements TimeIntervalRepository {
-//   TimeIntervalRepositoryImpl(super.localDataSource)
+// class TaskActivityRepositoryImpl extends BaseCRUDOperations<TaskActivityEntity,
+//         TaskActivityHiveModel, TaskActivityDataSource<TaskActivityHiveModel>>
+//     implements TaskActivityRepository {
+//   TaskActivityRepositoryImpl(super.localDataSource)
 //       : _localDataSource = localDataSource;
-//   final TimeIntervalDataSource _localDataSource;
+//   final TaskActivityDataSource _localDataSource;
 
 //   @override
-//   TimeIntervalHiveModel fromEntity(TimeIntervalEntity entity) =>
-//       TimeIntervalHiveModel.fromEntity(entity);
+//   TaskActivityHiveModel fromEntity(TaskActivityEntity entity) =>
+//       TaskActivityHiveModel.fromEntity(entity);
 
 //   @override
-//   TimeIntervalEntity toEntity(TimeIntervalHiveModel model) => model.toEntity();
+//   TaskActivityEntity toEntity(TaskActivityHiveModel model) => model.toEntity();
 
-//   Either<Failure, List<TimeIntervalEntity>> toEntities(
-//     Either<Failure, List<TimeIntervalHiveModel>> models,
+//   Either<Failure, List<TaskActivityEntity>> toEntities(
+//     Either<Failure, List<TaskActivityHiveModel>> models,
 //   ) =>
 //       models.map(
 //         (taskModels) => taskModels
-//             .map<TimeIntervalEntity>((taskModel) => taskModel.toEntity())
+//             .map<TaskActivityEntity>((taskModel) => taskModel.toEntity())
 //             .toList(),
 //       );
 
 //   @override
-//   ResultFuture<List<TimeIntervalEntity>>
-//       getTimeIntervalByMainTaskIdAndDateRange(
+//   ResultFuture<List<TaskActivityEntity>>
+//       getTaskActivityByTaskIdAndDateRange(
 //     GetByTaskIdsAndDateRangeParams params,
 //   ) async =>
 //           toEntities(
-//             await _localDataSource.getTimeIntervalByMainTaskIdAndDateRange(
+//             await _localDataSource.getTaskActivityByTaskIdAndDateRange(
 //               mainTaskIds: params.mainTaskIds,
 //               startAt: params.startAt,
 //               endAt: params.endAt,
-//             ) as Either<Failure, List<TimeIntervalHiveModel>>,
+//             ) as Either<Failure, List<TaskActivityHiveModel>>,
 //           );
 
 //   @override
-//   ResultFuture<List<TimeIntervalEntity>> getTimeIntervalBySubTaskId(
+//   ResultFuture<List<TaskActivityEntity>> getTaskActivityBySubTaskId(
 //     String subTaskId,
 //   ) async =>
 //       toEntities(
-//         await _localDataSource.getTimeIntervalBySubTaskId(subTaskId)
-//             as Either<Failure, List<TimeIntervalHiveModel>>,
+//         await _localDataSource.getTaskActivityBySubTaskId(subTaskId)
+//             as Either<Failure, List<TaskActivityHiveModel>>,
 //       );
 // }

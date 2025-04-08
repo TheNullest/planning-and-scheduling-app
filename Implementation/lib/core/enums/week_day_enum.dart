@@ -23,9 +23,8 @@ enum WeekDay {
   /// Index 6
   friday('جمعه');
 
-  final String _inPersian;
-
   const WeekDay(this._inPersian);
+  final String _inPersian;
 
   static String toStringCustome(int index, {bool inPersian = false}) {
     if (inPersian) {

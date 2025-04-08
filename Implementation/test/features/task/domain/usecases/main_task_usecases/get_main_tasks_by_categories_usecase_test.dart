@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/main_task_entity.dart';
+import 'package:zamaan/domain/entities/task_entity.dart';
 import 'package:zamaan/domain/repositories/main_task_repository.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/main_task/get_main_tasks_by_categories_usecase.dart';
 
