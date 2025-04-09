@@ -3,7 +3,7 @@
 part of 'user_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {

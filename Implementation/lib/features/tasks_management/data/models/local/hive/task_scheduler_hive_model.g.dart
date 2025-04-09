@@ -3,11 +3,10 @@
 part of 'task_scheduler_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-class TaskSchedulerHiveModelAdapter
-    extends HiveBaseTypeAdapter<TaskSchedulerHiveModel> {
+class TaskSchedulerHiveModelAdapter extends HiveBaseTypeAdapter<TaskSchedulerHiveModel> {
   @override
   final int typeId = 5;
 

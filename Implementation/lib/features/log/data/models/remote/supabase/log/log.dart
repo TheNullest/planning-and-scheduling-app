@@ -20,6 +20,7 @@ class LogSupabaseModel with _$LogSupabaseModel {
     required String action,
     required DataMap data,
     @JsonKey(name: 'recoreded_at') required String recorededAt,
+    @JsonKey(name: 'is_synced') required bool isSynced,
   }) = _LogSupabaseModel;
 
   factory LogSupabaseModel.fromJson(Map<String, dynamic> json) =>
@@ -36,6 +37,7 @@ class LogSupabaseModel with _$LogSupabaseModel {
         action: entity.action.name,
         data: entity.data,
         recorededAt: entity.recordedAt.toIso8601String(),
+        isSynced: entity.isSynced,
       );
 
   @override
@@ -52,6 +54,7 @@ extension LogSupabaseModelX on LogSupabaseModel {
       action: SyncAction.fromName(action),
       data: data,
       recordedAt: DateTime.parse(recorededAt),
+      isSynced: isSynced,  
     );
   }
 }

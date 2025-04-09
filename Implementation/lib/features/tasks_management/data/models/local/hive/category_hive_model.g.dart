@@ -3,7 +3,7 @@
 part of 'category_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {

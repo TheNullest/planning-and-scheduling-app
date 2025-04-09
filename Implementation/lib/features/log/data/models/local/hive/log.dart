@@ -19,6 +19,7 @@ class LogHiveModel extends LogEntity with HiveObjectMixin {
     required super.action,
     required super.data,
     required super.recordedAt,
+    super.isSynced = false,
   });
 
   factory LogHiveModel.fromEntity(LogEntity entity) => LogHiveModel(
@@ -29,6 +30,7 @@ class LogHiveModel extends LogEntity with HiveObjectMixin {
         action: entity.action,
         data: entity.data,
         recordedAt: entity.recordedAt,
+        isSynced: entity.isSynced,
       );
   LogEntity toEntity() {
     return LogEntity(
@@ -39,6 +41,7 @@ class LogHiveModel extends LogEntity with HiveObjectMixin {
       action: action,
       data: data,
       recordedAt: recordedAt,
+      isSynced: isSynced,
     );
   }
 
@@ -50,7 +53,8 @@ class LogHiveModel extends LogEntity with HiveObjectMixin {
     String? entityId,
     SyncAction? action,
     DataMap? data,
-    DateTime? recorededAt,
+    DateTime? recordedAt,
+    bool? isSynced,
   }) {
     return LogHiveModel(
       id: id ?? this.id,
@@ -59,7 +63,8 @@ class LogHiveModel extends LogEntity with HiveObjectMixin {
       entityId: entityId ?? this.entityId,
       action: action ?? this.action,
       data: data ?? this.data,
-      recordedAt: recorededAt ?? recordedAt,
+      recordedAt: recordedAt ?? this.recordedAt,
+      isSynced: isSynced ?? this.isSynced,
     );
   }
 }

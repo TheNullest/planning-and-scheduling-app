@@ -201,7 +201,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
           await signIn(params);
 
           // Sign in the user with the provided email and password
-          final user = foldEither(await signIn(params));
+          final user = foldEither<UserSupabaseModel>(await signIn(params));
 
           // Remove the user from the 'profiles' table
           await _supabaseClient.from('profiles').delete().eq('id', user.id!);

@@ -6,7 +6,7 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart';
 import 'package:zamaan/features/log/data/sources/base/device_data_source.dart';
 
-class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceSupabaseModel> {
+class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceSupabaseModel> {
   DeviceHiveDataSourceImpl(this._supabaseClient);
   final SupabaseClient _supabaseClient;
 
@@ -14,10 +14,7 @@ class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceSupabaseModel> {
   EResultFuture<List<DeviceSupabaseModel>> getDevices(String? userId) async =>
       tryCatchEither<List<DeviceSupabaseModel>>(
         action: () async {
-          final devices = await _supabaseClient
-              .from('devices')
-              .select()
-              .eq('user_id', userId!);
+          final devices = await _supabaseClient.from('devices').select().eq('user_id', userId!);
           return Right(devices.map(DeviceSupabaseModel.fromJson).toList());
         },
         failureType: FailureType.remote,
@@ -25,12 +22,9 @@ class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceSupabaseModel> {
 
   /// It is just for local hive db
   @override
-  EResultFutureVoid registerDevices(List<DeviceSupabaseModel> devices) async =>
-      tryCatchEither(
+  EResultFutureVoid registerDevices(List<DeviceSupabaseModel> devices) async => tryCatchEither(
         action: () async {
-          await _supabaseClient
-              .from('devices')
-              .insert(devices.map((e) => e.toJson()).toList());
+          await _supabaseClient.from('devices').insert(devices.map((e) => e.toJson()).toList());
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -43,19 +37,14 @@ class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceSupabaseModel> {
   }) async =>
       tryCatchEither(
         action: () async {
-          await _supabaseClient
-              .from('devices')
-              .delete()
-              .eq('id', id)
-              .eq('user_id', userId!);
+          await _supabaseClient.from('devices').delete().eq('id', id).eq('user_id', userId!);
           return const Right(null);
         },
         failureType: FailureType.remote,
       );
 
   @override
-  EResultFutureVoid updateDeviceInfo(DeviceSupabaseModel device) async =>
-      tryCatchEither(
+  EResultFutureVoid updateDeviceInfo(DeviceSupabaseModel device) async => tryCatchEither(
         action: () async {
           await _supabaseClient
               .from('devices')

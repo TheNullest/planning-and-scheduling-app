@@ -3,11 +3,10 @@
 part of 'time_interval_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-class TaskActivityHiveModelAdapter
-    extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
+class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
   @override
   final int typeId = 8;
 

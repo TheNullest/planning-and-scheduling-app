@@ -6,27 +6,33 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/sync_log/sync_log.dart';
 import 'package:zamaan/features/log/data/sources/base/sync_log_data_source.dart';
 
-class SyncLogHiveDataSourceImpl extends SyncLogDataSource<SyncLogSupabaseModel> {
-  SyncLogHiveDataSourceImpl(this._supabaseClient);
+class SyncLogSupabaseDataSourceImpl implements SyncLogDataSource<SyncLogSupabaseModel> {
+  SyncLogSupabaseDataSourceImpl(this._supabaseClient);
 
   final SupabaseClient _supabaseClient;
   @override
-  EResultFutureVoid createSyncLog(SyncLogSupabaseModel entity) async => tryCatchEither(
+  EResultFutureVoid createSyncLogs(List<SyncLogSupabaseModel> syncLogs) async => tryCatchEither(
         action: () async {
-          await _supabaseClient.from('sync_logs').insert(entity);
+          await _supabaseClient.from('sync_logs').insert(
+                syncLogs.map((e) => e.toJson()).toList(),
+              );
           return const Right(null);
         },
         failureType: FailureType.remote,
       );
 
   @override
-  EResultFuture<List<SyncLogSupabaseModel>> getUnsyncedLogs(String? userId) async =>
+  EResultFuture<List<SyncLogSupabaseModel>> getUnsyncedLogs({
+    required String userId,
+    required String deviceId,
+  }) async =>
       tryCatchEither<List<SyncLogSupabaseModel>>(
         action: () async {
           final logs = await _supabaseClient
               .from('sync_logs')
               .select()
-              .eq('user_id', userId!)
+              .eq('user_id', userId)
+              .eq('device_id', deviceId)
               .eq('is_synced', false);
           return Right(
             logs
@@ -40,15 +46,14 @@ class SyncLogHiveDataSourceImpl extends SyncLogDataSource<SyncLogSupabaseModel> 
       );
 
   @override
-  EResultFutureVoid markDeviceAsSynced({
-    required String deviceId,
-    String? userId,
-  }) async =>
+  EResultFutureVoid markDeviceAsSynced({required String userId, required String deviceId}) async =>
       tryCatchEither(
         action: () async {
           await _supabaseClient
               .from('sync_logs')
-              .update({'is_synced': true}).eq('device_id', deviceId);
+              .update({'is_synced': true})
+              .eq('user_id', userId)
+              .eq('device_id', deviceId);
           return const Right(null);
         },
         failureType: FailureType.remote,

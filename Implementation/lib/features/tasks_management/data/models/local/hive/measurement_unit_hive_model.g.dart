@@ -3,11 +3,10 @@
 part of 'measurement_unit_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-class MeasurementUnitHiveModelAdapter
-    extends HiveBaseTypeAdapter<MeasurementUnitHiveModel> {
+class MeasurementUnitHiveModelAdapter extends HiveBaseTypeAdapter<MeasurementUnitHiveModel> {
   @override
   final int typeId = 4;
 

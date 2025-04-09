@@ -48,8 +48,7 @@ class HiveServices<HiveModel> {
     if (_platform.isWindows) {
       _directory.directory = Directory(r'E:\Flutter.Dart\HiveFiles\Zamaan');
     } else {
-      _directory.directory =
-          await _pathProvider.getApplicationDocumentsDirectory();
+      _directory.directory = await _pathProvider.getApplicationDocumentsDirectory();
     }
     if (!_directory.existsSync()) {
       await _directory.create(recursive: true);

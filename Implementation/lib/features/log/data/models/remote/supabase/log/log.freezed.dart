@@ -31,6 +31,8 @@ mixin _$LogSupabaseModel {
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
   @JsonKey(name: 'recoreded_at')
   String get recorededAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_synced')
+  bool get isSynced => throw _privateConstructorUsedError;
 
   /// Serializes this LogSupabaseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,7 +57,8 @@ abstract class $LogSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'entity_id') String entityId,
       String action,
       Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') String recorededAt});
+      @JsonKey(name: 'recoreded_at') String recorededAt,
+      @JsonKey(name: 'is_synced') bool isSynced});
 }
 
 /// @nodoc
@@ -80,6 +83,7 @@ class _$LogSupabaseModelCopyWithImpl<$Res, $Val extends LogSupabaseModel>
     Object? action = null,
     Object? data = null,
     Object? recorededAt = null,
+    Object? isSynced = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -110,6 +114,10 @@ class _$LogSupabaseModelCopyWithImpl<$Res, $Val extends LogSupabaseModel>
           ? _value.recorededAt
           : recorededAt // ignore: cast_nullable_to_non_nullable
               as String,
+      isSynced: null == isSynced
+          ? _value.isSynced
+          : isSynced // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -129,7 +137,8 @@ abstract class _$$LogSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'entity_id') String entityId,
       String action,
       Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') String recorededAt});
+      @JsonKey(name: 'recoreded_at') String recorededAt,
+      @JsonKey(name: 'is_synced') bool isSynced});
 }
 
 /// @nodoc
@@ -152,6 +161,7 @@ class __$$LogSupabaseModelImplCopyWithImpl<$Res>
     Object? action = null,
     Object? data = null,
     Object? recorededAt = null,
+    Object? isSynced = null,
   }) {
     return _then(_$LogSupabaseModelImpl(
       id: null == id
@@ -182,6 +192,10 @@ class __$$LogSupabaseModelImplCopyWithImpl<$Res>
           ? _value.recorededAt
           : recorededAt // ignore: cast_nullable_to_non_nullable
               as String,
+      isSynced: null == isSynced
+          ? _value.isSynced
+          : isSynced // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -196,7 +210,8 @@ class _$LogSupabaseModelImpl implements _LogSupabaseModel {
       @JsonKey(name: 'entity_id') required this.entityId,
       required this.action,
       required final Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') required this.recorededAt})
+      @JsonKey(name: 'recoreded_at') required this.recorededAt,
+      @JsonKey(name: 'is_synced') required this.isSynced})
       : _data = data;
 
   factory _$LogSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -226,10 +241,13 @@ class _$LogSupabaseModelImpl implements _LogSupabaseModel {
   @override
   @JsonKey(name: 'recoreded_at')
   final String recorededAt;
+  @override
+  @JsonKey(name: 'is_synced')
+  final bool isSynced;
 
   @override
   String toString() {
-    return 'LogSupabaseModel(id: $id, userId: $userId, deviceId: $deviceId, entityId: $entityId, action: $action, data: $data, recorededAt: $recorededAt)';
+    return 'LogSupabaseModel(id: $id, userId: $userId, deviceId: $deviceId, entityId: $entityId, action: $action, data: $data, recorededAt: $recorededAt, isSynced: $isSynced)';
   }
 
   @override
@@ -246,13 +264,23 @@ class _$LogSupabaseModelImpl implements _LogSupabaseModel {
             (identical(other.action, action) || other.action == action) &&
             const DeepCollectionEquality().equals(other._data, _data) &&
             (identical(other.recorededAt, recorededAt) ||
-                other.recorededAt == recorededAt));
+                other.recorededAt == recorededAt) &&
+            (identical(other.isSynced, isSynced) ||
+                other.isSynced == isSynced));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, deviceId, entityId,
-      action, const DeepCollectionEquality().hash(_data), recorededAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      deviceId,
+      entityId,
+      action,
+      const DeepCollectionEquality().hash(_data),
+      recorededAt,
+      isSynced);
 
   /// Create a copy of LogSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -279,7 +307,8 @@ abstract class _LogSupabaseModel implements LogSupabaseModel {
           @JsonKey(name: 'entity_id') required final String entityId,
           required final String action,
           required final Map<String, dynamic> data,
-          @JsonKey(name: 'recoreded_at') required final String recorededAt}) =
+          @JsonKey(name: 'recoreded_at') required final String recorededAt,
+          @JsonKey(name: 'is_synced') required final bool isSynced}) =
       _$LogSupabaseModelImpl;
 
   factory _LogSupabaseModel.fromJson(Map<String, dynamic> json) =
@@ -303,6 +332,9 @@ abstract class _LogSupabaseModel implements LogSupabaseModel {
   @override
   @JsonKey(name: 'recoreded_at')
   String get recorededAt;
+  @override
+  @JsonKey(name: 'is_synced')
+  bool get isSynced;
 
   /// Create a copy of LogSupabaseModel
   /// with the given fields replaced by the non-null parameter values.

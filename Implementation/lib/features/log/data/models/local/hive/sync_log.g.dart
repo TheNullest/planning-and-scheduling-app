@@ -3,11 +3,10 @@
 part of 'sync_log.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-class SyncLogHiveModelAdapter
-    extends HiveBaseTypeAdapter<SyncLogHiveModel> {
+class SyncLogHiveModelAdapter extends HiveBaseTypeAdapter<SyncLogHiveModel> {
   @override
   final int typeId = 31;
 

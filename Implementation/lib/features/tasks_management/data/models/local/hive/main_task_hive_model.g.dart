@@ -3,7 +3,7 @@
 part of 'main_task_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
@@ -77,7 +77,5 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TaskHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

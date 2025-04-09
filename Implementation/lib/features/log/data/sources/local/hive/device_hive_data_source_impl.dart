@@ -6,7 +6,7 @@ import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/sources/base/device_data_source.dart';
 
-class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceHiveModel> {
+class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
   DeviceHiveDataSourceImpl(this._hiveBox);
 
   /// The Hive service used for local storage operations.
@@ -24,8 +24,7 @@ class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceHiveModel> {
       );
 
   @override
-  EResultFutureVoid registerDevices(List<DeviceHiveModel> devices) async =>
-      tryCatchEither(
+  EResultFutureVoid registerDevices(List<DeviceHiveModel> devices) async => tryCatchEither(
         action: () async => _hiveBox.operator(
           job: (box) async {
             await box.addAll(devices);
@@ -51,8 +50,7 @@ class DeviceHiveDataSourceImpl extends DeviceDataSource<DeviceHiveModel> {
       );
 
   @override
-  EResultFutureVoid updateDeviceInfo(DeviceHiveModel device) async =>
-      tryCatchEither(
+  EResultFutureVoid updateDeviceInfo(DeviceHiveModel device) async => tryCatchEither(
         action: () async => _hiveBox.operator(
           job: (box) async {
             await box.put(device.id, device);

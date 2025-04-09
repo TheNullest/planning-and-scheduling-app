@@ -3,7 +3,7 @@
 part of 'log.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
@@ -24,13 +24,14 @@ class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
       action: fields[4] as SyncAction,
       data: (fields[5] as Map).cast<String, dynamic>(),
       recordedAt: fields[6] as DateTime,
+      isSynced: fields[7] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, LogHiveModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
       ..writeByte(5)
       ..write(obj.data)
       ..writeByte(6)
-      ..write(obj.recordedAt);
+      ..write(obj.recordedAt)
+      ..writeByte(7)
+      ..write(obj.isSynced);
   }
 
   @override
@@ -53,7 +56,5 @@ class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LogHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is LogHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

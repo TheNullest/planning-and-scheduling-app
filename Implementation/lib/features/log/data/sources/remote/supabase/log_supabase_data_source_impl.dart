@@ -6,14 +6,13 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/log/log.dart';
 import 'package:zamaan/features/log/data/sources/base/log_data_source.dart';
 
-class SyncLogSupabaseDataSourceImpl extends LogDataSource<LogSupabaseModel> {
+class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
   SyncLogSupabaseDataSourceImpl(this._supabaseClient);
 
   final SupabaseClient _supabaseClient;
 
   @override
-  EResultFutureVoid createBulkLogs(List<LogSupabaseModel> logs) async =>
-      tryCatchEither(
+  EResultFutureVoid createBulkLogs(List<LogSupabaseModel> logs) async => tryCatchEither(
         action: () async {
           await _supabaseClient.from('logs').insert(logs);
           return const Right(null);
@@ -31,16 +30,19 @@ class SyncLogSupabaseDataSourceImpl extends LogDataSource<LogSupabaseModel> {
       );
 
   @override
-  EResultFuture<List<LogSupabaseModel>> getLogs(String? userId) async =>
+  EResultFuture<List<LogSupabaseModel>> getLogs({
+    String? userId,
+    List<String>? logIds,
+    bool fromLocal = true,
+  }) async =>
       tryCatchEither<List<LogSupabaseModel>>(
         action: () async {
-          final logs = await _supabaseClient
-              .from('logs')
-              .select()
-              .eq('user_id', userId!);
-          return Right(
-            logs.map(LogSupabaseModel.fromJson).toList(),
-          );
+          final supabaseLogs = await _supabaseClient.from('logs').select().eq('user_id', userId!);
+          final filteredLogs = logIds != null && logIds.isNotEmpty
+              ? supabaseLogs.where((log) => logIds.contains(log['id']))
+              : supabaseLogs;
+          final result = filteredLogs.map(LogSupabaseModel.fromJson).toList();
+          return Right(result);
         },
         failureType: FailureType.remote,
       );

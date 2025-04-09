@@ -2,7 +2,7 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/domain/entities/device.dart';
 import 'package:zamaan/features/log/domain/repositories/device_repo.dart';
 
-class DeviceRepoImpl extends DeviceRepository<DeviceEntity> {
+class DeviceRepoImpl implements DeviceRepository<DeviceEntity> {
   @override
   EResultFuture<List<DeviceEntity>> getDevices(String? userId) {
     // TODO: implement getDevices
