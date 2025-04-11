@@ -1,5 +1,5 @@
-import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
-import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
+import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
 abstract interface class MeasurementUnitRepository
-    extends BaseRepositoryAbstraction<MeasurementUnitEntity> {}
+    implements BaseRepository<MeasurementUnitEntity> {}

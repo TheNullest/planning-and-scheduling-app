@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 
 part 'user_supabase_model.freezed.dart';
 part 'user_supabase_model.g.dart';

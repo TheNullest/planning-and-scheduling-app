@@ -1,13 +1,13 @@
+import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/log/data/models/local/hive/log.dart';
 import 'package:zamaan/features/log/data/sources/base/log_data_source.dart';
 
-class SyncLogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
-  SyncLogHiveDataSourceImpl(this._hiveBox);
+class LogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
+  LogHiveDataSourceImpl(this._hiveBox);
 
   final HiveServices<LogHiveModel> _hiveBox;
   String get _boxName => HiveBoxConstants.syncLogsBox;
@@ -25,9 +25,8 @@ class SyncLogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
 
   @override
   EResultFuture<List<LogHiveModel>> getLogs({
-    required bool fromLocal,
-    String? userId,
     List<String>? logIds,
+    bool fromLocal = true,
   }) async =>
       tryCatchEither<List<LogHiveModel>>(
         action: () async => _hiveBox.operator<List<LogHiveModel>>(
@@ -40,7 +39,7 @@ class SyncLogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
   @override
   EResultFuture<List<LogHiveModel>> getSinceDate({
     required DateTime fromDate,
-    String? userId,
+    bool fromLocal = true,
   }) async =>
       tryCatchEither<List<LogHiveModel>>(
         action: () async => _hiveBox.operator<List<LogHiveModel>>(

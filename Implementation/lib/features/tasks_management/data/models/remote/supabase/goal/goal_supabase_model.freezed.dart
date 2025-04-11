@@ -22,7 +22,7 @@ GoalSupabaseModel _$GoalSupabaseModelFromJson(Map<String, dynamic> json) {
 mixin _$GoalSupabaseModel {
   String get taskId => throw _privateConstructorUsedError;
   String get measurementUnitId => throw _privateConstructorUsedError;
-  int get measurementValue => throw _privateConstructorUsedError;
+  int get measurementUnitValue => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'sub_task_id')
   String? get subTaskId => throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $GoalSupabaseModelCopyWith<$Res> {
   $Res call(
       {String taskId,
       String measurementUnitId,
-      int measurementValue,
+      int measurementUnitValue,
       String? id,
       @JsonKey(name: 'sub_task_id') String? subTaskId,
       @JsonKey(name: 'user_id') String? userId,
@@ -94,7 +94,7 @@ class _$GoalSupabaseModelCopyWithImpl<$Res, $Val extends GoalSupabaseModel>
   $Res call({
     Object? taskId = null,
     Object? measurementUnitId = null,
-    Object? measurementValue = null,
+    Object? measurementUnitValue = null,
     Object? id = freezed,
     Object? subTaskId = freezed,
     Object? userId = freezed,
@@ -116,9 +116,9 @@ class _$GoalSupabaseModelCopyWithImpl<$Res, $Val extends GoalSupabaseModel>
           ? _value.measurementUnitId
           : measurementUnitId // ignore: cast_nullable_to_non_nullable
               as String,
-      measurementValue: null == measurementValue
-          ? _value.measurementValue
-          : measurementValue // ignore: cast_nullable_to_non_nullable
+      measurementUnitValue: null == measurementUnitValue
+          ? _value.measurementUnitValue
+          : measurementUnitValue // ignore: cast_nullable_to_non_nullable
               as int,
       id: freezed == id
           ? _value.id
@@ -179,7 +179,7 @@ abstract class _$$GoalSupabaseModelImplCopyWith<$Res>
   $Res call(
       {String taskId,
       String measurementUnitId,
-      int measurementValue,
+      int measurementUnitValue,
       String? id,
       @JsonKey(name: 'sub_task_id') String? subTaskId,
       @JsonKey(name: 'user_id') String? userId,
@@ -208,7 +208,7 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? taskId = null,
     Object? measurementUnitId = null,
-    Object? measurementValue = null,
+    Object? measurementUnitValue = null,
     Object? id = freezed,
     Object? subTaskId = freezed,
     Object? userId = freezed,
@@ -230,9 +230,9 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
           ? _value.measurementUnitId
           : measurementUnitId // ignore: cast_nullable_to_non_nullable
               as String,
-      measurementValue: null == measurementValue
-          ? _value.measurementValue
-          : measurementValue // ignore: cast_nullable_to_non_nullable
+      measurementUnitValue: null == measurementUnitValue
+          ? _value.measurementUnitValue
+          : measurementUnitValue // ignore: cast_nullable_to_non_nullable
               as int,
       id: freezed == id
           ? _value.id
@@ -288,7 +288,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
   const _$GoalSupabaseModelImpl(
       {required this.taskId,
       required this.measurementUnitId,
-      required this.measurementValue,
+      required this.measurementUnitValue,
       required this.id,
       @JsonKey(name: 'sub_task_id') this.subTaskId,
       @JsonKey(name: 'user_id') this.userId,
@@ -309,7 +309,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
   @override
   final String measurementUnitId;
   @override
-  final int measurementValue;
+  final int measurementUnitValue;
   @override
   final String? id;
   @override
@@ -344,7 +344,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
 
   @override
   String toString() {
-    return 'GoalSupabaseModel(taskId: $taskId, measurementUnitId: $measurementUnitId, measurementValue: $measurementValue, id: $id, subTaskId: $subTaskId, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, perActiveHour: $perActiveHour, perActiveDay: $perActiveDay, perActiveWeek: $perActiveWeek, perActiveMonth: $perActiveMonth, perActiveYear: $perActiveYear)';
+    return 'GoalSupabaseModel(taskId: $taskId, measurementUnitId: $measurementUnitId, measurementUnitValue: $measurementUnitValue, id: $id, subTaskId: $subTaskId, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, perActiveHour: $perActiveHour, perActiveDay: $perActiveDay, perActiveWeek: $perActiveWeek, perActiveMonth: $perActiveMonth, perActiveYear: $perActiveYear)';
   }
 
   @override
@@ -355,8 +355,8 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
             (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.measurementUnitId, measurementUnitId) ||
                 other.measurementUnitId == measurementUnitId) &&
-            (identical(other.measurementValue, measurementValue) ||
-                other.measurementValue == measurementValue) &&
+            (identical(other.measurementUnitValue, measurementUnitValue) ||
+                other.measurementUnitValue == measurementUnitValue) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.subTaskId, subTaskId) ||
                 other.subTaskId == subTaskId) &&
@@ -385,7 +385,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
       runtimeType,
       taskId,
       measurementUnitId,
-      measurementValue,
+      measurementUnitValue,
       id,
       subTaskId,
       userId,
@@ -419,7 +419,7 @@ abstract class _GoalSupabaseModel implements GoalSupabaseModel {
   const factory _GoalSupabaseModel(
           {required final String taskId,
           required final String measurementUnitId,
-          required final int measurementValue,
+          required final int measurementUnitValue,
           required final String? id,
           @JsonKey(name: 'sub_task_id') final String? subTaskId,
           @JsonKey(name: 'user_id') final String? userId,
@@ -441,7 +441,7 @@ abstract class _GoalSupabaseModel implements GoalSupabaseModel {
   @override
   String get measurementUnitId;
   @override
-  int get measurementValue;
+  int get measurementUnitValue;
   @override
   String? get id;
   @override

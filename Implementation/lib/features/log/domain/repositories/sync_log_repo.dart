@@ -15,23 +15,19 @@ import 'package:zamaan/features/log/domain/entities/sync_log.dart';
 ///     only after all related devices in the ecosystem are synced.
 ///
 /// ▸ All operations work directly with Supabase - no local persistence occurs.
-abstract class SyncLogRepository<T> {
+abstract interface class SyncLogRepository<T> {
   /// Fetches unsynchronized logs for a user's device group from Supabase.
   ///
   /// Used to coordinate synchronization across multiple devices owned by the same user.
   ///
   /// Parameters:
-  /// - [userId]: Supabase UUID authenticated user (enforces RLS policies).
   /// - [deviceId]: Primary coordinator device ID initiating the sync.
   ///
   /// Returns:
   /// - [EResultFuture<List<T>>]:
   ///   - Success: List of [SyncLogEntity] or [SyncLogSupabaseModel] instances.
   ///   - Failure: Network errors, RLS violations, or data format mismatches.
-  EResultFuture<List<T>> getUnsyncedLogs({
-    required String userId,
-    required String deviceId,
-  });
+  EResultFuture<List<T>> getUnsyncedLogs(String deviceId);
 
   /// Atomically marks sync completion for multiple devices in a single transaction.
   ///
@@ -40,17 +36,13 @@ abstract class SyncLogRepository<T> {
   /// marked as synced for the corresponding devices.
   ///
   /// Parameters:
-  /// - [userId]: User owning the device group (RLS filter).
-  /// - [deviceId]: Coordinator device ID triggering the completion.
+  /// - [syncLogId]: Coordinator syncLog ID triggering the completion.
   ///
   /// Returns:
   /// - [EResultFutureVoid]:
   ///   - Success: Empty result.
   ///   - Failure: Partial updates, transaction conflicts, or policy violations.
-  EResultFutureVoid markSyncLogAsSynced({
-    required String userId,
-    required String deviceId,
-  });
+  EResultFutureVoid markSyncLogAsSynced(String syncLogId);
 
   /// Bulk creates unsynced log entries in Supabase to notify linked devices of pending synchronization.
   ///

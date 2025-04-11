@@ -18,12 +18,12 @@ import 'package:zamaan/features/log/data/models/local/hive/log.dart';
 import 'package:zamaan/features/log/data/models/local/hive/sync_log.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/time_interval_hive_model.dart';
 
 /// A generic service class for working with Hive boxes. It is parameterized
 class HiveServices<HiveModel> {

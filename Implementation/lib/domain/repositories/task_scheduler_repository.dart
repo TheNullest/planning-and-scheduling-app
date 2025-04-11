@@ -1,48 +1,40 @@
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
-import 'package:zamaan/domain/params/get_by_task_ids_and_date_range_params.dart';
-import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
+import 'package:zamaan/domain/entities/task_scheduler.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
-abstract interface class TaskSchedulerRepository
-    extends BaseRepositoryAbstraction<TaskSchedulerEntity> {
+abstract interface class TaskSchedulerRepository implements BaseRepository<TaskSchedulerEntity> {
   // Additional search methods specific to ScheduledTimeEntity
-
-  /// Retrieves scheduled times by a list of main task IDs and an optional date range.
-  ///
-  /// In the **`[params]`** :
-  /// - [mainTaskIds] - The list of main task IDs to filter by.
-  /// - [startAt] - The optional start date of the range.
-  /// - [endAt] - The optional end date of the range.
-  /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>>
-      getTaskSchedulersByTaskIdsAndDateRange(
-    GetByTaskIdsAndDateRangeParams params,
-  );
 
   /// Retrieves scheduled times by the main task ID.
   ///
   /// - [taskId] - The ID of the main task.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTaskId(
-    String taskId,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTaskId(
+    String taskId, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
   /// Retrieves scheduled times by their start time.
   ///
   /// - [startTime] - The start time of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByStartTime(
-    DateTime startTime,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByStartTime(
+    DateTime startTime, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
   /// Retrieves scheduled times by their repetition type.
   ///
   /// - [repetitionType] - The repetition type of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByRepetitionType(
-    RepetitionType repetitionType,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByRepetitionType(
+    RepetitionType repetitionType, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
   /// Retrieves scheduled times by their time unit.
   ///
@@ -56,33 +48,37 @@ abstract interface class TaskSchedulerRepository
   /// - `5.TimeUnit.year`: Represents a year.
   ///
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTimeUnit(
-    TimeUnit timeUnit,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTimeUnit(
+    TimeUnit timeUnit, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
   /// Retrieves scheduled times by their specific times.
   ///
   /// [specificTimes] - The specific times of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersBySpecificTimes(
-    List<int> specificTimes,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchBySpecificTimes(
+    List<int> specificTimes, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
   /// Retrieves scheduled times by their end time.
   ///
   /// - [endTime] - The end time of the scheduled times.
   /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByEndTime(
-    DateTime endTime,
-  );
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByDueDate(
+    DateTime endTime, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  });
 
-  /// Retrieves scheduled times within a specific date range.
-  ///
-  /// - [startDate] - The start date of the range.
-  /// - [endDate] - The end date of the range.
-  /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  EResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersWithinDateRange({
-    required DateTime startDate,
-    required DateTime endDate,
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTaskIdsAndDateRange({
+    required List<String> taskIds,
+    required DateTime? startAt,
+    required DateTime? dueDate,
+    bool fromLocal = false,
+    bool fromRemote = false,
   });
 }

@@ -1,9 +1,9 @@
 export 'measurement_value.dart';
-export 'priority_enum.dart';
-export 'repetition_type_enum.dart';
-export 'status_enum.dart';
-export 'time_unit_enum.dart';
-export 'week_day_enum.dart';
+export 'priority.dart';
+export 'repetition_type.dart';
+export 'task_status.dart';
+export 'time_unit.dart';
+export 'week_day.dart';
 
 enum ButtonStates {
   exited,

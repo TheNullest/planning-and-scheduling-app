@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/entities/task_scheduler.dart';
 
 part 'task_scheduler_supabase_model.freezed.dart';
 part 'task_scheduler_supabase_model.g.dart';
@@ -11,17 +12,19 @@ part 'task_scheduler_supabase_model.g.dart';
 )
 class TaskSchedulerSupabaseModel with _$TaskSchedulerSupabaseModel {
   const factory TaskSchedulerSupabaseModel({
-    @JsonKey(name: 'main_task_id') required String taskId,
-    @JsonKey(name: 'repetition_type') required int repetitionType,
     required String? id,
-    @JsonKey(name: 'time_unit') required int timeUnit,
+    @JsonKey(name: 'main_task_id') required String taskId,
+    @JsonKey(name: 'repetition_type') required String repetitionType,
+    @JsonKey(name: 'task_scheduler_specific_times', includeToJson: false, fromJson: _extractIds)
+    required List<int>? specificTimes,
+    @JsonKey(name: 'time_unit') required String timeUnit,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? description,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'user_id') String? userId,
     @JsonKey(name: 'goal_id') String? goalId,
     @JsonKey(name: 'will_start_at') DateTime? willStartAt,
-    @JsonKey(name: 'end_at') DateTime? endAt,
+    @JsonKey(name: 'due_at') DateTime? dueDate,
   }) = _TaskSchedulerSupabaseModel;
 
   /// Creates an instance of [TaskSchedulerSupabaseModel] from a domain [TaskSchedulerEntity].
@@ -35,9 +38,10 @@ class TaskSchedulerSupabaseModel with _$TaskSchedulerSupabaseModel {
         userId: entity.userId,
         goalId: entity.goalId,
         willStartAt: entity.willStartAt,
-        endAt: entity.endAt,
+        dueDate: entity.dueDate,
         repetitionType: entity.repetitionType,
         timeUnit: entity.timeUnit,
+        specificTimes: entity.specificTimes,
       );
 
   /// Creates an instance from a JSON map.
@@ -50,4 +54,8 @@ class TaskSchedulerSupabaseModel with _$TaskSchedulerSupabaseModel {
 
   @override
   Map<String, dynamic> toJson() => _$TaskSchedulerSupabaseModelToJson(this);
+}
+
+List<int>? _extractIds(DataMap json) {
+  return (json['task_specific_times'] as List).map((item) => item['specific_time'] as int).toList();
 }

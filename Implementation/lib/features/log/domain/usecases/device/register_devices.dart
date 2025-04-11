@@ -4,7 +4,7 @@ import 'package:zamaan/features/log/domain/entities/device.dart';
 import 'package:zamaan/features/log/domain/repositories/device_repo.dart';
 
 class RegisterDevicesUsecase
-    extends UseCaseWithParams<DeviceRepository<DeviceEntity>, void, List<DeviceEntity>> {
+    extends UsecaseWithParams<DeviceRepository<DeviceEntity>, void, List<DeviceEntity>> {
   RegisterDevicesUsecase(super.repository);
 
   @override

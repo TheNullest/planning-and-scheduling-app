@@ -4,7 +4,7 @@ import 'package:zamaan/features/log/domain/entities/sync_log.dart';
 import 'package:zamaan/features/log/domain/repositories/sync_log_repo.dart';
 
 class CreateSyncLogsUsecase
-    extends UseCaseWithParams<SyncLogRepository<SyncLogEntity>, void, List<SyncLogEntity>> {
+    extends UsecaseWithParams<SyncLogRepository<SyncLogEntity>, void, List<SyncLogEntity>> {
   CreateSyncLogsUsecase(super.repository);
 
   @override

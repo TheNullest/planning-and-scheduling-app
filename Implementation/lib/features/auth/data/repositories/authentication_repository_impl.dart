@@ -3,7 +3,7 @@ import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';

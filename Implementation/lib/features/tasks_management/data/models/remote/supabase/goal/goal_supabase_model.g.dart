@@ -10,7 +10,7 @@ Map<String, dynamic> _$GoalSupabaseModelToJson(GoalSupabaseModel instance) =>
     <String, dynamic>{
       'taskId': instance.taskId,
       'measurementUnitId': instance.measurementUnitId,
-      'measurementValue': instance.measurementValue,
+      'measurementUnitValue': instance.measurementUnitValue,
       'id': instance.id,
       'sub_task_id': instance.subTaskId,
       'user_id': instance.userId,
@@ -29,7 +29,7 @@ _$GoalSupabaseModelImpl _$$GoalSupabaseModelImplFromJson(
     _$GoalSupabaseModelImpl(
       taskId: json['taskId'] as String,
       measurementUnitId: json['measurementUnitId'] as String,
-      measurementValue: (json['measurementValue'] as num).toInt(),
+      measurementUnitValue: (json['measurementUnitValue'] as num).toInt(),
       id: json['id'] as String?,
       subTaskId: json['sub_task_id'] as String?,
       userId: json['user_id'] as String?,
@@ -52,7 +52,7 @@ Map<String, dynamic> _$$GoalSupabaseModelImplToJson(
     <String, dynamic>{
       'taskId': instance.taskId,
       'measurementUnitId': instance.measurementUnitId,
-      'measurementValue': instance.measurementValue,
+      'measurementUnitValue': instance.measurementUnitValue,
       'id': instance.id,
       'sub_task_id': instance.subTaskId,
       'user_id': instance.userId,

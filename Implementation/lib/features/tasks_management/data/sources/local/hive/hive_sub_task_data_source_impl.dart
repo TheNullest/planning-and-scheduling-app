@@ -1,15 +1,14 @@
+import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/enums/priority_enum.dart';
-import 'package:zamaan/core/enums/status_enum.dart';
+import 'package:zamaan/core/enums/priority.dart';
+import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/local/hive/base_hive_data_source_abstraction.dart';
-import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/bases/local/hive/sub_task_data_source.dart';
+import 'package:zamaan/features/tasks_management/data/sources/bases/sub_task_data_source.dart';
 
-class HiveSubTaskDataSourceImpl
-    extends BaseLocalDataSourceAbstraction<SubTaskHiveModel>
+class HiveSubTaskDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
     implements SubTaskDataSource<SubTaskHiveModel> {
   // Just to add the testablity feature to the class,
   // we need to inject the [HiveInitializer<SubTaskHiveModel>] like this
@@ -20,33 +19,29 @@ class HiveSubTaskDataSourceImpl
   final HiveServices<SubTaskHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getSubTasksByPriority(
+  EResultFuture<List<SubTaskHiveModel>> getBatchByPriority(
     Priority priority,
   ) async =>
       _hiveBox.operator<List<SubTaskHiveModel>>(
-        job: (box) async => box.values
-            .where((item) => item.priority == (priority.index))
-            .toList(),
+        job: (box) async => box.values.where((item) => item.priority == (priority.index)).toList(),
         boxName: _boxName,
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getSubTasksByStatus(
-    Status status,
+  EResultFuture<List<SubTaskHiveModel>> getBatchByStatus(
+    TaskStatus status,
   ) async =>
       _hiveBox.operator<List<SubTaskHiveModel>>(
-        job: (box) async =>
-            box.values.where((item) => item.status == (status.index)).toList(),
+        job: (box) async => box.values.where((item) => item.status == (status.index)).toList(),
         boxName: _boxName,
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getSubTasksByTaskId(
+  EResultFuture<List<SubTaskHiveModel>> getBatchByTaskId(
     String taskId,
   ) async =>
       _hiveBox.operator<List<SubTaskHiveModel>>(
-        job: (box) async =>
-            box.values.where((item) => item.taskId == taskId).toList(),
+        job: (box) async => box.values.where((item) => item.taskId == taskId).toList(),
         boxName: _boxName,
       );
 }

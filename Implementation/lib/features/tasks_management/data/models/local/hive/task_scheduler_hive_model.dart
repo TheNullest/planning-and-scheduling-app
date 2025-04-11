@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
+import 'package:zamaan/domain/entities/task_scheduler.dart';
 
 part 'task_scheduler_hive_model.g.dart';
 
@@ -18,7 +18,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
     super.userId,
     super.goalId,
     super.willStartAt,
-    super.endAt,
+    super.dueDate,
     super.repetitionType,
     super.timeUnit,
     super.specificTimes,
@@ -27,8 +27,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
   // For the purpose of testing
   TaskSchedulerHiveModel.empty() : super.empty();
 
-  factory TaskSchedulerHiveModel.fromEntity(TaskSchedulerEntity entity) =>
-      TaskSchedulerHiveModel(
+  factory TaskSchedulerHiveModel.fromEntity(TaskSchedulerEntity entity) => TaskSchedulerHiveModel(
         id: entity.id,
         updatedAt: entity.updatedAt,
         description: entity.description,
@@ -37,7 +36,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
         taskId: entity.taskId,
         willStartAt: entity.willStartAt,
         goalId: entity.goalId,
-        endAt: entity.endAt,
+        dueDate: entity.dueDate,
         repetitionType: entity.repetitionType,
         timeUnit: entity.timeUnit,
         specificTimes: entity.specificTimes,
@@ -54,9 +53,9 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
     String? taskId,
     String? goalId,
     DateTime? willStartAt,
-    DateTime? endAt,
-    int? repetitionType,
-    int? timeUnit,
+    DateTime? dueDate,
+    String? repetitionType,
+    String? timeUnit,
     List<int>? specificTimes,
   }) =>
       TaskSchedulerHiveModel(
@@ -68,7 +67,7 @@ class TaskSchedulerHiveModel extends TaskSchedulerEntity with HiveObjectMixin {
         taskId: taskId ?? this.taskId,
         goalId: goalId ?? this.goalId,
         willStartAt: willStartAt ?? this.willStartAt,
-        endAt: endAt ?? this.endAt,
+        dueDate: dueDate ?? this.dueDate,
         repetitionType: repetitionType ?? this.repetitionType,
         timeUnit: timeUnit ?? this.timeUnit,
         specificTimes: specificTimes ?? this.specificTimes,

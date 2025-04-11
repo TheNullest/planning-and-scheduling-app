@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/category_entity.dart';
+import 'package:zamaan/domain/entities/category.dart';
 
 part 'category_hive_model.g.dart';
 
@@ -23,8 +23,7 @@ class CategoryHiveModel extends CategoryEntity with HiveObjectMixin {
   // For the purpose of testing
   CategoryHiveModel.empty() : super.empty();
 
-  factory CategoryHiveModel.fromEntity(CategoryEntity entity) =>
-      CategoryHiveModel(
+  factory CategoryHiveModel.fromEntity(CategoryEntity entity) => CategoryHiveModel(
         id: entity.id,
         description: entity.description,
         createdAt: entity.createdAt,

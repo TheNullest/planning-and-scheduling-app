@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/category_entity.dart';
+import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
 
 void main() {

@@ -1,19 +1,22 @@
-// import 'package:zamaan/core/repositories/base_crud_operations.dart';
-// import 'package:zamaan/features/task/data/sources/bases/category_data_source.dart';
-// import 'package:zamaan/features/task/data/models/local/category_local_model.dart';
-// import 'package:zamaan/features/task/domain/entities/category_entity.dart';
-// import 'package:zamaan/features/task/domain/repositories/category_repository.dart';
+import 'package:zamaan/data/mappers/category.dart';
+import 'package:zamaan/domain/entities/category.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
+import 'package:zamaan/domain/repositories/category_repository.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/category/category_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/sources/bases/category_data_source.dart';
 
-// class CategoryRepositoryImpl extends BaseCRUDOperations<
-//     CategoryEntity,
-//     CategoryHiveModel,
-//     CategoryDataSource<CategoryHiveModel>> implements CategoryRepository {
-//   CategoryRepositoryImpl(super.dataSource);
-
-//   @override
-//   CategoryHiveModel fromEntity(CategoryEntity entity) =>
-//       CategoryHiveModel.fromEntity(entity);
-
-//   @override
-//   CategoryEntity toEntity(CategoryHiveModel model) => model.toEntity();
-// }
+class CategoryRepositoryImpl extends BaseRepositoryImpl<
+    CategoryEntity,
+    CategoryHiveModel,
+    CategorySupabaseModel,
+    CategoryDataSource<CategoryHiveModel>,
+    CategoryDataSource<CategorySupabaseModel>,
+    CategoryMapper> implements CategoryRepository {
+  CategoryRepositoryImpl({
+    required super.localDataSource,
+    required super.remoteDataSource,
+    required super.mapper,
+    required super.netConnectivity,
+  });
+}

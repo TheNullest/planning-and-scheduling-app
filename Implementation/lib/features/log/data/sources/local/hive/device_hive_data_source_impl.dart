@@ -1,8 +1,8 @@
+import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/sources/base/device_data_source.dart';
 
@@ -14,7 +14,7 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
   String get _boxName => HiveBoxConstants.devicesBox;
 
   @override
-  EResultFuture<List<DeviceHiveModel>> getDevices(String? userId) async =>
+  EResultFuture<List<DeviceHiveModel>> getDevices({bool fromLocal = true}) async =>
       tryCatchEither<List<DeviceHiveModel>>(
         action: () async => _hiveBox.operator<List<DeviceHiveModel>>(
           job: (box) async => box.values.toList(),
@@ -35,11 +35,7 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
       );
 
   @override
-  EResultFutureVoid unregisterDevice({
-    required String id,
-    String? userId,
-  }) async =>
-      tryCatchEither(
+  EResultFutureVoid unregisterDevice(String id) async => tryCatchEither(
         action: () async => _hiveBox.operator(
           job: (box) async {
             await box.delete(id);
@@ -55,6 +51,19 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
           job: (box) async {
             await box.put(device.id, device);
           },
+          boxName: _boxName,
+        ),
+        failureType: FailureType.local,
+      );
+
+  @override
+  EResultFuture<DeviceHiveModel?> getDeviceById({
+    required String id,
+    bool fromLocal = true,
+  }) async =>
+      tryCatchEither<DeviceHiveModel?>(
+        action: () async => _hiveBox.operator<DeviceHiveModel?>(
+          job: (box) async => box.get(id),
           boxName: _boxName,
         ),
         failureType: FailureType.local,

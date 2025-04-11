@@ -1,116 +1,206 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:zamaan/core/enums/enums.dart';
-// import 'package:zamaan/core/error/failures/failure.dart';
-// import 'package:zamaan/core/repositories/base_crud_operations.dart';
-// import 'package:zamaan/core/utils/typedef.dart';
-// import 'package:zamaan/features/task/data/sources/bases/task_scheduler_data_source.dart';
-// import 'package:zamaan/features/task/data/models/local/task_scheduler_local_model.dart';
-// import 'package:zamaan/features/task/domain/entities/task_scheduler_entity.dart';
-// import 'package:zamaan/features/task/domain/params/get_by_task_ids_and_date_range_params.dart';
-// import 'package:zamaan/features/task/domain/repositories/task_scheduler_repository.dart';
+import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/enums/failure_type.dart';
+import 'package:zamaan/core/enums/repetition_type.dart';
+import 'package:zamaan/core/enums/time_unit.dart';
+import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/mappers/task_scheduler.dart';
+import 'package:zamaan/domain/entities/task_scheduler.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
+import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task_scheduler/task_scheduler_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/sources/bases/task_scheduler_data_source.dart';
 
-// class TaskSchedulerRepositoryImpl extends BaseCRUDOperations<
-//         TaskSchedulerEntity,
-//         TaskSchedulerHiveModel,
-//         TaskSchedulerDataSource<TaskSchedulerHiveModel>>
-//     implements TaskSchedulerRepository {
-//   TaskSchedulerRepositoryImpl(super.localDataSource)
-//       : _localDataSource = localDataSource;
-//   final TaskSchedulerDataSource _localDataSource;
+class TaskSchedulerRepositoryImpl extends BaseRepositoryImpl<
+    TaskSchedulerEntity,
+    TaskSchedulerHiveModel,
+    TaskSchedulerSupabaseModel,
+    TaskSchedulerDataSource<TaskSchedulerHiveModel>,
+    TaskSchedulerDataSource<TaskSchedulerSupabaseModel>,
+    TaskSchedulerMapper> implements TaskSchedulerRepository {
+  TaskSchedulerRepositoryImpl({
+    required super.localDataSource,
+    required super.remoteDataSource,
+    required super.mapper,
+    required super.netConnectivity,
+  })  : _localDataSource = localDataSource,
+        _remoteDataSource = remoteDataSource,
+        _mapper = mapper,
+        _netConnectivity = netConnectivity;
 
-//   @override
-//   TaskSchedulerHiveModel fromEntity(TaskSchedulerEntity entity) =>
-//       TaskSchedulerHiveModel.fromEntity(entity);
+  final TaskSchedulerDataSource<TaskSchedulerHiveModel> _localDataSource;
+  final TaskSchedulerDataSource<TaskSchedulerSupabaseModel> _remoteDataSource;
+  final TaskSchedulerMapper _mapper;
+  final NetworkConnectivityMonitorCubit _netConnectivity;
 
-//   @override
-//   TaskSchedulerEntity toEntity(TaskSchedulerHiveModel model) =>
-//       model.toEntity();
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByDueDate(
+    DateTime dueDate, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByDueDate(dueDate);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByDueDate(dueDate);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   Either<Failure, List<TaskSchedulerEntity>> toEntities(
-//     Either<Failure, List<TaskSchedulerHiveModel>> models,
-//   ) =>
-//       models.map(
-//         (taskModels) => taskModels
-//             .map<TaskSchedulerEntity>((taskModel) => taskModel.toEntity())
-//             .toList(),
-//       );
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByRepetitionType(
+    RepetitionType repetitionType, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByRepetitionType(repetitionType);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByRepetitionType(repetitionType);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchBySpecificTimes(
+    List<int> specificTimes, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchBySpecificTimes(specificTimes);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchBySpecificTimes(specificTimes);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>>
-//       getTaskSchedulersByTaskIdsAndDateRange(
-//     GetByTaskIdsAndDateRangeParams params,
-//   ) async =>
-//           toEntities(
-//             await _localDataSource.getTaskSchedulersByTaskIdsAndDateRange(
-//               mainTaskIds: params.mainTaskIds,
-//               startAt: params.startAt,
-//               endAt: params.endAt,
-//             ) as Either<Failure, List<TaskSchedulerHiveModel>>,
-//           );
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByStartTime(
+    DateTime startTime, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByStartTime(startTime);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByStartTime(startTime);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTaskId(
+    String taskId, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByTaskId(taskId);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByTaskId(taskId);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByEndTime(
-//     DateTime endTime,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersByEndTime(endTime)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTimeUnit(
+    TimeUnit timeUnit, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByTimeUnit(timeUnit);
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByTimeUnit(timeUnit);
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTaskId(
-//     String taskId,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersByTaskId(taskId)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByRepetitionType(
-//     RepetitionType repetitionType,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersByRepetitionType(repetitionType)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersBySpecificTimes(
-//     List<int> specificTimes,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersBySpecificTimes(specificTimes)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByStartTime(
-//     DateTime startTime,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersByStartTime(startTime)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersByTimeUnit(
-//     TimeUnit timeUnit,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersByTimeUnit(timeUnit)
-//             as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<TaskSchedulerEntity>> getTaskSchedulersWithinDateRange({
-//     required DateTime startDate,
-//     required DateTime endDate,
-//   }) async =>
-//       toEntities(
-//         await _localDataSource.getTaskSchedulersWithinDateRange(
-//           startDate: startDate,
-//           endDate: endDate,
-//         ) as Either<Failure, List<TaskSchedulerHiveModel>>,
-//       );
-// }
+  @override
+  EResultFuture<List<TaskSchedulerEntity>> getBatchByTaskIdsAndDateRange({
+    required List<String> taskIds,
+    required DateTime? startAt,
+    required DateTime? dueDate,
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByTaskIdsAndDateRange(
+              taskIds: taskIds,
+              startAt: startAt,
+              dueDate: dueDate,
+            );
+            final models = _mapper.foldEitherList<TaskSchedulerHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByTaskIdsAndDateRange(
+              taskIds: taskIds,
+              startAt: startAt,
+              dueDate: dueDate,
+            );
+            final models = _mapper.foldEitherList<TaskSchedulerSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
+}

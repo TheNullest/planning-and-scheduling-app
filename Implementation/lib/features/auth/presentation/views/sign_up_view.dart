@@ -6,7 +6,7 @@ import 'package:zamaan/core/extensions/int_to_space_extension.dart';
 import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/widgets/auth_field.dart';

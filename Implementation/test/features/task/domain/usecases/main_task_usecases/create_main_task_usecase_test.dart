@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/task_entity.dart';
-import 'package:zamaan/domain/repositories/main_task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/main_task/create_main_task_usecase.dart';
+import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/repositories/task_repository.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/create_task_usecase.dart';
 
 import '_main_task_repository.mock.dart';
 
@@ -19,9 +19,7 @@ void main() {
   });
 
   final param = MainTaskEntity.empty();
-  test(
-      '[mainTask.createUsecase] must call the [MainTaskRepository.createEntity]',
-      () async {
+  test('[mainTask.createUsecase] must call the [MainTaskRepository.createEntity]', () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))

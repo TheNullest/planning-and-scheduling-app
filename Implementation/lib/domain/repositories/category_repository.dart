@@ -1,5 +1,4 @@
-import 'package:zamaan/domain/entities/category_entity.dart';
-import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
+import 'package:zamaan/domain/entities/category.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
-abstract interface class CategoryRepository
-    extends BaseRepositoryAbstraction<CategoryEntity> {}
+abstract interface class CategoryRepository implements BaseRepository<CategoryEntity> {}

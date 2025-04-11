@@ -1,5 +1,4 @@
-import 'package:zamaan/domain/entities/tag_entity.dart';
-import 'package:zamaan/domain/repositories/bases/base_repository_abstraction.dart';
+import 'package:zamaan/domain/entities/tag.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
-abstract interface class TagRepository
-    extends BaseRepositoryAbstraction<TagEntity> {}
+abstract interface class TagRepository implements BaseRepository<TagEntity> {}

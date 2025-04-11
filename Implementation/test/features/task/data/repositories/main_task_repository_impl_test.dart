@@ -1,9 +1,9 @@
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/task_entity.dart';
-import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
+import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/features/task/data/sources/hive_main_task_data_source_impl.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 
 class MockDataSource extends Mock implements HiveMainTaskDataSourceImpl {}
 
@@ -69,15 +69,13 @@ void main() {
     test(
         '[mainTaskRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<MainTaskEntity>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
-      when(() => mockDataSource.getEntities())
-          .thenAnswer((_) async => const Right([]));
+      when(() => mockDataSource.getEntities()).thenAnswer((_) async => const Right([]));
 
       final result = await mainTaskRepo.getEntities();
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<MainTaskEntity>>>());
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
@@ -92,8 +90,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<MainTaskEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
   });
@@ -102,8 +99,7 @@ void main() {
     test(
         '[mainTaskRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(MainTaskEntity)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
-      when(() => mockDataSource.getEntity(id: model.id))
-          .thenAnswer((_) async => Right(model));
+      when(() => mockDataSource.getEntity(id: model.id)).thenAnswer((_) async => Right(model));
 
       final result = await mainTaskRepo.getEntity(id: entity.id);
 
@@ -345,14 +341,14 @@ void main() {
     test(
         '[mainTaskRepo.getMainTasksByStatus] must call the [getMainTasksByStatus] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
-      when(() => mockDataSource.getMainTasksByStatus(Status.inProgress))
+      when(() => mockDataSource.getMainTasksByStatus(TaskStatus.inProgress))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await mainTaskRepo.getMainTasksByStatus(Status.inProgress);
+      final result = await mainTaskRepo.getMainTasksByStatus(TaskStatus.inProgress);
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<MainTaskEntity>>>());
-      verify(() => mockDataSource.getMainTasksByStatus(Status.inProgress))
+      verify(() => mockDataSource.getMainTasksByStatus(TaskStatus.inProgress))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -360,10 +356,10 @@ void main() {
     test(
         '[mainTaskRepo.getMainTasksByStatus.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getMainTasksByStatus(Status.inProgress))
+      when(() => mockDataSource.getMainTasksByStatus(TaskStatus.inProgress))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await mainTaskRepo.getMainTasksByStatus(Status.inProgress);
+      final result = await mainTaskRepo.getMainTasksByStatus(TaskStatus.inProgress);
 
       expect(result.isLeft(), true);
       expect(
@@ -372,7 +368,7 @@ void main() {
           const Left<Failure, List<MainTaskEntity>>(HiveFailure('Error')),
         ),
       );
-      verify(() => mockDataSource.getMainTasksByStatus(Status.inProgress))
+      verify(() => mockDataSource.getMainTasksByStatus(TaskStatus.inProgress))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -382,8 +378,7 @@ void main() {
     test(
         '[mainTaskRepo.getMainTasksByTags] must call the [getMainTasksByTags] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
-      when(() => mockDataSource.getMainTasksByTags([]))
-          .thenAnswer((_) async => const Right([]));
+      when(() => mockDataSource.getMainTasksByTags([])).thenAnswer((_) async => const Right([]));
 
       final result = await mainTaskRepo.getMainTasksByTags([]);
 

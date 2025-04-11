@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 
 void main() {

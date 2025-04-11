@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/tag_entity.dart';
+import 'package:zamaan/domain/entities/tag.dart';
 
 /// The `tags` attribute can be used to categorize or label a task in various ways,
 /// depending on the specific needs and preferences of the user. Here's an example:

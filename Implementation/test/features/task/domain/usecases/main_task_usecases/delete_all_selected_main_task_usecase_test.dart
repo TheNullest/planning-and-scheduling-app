@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/main_task/domain/repositories/main_task_repository.dart';
-import 'package:zamaan/features/main_task/domain/usecases/delete_all_selected_main_task_usecase.dart';
+import 'package:zamaan/features/task/domain/repositories/main_task_repository.dart';
+import 'package:zamaan/features/task/domain/usecases/delete_all_selected_main_task_usecase.dart';
 
 import '_main_task_repository.mock.dart';
 
@@ -20,8 +20,7 @@ void main() {
       '[mainTask.deleteAllSelectedUsecase] must call the [MainTaskRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
-    when(() => repository.deleteAllSelected([]))
-        .thenAnswer((_) async => const Right(null));
+    when(() => repository.deleteAllSelected([])).thenAnswer((_) async => const Right(null));
 
     // Act
     final actual = await useCase([]);

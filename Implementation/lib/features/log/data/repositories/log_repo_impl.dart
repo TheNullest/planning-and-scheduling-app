@@ -31,8 +31,7 @@ class LogRepoImpl implements LogRepository<LogEntity> {
 
   @override
   EResultFuture<List<LogEntity>> getLogs({
-    required bool fromLocal,
-    String? userId,
+    bool fromLocal = false,
     List<String>? logIds,
   }) async =>
       tryCatchEither<List<LogEntity>>(
@@ -45,7 +44,6 @@ class LogRepoImpl implements LogRepository<LogEntity> {
           }
 
           final response = await _logSupabaseDataSource.getLogs(
-            userId: userId,
             logIds: logIds,
             fromLocal: fromLocal,
           );
@@ -59,13 +57,13 @@ class LogRepoImpl implements LogRepository<LogEntity> {
   @override
   EResultFuture<List<LogEntity>> getSinceDate({
     required DateTime fromDate,
+    bool fromLocal = false,
     String? userId,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {
           final response = await _logSupabaseDataSource.getSinceDate(
             fromDate: fromDate,
-            userId: userId,
           );
           final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();

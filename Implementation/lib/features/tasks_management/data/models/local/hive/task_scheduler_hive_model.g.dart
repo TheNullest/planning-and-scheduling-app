@@ -25,9 +25,9 @@ class TaskSchedulerHiveModelAdapter extends HiveBaseTypeAdapter<TaskSchedulerHiv
       userId: fields[1] as String?,
       goalId: fields[12] as String?,
       willStartAt: fields[13] as DateTime?,
-      endAt: fields[17] as DateTime?,
-      repetitionType: fields[14] as int?,
-      timeUnit: fields[15] as int?,
+      dueDate: fields[17] as DateTime?,
+      repetitionType: fields[14] as String?,
+      timeUnit: fields[15] as String?,
       specificTimes: (fields[16] as List?)?.cast<int>(),
     );
   }
@@ -49,7 +49,7 @@ class TaskSchedulerHiveModelAdapter extends HiveBaseTypeAdapter<TaskSchedulerHiv
       ..writeByte(16)
       ..write(obj.specificTimes)
       ..writeByte(17)
-      ..write(obj.endAt)
+      ..write(obj.dueDate)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

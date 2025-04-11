@@ -8,6 +8,6 @@ class LogParams {
 
   final List<String> logIds;
   final String userId;
-  final bool? fromLocal;
+  final bool fromLocal;
   final DateTime? fromDate;
 }

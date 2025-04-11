@@ -24,7 +24,7 @@ class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
   EResultFuture<List<LogSupabaseModel>> getLogs({
     String? userId,
     List<String>? logIds,
-    bool fromLocal = true,
+    bool fromLocal = false,
   }) async =>
       tryCatchEither<List<LogSupabaseModel>>(
         action: () async {
@@ -41,14 +41,13 @@ class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
   @override
   EResultFuture<List<LogSupabaseModel>> getSinceDate({
     required DateTime fromDate,
-    String? userId,
+    bool fromLocal = false,
   }) async =>
       tryCatchEither<List<LogSupabaseModel>>(
         action: () async {
           final logs = await _supabaseClient
               .from('logs')
               .select()
-              .eq('user_id', userId!)
               .gte('created_at', fromDate.toIso8601String());
           return Right(
             logs.map(LogSupabaseModel.fromJson).toList(),

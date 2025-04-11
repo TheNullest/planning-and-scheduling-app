@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/sub_task_entity.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
 
 part 'sub_task_hive_model.g.dart'; // Include for code generation
 
