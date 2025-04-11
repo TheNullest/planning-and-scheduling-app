@@ -6,8 +6,7 @@ part of 'measurement_unit_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MeasurementUnitHiveModelAdapter
-    extends HiveBaseTypeAdapter<MeasurementUnitHiveModel> {
+class MeasurementUnitHiveModelAdapter extends HiveBaseTypeAdapter<MeasurementUnitHiveModel> {
   @override
   final int typeId = 4;
 
@@ -18,14 +17,14 @@ class MeasurementUnitHiveModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MeasurementUnitHiveModel(
-      title: fields[5] as String,
-      iconCode: fields[7] as int,
+      title: fields[11] as String,
+      iconCode: fields[13] as int,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      isDouble: fields[6] as bool,
+      isDouble: fields[12] as bool,
     );
   }
 
@@ -33,11 +32,11 @@ class MeasurementUnitHiveModelAdapter
   void write(BinaryWriter writer, MeasurementUnitHiveModel obj) {
     writer
       ..writeByte(8)
-      ..writeByte(5)
+      ..writeByte(11)
       ..write(obj.title)
-      ..writeByte(6)
+      ..writeByte(12)
       ..write(obj.isDouble)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.iconCode)
       ..writeByte(0)
       ..write(obj.id)

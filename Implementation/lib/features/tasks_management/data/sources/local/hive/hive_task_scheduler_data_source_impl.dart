@@ -36,7 +36,7 @@ class HiveTaskSchedulerDataSourceImpl
   /// Returns a [EResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
   EResultFuture<List<TaskSchedulerHiveModel>>
-      getTaskSchedulersByMainTaskIdsAndDateRange({
+      getTaskSchedulersByTaskIdsAndDateRange({
     required List<String> mainTaskIds,
     required DateTime? startAt,
     required DateTime? endAt,
@@ -47,7 +47,7 @@ class HiveTaskSchedulerDataSourceImpl
                   (startAt == null || task.willStartAt!.isAfter(startAt)) &&
                       (endAt == null || task.endAt!.isBefore(endAt));
               if (!isWithinDateRange) return false;
-              return mainTaskIds.contains(task.mainTaskId);
+              return mainTaskIds.contains(task.taskId);
             }).toList(),
             boxName: _boxName,
           );
@@ -70,16 +70,16 @@ class HiveTaskSchedulerDataSourceImpl
 
   /// Retrieves tasks based on a specific main task ID.
   ///
-  /// [mainTaskId] - The main task ID to filter the tasks.
+  /// [taskId] - The main task ID to filter the tasks.
   ///
   /// Returns a [EResultFuture] containing a list of [TaskSchedulerHiveModel] objects.
   @override
-  EResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<TaskSchedulerHiveModel>> getTaskSchedulersByTaskId(
+    String taskId,
   ) async {
     return _hiveBox.operator<List<TaskSchedulerHiveModel>>(
       job: (box) async =>
-          box.values.where((task) => task.mainTaskId == mainTaskId).toList(),
+          box.values.where((task) => task.taskId == taskId).toList(),
       boxName: _boxName,
     );
   }

@@ -1,25 +1,25 @@
 import 'package:zamaan/core/extensions/string_to_sentence_case_extension.dart';
 
 enum Priority {
-  critical,
-  high,
-  medium,
+  optional,
   low,
-  optional;
+  medium,
+  high,
+  critical;
 
   static String toStringCustome(int index, {bool inPersian = false}) {
     if (inPersian) {
       switch (index) {
         case 0:
-          return 'بحرانی';
+          return 'دلخواه';
         case 1:
-          return 'بالا';
+          return 'پایین';
         case 2:
           return 'میانی';
         case 3:
-          return 'پایین';
+          return 'بالا';
         case 4:
-          return 'دلخواه';
+          return 'بحرانی';
         default:
           throw Exception('The Priority index is not allowed and defined');
       }

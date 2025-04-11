@@ -17,20 +17,20 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GoalHiveModel(
-      mainTaskId: fields[5] as String,
-      measurementUnitId: fields[7] as String,
-      measurementValue: fields[8] as int,
+      taskId: fields[11] as String,
+      measurementUnitId: fields[13] as String,
+      measurementUnitValue: fields[14] as int,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      subTaskId: fields[6] as String?,
-      perActiveHour: fields[9] as double,
-      perActiveDay: fields[10] as double,
-      perActiveWeek: fields[11] as double,
-      perActiveMonth: fields[12] as double,
-      perActiveYear: fields[13] as double,
+      subTaskId: fields[12] as String?,
+      perActiveHour: fields[15] as double,
+      perActiveDay: fields[16] as double,
+      perActiveWeek: fields[17] as double,
+      perActiveMonth: fields[18] as double,
+      perActiveYear: fields[19] as double,
     );
   }
 
@@ -38,23 +38,23 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   void write(BinaryWriter writer, GoalHiveModel obj) {
     writer
       ..writeByte(14)
-      ..writeByte(5)
-      ..write(obj.mainTaskId)
-      ..writeByte(6)
-      ..write(obj.subTaskId)
-      ..writeByte(7)
-      ..write(obj.measurementUnitId)
-      ..writeByte(8)
-      ..write(obj.measurementValue)
-      ..writeByte(9)
-      ..write(obj.perActiveHour)
-      ..writeByte(10)
-      ..write(obj.perActiveDay)
       ..writeByte(11)
-      ..write(obj.perActiveWeek)
+      ..write(obj.taskId)
       ..writeByte(12)
-      ..write(obj.perActiveMonth)
+      ..write(obj.subTaskId)
       ..writeByte(13)
+      ..write(obj.measurementUnitId)
+      ..writeByte(14)
+      ..write(obj.measurementUnitValue)
+      ..writeByte(15)
+      ..write(obj.perActiveHour)
+      ..writeByte(16)
+      ..write(obj.perActiveDay)
+      ..writeByte(17)
+      ..write(obj.perActiveWeek)
+      ..writeByte(18)
+      ..write(obj.perActiveMonth)
+      ..writeByte(19)
       ..write(obj.perActiveYear)
       ..writeByte(0)
       ..write(obj.id)
@@ -74,7 +74,5 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GoalHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is GoalHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

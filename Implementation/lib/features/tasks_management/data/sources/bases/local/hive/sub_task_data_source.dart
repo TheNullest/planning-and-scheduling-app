@@ -14,7 +14,7 @@ abstract class SubTaskDataSource<SubTaskModel extends SubTaskEntity>
     Status status,
   );
 
-  EResultFuture<List<SubTaskModel>> getSubTasksByMainTaskId(
-    String mainTaskId,
+  EResultFuture<List<SubTaskModel>> getSubTasksByTaskId(
+    String taskId,
   );
 }

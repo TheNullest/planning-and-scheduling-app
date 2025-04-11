@@ -10,7 +10,7 @@ import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
@@ -46,8 +46,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<RemoteUserModel> getCurrentUser() async =>
-      tryCatchEither<RemoteUserModel>(
+  EResultFuture<UserSupabaseModel> getCurrentUser() async => tryCatchEither<UserSupabaseModel>(
         action: () async {
           if (currentUserSession != null) {
             // Fetch user data from the 'profiles' table
@@ -58,8 +57,8 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
                 .single();
             // Return the user data as a RemoteUserModel
             return Right(
-              RemoteUserModel.fromJson(userData)
-                  .copyWith(emailAddress: currentUserSession!.user.email),
+              UserSupabaseModel.fromJson(userData)
+                  .copyWith(emailAddress: currentUserSession!.user.email!),
             );
           }
 
@@ -81,8 +80,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<RemoteUserModel> signIn(UserSignInParams params) async =>
-      _getUser(
+  EResultFuture<UserSupabaseModel> signIn(UserSignInParams params) async => _getUser(
         () async => _auth.signInWithPassword(
           password: params.password,
           email: params.email,
@@ -98,12 +96,11 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<RemoteUserModel> signUp(RemoteUserModel userModel) async =>
-      _getUser(
+  EResultFuture<UserSupabaseModel> signUp(UserSupabaseModel userModel) async => _getUser(
         () async => _auth.signUp(
           password: userModel.password,
           email: userModel.emailAddress,
-          data: userModel.toMap(),
+          data: userModel.toJson(),
         ),
       );
 
@@ -130,13 +127,13 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<RemoteUserModel> updateUser(RemoteUserModel entity) async =>
-      tryCatchEither<RemoteUserModel>(
+  EResultFuture<UserSupabaseModel> updateUser(UserSupabaseModel entity) async =>
+      tryCatchEither<UserSupabaseModel>(
         action: () async {
           // Update the user's information
           final result = await _auth.updateUser(
             UserAttributes(
-              data: entity.toSupabaseDataMap(),
+              data: entity.toJson(),
               email: entity.emailAddress,
               password: entity.password,
             ),
@@ -144,15 +141,14 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
 
           // Return the updated user data as a RemoteUserModel
           return Right(
-            RemoteUserModel.fromSupabaseUserJson(result.user!.toJson()),
+            UserSupabaseModel.fromJson(result.user!.toJson()),
           );
         },
         failureType: FailureType.remote,
       );
 
   @override
-  EResultFutureVoid changePassword(ChangePasswordParams params) async =>
-      tryCatchEither(
+  EResultFutureVoid changePassword(ChangePasswordParams params) async => tryCatchEither(
         action: () async {
           // Verify the user's credentials by signing in with the provided email and password
           await signIn(params);
@@ -172,11 +168,8 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   @override
   EResultFutureVoid resetPassword(String email) async => tryCatchEither(
         action: () async {
-          final response = await _supabaseClient
-              .from('profiles')
-              .select('id')
-              .eq('user_name', 'moien')
-              .single();
+          final response =
+              await _supabaseClient.from('profiles').select('id').eq('user_name', 'moien').single();
 
           log(response['id'] as String);
 
@@ -200,22 +193,18 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing `true` if successful, or an error.
   @override
-  EResultFuture<bool> deleteUserAccount(UserSignInParams params) =>
-      tryCatchEither<bool>(
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params) => tryCatchEither<bool>(
         action: () async {
+          //TODO.FIXME: Implement this method to handle delete user account properly.
+
           // Sign in the user with the provided email and password to verify their credentials
           await signIn(params);
 
           // Sign in the user with the provided email and password
-          final user = foldEither(await signIn(params));
-
-          // Change the user email to delete datetime in the 'auth.users' table
-          final delete = RemoteUserModel.delete();
-          await _auth.updateUser(UserAttributes(email: delete.emailAddress));
-          await updateUser(delete);
+          final user = foldEither<UserSupabaseModel>(await signIn(params));
 
           // Remove the user from the 'profiles' table
-          await _supabaseClient.from('profiles').delete().eq('id', user.id);
+          await _supabaseClient.from('profiles').delete().eq('id', user.id!);
 
           return const Right(true);
         },
@@ -230,15 +219,19 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///   - fn: The function to execute.
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
-  EResultFuture<RemoteUserModel> _getUser(
+  EResultFuture<UserSupabaseModel> _getUser(
     Future<AuthResponse> Function() fn,
   ) async =>
-      tryCatchEither<RemoteUserModel>(
+      tryCatchEither<UserSupabaseModel>(
         action: () async {
           // Execute the provided function and return the user data
           final response = await fn();
+
+          final user = response.user!.toJson();
+          log(user.toString());
+
           return Right(
-            RemoteUserModel.fromSupabaseUserJson(response.user!.toJson()),
+            UserSupabaseModel.fromJson(response.user!.toJson()),
           );
         },
         failureType: FailureType.remote,

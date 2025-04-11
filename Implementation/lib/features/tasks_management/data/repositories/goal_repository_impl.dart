@@ -20,12 +20,12 @@
 //   GoalEntity toEntity(GoalHiveModel model) => model.toEntity();
 
 //   @override
-//   ResultFuture<List<GoalEntity>> getGoalsByMainTaskId(
-//     String mainTaskId,
+//   ResultFuture<List<GoalEntity>> getGoalsByTaskId(
+//     String taskId,
 //   ) async =>
 //       tryCatchEither<List<GoalEntity>>(() async {
 //         final entities =
-//             await _localDataSource.getGoalsByMainTaskId(mainTaskId);
+//             await _localDataSource.getGoalsByTaskId(taskId);
 //         return entities.map(
 //           (either) => either
 //               .map<GoalEntity>((model) => toEntity(model as GoalHiveModel))

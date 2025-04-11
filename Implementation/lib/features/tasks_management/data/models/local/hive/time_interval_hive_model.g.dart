@@ -6,45 +6,47 @@ part of 'time_interval_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TimeIntervalHiveModelAdapter
-    extends HiveBaseTypeAdapter<TimeIntervalHiveModel> {
+class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
   @override
   final int typeId = 8;
 
   @override
-  TimeIntervalHiveModel read(BinaryReader reader) {
+  TaskActivityHiveModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return TimeIntervalHiveModel(
-      mainTaskId: fields[5] as String,
-      subTaskId: fields[6] as String,
-      startAt: fields[7] as DateTime,
+    return TaskActivityHiveModel(
+      taskId: fields[11] as String,
+      subTaskId: fields[12] as String,
+      startAt: fields[13] as DateTime,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      endAt: fields[8] as DateTime?,
-      spentTime: fields[9] as Duration?,
+      endAt: fields[14] as DateTime?,
+      spentTime: fields[15] as Duration?,
+      isPaused: fields[16] as bool,
     );
   }
 
   @override
-  void write(BinaryWriter writer, TimeIntervalHiveModel obj) {
+  void write(BinaryWriter writer, TaskActivityHiveModel obj) {
     writer
-      ..writeByte(10)
-      ..writeByte(5)
-      ..write(obj.mainTaskId)
-      ..writeByte(6)
+      ..writeByte(11)
+      ..writeByte(11)
+      ..write(obj.taskId)
+      ..writeByte(12)
       ..write(obj.subTaskId)
-      ..writeByte(7)
+      ..writeByte(13)
       ..write(obj.startAt)
-      ..writeByte(8)
+      ..writeByte(14)
       ..write(obj.endAt)
-      ..writeByte(9)
+      ..writeByte(15)
       ..write(obj.spentTime)
+      ..writeByte(16)
+      ..write(obj.isPaused)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -63,7 +65,7 @@ class TimeIntervalHiveModelAdapter
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TimeIntervalHiveModelAdapter &&
+      other is TaskActivityHiveModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

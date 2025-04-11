@@ -52,8 +52,8 @@ class TagHiveModel extends TagEntity with HiveObjectMixin {
     String? userId,
     String? description,
     String? title,
-    int? colorCode,
-    int? iconCode,
+    String? colorCode,
+    String? iconCode,
   }) =>
       TagHiveModel(
         id: id ?? this.id,

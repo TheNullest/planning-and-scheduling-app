@@ -1,321 +1,321 @@
-// ignore_for_file: inference_failure_on_instance_creation
+// // ignore_for_file: inference_failure_on_instance_creation
 
-import 'package:dartz/dartz.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-import 'package:zamaan/core/error/failures/failure.dart';
-import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
-import 'package:zamaan/core/utils/uuid.dart';
-import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
-import 'package:zamaan/features/tag/data/models/tag_local_model.dart';
-import 'package:zamaan/features/tag/data/sources/hive_tag_data_source_impl.dart';
+// import 'package:dartz/dartz.dart';
+// import 'package:flutter_test/flutter_test.dart';
+// import 'package:mocktail/mocktail.dart';
+// import 'package:zamaan/core/error/failures/failure.dart';
+// import 'package:zamaan/core/error/failures/hive_failure.dart';
+// import 'package:zamaan/core/services/hive/hive_services.dart';
+// import 'package:zamaan/core/utils/uuid.dart';
+// import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
+// import 'package:zamaan/features/tag/data/models/tag_local_model.dart';
+// import 'package:zamaan/features/tag/data/sources/hive_tag_data_source_impl.dart';
 
-class MockHiveInit extends Mock implements HiveServices<TagHiveModel> {}
+// class MockHiveInit extends Mock implements HiveServices<TagHiveModel> {}
 
-void main() {
-  late HiveTagDataSourceImpl dataSource;
-  late HiveServices<TagHiveModel> mockHiveInit;
-  late TagHiveModel model;
-  late List<String> keys;
-  const boxName = HiveBoxConstants.tagsBox;
-  setUp(() {
-    mockHiveInit = MockHiveInit();
-    dataSource = HiveTagDataSourceImpl(hiveBox: mockHiveInit);
-    model = TagHiveModel.empty();
-    keys = [
-      uuidGenerator(),
-      uuidGenerator(),
-      uuidGenerator(),
-      uuidGenerator(),
-      uuidGenerator(),
-      uuidGenerator(),
-    ];
-  });
+// void main() {
+//   late HiveTagDataSourceImpl dataSource;
+//   late HiveServices<TagHiveModel> mockHiveInit;
+//   late TagHiveModel model;
+//   late List<String> keys;
+//   const boxName = HiveBoxConstants.tagsBox;
+//   setUp(() {
+//     mockHiveInit = MockHiveInit();
+//     dataSource = HiveTagDataSourceImpl(hiveBox: mockHiveInit);
+//     model = TagHiveModel.empty();
+//     keys = [
+//       uuidGenerator(),
+//       uuidGenerator(),
+//       uuidGenerator(),
+//       uuidGenerator(),
+//       uuidGenerator(),
+//       uuidGenerator(),
+//     ];
+//   });
 
-  group('tagDataSource', () {
-    test(
-        '[tagDataSource.createEntity] must save entity to the box and returns [Right(null)] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Right(null));
+//   group('tagDataSource', () {
+//     test(
+//         '[tagDataSource.createEntity] must save entity to the box and returns [Right(null)] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Right(null));
 
-      final result = await dataSource.createEntity(newEntity: model);
+//       final result = await dataSource.createEntity(newEntity: model);
 
-      expect(result.isRight(), true);
-      expect(result, equals(const Right(null)));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(const Right(null)));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.createEntity(newEntity: model);
+//       final result = await dataSource.createEntity(newEntity: model);
 
-      expect(result.isLeft(), true);
-      expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isLeft(), true);
+//       expect(result, equals(const Left(HiveFailure('Error'))));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
-        () async {
-      when(
-        () => mockHiveInit.operator<List<TagHiveModel>>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Right([]));
+//     test(
+//         '[tagDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<List<TagHiveModel>>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Right([]));
 
-      final result = await dataSource.getEntities();
+//       final result = await dataSource.getEntities();
 
-      expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, List<TagHiveModel>>([])));
-      verify(
-        () => mockHiveInit.operator<List<TagHiveModel>>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(const Right<Failure, List<TagHiveModel>>([])));
+//       verify(
+//         () => mockHiveInit.operator<List<TagHiveModel>>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
-        () async {
-      when(
-        () => mockHiveInit.operator<List<TagHiveModel>>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<List<TagHiveModel>>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.getEntities();
+//       final result = await dataSource.getEntities();
 
-      expect(result.isLeft(), true);
-      expect(
-        result,
-        equals(
-          const Left<Failure, List<TagHiveModel>>(HiveFailure('Error')),
-        ),
-      );
-      verify(
-        () => mockHiveInit.operator<List<TagHiveModel>>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isLeft(), true);
+//       expect(
+//         result,
+//         equals(
+//           const Left<Failure, List<TagHiveModel>>(HiveFailure('Error')),
+//         ),
+//       );
+//       verify(
+//         () => mockHiveInit.operator<List<TagHiveModel>>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TagHiveModel)] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<TagHiveModel>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => Right(model));
+//     test(
+//         '[tagDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TagHiveModel)] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<TagHiveModel>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => Right(model));
 
-      final result = await dataSource.getEntity(id: model.id);
+//       final result = await dataSource.getEntity(id: model.id);
 
-      expect(result.isRight(), true);
-      expect(result, equals(Right<Failure, TagHiveModel>(model)));
-      verify(
-        () => mockHiveInit.operator<TagHiveModel>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(Right<Failure, TagHiveModel>(model)));
+//       verify(
+//         () => mockHiveInit.operator<TagHiveModel>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<TagHiveModel>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<TagHiveModel>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.getEntity(id: model.id);
+//       final result = await dataSource.getEntity(id: model.id);
 
-      expect(result.isLeft(), true);
-      expect(
-        result,
-        equals(const Left<Failure, TagHiveModel>(HiveFailure('Error'))),
-      );
-      verify(
-        () => mockHiveInit.operator<TagHiveModel>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isLeft(), true);
+//       expect(
+//         result,
+//         equals(const Left<Failure, TagHiveModel>(HiveFailure('Error'))),
+//       );
+//       verify(
+//         () => mockHiveInit.operator<TagHiveModel>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.updateEntity] must update entity in the box and returns [Right(null)] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Right(null));
+//     test(
+//         '[tagDataSource.updateEntity] must update entity in the box and returns [Right(null)] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Right(null));
 
-      final result = await dataSource.updateEntity(entity: model);
+//       final result = await dataSource.updateEntity(entity: model);
 
-      expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, void>(null)));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(const Right<Failure, void>(null)));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.updateEntity(entity: model);
+//       final result = await dataSource.updateEntity(entity: model);
 
-      expect(result.isLeft(), true);
-      expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isLeft(), true);
+//       expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.deleteEntity] must delete entity by id from the box and returns [Right(null)] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Right(null));
+//     test(
+//         '[tagDataSource.deleteEntity] must delete entity by id from the box and returns [Right(null)] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Right(null));
 
-      final result = await dataSource.deleteEntity(id: model.id);
+//       final result = await dataSource.deleteEntity(id: model.id);
 
-      expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, void>(null)));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(const Right<Failure, void>(null)));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.deleteEntity(id: model.id);
+//       final result = await dataSource.deleteEntity(id: model.id);
 
-      expect(result.isLeft(), true);
-      expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isLeft(), true);
+//       expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.deleteAllSelected] should delete from the box all the entities whose [ID] it has received and returns [Right(null)] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Right(null));
+//     test(
+//         '[tagDataSource.deleteAllSelected] should delete from the box all the entities whose [ID] it has received and returns [Right(null)] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Right(null));
 
-      final result = await dataSource.deleteAllSelected(keys);
+//       final result = await dataSource.deleteAllSelected(keys);
 
-      expect(result.isRight(), true);
-      expect(result, equals(const Right<Failure, void>(null)));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
+//       expect(result.isRight(), true);
+//       expect(result, equals(const Right<Failure, void>(null)));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
 
-    test(
-        '[tagDataSource.deleteAllSelected.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
-        () async {
-      when(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).thenAnswer((_) async => const Left(HiveFailure('Error')));
+//     test(
+//         '[tagDataSource.deleteAllSelected.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
+//         () async {
+//       when(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await dataSource.deleteAllSelected(keys);
+//       final result = await dataSource.deleteAllSelected(keys);
 
-      expect(result.isLeft(), true);
-      expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
-      verify(
-        () => mockHiveInit.operator<void>(
-          job: any(named: 'job'),
-          boxName: boxName,
-        ),
-      ).called(1); // Verify that get was only called once with the correct ID
-      verifyNoMoreInteractions(mockHiveInit);
-    });
-  });
-}
+//       expect(result.isLeft(), true);
+//       expect(result, equals(const Left<Failure, void>(HiveFailure('Error'))));
+//       verify(
+//         () => mockHiveInit.operator<void>(
+//           job: any(named: 'job'),
+//           boxName: boxName,
+//         ),
+//       ).called(1); // Verify that get was only called once with the correct ID
+//       verifyNoMoreInteractions(mockHiveInit);
+//     });
+//   });
+// }

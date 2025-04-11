@@ -1,13 +1,13 @@
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/time_interval_entity.dart';
+import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/repositories/time_interval_repository.dart';
 import 'package:zamaan/domain/usecases/base_usecase.dart';
 
-class GetTimeIntervalBySubTaskIdUsecase extends UseCaseWithParams<
-    TimeIntervalRepository, List<TimeIntervalEntity>, String> {
-  GetTimeIntervalBySubTaskIdUsecase(super.repository);
+class GetTaskActivityBySubTaskIdUsecase extends UseCaseWithParams<
+    TaskActivityRepository, List<TaskActivityEntity>, String> {
+  GetTaskActivityBySubTaskIdUsecase(super.repository);
 
   @override
-  EResultFuture<List<TimeIntervalEntity>> call(String params) async =>
-      repository.getTimeIntervalBySubTaskId(params);
+  EResultFuture<List<TaskActivityEntity>> call(String params) async =>
+      repository.getTaskActivityBySubTaskId(params);
 }

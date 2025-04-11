@@ -9,5 +9,5 @@ class GetTaskSchedulerByTaskIdUsecase extends UseCaseWithParams<
 
   @override
   EResultFuture<List<TaskSchedulerEntity>> call(String params) async =>
-      repository.getTaskSchedulersByMainTaskId(params);
+      repository.getTaskSchedulersByTaskId(params);
 }

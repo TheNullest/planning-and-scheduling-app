@@ -6,7 +6,7 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/user_entity.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/auth/data/models/remote/remote_user_model.dart';
+import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
@@ -27,31 +27,27 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final NetworkConnectivityMonitor _connectionChecker;
 
   @override
-  EResultFuture<UserEntity> getCurrentUser() async =>
-      tryCatchEither<UserEntity>(
+  EResultFuture<UserEntity> getCurrentUser() async => tryCatchEither<UserEntity>(
         action: () async => _executeBasedOnConnection<UserEntity>(
-          onConnectedAction: () async => _remoteDataSource.getCurrentUser(),
+          onConnectedAction: () async {
+            final result = await _remoteDataSource.getCurrentUser();
+            return Right(foldEither<UserEntity>(result).toEntity());
+          },
           onNotConnectedAction: () async => _localDataSource.getCurrentUser(),
         ),
       );
 
   @override
-  EResultFuture<UserEntity> signIn(UserSignInParams params) async =>
-      tryCatchEither(
+  EResultFuture<UserEntity> signIn(UserSignInParams params) async => tryCatchEither(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.signIn(params);
-            final userEntity = result;
+            final userEntity = foldEither<UserSupabaseModel>(result).toEntity();
             await _localDataSource.storeCurrentUser(
-              UserHiveModel.fromEntity(
-                userEntity.fold(
-                  (left) => throw left,
-                  (right) => right,
-                ),
-              ),
+              UserHiveModel.fromEntity(userEntity),
             );
 
-            return userEntity;
+            return Right(userEntity);
           },
           onNotConnectedAction: () => _throwNoConnectionException('signIn'),
         ),
@@ -73,13 +69,11 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   EResultFuture<UserEntity> signUp(UserEntity user) async => tryCatchEither(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
-            final result = await _remoteDataSource
-                .signUp(RemoteUserModel.fromEntity(user));
-            final userEntity =
-                foldEither<RemoteUserModel>(result).toEntity().toEntity();
+            final result = await _remoteDataSource.signUp(UserSupabaseModel.fromEntity(user));
+            final userEntity = foldEither<UserSupabaseModel>(result).toEntity().toEntity();
             await _localDataSource.storeCurrentUser(
               UserHiveModel.fromRemote(
-                foldEither<RemoteUserModel>(result),
+                foldEither<UserSupabaseModel>(result),
               ),
             );
             return Right(userEntity);
@@ -89,8 +83,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  EResultFuture<bool> deleteUserAccount(UserSignInParams params) async =>
-      tryCatchEither(
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params) async => tryCatchEither(
         action: () async => _executeBasedOnConnection<bool>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.deleteUserAccount(params);
@@ -106,13 +99,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.updateUser(
-              RemoteUserModel.fromEntity(user),
+              UserSupabaseModel.fromEntity(user),
             );
-            final userEntity =
-                foldEither<RemoteUserModel>(result).toEntity().toEntity();
+            final userEntity = foldEither<UserSupabaseModel>(result).toEntity().toEntity();
             await _localDataSource.storeCurrentUser(
               UserHiveModel.fromRemote(
-                foldEither<RemoteUserModel>(result),
+                foldEither<UserSupabaseModel>(result),
               ),
             );
             return Right(userEntity);
@@ -122,8 +114,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       );
 
   @override
-  EResultFutureVoid changePassword(ChangePasswordParams params) async =>
-      tryCatchEither<void>(
+  EResultFutureVoid changePassword(ChangePasswordParams params) async => tryCatchEither<void>(
         action: () async => _executeBasedOnConnection<void>(
           onConnectedAction: () async {
             await _remoteDataSource.changePassword(params);

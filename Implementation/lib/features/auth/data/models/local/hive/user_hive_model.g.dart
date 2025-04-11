@@ -17,17 +17,17 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserHiveModel(
-      userName: fields[5] as String,
-      password: fields[6] as String,
-      firstName: fields[7] as String,
-      lastName: fields[8] as String,
-      emailAddress: fields[9] as String,
+      userName: fields[11] as String,
+      password: fields[12] as String,
+      firstName: fields[13] as String,
+      lastName: fields[14] as String,
+      emailAddress: fields[15] as String,
       id: fields[0] as String?,
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       updatedAt: fields[4] as DateTime?,
-      birthDate: fields[10] as DateTime?,
-      avatarPath: fields[11] as String?,
+      birthDate: fields[16] as DateTime?,
+      avatarPath: fields[17] as String?,
     );
   }
 
@@ -35,19 +35,19 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
   void write(BinaryWriter writer, UserHiveModel obj) {
     writer
       ..writeByte(12)
-      ..writeByte(5)
-      ..write(obj.userName)
-      ..writeByte(6)
-      ..write(obj.password)
-      ..writeByte(7)
-      ..write(obj.firstName)
-      ..writeByte(8)
-      ..write(obj.lastName)
-      ..writeByte(9)
-      ..write(obj.emailAddress)
-      ..writeByte(10)
-      ..write(obj.birthDate)
       ..writeByte(11)
+      ..write(obj.userName)
+      ..writeByte(12)
+      ..write(obj.password)
+      ..writeByte(13)
+      ..write(obj.firstName)
+      ..writeByte(14)
+      ..write(obj.lastName)
+      ..writeByte(15)
+      ..write(obj.emailAddress)
+      ..writeByte(16)
+      ..write(obj.birthDate)
+      ..writeByte(17)
       ..write(obj.avatarPath)
       ..writeByte(0)
       ..write(obj.id)

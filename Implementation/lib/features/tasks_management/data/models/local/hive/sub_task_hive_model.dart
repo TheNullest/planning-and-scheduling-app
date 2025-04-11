@@ -10,7 +10,7 @@ part 'sub_task_hive_model.g.dart'; // Include for code generation
 // ignore: must_be_immutable
 class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
   SubTaskHiveModel({
-    required super.mainTaskId,
+    required super.taskId,
     required super.title,
     super.id,
     super.updatedAt,
@@ -30,7 +30,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        mainTaskId: entity.mainTaskId,
+        taskId: entity.taskId,
         title: entity.title,
         priority: entity.priority,
         status: entity.status,
@@ -43,7 +43,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
+    String? taskId,
     String? title,
     int? priority,
     int? status,
@@ -54,7 +54,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         title: title ?? this.title,
         priority: priority ?? this.priority,
         status: status ?? this.status,

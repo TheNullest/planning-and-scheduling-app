@@ -1,36 +1,34 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 class SubTaskEntity extends BaseEntityAbstraction {
   SubTaskEntity({
-    required this.mainTaskId,
+    required this.taskId,
     required this.title,
     super.id,
     super.updatedAt,
     super.createdAt,
     super.userId,
     super.description,
-    int? priority,
-    int? status,
-  })  : priority = priority ?? Priority.optional.index,
-        status = status ?? Status.notStarted.index;
+    this.priority = 0, // Replace with the actual index of [Priority.optional]
+    this.status = 0, // Replace with the actual index of [Status.notStarted]
+  });
 
-  SubTaskEntity.empty() : this(mainTaskId: '1', title: 'title');
+  SubTaskEntity.empty() : this(taskId: '1', title: 'title');
 
-  @HiveField(5)
-  final String mainTaskId;
+  @HiveField(11)
+  final String taskId;
 
-  @HiveField(6)
+  @HiveField(12)
   final int priority;
 
-  @HiveField(7)
+  @HiveField(13)
   final String title;
 
   /// Status == 0 => notStarted\
   /// Status == 1 => inProgress\
   /// Status == 2 => completed
-  @HiveField(8)
+  @HiveField(14)
   final int status;
 
   SubTaskEntity toEntity() => SubTaskEntity(
@@ -39,7 +37,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
         description: description,
         createdAt: createdAt,
         userId: userId,
-        mainTaskId: mainTaskId,
+        taskId: taskId,
         title: title,
         priority: priority,
         status: status,
@@ -52,7 +50,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? mainTaskId,
+    String? taskId,
     String? title,
     int? priority,
     int? status,
@@ -63,7 +61,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        mainTaskId: mainTaskId ?? this.mainTaskId,
+        taskId: taskId ?? this.taskId,
         title: title ?? this.title,
         priority: priority ?? this.priority,
         status: status ?? this.status,
@@ -72,7 +70,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        mainTaskId,
+        taskId,
         title,
         priority,
         status,

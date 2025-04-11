@@ -3,6 +3,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 abstract class HiveBoxConstants {
   HiveBoxConstants._();
   static const String usersBox = 'usersBox';
+  static const String devicesBox = 'devicesBox';
+  static const String deviceSyncRecordBox = 'deviceSyncRecordBox';
+  static const String syncLogsBox = 'syncLogsBox';
   static const String mainTasksBox = 'mainTasksBox';
   static const String subTasksBox = 'subTasksBox';
   static const String goalsBox = 'goalsBox';
@@ -10,7 +13,7 @@ abstract class HiveBoxConstants {
   static const String measurementUnitsBox = 'measurementUnitsBox';
   static const String taskSchedulersBox = 'taskSchedulersBox';
   static const String tagsBox = 'tagsBox';
-  static const String timeIntervalsBox = 'timeIntervalsBox';
+  static const String taskActivitysBox = 'taskActivitysBox';
 }
 
 enum HiveBox {
@@ -22,7 +25,7 @@ enum HiveBox {
   measurementUnitsBox(HiveBoxConstants.measurementUnitsBox),
   taskSchedulersBox(HiveBoxConstants.taskSchedulersBox),
   tagsBox(HiveBoxConstants.tagsBox),
-  timeIntervalsBox(HiveBoxConstants.timeIntervalsBox);
+  taskActivitysBox(HiveBoxConstants.taskActivitysBox);
 
   const HiveBox(this.name);
   final String name;
