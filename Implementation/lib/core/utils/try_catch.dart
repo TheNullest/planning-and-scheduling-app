@@ -55,8 +55,7 @@ EResultFuture<T> tryCatchEither<T>({
   final location = getCurrentLocation();
 
   // Format the custom message if provided.
-  final formattedMessage =
-      customMessage != null ? '\n ** $customMessage **' : '';
+  final formattedMessage = customMessage != null ? '\n ** $customMessage **' : '';
 
   try {
     // Execute the provided action and await its result.
@@ -78,16 +77,13 @@ EResultFuture<T> tryCatchEither<T>({
     final exception = RemoteException(
       errorLocation: location,
       code: e.code,
-      message: formattedMessage.isNotEmpty
-          ? '${e.message} $formattedMessage'
-          : e.message,
+      message: formattedMessage.isNotEmpty ? '${e.message} $formattedMessage' : e.message,
     );
     return Left(exception);
   } on TimeoutException catch (e) {
     // Handle timeout exceptions.
-    final exceptionMessage = formattedMessage.isNotEmpty
-        ? 'Timeout: $e $formattedMessage'
-        : 'Timeout: $e';
+    final exceptionMessage =
+        formattedMessage.isNotEmpty ? 'Timeout: $e $formattedMessage' : 'Timeout: $e';
     final exception = RemoteException(
       errorLocation: location,
       message: exceptionMessage,
@@ -95,9 +91,8 @@ EResultFuture<T> tryCatchEither<T>({
     return Left(exception);
   } on FormatException catch (e) {
     // Handle format exceptions.
-    final exceptionMessage = formattedMessage.isNotEmpty
-        ? 'Format error: $e $formattedMessage'
-        : 'Format error: $e';
+    final exceptionMessage =
+        formattedMessage.isNotEmpty ? 'Format error: $e $formattedMessage' : 'Format error: $e';
     final exception = LocalException(
       message: exceptionMessage,
       errorLocation: location,
@@ -105,10 +100,8 @@ EResultFuture<T> tryCatchEither<T>({
     return Left(exception);
   } catch (e) {
     // Handle any other exceptions.
-    final exceptionMessage =
-        formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
-    final exception =
-        _mapFailureTypeToException(failureType, exceptionMessage, location);
+    final exceptionMessage = formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
+    final exception = _mapFailureTypeToException(failureType, exceptionMessage, location);
     return Left(exception);
   } finally {
     // Execute the onFinally callback if provided.
@@ -163,8 +156,7 @@ T tryCatchSimple<T>({
   } catch (e) {
     // Construct the exception message with the optional custom message.
     final exceptionMessage =
-        (customMessage != null ? '\n ** $customMessage ** ' : ' ') +
-            e.toString();
+        (customMessage != null ? '\n ** $customMessage ** ' : ' ') + e.toString();
 
     // Throw a LocalException with the constructed message and current location.
     throw LocalException(

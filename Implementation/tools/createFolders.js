@@ -14,18 +14,18 @@ const path = require('path');
 
 //   // main task
 //   // Data Layer
-//   { folder: 'lib/features/main_task/data/models' },
-//   { folder: 'lib/features/main_task/data/datasources' },
-//   { folder: 'lib/features/main_task/data/repositories' },
+//   { folder: 'lib/features/task/data/models' },
+//   { folder: 'lib/features/task/data/datasources' },
+//   { folder: 'lib/features/task/data/repositories' },
 //   // Domain Layer
-//   { folder: 'lib/features/main_task/domain/entities' },
-//   { folder: 'lib/features/main_task/domain/repositories' },
-//   { folder: 'lib/features/main_task/domain/usecases' },
+//   { folder: 'lib/features/task/domain/entities' },
+//   { folder: 'lib/features/task/domain/repositories' },
+//   { folder: 'lib/features/task/domain/usecases' },
 //   // Presentation Layer
-//   { folder: 'lib/features/main_task/presentation/views' },
-//   { folder: 'lib/features/main_task/presentation/viewmodels' },
-//   { folder: 'lib/features/main_task/presentation/widgets' },
-  
+//   { folder: 'lib/features/task/presentation/views' },
+//   { folder: 'lib/features/task/presentation/viewmodels' },
+//   { folder: 'lib/features/task/presentation/widgets' },
+
 //   // category
 //   // Data Layer
 //   { folder: 'lib/features/category/data/models' },
@@ -39,7 +39,7 @@ const path = require('path');
 //   { folder: 'lib/features/category/presentation/views' },
 //   { folder: 'lib/features/category/presentation/viewmodels' },
 //   { folder: 'lib/features/category/presentation/widgets' },
-  
+
 //   // goal
 //   // Data Layer
 //   { folder: 'lib/features/goal/data/models' },
@@ -53,7 +53,7 @@ const path = require('path');
 //   { folder: 'lib/features/goal/presentation/views' },
 //   { folder: 'lib/features/goal/presentation/viewmodels' },
 //   { folder: 'lib/features/goal/presentation/widgets' },
-  
+
 //   // measurement unit
 //   // Data Layer
 //   { folder: 'lib/features/measurement_unit/data/models' },
@@ -67,7 +67,7 @@ const path = require('path');
 //   { folder: 'lib/features/measurement_unit/presentation/views' },
 //   { folder: 'lib/features/measurement_unit/presentation/viewmodels' },
 //   { folder: 'lib/features/measurement_unit/presentation/widgets' },
-  
+
 //   // sub task
 //   // Data Layer
 //   { folder: 'lib/features/sub_task/data/models' },
@@ -81,7 +81,7 @@ const path = require('path');
 //   { folder: 'lib/features/sub_task/presentation/views' },
 //   { folder: 'lib/features/sub_task/presentation/viewmodels' },
 //   { folder: 'lib/features/sub_task/presentation/widgets'},
-  
+
 //   // tag
 //   // Data Layer
 //   { folder: 'lib/features/tag/data/models' },
@@ -95,7 +95,7 @@ const path = require('path');
 //   { folder: 'lib/features/tag/presentation/views' },
 //   { folder: 'lib/features/tag/presentation/viewmodels' },
 //   { folder: 'lib/features/tag/presentation/widgets'},
-  
+
 //   // task scheduler
 //   // Data Layer
 //   { folder: 'lib/features/task_scheduler/data/models' },
@@ -109,7 +109,7 @@ const path = require('path');
 //   { folder: 'lib/features/task_scheduler/presentation/views' },
 //   { folder: 'lib/features/task_scheduler/presentation/viewmodels' },
 //   { folder: 'lib/features/task_scheduler/presentation/widgets'},
-  
+
 //   // time interval
 //   // Data Layer
 //   { folder: 'lib/features/time_interval/data/models' },
@@ -152,18 +152,18 @@ const path = require('path');
 
 //   // main task
 //   // Data Layer
-//   'lib/features/main_task/data/models' ,
-//   'lib/features/main_task/data/datasources' ,
-//   'lib/features/main_task/data/repositories' ,
+//   'lib/features/task/data/models' ,
+//   'lib/features/task/data/datasources' ,
+//   'lib/features/task/data/repositories' ,
 //   // Domain Layer
-//   'lib/features/main_task/domain/entities' ,
-//   'lib/features/main_task/domain/repositories' ,
-//   'lib/features/main_task/domain/usecases' ,
+//   'lib/features/task/domain/entities' ,
+//   'lib/features/task/domain/repositories' ,
+//   'lib/features/task/domain/usecases' ,
 //   // Presentation Layer
-//    'lib/features/main_task/presentation/views' ,
-//    'lib/features/main_task/presentation/viewmodels' ,
-//    'lib/features/main_task/presentation/widgets' ,
-  
+//    'lib/features/task/presentation/views' ,
+//    'lib/features/task/presentation/viewmodels' ,
+//    'lib/features/task/presentation/widgets' ,
+
 //   // category
 //   // Data Layer
 //    'lib/features/category/data/models' ,
@@ -177,7 +177,7 @@ const path = require('path');
 //   'lib/features/category/presentation/views' ,
 //   'lib/features/category/presentation/viewmodels' ,
 //   'lib/features/category/presentation/widgets' ,
-  
+
 //   // goal
 //   // Data Layer
 //    'lib/features/goal/data/models' ,
@@ -191,7 +191,7 @@ const path = require('path');
 //    'lib/features/goal/presentation/views' ,
 //    'lib/features/goal/presentation/viewmodels' ,
 //    'lib/features/goal/presentation/widgets' ,
-  
+
 //   // measurement unit
 //   // Data Layer
 //    'lib/features/measurement_unit/data/models' ,
@@ -205,7 +205,7 @@ const path = require('path');
 //    'lib/features/measurement_unit/presentation/views' ,
 //    'lib/features/measurement_unit/presentation/viewmodels' ,
 //    'lib/features/measurement_unit/presentation/widgets' ,
-  
+
 //   // sub task
 //   // Data Layer
 //    'lib/features/sub_task/data/models' ,
@@ -219,7 +219,7 @@ const path = require('path');
 //    'lib/features/sub_task/presentation/views' ,
 //    'lib/features/sub_task/presentation/viewmodels' ,
 //    'lib/features/sub_task/presentation/widgets',
-  
+
 //   // tag
 //   // Data Layer
 //    'lib/features/tag/data/models' ,
@@ -233,7 +233,7 @@ const path = require('path');
 //    'lib/features/tag/presentation/views' ,
 //    'lib/features/tag/presentation/viewmodels' ,
 //    'lib/features/tag/presentation/widgets',
-  
+
 //   // task scheduler
 //   // Data Layer
 //    'lib/features/task_scheduler/data/models' ,
@@ -247,7 +247,7 @@ const path = require('path');
 //    'lib/features/task_scheduler/presentation/views' ,
 //    'lib/features/task_scheduler/presentation/viewmodels' ,
 //    'lib/features/task_scheduler/presentation/widgets',
-  
+
 //   // time interval
 //   // Data Layer
 //    'lib/features/time_interval/data/models' ,
@@ -264,10 +264,10 @@ const path = require('path');
 // ];
 
 const folders = [
-  'lib/features/reminder/domain/usecases',
-  'lib/features/reminder/presentation/viewmodels',
-  'lib/features/reminder/presentation/views',
-  'lib/features/reminder/presentation/widget',
+  '../lib/features/notification/domain/usecases',
+  '../lib/features/notification/presentation/viewmodels',
+  '../lib/features/notification/presentation/views',
+  '../lib/features/notification/presentation/widget',
 ];
 
 folders.forEach(folder => {

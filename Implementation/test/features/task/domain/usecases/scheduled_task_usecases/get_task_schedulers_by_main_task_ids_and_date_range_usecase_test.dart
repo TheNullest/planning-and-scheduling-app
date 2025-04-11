@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/task_scheduler_entity.dart';
+import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_schedulers_by_main_task_ids_and_date_range_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_schedulers_by_task_ids_and_date_range_usecase.dart';
 
 import '_task_scheduler_repository.mock.dart';
 

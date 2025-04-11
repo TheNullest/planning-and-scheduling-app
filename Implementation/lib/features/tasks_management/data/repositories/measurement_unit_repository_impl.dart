@@ -1,21 +1,22 @@
-// import 'package:zamaan/core/repositories/base_crud_operations.dart';
-// import 'package:zamaan/features/task/data/sources/bases/measurement_unit_data_source.dart';
-// import 'package:zamaan/features/task/data/models/local/measurement_unit_local_model.dart';
-// import 'package:zamaan/features/task/domain/entities/measurement_unit_entity.dart';
-// import 'package:zamaan/features/task/domain/repositories/measurement_unit_repository.dart';
+import 'package:zamaan/data/mappers/measurement_unit.dart';
+import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
+import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/measurement_unit/measurement_unit_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/sources/bases/measurement_unit_data_source.dart';
 
-// class MeasurementUnitRepositoryImpl extends BaseCRUDOperations<
-//         MeasurementUnitEntity,
-//         MeasurementUnitHiveModel,
-//         MeasurementUnitDataSource<MeasurementUnitHiveModel>>
-//     implements MeasurementUnitRepository {
-//   MeasurementUnitRepositoryImpl(super.localDataSource);
-
-//   @override
-//   MeasurementUnitHiveModel fromEntity(MeasurementUnitEntity entity) =>
-//       MeasurementUnitHiveModel.fromEntity(entity);
-
-//   @override
-//   MeasurementUnitEntity toEntity(MeasurementUnitHiveModel model) =>
-//       model.toEntity();
-// }
+class MeasurementUnitRepositoryImpl extends BaseRepositoryImpl<
+    MeasurementUnitEntity,
+    MeasurementUnitHiveModel,
+    MeasurementUnitSupabaseModel,
+    MeasurementUnitDataSource<MeasurementUnitHiveModel>,
+    MeasurementUnitDataSource<MeasurementUnitSupabaseModel>,
+    MeasurementUnitMapper> implements MeasurementUnitRepository {
+  MeasurementUnitRepositoryImpl({
+    required super.localDataSource,
+    required super.remoteDataSource,
+    required super.mapper,
+    required super.netConnectivity,
+  });
+}

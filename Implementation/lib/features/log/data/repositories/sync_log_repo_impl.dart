@@ -24,15 +24,10 @@ class SyncLogRepoImpl implements SyncLogRepository<SyncLogEntity> {
       );
 
   @override
-  EResultFuture<List<SyncLogEntity>> getUnsyncedLogs({
-    required String userId,
-    required String deviceId,
-  }) async =>
-      tryCatchEither(
+  EResultFuture<List<SyncLogEntity>> getUnsyncedLogs(String deviceId) async => tryCatchEither(
         action: () async {
           final response = await _syncLogSupabaseDataSource.getUnsyncedLogs(
-            userId: userId,
-            deviceId: deviceId,
+            deviceId,
           );
           final fold = foldEither<List<SyncLogSupabaseModel>>(response);
           final result = fold.map((item) => item.toEntity()).toList();
@@ -42,13 +37,12 @@ class SyncLogRepoImpl implements SyncLogRepository<SyncLogEntity> {
       );
 
   @override
-  EResultFutureVoid markSyncLogAsSynced({
-    required String deviceId,
-    required String userId,
-  }) async =>
+  EResultFutureVoid markSyncLogAsSynced(
+    String syncLogId,
+  ) async =>
       tryCatchEither(
         action: () async {
-          await _syncLogSupabaseDataSource.markSyncLogAsSynced(userId: userId, deviceId: deviceId);
+          await _syncLogSupabaseDataSource.markSyncLogAsSynced(syncLogId);
           return const Right(null);
         },
         failureType: FailureType.local,

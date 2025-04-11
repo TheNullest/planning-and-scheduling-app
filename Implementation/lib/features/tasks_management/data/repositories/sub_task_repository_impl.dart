@@ -1,60 +1,106 @@
-// import 'package:dartz/dartz.dart';
-// import 'package:zamaan/core/enums/priority_enum.dart';
-// import 'package:zamaan/core/enums/status_enum.dart';
-// import 'package:zamaan/core/error/failures/failure.dart';
-// import 'package:zamaan/core/repositories/base_crud_operations.dart';
-// import 'package:zamaan/core/utils/typedef.dart';
-// import 'package:zamaan/features/task/data/sources/bases/sub_task_data_source.dart';
-// import 'package:zamaan/features/task/data/models/local/sub_task_local_model.dart';
-// import 'package:zamaan/features/task/domain/entities/sub_task_entity.dart';
-// import 'package:zamaan/features/task/domain/repositories/sub_task_repository.dart';
+import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/enums/failure_type.dart';
+import 'package:zamaan/core/enums/priority_enum.dart';
+import 'package:zamaan/core/enums/status_enum.dart';
+import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/mappers/sub_task.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
+import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
+import 'package:zamaan/domain/repositories/sub_task_repository.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub_task/sub_task_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/sources/bases/sub_task_data_source.dart';
 
-// class SubTaskRepositoryImpl extends BaseCRUDOperations<
-//     SubTaskEntity,
-//     SubTaskHiveModel,
-//     SubTaskDataSource<SubTaskHiveModel>> implements SubTaskRepository {
-//   SubTaskRepositoryImpl(super.localDataSource)
-//       : _localDataSource = localDataSource;
-//   final SubTaskDataSource _localDataSource;
+class SubTaskRepositoryImpl extends BaseRepositoryImpl<
+    SubTaskEntity,
+    SubTaskHiveModel,
+    SubTaskSupabaseModel,
+    SubTaskDataSource<SubTaskHiveModel>,
+    SubTaskDataSource<SubTaskSupabaseModel>,
+    SubTaskMapper> implements SubTaskRepository {
+  SubTaskRepositoryImpl({
+    required super.localDataSource,
+    required super.remoteDataSource,
+    required super.mapper,
+    required super.netConnectivity,
+  })  : _localDataSource = localDataSource,
+        _remoteDataSource = remoteDataSource,
+        _mapper = mapper,
+        _netConnectivity = netConnectivity;
 
-//   @override
-//   SubTaskHiveModel fromEntity(SubTaskEntity entity) =>
-//       SubTaskHiveModel.fromEntity(entity);
+  final SubTaskDataSource<SubTaskHiveModel> _localDataSource;
+  final SubTaskDataSource<SubTaskSupabaseModel> _remoteDataSource;
+  final SubTaskMapper _mapper;
+  final NetworkConnectivityMonitorCubit _netConnectivity;
 
-//   @override
-//   SubTaskEntity toEntity(SubTaskHiveModel model) => model.toEntity();
+  @override
+  EResultFuture<List<SubTaskEntity>> getBatchByPriority(
+    Priority priority, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByPriority(priority);
+            final models = _mapper.foldEitherList<SubTaskHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByPriority(priority);
+            final models = _mapper.foldEitherList<SubTaskSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   Either<Failure, List<SubTaskEntity>> toEntities(
-//     Either<Failure, List<SubTaskHiveModel>> models,
-//   ) =>
-//       models.map(
-//         (taskModels) => taskModels
-//             .map<SubTaskEntity>((taskModel) => taskModel.toEntity())
-//             .toList(),
-//       );
+  @override
+  EResultFuture<List<SubTaskEntity>> getBatchByStatus(
+    Status status, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByStatus(status);
+            final models = _mapper.foldEitherList<SubTaskHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByStatus(status);
+            final models = _mapper.foldEitherList<SubTaskSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
 
-//   @override
-//   ResultFuture<List<SubTaskEntity>> getSubTasksByTaskId(
-//     String taskId,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getSubTasksByTaskId(taskId)
-//             as Either<Failure, List<SubTaskHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<SubTaskEntity>> getSubTasksByPriority(
-//     Priority priority,
-//   ) async =>
-//       toEntities(
-//         await _localDataSource.getSubTasksByPriority(priority)
-//             as Either<Failure, List<SubTaskHiveModel>>,
-//       );
-
-//   @override
-//   ResultFuture<List<SubTaskEntity>> getSubTasksByStatus(Status status) async =>
-//       toEntities(
-//         await _localDataSource.getSubTasksByStatus(status)
-//             as Either<Failure, List<SubTaskHiveModel>>,
-//       );
-// }
+  @override
+  EResultFuture<List<SubTaskEntity>> getBatchByTaskId(
+    String taskId, {
+    bool fromLocal = false,
+    bool fromRemote = false,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (fromLocal) {
+            final response = await _localDataSource.getBatchByTaskId(taskId);
+            final models = _mapper.foldEitherList<SubTaskHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchByTaskId(taskId);
+            final models = _mapper.foldEitherList<SubTaskSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
+}

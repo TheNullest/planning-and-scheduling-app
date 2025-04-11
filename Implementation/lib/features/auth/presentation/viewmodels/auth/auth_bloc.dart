@@ -7,7 +7,7 @@ import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';

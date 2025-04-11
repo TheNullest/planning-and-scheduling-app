@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/goal_entity.dart';
+import 'package:zamaan/domain/entities/goal.dart';
 
 part 'goal_supabase_model.freezed.dart';
 part 'goal_supabase_model.g.dart';
@@ -13,7 +13,7 @@ class GoalSupabaseModel with _$GoalSupabaseModel {
   const factory GoalSupabaseModel({
     required String taskId,
     required String measurementUnitId,
-    required int measurementValue,
+    required int measurementUnitValue,
     required String? id,
     @JsonKey(name: 'sub_task_id') String? subTaskId,
     @JsonKey(name: 'user_id') String? userId,
@@ -31,7 +31,7 @@ class GoalSupabaseModel with _$GoalSupabaseModel {
         id: entity.id,
         taskId: entity.taskId,
         measurementUnitId: entity.measurementUnitId,
-        measurementValue: entity.measurementUnitValue,
+        measurementUnitValue: entity.measurementUnitValue,
         subTaskId: entity.subTaskId,
         userId: entity.userId,
         description: entity.description,
@@ -47,8 +47,7 @@ class GoalSupabaseModel with _$GoalSupabaseModel {
   factory GoalSupabaseModel.fromJson(Map<String, dynamic> json) =>
       _$GoalSupabaseModelFromJson(json);
 
-  factory GoalSupabaseModel.empty() =>
-      GoalSupabaseModel.fromEntity(GoalEntity.empty());
+  factory GoalSupabaseModel.empty() => GoalSupabaseModel.fromEntity(GoalEntity.empty());
 
   @override
   Map<String, dynamic> toJson() => _$GoalSupabaseModelToJson(this);

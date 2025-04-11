@@ -22,20 +22,20 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     super.createdAt,
     super.userId,
     super.description,
-    this.endAt,
+    this.dueDate,
+    this.fixedTagIds,
     Duration? spentTime,
     this.isPaused = false,
-  }) : spentTime = (endAt != null && spentTime == null)
-            ? (endAt.isAfter(startAt)
-                ? endAt.difference(startAt)
+  }) : spentTime = (dueDate != null && spentTime == null)
+            ? (dueDate.isAfter(startAt)
+                ? dueDate.difference(startAt)
                 : throw ArgumentError('endAt must be after startAt'))
             : spentTime;
 
   /// Creates an empty [TaskActivityEntity] with default values.
   ///
   /// This constructor is useful for initializing an entity with default values.
-  TaskActivityEntity.empty()
-      : this(taskId: '1', subTaskId: '2', startAt: DateTime(2024));
+  TaskActivityEntity.empty() : this(taskId: '1', subTaskId: '2', startAt: DateTime(2024));
 
   /// The ID of the main task associated with this time interval.
   @HiveField(11)
@@ -51,7 +51,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
 
   /// The end time of the time interval, if any.
   @HiveField(14)
-  final DateTime? endAt;
+  final DateTime? dueDate;
 
   /// The calculated spent time based on the difference between `startAt` and `endAt`.
   ///
@@ -62,6 +62,9 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   final Duration? spentTime;
 
   @HiveField(16)
+  final List<String>? fixedTagIds;
+
+  @HiveField(17)
   final bool isPaused;
 
   @override
@@ -75,7 +78,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     String? taskId,
     String? subTaskId,
     DateTime? startAt,
-    DateTime? endAt,
+    DateTime? dueDate,
+    List<String>? fixedTagIds,
     bool? isPaused,
   }) =>
       TaskActivityEntity(
@@ -87,7 +91,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         taskId: taskId ?? this.taskId,
         subTaskId: subTaskId ?? this.subTaskId,
         startAt: startAt ?? this.startAt,
-        endAt: endAt ?? this.endAt,
+        dueDate: dueDate ?? this.dueDate,
+        fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         isPaused: isPaused ?? this.isPaused,
       );
 
@@ -100,8 +105,9 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         taskId: taskId,
         subTaskId: subTaskId,
         startAt: startAt,
-        endAt: endAt,
+        dueDate: dueDate,
         spentTime: spentTime,
+        fixedTagIds: fixedTagIds,
         isPaused: isPaused,
       );
 
@@ -115,7 +121,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         taskId,
         subTaskId,
         startAt,
-        endAt,
+        dueDate,
         spentTime,
         isPaused,
       ];

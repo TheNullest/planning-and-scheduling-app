@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/domain/entities/measurement_unit.dart';
 
 part 'measurement_unit_hive_model.g.dart';
 
@@ -8,8 +8,7 @@ part 'measurement_unit_hive_model.g.dart';
 // Since HiveObjectMixin contains mutable fields,
 // we ignore the immutability check for this class.
 // ignore: must_be_immutable
-class MeasurementUnitHiveModel extends MeasurementUnitEntity
-    with HiveObjectMixin {
+class MeasurementUnitHiveModel extends MeasurementUnitEntity with HiveObjectMixin {
   MeasurementUnitHiveModel({
     required super.title,
     required super.iconCode,
@@ -44,7 +43,7 @@ class MeasurementUnitHiveModel extends MeasurementUnitEntity
     String? userId,
     String? title,
     String? description,
-    int? iconCode,
+    String? iconCode,
     bool? isDouble,
   }) =>
       MeasurementUnitHiveModel(

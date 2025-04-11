@@ -1,89 +1,106 @@
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/features/log/data/models/local/hive/device.dart' show DeviceHiveModel;
-import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart' show DeviceSupabaseModel;
-import 'package:zamaan/features/log/domain/entities/device.dart' show DeviceEntity;
+import 'package:zamaan/features/log/data/models/local/hive/device.dart';
+import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart';
+import 'package:zamaan/features/log/domain/entities/device.dart';
 
 /// An abstract interface for managing device operations.
 ///
 /// This repository defines methods for registering, updating, retrieving, and
-/// unregistering devices in the system. It provides support for both local
-/// storage (Hive) and remote database (Supabase) interactions.
+/// unregistering devices in the system. It supports both local storage (Hive)
+/// and remote database (Supabase) interactions.
 ///
-/// ▸ Type [T]:
-///   - Represents the device structure used in the repository.
-///   - [T] can correspond to:
-///     1. Domain entity: [DeviceEntity] (for business logic purposes).
-///     2. Supabase model: [DeviceSupabaseModel] (for interactions with Supabase database).
-///     3. Hive model: [DeviceHiveModel] (for local storage and offline capabilities).
+/// ▸ **Type [T]:**
+///   - Represents the device structure used in the repository. Depending on the
+///     layer and intended use, [T] can correspond to:
+///     1. **Domain Entity:** [DeviceEntity] used for business logic purposes.
+///     2. **Supabase Model:** [DeviceSupabaseModel] used for direct interactions with Supabase.
+///     3. **Hive Model:** [DeviceHiveModel] used for local storage and offline capabilities.
 ///
-/// This flexibility ensures seamless integration across the app's data flow and
+/// This design ensures seamless integration throughout the data flow and maintains
 /// compatibility with both local and remote environments.
-abstract class DeviceRepository<T> {
+abstract interface class DeviceRepository<T> {
   /// Registers and stores one or multiple devices in the system.
   ///
-  /// This method allows bulk registration of devices in either Supabase or
-  /// Hive, depending on the implementation. It ensures efficient and
-  /// scalable device onboarding.
+  /// This method allows for bulk registration of devices in either Supabase or Hive,
+  /// depending on the implementation. It ensures a scalable onboarding process and
+  /// emphasizes data integrity by applying:
+  /// - **Atomicity:** Local implementations (Hive) should perform operations within a single transaction.
+  /// - **Rollback mechanisms:** Remote implementations (Supabase) should support batch inserts with rollback capabilities on failure.
   ///
-  /// Parameters:
+  /// **Parameters:**
   /// - [devices]: A list of devices of type [T] to be registered.
   ///
-  /// Returns:
+  /// **Returns:**
   /// - [EResultFutureVoid]:
-  ///   - Success: Indicates all devices have been successfully registered.
-  ///   - Failure: May occur due to network issues, database conflicts, or
-  ///     invalid data in the device list.
+  ///   - **Success:** All devices are successfully registered.
+  ///   - **Failure:** May occur due to network errors, database conflicts, or invalid device data.
   EResultFutureVoid registerDevices(List<T> devices);
 
-  /// Unregisters a device and closes its current session.
+  /// Unregisters a device and terminates its active session.
   ///
-  /// This method should be called when:
-  /// - A user logs out of the app.
-  /// - The app is uninstalled from the device.
-  /// - A device needs to be manually removed from the system.
+  /// This method should be called when a device is no longer active, such as when:
+  /// - A user logs out.
+  /// - The app is uninstalled.
+  /// - A device must be manually removed from the system.
   ///
-  /// Parameters:
-  /// - [id]: The unique identifier of the device to unregister.
-  /// - [userId]: (Optional) The user ID associated with the device.
-  ///   Used for filtering or validation purposes during the operation.
+  /// **Parameters:**
+  /// - [id]: The unique identifier of the device to be unregistered. This identifier
+  ///         is used for both filtering and validation during the operation.
   ///
-  /// Returns:
+  /// **Returns:**
   /// - [EResultFutureVoid]:
-  ///   - Success: Indicates the device has been successfully unregistered.
-  ///   - Failure: May occur due to network issues, invalid identifiers, or
-  ///     session conflicts.
-  EResultFutureVoid unregisterDevice({required String id, String? userId});
+  ///   - **Success:** The device has been successfully unregistered.
+  ///   - **Failure:** May occur due to network issues, invalid identifiers, or session conflicts.
+  EResultFutureVoid unregisterDevice(String id);
 
-  /// Updates the information of a device in the system.
+  /// Updates the information for an existing device.
   ///
-  /// This method modifies device-related metadata, such as its last active
-  /// timestamp, app version, or other properties depending on the use case.
+  /// This method is intended to modify device metadata, such as its last active timestamp,
+  /// application version, or other contextual properties.
   ///
-  /// Parameters:
-  /// - [device]: The device entity or model of type [T] containing updated
-  ///   information.
+  /// **Parameters:**
+  /// - [device]: An instance of type [T] (which may be a domain entity or a data model)
+  ///             containing the updated device information.
   ///
-  /// Returns:
+  /// **Returns:**
   /// - [EResultFutureVoid]:
-  ///   - Success: Indicates the device information has been successfully updated.
-  ///   - Failure: May occur due to data conflicts, invalid device properties, or
-  ///     database connectivity issues.
+  ///   - **Success:** The device information is successfully updated.
+  ///   - **Failure:** May occur due to data conflicts, invalid properties, or database connectivity issues.
   EResultFutureVoid updateDeviceInfo(T device);
 
-  /// Retrieves devices associated with a specific user.
+  /// Retrieves a list of devices from the system.
   ///
-  /// This method fetches all devices linked to the provided user ID. If no
-  /// [userId] is provided, it retrieves all devices in the system. The data
-  /// source (Hive or Supabase) depends on the repository implementation.
+  /// The method fetches devices from the storage layer specified by the [fromLocal] flag:
+  /// - **Local Storage (Hive):** When [fromLocal] is set to `true`, ensuring offline availability.
+  /// - **Remote Database (Supabase):** When [fromLocal] is set to `false` (this is the default),
+  ///   relying on network-based data.
   ///
-  /// Parameters:
-  /// - [userId]: (Optional) The user ID whose devices are being retrieved.
-  ///   If null, all devices are fetched.
+  /// **Parameters:**
+  /// - [fromLocal]: A boolean flag that selects the target storage layer:
+  ///   - `true`: Query local storage.
+  ///   - `false`: Query remote storage (default).
   ///
-  /// Returns:
+  /// **Returns:**
   /// - [EResultFuture<List<T>>]:
-  ///   - Success: A list of device entities or models matching the query.
-  ///   - Failure: May occur due to network issues, invalid user identifiers,
-  ///     or data format mismatches.
-  EResultFuture<List<T>> getDevices(String? userId);
+  ///   - **Success:** A list of devices (entities or models) retrieved from the chosen layer.
+  ///   - **Failure:** May occur due to network errors, data formatting issues, or invalid queries.
+  EResultFuture<List<T>> getDevices({bool fromLocal = false});
+
+  /// Retrieves a specific device by its unique identifier.
+  ///
+  /// This method fetches a single device record from the selected storage layer:
+  /// - **Local Storage (Hive):** When [fromLocal] is set to `true`, ensuring quick local access.
+  /// - **Remote Database (Supabase):** When [fromLocal] is set to `false` (default), requiring potential
+  ///   network validations and error handling.
+  ///
+  /// **Parameters:**
+  /// - [id]: The unique identifier of the device.
+  /// - [fromLocal]: Boolean flag indicating whether to search in local storage (`true`)
+  ///   or in the cloud (`false`, default).
+  ///
+  /// **Returns:**
+  /// - [EResultFuture<T>]:
+  ///   - **Success:** The device matching the given identifier.
+  ///   - **Failure:** An error if the device is not found or if issues occur during data retrieval.
+  EResultFuture<T?> getDeviceById({required String id, bool fromLocal = false});
 }

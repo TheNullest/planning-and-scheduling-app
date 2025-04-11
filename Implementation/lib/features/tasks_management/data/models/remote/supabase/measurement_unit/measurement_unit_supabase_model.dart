@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/domain/entities/measurement_unit.dart';
 
 part 'measurement_unit_supabase_model.freezed.dart';
 part 'measurement_unit_supabase_model.g.dart';
@@ -27,7 +27,7 @@ class MeasurementUnitSupabaseModel with _$MeasurementUnitSupabaseModel {
       MeasurementUnitSupabaseModel(
         id: entity.id,
         title: entity.title,
-        iconCode: entity.iconCode.toString(),
+        iconCode: entity.iconCode,
         userId: entity.userId,
         description: entity.description,
         createdAt: entity.createdAt,

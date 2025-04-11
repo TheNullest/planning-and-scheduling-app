@@ -1,11 +1,11 @@
 import 'package:mocktail/mocktail.dart';
-import 'package:zamaan/domain/entities/user_entity.dart';
+import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/features/auth/domain/repositories/authentication_repository.dart';
 
 export 'package:dartz/dartz.dart' hide Evaluation;
 export 'package:flutter_test/flutter_test.dart';
 export 'package:mocktail/mocktail.dart';
-export 'package:zamaan/domain/entities/user_entity.dart';
+export 'package:zamaan/domain/entities/user.dart';
 export 'package:zamaan/features/auth/domain/repositories/authentication_repository.dart';
 
 class MockAuthRepo extends Mock implements AuthenticationRepository {}

@@ -1,11 +1,10 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit_entity.dart';
+import 'package:zamaan/domain/entities/measurement_unit.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_measurement_unit_data_source_impl.dart';
 
-class MockDataSource extends Mock
-    implements HiveMeasurementUnitDataSourceImpl {}
+class MockDataSource extends Mock implements HiveMeasurementUnitDataSourceImpl {}
 
 void main() {
   late HiveMeasurementUnitDataSourceImpl mockDataSource;
@@ -24,7 +23,7 @@ void main() {
         '[measurementUnitRepo.createEntity] must call the [createEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
@@ -34,7 +33,7 @@ void main() {
       expect(result.isRight(), true);
       expect(result, equals(const Right(null)));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -45,7 +44,7 @@ void main() {
         '[measurementUnitRepo.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
@@ -55,7 +54,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: MeasurementUnitHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -66,17 +65,14 @@ void main() {
   group('getEntities', () {
     test(
         '[measurementUnitRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<MeasurementUnitEntity>)] data'
-        'which will turn into [Right(List<MeasurementUnitEntity>)] data',
-        () async {
-      when(() => mockDataSource.getEntities())
-          .thenAnswer((_) async => const Right([]));
+        'which will turn into [Right(List<MeasurementUnitEntity>)] data', () async {
+      when(() => mockDataSource.getEntities()).thenAnswer((_) async => const Right([]));
 
       final result = await measurementUnitRepo.getEntities();
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<MeasurementUnitEntity>>>());
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
@@ -91,8 +87,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<MeasurementUnitEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
   });
@@ -100,10 +95,8 @@ void main() {
   group('getEntity', () {
     test(
         '[measurementUnitRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(MeasurementUnitEntity)] data'
-        'which will turn into [Right(List<MeasurementUnitEntity>)] data',
-        () async {
-      when(() => mockDataSource.getEntity(id: model.id))
-          .thenAnswer((_) async => Right(model));
+        'which will turn into [Right(List<MeasurementUnitEntity>)] data', () async {
+      when(() => mockDataSource.getEntity(id: model.id)).thenAnswer((_) async => Right(model));
 
       final result = await measurementUnitRepo.getEntity(id: entity.id);
 

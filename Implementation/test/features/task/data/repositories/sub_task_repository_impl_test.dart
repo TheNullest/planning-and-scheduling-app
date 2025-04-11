@@ -1,7 +1,7 @@
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/sub_task_entity.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_sub_task_data_source_impl.dart';
 
@@ -24,7 +24,7 @@ void main() {
         '[subTaskRepo.createEntity] must call the [createEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
@@ -34,7 +34,7 @@ void main() {
       expect(result.isRight(), true);
       expect(result, equals(const Right(null)));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -45,7 +45,7 @@ void main() {
         '[subTaskRepo.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
@@ -55,7 +55,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: SubTaskHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -67,15 +67,13 @@ void main() {
     test(
         '[subTaskRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<SubTaskEntity>)] data'
         'which will turn into [Right(List<SubTaskEntity>)] data', () async {
-      when(() => mockDataSource.getEntities())
-          .thenAnswer((_) async => const Right([]));
+      when(() => mockDataSource.getEntities()).thenAnswer((_) async => const Right([]));
 
       final result = await subTaskRepo.getEntities();
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<SubTaskEntity>>>());
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
@@ -90,8 +88,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<SubTaskEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
   });
@@ -100,8 +97,7 @@ void main() {
     test(
         '[subTaskRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(SubTaskEntity)] data'
         'which will turn into [Right(List<SubTaskEntity>)] data', () async {
-      when(() => mockDataSource.getEntity(id: model.id))
-          .thenAnswer((_) async => Right(model));
+      when(() => mockDataSource.getEntity(id: model.id)).thenAnswer((_) async => Right(model));
 
       final result = await subTaskRepo.getEntity(id: entity.id);
 
@@ -264,14 +260,14 @@ void main() {
     test(
         '[subTaskRepo.getSubTasksByPriority] must call the [getSubTasksByPriority] of the [dataSource] then returns [Right(List<SubTaskEntity>)] data'
         'which will turn into [Right(List<SubTaskEntity>)] data', () async {
-      when(() => mockDataSource.getSubTasksByPriority(Priority.critical))
+      when(() => mockDataSource.getBatchByPriority(Priority.critical))
           .thenAnswer((_) async => const Right([]));
 
       final result = await subTaskRepo.getSubTasksByPriority(Priority.critical);
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<SubTaskEntity>>>());
-      verify(() => mockDataSource.getSubTasksByPriority(Priority.critical))
+      verify(() => mockDataSource.getBatchByPriority(Priority.critical))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -279,7 +275,7 @@ void main() {
     test(
         '[subTaskRepo.getSubTasksByPriority.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getSubTasksByPriority(Priority.critical))
+      when(() => mockDataSource.getBatchByPriority(Priority.critical))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
       final result = await subTaskRepo.getSubTasksByPriority(Priority.critical);
@@ -287,7 +283,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<SubTaskEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getSubTasksByPriority(Priority.critical))
+      verify(() => mockDataSource.getBatchByPriority(Priority.critical))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -297,14 +293,14 @@ void main() {
     test(
         '[subTaskRepo.getSubTasksByStatus] must call the [getSubTasksByStatus] of the [dataSource] then returns [Right(List<SubTaskEntity>)] data'
         'which will turn into [Right(List<SubTaskEntity>)] data', () async {
-      when(() => mockDataSource.getSubTasksByStatus(Status.inProgress))
+      when(() => mockDataSource.getBatchByStatus(Status.inProgress))
           .thenAnswer((_) async => const Right([]));
 
       final result = await subTaskRepo.getSubTasksByStatus(Status.inProgress);
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<SubTaskEntity>>>());
-      verify(() => mockDataSource.getSubTasksByStatus(Status.inProgress))
+      verify(() => mockDataSource.getBatchByStatus(Status.inProgress))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -312,7 +308,7 @@ void main() {
     test(
         '[subTaskRepo.getSubTasksByStatus.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getSubTasksByStatus(Status.inProgress))
+      when(() => mockDataSource.getBatchByStatus(Status.inProgress))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
       final result = await subTaskRepo.getSubTasksByStatus(Status.inProgress);
@@ -320,7 +316,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<SubTaskEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getSubTasksByStatus(Status.inProgress))
+      verify(() => mockDataSource.getBatchByStatus(Status.inProgress))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });

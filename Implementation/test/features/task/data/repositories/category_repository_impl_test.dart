@@ -1,6 +1,6 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/category_entity.dart';
+import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_category_data_source_impl.dart';
 
@@ -23,7 +23,7 @@ void main() {
         '[categoryRepo.createEntity] must call the [createEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: CategoryHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
@@ -33,7 +33,7 @@ void main() {
       expect(result.isRight(), true);
       expect(result, equals(const Right(null)));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: CategoryHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -44,7 +44,7 @@ void main() {
         '[categoryRepo.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: CategoryHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
@@ -54,7 +54,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
-        () => mockDataSource.createEntity(
+        () => mockDataSource.createEntities(
           newEntity: CategoryHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
@@ -66,15 +66,13 @@ void main() {
     test(
         '[categoryRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<CategoryEntity>)] data'
         'which will turn into [Right(List<CategoryEntity>)] data', () async {
-      when(() => mockDataSource.getEntities())
-          .thenAnswer((_) async => const Right([]));
+      when(() => mockDataSource.getEntities()).thenAnswer((_) async => const Right([]));
 
       final result = await categoryRepo.getEntities();
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<CategoryEntity>>>());
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
@@ -89,8 +87,7 @@ void main() {
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<CategoryEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getEntities())
-          .called(1); // Verify that get was only called once
+      verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
   });
@@ -99,8 +96,7 @@ void main() {
     test(
         '[categoryRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(CategoryEntity)] data'
         'which will turn into [Right(List<CategoryEntity>)] data', () async {
-      when(() => mockDataSource.getEntity(id: model.id))
-          .thenAnswer((_) async => Right(model));
+      when(() => mockDataSource.getEntity(id: model.id)).thenAnswer((_) async => Right(model));
 
       final result = await categoryRepo.getEntity(id: entity.id);
 

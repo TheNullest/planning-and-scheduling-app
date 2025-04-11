@@ -9,9 +9,9 @@
 // import 'package:zamaan/core/services/hive/hive_services.dart';
 // import 'package:zamaan/core/utils/uuid.dart';
 // import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
-// import 'package:zamaan/features/main_task/data/models/main_task_local_model.dart';
-// import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
-// import 'package:zamaan/features/main_task/data/sources/hive_main_task_data_source_impl.dart';
+// import 'package:zamaan/features/task/data/models/main_task_local_model.dart';
+// import 'package:zamaan/features/task/data/sources/hive_main_task_data_source_impl.dart';
+// import 'package:zamaan/features/task/data/sources/hive_main_task_data_source_impl.dart';
 // import 'package:zamaan/features/tasks_management/data/models/local/hive/main_task_hive_model.dart';
 // >>>>>>> temp-branch
 

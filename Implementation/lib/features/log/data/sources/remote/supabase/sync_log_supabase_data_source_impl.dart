@@ -14,7 +14,7 @@ class SyncLogSupabaseDataSourceImpl implements SyncLogDataSource<SyncLogSupabase
   EResultFutureVoid createSyncLogs(List<SyncLogSupabaseModel> syncLogs) async => tryCatchEither(
         action: () async {
           await _supabaseClient.from('sync_logs').insert(
-                syncLogs.map((e) => e.toJson()).toList(),
+                syncLogs.map((e) => e.toJson).toList(),
               );
           return const Right(null);
         },
@@ -22,16 +22,12 @@ class SyncLogSupabaseDataSourceImpl implements SyncLogDataSource<SyncLogSupabase
       );
 
   @override
-  EResultFuture<List<SyncLogSupabaseModel>> getUnsyncedLogs({
-    required String userId,
-    required String deviceId,
-  }) async =>
+  EResultFuture<List<SyncLogSupabaseModel>> getUnsyncedLogs(String deviceId) async =>
       tryCatchEither<List<SyncLogSupabaseModel>>(
         action: () async {
           final logs = await _supabaseClient
               .from('sync_logs')
               .select()
-              .eq('user_id', userId)
               .eq('device_id', deviceId)
               .eq('is_synced', false);
           return Right(
@@ -46,14 +42,9 @@ class SyncLogSupabaseDataSourceImpl implements SyncLogDataSource<SyncLogSupabase
       );
 
   @override
-  EResultFutureVoid markSyncLogAsSynced({required String userId, required String deviceId}) async =>
-      tryCatchEither(
+  EResultFutureVoid markSyncLogAsSynced(String syncLogId) async => tryCatchEither(
         action: () async {
-          await _supabaseClient
-              .from('sync_logs')
-              .update({'is_synced': true})
-              .eq('user_id', userId)
-              .eq('device_id', deviceId);
+          await _supabaseClient.from('sync_logs').update({'is_synced': true}).eq('id', syncLogId);
           return const Right(null);
         },
         failureType: FailureType.remote,

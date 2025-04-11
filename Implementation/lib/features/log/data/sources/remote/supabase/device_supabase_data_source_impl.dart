@@ -6,15 +6,15 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart';
 import 'package:zamaan/features/log/data/sources/base/device_data_source.dart';
 
-class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceSupabaseModel> {
-  DeviceHiveDataSourceImpl(this._supabaseClient);
+class DeviceSupabaseDataSourceImpl implements DeviceDataSource<DeviceSupabaseModel> {
+  DeviceSupabaseDataSourceImpl(this._supabaseClient);
   final SupabaseClient _supabaseClient;
 
   @override
-  EResultFuture<List<DeviceSupabaseModel>> getDevices(String? userId) async =>
+  EResultFuture<List<DeviceSupabaseModel>> getDevices({bool fromLocal = false}) async =>
       tryCatchEither<List<DeviceSupabaseModel>>(
         action: () async {
-          final devices = await _supabaseClient.from('devices').select().eq('user_id', userId!);
+          final devices = await _supabaseClient.from('devices').select();
           return Right(devices.map(DeviceSupabaseModel.fromJson).toList());
         },
         failureType: FailureType.remote,
@@ -31,13 +31,9 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceSupabaseModel> 
       );
 
   @override
-  EResultFutureVoid unregisterDevice({
-    required String id,
-    String? userId,
-  }) async =>
-      tryCatchEither(
+  EResultFutureVoid unregisterDevice(String id) async => tryCatchEither(
         action: () async {
-          await _supabaseClient.from('devices').delete().eq('id', id).eq('user_id', userId!);
+          await _supabaseClient.from('devices').delete().eq('id', id);
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -52,6 +48,19 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceSupabaseModel> 
               .eq('id', device.id)
               .eq('user_id', device.userId);
           return const Right(null);
+        },
+        failureType: FailureType.remote,
+      );
+
+  @override
+  EResultFuture<DeviceSupabaseModel> getDeviceById({
+    required String id,
+    bool fromLocal = false,
+  }) async =>
+      tryCatchEither<DeviceSupabaseModel>(
+        action: () async {
+          final device = await _supabaseClient.from('devices').select().eq('id', id).single();
+          return Right(DeviceSupabaseModel.fromJson(device));
         },
         failureType: FailureType.remote,
       );

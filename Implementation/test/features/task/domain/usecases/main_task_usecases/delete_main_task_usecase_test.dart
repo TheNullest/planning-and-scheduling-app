@@ -3,9 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/goal_entity.dart';
-import 'package:zamaan/domain/repositories/main_task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/main_task/delete_main_task_usecase.dart';
+import 'package:zamaan/domain/entities/goal.dart';
+import 'package:zamaan/domain/repositories/task_repository.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/delete_task_usecase.dart';
 
 import '_main_task_repository.mock.dart';
 
@@ -22,8 +22,7 @@ void main() {
       '[mainTask.deleteUsecase] must call the [MainTaskRepository.deleteEntity] and delete the entity then return the Right value',
       () async {
 // Arrange
-    when(() => repository.deleteEntity(id: params))
-        .thenAnswer((_) async => const Right(null));
+    when(() => repository.deleteEntity(id: params)).thenAnswer((_) async => const Right(null));
 
 // Act
     final actual = await useCase(params);

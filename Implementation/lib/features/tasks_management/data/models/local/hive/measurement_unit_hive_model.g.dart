@@ -18,7 +18,7 @@ class MeasurementUnitHiveModelAdapter extends HiveBaseTypeAdapter<MeasurementUni
     };
     return MeasurementUnitHiveModel(
       title: fields[11] as String,
-      iconCode: fields[13] as int,
+      iconCode: fields[13] as String,
       id: fields[0] as String?,
       updatedAt: fields[4] as DateTime?,
       description: fields[3] as String?,
