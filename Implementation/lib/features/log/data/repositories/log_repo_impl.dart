@@ -20,21 +20,10 @@ class LogRepoImpl implements LogRepository<LogEntity> {
   final LogDataSource<LogHiveModel> _logHiveDataSource;
 
   @override
-  EResultFutureVoid createBulkLogs(List<LogEntity> logs) async => tryCatchEither(
+  EResultFutureVoid createLogs(List<LogEntity> logs) async => tryCatchEither(
         action: () async {
-          await _logSupabaseDataSource
-              .createBulkLogs(logs.map(LogSupabaseModel.fromEntity).toList());
-          await _logHiveDataSource.createBulkLogs(logs.map(LogHiveModel.fromEntity).toList());
-          return const Right(null);
-        },
-        failureType: FailureType.local,
-      );
-
-  @override
-  EResultFutureVoid createLog(LogEntity log) async => tryCatchEither(
-        action: () async {
-          await _logSupabaseDataSource.createLog(LogSupabaseModel.fromEntity(log));
-          await _logHiveDataSource.createLog(LogHiveModel.fromEntity(log));
+          await _logSupabaseDataSource.createLogs(logs.map(LogSupabaseModel.fromEntity).toList());
+          await _logHiveDataSource.createLogs(logs.map(LogHiveModel.fromEntity).toList());
           return const Right(null);
         },
         failureType: FailureType.local,
@@ -42,20 +31,24 @@ class LogRepoImpl implements LogRepository<LogEntity> {
 
   @override
   EResultFuture<List<LogEntity>> getLogs({
+    required bool fromLocal,
     String? userId,
     List<String>? logIds,
-    bool fromLocal = true,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {
           if (fromLocal) {
-            final response = await _logHiveDataSource.getLogs(logIds: logIds);
+            final response = await _logHiveDataSource.getLogs(logIds: logIds, fromLocal: fromLocal);
             final hiveModels = foldEither<List<LogHiveModel>>(response);
             final result = hiveModels.map((item) => item.toEntity()).toList();
             return Right(result);
           }
 
-          final response = await _logSupabaseDataSource.getLogs(userId: userId, logIds: logIds);
+          final response = await _logSupabaseDataSource.getLogs(
+            userId: userId,
+            logIds: logIds,
+            fromLocal: fromLocal,
+          );
           final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();
           return Right(result);

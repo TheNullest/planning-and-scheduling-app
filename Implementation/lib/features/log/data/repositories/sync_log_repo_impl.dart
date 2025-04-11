@@ -42,13 +42,13 @@ class SyncLogRepoImpl implements SyncLogRepository<SyncLogEntity> {
       );
 
   @override
-  EResultFutureVoid markDeviceAsSynced({
+  EResultFutureVoid markSyncLogAsSynced({
     required String deviceId,
     required String userId,
   }) async =>
       tryCatchEither(
         action: () async {
-          await _syncLogSupabaseDataSource.markDeviceAsSynced(userId: userId, deviceId: deviceId);
+          await _syncLogSupabaseDataSource.markSyncLogAsSynced(userId: userId, deviceId: deviceId);
           return const Right(null);
         },
         failureType: FailureType.local,

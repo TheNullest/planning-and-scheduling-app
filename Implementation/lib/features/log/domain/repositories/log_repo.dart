@@ -19,7 +19,7 @@ import 'package:zamaan/features/log/domain/entities/log.dart';
 ///     - [LogSupabaseModel]: Direct mapping to Supabase tables
 ///     - [LogHiveModel]: Local storage format for offline access
 abstract class LogRepository<T> {
-  /// Creates a log entry in the appropriate storage layer.
+  /// Creates log entries in the appropriate storage layer.
   ///
   /// Behavior depends on type parameter [T]:
   /// - [LogSupabaseModel]: Cloud-only write (SyncLogs included)
@@ -27,37 +27,28 @@ abstract class LogRepository<T> {
   /// - [LogEntity]: Requires conversion to specific model first
   ///
   /// Parameters:
-  /// - [log]: Entry to create (type must match repository specialization)
+  /// - [logs]: Entries to create (type must match repository specialization)
   ///
   /// Returns:
   /// - [EResultFutureVoid]:
-  ///   - Success: Entry persisted in target storage
+  ///   - Success: Logs persisted in target storage
   ///   - Failure: Storage-specific errors (network, DB constraints, etc.)
   ///
-  /// Example:
-  /// ```dart
-  /// // Cloud SyncLog creation
-  /// createLog(SyncLogSupabaseModel(...));
-  ///
-  /// // Local log creation
-  /// createLog(LogHiveModel(...));
-  /// ```
-  EResultFutureVoid createLog(T log);
-
   /// Bulk writes logs to target storage with atomic guarantees.
   ///
   /// Implementation Requirements:
   /// - Local: Single transaction for all entries
   /// - Cloud: Batch insert with rollback on failure
   ///
-  /// Parameters:
-  /// - [logs]: Entries to create (must be storage-layer compatible)
+  /// Example:
+  /// ```dart
+  /// // Cloud SyncLog creation
+  /// createLogs([SyncLogSupabaseModel(...), SyncLogSupabaseModel(...)]); // Example for bulk creation
   ///
-  /// Returns:
-  /// - [EResultFutureVoid]:
-  ///   - Success: All entries persisted
-  ///   - Failure: No entries persisted (atomic failure)
-  EResultFutureVoid createBulkLogs(List<T> logs);
+  /// // Local log creation
+  /// createLogs([LogHiveModel(...), LogHiveModel(...)]); // Example for bulk creation
+  /// ```
+  EResultFutureVoid createLogs(List<T> logs);
 
   /// Unified log retrieval with storage-layer switching.
   ///
@@ -66,7 +57,7 @@ abstract class LogRepository<T> {
   /// |--------------|---------------------------------------|-----------------------------------|
   /// | [userId]     | Ignored (single-user assumption)       | Required (RLS enforcement)        |
   /// | [logIds]     | Not supported                          | Filters specific SyncLog entries  |
-  /// | Return Type  | List<LogHiveModel>                     | List<LogSupabaseModel>            |
+  /// | Return Type  | `List<LogHiveModel>`                     | `List<LogSupabaseModel>`            |
   ///
   /// Parameters:
   /// - [fromLocal]: Storage selection flag
@@ -87,9 +78,9 @@ abstract class LogRepository<T> {
   /// getLogs(userId: "supa-user-123", logIds: ["sync1"], fromLocal: false);
   /// ```
   EResultFuture<List<T>> getLogs({
+    required bool fromLocal,
     String? userId,
     List<String>? logIds,
-    bool fromLocal = true,
   });
 
   /// Time-based log retrieval with cross-layer consistency.

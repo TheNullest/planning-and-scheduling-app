@@ -13,7 +13,7 @@ class SyncLogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
   String get _boxName => HiveBoxConstants.syncLogsBox;
 
   @override
-  EResultFutureVoid createBulkLogs(List<LogHiveModel> logs) async => tryCatchEither(
+  EResultFutureVoid createLogs(List<LogHiveModel> logs) async => tryCatchEither(
         action: () async => _hiveBox.operator(
           job: (box) async {
             await box.addAll(logs);
@@ -24,21 +24,10 @@ class SyncLogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
       );
 
   @override
-  EResultFutureVoid createLog(LogHiveModel log) async => tryCatchEither(
-        action: () async => _hiveBox.operator(
-          job: (box) async {
-            await box.add(log);
-          },
-          boxName: _boxName,
-        ),
-        failureType: FailureType.local,
-      );
-
-  @override
   EResultFuture<List<LogHiveModel>> getLogs({
+    required bool fromLocal,
     String? userId,
     List<String>? logIds,
-    bool fromLocal = true,
   }) async =>
       tryCatchEither<List<LogHiveModel>>(
         action: () async => _hiveBox.operator<List<LogHiveModel>>(

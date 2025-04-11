@@ -12,18 +12,9 @@ class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
   final SupabaseClient _supabaseClient;
 
   @override
-  EResultFutureVoid createBulkLogs(List<LogSupabaseModel> logs) async => tryCatchEither(
+  EResultFutureVoid createLogs(List<LogSupabaseModel> logs) async => tryCatchEither(
         action: () async {
           await _supabaseClient.from('logs').insert(logs);
-          return const Right(null);
-        },
-        failureType: FailureType.remote,
-      );
-
-  @override
-  EResultFutureVoid createLog(LogSupabaseModel log) async => tryCatchEither(
-        action: () async {
-          await _supabaseClient.from('logs').insert(log);
           return const Right(null);
         },
         failureType: FailureType.remote,

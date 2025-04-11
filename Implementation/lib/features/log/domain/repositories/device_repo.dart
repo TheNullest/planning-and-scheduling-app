@@ -1,4 +1,7 @@
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/features/log/data/models/local/hive/device.dart' show DeviceHiveModel;
+import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart' show DeviceSupabaseModel;
+import 'package:zamaan/features/log/domain/entities/device.dart' show DeviceEntity;
 
 /// An abstract interface for managing device operations.
 ///

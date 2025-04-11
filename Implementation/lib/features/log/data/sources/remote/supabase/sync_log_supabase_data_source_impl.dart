@@ -46,7 +46,7 @@ class SyncLogSupabaseDataSourceImpl implements SyncLogDataSource<SyncLogSupabase
       );
 
   @override
-  EResultFutureVoid markDeviceAsSynced({required String userId, required String deviceId}) async =>
+  EResultFutureVoid markSyncLogAsSynced({required String userId, required String deviceId}) async =>
       tryCatchEither(
         action: () async {
           await _supabaseClient

@@ -47,7 +47,7 @@ abstract class SyncLogRepository<T> {
   /// - [EResultFutureVoid]:
   ///   - Success: Empty result.
   ///   - Failure: Partial updates, transaction conflicts, or policy violations.
-  EResultFutureVoid markDeviceAsSynced({
+  EResultFutureVoid markSyncLogAsSynced({
     required String userId,
     required String deviceId,
   });
