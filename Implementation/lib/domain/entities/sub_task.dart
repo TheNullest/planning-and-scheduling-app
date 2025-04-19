@@ -12,6 +12,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
     super.description,
     this.priority = 0, // Replace with the actual index of [Priority.optional]
     this.status = 0, // Replace with the actual index of [Status.notStarted]
+    this.totalSpentTime,
   });
 
   SubTaskEntity.empty() : this(taskId: '1', title: 'title');
@@ -31,6 +32,10 @@ class SubTaskEntity extends BaseEntityAbstraction {
   @HiveField(14)
   final int status;
 
+  @HiveField(15)
+  final Duration? totalSpentTime;
+
+
   SubTaskEntity toEntity() => SubTaskEntity(
         id: id,
         updatedAt: updatedAt,
@@ -41,6 +46,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
         title: title,
         priority: priority,
         status: status,
+        totalSpentTime: totalSpentTime,
       );
 
   @override
@@ -48,6 +54,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
     String? id,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Duration? totalSpentTime,
     String? userId,
     String? description,
     String? taskId,
@@ -65,6 +72,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
         title: title ?? this.title,
         priority: priority ?? this.priority,
         status: status ?? this.status,
+        totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       );
 
   @override
@@ -74,5 +82,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
         title,
         priority,
         status,
+        totalSpentTime,
       ];
 }

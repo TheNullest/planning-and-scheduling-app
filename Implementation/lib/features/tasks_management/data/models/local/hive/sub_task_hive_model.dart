@@ -19,6 +19,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
     super.userId,
     super.priority,
     super.status,
+    super.totalSpentTime,
   }) : super();
 
   // For the purpose of testing
@@ -34,6 +35,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
         title: entity.title,
         priority: entity.priority,
         status: entity.status,
+        totalSpentTime: entity.totalSpentTime,
       );
 
   @override
@@ -41,6 +43,7 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
     String? id,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Duration? totalSpentTime,
     String? userId,
     String? description,
     String? taskId,
@@ -58,5 +61,6 @@ class SubTaskHiveModel extends SubTaskEntity with HiveObjectMixin {
         title: title ?? this.title,
         priority: priority ?? this.priority,
         status: status ?? this.status,
+        totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       );
 }

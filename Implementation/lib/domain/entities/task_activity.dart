@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 /// Represents a time interval entity with details about tasks and time spent.
@@ -24,10 +25,11 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     super.description,
     this.scheduledTaskId,
     this.dueDate,
-    this.fixedTagIds,
+    this.variableTagIds,
     Duration? spentTime,
-    this.isPaused = false,
-  }) : spentTime = (dueDate != null && spentTime == null)
+    String? taskStatus,
+  })  : taskStatus = taskStatus ?? TaskStatus.scheduled.displayName,
+        spentTime = (dueDate != null && spentTime == null)
             ? (dueDate.isAfter(startAt)
                 ? dueDate.difference(startAt)
                 : throw ArgumentError('endAt must be after startAt'))
@@ -63,13 +65,13 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   final Duration? spentTime;
 
   @HiveField(16)
-  final List<String>? fixedTagIds;
+  final List<String>? variableTagIds;
 
   @HiveField(17)
   final String? scheduledTaskId;
 
   @HiveField(18)
-  final bool isPaused;
+  final String taskStatus;
 
   @override
   TaskActivityEntity copyWith({
@@ -84,8 +86,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     String? scheduledTaskId,
     DateTime? startAt,
     DateTime? dueDate,
-    List<String>? fixedTagIds,
-    bool? isPaused,
+    List<String>? variableTagIds,
+    String? taskStatus,
   }) =>
       TaskActivityEntity(
         id: id ?? this.id,
@@ -97,8 +99,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         subTaskId: subTaskId ?? this.subTaskId,
         startAt: startAt ?? this.startAt,
         dueDate: dueDate ?? this.dueDate,
-        fixedTagIds: fixedTagIds ?? this.fixedTagIds,
-        isPaused: isPaused ?? this.isPaused,
+        variableTagIds: variableTagIds ?? this.variableTagIds,
+        taskStatus: taskStatus ?? this.taskStatus,
         scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
       );
 
@@ -113,8 +115,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         startAt: startAt,
         dueDate: dueDate,
         spentTime: spentTime,
-        fixedTagIds: fixedTagIds,
-        isPaused: isPaused,
+        variableTagIds: variableTagIds,
+        taskStatus: taskStatus,
         scheduledTaskId: scheduledTaskId,
       );
 
@@ -130,7 +132,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         startAt,
         dueDate,
         spentTime,
-        isPaused,
+        taskStatus,
         scheduledTaskId,
       ];
 }

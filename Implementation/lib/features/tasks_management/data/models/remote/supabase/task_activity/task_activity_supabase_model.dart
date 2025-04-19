@@ -15,7 +15,7 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
     @JsonKey(name: 'sub_task_id') required String subTaskId,
     @JsonKey(name: 'start_at') required DateTime startAt,
     required String? id,
-    @JsonKey(defaultValue: false, name: 'is_paused') required bool isPaused,
+    @JsonKey(name: 'task_status') required String taskStatus,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? description,
     @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -47,7 +47,7 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
         userId: entity.userId,
         dueDate: entity.dueDate,
         spentTime: entity.spentTime,
-        isPaused: entity.isPaused,
+        taskStatus: entity.taskStatus,
         scheduledTaskId: entity.scheduledTaskId,
       );
 

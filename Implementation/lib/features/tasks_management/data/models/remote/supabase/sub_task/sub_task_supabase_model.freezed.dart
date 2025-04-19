@@ -20,7 +20,7 @@ SubTaskSupabaseModel _$SubTaskSupabaseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SubTaskSupabaseModel {
-  @JsonKey(name: 'main_task_id')
+  @JsonKey(name: 'task_id')
   String get taskId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
@@ -31,6 +31,8 @@ mixin _$SubTaskSupabaseModel {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String? get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_spent_time')
+  Duration? get totalSpentTime => throw _privateConstructorUsedError;
   int? get priority => throw _privateConstructorUsedError;
   int? get status => throw _privateConstructorUsedError;
 
@@ -51,13 +53,14 @@ abstract class $SubTaskSupabaseModelCopyWith<$Res> {
       _$SubTaskSupabaseModelCopyWithImpl<$Res, SubTaskSupabaseModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'main_task_id') String taskId,
+      {@JsonKey(name: 'task_id') String taskId,
       String title,
       String? id,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
       int? priority,
       int? status});
 }
@@ -85,6 +88,7 @@ class _$SubTaskSupabaseModelCopyWithImpl<$Res,
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
+    Object? totalSpentTime = freezed,
     Object? priority = freezed,
     Object? status = freezed,
   }) {
@@ -117,6 +121,10 @@ class _$SubTaskSupabaseModelCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      totalSpentTime: freezed == totalSpentTime
+          ? _value.totalSpentTime
+          : totalSpentTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
       priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
@@ -138,13 +146,14 @@ abstract class _$$SubTaskSupabaseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'main_task_id') String taskId,
+      {@JsonKey(name: 'task_id') String taskId,
       String title,
       String? id,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
       int? priority,
       int? status});
 }
@@ -169,6 +178,7 @@ class __$$SubTaskSupabaseModelImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
+    Object? totalSpentTime = freezed,
     Object? priority = freezed,
     Object? status = freezed,
   }) {
@@ -201,6 +211,10 @@ class __$$SubTaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      totalSpentTime: freezed == totalSpentTime
+          ? _value.totalSpentTime
+          : totalSpentTime // ignore: cast_nullable_to_non_nullable
+              as Duration?,
       priority: freezed == priority
           ? _value.priority
           : priority // ignore: cast_nullable_to_non_nullable
@@ -217,13 +231,14 @@ class __$$SubTaskSupabaseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
   const _$SubTaskSupabaseModelImpl(
-      {@JsonKey(name: 'main_task_id') required this.taskId,
+      {@JsonKey(name: 'task_id') required this.taskId,
       required this.title,
       required this.id,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.description,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'total_spent_time') this.totalSpentTime,
       this.priority,
       this.status});
 
@@ -231,7 +246,7 @@ class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
       _$$SubTaskSupabaseModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'main_task_id')
+  @JsonKey(name: 'task_id')
   final String taskId;
   @override
   final String title;
@@ -249,13 +264,16 @@ class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
   @JsonKey(name: 'user_id')
   final String? userId;
   @override
+  @JsonKey(name: 'total_spent_time')
+  final Duration? totalSpentTime;
+  @override
   final int? priority;
   @override
   final int? status;
 
   @override
   String toString() {
-    return 'SubTaskSupabaseModel(taskId: $taskId, title: $title, id: $id, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, priority: $priority, status: $status)';
+    return 'SubTaskSupabaseModel(taskId: $taskId, title: $title, id: $id, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, totalSpentTime: $totalSpentTime, priority: $priority, status: $status)';
   }
 
   @override
@@ -273,6 +291,8 @@ class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.totalSpentTime, totalSpentTime) ||
+                other.totalSpentTime == totalSpentTime) &&
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
             (identical(other.status, status) || other.status == status));
@@ -281,7 +301,7 @@ class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, taskId, title, id, updatedAt,
-      description, createdAt, userId, priority, status);
+      description, createdAt, userId, totalSpentTime, priority, status);
 
   /// Create a copy of SubTaskSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -303,13 +323,14 @@ class _$SubTaskSupabaseModelImpl implements _SubTaskSupabaseModel {
 
 abstract class _SubTaskSupabaseModel implements SubTaskSupabaseModel {
   const factory _SubTaskSupabaseModel(
-      {@JsonKey(name: 'main_task_id') required final String taskId,
+      {@JsonKey(name: 'task_id') required final String taskId,
       required final String title,
       required final String? id,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? description,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'user_id') final String? userId,
+      @JsonKey(name: 'total_spent_time') final Duration? totalSpentTime,
       final int? priority,
       final int? status}) = _$SubTaskSupabaseModelImpl;
 
@@ -317,7 +338,7 @@ abstract class _SubTaskSupabaseModel implements SubTaskSupabaseModel {
       _$SubTaskSupabaseModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'main_task_id')
+  @JsonKey(name: 'task_id')
   String get taskId;
   @override
   String get title;
@@ -334,6 +355,9 @@ abstract class _SubTaskSupabaseModel implements SubTaskSupabaseModel {
   @override
   @JsonKey(name: 'user_id')
   String? get userId;
+  @override
+  @JsonKey(name: 'total_spent_time')
+  Duration? get totalSpentTime;
   @override
   int? get priority;
   @override

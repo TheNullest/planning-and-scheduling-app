@@ -40,8 +40,6 @@ mixin _$ScheduledTaskSupabaseModel {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String? get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'goal_id')
-  String? get goalId => throw _privateConstructorUsedError;
   @JsonKey(name: 'will_start_at')
   DateTime? get willStartAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'due_at')
@@ -78,7 +76,6 @@ abstract class $ScheduledTaskSupabaseModelCopyWith<$Res> {
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'goal_id') String? goalId,
       @JsonKey(name: 'will_start_at') DateTime? willStartAt,
       @JsonKey(name: 'due_at') DateTime? dueDate});
 }
@@ -108,7 +105,6 @@ class _$ScheduledTaskSupabaseModelCopyWithImpl<$Res,
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
-    Object? goalId = freezed,
     Object? willStartAt = freezed,
     Object? dueDate = freezed,
   }) {
@@ -149,10 +145,6 @@ class _$ScheduledTaskSupabaseModelCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      goalId: freezed == goalId
-          ? _value.goalId
-          : goalId // ignore: cast_nullable_to_non_nullable
-              as String?,
       willStartAt: freezed == willStartAt
           ? _value.willStartAt
           : willStartAt // ignore: cast_nullable_to_non_nullable
@@ -188,7 +180,6 @@ abstract class _$$ScheduledTaskSupabaseModelImplCopyWith<$Res>
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'goal_id') String? goalId,
       @JsonKey(name: 'will_start_at') DateTime? willStartAt,
       @JsonKey(name: 'due_at') DateTime? dueDate});
 }
@@ -217,7 +208,6 @@ class __$$ScheduledTaskSupabaseModelImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
-    Object? goalId = freezed,
     Object? willStartAt = freezed,
     Object? dueDate = freezed,
   }) {
@@ -258,10 +248,6 @@ class __$$ScheduledTaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      goalId: freezed == goalId
-          ? _value.goalId
-          : goalId // ignore: cast_nullable_to_non_nullable
-              as String?,
       willStartAt: freezed == willStartAt
           ? _value.willStartAt
           : willStartAt // ignore: cast_nullable_to_non_nullable
@@ -291,7 +277,6 @@ class _$ScheduledTaskSupabaseModelImpl implements _ScheduledTaskSupabaseModel {
       this.description,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'user_id') this.userId,
-      @JsonKey(name: 'goal_id') this.goalId,
       @JsonKey(name: 'will_start_at') this.willStartAt,
       @JsonKey(name: 'due_at') this.dueDate})
       : _specificTimes = specificTimes;
@@ -337,9 +322,6 @@ class _$ScheduledTaskSupabaseModelImpl implements _ScheduledTaskSupabaseModel {
   @JsonKey(name: 'user_id')
   final String? userId;
   @override
-  @JsonKey(name: 'goal_id')
-  final String? goalId;
-  @override
   @JsonKey(name: 'will_start_at')
   final DateTime? willStartAt;
   @override
@@ -348,7 +330,7 @@ class _$ScheduledTaskSupabaseModelImpl implements _ScheduledTaskSupabaseModel {
 
   @override
   String toString() {
-    return 'ScheduledTaskSupabaseModel(id: $id, taskId: $taskId, repetitionType: $repetitionType, specificTimes: $specificTimes, timeUnit: $timeUnit, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, goalId: $goalId, willStartAt: $willStartAt, dueDate: $dueDate)';
+    return 'ScheduledTaskSupabaseModel(id: $id, taskId: $taskId, repetitionType: $repetitionType, specificTimes: $specificTimes, timeUnit: $timeUnit, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, willStartAt: $willStartAt, dueDate: $dueDate)';
   }
 
   @override
@@ -371,7 +353,6 @@ class _$ScheduledTaskSupabaseModelImpl implements _ScheduledTaskSupabaseModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.goalId, goalId) || other.goalId == goalId) &&
             (identical(other.willStartAt, willStartAt) ||
                 other.willStartAt == willStartAt) &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate));
@@ -390,7 +371,6 @@ class _$ScheduledTaskSupabaseModelImpl implements _ScheduledTaskSupabaseModel {
       description,
       createdAt,
       userId,
-      goalId,
       willStartAt,
       dueDate);
 
@@ -427,7 +407,6 @@ abstract class _ScheduledTaskSupabaseModel
       final String? description,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'user_id') final String? userId,
-      @JsonKey(name: 'goal_id') final String? goalId,
       @JsonKey(name: 'will_start_at') final DateTime? willStartAt,
       @JsonKey(name: 'due_at')
       final DateTime? dueDate}) = _$ScheduledTaskSupabaseModelImpl;
@@ -463,9 +442,6 @@ abstract class _ScheduledTaskSupabaseModel
   @override
   @JsonKey(name: 'user_id')
   String? get userId;
-  @override
-  @JsonKey(name: 'goal_id')
-  String? get goalId;
   @override
   @JsonKey(name: 'will_start_at')
   DateTime? get willStartAt;

@@ -17,7 +17,6 @@ Map<String, dynamic> _$ScheduledTaskSupabaseModelToJson(
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
       'user_id': instance.userId,
-      'goal_id': instance.goalId,
       'will_start_at': instance.willStartAt?.toIso8601String(),
       'due_at': instance.dueDate?.toIso8601String(),
     };
@@ -39,7 +38,6 @@ _$ScheduledTaskSupabaseModelImpl _$$ScheduledTaskSupabaseModelImplFromJson(
           ? null
           : DateTime.parse(json['created_at'] as String),
       userId: json['user_id'] as String?,
-      goalId: json['goal_id'] as String?,
       willStartAt: json['will_start_at'] == null
           ? null
           : DateTime.parse(json['will_start_at'] as String),
@@ -59,7 +57,6 @@ Map<String, dynamic> _$$ScheduledTaskSupabaseModelImplToJson(
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
       'user_id': instance.userId,
-      'goal_id': instance.goalId,
       'will_start_at': instance.willStartAt?.toIso8601String(),
       'due_at': instance.dueDate?.toIso8601String(),
     };

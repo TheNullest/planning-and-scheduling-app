@@ -3,7 +3,7 @@
 part of 'sub_task_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
@@ -26,13 +26,14 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       userId: fields[1] as String?,
       priority: fields[12] as int,
       status: fields[14] as int,
+      totalSpentTime: fields[15] as Duration?,
     );
   }
 
   @override
   void write(BinaryWriter writer, SubTaskHiveModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
@@ -41,6 +42,8 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       ..write(obj.title)
       ..writeByte(14)
       ..write(obj.status)
+      ..writeByte(15)
+      ..write(obj.totalSpentTime)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

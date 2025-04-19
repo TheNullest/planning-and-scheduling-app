@@ -25,7 +25,6 @@ class ScheduledTaskMapper
           userId: model.userId,
           taskId: model.taskId,
           dueDate: model.dueDate,
-          goalId: model.goalId,
           repetitionType: model.repetitionType,
           specificTimes: [],
           timeUnit: model.timeUnit,

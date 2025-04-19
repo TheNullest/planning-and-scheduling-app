@@ -3,11 +3,10 @@
 part of 'scheduled_task_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduledTaskHiveModelAdapter
-    extends HiveBaseTypeAdapter<ScheduledTaskHiveModel> {
+class ScheduledTaskHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledTaskHiveModel> {
   @override
   final int typeId = 5;
 
@@ -24,32 +23,29 @@ class ScheduledTaskHiveModelAdapter
       description: fields[3] as String?,
       createdAt: fields[2] as DateTime?,
       userId: fields[1] as String?,
-      goalId: fields[12] as String?,
-      willStartAt: fields[13] as DateTime?,
-      dueDate: fields[17] as DateTime?,
-      repetitionType: fields[14] as String?,
-      timeUnit: fields[15] as String?,
-      specificTimes: (fields[16] as List?)?.cast<int>(),
+      willStartAt: fields[12] as DateTime?,
+      dueDate: fields[16] as DateTime?,
+      repetitionType: fields[13] as String?,
+      timeUnit: fields[14] as String?,
+      specificTimes: (fields[15] as List?)?.cast<int>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, ScheduledTaskHiveModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(11)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
-      ..write(obj.goalId)
-      ..writeByte(13)
       ..write(obj.willStartAt)
-      ..writeByte(14)
+      ..writeByte(13)
       ..write(obj.repetitionType)
-      ..writeByte(15)
+      ..writeByte(14)
       ..write(obj.timeUnit)
-      ..writeByte(16)
+      ..writeByte(15)
       ..write(obj.specificTimes)
-      ..writeByte(17)
+      ..writeByte(16)
       ..write(obj.dueDate)
       ..writeByte(0)
       ..write(obj.id)

@@ -21,8 +21,8 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
     super.userId,
     super.dueDate,
     super.spentTime,
-    super.isPaused,
-    super.fixedTagIds,
+    super.taskStatus,
+    super.variableTagIds,
   }) : super();
   factory TaskActivityHiveModel.fromEntity(TaskActivityEntity entity) => TaskActivityHiveModel(
         id: entity.id,
@@ -36,7 +36,7 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
         startAt: entity.startAt,
         dueDate: entity.dueDate,
         spentTime: entity.spentTime,
-        fixedTagIds: entity.fixedTagIds,
+        variableTagIds: entity.variableTagIds,
       );
 
   // For the purpose of testing
@@ -54,8 +54,8 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
     String? subTaskId,
     DateTime? startAt,
     DateTime? dueDate,
-    List<String>? fixedTagIds,
-    bool? isPaused,
+    List<String>? variableTagIds,
+    String? taskStatus,
     String? scheduledTaskId,
   }) =>
       TaskActivityHiveModel(
@@ -68,8 +68,8 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
         subTaskId: subTaskId ?? this.subTaskId,
         startAt: startAt ?? this.startAt,
         dueDate: dueDate ?? this.dueDate,
-        fixedTagIds: fixedTagIds ?? this.fixedTagIds,
-        isPaused: isPaused ?? this.isPaused,
+        variableTagIds: variableTagIds ?? this.variableTagIds,
+        taskStatus: taskStatus ?? this.taskStatus,
         scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
       );
 }

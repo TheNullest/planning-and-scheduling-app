@@ -28,8 +28,8 @@ mixin _$TaskActivitySupabaseModel {
   @JsonKey(name: 'start_at')
   DateTime get startAt => throw _privateConstructorUsedError;
   String? get id => throw _privateConstructorUsedError;
-  @JsonKey(defaultValue: false, name: 'is_paused')
-  bool get isPaused => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false, name: 'task_status')
+  String get taskStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -66,7 +66,7 @@ abstract class $TaskActivitySupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'sub_task_id') String subTaskId,
       @JsonKey(name: 'start_at') DateTime startAt,
       String? id,
-      @JsonKey(defaultValue: false, name: 'is_paused') bool isPaused,
+      @JsonKey(defaultValue: false, name: 'task_status') String taskStatus,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -100,7 +100,7 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
     Object? subTaskId = null,
     Object? startAt = null,
     Object? id = freezed,
-    Object? isPaused = null,
+    Object? taskStatus = null,
     Object? updatedAt = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
@@ -126,10 +126,10 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      isPaused: null == isPaused
-          ? _value.isPaused
-          : isPaused // ignore: cast_nullable_to_non_nullable
-              as bool,
+      taskStatus: null == taskStatus
+          ? _value.taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
+              as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -176,7 +176,7 @@ abstract class _$$TaskActivitySupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'sub_task_id') String subTaskId,
       @JsonKey(name: 'start_at') DateTime startAt,
       String? id,
-      @JsonKey(defaultValue: false, name: 'is_paused') bool isPaused,
+      @JsonKey(defaultValue: false, name: 'task_status') String taskStatus,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
@@ -209,7 +209,7 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
     Object? subTaskId = null,
     Object? startAt = null,
     Object? id = freezed,
-    Object? isPaused = null,
+    Object? taskStatus = null,
     Object? updatedAt = freezed,
     Object? description = freezed,
     Object? createdAt = freezed,
@@ -235,10 +235,10 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      isPaused: null == isPaused
-          ? _value.isPaused
-          : isPaused // ignore: cast_nullable_to_non_nullable
-              as bool,
+      taskStatus: null == taskStatus
+          ? _value.taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
+              as String,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -279,7 +279,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       @JsonKey(name: 'sub_task_id') required this.subTaskId,
       @JsonKey(name: 'start_at') required this.startAt,
       required this.id,
-      @JsonKey(defaultValue: false, name: 'is_paused') required this.isPaused,
+      @JsonKey(defaultValue: false, name: 'task_status')
+      required this.taskStatus,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.description,
       @JsonKey(name: 'created_at') this.createdAt,
@@ -307,8 +308,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
   @override
   final String? id;
   @override
-  @JsonKey(defaultValue: false, name: 'is_paused')
-  final bool isPaused;
+  @JsonKey(defaultValue: false, name: 'task_status')
+  final String taskStatus;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -333,7 +334,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
 
   @override
   String toString() {
-    return 'TaskActivitySupabaseModel(taskId: $taskId, subTaskId: $subTaskId, startAt: $startAt, id: $id, isPaused: $isPaused, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, scheduledTaskId: $scheduledTaskId, dueDate: $dueDate, spentTime: $spentTime)';
+    return 'TaskActivitySupabaseModel(taskId: $taskId, subTaskId: $subTaskId, startAt: $startAt, id: $id, taskStatus: $taskStatus, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, scheduledTaskId: $scheduledTaskId, dueDate: $dueDate, spentTime: $spentTime)';
   }
 
   @override
@@ -346,8 +347,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
                 other.subTaskId == subTaskId) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.isPaused, isPaused) ||
-                other.isPaused == isPaused) &&
+            (identical(other.taskStatus, taskStatus) ||
+                other.taskStatus == taskStatus) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.description, description) ||
@@ -370,7 +371,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       subTaskId,
       startAt,
       id,
-      isPaused,
+      taskStatus,
       updatedAt,
       description,
       createdAt,
@@ -402,8 +403,8 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
       @JsonKey(name: 'sub_task_id') required final String subTaskId,
       @JsonKey(name: 'start_at') required final DateTime startAt,
       required final String? id,
-      @JsonKey(defaultValue: false, name: 'is_paused')
-      required final bool isPaused,
+      @JsonKey(defaultValue: false, name: 'task_status')
+      required final String taskStatus,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? description,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
@@ -431,8 +432,8 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
   @override
   String? get id;
   @override
-  @JsonKey(defaultValue: false, name: 'is_paused')
-  bool get isPaused;
+  @JsonKey(defaultValue: false, name: 'task_status')
+  String get taskStatus;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

@@ -27,7 +27,7 @@ class TaskActivityMapper
           startAt: model.startAt,
           dueDate: model.dueDate,
           subTaskId: model.subTaskId,
-          isPaused: model.isPaused,
+          taskStatus: model.taskStatus,
           spentTime: model.spentTime,
         ),
         failureType: FailureType.local,

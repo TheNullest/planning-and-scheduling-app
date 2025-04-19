@@ -33,8 +33,7 @@ class LogRepoImpl implements LogRepository<LogEntity> {
 
   @override
   EResultFuture<List<LogEntity>> getLogs({
-    List<String>? logIds,
-    required DataSourcePolicy policy,
+    required DataSourcePolicy policy, List<String>? logIds,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {

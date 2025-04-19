@@ -82,7 +82,7 @@ abstract interface class LogRepository<T> {
   /// // Retrieve cloud-based SyncLogs (type T = LogSupabaseModel) with filtering
   /// getLogs(isLocal(policy): false, logIds: ["sync1", "sync2"]);
   /// ```
-  EResultFuture<List<T>> getLogs({List<String>? logIds, required DataSourcePolicy policy});
+  EResultFuture<List<T>> getLogs({required DataSourcePolicy policy, List<String>? logIds});
 
   /// Retrieves logs based on a starting date while ensuring cross-layer consistency.
   ///

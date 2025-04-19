@@ -3,7 +3,7 @@
 part of 'task_activity_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
@@ -28,8 +28,8 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
       userId: fields[1] as String?,
       dueDate: fields[14] as DateTime?,
       spentTime: fields[15] as Duration?,
-      isPaused: fields[18] as bool,
-      fixedTagIds: (fields[16] as List?)?.cast<String>(),
+      taskStatus: fields[18] as String?,
+      variableTagIds: (fields[16] as List?)?.cast<String>(),
     );
   }
 
@@ -48,11 +48,11 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
       ..writeByte(15)
       ..write(obj.spentTime)
       ..writeByte(16)
-      ..write(obj.fixedTagIds)
+      ..write(obj.variableTagIds)
       ..writeByte(17)
       ..write(obj.scheduledTaskId)
       ..writeByte(18)
-      ..write(obj.isPaused)
+      ..write(obj.taskStatus)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

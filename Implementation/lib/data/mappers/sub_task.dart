@@ -24,6 +24,7 @@ class SubTaskMapper extends Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupab
           title: model.title,
           priority: model.priority!,
           status: model.status!,
+          totalSpentTime: model.totalSpentTime,
         ),
         failureType: FailureType.local,
       );

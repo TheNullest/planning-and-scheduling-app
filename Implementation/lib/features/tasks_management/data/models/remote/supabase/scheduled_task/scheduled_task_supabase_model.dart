@@ -22,7 +22,6 @@ class ScheduledTaskSupabaseModel with _$ScheduledTaskSupabaseModel {
     String? description,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'user_id') String? userId,
-    @JsonKey(name: 'goal_id') String? goalId,
     @JsonKey(name: 'will_start_at') DateTime? willStartAt,
     @JsonKey(name: 'due_at') DateTime? dueDate,
   }) = _ScheduledTaskSupabaseModel;
@@ -36,7 +35,6 @@ class ScheduledTaskSupabaseModel with _$ScheduledTaskSupabaseModel {
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        goalId: entity.goalId,
         willStartAt: entity.willStartAt,
         dueDate: entity.dueDate,
         repetitionType: entity.repetitionType,

@@ -10,7 +10,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   /// Constructor for creating a `ScheduledTaskEntity`.
   ///
   /// - [taskId] is the ID of the main task.
-  /// - [goalId] is the ID of the goal.
   /// - [willStartAt] is the start time of the task.
   /// - [repetitionType] is the type of repetition (default: RepetitionType.every).
   /// - [timeUnit] is the unit of time for the repetition (default: TimeUnit.day).
@@ -23,7 +22,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
     super.createdAt,
     super.userId,
     super.description,
-    this.goalId,
     this.willStartAt,
     this.dueDate,
     String? repetitionType,
@@ -44,13 +42,11 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   @HiveField(11)
   final String taskId;
 
-  @HiveField(12)
-  final String? goalId;
 
   /// The start time of the task.\
   /// This field indicates when the task is scheduled to start.\
   /// If the task has a specific start time, it should be set here.
-  @HiveField(13)
+  @HiveField(12)
   final DateTime? willStartAt;
 
   /// Retrieves scheduled times by their repetition type.
@@ -61,7 +57,7 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   /// - `1.RepetitionType.per`: Repeats per a specified interval and time unit.
   /// - `2.RepetitionType.interval`: Repeats at regular intervals of the specified time unit.
   /// - `3.RepetitionType.specificDateTimes`: Repeats on specific dateTimes.
-  @HiveField(14)
+  @HiveField(13)
   final String repetitionType;
 
   /// The unit of time for the repetition (default: TimeUnit.day).
@@ -73,14 +69,14 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   /// - `3.TimeUnit.week`: Represents a week.
   /// - `4.TimeUnit.month`: Represents a month.
   /// - `5.TimeUnit.year`: Represents a year.
-  @HiveField(15)
+  @HiveField(14)
   final String timeUnit;
 
   /// The specific times for the repetition (optional).
   ///
   /// - For `RepetitionType.every`: Specifies times like [10, 12, 16] o'clock every 2 days.
   /// - For `RepetitionType.specificDays`: Specifies days like [2, 3, 5] of each week or [10, 20, 25] of each month.
-  @HiveField(16)
+  @HiveField(15)
   final List<int>? specificTimes;
 
   /// **Conditional End Time:**
@@ -90,7 +86,7 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   ///   This signifies a fixed duration for the task.
   /// - If the task has no predefined end time, `dueDate` will be set later
   ///   when the task is actually completed. This indicates a dynamic duration.
-  @HiveField(17)
+  @HiveField(16)
   final DateTime? dueDate;
 
   @override
@@ -101,7 +97,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
     String? userId,
     String? description,
     String? taskId,
-    String? goalId,
     DateTime? willStartAt,
     DateTime? dueDate,
     String? repetitionType,
@@ -115,7 +110,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
         taskId: taskId ?? this.taskId,
-        goalId: goalId ?? this.goalId,
         willStartAt: willStartAt ?? this.willStartAt,
         dueDate: dueDate ?? this.dueDate,
         repetitionType: repetitionType ?? this.repetitionType,
@@ -130,7 +124,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
         createdAt: createdAt,
         userId: userId,
         taskId: taskId,
-        goalId: goalId,
         willStartAt: willStartAt,
         dueDate: dueDate,
         repetitionType: repetitionType,
@@ -143,7 +136,6 @@ class ScheduledTaskEntity extends BaseEntityAbstraction {
   List<Object?> get props => [
         ...super.props,
         taskId,
-        goalId,
         willStartAt,
         dueDate,
         repetitionType,

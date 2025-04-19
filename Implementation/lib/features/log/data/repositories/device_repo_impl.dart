@@ -22,7 +22,7 @@ class DeviceRepoImpl implements DeviceRepository<DeviceEntity> {
 
   @override
   EResultFuture<DeviceEntity?> getDeviceById(
-          {required String id, required DataSourcePolicy policy}) async =>
+          {required String id, required DataSourcePolicy policy,}) async =>
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
