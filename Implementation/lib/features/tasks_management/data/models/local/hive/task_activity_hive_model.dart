@@ -14,7 +14,7 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
     required super.subTaskId,
     required super.startAt,
     super.id,
-    super.taskSchedulerId,
+    super.scheduledTaskId,
     super.updatedAt,
     super.description,
     super.createdAt,
@@ -32,7 +32,7 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
         userId: entity.userId,
         taskId: entity.taskId,
         subTaskId: entity.subTaskId,
-        taskSchedulerId: entity.taskSchedulerId,
+        scheduledTaskId: entity.scheduledTaskId,
         startAt: entity.startAt,
         dueDate: entity.dueDate,
         spentTime: entity.spentTime,
@@ -56,7 +56,7 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
     DateTime? dueDate,
     List<String>? fixedTagIds,
     bool? isPaused,
-    String? taskSchedulerId,
+    String? scheduledTaskId,
   }) =>
       TaskActivityHiveModel(
         id: id ?? this.id,
@@ -70,6 +70,6 @@ class TaskActivityHiveModel extends TaskActivityEntity with HiveObjectMixin {
         dueDate: dueDate ?? this.dueDate,
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         isPaused: isPaused ?? this.isPaused,
-        taskSchedulerId: taskSchedulerId ?? this.taskSchedulerId,
+        scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
       );
 }

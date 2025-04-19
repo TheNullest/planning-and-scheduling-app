@@ -11,5 +11,5 @@ abstract class TaskDataSource<Model> extends BaseDataSource<Model> {
   EResultFuture<List<Model>> getBatchByCategories(List<String> categoryIds);
   EResultFuture<List<Model>> getBatchByFixedTags(List<String> tagIds);
 
-  EResultFuture<Model> getByTaskSchedulerId(String schedulerId);
+  EResultFuture<Model> getByScheduledTaskId(String schedulerId);
 }

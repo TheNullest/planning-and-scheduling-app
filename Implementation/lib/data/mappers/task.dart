@@ -28,7 +28,7 @@ class TaskMapper extends Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
           dueDate: model.dueDate,
           categoryIds: [],
           fixedTagIds: [],
-          taskSchedulerId: model.taskSchedulerId,
+          scheduledTaskId: model.scheduledTaskId,
           totalSpentTime: model.totalSpentTime,
         ),
         failureType: FailureType.local,

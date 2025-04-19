@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
@@ -36,16 +37,15 @@ class GoalRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<GoalEntity?> getGoalBySubTaskId(
     String subTaskId, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getGoalBySubTaskId(subTaskId);
             return Right(_mapper.toEntityFromHive(_mapper.foldEitherSingle(response)!));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getGoalBySubTaskId(subTaskId);
             return Right(_mapper.toEntityFromSupabase(_mapper.foldEitherSingle(response)!));
           }
@@ -57,16 +57,15 @@ class GoalRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<List<GoalEntity>> getGoalsByTaskId(
     String taskId, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getGoalsByTaskId(taskId);
             return Right(_mapper.toEntitiesFromHive(_mapper.foldEitherList(response)));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getGoalsByTaskId(taskId);
             return Right(_mapper.toEntitiesFromSupabase(_mapper.foldEitherList(response)));
           }

@@ -37,8 +37,8 @@ mixin _$TaskActivitySupabaseModel {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String? get userId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'task_scheduler_id')
-  String? get taskSchedulerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'scheduled_task_id')
+  String? get scheduledTaskId => throw _privateConstructorUsedError;
   @JsonKey(name: 'due_date')
   DateTime? get dueDate => throw _privateConstructorUsedError;
   @JsonKey(
@@ -71,7 +71,7 @@ abstract class $TaskActivitySupabaseModelCopyWith<$Res> {
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'task_scheduler_id') String? taskSchedulerId,
+      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId,
       @JsonKey(name: 'due_date') DateTime? dueDate,
       @JsonKey(
           name: 'spent_time',
@@ -105,7 +105,7 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
-    Object? taskSchedulerId = freezed,
+    Object? scheduledTaskId = freezed,
     Object? dueDate = freezed,
     Object? spentTime = freezed,
   }) {
@@ -146,9 +146,9 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      taskSchedulerId: freezed == taskSchedulerId
-          ? _value.taskSchedulerId
-          : taskSchedulerId // ignore: cast_nullable_to_non_nullable
+      scheduledTaskId: freezed == scheduledTaskId
+          ? _value.scheduledTaskId
+          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
               as String?,
       dueDate: freezed == dueDate
           ? _value.dueDate
@@ -181,7 +181,7 @@ abstract class _$$TaskActivitySupabaseModelImplCopyWith<$Res>
       String? description,
       @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'user_id') String? userId,
-      @JsonKey(name: 'task_scheduler_id') String? taskSchedulerId,
+      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId,
       @JsonKey(name: 'due_date') DateTime? dueDate,
       @JsonKey(
           name: 'spent_time',
@@ -214,7 +214,7 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
     Object? description = freezed,
     Object? createdAt = freezed,
     Object? userId = freezed,
-    Object? taskSchedulerId = freezed,
+    Object? scheduledTaskId = freezed,
     Object? dueDate = freezed,
     Object? spentTime = freezed,
   }) {
@@ -255,9 +255,9 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      taskSchedulerId: freezed == taskSchedulerId
-          ? _value.taskSchedulerId
-          : taskSchedulerId // ignore: cast_nullable_to_non_nullable
+      scheduledTaskId: freezed == scheduledTaskId
+          ? _value.scheduledTaskId
+          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
               as String?,
       dueDate: freezed == dueDate
           ? _value.dueDate
@@ -284,7 +284,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       this.description,
       @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'user_id') this.userId,
-      @JsonKey(name: 'task_scheduler_id') this.taskSchedulerId,
+      @JsonKey(name: 'scheduled_task_id') this.scheduledTaskId,
       @JsonKey(name: 'due_date') this.dueDate,
       @JsonKey(
           name: 'spent_time',
@@ -321,8 +321,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
   @JsonKey(name: 'user_id')
   final String? userId;
   @override
-  @JsonKey(name: 'task_scheduler_id')
-  final String? taskSchedulerId;
+  @JsonKey(name: 'scheduled_task_id')
+  final String? scheduledTaskId;
   @override
   @JsonKey(name: 'due_date')
   final DateTime? dueDate;
@@ -333,7 +333,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
 
   @override
   String toString() {
-    return 'TaskActivitySupabaseModel(taskId: $taskId, subTaskId: $subTaskId, startAt: $startAt, id: $id, isPaused: $isPaused, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, taskSchedulerId: $taskSchedulerId, dueDate: $dueDate, spentTime: $spentTime)';
+    return 'TaskActivitySupabaseModel(taskId: $taskId, subTaskId: $subTaskId, startAt: $startAt, id: $id, isPaused: $isPaused, updatedAt: $updatedAt, description: $description, createdAt: $createdAt, userId: $userId, scheduledTaskId: $scheduledTaskId, dueDate: $dueDate, spentTime: $spentTime)';
   }
 
   @override
@@ -355,8 +355,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.taskSchedulerId, taskSchedulerId) ||
-                other.taskSchedulerId == taskSchedulerId) &&
+            (identical(other.scheduledTaskId, scheduledTaskId) ||
+                other.scheduledTaskId == scheduledTaskId) &&
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
             (identical(other.spentTime, spentTime) ||
                 other.spentTime == spentTime));
@@ -375,7 +375,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       description,
       createdAt,
       userId,
-      taskSchedulerId,
+      scheduledTaskId,
       dueDate,
       spentTime);
 
@@ -408,7 +408,7 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
       final String? description,
       @JsonKey(name: 'created_at') final DateTime? createdAt,
       @JsonKey(name: 'user_id') final String? userId,
-      @JsonKey(name: 'task_scheduler_id') final String? taskSchedulerId,
+      @JsonKey(name: 'scheduled_task_id') final String? scheduledTaskId,
       @JsonKey(name: 'due_date') final DateTime? dueDate,
       @JsonKey(
           name: 'spent_time',
@@ -445,8 +445,8 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
   @JsonKey(name: 'user_id')
   String? get userId;
   @override
-  @JsonKey(name: 'task_scheduler_id')
-  String? get taskSchedulerId;
+  @JsonKey(name: 'scheduled_task_id')
+  String? get scheduledTaskId;
   @override
   @JsonKey(name: 'due_date')
   DateTime? get dueDate;

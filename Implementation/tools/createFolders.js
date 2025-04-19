@@ -275,3 +275,5 @@ folders.forEach(folder => {
 });
 
 console.log('Folders created successfully!');
+
+

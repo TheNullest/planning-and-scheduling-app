@@ -29,7 +29,7 @@ mixin _$LogSupabaseModel {
   String get entityId => throw _privateConstructorUsedError;
   String get action => throw _privateConstructorUsedError;
   Map<String, dynamic> get data => throw _privateConstructorUsedError;
-  @JsonKey(name: 'recoreded_at')
+  @JsonKey(name: 'recorded_at')
   String get recorededAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_synced')
   bool get isSynced => throw _privateConstructorUsedError;
@@ -57,7 +57,7 @@ abstract class $LogSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'entity_id') String entityId,
       String action,
       Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') String recorededAt,
+      @JsonKey(name: 'recorded_at') String recorededAt,
       @JsonKey(name: 'is_synced') bool isSynced});
 }
 
@@ -137,7 +137,7 @@ abstract class _$$LogSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'entity_id') String entityId,
       String action,
       Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') String recorededAt,
+      @JsonKey(name: 'recorded_at') String recorededAt,
       @JsonKey(name: 'is_synced') bool isSynced});
 }
 
@@ -210,7 +210,7 @@ class _$LogSupabaseModelImpl implements _LogSupabaseModel {
       @JsonKey(name: 'entity_id') required this.entityId,
       required this.action,
       required final Map<String, dynamic> data,
-      @JsonKey(name: 'recoreded_at') required this.recorededAt,
+      @JsonKey(name: 'recorded_at') required this.recorededAt,
       @JsonKey(name: 'is_synced') required this.isSynced})
       : _data = data;
 
@@ -239,7 +239,7 @@ class _$LogSupabaseModelImpl implements _LogSupabaseModel {
   }
 
   @override
-  @JsonKey(name: 'recoreded_at')
+  @JsonKey(name: 'recorded_at')
   final String recorededAt;
   @override
   @JsonKey(name: 'is_synced')
@@ -307,7 +307,7 @@ abstract class _LogSupabaseModel implements LogSupabaseModel {
           @JsonKey(name: 'entity_id') required final String entityId,
           required final String action,
           required final Map<String, dynamic> data,
-          @JsonKey(name: 'recoreded_at') required final String recorededAt,
+          @JsonKey(name: 'recorded_at') required final String recorededAt,
           @JsonKey(name: 'is_synced') required final bool isSynced}) =
       _$LogSupabaseModelImpl;
 
@@ -330,7 +330,7 @@ abstract class _LogSupabaseModel implements LogSupabaseModel {
   @override
   Map<String, dynamic> get data;
   @override
-  @JsonKey(name: 'recoreded_at')
+  @JsonKey(name: 'recorded_at')
   String get recorededAt;
   @override
   @JsonKey(name: 'is_synced')

@@ -1,3 +1,4 @@
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/local/hive/log.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/log/log.dart';
@@ -52,18 +53,18 @@ abstract interface class LogRepository<T> {
   /// // Creating logs locally using Hive
   /// createLogs([LogHiveModel(...), LogHiveModel(...)]);
   /// ```
-  EResultFutureVoid createLogs(List<T> logs);
+  EResultFutureVoid createLogs(List<T> logs, {required DataSourcePolicy policy});
 
   /// Retrieves logs from the designated storage layer, switching between local and cloud modes.
   ///
   /// **Core Behavior Matrix:**
-  /// | Parameter      | Local Mode (`fromLocal: true`)                | Cloud Mode (`fromLocal: false`)               |
+  /// | Parameter      | Local Mode (`isLocal(policy): true`)                | Cloud Mode (`isLocal(policy): false`)               |
   /// |----------------|-----------------------------------------------|-----------------------------------------------|
   /// | **[logIds]**   | Ignored – filtering not supported locally     | Used to filter specific SyncLog entries       |
   /// | **Return**     | List of [LogHiveModel] for local persistence   | List of [LogSupabaseModel] for cloud persistence|
   ///
   /// **Parameters:**
-  /// - **[fromLocal]**: Flag indicating which storage layer to query.
+  /// - **[isLocal(policy)]**: Flag indicating which storage layer to query.
   ///   - `true`: Query local storage (Hive).
   ///   - `false`: Query remote storage (Supabase) (default).
   /// - **[logIds]**: (Optional) For cloud mode only; used to filter specific SyncLog records.
@@ -76,15 +77,12 @@ abstract interface class LogRepository<T> {
   /// **Example:**
   /// ```dart
   /// // Retrieve logs from local storage (type T = LogHiveModel)
-  /// getLogs(fromLocal: true);
+  /// getLogs(isLocal(policy): true);
   ///
   /// // Retrieve cloud-based SyncLogs (type T = LogSupabaseModel) with filtering
-  /// getLogs(fromLocal: false, logIds: ["sync1", "sync2"]);
+  /// getLogs(isLocal(policy): false, logIds: ["sync1", "sync2"]);
   /// ```
-  EResultFuture<List<T>> getLogs({
-    bool fromLocal = false,
-    List<String>? logIds,
-  });
+  EResultFuture<List<T>> getLogs({List<String>? logIds, required DataSourcePolicy policy});
 
   /// Retrieves logs based on a starting date while ensuring cross-layer consistency.
   ///
@@ -94,7 +92,7 @@ abstract interface class LogRepository<T> {
   ///
   /// **Parameters:**
   /// - **[fromDate]:** The starting point for filtering logs by time.
-  /// - **[fromLocal]:** Determines the target storage layer:
+  /// - **[isLocal(policy)]:** Determines the target storage layer:
   ///   - `true`: Targets local storage (e.g., Hive) and uses the device's current timezone.
   ///   - `false`: Targets cloud storage (e.g., Supabase) and converts [fromDate] to UTC internally.
   ///
@@ -105,8 +103,9 @@ abstract interface class LogRepository<T> {
   ///
   /// **Implementation Note:**
   /// - In cloud mode, [fromDate] is automatically converted to UTC to ensure consistency with Supabase queries.
-  EResultFuture<List<T>> getSinceDate({
+  EResultFuture<List<T>> getWithDateRange({
     required DateTime fromDate,
-    bool fromLocal = false,
+    required DateTime toDate,
+    required DataSourcePolicy policy,
   });
 }

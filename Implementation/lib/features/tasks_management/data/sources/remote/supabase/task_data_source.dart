@@ -5,6 +5,7 @@ import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/task.dart';
+import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task/task_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/task_data_source.dart';
@@ -25,13 +26,13 @@ class TaskSupabaseDataSourceImpl extends SupabaseDataSource<TaskSupabaseModel>
   String get selectQuery => '*, task_tags(*), categories(*)';
 
   @override
-  EResultFuture<TaskSupabaseModel> getByTaskSchedulerId(String schedulerId) async =>
+  EResultFuture<TaskSupabaseModel> getByScheduledTaskId(String schedulerId) async =>
       tryCatchEither<TaskSupabaseModel>(
         action: () async {
           final result = await client
               .from(collectionPath)
               .select(selectQuery)
-              .eq('task_scheduler_id', schedulerId)
+              .eq('scheduled_task_id', schedulerId)
               .single();
           return Right(_mapper.fromJson(result));
         },
@@ -46,7 +47,7 @@ class TaskSupabaseDataSourceImpl extends SupabaseDataSource<TaskSupabaseModel>
                 conditionToString(
                   conditions: categoryIds,
                   join: ',',
-                  fieldName: 'task_scheduler_id',
+                  fieldName: 'scheduled_task_id',
                 ),
               );
           return Right(_mapper.fromJsonList(result));

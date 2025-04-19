@@ -29,9 +29,9 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
     @JsonKey(name: 'due_date') DateTime? dueDate,
     @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
     @JsonKey(
-      name: 'task_scheduler_id',
+      name: 'scheduled_task_id',
     )
-    String? taskSchedulerId,
+    String? scheduledTaskId,
   }) = _TaskSupabaseModel;
 
   factory TaskSupabaseModel.fromEntity(TaskEntity entity) => TaskSupabaseModel(
@@ -47,7 +47,7 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
         archived: entity.archived,
         dueDate: entity.dueDate,
         totalSpentTime: entity.totalSpentTime,
-        taskSchedulerId: entity.taskSchedulerId,
+        scheduledTaskId: entity.scheduledTaskId,
         categoryIds: entity.categoryIds,
         tagIds: entity.fixedTagIds,
       );

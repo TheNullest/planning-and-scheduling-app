@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
@@ -20,51 +21,39 @@ class DeviceRepoImpl implements DeviceRepository<DeviceEntity> {
   final DeviceDataSource<DeviceHiveModel> _deviceHiveDataSource;
 
   @override
-  EResultFuture<DeviceEntity?> getDeviceById({required String id, bool fromLocal = false}) async =>
+  EResultFuture<DeviceEntity?> getDeviceById(
+          {required String id, required DataSourcePolicy policy}) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
-            final response =
-                await _deviceHiveDataSource.getDeviceById(id: id, fromLocal: fromLocal);
+          if (DataSourcePolicy.isLocal(policy)) {
+            final response = await _deviceHiveDataSource.getDeviceById(id);
             final hiveModel = foldEither<DeviceHiveModel?>(response);
             return Right(hiveModel?.toEntity());
-          } else {
-            final response =
-                await _deviceSupabaseDataSource.getDeviceById(id: id, fromLocal: fromLocal);
-            final supabaseModel = foldEither<DeviceSupabaseModel?>(response);
-            return Right(supabaseModel?.toEntity());
           }
+          final response = await _deviceSupabaseDataSource.getDeviceById(id);
+          final supabaseModel = foldEither<DeviceSupabaseModel?>(response);
+          return Right(supabaseModel?.toEntity());
         },
         failureType: FailureType.local,
       );
 
   @override
-  EResultFuture<List<DeviceEntity>> getDevices({bool fromLocal = false}) async =>
-      tryCatchEither<List<DeviceEntity>>(
+  EResultFuture<List<DeviceEntity>> getDevices() async => tryCatchEither<List<DeviceEntity>>(
         action: () async {
-          if (fromLocal) {
-            final response = await _deviceHiveDataSource.getDevices(fromLocal: fromLocal);
-            final hiveModels = foldEither<List<DeviceHiveModel>>(response);
-            final result = hiveModels.map((item) => item.toEntity()).toList();
-            return Right(result);
-          } else {
-            final response = await _deviceSupabaseDataSource.getDevices(fromLocal: fromLocal);
-            final supabaseModels = foldEither<List<DeviceSupabaseModel>>(response);
-            final result = supabaseModels.map((item) => item.toEntity()).toList();
-            return Right(result);
-          }
+          final response = await _deviceSupabaseDataSource.getDevices();
+          final supabaseModels = foldEither<List<DeviceSupabaseModel>>(response);
+          final result = supabaseModels.map((item) => item.toEntity()).toList();
+          return Right(result);
         },
         failureType: FailureType.local,
       );
 
   @override
-  EResultFutureVoid registerDevices(List<DeviceEntity> devices) async => tryCatchEither(
+  EResultFutureVoid registerDevice(DeviceEntity device) async => tryCatchEither(
         action: () async {
-          await _deviceSupabaseDataSource.registerDevices(
-            devices.map(DeviceSupabaseModel.fromEntity).toList(),
-          );
-          await _deviceHiveDataSource.registerDevices(
-            devices.map(DeviceHiveModel.fromEntity).toList(),
+          await _deviceSupabaseDataSource.registerDevice(DeviceSupabaseModel.fromEntity(device));
+          await _deviceHiveDataSource.registerDevice(
+            DeviceHiveModel.fromEntity(device),
           );
           return const Right(null);
         },

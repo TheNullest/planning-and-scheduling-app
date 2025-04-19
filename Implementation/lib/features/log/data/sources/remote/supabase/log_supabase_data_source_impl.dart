@@ -3,11 +3,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/log/log.dart';
 import 'package:zamaan/features/log/data/sources/base/log_data_source.dart';
 
-class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
-  SyncLogSupabaseDataSourceImpl(this._supabaseClient);
+class LogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
+  LogSupabaseDataSourceImpl(this._supabaseClient);
 
   final SupabaseClient _supabaseClient;
 
@@ -21,34 +22,34 @@ class SyncLogSupabaseDataSourceImpl implements LogDataSource<LogSupabaseModel> {
       );
 
   @override
-  EResultFuture<List<LogSupabaseModel>> getLogs({
-    String? userId,
+  EResultFuture<List<LogSupabaseModel>> getLogs(
     List<String>? logIds,
-    bool fromLocal = false,
-  }) async =>
+  ) async =>
       tryCatchEither<List<LogSupabaseModel>>(
         action: () async {
-          final supabaseLogs = await _supabaseClient.from('logs').select().eq('user_id', userId!);
-          final filteredLogs = logIds != null && logIds.isNotEmpty
-              ? supabaseLogs.where((log) => logIds.contains(log['id']))
-              : supabaseLogs;
-          final result = filteredLogs.map(LogSupabaseModel.fromJson).toList();
+          final supabaseLogs = await _supabaseClient
+              .from('logs')
+              .select()
+              .or(conditionToString(conditions: logIds!, join: ',', fieldName: 'log_id'));
+
+          final result = supabaseLogs.map(LogSupabaseModel.fromJson).toList();
           return Right(result);
         },
         failureType: FailureType.remote,
       );
 
   @override
-  EResultFuture<List<LogSupabaseModel>> getSinceDate({
+  EResultFuture<List<LogSupabaseModel>> getWithDateRange({
     required DateTime fromDate,
-    bool fromLocal = false,
+    required DateTime toDate,
   }) async =>
       tryCatchEither<List<LogSupabaseModel>>(
         action: () async {
           final logs = await _supabaseClient
               .from('logs')
               .select()
-              .gte('created_at', fromDate.toIso8601String());
+              .gte('recorded_at', fromDate.toIso8601String())
+              .lte('recorded_at', toDate.toIso8601String());
           return Right(
             logs.map(LogSupabaseModel.fromJson).toList(),
           );

@@ -8,7 +8,7 @@ import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
 import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
+import 'package:zamaan/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/widgets/auth_field.dart';
 import 'package:zamaan/presentation_shared/widgets/loader.dart';
 
@@ -50,8 +50,7 @@ class _SignUpViewState extends State<SignUpView> {
             }
             if (state is AuthSuccessState) {
               showSnackBar(context, state.user.userName);
-              context.userProvider
-                  .initUser(UserHiveModel.fromEntity(state.user));
+              context.userProvider.initUser(UserHiveModel.fromEntity(state.user));
               navigatorPushRemoveUntil(context, AppRoutes.home);
             }
           },
@@ -138,10 +137,7 @@ class _SignUpViewState extends State<SignUpView> {
                           children: [
                             TextSpan(
                               text: AppLocaleKeys.uiElements.titles.signIn,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                             ),

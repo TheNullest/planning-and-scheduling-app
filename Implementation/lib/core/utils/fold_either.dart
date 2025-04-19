@@ -15,3 +15,13 @@ T foldEither<T>(Either<Failure, dynamic> either) {
     (right) => right as T,
   );
 }
+
+T foldEitherJob<T>(Either<Failure, dynamic> either, Future Function()? right) {
+  return either.fold(
+    (left) => throw left,
+    (right) {
+      right();
+      return right as T;
+    },
+  );
+}

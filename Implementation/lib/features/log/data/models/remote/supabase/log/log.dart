@@ -19,15 +19,13 @@ class LogSupabaseModel with _$LogSupabaseModel {
     @JsonKey(name: 'entity_id') required String entityId,
     required String action,
     required DataMap data,
-    @JsonKey(name: 'recoreded_at') required String recorededAt,
+    @JsonKey(name: 'recorded_at') required String recorededAt,
     @JsonKey(name: 'is_synced') required bool isSynced,
   }) = _LogSupabaseModel;
 
-  factory LogSupabaseModel.fromJson(Map<String, dynamic> json) =>
-      _$LogSupabaseModelFromJson(json);
+  factory LogSupabaseModel.fromJson(Map<String, dynamic> json) => _$LogSupabaseModelFromJson(json);
 
-  factory LogSupabaseModel.empty() =>
-      LogSupabaseModel.fromEntity(LogEntity.empty());
+  factory LogSupabaseModel.empty() => LogSupabaseModel.fromEntity(LogEntity.empty());
 
   factory LogSupabaseModel.fromEntity(LogEntity entity) => LogSupabaseModel(
         id: entity.id,
@@ -54,7 +52,7 @@ extension LogSupabaseModelX on LogSupabaseModel {
       action: SyncAction.fromName(action),
       data: data,
       recordedAt: DateTime.parse(recorededAt),
-      isSynced: isSynced,  
+      isSynced: isSynced,
     );
   }
 }

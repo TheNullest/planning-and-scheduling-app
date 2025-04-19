@@ -20,7 +20,7 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
     String? description,
     @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'user_id') String? userId,
-    @JsonKey(name: 'task_scheduler_id') String? taskSchedulerId,
+    @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId,
     @JsonKey(name: 'due_date') DateTime? dueDate,
     @JsonKey(
       name: 'spent_time',
@@ -48,7 +48,7 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
         dueDate: entity.dueDate,
         spentTime: entity.spentTime,
         isPaused: entity.isPaused,
-        taskSchedulerId: entity.taskSchedulerId,
+        scheduledTaskId: entity.scheduledTaskId,
       );
 
   @override

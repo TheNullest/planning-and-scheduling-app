@@ -24,10 +24,7 @@ class LogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
       );
 
   @override
-  EResultFuture<List<LogHiveModel>> getLogs({
-    List<String>? logIds,
-    bool fromLocal = true,
-  }) async =>
+  EResultFuture<List<LogHiveModel>> getLogs(List<String>? logIds) async =>
       tryCatchEither<List<LogHiveModel>>(
         action: () async => _hiveBox.operator<List<LogHiveModel>>(
           job: (box) async => box.values.toList(),
@@ -37,13 +34,19 @@ class LogHiveDataSourceImpl implements LogDataSource<LogHiveModel> {
       );
 
   @override
-  EResultFuture<List<LogHiveModel>> getSinceDate({
+  EResultFuture<List<LogHiveModel>> getWithDateRange({
     required DateTime fromDate,
-    bool fromLocal = true,
+    required DateTime toDate,
   }) async =>
       tryCatchEither<List<LogHiveModel>>(
         action: () async => _hiveBox.operator<List<LogHiveModel>>(
-          job: (box) async => box.values.where((log) => log.recordedAt.isAfter(fromDate)).toList(),
+          job: (box) async => box.values
+              .where(
+                (log) =>
+                    log.recordedAt.compareTo(fromDate) >= 0 &&
+                    log.recordedAt.compareTo(toDate) <= 0,
+              )
+              .toList(),
           boxName: _boxName,
         ),
         failureType: FailureType.local,

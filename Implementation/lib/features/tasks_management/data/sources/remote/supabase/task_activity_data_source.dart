@@ -36,7 +36,7 @@ class TaskActivitySupabaseDataSourceImpl extends SupabaseDataSource<TaskActivity
       tryCatchEither(
         action: () async {
           final result = await client
-              .from('task_scheduler')
+              .from('scheduled_task')
               .select()
               .eq('task_id', taskId)
               .gte('will_start_at', startAt!.toIso8601String())

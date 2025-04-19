@@ -46,12 +46,9 @@ void main() {
     );
   });
 
-  test(
-      'HiveServices().init() uses windows path when platfrom.isWindows is true',
-      () async {
+  test('HiveServices().init() uses windows path when platfrom.isWindows is true', () async {
     // Arrange: Stub the path property
-    when(() => mockDirectory.path)
-        .thenReturn(r'E:\Flutter.Dart\HiveFiles\test');
+    when(() => mockDirectory.path).thenReturn(r'E:\Flutter.Dart\HiveFiles\test');
 
     // Arrange: Stub `isWindows` to return true
     when(() => mockPlatform.isWindows).thenReturn(true);
@@ -75,10 +72,8 @@ void main() {
     // Assert: Verify that the correct platform-dependent path was used
     verify(() => mockHive.isAdapterRegistered(any())).called(9);
     verify(() => mockHive.registerAdapter(UserHiveModelAdapter())).called(1);
-    verify(() => mockHive.registerAdapter(MainTaskHiveModelAdapter()))
-        .called(1);
-    verify(() => mockHive.initFlutter(r'E:\Flutter.Dart\HiveFiles\test'))
-        .called(1);
+    verify(() => mockHive.registerAdapter(TaskHiveModelAdapter())).called(1);
+    verify(() => mockHive.initFlutter(r'E:\Flutter.Dart\HiveFiles\test')).called(1);
   });
 
   test('operator method opens box, executes job, and closes the box', () async {
@@ -86,8 +81,7 @@ void main() {
     // Stub isBoxOpen to return false so that openBox() is called.
     when(() => mockHive.isBoxOpen(boxName)).thenReturn(false);
     // Stub openBox to return our mockBox.
-    when(() => mockHive.openBox<UserHiveModel>(boxName))
-        .thenAnswer((_) async => mockBox);
+    when(() => mockHive.openBox<UserHiveModel>(boxName)).thenAnswer((_) async => mockBox);
     // When the box() is called, return our mockBox.
     when(() => mockHive.box<UserHiveModel>(boxName)).thenReturn(mockBox);
     // Stub the box's isOpen property.

@@ -14,8 +14,7 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
   String get _boxName => HiveBoxConstants.devicesBox;
 
   @override
-  EResultFuture<List<DeviceHiveModel>> getDevices({bool fromLocal = true}) async =>
-      tryCatchEither<List<DeviceHiveModel>>(
+  EResultFuture<List<DeviceHiveModel>> getDevices() async => tryCatchEither<List<DeviceHiveModel>>(
         action: () async => _hiveBox.operator<List<DeviceHiveModel>>(
           job: (box) async => box.values.toList(),
           boxName: _boxName,
@@ -24,10 +23,10 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
       );
 
   @override
-  EResultFutureVoid registerDevices(List<DeviceHiveModel> devices) async => tryCatchEither(
+  EResultFutureVoid registerDevice(DeviceHiveModel device) async => tryCatchEither(
         action: () async => _hiveBox.operator(
           job: (box) async {
-            await box.addAll(devices);
+            await box.add(device);
           },
           boxName: _boxName,
         ),
@@ -57,10 +56,9 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
       );
 
   @override
-  EResultFuture<DeviceHiveModel?> getDeviceById({
-    required String id,
-    bool fromLocal = true,
-  }) async =>
+  EResultFuture<DeviceHiveModel?> getDeviceById(
+    String id,
+  ) async =>
       tryCatchEither<DeviceHiveModel?>(
         action: () async => _hiveBox.operator<DeviceHiveModel?>(
           job: (box) async => box.get(id),

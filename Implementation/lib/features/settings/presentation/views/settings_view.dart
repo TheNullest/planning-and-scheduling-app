@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
-import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
+import 'package:zamaan/features/auth/presentation/blocs/auth/auth_bloc.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
@@ -32,8 +32,7 @@ class _SettingsViewState extends State<SettingsView> {
               style: const TextStyle(color: Colors.white),
             ),
             IconButton(
-              onPressed: () =>
-                  context.read<AppUserCubit>().signOutUser(context),
+              onPressed: () => context.read<AppUserCubit>().signOutUser(context),
               icon: const Icon(Icons.logout),
               color: Colors.white,
             ),

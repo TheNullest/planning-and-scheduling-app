@@ -20,7 +20,7 @@ Map<String, dynamic> _$TaskSupabaseModelToJson(TaskSupabaseModel instance) =>
       'archived': instance.archived,
       'due_date': instance.dueDate?.toIso8601String(),
       'total_spent_time': instance.totalSpentTime?.inMicroseconds,
-      'task_scheduler_id': instance.taskSchedulerId,
+      'scheduled_task_id': instance.scheduledTaskId,
     };
 
 _$TaskSupabaseModelImpl _$$TaskSupabaseModelImplFromJson(
@@ -48,7 +48,7 @@ _$TaskSupabaseModelImpl _$$TaskSupabaseModelImplFromJson(
       totalSpentTime: json['total_spent_time'] == null
           ? null
           : Duration(microseconds: (json['total_spent_time'] as num).toInt()),
-      taskSchedulerId: json['task_scheduler_id'] as String?,
+      scheduledTaskId: json['scheduled_task_id'] as String?,
     );
 
 Map<String, dynamic> _$$TaskSupabaseModelImplToJson(
@@ -66,5 +66,5 @@ Map<String, dynamic> _$$TaskSupabaseModelImplToJson(
       'archived': instance.archived,
       'due_date': instance.dueDate?.toIso8601String(),
       'total_spent_time': instance.totalSpentTime?.inMicroseconds,
-      'task_scheduler_id': instance.taskSchedulerId,
+      'scheduled_task_id': instance.scheduledTaskId,
     };

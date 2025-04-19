@@ -3,7 +3,7 @@
 part of 'task_hive_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// HiveBaseTypeAdapterGenerator
 // **************************************************************************
 
 class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
@@ -31,7 +31,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       fixedTagIds: (fields[17] as List?)?.cast<String>(),
       dueDate: fields[15] as DateTime?,
       totalSpentTime: fields[18] as Duration?,
-      taskSchedulerId: fields[20] as String?,
+      scheduledTaskId: fields[20] as String?,
     );
   }
 
@@ -58,7 +58,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..writeByte(19)
       ..write(obj.archived)
       ..writeByte(20)
-      ..write(obj.taskSchedulerId)
+      ..write(obj.scheduledTaskId)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -77,5 +77,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is TaskHiveModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

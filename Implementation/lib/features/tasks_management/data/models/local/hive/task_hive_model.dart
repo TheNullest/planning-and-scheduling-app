@@ -24,7 +24,7 @@ class TaskHiveModel extends TaskEntity with HiveObjectMixin {
     super.fixedTagIds,
     super.dueDate,
     super.totalSpentTime,
-    super.taskSchedulerId,
+    super.scheduledTaskId,
   });
 
   TaskHiveModel.empty() : super.empty();
@@ -44,7 +44,7 @@ class TaskHiveModel extends TaskEntity with HiveObjectMixin {
         fixedTagIds: entity.fixedTagIds,
         dueDate: entity.dueDate,
         totalSpentTime: entity.totalSpentTime,
-        taskSchedulerId: entity.taskSchedulerId,
+        scheduledTaskId: entity.scheduledTaskId,
       );
 
   @override
@@ -64,7 +64,7 @@ class TaskHiveModel extends TaskEntity with HiveObjectMixin {
     List<String>? tagIds,
     DateTime? dueDate,
     Duration? totalSpentTime,
-    String? taskSchedulerId,
+    String? scheduledTaskId,
   }) =>
       TaskHiveModel(
         id: id ?? this.id,
@@ -81,6 +81,6 @@ class TaskHiveModel extends TaskEntity with HiveObjectMixin {
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         dueDate: dueDate ?? this.dueDate,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        taskSchedulerId: taskSchedulerId ?? taskSchedulerId,
+        scheduledTaskId: scheduledTaskId ?? scheduledTaskId,
       );
 }

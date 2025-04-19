@@ -3,7 +3,7 @@
 part of 'user_hive_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// HiveBaseTypeAdapterGenerator
 // **************************************************************************
 
 class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
@@ -67,5 +67,7 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is UserHiveModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

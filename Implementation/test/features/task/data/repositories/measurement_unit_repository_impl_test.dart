@@ -2,12 +2,12 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/measurement_unit.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_measurement_unit_data_source_impl.dart';
+import 'package:zamaan/features/tasks_management/data/sources/local/hive/measurement_unit_data_source_impl.dart';
 
-class MockDataSource extends Mock implements HiveMeasurementUnitDataSourceImpl {}
+class MockDataSource extends Mock implements MeasurementUnitHiveDataSourceImpl {}
 
 void main() {
-  late HiveMeasurementUnitDataSourceImpl mockDataSource;
+  late MeasurementUnitHiveDataSourceImpl mockDataSource;
   late MeasurementUnitRepositoryImpl measurementUnitRepo;
   late MeasurementUnitHiveModel model;
   late MeasurementUnitEntity entity;

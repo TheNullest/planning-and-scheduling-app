@@ -14,7 +14,7 @@ Map<String, dynamic> _$LogSupabaseModelToJson(LogSupabaseModel instance) =>
       'entity_id': instance.entityId,
       'action': instance.action,
       'data': instance.data,
-      'recoreded_at': instance.recorededAt,
+      'recorded_at': instance.recorededAt,
       'is_synced': instance.isSynced,
     };
 
@@ -27,7 +27,7 @@ _$LogSupabaseModelImpl _$$LogSupabaseModelImplFromJson(
       entityId: json['entity_id'] as String,
       action: json['action'] as String,
       data: json['data'] as Map<String, dynamic>,
-      recorededAt: json['recoreded_at'] as String,
+      recorededAt: json['recorded_at'] as String,
       isSynced: json['is_synced'] as bool,
     );
 
@@ -40,6 +40,6 @@ Map<String, dynamic> _$$LogSupabaseModelImplToJson(
       'entity_id': instance.entityId,
       'action': instance.action,
       'data': instance.data,
-      'recoreded_at': instance.recorededAt,
+      'recorded_at': instance.recorededAt,
       'is_synced': instance.isSynced,
     };

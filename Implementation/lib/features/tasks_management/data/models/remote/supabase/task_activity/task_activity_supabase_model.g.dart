@@ -18,7 +18,7 @@ Map<String, dynamic> _$TaskActivitySupabaseModelToJson(
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
       'user_id': instance.userId,
-      'task_scheduler_id': instance.taskSchedulerId,
+      'scheduled_task_id': instance.scheduledTaskId,
       'due_date': instance.dueDate?.toIso8601String(),
       'spent_time': _durationToJson(instance.spentTime),
     };
@@ -39,7 +39,7 @@ _$TaskActivitySupabaseModelImpl _$$TaskActivitySupabaseModelImplFromJson(
           ? null
           : DateTime.parse(json['created_at'] as String),
       userId: json['user_id'] as String?,
-      taskSchedulerId: json['task_scheduler_id'] as String?,
+      scheduledTaskId: json['scheduled_task_id'] as String?,
       dueDate: json['due_date'] == null
           ? null
           : DateTime.parse(json['due_date'] as String),
@@ -58,7 +58,7 @@ Map<String, dynamic> _$$TaskActivitySupabaseModelImplToJson(
       'description': instance.description,
       'created_at': instance.createdAt?.toIso8601String(),
       'user_id': instance.userId,
-      'task_scheduler_id': instance.taskSchedulerId,
+      'scheduled_task_id': instance.scheduledTaskId,
       'due_date': instance.dueDate?.toIso8601String(),
       'spent_time': _durationToJson(instance.spentTime),
     };

@@ -1,3 +1,13 @@
-import 'package:zamaan/features/log/domain/repositories/device_repo.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 
-abstract interface class DeviceDataSource<T> implements DeviceRepository<T> {}
+abstract class DeviceDataSource<T> {
+  EResultFuture<T?> getDeviceById(String id);
+
+  EResultFuture<List<T>> getDevices();
+
+  EResultFutureVoid registerDevice(T device);
+
+  EResultFutureVoid unregisterDevice(String id);
+
+  EResultFutureVoid updateDeviceInfo(T device);
+}

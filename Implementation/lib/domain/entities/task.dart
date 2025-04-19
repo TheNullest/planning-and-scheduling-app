@@ -26,7 +26,7 @@ class TaskEntity extends BaseEntityAbstraction {
     this.fixedTagIds,
     this.dueDate,
     this.totalSpentTime,
-    this.taskSchedulerId,
+    this.scheduledTaskId,
   });
 
   /// A default, empty instance for initial values or testing.
@@ -69,7 +69,7 @@ class TaskEntity extends BaseEntityAbstraction {
   final bool archived;
 
   @HiveField(20)
-  final String? taskSchedulerId;
+  final String? scheduledTaskId;
 
   TaskEntity toEntity() => TaskEntity(
         id: id,
@@ -86,7 +86,7 @@ class TaskEntity extends BaseEntityAbstraction {
         fixedTagIds: fixedTagIds,
         dueDate: dueDate,
         totalSpentTime: totalSpentTime,
-        taskSchedulerId: taskSchedulerId,
+        scheduledTaskId: scheduledTaskId,
       );
 
   @override
@@ -105,7 +105,7 @@ class TaskEntity extends BaseEntityAbstraction {
     List<String>? fixedTagIds,
     DateTime? dueDate,
     Duration? totalSpentTime,
-    String? taskSchedulerId,
+    String? scheduledTaskId,
   }) =>
       TaskEntity(
         id: id ?? this.id,
@@ -122,7 +122,7 @@ class TaskEntity extends BaseEntityAbstraction {
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         dueDate: dueDate ?? this.dueDate,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        taskSchedulerId: taskSchedulerId ?? this.taskSchedulerId,
+        scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
       );
 
 // validations
@@ -143,6 +143,6 @@ class TaskEntity extends BaseEntityAbstraction {
         fixedTagIds,
         dueDate,
         totalSpentTime,
-        taskSchedulerId,
+        scheduledTaskId,
       ];
 }

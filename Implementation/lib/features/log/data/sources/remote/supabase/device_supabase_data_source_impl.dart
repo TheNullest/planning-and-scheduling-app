@@ -11,7 +11,7 @@ class DeviceSupabaseDataSourceImpl implements DeviceDataSource<DeviceSupabaseMod
   final SupabaseClient _supabaseClient;
 
   @override
-  EResultFuture<List<DeviceSupabaseModel>> getDevices({bool fromLocal = false}) async =>
+  EResultFuture<List<DeviceSupabaseModel>> getDevices() async =>
       tryCatchEither<List<DeviceSupabaseModel>>(
         action: () async {
           final devices = await _supabaseClient.from('devices').select();
@@ -22,9 +22,9 @@ class DeviceSupabaseDataSourceImpl implements DeviceDataSource<DeviceSupabaseMod
 
   /// It is just for local hive db
   @override
-  EResultFutureVoid registerDevices(List<DeviceSupabaseModel> devices) async => tryCatchEither(
+  EResultFutureVoid registerDevice(DeviceSupabaseModel device) async => tryCatchEither(
         action: () async {
-          await _supabaseClient.from('devices').insert(devices.map((e) => e.toJson()).toList());
+          await _supabaseClient.from('devices').insert(device);
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -53,10 +53,7 @@ class DeviceSupabaseDataSourceImpl implements DeviceDataSource<DeviceSupabaseMod
       );
 
   @override
-  EResultFuture<DeviceSupabaseModel> getDeviceById({
-    required String id,
-    bool fromLocal = false,
-  }) async =>
+  EResultFuture<DeviceSupabaseModel> getDeviceById(String id) async =>
       tryCatchEither<DeviceSupabaseModel>(
         action: () async {
           final device = await _supabaseClient.from('devices').select().eq('id', id).single();

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
@@ -20,7 +21,8 @@ class LogRepoImpl implements LogRepository<LogEntity> {
   final LogDataSource<LogHiveModel> _logHiveDataSource;
 
   @override
-  EResultFutureVoid createLogs(List<LogEntity> logs) async => tryCatchEither(
+  EResultFutureVoid createLogs(List<LogEntity> logs, {required DataSourcePolicy policy}) async =>
+      tryCatchEither(
         action: () async {
           await _logSupabaseDataSource.createLogs(logs.map(LogSupabaseModel.fromEntity).toList());
           await _logHiveDataSource.createLogs(logs.map(LogHiveModel.fromEntity).toList());
@@ -31,21 +33,20 @@ class LogRepoImpl implements LogRepository<LogEntity> {
 
   @override
   EResultFuture<List<LogEntity>> getLogs({
-    bool fromLocal = false,
     List<String>? logIds,
+    required DataSourcePolicy policy,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {
-          if (fromLocal) {
-            final response = await _logHiveDataSource.getLogs(logIds: logIds, fromLocal: fromLocal);
+          if (DataSourcePolicy.isLocal(policy)) {
+            final response = await _logHiveDataSource.getLogs(logIds);
             final hiveModels = foldEither<List<LogHiveModel>>(response);
             final result = hiveModels.map((item) => item.toEntity()).toList();
             return Right(result);
           }
 
           final response = await _logSupabaseDataSource.getLogs(
-            logIds: logIds,
-            fromLocal: fromLocal,
+            logIds,
           );
           final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();
@@ -55,15 +56,26 @@ class LogRepoImpl implements LogRepository<LogEntity> {
       );
 
   @override
-  EResultFuture<List<LogEntity>> getSinceDate({
+  EResultFuture<List<LogEntity>> getWithDateRange({
     required DateTime fromDate,
-    bool fromLocal = false,
-    String? userId,
+    required DateTime toDate,
+    required DataSourcePolicy policy,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {
-          final response = await _logSupabaseDataSource.getSinceDate(
+          if (DataSourcePolicy.isLocal(policy)) {
+            final response = await _logHiveDataSource.getWithDateRange(
+              fromDate: fromDate,
+              toDate: toDate,
+            );
+            final hiveModels = foldEither<List<LogHiveModel>>(response);
+            final result = hiveModels.map((item) => item.toEntity()).toList();
+            return Right(result);
+          }
+
+          final response = await _logSupabaseDataSource.getWithDateRange(
             fromDate: fromDate,
+            toDate: toDate,
           );
           final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();

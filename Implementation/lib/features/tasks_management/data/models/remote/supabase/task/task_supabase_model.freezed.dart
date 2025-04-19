@@ -43,8 +43,8 @@ mixin _$TaskSupabaseModel {
   DateTime? get dueDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_spent_time')
   Duration? get totalSpentTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'task_scheduler_id')
-  String? get taskSchedulerId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'scheduled_task_id')
+  String? get scheduledTaskId => throw _privateConstructorUsedError;
 
   /// Serializes this TaskSupabaseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -80,7 +80,7 @@ abstract class $TaskSupabaseModelCopyWith<$Res> {
       bool? archived,
       @JsonKey(name: 'due_date') DateTime? dueDate,
       @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
-      @JsonKey(name: 'task_scheduler_id') String? taskSchedulerId});
+      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId});
 }
 
 /// @nodoc
@@ -112,7 +112,7 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
     Object? archived = freezed,
     Object? dueDate = freezed,
     Object? totalSpentTime = freezed,
-    Object? taskSchedulerId = freezed,
+    Object? scheduledTaskId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -171,9 +171,9 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
           ? _value.totalSpentTime
           : totalSpentTime // ignore: cast_nullable_to_non_nullable
               as Duration?,
-      taskSchedulerId: freezed == taskSchedulerId
-          ? _value.taskSchedulerId
-          : taskSchedulerId // ignore: cast_nullable_to_non_nullable
+      scheduledTaskId: freezed == scheduledTaskId
+          ? _value.scheduledTaskId
+          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -205,7 +205,7 @@ abstract class _$$TaskSupabaseModelImplCopyWith<$Res>
       bool? archived,
       @JsonKey(name: 'due_date') DateTime? dueDate,
       @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
-      @JsonKey(name: 'task_scheduler_id') String? taskSchedulerId});
+      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId});
 }
 
 /// @nodoc
@@ -235,7 +235,7 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
     Object? archived = freezed,
     Object? dueDate = freezed,
     Object? totalSpentTime = freezed,
-    Object? taskSchedulerId = freezed,
+    Object? scheduledTaskId = freezed,
   }) {
     return _then(_$TaskSupabaseModelImpl(
       id: null == id
@@ -294,9 +294,9 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value.totalSpentTime
           : totalSpentTime // ignore: cast_nullable_to_non_nullable
               as Duration?,
-      taskSchedulerId: freezed == taskSchedulerId
-          ? _value.taskSchedulerId
-          : taskSchedulerId // ignore: cast_nullable_to_non_nullable
+      scheduledTaskId: freezed == scheduledTaskId
+          ? _value.scheduledTaskId
+          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -323,7 +323,7 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       this.archived,
       @JsonKey(name: 'due_date') this.dueDate,
       @JsonKey(name: 'total_spent_time') this.totalSpentTime,
-      @JsonKey(name: 'task_scheduler_id') this.taskSchedulerId})
+      @JsonKey(name: 'scheduled_task_id') this.scheduledTaskId})
       : _categoryIds = categoryIds,
         _tagIds = tagIds;
 
@@ -384,12 +384,12 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
   @JsonKey(name: 'total_spent_time')
   final Duration? totalSpentTime;
   @override
-  @JsonKey(name: 'task_scheduler_id')
-  final String? taskSchedulerId;
+  @JsonKey(name: 'scheduled_task_id')
+  final String? scheduledTaskId;
 
   @override
   String toString() {
-    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, categoryIds: $categoryIds, tagIds: $tagIds, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, priority: $priority, archived: $archived, dueDate: $dueDate, totalSpentTime: $totalSpentTime, taskSchedulerId: $taskSchedulerId)';
+    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, categoryIds: $categoryIds, tagIds: $tagIds, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, priority: $priority, archived: $archived, dueDate: $dueDate, totalSpentTime: $totalSpentTime, scheduledTaskId: $scheduledTaskId)';
   }
 
   @override
@@ -420,8 +420,8 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
             (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
             (identical(other.totalSpentTime, totalSpentTime) ||
                 other.totalSpentTime == totalSpentTime) &&
-            (identical(other.taskSchedulerId, taskSchedulerId) ||
-                other.taskSchedulerId == taskSchedulerId));
+            (identical(other.scheduledTaskId, scheduledTaskId) ||
+                other.scheduledTaskId == scheduledTaskId));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -442,7 +442,7 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       archived,
       dueDate,
       totalSpentTime,
-      taskSchedulerId);
+      scheduledTaskId);
 
   /// Create a copy of TaskSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -480,8 +480,8 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
       final bool? archived,
       @JsonKey(name: 'due_date') final DateTime? dueDate,
       @JsonKey(name: 'total_spent_time') final Duration? totalSpentTime,
-      @JsonKey(name: 'task_scheduler_id')
-      final String? taskSchedulerId}) = _$TaskSupabaseModelImpl;
+      @JsonKey(name: 'scheduled_task_id')
+      final String? scheduledTaskId}) = _$TaskSupabaseModelImpl;
 
   factory _TaskSupabaseModel.fromJson(Map<String, dynamic> json) =
       _$TaskSupabaseModelImpl.fromJson;
@@ -524,8 +524,8 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
   @JsonKey(name: 'total_spent_time')
   Duration? get totalSpentTime;
   @override
-  @JsonKey(name: 'task_scheduler_id')
-  String? get taskSchedulerId;
+  @JsonKey(name: 'scheduled_task_id')
+  String? get scheduledTaskId;
 
   /// Create a copy of TaskSupabaseModel
   /// with the given fields replaced by the non-null parameter values.

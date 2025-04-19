@@ -1,3 +1,12 @@
-import 'package:zamaan/features/log/domain/repositories/log_repo.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 
-abstract interface class LogDataSource<T> implements LogRepository<T> {}
+abstract class LogDataSource<T> {
+  EResultFutureVoid createLogs(List<T> logs);
+
+  EResultFuture<List<T>> getLogs(List<String>? logIds);
+
+  EResultFuture<List<T>> getWithDateRange({
+    required DateTime fromDate,
+    required DateTime toDate,
+  });
+}

@@ -22,7 +22,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     super.createdAt,
     super.userId,
     super.description,
-    this.taskSchedulerId,
+    this.scheduledTaskId,
     this.dueDate,
     this.fixedTagIds,
     Duration? spentTime,
@@ -66,7 +66,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   final List<String>? fixedTagIds;
 
   @HiveField(17)
-  final String? taskSchedulerId;
+  final String? scheduledTaskId;
 
   @HiveField(18)
   final bool isPaused;
@@ -81,7 +81,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     String? description,
     String? taskId,
     String? subTaskId,
-    String? taskSchedulerId,
+    String? scheduledTaskId,
     DateTime? startAt,
     DateTime? dueDate,
     List<String>? fixedTagIds,
@@ -99,7 +99,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         dueDate: dueDate ?? this.dueDate,
         fixedTagIds: fixedTagIds ?? this.fixedTagIds,
         isPaused: isPaused ?? this.isPaused,
-        taskSchedulerId: taskSchedulerId ?? this.taskSchedulerId,
+        scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
       );
 
   TaskActivityEntity toEntity() => TaskActivityEntity(
@@ -115,7 +115,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         spentTime: spentTime,
         fixedTagIds: fixedTagIds,
         isPaused: isPaused,
-        taskSchedulerId: taskSchedulerId,
+        scheduledTaskId: scheduledTaskId,
       );
 
   /// Returns a list of properties that are used to determine equality.
@@ -131,6 +131,6 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         dueDate,
         spentTime,
         isPaused,
-        taskSchedulerId,
+        scheduledTaskId,
       ];
 }

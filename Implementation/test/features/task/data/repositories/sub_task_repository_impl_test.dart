@@ -3,12 +3,12 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_sub_task_data_source_impl.dart';
+import 'package:zamaan/features/tasks_management/data/sources/local/hive/sub_task_data_source_impl.dart';
 
-class MockDataSource extends Mock implements HiveSubTaskDataSourceImpl {}
+class MockDataSource extends Mock implements SubTaskHiveDataSourceImpl {}
 
 void main() {
-  late HiveSubTaskDataSourceImpl mockDataSource;
+  late SubTaskHiveDataSourceImpl mockDataSource;
   late SubTaskRepositoryImpl subTaskRepo;
   late SubTaskHiveModel model;
   late SubTaskEntity entity;

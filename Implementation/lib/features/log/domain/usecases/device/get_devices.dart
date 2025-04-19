@@ -4,10 +4,9 @@ import 'package:zamaan/features/log/domain/entities/device.dart';
 import 'package:zamaan/features/log/domain/repositories/device_repo.dart';
 
 class GetDevicesUsecase
-    extends UsecaseWithParams<DeviceRepository<DeviceEntity>, List<DeviceEntity>, bool> {
+    extends UsecaseWithoutParams<DeviceRepository<DeviceEntity>, List<DeviceEntity>> {
   GetDevicesUsecase(super.repository);
 
   @override
-  EResultFuture<List<DeviceEntity>> call(bool fromLocal) async =>
-      repository.getDevices(fromLocal: fromLocal);
+  EResultFuture<List<DeviceEntity>> call() async => repository.getDevices();
 }

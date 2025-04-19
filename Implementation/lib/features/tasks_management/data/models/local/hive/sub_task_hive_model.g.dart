@@ -3,7 +3,7 @@
 part of 'sub_task_hive_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// HiveBaseTypeAdapterGenerator
 // **************************************************************************
 
 class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {

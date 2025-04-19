@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
@@ -22,23 +23,13 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
 
   /// #### Saves the `[item]` to the Hive box conditionally.
   @override
-  EResultFutureVoid create(
-    HiveModel newEntity, {
-    bool fromLocal = false,
-    bool fromRemote = false,
-  }) async =>
-      _hiveServices.operator(
+  EResultFutureVoid create(HiveModel newEntity) async => _hiveServices.operator(
         job: (box) async => box.put(newEntity.id, newEntity),
         boxName: _boxName,
       );
 
   @override
-  EResultFutureVoid createBatch(
-    List<HiveModel> entities, {
-    bool fromLocal = false,
-    bool fromRemote = false,
-  }) async =>
-      _hiveServices.operator(
+  EResultFutureVoid createBatch(List<HiveModel> entities) async => _hiveServices.operator(
         job: (box) async {
           final map = {for (final model in entities) model.id: model};
           return box.putAll(map);
@@ -47,7 +38,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
       );
 
   @override
-  EResultFutureVoid delete(String id, {bool fromLocal = false, bool fromRemote = false}) async {
+  EResultFutureVoid delete(String id) async {
     if (!isValidUUID(id)) {
       throw LocalException(
         message: 'This $id is not a valid [UUID] ',
@@ -61,12 +52,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   }
 
   @override
-  EResultFutureVoid updateBatch(
-    List<HiveModel> entities, {
-    bool fromLocal = false,
-    bool fromRemote = false,
-  }) async =>
-      tryCatchEither(
+  EResultFutureVoid updateBatch(List<HiveModel> entities) async => tryCatchEither(
         action: () async => _hiveServices.operator(
           job: (box) async => box.putAll({for (final model in entities) model.id: model}),
           boxName: _boxName,
@@ -76,8 +62,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
 
   /// Retrieves all items from the Hive box.
   @override
-  EResultFuture<List<HiveModel>> getAll({bool fromLocal = false, bool fromRemote = false}) async =>
-      _hiveServices.operator<List<HiveModel>>(
+  EResultFuture<List<HiveModel>> getAll() async => _hiveServices.operator<List<HiveModel>>(
         job: (box) async => box.values.toList(),
         boxName: _boxName,
       );
@@ -85,8 +70,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   @override
   EResultFuture<HiveModel> getByValue(
     String id, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
     String fieldName = 'id',
   }) async =>
       tryCatchEither(
@@ -100,8 +84,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   @override
   EResultFuture<List<HiveModel>> getAllByValues(
     List<String> values, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
     String fieldName = 'id',
   }) async =>
       tryCatchEither<List<HiveModel>>(
@@ -119,20 +102,10 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   ///
   /// for this reason, the [create] function is used again
   @override
-  EResultFutureVoid update(
-    HiveModel entity, {
-    bool fromLocal = false,
-    bool fromRemote = false,
-  }) async =>
-      create(entity);
+  EResultFutureVoid update(HiveModel entity) async => create(entity);
 
   @override
-  EResultFutureVoid deleteBatch(
-    List<String> ids, {
-    bool fromLocal = false,
-    bool fromRemote = false,
-  }) async =>
-      tryCatchEither(
+  EResultFutureVoid deleteBatch(List<String> ids) async => tryCatchEither(
         action: () async => _hiveServices.operator(
           job: (box) async {
             final invalidKeys = <String>[];
@@ -154,7 +127,9 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
       );
 
   @override
-  EResultFuture<bool> exists(String id, {bool fromLocal = false, bool fromRemote = false}) async =>
+  EResultFuture<bool> exists(
+    String id,
+  ) async =>
       tryCatchEither(
         action: () async => _hiveServices.operator<bool>(
           job: (box) async => box.containsKey(id),
@@ -167,8 +142,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   EResultFuture<List<HiveModel>> getAllWithinDateRange({
     required DateTime fromDate,
     required DateTime toDate,
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
     String fieldName = 'created_at',
   }) async =>
       tryCatchEither(

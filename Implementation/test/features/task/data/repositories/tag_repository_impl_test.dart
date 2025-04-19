@@ -2,12 +2,12 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_tag_data_source_impl.dart';
+import 'package:zamaan/features/tasks_management/data/sources/local/hive/tag_data_source_impl.dart';
 
-class MockDataSource extends Mock implements HiveTagDataSourceImpl {}
+class MockDataSource extends Mock implements TagHiveDataSourceImpl {}
 
 void main() {
-  late HiveTagDataSourceImpl mockDataSource;
+  late TagHiveDataSourceImpl mockDataSource;
   late TagRepositoryImpl tagRepo;
   late TagHiveModel model;
   late TagEntity entity;

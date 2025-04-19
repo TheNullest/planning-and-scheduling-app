@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
@@ -31,14 +32,16 @@ abstract class BaseRepositoryImpl<
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
   @override
-  EResultFutureVoid create(Entity entity,
-          {bool fromLocal = false, bool fromRemote = false,}) async =>
+  EResultFutureVoid create(
+    Entity entity, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.create(_mapper.toHiveModel(entity));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             await _remoteDataSource.create(_mapper.toSupabaseModel(entity));
           }
           return const Right(null);
@@ -49,15 +52,14 @@ abstract class BaseRepositoryImpl<
   @override
   EResultFutureVoid createBatch(
     List<Entity> entities, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.createBatch(_mapper.toHiveModels(entities));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             await _remoteDataSource.createBatch(_mapper.toSupabaseModels(entities));
           }
           return const Right(null);
@@ -66,13 +68,16 @@ abstract class BaseRepositoryImpl<
       );
 
   @override
-  EResultFutureVoid delete(String id, {bool fromLocal = false, bool fromRemote = false}) async =>
+  EResultFutureVoid delete(
+    String id, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.delete(id);
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             await _remoteDataSource.deleteBatch([id]);
           }
           return const Right(null);
@@ -83,15 +88,14 @@ abstract class BaseRepositoryImpl<
   @override
   EResultFutureVoid deleteBatch(
     List<String> ids, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.deleteBatch(ids);
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             return _remoteDataSource.deleteBatch(ids);
           }
           return const Right(null);
@@ -100,15 +104,17 @@ abstract class BaseRepositoryImpl<
       );
 
   @override
-  EResultFuture<List<Entity>> getAll({bool fromLocal = false, bool fromRemote = false}) async =>
+  EResultFuture<List<Entity>> getAll({
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getAll();
             final result = _mapper.foldEitherList(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getAll();
             final result = _mapper.foldEitherList<SupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
@@ -122,17 +128,16 @@ abstract class BaseRepositoryImpl<
   @override
   EResultFuture<Entity?> getById(
     String id, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getByValue(id);
             final models = _mapper.foldEitherSingle<HiveModel>(response);
             return Right(_mapper.toEntityFromHive(models!));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getByValue(id);
             final models = _mapper.foldEitherSingle<SupabaseModel?>(response);
             return Right(_mapper.toEntityFromSupabase(models as SupabaseModel));
@@ -145,17 +150,16 @@ abstract class BaseRepositoryImpl<
   @override
   EResultFuture<List<Entity>> getByIds(
     List<String> ids, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getAllByValues(ids);
             final result = _mapper.foldEitherList<HiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getAllByValues(ids);
             final result = _mapper.foldEitherList<SupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
@@ -166,14 +170,16 @@ abstract class BaseRepositoryImpl<
       );
 
   @override
-  EResultFutureVoid update(Entity entity,
-          {bool fromLocal = false, bool fromRemote = false,}) async =>
+  EResultFutureVoid update(
+    Entity entity, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.update(_mapper.toHiveModel(entity));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             return _remoteDataSource.updateBatch([_mapper.toSupabaseModel(entity)]);
           }
           return const Right(null);
@@ -184,15 +190,14 @@ abstract class BaseRepositoryImpl<
   @override
   EResultFutureVoid updateBatch(
     List<Entity> entities, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.updateBatch(_mapper.toHiveModels(entities));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             return _remoteDataSource.updateBatch(_mapper.toSupabaseModels(entities));
           }
           return const Right(null);
@@ -201,13 +206,16 @@ abstract class BaseRepositoryImpl<
       );
 
   @override
-  EResultFuture<bool> exists(String id, {bool fromLocal = false, bool fromRemote = false}) async =>
+  EResultFuture<bool> exists(
+    String id, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             return _localDataSource.exists(id);
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             return _remoteDataSource.exists(id);
           }
           return const Right(false);
@@ -219,18 +227,17 @@ abstract class BaseRepositoryImpl<
   EResultFuture<List<Entity>> getWithinDateRange({
     required DateTime fromDate,
     required DateTime toDate,
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response =
                 await _localDataSource.getAllWithinDateRange(fromDate: fromDate, toDate: toDate);
             final result = _mapper.foldEitherList<HiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response =
                 await _remoteDataSource.getAllWithinDateRange(fromDate: fromDate, toDate: toDate);
             final result = _mapper.foldEitherList<SupabaseModel>(response);

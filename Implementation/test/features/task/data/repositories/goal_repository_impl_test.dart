@@ -2,12 +2,12 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_goal_data_source_impl.dart';
+import 'package:zamaan/features/tasks_management/data/sources/local/hive/goal_data_source_impl.dart';
 
-class MockDataSource extends Mock implements HiveGoalDataSourceImpl {}
+class MockDataSource extends Mock implements GoalHiveDataSourceImpl {}
 
 void main() {
-  late HiveGoalDataSourceImpl mockDataSource;
+  late GoalHiveDataSourceImpl mockDataSource;
   late GoalRepositoryImpl goalRepo;
   late GoalHiveModel model;
   late GoalEntity entity;

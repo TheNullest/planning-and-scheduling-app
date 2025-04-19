@@ -1,3 +1,4 @@
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 
 /// Abstract base repository interface for managing entities in local and remote data sources.
@@ -11,123 +12,116 @@ abstract class BaseRepository<Entity> {
   /// Retrieves all entities from local, remote, or both data sources.
   ///
   /// **Parameters:**
-  /// - [fromLocal]: If `true`, retrieves entities from the local source.
-  /// - [fromRemote]: If `true`, retrieves entities from the remote source.
   ///
   /// **Returns:**
   /// - A future containing a list of nullable entities.
-  EResultFuture<List<Entity>> getAll({bool fromLocal = true, bool fromRemote = true});
+  EResultFuture<List<Entity>> getAll({
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Retrieves a single entity by its unique identifier from local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [id]: The unique identifier of the entity to retrieve.
-  /// - [fromLocal]: If `true`, retrieves the entity from the local source.
-  /// - [fromRemote]: If `true`, retrieves the entity from the remote source.
   ///
   /// **Returns:**
   /// - A future containing the nullable entity.
-  EResultFuture<Entity?> getById(String id, {bool fromLocal = true, bool fromRemote = true});
+  EResultFuture<Entity?> getById(
+    String id, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Retrieves multiple entities by their unique identifiers from local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [ids]: The list of unique identifiers for the entities to retrieve.
-  /// - [fromLocal]: If `true`, retrieves the entities from the local source.
-  /// - [fromRemote]: If `true`, retrieves the entities from the remote source.
   ///
   /// **Returns:**
   /// - A future containing a list of nullable entities.
   EResultFuture<List<Entity>> getByIds(
     List<String> ids, {
-    bool fromLocal = true,
-    bool fromRemote = true,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 
   /// Creates a single entity in local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [entity]: The entity to create.
-  /// - [fromLocal]: If `true`, creates the entity in the local source.
-  /// - [fromRemote]: If `true`, creates the entity in the remote source.
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid create(Entity entity, {bool fromLocal = true, bool fromRemote = true});
+  EResultFutureVoid create(
+    Entity entity, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Updates a single entity in local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [entity]: The entity with updated data.
-  /// - [fromLocal]: If `true`, updates the entity in the local source.
-  /// - [fromRemote]: If `true`, updates the entity in the remote source.
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid update(Entity entity, {bool fromLocal = true, bool fromRemote = true});
+  EResultFutureVoid update(
+    Entity entity, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Deletes a single entity by its unique identifier from local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [id]: The unique identifier of the entity to delete.
-  /// - [fromLocal]: If `true`, deletes the entity from the local source.
-  /// - [fromRemote]: If `true`, deletes the entity from the remote source.
-  ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid delete(String id, {bool fromLocal = true, bool fromRemote = true});
+  EResultFutureVoid delete(
+    String id, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Deletes multiple entities by their unique identifiers in local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [ids]: The list of unique identifiers for the entities to delete.
-  /// - [fromLocal]: If `true`, deletes the entities from the local source.
-  /// - [fromRemote]: If `true`, deletes the entities from the remote source.
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid deleteBatch(List<String> ids, {bool fromLocal = true, bool fromRemote = true});
+  EResultFutureVoid deleteBatch(
+    List<String> ids, {
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
 
   /// Creates multiple entities in a batch operation in local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [entities]: The list of entities to create.
-  /// - [fromLocal]: If `true`, creates the entities in the local source.
-  /// - [fromRemote]: If `true`, creates the entities in the remote source.
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
   EResultFutureVoid createBatch(
     List<Entity> entities, {
-    bool fromLocal = true,
-    bool fromRemote = true,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 
   /// Updates multiple entities in a batch operation in local, remote, or both data sources.
   ///
   /// **Parameters:**
   /// - [entities]: The list of entities with updated data.
-  /// - [fromLocal]: If `true`, updates the entities in the local source.
-  /// - [fromRemote]: If `true`, updates the entities in the remote source.
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
   EResultFutureVoid updateBatch(
     List<Entity> entities, {
-    bool fromLocal = true,
-    bool fromRemote = true,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 
   EResultFuture<List<Entity>> getWithinDateRange({
     required DateTime fromDate,
     required DateTime toDate,
-    bool fromLocal = true,
-    bool fromRemote = true,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 
   EResultFuture<bool> exists(
     String id, {
-    bool fromLocal = true,
-    bool fromRemote = true,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 }

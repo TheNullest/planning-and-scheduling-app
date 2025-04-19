@@ -8,7 +8,7 @@ import 'package:zamaan/core/di/init_dependencies.dart';
 import 'package:zamaan/core/localization/multi_assets_loader.dart';
 import 'package:zamaan/core/providers/user_provider.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
-import 'package:zamaan/features/auth/presentation/viewmodels/auth/auth_bloc.dart';
+import 'package:zamaan/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/navigation/presentation/views/home_view.dart';
 import 'package:zamaan/presentation_shared/navigation/app_router.dart';
@@ -25,7 +25,8 @@ void main() async {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-              create: (_) => serviceLocator<NetworkConnectivityMonitorCubit>(),),
+            create: (_) => serviceLocator<NetworkConnectivityMonitorCubit>(),
+          ),
           BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
           BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
         ],
@@ -66,8 +67,7 @@ class _ZamaanState extends State<Zamaan> {
         home: Stack(
           children: [
             Positioned.fill(
-              child: BlocConsumer<NetworkConnectivityMonitorCubit,
-                  NetworkConnectivityMonitorState>(
+              child: BlocConsumer<NetworkConnectivityMonitorCubit, NetworkConnectivityMonitorState>(
                 listener: (context, state) {
                   if (state is NetworkConnectivityMonitorFailureState) {
                     showSnackBar(context, 'No Internet Connection');
@@ -84,9 +84,8 @@ class _ZamaanState extends State<Zamaan> {
             Positioned(
               child: BlocSelector<AppUserCubit, AppUserState, bool>(
                 selector: (state) => state is AppUserSignedInState,
-                builder: (context, userSignedIn) => userSignedIn
-                    ? serviceLocator<HomeView>()
-                    : serviceLocator<SignInView>(),
+                builder: (context, userSignedIn) =>
+                    userSignedIn ? serviceLocator<HomeView>() : serviceLocator<SignInView>(),
               ),
             ),
           ],
@@ -95,5 +94,3 @@ class _ZamaanState extends State<Zamaan> {
     );
   }
 }
-
-//TODO #2 Implement a versioning system within your models (e.g., an additional field) to track changes over time.

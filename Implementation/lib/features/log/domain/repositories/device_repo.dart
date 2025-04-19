@@ -1,3 +1,4 @@
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart';
@@ -28,13 +29,13 @@ abstract interface class DeviceRepository<T> {
   /// - **Rollback mechanisms:** Remote implementations (Supabase) should support batch inserts with rollback capabilities on failure.
   ///
   /// **Parameters:**
-  /// - [devices]: A list of devices of type [T] to be registered.
+  /// - [device]: A list of devices of type [T] to be registered.
   ///
   /// **Returns:**
   /// - [EResultFutureVoid]:
   ///   - **Success:** All devices are successfully registered.
   ///   - **Failure:** May occur due to network errors, database conflicts, or invalid device data.
-  EResultFutureVoid registerDevices(List<T> devices);
+  EResultFutureVoid registerDevice(T device);
 
   /// Unregisters a device and terminates its active session.
   ///
@@ -70,13 +71,13 @@ abstract interface class DeviceRepository<T> {
 
   /// Retrieves a list of devices from the system.
   ///
-  /// The method fetches devices from the storage layer specified by the [fromLocal] flag:
-  /// - **Local Storage (Hive):** When [fromLocal] is set to `true`, ensuring offline availability.
-  /// - **Remote Database (Supabase):** When [fromLocal] is set to `false` (this is the default),
+  /// The method fetches devices from the storage layer specified by the [isLocal(policy)] flag:
+  /// - **Local Storage (Hive):** When [isLocal(policy)] is set to `true`, ensuring offline availability.
+  /// - **Remote Database (Supabase):** When [isLocal(policy)] is set to `false` (this is the default),
   ///   relying on network-based data.
   ///
   /// **Parameters:**
-  /// - [fromLocal]: A boolean flag that selects the target storage layer:
+  /// - [isLocal(policy)]: A boolean flag that selects the target storage layer:
   ///   - `true`: Query local storage.
   ///   - `false`: Query remote storage (default).
   ///
@@ -84,23 +85,23 @@ abstract interface class DeviceRepository<T> {
   /// - [EResultFuture<List<T>>]:
   ///   - **Success:** A list of devices (entities or models) retrieved from the chosen layer.
   ///   - **Failure:** May occur due to network errors, data formatting issues, or invalid queries.
-  EResultFuture<List<T>> getDevices({bool fromLocal = false});
+  EResultFuture<List<T>> getDevices();
 
   /// Retrieves a specific device by its unique identifier.
   ///
   /// This method fetches a single device record from the selected storage layer:
-  /// - **Local Storage (Hive):** When [fromLocal] is set to `true`, ensuring quick local access.
-  /// - **Remote Database (Supabase):** When [fromLocal] is set to `false` (default), requiring potential
+  /// - **Local Storage (Hive):** When [isLocal(policy)] is set to `true`, ensuring quick local access.
+  /// - **Remote Database (Supabase):** When [isLocal(policy)] is set to `false` (default), requiring potential
   ///   network validations and error handling.
   ///
   /// **Parameters:**
   /// - [id]: The unique identifier of the device.
-  /// - [fromLocal]: Boolean flag indicating whether to search in local storage (`true`)
+  /// - [isLocal(policy)]: Boolean flag indicating whether to search in local storage (`true`)
   ///   or in the cloud (`false`, default).
   ///
   /// **Returns:**
   /// - [EResultFuture<T>]:
   ///   - **Success:** The device matching the given identifier.
   ///   - **Failure:** An error if the device is not found or if issues occur during data retrieval.
-  EResultFuture<T?> getDeviceById({required String id, bool fromLocal = false});
+  EResultFuture<T?> getDeviceById({required String id, required DataSourcePolicy policy});
 }

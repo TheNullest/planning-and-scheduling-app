@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
@@ -37,17 +38,16 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<List<TaskEntity>> getBatchByCategories(
     List<String> categoryIds, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getBatchByCategories(categoryIds);
             final result = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getBatchByCategories(categoryIds);
             final result = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
@@ -60,17 +60,16 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<List<TaskEntity>> getBatchByPriority(
     Priority priority, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getBatchByPriority(priority);
             final models = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(models));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getBatchByPriority(priority);
             final models = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(models));
@@ -83,17 +82,16 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<List<TaskEntity>> getBatchByStatus(
     TaskStatus status, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getBatchArchived(status);
             final models = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(models));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getBatchArchived(status);
             final models = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(models));
@@ -106,17 +104,16 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   @override
   EResultFuture<List<TaskEntity>> getBatchByTags(
     List<String> tagIds, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getBatchByFixedTags(tagIds);
             final result = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getBatchByFixedTags(tagIds);
             final result = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
@@ -127,20 +124,19 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
       );
 
   @override
-  EResultFuture<TaskEntity?> getBatchByTaskSchedulerId(
+  EResultFuture<TaskEntity?> getBatchByScheduledTaskId(
     String schedulerId, {
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
-            final response = await _localDataSource.getByTaskSchedulerId(schedulerId);
+          if (DataSourcePolicy.isLocal(policy)) {
+            final response = await _localDataSource.getByScheduledTaskId(schedulerId);
             final model = _mapper.foldEitherSingle<TaskHiveModel>(response);
             return Right(_mapper.toEntityFromHive(model!));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response = await _remoteDataSource.getByTaskSchedulerId(schedulerId);
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getByScheduledTaskId(schedulerId);
             final model = _mapper.foldEitherSingle<TaskSupabaseModel>(response);
             return Right(_mapper.toEntityFromSupabase(model!));
           }
@@ -153,17 +149,16 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   EResultFuture<List<TaskEntity>> getBatchByDueDateRange({
     required DateTime dueDateFrom,
     required DateTime dueDateTo,
-    bool fromLocal = false,
-    bool fromRemote = false,
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async =>
       tryCatchEither(
         action: () async {
-          if (fromLocal) {
+          if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getBatchByDueDateRange(dueDateFrom, dueDateTo);
             final result = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
-          if (fromRemote && _netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getBatchByDueDateRange(dueDateFrom, dueDateTo);
             final result = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
