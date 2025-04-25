@@ -7,4 +7,6 @@ class TasksManagerEvent with _$TasksManagerEvent {
   const factory TasksManagerEvent.createTaskWithSubTasks({
     required CreateTaskWithSubTasksParams taskAndSubTasks,
   }) = _CreateTaskWithSubTasksEvent;
+
+  const factory TasksManagerEvent.fetchTodayTasks() = _FetchTodayTasks;
 }

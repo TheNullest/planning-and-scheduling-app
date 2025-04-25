@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/core/enums/sync_action.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/hive/sync_action.dart';
 import 'package:zamaan/features/log/domain/entities/log.dart';
 
 part 'log.freezed.dart';

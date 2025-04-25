@@ -1,19 +1,21 @@
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
 import 'package:zamaan/domain/entities/tag.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tag/tag_supabase_model.dart';
 
 class TagMapper extends Mapper<TagEntity, TagHiveModel, TagSupabaseModel> {
   @override
   TagEntity toEntityFromHive(TagHiveModel model) => tryCatchSimple<TagEntity>(
-        action: () => model.toEntity(),
+        action: () => model.copyWith(),
         failureType: FailureType.local,
       );
 
   @override
-  TagEntity toEntityFromSupabase(TagSupabaseModel model) => tryCatchSimple<TagEntity>(
+  TagEntity toEntityFromSupabase(TagSupabaseModel model, {DataMap? relatedListModels}) =>
+      tryCatchSimple<TagEntity>(
         action: () => TagEntity(
           id: model.id,
           description: model.description,

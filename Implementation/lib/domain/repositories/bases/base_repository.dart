@@ -1,5 +1,5 @@
-import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
 
 /// Abstract base repository interface for managing entities in local and remote data sources.
 ///

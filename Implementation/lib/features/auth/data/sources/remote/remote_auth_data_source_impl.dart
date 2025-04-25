@@ -1,15 +1,13 @@
-// ignore_for_file: void_checks
-
 import 'dart:async';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
@@ -160,7 +158,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
         failureType: FailureType.remote,
       );
 
-  // TODO: Improve this method to handle different scenarios and remove hardcoded values.
+  // TODO[FIXME]: mprove this method to handle different scenarios and remove hardcoded values.
   // - Validate the email format before making the request.
   // - Handle cases where the user does not exist.
   // - Use a secure method to generate a new password instead of hardcoding it.
@@ -195,7 +193,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   @override
   EResultFuture<bool> deleteUserAccount(UserSignInParams params) => tryCatchEither<bool>(
         action: () async {
-          //TODO.FIXME: Implement this method to handle delete user account properly.
+          //TODO: [FIXME]: Implement this method to handle delete user account properly.
 
           // Sign in the user with the provided email and password to verify their credentials
           await signIn(params);

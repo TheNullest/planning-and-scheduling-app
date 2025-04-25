@@ -21,14 +21,14 @@ class GoalHiveDataSourceImpl extends HiveDataSource<GoalHiveModel>
     String taskId,
   ) async =>
       _hiveBox.operator<List<GoalHiveModel>>(
-        job: (box) async => box.values.where((goalModel) => goalModel.taskId == taskId).toList(),
+        job: (box) async => box.values.where((goalModel) => goalModel.refType == taskId).toList(),
         boxName: _boxName,
       );
 
   @override
   EResultFuture<GoalHiveModel> getGoalBySubTaskId(String subTaskId) async =>
       _hiveBox.operator<GoalHiveModel>(
-        job: (box) async => box.values.firstWhere((goalModel) => goalModel.subTaskId == subTaskId),
+        job: (box) async => box.values.firstWhere((goalModel) => goalModel.refId == subTaskId),
         boxName: _boxName,
       );
 }

@@ -3,7 +3,7 @@
 part of 'user_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
@@ -17,17 +17,18 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserHiveModel(
+      createdAt: fields[2] as DateTime,
+      description: fields[3] as String?,
+      updatedAt: fields[4] as DateTime?,
       userName: fields[11] as String,
       password: fields[12] as String,
       firstName: fields[13] as String,
       lastName: fields[14] as String,
       emailAddress: fields[15] as String,
-      id: fields[0] as String?,
-      description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
-      updatedAt: fields[4] as DateTime?,
       birthDate: fields[16] as DateTime?,
       avatarPath: fields[17] as String?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
     );
   }
 
@@ -67,7 +68,5 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is UserHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is UserHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

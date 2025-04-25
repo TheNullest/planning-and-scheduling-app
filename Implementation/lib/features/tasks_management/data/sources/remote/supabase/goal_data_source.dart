@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/goal.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goal/goal_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/goal_data_source.dart';
 

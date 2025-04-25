@@ -1,18 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_measurement_unit_hive_model.dart';
 
 void main() {
-  final entity = MeasurementUnitEntity.empty();
+  final entity = CustomeMeasurementUnitEntity.empty();
   final testModel = MeasurementUnitHiveModel.fromEntity(entity);
-  test(
-      '[hiveMeasurementUnitModel] must be a subclass of [MeasurementUnitEntity] ',
-      () {
+  test('[hiveMeasurementUnitModel] must be a subclass of [MeasurementUnitEntity] ', () {
     // Arrange => testModel
 
     // Assert
-    expect(testModel, isA<MeasurementUnitEntity>());
+    expect(testModel, isA<CustomeMeasurementUnitEntity>());
     expect(testModel, isA<BaseEntityAbstraction>());
   });
 

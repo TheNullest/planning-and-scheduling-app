@@ -23,14 +23,14 @@ mixin _$TagSupabaseModel {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'color_code')
-  String get colorCode => throw _privateConstructorUsedError;
+  int get colorCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'icon_code')
-  String get iconCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  int get iconCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String get userId => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -53,11 +53,11 @@ abstract class $TagSupabaseModelCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'user_id') String userId,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -80,9 +80,9 @@ class _$TagSupabaseModelCopyWithImpl<$Res, $Val extends TagSupabaseModel>
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? userId = freezed,
+    Object? createdAt = null,
+    Object? userId = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -97,23 +97,23 @@ class _$TagSupabaseModelCopyWithImpl<$Res, $Val extends TagSupabaseModel>
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -133,11 +133,11 @@ abstract class _$$TagSupabaseModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'user_id') String userId,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -158,9 +158,9 @@ class __$$TagSupabaseModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? userId = freezed,
+    Object? createdAt = null,
+    Object? userId = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_$TagSupabaseModelImpl(
@@ -175,23 +175,23 @@ class __$$TagSupabaseModelImplCopyWithImpl<$Res>
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -208,9 +208,9 @@ class _$TagSupabaseModelImpl implements _TagSupabaseModel {
       required this.title,
       @JsonKey(name: 'color_code') required this.colorCode,
       @JsonKey(name: 'icon_code') required this.iconCode,
-      @JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'user_id') required this.userId,
       this.description,
-      @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
   factory _$TagSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -222,25 +222,25 @@ class _$TagSupabaseModelImpl implements _TagSupabaseModel {
   final String title;
   @override
   @JsonKey(name: 'color_code')
-  final String colorCode;
+  final int colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  final String iconCode;
-  @override
-  @JsonKey(name: 'user_id')
-  final String? userId;
-  @override
-  final String? description;
+  final int iconCode;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime? createdAt;
+  final DateTime createdAt;
+  @override
+  @JsonKey(name: 'user_id')
+  final String userId;
+  @override
+  final String? description;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'TagSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'TagSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, createdAt: $createdAt, userId: $userId, description: $description, updatedAt: $updatedAt)';
   }
 
   @override
@@ -254,11 +254,11 @@ class _$TagSupabaseModelImpl implements _TagSupabaseModel {
                 other.colorCode == colorCode) &&
             (identical(other.iconCode, iconCode) ||
                 other.iconCode == iconCode) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
@@ -266,7 +266,7 @@ class _$TagSupabaseModelImpl implements _TagSupabaseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, colorCode, iconCode,
-      userId, description, createdAt, updatedAt);
+      createdAt, userId, description, updatedAt);
 
   /// Create a copy of TagSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -289,11 +289,11 @@ abstract class _TagSupabaseModel implements TagSupabaseModel {
   const factory _TagSupabaseModel(
           {required final String id,
           required final String title,
-          @JsonKey(name: 'color_code') required final String colorCode,
-          @JsonKey(name: 'icon_code') required final String iconCode,
-          @JsonKey(name: 'user_id') final String? userId,
+          @JsonKey(name: 'color_code') required final int colorCode,
+          @JsonKey(name: 'icon_code') required final int iconCode,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'user_id') required final String userId,
           final String? description,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$TagSupabaseModelImpl;
 
@@ -306,18 +306,18 @@ abstract class _TagSupabaseModel implements TagSupabaseModel {
   String get title;
   @override
   @JsonKey(name: 'color_code')
-  String get colorCode;
+  int get colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  String get iconCode;
-  @override
-  @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  String? get description;
+  int get iconCode;
   @override
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt;
+  DateTime get createdAt;
+  @override
+  @JsonKey(name: 'user_id')
+  String get userId;
+  @override
+  String? get description;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

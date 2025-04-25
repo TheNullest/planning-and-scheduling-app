@@ -1,4 +1,4 @@
-import 'package:zamaan/core/enums/enums.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/goal_ui.dart';
 

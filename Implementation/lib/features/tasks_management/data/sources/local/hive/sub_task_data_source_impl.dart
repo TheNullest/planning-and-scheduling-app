@@ -1,10 +1,10 @@
 import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/enums/priority.dart';
-import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
+import 'package:zamaan/domain/enums/hive/priority.dart';
+import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/sub_task_data_source.dart';
 

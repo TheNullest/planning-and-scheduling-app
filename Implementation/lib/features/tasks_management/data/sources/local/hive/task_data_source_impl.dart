@@ -1,9 +1,9 @@
 import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/task_data_source.dart';
 
@@ -25,7 +25,7 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
         job: (box) async => box.values
             .where(
               (task) =>
-                  task.categoryIds.any((categoryId) => categoryIds.contains(categoryId)) &&
+                  task.categories.any((categoryId) => categoryIds.contains(categoryId)) &&
                   !task.archived,
             )
             .toList(),
@@ -44,22 +44,13 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
       );
 
   @override
-  EResultFuture<List<TaskHiveModel>> getBatchArchived(
-    TaskStatus status,
-  ) async =>
-      _hiveBox.operator<List<TaskHiveModel>>(
-        job: (box) async => box.values.where((item) => item.archived).toList(),
-        boxName: _boxName,
-      );
-
-  @override
   EResultFuture<List<TaskHiveModel>> getBatchByFixedTags(
     List<String> tagIds,
   ) async =>
       _hiveBox.operator<List<TaskHiveModel>>(
         job: (box) async => box.values
             .where(
-              (task) => task.fixedTagIds!.any((tagId) => tagIds.contains(tagId)) && !task.archived,
+              (task) => task.fixedTags.any((tagId) => tagIds.contains(tagId)) && !task.archived,
             )
             .toList(),
         boxName: _boxName,
@@ -83,12 +74,16 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
       );
 
   @override
-  EResultFuture<TaskHiveModel> getByScheduledTaskId(
-    String schedulerId,
-  ) async =>
-      _hiveBox.operator<TaskHiveModel>(
+  EResultFuture<List<TaskHiveModel>> getBatchByStatus(TaskStatus status) async =>
+      _hiveBox.operator<List<TaskHiveModel>>(
         job: (box) async =>
-            box.values.firstWhere((task) => task.scheduledTaskId == schedulerId && !task.archived),
+            box.values.where((task) => task.taskStatus.compareTo(status.name) == 0).toList(),
+        boxName: _boxName,
+      );
+  @override
+  EResultFuture<List<TaskHiveModel>> getBatchArchived() async =>
+      _hiveBox.operator<List<TaskHiveModel>>(
+        job: (box) async => box.values.where((task) => task.archived == true).toList(),
         boxName: _boxName,
       );
 }

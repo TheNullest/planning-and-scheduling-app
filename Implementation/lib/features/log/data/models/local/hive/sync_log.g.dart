@@ -3,7 +3,7 @@
 part of 'sync_log.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class SyncLogHiveModelAdapter extends HiveBaseTypeAdapter<SyncLogHiveModel> {

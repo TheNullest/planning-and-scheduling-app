@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// Abstract mapper interface for entity conversions.
 ///
@@ -11,7 +12,7 @@ abstract class Mapper<Entity, Hive, Supabase> {
   Entity toEntityFromHive(Hive model);
 
   /// Converts a Supabase model to a domain entity.
-  Entity toEntityFromSupabase(Supabase model);
+  Entity toEntityFromSupabase(Supabase model, {DataMap? relatedListModels});
 
   /// Converts a domain entity to a Hive model.
   Hive toHiveModel(Entity entity);

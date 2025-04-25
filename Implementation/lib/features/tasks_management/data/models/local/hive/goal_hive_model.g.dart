@@ -3,12 +3,12 @@
 part of 'goal_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 4;
 
   @override
   GoalHiveModel read(BinaryReader reader) {
@@ -17,45 +17,51 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GoalHiveModel(
-      taskId: fields[11] as String,
-      measurementUnitId: fields[13] as String,
-      measurementUnitValue: fields[14] as int,
-      id: fields[0] as String?,
-      updatedAt: fields[4] as DateTime?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
       description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
-      userId: fields[1] as String?,
-      subTaskId: fields[12] as String?,
-      perActiveHour: fields[15] as double,
-      perActiveDay: fields[16] as double,
-      perActiveWeek: fields[17] as double,
-      perActiveMonth: fields[18] as double,
-      perActiveYear: fields[19] as double,
+      updatedAt: fields[4] as DateTime?,
+      refType: fields[11] as ReferenceType,
+      refId: fields[12] as String,
+      measurementUnit: fields[13] as MeasurementUnit?,
+      goalConstraint: fields[14] as GoalConstraint,
+      minutelyTarget: fields[15] as double,
+      hourlyTarget: fields[16] as double,
+      dailyTarget: fields[17] as double,
+      weeklyTarget: fields[18] as double,
+      monthlyTarget: fields[19] as double,
+      yearlyTarget: fields[20] as double,
+      customMeasurementUnitId: fields[21] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, GoalHiveModel obj) {
     writer
-      ..writeByte(14)
-      ..writeByte(11)
-      ..write(obj.taskId)
-      ..writeByte(12)
-      ..write(obj.subTaskId)
-      ..writeByte(13)
-      ..write(obj.measurementUnitId)
-      ..writeByte(14)
-      ..write(obj.measurementUnitValue)
-      ..writeByte(15)
-      ..write(obj.perActiveHour)
       ..writeByte(16)
-      ..write(obj.perActiveDay)
+      ..writeByte(11)
+      ..write(obj.refType)
+      ..writeByte(12)
+      ..write(obj.refId)
+      ..writeByte(13)
+      ..write(obj.measurementUnit)
+      ..writeByte(14)
+      ..write(obj.goalConstraint)
+      ..writeByte(15)
+      ..write(obj.minutelyTarget)
+      ..writeByte(16)
+      ..write(obj.hourlyTarget)
       ..writeByte(17)
-      ..write(obj.perActiveWeek)
+      ..write(obj.dailyTarget)
       ..writeByte(18)
-      ..write(obj.perActiveMonth)
+      ..write(obj.weeklyTarget)
       ..writeByte(19)
-      ..write(obj.perActiveYear)
+      ..write(obj.monthlyTarget)
+      ..writeByte(20)
+      ..write(obj.yearlyTarget)
+      ..writeByte(21)
+      ..write(obj.customMeasurementUnitId)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -74,7 +80,5 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GoalHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is GoalHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

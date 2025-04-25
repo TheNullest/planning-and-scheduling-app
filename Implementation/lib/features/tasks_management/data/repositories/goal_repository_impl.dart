@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/goal.dart';
 import 'package:zamaan/domain/entities/goal.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
 import 'package:zamaan/domain/repositories/goal_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';

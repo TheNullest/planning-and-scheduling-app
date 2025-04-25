@@ -17,7 +17,7 @@ class _Labels {
   String get subtasks => '$_prefix.subtasks'.tr();
   String get tags => '$_prefix.tags'.tr();
   String get goals => '$_prefix.goals'.tr();
-  String get measurementUnit => '$_prefix.measurement_unit'.tr();
+  String get customeCustomeMeasurementUnit => '$_prefix.measurement_unit'.tr();
   String get startDate => '$_prefix.start_date'.tr();
   String get endDate => '$_prefix.end_date'.tr();
   String get repeat => '$_prefix.repeat'.tr();

@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 // Base directory where the operation will start
-const baseDir = path.join(__dirname, '../lib/features/tasks_management');
+const baseDir = path.join(__dirname, '../lib/');
 
 // Words to replace
-const targetWord = 'isLocal(policy)';
-const replacementWord = 'DataSourcePolicy.isLocal(policy)';
+const targetWord = 'MeasurementUnit';
+const replacementWord = 'CustomeMeasurementUnit';
 
 // Function to recursively process folders and files
 function processDirectory(dir) {

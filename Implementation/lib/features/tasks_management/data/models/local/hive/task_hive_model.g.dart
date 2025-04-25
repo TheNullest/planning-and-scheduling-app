@@ -3,7 +3,7 @@
 part of 'task_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
@@ -17,28 +17,27 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskHiveModel(
-      title: fields[11] as String,
-      categoryIds: (fields[16] as List).cast<String>(),
-      colorCode: fields[12] as String,
-      iconCode: fields[13] as String,
-      id: fields[0] as String?,
-      updatedAt: fields[4] as DateTime?,
-      userId: fields[1] as String?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
       description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
-      priority: fields[14] as int,
-      archived: fields[19] as bool,
-      fixedTagIds: (fields[17] as List?)?.cast<String>(),
-      dueDate: fields[15] as DateTime?,
-      totalSpentTime: fields[18] as Duration?,
-      scheduledTaskId: fields[20] as String?,
+      updatedAt: fields[4] as DateTime?,
+      title: fields[11] as String,
+      colorCode: fields[12] as int,
+      iconCode: fields[13] as int,
+      priority: fields[14] as Priority,
+      categories: (fields[15] as List).cast<CategoryEntity>(),
+      fixedTags: (fields[16] as List).cast<TagEntity>(),
+      totalSpentTime: fields[17] as Duration,
+      archived: fields[18] as bool,
+      taskStatus: fields[19] as TaskStatus,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(14)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -48,17 +47,15 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..writeByte(14)
       ..write(obj.priority)
       ..writeByte(15)
-      ..write(obj.dueDate)
+      ..write(obj.categories)
       ..writeByte(16)
-      ..write(obj.categoryIds)
+      ..write(obj.fixedTags)
       ..writeByte(17)
-      ..write(obj.fixedTagIds)
-      ..writeByte(18)
       ..write(obj.totalSpentTime)
-      ..writeByte(19)
+      ..writeByte(18)
       ..write(obj.archived)
-      ..writeByte(20)
-      ..write(obj.scheduledTaskId)
+      ..writeByte(19)
+      ..write(obj.taskStatus)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -77,7 +74,5 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TaskHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

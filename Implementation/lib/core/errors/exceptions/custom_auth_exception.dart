@@ -1,5 +1,5 @@
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// A class representing an authentication failure or error.
 class CustomAuthException extends RemoteException {

@@ -16,7 +16,7 @@ class _Hints {
   String get addTag => '$_prefix.add_tag'.tr();
   String get addGoal => '$_prefix.add_goal'.tr();
   String get addCategory => '$_prefix.add_category'.tr();
-  String get addMeasurementUnit => '$_prefix.add_measurement_unit'.tr();
+  String get addCustomeMeasurementUnit => '$_prefix.add_measurement_unit'.tr();
   String get timePicker => '$_prefix.time_picker'.tr();
   String get location => '$_prefix.location'.tr();
   String get notes => '$_prefix.notes'.tr();

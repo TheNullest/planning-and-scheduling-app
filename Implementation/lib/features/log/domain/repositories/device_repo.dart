@@ -1,5 +1,5 @@
-import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/device/device.dart';
 import 'package:zamaan/features/log/domain/entities/device.dart';

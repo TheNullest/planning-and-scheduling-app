@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/get_measurement_units_usecase.dart';
 
@@ -20,8 +20,7 @@ void main() {
       '[measurementUnit.getAllUsecase] must call the [MeasurementUnitRepository.getEntities] and return [List<MeasurementUnitEntity>]',
       () async {
     //Arrange
-    when(() => repository.getEntities())
-        .thenAnswer((_) async => const Right([]));
+    when(() => repository.getEntities()).thenAnswer((_) async => const Right([]));
 
     // Act
     final result = await useCase();
@@ -31,7 +30,7 @@ void main() {
 
     expect(
       result,
-      equals(const Right<dynamic, List<MeasurementUnitEntity>>([])),
+      equals(const Right<dynamic, List<CustomeMeasurementUnitEntity>>([])),
     );
     verify(() => repository.getEntities()).called(1);
     verifyNoMoreInteractions(repository);
@@ -41,8 +40,7 @@ void main() {
       '[measurementUnit.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
       () async {
     //Arrange
-    when(() => repository.getEntities())
-        .thenAnswer((_) async => const Left(HiveFailure('Error')));
+    when(() => repository.getEntities()).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
     // Act
     final result = await useCase();

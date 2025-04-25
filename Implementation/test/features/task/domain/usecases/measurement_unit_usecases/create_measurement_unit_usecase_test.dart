@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/create_measurement_unit_usecase.dart';
 
@@ -18,9 +18,8 @@ void main() {
     usecase = CreateMeasurementUnitUsecase(mockedRepository);
   });
 
-  final param = MeasurementUnitEntity.empty();
-  test(
-      '[measurementUnit.createUsecase] must call the [MeasurementUnitRepository.createEntity]',
+  final param = CustomeMeasurementUnitEntity.empty();
+  test('[measurementUnit.createUsecase] must call the [MeasurementUnitRepository.createEntity]',
       () async {
     // Arrange
     // Act

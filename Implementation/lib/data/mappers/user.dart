@@ -1,19 +1,21 @@
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
 import 'package:zamaan/domain/entities/user.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 
 class UserMapper extends Mapper<UserEntity, UserHiveModel, UserSupabaseModel> {
   @override
   UserEntity toEntityFromHive(UserHiveModel model) => tryCatchSimple<UserEntity>(
-        action: () => model.toEntity(),
+        action: () => model.copyWith(),
         failureType: FailureType.local,
       );
 
   @override
-  UserEntity toEntityFromSupabase(UserSupabaseModel model) => tryCatchSimple<UserEntity>(
+  UserEntity toEntityFromSupabase(UserSupabaseModel model, {DataMap? relatedListModels}) =>
+      tryCatchSimple<UserEntity>(
         action: () => model.toEntity(),
         failureType: FailureType.local,
       );

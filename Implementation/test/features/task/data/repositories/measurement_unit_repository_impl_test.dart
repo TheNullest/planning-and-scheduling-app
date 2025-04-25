@@ -1,7 +1,7 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/measurement_unit_hive_model.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_measurement_unit_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/measurement_unit_data_source_impl.dart';
 
 class MockDataSource extends Mock implements MeasurementUnitHiveDataSourceImpl {}
@@ -10,11 +10,11 @@ void main() {
   late MeasurementUnitHiveDataSourceImpl mockDataSource;
   late MeasurementUnitRepositoryImpl measurementUnitRepo;
   late MeasurementUnitHiveModel model;
-  late MeasurementUnitEntity entity;
+  late CustomeMeasurementUnitEntity entity;
   setUp(() {
     mockDataSource = MockDataSource();
     measurementUnitRepo = MeasurementUnitRepositoryImpl(mockDataSource);
-    entity = MeasurementUnitEntity.empty();
+    entity = CustomeMeasurementUnitEntity.empty();
     model = MeasurementUnitHiveModel.fromEntity(entity);
   });
 
@@ -71,7 +71,7 @@ void main() {
       final result = await measurementUnitRepo.getEntities();
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<MeasurementUnitEntity>>>());
+      expect(result, isA<Right<Failure, List<CustomeMeasurementUnitEntity>>>());
       verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -85,7 +85,7 @@ void main() {
       final result = await measurementUnitRepo.getEntities();
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<MeasurementUnitEntity>>>());
+      expect(result, isA<Left<Failure, List<CustomeMeasurementUnitEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -101,7 +101,7 @@ void main() {
       final result = await measurementUnitRepo.getEntity(id: entity.id);
 
       expect(result.isRight(), true);
-      expect(result, Right<Failure, MeasurementUnitEntity>(entity));
+      expect(result, Right<Failure, CustomeMeasurementUnitEntity>(entity));
       verify(() => mockDataSource.getEntity(id: model.id))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -119,7 +119,7 @@ void main() {
       expect(
         result,
         equals(
-          const Left<Failure, MeasurementUnitEntity>(
+          const Left<Failure, CustomeMeasurementUnitEntity>(
             HiveFailure('Error'),
           ),
         ),

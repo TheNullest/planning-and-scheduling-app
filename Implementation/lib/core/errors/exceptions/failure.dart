@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
-import 'package:zamaan/core/extensions/string_to_sentence_case_extension.dart';
+import 'package:zamaan/core/extensions/string.dart';
 import 'package:zamaan/core/utils/current_location.dart'; // Import the getCurrentLocation function
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// An abstract class representing a failure or error.
 ///

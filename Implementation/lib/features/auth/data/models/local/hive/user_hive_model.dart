@@ -8,21 +8,19 @@ part 'user_hive_model.g.dart';
 @HiveType(typeId: 0)
 class UserHiveModel extends UserEntity {
   UserHiveModel({
+    required super.createdAt,
+    required super.description,
+    required super.updatedAt,
     required super.userName,
     required super.password,
     required super.firstName,
     required super.lastName,
     required super.emailAddress,
+    required super.birthDate,
+    required super.avatarPath,
     super.id = '',
-    super.description,
-    super.createdAt,
-    super.updatedAt,
-    super.birthDate,
-    super.avatarPath,
+    super.userId = '',
   });
-
-  // For the purpose of testing
-  UserHiveModel.empty() : super.forTest();
 
   factory UserHiveModel.fromEntity(UserEntity entity) => UserHiveModel(
         id: entity.id,
@@ -38,7 +36,7 @@ class UserHiveModel extends UserEntity {
         emailAddress: entity.emailAddress,
       );
   factory UserHiveModel.fromRemote(UserSupabaseModel entity) => UserHiveModel(
-        id: entity.id,
+        id: entity.id!,
         userName: entity.userName,
         password: entity.password,
         firstName: entity.firstName,

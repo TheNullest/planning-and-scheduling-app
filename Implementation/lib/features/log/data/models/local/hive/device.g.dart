@@ -3,7 +3,7 @@
 part of 'device.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class DeviceHiveModelAdapter extends HiveBaseTypeAdapter<DeviceHiveModel> {
@@ -59,7 +59,5 @@ class DeviceHiveModelAdapter extends HiveBaseTypeAdapter<DeviceHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DeviceHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is DeviceHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

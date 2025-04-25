@@ -23,28 +23,26 @@ mixin _$TaskSupabaseModel {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'color_code')
-  String get colorCode => throw _privateConstructorUsedError;
+  int get colorCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'icon_code')
-  String get iconCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'task_categories', includeToJson: false, fromJson: _categories)
-  List<String>? get categoryIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-  List<String>? get tagIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  int get iconCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'task_status')
+  String get taskStatus => throw _privateConstructorUsedError;
+  String get priority => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  bool get archived => throw _privateConstructorUsedError;
+  @JsonKey(name: 'categories')
+  List<String> get categories => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fixed_tags')
+  List<String> get fixedTags => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'total_spent_time')
+  Duration get totalSpentTime => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  int? get priority => throw _privateConstructorUsedError;
-  bool? get archived => throw _privateConstructorUsedError;
-  @JsonKey(name: 'due_date')
-  DateTime? get dueDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'total_spent_time')
-  Duration? get totalSpentTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_task_id')
-  String? get scheduledTaskId => throw _privateConstructorUsedError;
 
   /// Serializes this TaskSupabaseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -65,22 +63,18 @@ abstract class $TaskSupabaseModelCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(
-          name: 'task_categories', includeToJson: false, fromJson: _categories)
-      List<String>? categoryIds,
-      @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-      List<String>? tagIds,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'task_status') String taskStatus,
+      String priority,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      bool archived,
+      @JsonKey(name: 'categories') List<String> categories,
+      @JsonKey(name: 'fixed_tags') List<String> fixedTags,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      int? priority,
-      bool? archived,
-      @JsonKey(name: 'due_date') DateTime? dueDate,
-      @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
-      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId});
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -102,17 +96,16 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? categoryIds = freezed,
-    Object? tagIds = freezed,
-    Object? userId = freezed,
+    Object? taskStatus = null,
+    Object? priority = null,
+    Object? createdAt = null,
+    Object? archived = null,
+    Object? categories = null,
+    Object? fixedTags = null,
+    Object? userId = null,
+    Object? totalSpentTime = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? priority = freezed,
-    Object? archived = freezed,
-    Object? dueDate = freezed,
-    Object? totalSpentTime = freezed,
-    Object? scheduledTaskId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -126,55 +119,51 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      taskStatus: null == taskStatus
+          ? _value.taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryIds: freezed == categoryIds
-          ? _value.categoryIds
-          : categoryIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      tagIds: freezed == tagIds
-          ? _value.tagIds
-          : tagIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      userId: freezed == userId
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      archived: null == archived
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      fixedTags: null == fixedTags
+          ? _value.fixedTags
+          : fixedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      totalSpentTime: null == totalSpentTime
+          ? _value.totalSpentTime
+          : totalSpentTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      priority: freezed == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as int?,
-      archived: freezed == archived
-          ? _value.archived
-          : archived // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      totalSpentTime: freezed == totalSpentTime
-          ? _value.totalSpentTime
-          : totalSpentTime // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-      scheduledTaskId: freezed == scheduledTaskId
-          ? _value.scheduledTaskId
-          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 }
@@ -190,22 +179,18 @@ abstract class _$$TaskSupabaseModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(
-          name: 'task_categories', includeToJson: false, fromJson: _categories)
-      List<String>? categoryIds,
-      @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-      List<String>? tagIds,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'task_status') String taskStatus,
+      String priority,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      bool archived,
+      @JsonKey(name: 'categories') List<String> categories,
+      @JsonKey(name: 'fixed_tags') List<String> fixedTags,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
-      @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      int? priority,
-      bool? archived,
-      @JsonKey(name: 'due_date') DateTime? dueDate,
-      @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
-      @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId});
+      @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -225,17 +210,16 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? categoryIds = freezed,
-    Object? tagIds = freezed,
-    Object? userId = freezed,
+    Object? taskStatus = null,
+    Object? priority = null,
+    Object? createdAt = null,
+    Object? archived = null,
+    Object? categories = null,
+    Object? fixedTags = null,
+    Object? userId = null,
+    Object? totalSpentTime = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
-    Object? priority = freezed,
-    Object? archived = freezed,
-    Object? dueDate = freezed,
-    Object? totalSpentTime = freezed,
-    Object? scheduledTaskId = freezed,
   }) {
     return _then(_$TaskSupabaseModelImpl(
       id: null == id
@@ -249,55 +233,51 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
+              as int,
+      taskStatus: null == taskStatus
+          ? _value.taskStatus
+          : taskStatus // ignore: cast_nullable_to_non_nullable
               as String,
-      categoryIds: freezed == categoryIds
-          ? _value._categoryIds
-          : categoryIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      tagIds: freezed == tagIds
-          ? _value._tagIds
-          : tagIds // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      userId: freezed == userId
+      priority: null == priority
+          ? _value.priority
+          : priority // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      archived: null == archived
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      fixedTags: null == fixedTags
+          ? _value._fixedTags
+          : fixedTags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      totalSpentTime: null == totalSpentTime
+          ? _value.totalSpentTime
+          : totalSpentTime // ignore: cast_nullable_to_non_nullable
+              as Duration,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      priority: freezed == priority
-          ? _value.priority
-          : priority // ignore: cast_nullable_to_non_nullable
-              as int?,
-      archived: freezed == archived
-          ? _value.archived
-          : archived // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      dueDate: freezed == dueDate
-          ? _value.dueDate
-          : dueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      totalSpentTime: freezed == totalSpentTime
-          ? _value.totalSpentTime
-          : totalSpentTime // ignore: cast_nullable_to_non_nullable
-              as Duration?,
-      scheduledTaskId: freezed == scheduledTaskId
-          ? _value.scheduledTaskId
-          : scheduledTaskId // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -310,22 +290,18 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       required this.title,
       @JsonKey(name: 'color_code') required this.colorCode,
       @JsonKey(name: 'icon_code') required this.iconCode,
-      @JsonKey(
-          name: 'task_categories', includeToJson: false, fromJson: _categories)
-      required final List<String>? categoryIds,
-      @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-      required final List<String>? tagIds,
-      @JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'task_status') required this.taskStatus,
+      required this.priority,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      required this.archived,
+      @JsonKey(name: 'categories') required final List<String> categories,
+      @JsonKey(name: 'fixed_tags') required final List<String> fixedTags,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'total_spent_time') required this.totalSpentTime,
       this.description,
-      @JsonKey(name: 'created_at') this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt,
-      this.priority,
-      this.archived,
-      @JsonKey(name: 'due_date') this.dueDate,
-      @JsonKey(name: 'total_spent_time') this.totalSpentTime,
-      @JsonKey(name: 'scheduled_task_id') this.scheduledTaskId})
-      : _categoryIds = categoryIds,
-        _tagIds = tagIds;
+      @JsonKey(name: 'updated_at') this.updatedAt})
+      : _categories = categories,
+        _fixedTags = fixedTags;
 
   factory _$TaskSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskSupabaseModelImplFromJson(json);
@@ -336,60 +312,53 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
   final String title;
   @override
   @JsonKey(name: 'color_code')
-  final String colorCode;
+  final int colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  final String iconCode;
-  final List<String>? _categoryIds;
+  final int iconCode;
   @override
-  @JsonKey(name: 'task_categories', includeToJson: false, fromJson: _categories)
-  List<String>? get categoryIds {
-    final value = _categoryIds;
-    if (value == null) return null;
-    if (_categoryIds is EqualUnmodifiableListView) return _categoryIds;
+  @JsonKey(name: 'task_status')
+  final String taskStatus;
+  @override
+  final String priority;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+  @override
+  final bool archived;
+  final List<String> _categories;
+  @override
+  @JsonKey(name: 'categories')
+  List<String> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_categories);
   }
 
-  final List<String>? _tagIds;
+  final List<String> _fixedTags;
   @override
-  @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-  List<String>? get tagIds {
-    final value = _tagIds;
-    if (value == null) return null;
-    if (_tagIds is EqualUnmodifiableListView) return _tagIds;
+  @JsonKey(name: 'fixed_tags')
+  List<String> get fixedTags {
+    if (_fixedTags is EqualUnmodifiableListView) return _fixedTags;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_fixedTags);
   }
 
   @override
   @JsonKey(name: 'user_id')
-  final String? userId;
+  final String userId;
+  @override
+  @JsonKey(name: 'total_spent_time')
+  final Duration totalSpentTime;
   @override
   final String? description;
   @override
-  @JsonKey(name: 'created_at')
-  final DateTime? createdAt;
-  @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
-  @override
-  final int? priority;
-  @override
-  final bool? archived;
-  @override
-  @JsonKey(name: 'due_date')
-  final DateTime? dueDate;
-  @override
-  @JsonKey(name: 'total_spent_time')
-  final Duration? totalSpentTime;
-  @override
-  @JsonKey(name: 'scheduled_task_id')
-  final String? scheduledTaskId;
 
   @override
   String toString() {
-    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, categoryIds: $categoryIds, tagIds: $tagIds, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, priority: $priority, archived: $archived, dueDate: $dueDate, totalSpentTime: $totalSpentTime, scheduledTaskId: $scheduledTaskId)';
+    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, taskStatus: $taskStatus, priority: $priority, createdAt: $createdAt, archived: $archived, categories: $categories, fixedTags: $fixedTags, userId: $userId, totalSpentTime: $totalSpentTime, description: $description, updatedAt: $updatedAt)';
   }
 
   @override
@@ -403,25 +372,25 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
                 other.colorCode == colorCode) &&
             (identical(other.iconCode, iconCode) ||
                 other.iconCode == iconCode) &&
-            const DeepCollectionEquality()
-                .equals(other._categoryIds, _categoryIds) &&
-            const DeepCollectionEquality().equals(other._tagIds, _tagIds) &&
-            (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
+            (identical(other.taskStatus, taskStatus) ||
+                other.taskStatus == taskStatus) &&
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
             (identical(other.archived, archived) ||
                 other.archived == archived) &&
-            (identical(other.dueDate, dueDate) || other.dueDate == dueDate) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality()
+                .equals(other._fixedTags, _fixedTags) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.totalSpentTime, totalSpentTime) ||
                 other.totalSpentTime == totalSpentTime) &&
-            (identical(other.scheduledTaskId, scheduledTaskId) ||
-                other.scheduledTaskId == scheduledTaskId));
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -432,17 +401,16 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       title,
       colorCode,
       iconCode,
-      const DeepCollectionEquality().hash(_categoryIds),
-      const DeepCollectionEquality().hash(_tagIds),
-      userId,
-      description,
-      createdAt,
-      updatedAt,
+      taskStatus,
       priority,
+      createdAt,
       archived,
-      dueDate,
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_fixedTags),
+      userId,
       totalSpentTime,
-      scheduledTaskId);
+      description,
+      updatedAt);
 
   /// Create a copy of TaskSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -465,23 +433,19 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
   const factory _TaskSupabaseModel(
       {required final String id,
       required final String title,
-      @JsonKey(name: 'color_code') required final String colorCode,
-      @JsonKey(name: 'icon_code') required final String iconCode,
-      @JsonKey(
-          name: 'task_categories', includeToJson: false, fromJson: _categories)
-      required final List<String>? categoryIds,
-      @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-      required final List<String>? tagIds,
-      @JsonKey(name: 'user_id') final String? userId,
+      @JsonKey(name: 'color_code') required final int colorCode,
+      @JsonKey(name: 'icon_code') required final int iconCode,
+      @JsonKey(name: 'task_status') required final String taskStatus,
+      required final String priority,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      required final bool archived,
+      @JsonKey(name: 'categories') required final List<String> categories,
+      @JsonKey(name: 'fixed_tags') required final List<String> fixedTags,
+      @JsonKey(name: 'user_id') required final String userId,
+      @JsonKey(name: 'total_spent_time') required final Duration totalSpentTime,
       final String? description,
-      @JsonKey(name: 'created_at') final DateTime? createdAt,
-      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-      final int? priority,
-      final bool? archived,
-      @JsonKey(name: 'due_date') final DateTime? dueDate,
-      @JsonKey(name: 'total_spent_time') final Duration? totalSpentTime,
-      @JsonKey(name: 'scheduled_task_id')
-      final String? scheduledTaskId}) = _$TaskSupabaseModelImpl;
+      @JsonKey(name: 'updated_at')
+      final DateTime? updatedAt}) = _$TaskSupabaseModelImpl;
 
   factory _TaskSupabaseModel.fromJson(Map<String, dynamic> json) =
       _$TaskSupabaseModelImpl.fromJson;
@@ -492,40 +456,37 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
   String get title;
   @override
   @JsonKey(name: 'color_code')
-  String get colorCode;
+  int get colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  String get iconCode;
+  int get iconCode;
   @override
-  @JsonKey(name: 'task_categories', includeToJson: false, fromJson: _categories)
-  List<String>? get categoryIds;
+  @JsonKey(name: 'task_status')
+  String get taskStatus;
   @override
-  @JsonKey(name: 'task_tags', includeToJson: false, fromJson: _tags)
-  List<String>? get tagIds;
+  String get priority;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt;
+  @override
+  bool get archived;
+  @override
+  @JsonKey(name: 'categories')
+  List<String> get categories;
+  @override
+  @JsonKey(name: 'fixed_tags')
+  List<String> get fixedTags;
   @override
   @JsonKey(name: 'user_id')
-  String? get userId;
+  String get userId;
+  @override
+  @JsonKey(name: 'total_spent_time')
+  Duration get totalSpentTime;
   @override
   String? get description;
   @override
-  @JsonKey(name: 'created_at')
-  DateTime? get createdAt;
-  @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
-  @override
-  int? get priority;
-  @override
-  bool? get archived;
-  @override
-  @JsonKey(name: 'due_date')
-  DateTime? get dueDate;
-  @override
-  @JsonKey(name: 'total_spent_time')
-  Duration? get totalSpentTime;
-  @override
-  @JsonKey(name: 'scheduled_task_id')
-  String? get scheduledTaskId;
 
   /// Create a copy of TaskSupabaseModel
   /// with the given fields replaced by the non-null parameter values.

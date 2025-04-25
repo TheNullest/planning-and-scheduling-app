@@ -21,6 +21,7 @@ mixin _$TasksManagerEvent {
     required TResult Function() started,
     required TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)
         createTaskWithSubTasks,
+    required TResult Function() fetchTodayTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TasksManagerEvent {
     TResult? Function()? started,
     TResult? Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult? Function()? fetchTodayTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TasksManagerEvent {
     TResult Function()? started,
     TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult Function()? fetchTodayTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$TasksManagerEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_CreateTaskWithSubTasksEvent value)
         createTaskWithSubTasks,
+    required TResult Function(_FetchTodayTasks value) fetchTodayTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$TasksManagerEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult? Function(_FetchTodayTasks value)? fetchTodayTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$TasksManagerEvent {
     TResult Function(_Started value)? started,
     TResult Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult Function(_FetchTodayTasks value)? fetchTodayTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +133,7 @@ class _$StartedImpl implements _Started {
     required TResult Function() started,
     required TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)
         createTaskWithSubTasks,
+    required TResult Function() fetchTodayTasks,
   }) {
     return started();
   }
@@ -137,6 +144,7 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult? Function()? fetchTodayTasks,
   }) {
     return started?.call();
   }
@@ -147,6 +155,7 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult Function()? fetchTodayTasks,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -161,6 +170,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_CreateTaskWithSubTasksEvent value)
         createTaskWithSubTasks,
+    required TResult Function(_FetchTodayTasks value) fetchTodayTasks,
   }) {
     return started(this);
   }
@@ -171,6 +181,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult? Function(_FetchTodayTasks value)? fetchTodayTasks,
   }) {
     return started?.call(this);
   }
@@ -181,6 +192,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult Function(_FetchTodayTasks value)? fetchTodayTasks,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -271,6 +283,7 @@ class _$CreateTaskWithSubTasksEventImpl
     required TResult Function() started,
     required TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)
         createTaskWithSubTasks,
+    required TResult Function() fetchTodayTasks,
   }) {
     return createTaskWithSubTasks(taskAndSubTasks);
   }
@@ -281,6 +294,7 @@ class _$CreateTaskWithSubTasksEventImpl
     TResult? Function()? started,
     TResult? Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult? Function()? fetchTodayTasks,
   }) {
     return createTaskWithSubTasks?.call(taskAndSubTasks);
   }
@@ -291,6 +305,7 @@ class _$CreateTaskWithSubTasksEventImpl
     TResult Function()? started,
     TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
         createTaskWithSubTasks,
+    TResult Function()? fetchTodayTasks,
     required TResult orElse(),
   }) {
     if (createTaskWithSubTasks != null) {
@@ -305,6 +320,7 @@ class _$CreateTaskWithSubTasksEventImpl
     required TResult Function(_Started value) started,
     required TResult Function(_CreateTaskWithSubTasksEvent value)
         createTaskWithSubTasks,
+    required TResult Function(_FetchTodayTasks value) fetchTodayTasks,
   }) {
     return createTaskWithSubTasks(this);
   }
@@ -315,6 +331,7 @@ class _$CreateTaskWithSubTasksEventImpl
     TResult? Function(_Started value)? started,
     TResult? Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult? Function(_FetchTodayTasks value)? fetchTodayTasks,
   }) {
     return createTaskWithSubTasks?.call(this);
   }
@@ -325,6 +342,7 @@ class _$CreateTaskWithSubTasksEventImpl
     TResult Function(_Started value)? started,
     TResult Function(_CreateTaskWithSubTasksEvent value)?
         createTaskWithSubTasks,
+    TResult Function(_FetchTodayTasks value)? fetchTodayTasks,
     required TResult orElse(),
   }) {
     if (createTaskWithSubTasks != null) {
@@ -349,12 +367,130 @@ abstract class _CreateTaskWithSubTasksEvent implements TasksManagerEvent {
 }
 
 /// @nodoc
+abstract class _$$FetchTodayTasksImplCopyWith<$Res> {
+  factory _$$FetchTodayTasksImplCopyWith(_$FetchTodayTasksImpl value,
+          $Res Function(_$FetchTodayTasksImpl) then) =
+      __$$FetchTodayTasksImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchTodayTasksImplCopyWithImpl<$Res>
+    extends _$TasksManagerEventCopyWithImpl<$Res, _$FetchTodayTasksImpl>
+    implements _$$FetchTodayTasksImplCopyWith<$Res> {
+  __$$FetchTodayTasksImplCopyWithImpl(
+      _$FetchTodayTasksImpl _value, $Res Function(_$FetchTodayTasksImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$FetchTodayTasksImpl implements _FetchTodayTasks {
+  const _$FetchTodayTasksImpl();
+
+  @override
+  String toString() {
+    return 'TasksManagerEvent.fetchTodayTasks()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FetchTodayTasksImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)
+        createTaskWithSubTasks,
+    required TResult Function() fetchTodayTasks,
+  }) {
+    return fetchTodayTasks();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
+        createTaskWithSubTasks,
+    TResult? Function()? fetchTodayTasks,
+  }) {
+    return fetchTodayTasks?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(CreateTaskWithSubTasksParams taskAndSubTasks)?
+        createTaskWithSubTasks,
+    TResult Function()? fetchTodayTasks,
+    required TResult orElse(),
+  }) {
+    if (fetchTodayTasks != null) {
+      return fetchTodayTasks();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateTaskWithSubTasksEvent value)
+        createTaskWithSubTasks,
+    required TResult Function(_FetchTodayTasks value) fetchTodayTasks,
+  }) {
+    return fetchTodayTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CreateTaskWithSubTasksEvent value)?
+        createTaskWithSubTasks,
+    TResult? Function(_FetchTodayTasks value)? fetchTodayTasks,
+  }) {
+    return fetchTodayTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateTaskWithSubTasksEvent value)?
+        createTaskWithSubTasks,
+    TResult Function(_FetchTodayTasks value)? fetchTodayTasks,
+    required TResult orElse(),
+  }) {
+    if (fetchTodayTasks != null) {
+      return fetchTodayTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchTodayTasks implements TasksManagerEvent {
+  const factory _FetchTodayTasks() = _$FetchTodayTasksImpl;
+}
+
+/// @nodoc
 mixin _$TasksManagerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
     required TResult Function(String errorMessage) creatingFailed,
   }) =>
       throw _privateConstructorUsedError;
@@ -363,6 +499,7 @@ mixin _$TasksManagerState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult? Function(String errorMessage)? creatingFailed,
   }) =>
       throw _privateConstructorUsedError;
@@ -371,6 +508,7 @@ mixin _$TasksManagerState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult Function(String errorMessage)? creatingFailed,
     required TResult orElse(),
   }) =>
@@ -381,6 +519,7 @@ mixin _$TasksManagerState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_TaskAndSubTasksCreated value)
         taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
     required TResult Function(_CreatingFailed value) creatingFailed,
   }) =>
       throw _privateConstructorUsedError;
@@ -389,6 +528,7 @@ mixin _$TasksManagerState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult? Function(_CreatingFailed value)? creatingFailed,
   }) =>
       throw _privateConstructorUsedError;
@@ -397,6 +537,7 @@ mixin _$TasksManagerState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult Function(_CreatingFailed value)? creatingFailed,
     required TResult orElse(),
   }) =>
@@ -468,6 +609,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
     required TResult Function(String errorMessage) creatingFailed,
   }) {
     return initial();
@@ -479,6 +621,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult? Function(String errorMessage)? creatingFailed,
   }) {
     return initial?.call();
@@ -490,6 +633,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult Function(String errorMessage)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -506,6 +650,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_TaskAndSubTasksCreated value)
         taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
     required TResult Function(_CreatingFailed value) creatingFailed,
   }) {
     return initial(this);
@@ -517,6 +662,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult? Function(_CreatingFailed value)? creatingFailed,
   }) {
     return initial?.call(this);
@@ -528,6 +674,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult Function(_CreatingFailed value)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -586,6 +733,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
     required TResult Function(String errorMessage) creatingFailed,
   }) {
     return loading();
@@ -597,6 +745,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult? Function(String errorMessage)? creatingFailed,
   }) {
     return loading?.call();
@@ -608,6 +757,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult Function(String errorMessage)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -624,6 +774,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_TaskAndSubTasksCreated value)
         taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
     required TResult Function(_CreatingFailed value) creatingFailed,
   }) {
     return loading(this);
@@ -635,6 +786,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult? Function(_CreatingFailed value)? creatingFailed,
   }) {
     return loading?.call(this);
@@ -646,6 +798,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult Function(_CreatingFailed value)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -707,6 +860,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
     required TResult Function(String errorMessage) creatingFailed,
   }) {
     return taskAndSubTasksCreated();
@@ -718,6 +872,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult? Function(String errorMessage)? creatingFailed,
   }) {
     return taskAndSubTasksCreated?.call();
@@ -729,6 +884,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult Function(String errorMessage)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -745,6 +901,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     required TResult Function(_Loading value) loading,
     required TResult Function(_TaskAndSubTasksCreated value)
         taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
     required TResult Function(_CreatingFailed value) creatingFailed,
   }) {
     return taskAndSubTasksCreated(this);
@@ -756,6 +913,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult? Function(_CreatingFailed value)? creatingFailed,
   }) {
     return taskAndSubTasksCreated?.call(this);
@@ -767,6 +925,7 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult Function(_CreatingFailed value)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -779,6 +938,173 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
 
 abstract class _TaskAndSubTasksCreated implements TasksManagerState {
   const factory _TaskAndSubTasksCreated() = _$TaskAndSubTasksCreatedImpl;
+}
+
+/// @nodoc
+abstract class _$$TodayTasksFetchedImplCopyWith<$Res> {
+  factory _$$TodayTasksFetchedImplCopyWith(_$TodayTasksFetchedImpl value,
+          $Res Function(_$TodayTasksFetchedImpl) then) =
+      __$$TodayTasksFetchedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<TaskUI> tasks});
+}
+
+/// @nodoc
+class __$$TodayTasksFetchedImplCopyWithImpl<$Res>
+    extends _$TasksManagerStateCopyWithImpl<$Res, _$TodayTasksFetchedImpl>
+    implements _$$TodayTasksFetchedImplCopyWith<$Res> {
+  __$$TodayTasksFetchedImplCopyWithImpl(_$TodayTasksFetchedImpl _value,
+      $Res Function(_$TodayTasksFetchedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+  }) {
+    return _then(_$TodayTasksFetchedImpl(
+      null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<TaskUI>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$TodayTasksFetchedImpl implements _TodayTasksFetched {
+  const _$TodayTasksFetchedImpl(final List<TaskUI> tasks) : _tasks = tasks;
+
+  final List<TaskUI> _tasks;
+  @override
+  List<TaskUI> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  String toString() {
+    return 'TasksManagerState.todayTasksFetched(tasks: $tasks)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TodayTasksFetchedImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TodayTasksFetchedImplCopyWith<_$TodayTasksFetchedImpl> get copyWith =>
+      __$$TodayTasksFetchedImplCopyWithImpl<_$TodayTasksFetchedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
+    required TResult Function(String errorMessage) creatingFailed,
+  }) {
+    return todayTasksFetched(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
+    TResult? Function(String errorMessage)? creatingFailed,
+  }) {
+    return todayTasksFetched?.call(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
+    TResult Function(String errorMessage)? creatingFailed,
+    required TResult orElse(),
+  }) {
+    if (todayTasksFetched != null) {
+      return todayTasksFetched(tasks);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_TaskAndSubTasksCreated value)
+        taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
+    required TResult Function(_CreatingFailed value) creatingFailed,
+  }) {
+    return todayTasksFetched(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
+    TResult? Function(_CreatingFailed value)? creatingFailed,
+  }) {
+    return todayTasksFetched?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
+    TResult Function(_CreatingFailed value)? creatingFailed,
+    required TResult orElse(),
+  }) {
+    if (todayTasksFetched != null) {
+      return todayTasksFetched(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _TodayTasksFetched implements TasksManagerState {
+  const factory _TodayTasksFetched(final List<TaskUI> tasks) =
+      _$TodayTasksFetchedImpl;
+
+  List<TaskUI> get tasks;
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TodayTasksFetchedImplCopyWith<_$TodayTasksFetchedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -854,6 +1180,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() taskAndSubTasksCreated,
+    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
     required TResult Function(String errorMessage) creatingFailed,
   }) {
     return creatingFailed(errorMessage);
@@ -865,6 +1192,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult? Function(String errorMessage)? creatingFailed,
   }) {
     return creatingFailed?.call(errorMessage);
@@ -876,6 +1204,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? taskAndSubTasksCreated,
+    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
     TResult Function(String errorMessage)? creatingFailed,
     required TResult orElse(),
   }) {
@@ -892,6 +1221,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     required TResult Function(_Loading value) loading,
     required TResult Function(_TaskAndSubTasksCreated value)
         taskAndSubTasksCreated,
+    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
     required TResult Function(_CreatingFailed value) creatingFailed,
   }) {
     return creatingFailed(this);
@@ -903,6 +1233,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult? Function(_CreatingFailed value)? creatingFailed,
   }) {
     return creatingFailed?.call(this);
@@ -914,6 +1245,7 @@ class _$CreatingFailedImpl implements _CreatingFailed {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
     TResult Function(_CreatingFailed value)? creatingFailed,
     required TResult orElse(),
   }) {

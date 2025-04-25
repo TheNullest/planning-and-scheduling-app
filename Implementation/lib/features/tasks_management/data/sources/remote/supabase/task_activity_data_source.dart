@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/task_activity.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task_activity/task_activity_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/bases/task_activity_data_source.dart';
 
@@ -36,7 +36,7 @@ class TaskActivitySupabaseDataSourceImpl extends SupabaseDataSource<TaskActivity
       tryCatchEither(
         action: () async {
           final result = await client
-              .from('scheduled_task')
+              .from('schedule_definition')
               .select()
               .eq('task_id', taskId)
               .gte('will_start_at', startAt!.toIso8601String())

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/log/data/models/local/hive/log.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/log/log.dart';
 import 'package:zamaan/features/log/data/sources/base/log_data_source.dart';

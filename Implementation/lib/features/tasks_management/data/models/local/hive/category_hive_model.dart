@@ -4,24 +4,17 @@ import 'package:zamaan/domain/entities/category.dart';
 
 part 'category_hive_model.g.dart';
 
-@HiveType(typeId: 2) // Unique ID for Hive
-// Since HiveObjectMixin contains mutable fields,
-// we ignore the immutability check for this class.
-// ignore: must_be_immutable
-class CategoryHiveModel extends CategoryEntity with HiveObjectMixin {
-  CategoryHiveModel({
-    required super.title,
-    required super.colorCode,
-    required super.iconCode,
-    super.id,
-    super.description,
-    super.createdAt,
-    super.updatedAt,
-    super.userId,
-  });
-
-  // For the purpose of testing
-  CategoryHiveModel.empty() : super.empty();
+@HiveType(typeId: 2)
+class CategoryHiveModel extends CategoryEntity {
+  CategoryHiveModel(
+      {required super.id,
+      required super.userId,
+      required super.createdAt,
+      required super.description,
+      required super.updatedAt,
+      required super.title,
+      required super.colorCode,
+      required super.iconCode,});
 
   factory CategoryHiveModel.fromEntity(CategoryEntity entity) => CategoryHiveModel(
         id: entity.id,
@@ -43,8 +36,8 @@ class CategoryHiveModel extends CategoryEntity with HiveObjectMixin {
     String? userId,
     String? description,
     String? title,
-    String? colorCode,
-    String? iconCode,
+    int? colorCode,
+    int? iconCode,
   }) =>
       CategoryHiveModel(
         id: id ?? this.id,

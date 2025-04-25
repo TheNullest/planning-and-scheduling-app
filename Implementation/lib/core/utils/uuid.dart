@@ -1,10 +1,5 @@
 import 'package:uuid/uuid.dart';
 
-bool isValidUUID(String uuid) {
-  final regex = RegExp(
-    r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$',
-  );
-  return regex.hasMatch(uuid);
-}
+bool isValidUUID(String uuid) => Uuid.isValidUUID(fromString: uuid);
 
 String get uuidGenerator => const Uuid().v4();

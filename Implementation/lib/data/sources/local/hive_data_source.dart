@@ -1,7 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
@@ -9,6 +7,8 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
     extends BaseDataSource<HiveModel> {

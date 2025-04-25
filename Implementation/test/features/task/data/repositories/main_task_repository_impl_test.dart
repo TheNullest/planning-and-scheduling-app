@@ -1,7 +1,7 @@
-import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/task/data/sources/hive_main_task_data_source_impl.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 

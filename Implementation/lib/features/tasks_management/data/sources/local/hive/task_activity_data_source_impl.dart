@@ -31,7 +31,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
     String taskId,
   ) async {
     return _hiveBox.operator<List<TaskActivityHiveModel>>(
-      job: (box) async => box.values.where((task) => task.taskId == taskId).toList(),
+      job: (box) async => box.values.where((task) => task.referenceId == taskId).toList(),
       boxName: _boxName,
     );
   }
@@ -51,7 +51,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
     return _hiveBox.operator<List<TaskActivityHiveModel>>(
       job: (box) async {
         return box.values.where((taskActivity) {
-          if (taskId.compareTo(taskActivity.taskId) != 0) return false;
+          if (taskId.compareTo(taskActivity.referenceId) != 0) return false;
 
           final isInDateRange = (startAt == null || taskActivity.startAt.isAfter(startAt)) &&
               (dueDate == null || taskActivity.dueDate!.isBefore(dueDate));
@@ -72,7 +72,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   ) async {
     return _hiveBox.operator<List<TaskActivityHiveModel>>(
       job: (box) async {
-        return box.values.where((taskActivity) => taskActivity.subTaskId == subTaskId).toList();
+        return box.values.where((taskActivity) => taskActivity.referenceType == subTaskId).toList();
       },
       boxName: _boxName,
     );

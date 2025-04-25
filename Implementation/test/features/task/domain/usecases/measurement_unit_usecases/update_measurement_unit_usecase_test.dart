@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/update_measurement_unit_usecase.dart';
 
@@ -18,14 +18,13 @@ void main() {
     useCase = UpdateMeasurementUnitUsecase(repository);
   });
 
-  final params = MeasurementUnitEntity.empty();
+  final params = CustomeMeasurementUnitEntity.empty();
   // Assert
   test(
       '[measurementUnit.updateUsecase] must call the [MeasurementUnitRepository.updateEntity] and update the [MeasurementUnitModel] with the right data',
       () async {
     //Arrange
-    when(() => repository.updateEntity(entity: params))
-        .thenAnswer((_) async => const Right(null));
+    when(() => repository.updateEntity(entity: params)).thenAnswer((_) async => const Right(null));
     // Act
     final actual = await useCase(params);
 
@@ -36,8 +35,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test(
-      '[measurementUnit.updateUsecase.failureTest] must return failure when update fails',
+  test('[measurementUnit.updateUsecase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

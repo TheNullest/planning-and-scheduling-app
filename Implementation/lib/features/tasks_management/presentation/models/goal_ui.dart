@@ -7,7 +7,7 @@ class GoalUI extends BaseUIModel {
     required super.description,
     required super.createdAt,
     required super.updatedAt,
-    required this.measurementUnit,
+    required this.customeCustomeMeasurementUnit,
     required this.perActiveHour,
     required this.perActiveDay,
     required this.perActiveWeek,
@@ -15,7 +15,7 @@ class GoalUI extends BaseUIModel {
     required this.perActiveYear,
   });
 
-  final MeasurementUnitUI measurementUnit;
+  final CustomeMeasurementUnitUI customeCustomeMeasurementUnit;
   final double perActiveHour;
   final double perActiveDay;
   final double perActiveWeek;
@@ -28,7 +28,7 @@ class GoalUI extends BaseUIModel {
     String? description,
     DateTime? createdAt,
     DateTime? updatedAt,
-    MeasurementUnitUI? measurementUnit,
+    CustomeMeasurementUnitUI? customeCustomeMeasurementUnit,
     double? perActiveHour,
     double? perActiveDay,
     double? perActiveWeek,
@@ -40,7 +40,7 @@ class GoalUI extends BaseUIModel {
         description: description ?? this.id,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
-        measurementUnit: measurementUnit ?? this.measurementUnit,
+        customeCustomeMeasurementUnit: customeCustomeMeasurementUnit ?? this.customeCustomeMeasurementUnit,
         perActiveHour: perActiveHour ?? this.perActiveHour,
         perActiveDay: perActiveDay ?? this.perActiveDay,
         perActiveWeek: perActiveWeek ?? this.perActiveWeek,

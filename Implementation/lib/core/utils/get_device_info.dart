@@ -1,7 +1,7 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:zamaan/core/enums/os.dart';
 import 'package:zamaan/domain/entities/utils/device_info.dart';
+import 'package:zamaan/domain/enums/hive/os.dart';
 
 Future<DeviceInfo> getDeviceInfo() async {
   final deviceInfo = DeviceInfoPlugin();

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/core/enums/os.dart';
+import 'package:zamaan/domain/enums/hive/os.dart';
 import 'package:zamaan/features/log/domain/entities/device.dart';
 
 part 'device.freezed.dart';

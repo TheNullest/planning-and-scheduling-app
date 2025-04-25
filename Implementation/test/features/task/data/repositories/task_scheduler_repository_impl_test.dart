@@ -1,7 +1,7 @@
-import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_task_scheduler_data_source_impl.dart';
@@ -466,14 +466,14 @@ void main() {
     test(
         '[taskSchedulerRepo.getTaskSchedulersByTimeUnit] must call the [getTaskSchedulersByTimeUnit] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
         'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
-      when(() => mockDataSource.getBatchByTimeUnit(TimeUnit.hour))
+      when(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(TimeUnit.hour);
+      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(IntervalUnit.hour);
 
       expect(result.isRight(), true);
       expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
-      verify(() => mockDataSource.getBatchByTimeUnit(TimeUnit.hour))
+      verify(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
@@ -481,15 +481,15 @@ void main() {
     test(
         '[taskSchedulerRepo.getTaskSchedulersByTimeUnit.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getBatchByTimeUnit(TimeUnit.hour))
+      when(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(TimeUnit.hour);
+      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(IntervalUnit.hour);
 
       expect(result.isLeft(), true);
       expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getBatchByTimeUnit(TimeUnit.hour))
+      verify(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });

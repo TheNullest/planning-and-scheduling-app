@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/services/hive/hive_services.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';

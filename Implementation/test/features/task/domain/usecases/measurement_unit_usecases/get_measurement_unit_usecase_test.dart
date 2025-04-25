@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/measurement_unit.dart';
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/get_measurement_unit_usecase.dart';
 
@@ -12,20 +12,19 @@ import '_measurement_unit_repository.mock.dart';
 void main() {
   late MeasurementUnitRepository mockedRepo;
   late GetMeasurementUnitUsecase usecase;
-  late MeasurementUnitEntity param;
+  late CustomeMeasurementUnitEntity param;
 
   setUp(() {
     mockedRepo = MockMeasurementUnitRepo();
     usecase = GetMeasurementUnitUsecase(mockedRepo);
-    param = MeasurementUnitEntity.empty();
+    param = CustomeMeasurementUnitEntity.empty();
   });
 
   test(
       '[measurementUnit.getUsecase] must call the [MeasurementUnitRepository.getEntity] and return [MeasurementUnitEntity]',
       () async {
     //Arrange
-    when(() => mockedRepo.getEntity(id: param.id))
-        .thenAnswer((_) async => Right(param));
+    when(() => mockedRepo.getEntity(id: param.id)).thenAnswer((_) async => Right(param));
 
     // Act
     final result = await usecase(param.id);
@@ -33,7 +32,7 @@ void main() {
     // Assert
     expect(result.isRight(), true);
 
-    expect(result, equals(Right<Failure, MeasurementUnitEntity>(param)));
+    expect(result, equals(Right<Failure, CustomeMeasurementUnitEntity>(param)));
     verify(() => mockedRepo.getEntity(id: param.id)).called(1);
     verifyNoMoreInteractions(mockedRepo);
   });

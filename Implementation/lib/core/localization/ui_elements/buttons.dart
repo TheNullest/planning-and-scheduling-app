@@ -20,7 +20,7 @@ class _Buttons {
   String get complete => '$_prefix.complete'.tr();
   String get reopen => '$_prefix.reopen'.tr();
   String get addCategory => '$_prefix.add_category'.tr();
-  String get addMeasurementUnit => '$_prefix.add_measurement_unit'.tr();
+  String get addCustomeMeasurementUnit => '$_prefix.add_measurement_unit'.tr();
   String get clear => '$_prefix.clear'.tr();
   String get apply => '$_prefix.apply'.tr();
 }

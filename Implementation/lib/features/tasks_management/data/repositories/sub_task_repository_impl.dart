@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
-import 'package:zamaan/core/enums/priority.dart';
-import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/sub_task.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
+import 'package:zamaan/domain/enums/hive/priority.dart';
+import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
 import 'package:zamaan/domain/repositories/sub_task_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';

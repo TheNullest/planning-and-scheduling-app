@@ -8,7 +8,7 @@ part of 'sub_task_hive_model.dart';
 
 class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
   @override
-  final int typeId = 6;
+  final int typeId = 7;
 
   @override
   SubTaskHiveModel read(BinaryReader reader) {
@@ -17,15 +17,15 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SubTaskHiveModel(
-      taskId: fields[11] as String,
-      title: fields[13] as String,
-      id: fields[0] as String?,
-      updatedAt: fields[4] as DateTime?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
       description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
-      userId: fields[1] as String?,
-      priority: fields[12] as int,
-      status: fields[14] as int,
+      updatedAt: fields[4] as DateTime?,
+      taskId: fields[11] as String,
+      priority: fields[12] as Priority,
+      title: fields[13] as String,
+      status: fields[14] as TaskStatus,
       totalSpentTime: fields[15] as Duration?,
     );
   }

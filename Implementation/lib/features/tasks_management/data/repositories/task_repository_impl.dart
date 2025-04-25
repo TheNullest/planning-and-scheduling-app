@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/enums.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/task.dart';
 import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/enums.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
@@ -87,12 +87,12 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            final response = await _localDataSource.getBatchArchived(status);
+            final response = await _localDataSource.getBatchByStatus(status);
             final models = _mapper.foldEitherList<TaskHiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(models));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response = await _remoteDataSource.getBatchArchived(status);
+            final response = await _remoteDataSource.getBatchByStatus(status);
             final models = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(models));
           }
@@ -124,28 +124,6 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
       );
 
   @override
-  EResultFuture<TaskEntity?> getBatchByScheduledTaskId(
-    String schedulerId, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  }) async =>
-      tryCatchEither(
-        action: () async {
-          if (DataSourcePolicy.isLocal(policy)) {
-            final response = await _localDataSource.getByScheduledTaskId(schedulerId);
-            final model = _mapper.foldEitherSingle<TaskHiveModel>(response);
-            return Right(_mapper.toEntityFromHive(model!));
-          }
-          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response = await _remoteDataSource.getByScheduledTaskId(schedulerId);
-            final model = _mapper.foldEitherSingle<TaskSupabaseModel>(response);
-            return Right(_mapper.toEntityFromSupabase(model!));
-          }
-          return const Right(null);
-        },
-        failureType: FailureType.local,
-      );
-
-  @override
   EResultFuture<List<TaskEntity>> getBatchByDueDateRange({
     required DateTime dueDateFrom,
     required DateTime dueDateTo,
@@ -162,6 +140,27 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
             final response = await _remoteDataSource.getBatchByDueDateRange(dueDateFrom, dueDateTo);
             final result = _mapper.foldEitherList<TaskSupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
+          }
+          return const Right([]);
+        },
+        failureType: FailureType.local,
+      );
+
+  @override
+  EResultFuture<List<TaskEntity>> getBatchArchived({
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  }) async =>
+      tryCatchEither(
+        action: () async {
+          if (DataSourcePolicy.isLocal(policy)) {
+            final response = await _localDataSource.getBatchArchived();
+            final models = _mapper.foldEitherList<TaskHiveModel>(response);
+            return Right(_mapper.toEntitiesFromHive(models));
+          }
+          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
+            final response = await _remoteDataSource.getBatchArchived();
+            final models = _mapper.foldEitherList<TaskSupabaseModel>(response);
+            return Right(_mapper.toEntitiesFromSupabase(models));
           }
           return const Right([]);
         },

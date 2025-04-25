@@ -3,12 +3,12 @@
 part of 'tag_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
   @override
-  final int typeId = 7;
+  final int typeId = 8;
 
   @override
   TagHiveModel read(BinaryReader reader) {
@@ -17,14 +17,14 @@ class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TagHiveModel(
-      title: fields[11] as String,
-      colorCode: fields[12] as String,
-      iconCode: fields[13] as String,
-      id: fields[0] as String?,
-      updatedAt: fields[4] as DateTime?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
       description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
-      userId: fields[1] as String?,
+      updatedAt: fields[4] as DateTime?,
+      title: fields[11] as String,
+      colorCode: fields[12] as int,
+      iconCode: fields[13] as int,
     );
   }
 
@@ -56,7 +56,5 @@ class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TagHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TagHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

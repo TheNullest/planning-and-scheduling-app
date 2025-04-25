@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart' show IconData;
 import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 
-class MeasurementUnitUI extends BaseUIModel {
-  MeasurementUnitUI({
+class CustomeMeasurementUnitUI extends BaseUIModel {
+  CustomeMeasurementUnitUI({
     required super.id,
     required super.description,
     required super.createdAt,
@@ -19,7 +19,7 @@ class MeasurementUnitUI extends BaseUIModel {
   final IconData icon;
 
   @override
-  MeasurementUnitUI copyWith({
+  CustomeMeasurementUnitUI copyWith({
     String? id,
     String? description,
     String? title,
@@ -29,7 +29,7 @@ class MeasurementUnitUI extends BaseUIModel {
     IconData? icon,
     int? value,
   }) =>
-      MeasurementUnitUI(
+      CustomeMeasurementUnitUI(
         id: id ?? this.id,
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,

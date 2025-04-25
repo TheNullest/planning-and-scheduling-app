@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/enums/sync_action.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/hive/sync_action.dart';
 
 /// Represents a log entry capturing changes within the application,
 /// including device-specific actions, user activity, and synchronization states.

@@ -1,4 +1,4 @@
-import 'package:zamaan/core/enums/task_status.dart';
+import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/tag_ui.dart';
 

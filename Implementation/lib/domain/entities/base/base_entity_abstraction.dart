@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/utils/uuid.dart';
 
 /// An abstract base class for entities, providing common fields and functionality.
 ///
@@ -11,20 +10,18 @@ import 'package:zamaan/core/utils/uuid.dart';
 /// - `description`: A description of the entity, if any.
 /// - `updatedAt`: The timestamp when the entity was last updated, can be null if not updated.
 abstract class BaseEntityAbstraction with EquatableMixin {
+  BaseEntityAbstraction({
+    required this.id,
+    required this.userId,
+    required this.createdAt,
+    this.description,
+    this.updatedAt,
+  });
+
   /// Creates a new `BaseEntityAbstraction` with the specified properties.
   ///
   /// The `id` and `createdAt` fields are automatically generated if not provided.
   /// The `order`, `userId`, and `description` fields are optional.
-  BaseEntityAbstraction({
-    String? id,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? userId,
-    this.description,
-  })  : id = id ?? uuidGenerator,
-        userId = userId?.isNotEmpty == true ? userId : null,
-        createdAt = (createdAt ?? DateTime.now()).toUtc(),
-        updatedAt = (updatedAt ?? createdAt ?? DateTime.now()).toUtc();
 
   /// The unique identifier for the entity.
   ///
@@ -34,7 +31,7 @@ abstract class BaseEntityAbstraction with EquatableMixin {
 
   /// The ID of the creator of the entity, if authenticated and signed in.
   @HiveField(1)
-  final String? userId;
+  final String userId;
 
   /// The timestamp when the entity was created.
   ///
@@ -42,7 +39,7 @@ abstract class BaseEntityAbstraction with EquatableMixin {
   @HiveField(2)
   final DateTime createdAt;
 
-  /// A description of the entity, if any.
+  /// A description of the entity.
   @HiveField(3)
   final String? description;
 

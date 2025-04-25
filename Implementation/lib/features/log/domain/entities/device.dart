@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/enums/os.dart';
+import 'package:zamaan/domain/enums/hive/os.dart';
 
 /// Represents a device registered within the application ecosystem.
 ///

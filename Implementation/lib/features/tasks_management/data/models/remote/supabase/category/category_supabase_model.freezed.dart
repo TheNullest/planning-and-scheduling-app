@@ -24,14 +24,14 @@ mixin _$CategorySupabaseModel {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'color_code')
-  String get colorCode => throw _privateConstructorUsedError;
+  int get colorCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'icon_code')
-  String get iconCode => throw _privateConstructorUsedError;
+  int get iconCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -54,11 +54,11 @@ abstract class $CategorySupabaseModelCopyWith<$Res> {
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -82,9 +82,9 @@ class _$CategorySupabaseModelCopyWithImpl<$Res,
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? userId = freezed,
+    Object? userId = null,
+    Object? createdAt = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -99,23 +99,23 @@ class _$CategorySupabaseModelCopyWithImpl<$Res,
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
+              as int,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -136,11 +136,11 @@ abstract class _$$CategorySupabaseModelImplCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      @JsonKey(name: 'color_code') String colorCode,
-      @JsonKey(name: 'icon_code') String iconCode,
-      @JsonKey(name: 'user_id') String? userId,
+      @JsonKey(name: 'color_code') int colorCode,
+      @JsonKey(name: 'icon_code') int iconCode,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -162,9 +162,9 @@ class __$$CategorySupabaseModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? colorCode = null,
     Object? iconCode = null,
-    Object? userId = freezed,
+    Object? userId = null,
+    Object? createdAt = null,
     Object? description = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_$CategorySupabaseModelImpl(
@@ -179,23 +179,23 @@ class __$$CategorySupabaseModelImplCopyWithImpl<$Res>
       colorCode: null == colorCode
           ? _value.colorCode
           : colorCode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       iconCode: null == iconCode
           ? _value.iconCode
           : iconCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      userId: freezed == userId
+              as int,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -212,9 +212,9 @@ class _$CategorySupabaseModelImpl implements _CategorySupabaseModel {
       required this.title,
       @JsonKey(name: 'color_code') required this.colorCode,
       @JsonKey(name: 'icon_code') required this.iconCode,
-      @JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'created_at') required this.createdAt,
       this.description,
-      @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
   factory _$CategorySupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -226,25 +226,25 @@ class _$CategorySupabaseModelImpl implements _CategorySupabaseModel {
   final String title;
   @override
   @JsonKey(name: 'color_code')
-  final String colorCode;
+  final int colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  final String iconCode;
+  final int iconCode;
   @override
   @JsonKey(name: 'user_id')
-  final String? userId;
-  @override
-  final String? description;
+  final String userId;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime? createdAt;
+  final DateTime createdAt;
+  @override
+  final String? description;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'CategorySupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'CategorySupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, userId: $userId, createdAt: $createdAt, description: $description, updatedAt: $updatedAt)';
   }
 
   @override
@@ -259,10 +259,10 @@ class _$CategorySupabaseModelImpl implements _CategorySupabaseModel {
             (identical(other.iconCode, iconCode) ||
                 other.iconCode == iconCode) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
@@ -270,7 +270,7 @@ class _$CategorySupabaseModelImpl implements _CategorySupabaseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, colorCode, iconCode,
-      userId, description, createdAt, updatedAt);
+      userId, createdAt, description, updatedAt);
 
   /// Create a copy of CategorySupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -293,11 +293,11 @@ abstract class _CategorySupabaseModel implements CategorySupabaseModel {
   const factory _CategorySupabaseModel(
           {required final String id,
           required final String title,
-          @JsonKey(name: 'color_code') required final String colorCode,
-          @JsonKey(name: 'icon_code') required final String iconCode,
-          @JsonKey(name: 'user_id') final String? userId,
+          @JsonKey(name: 'color_code') required final int colorCode,
+          @JsonKey(name: 'icon_code') required final int iconCode,
+          @JsonKey(name: 'user_id') required final String userId,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
           final String? description,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$CategorySupabaseModelImpl;
 
@@ -310,18 +310,18 @@ abstract class _CategorySupabaseModel implements CategorySupabaseModel {
   String get title;
   @override
   @JsonKey(name: 'color_code')
-  String get colorCode;
+  int get colorCode;
   @override
   @JsonKey(name: 'icon_code')
-  String get iconCode;
+  int get iconCode;
   @override
   @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  String? get description;
+  String get userId;
   @override
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt;
+  DateTime get createdAt;
+  @override
+  String? get description;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
 import 'package:zamaan/data/models/pagination_options.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
   SupabaseDataSource({

@@ -1,28 +1,40 @@
 import 'package:zamaan/domain/entities/category.dart';
+import 'package:zamaan/domain/entities/task.dart';
 
-/// The `tags` attribute can be used to categorize or label a task in various ways,\
-/// depending on the specific needs and preferences of the user. Here's an example:
+/// A specialized category used for labeling and organizing tasks with visual markers.
 ///
-/// For example, a task like "Learn Python" could be placed in the "Programming" category.\
-/// To further specify the task, tags could be used to indicate the specific Python\
-/// version (e.g., "Python 3.11") or the intended use case (e.g., "Web development").
+/// Extends [CategoryEntity] to add tag-specific functionality while maintaining
+/// core category properties. Tags are typically used for filtering, grouping,
+/// and quick visual identification of related tasks.
 ///
-/// The choice of tags is entirely up to the user and can vary based on their individual\
-/// workflow and organizational preferences.
-
+/// ## Example Usage
+/// ```dart
+/// TagEntity(
+///   id: "tag_123",
+///   title: "Urgent",
+///   colorCode: "#FF0000", // Red color
+///   iconCode: "🚨", // Alarm emoji
+///   userId: "user_456",
+///   createdAt: DateTime(2023, 10, 15),
+///   description: "High priority items",
+///   updatedAt: DateTime(2023, 10, 16),
+/// )
+/// ```
+///
+/// ## Relationships
+/// - Typically associated with [TaskEntity] through [TaskEntity.fixedTags]
+/// - Inherits all properties from [CategoryEntity]
 class TagEntity extends CategoryEntity {
   TagEntity({
+    required super.id,
+    required super.userId,
+    required super.createdAt,
+    required super.description,
+    required super.updatedAt,
     required super.title,
     required super.colorCode,
     required super.iconCode,
-    super.id,
-    super.updatedAt,
-    super.createdAt,
-    super.userId,
-    super.description,
   });
-
-  TagEntity.empty() : super.empty();
 
   @override
   TagEntity copyWith({
@@ -32,8 +44,8 @@ class TagEntity extends CategoryEntity {
     String? userId,
     String? description,
     String? title,
-    String? colorCode,
-    String? iconCode,
+    int? colorCode,
+    int? iconCode,
   }) =>
       TagEntity(
         id: id ?? this.id,
@@ -44,17 +56,5 @@ class TagEntity extends CategoryEntity {
         title: title ?? this.title,
         colorCode: colorCode ?? this.colorCode,
         iconCode: iconCode ?? this.iconCode,
-      );
-
-  @override
-  TagEntity toEntity() => TagEntity(
-        id: id,
-        updatedAt: updatedAt,
-        description: description,
-        createdAt: createdAt,
-        userId: userId,
-        title: title,
-        colorCode: colorCode,
-        iconCode: iconCode,
       );
 }

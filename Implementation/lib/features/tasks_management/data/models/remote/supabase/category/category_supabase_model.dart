@@ -13,18 +13,15 @@ class CategorySupabaseModel with _$CategorySupabaseModel {
   const factory CategorySupabaseModel({
     required String id,
     required String title,
-    @JsonKey(name: 'color_code') required String colorCode,
-    @JsonKey(name: 'icon_code') required String iconCode,
-    @JsonKey(name: 'user_id') String? userId,
+    @JsonKey(name: 'color_code') required int colorCode,
+    @JsonKey(name: 'icon_code') required int iconCode,
+    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
     String? description,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _CategorySupabaseModel;
-  factory CategorySupabaseModel.empty() =>
-      CategorySupabaseModel.fromEntity(CategoryEntity.empty());
 
-  factory CategorySupabaseModel.fromEntity(CategoryEntity entity) =>
-      CategorySupabaseModel(
+  factory CategorySupabaseModel.fromEntity(CategoryEntity entity) => CategorySupabaseModel(
         id: entity.id,
         title: entity.title,
         colorCode: entity.colorCode,

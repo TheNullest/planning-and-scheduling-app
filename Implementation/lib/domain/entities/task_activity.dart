@@ -1,77 +1,101 @@
 import 'package:hive/hive.dart';
-import 'package:zamaan/core/enums/task_status.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
+import 'package:zamaan/domain/entities/tag.dart';
+import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/enums/hive/reference_type.dart';
+import 'package:zamaan/domain/enums/hive/task_status.dart';
 
-/// Represents a time interval entity with details about tasks and time spent.
+/// Represents a tracked work session for a task or subtask, including scheduling relationships.
 ///
-/// This class extends `BaseEntityAbstraction` and includes additional fields
-/// for task IDs, start and end times, and calculated spent time.
+/// ## Example Usage
+/// ```dart
+/// final activity = TaskActivityEntity(
+///   referenceId: "task_123",
+///   referenceType: "task",
+///   dateRange: DateRange(
+///     start: DateTime(2023, 10, 15, 14, 0),
+///     end: DateTime(2023, 10, 15, 16, 30),
+///   ),
+///   variableTags: [TagEntity(id: "urgent", title: "Urgent")],
+///   scheduleDefinitionId: "sched_789",
+///   taskStatus: TaskStatus.completed,
+///   // Base entity fields
+///   id: "activity_456",
+///   userId: "user_001",
+///   createdAt: DateTime.now(),
+///   description: "Client project work session",
+/// );
+///
+/// print(activity.calculatedSpentTime); // Duration(hours: 2, minutes: 30)
+/// ```
 
 class TaskActivityEntity extends BaseEntityAbstraction {
-  /// Creates a new [TaskActivityEntity] with the specified properties.
-  ///
-  /// The `taskId`, `subTaskId`, and `startAt` are required to initialize the entity.
-  /// The `id`, `order`, `createdAt`, `userId`, `description`, and `endAt` are optional
-  /// and can be customized. The `spentTime` is automatically calculated and cannot be
-  /// directly customized or manipulated.
   TaskActivityEntity({
-    required this.taskId,
-    required this.subTaskId,
-    required this.startAt,
-    super.id,
-    super.updatedAt,
-    super.createdAt,
-    super.userId,
-    super.description,
-    this.scheduledTaskId,
-    this.dueDate,
-    this.variableTagIds,
-    Duration? spentTime,
-    String? taskStatus,
-  })  : taskStatus = taskStatus ?? TaskStatus.scheduled.displayName,
-        spentTime = (dueDate != null && spentTime == null)
-            ? (dueDate.isAfter(startAt)
-                ? dueDate.difference(startAt)
-                : throw ArgumentError('endAt must be after startAt'))
-            : spentTime;
+    required super.id,
+    required super.userId,
+    required super.createdAt,
+    required super.description,
+    required super.updatedAt,
+    required this.referenceId,
+    required this.referenceType,
+    required this.activityDuration,
+    required this.variableTags,
+    required this.scheduleDefinitionId,
+    required this.taskStatus,
+  });
 
-  /// Creates an empty [TaskActivityEntity] with default values.
+  /// The ID of the associated task or subtask
   ///
-  /// This constructor is useful for initializing an entity with default values.
-  TaskActivityEntity.empty() : this(taskId: '1', subTaskId: '2', startAt: DateTime(2024));
-
-  /// The ID of the main task associated with this time interval.
+  /// - When [referenceType] = "task": Links to [TaskEntity.id]
+  /// - When [referenceType] = "subtask": Links to [SubTaskEntity.id]
   @HiveField(11)
-  final String taskId;
+  final String referenceId;
 
-  /// The ID of the sub-task associated with this time interval.
-  @HiveField(12)
-  final String subTaskId;
-
-  /// The start time of the time interval.
-  @HiveField(13)
-  final DateTime startAt;
-
-  /// The end time of the time interval, if any.
-  @HiveField(14)
-  final DateTime? dueDate;
-
-  /// The calculated spent time based on the difference between `startAt` and `endAt`.
+  /// The type of entity referenced by [referenceId]
   ///
-  /// If `endAt` is provided and is after `startAt`, the `spentTime` field will be
-  /// automatically calculated as the difference between `startAt` and `endAt`.
-  /// If `endAt` is not set, `spentTime` remains null.
+  /// Valid values:
+  /// - "task" : Parent task reference
+  /// - "subtask" : Child task reference
+  @HiveField(12)
+  final ReferenceType referenceType;
+
+  /// The active time window for this work session
+  ///
+  /// Used for:
+  /// - Calculating duration via [calculatedSpentTime]
+  /// - Schedule adherence validation
+  @HiveField(13)
+  final DateRangeEntity activityDuration;
+
+  /// Dynamic tags associated with this specific work session
+  ///
+  /// Enables context-specific categorization different from
+  /// the parent task's tags
+  @HiveField(14)
+  final List<TagEntity> variableTags;
+
+  /// Reference to the schedule definition that triggered this activity
+  ///
+  /// Null indicates manual time tracking outside scheduling system
   @HiveField(15)
-  final Duration? spentTime;
+  final String? scheduleDefinitionId;
 
+  /// Current state of the work session
+  ///
+  /// Special states:
+  /// - [TaskStatus.doneLate] : Finished outside
+  ///   the parent schedule's active period
   @HiveField(16)
-  final List<String>? variableTagIds;
+  final TaskStatus taskStatus;
 
-  @HiveField(17)
-  final String? scheduledTaskId;
-
-  @HiveField(18)
-  final String taskStatus;
+  /// The calculated duration of the work session
+  ///
+  /// Automatically derived from [activityDuration] difference.
+  /// Returns null if session hasn't ended (end time not set).
+  Duration? get calculatedSpentTime =>
+      activityDuration.isValid ? activityDuration.end?.difference(activityDuration.start!) : null;
 
   @override
   TaskActivityEntity copyWith({
@@ -81,13 +105,12 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? userId,
     String? description,
-    String? taskId,
-    String? subTaskId,
-    String? scheduledTaskId,
-    DateTime? startAt,
-    DateTime? dueDate,
-    List<String>? variableTagIds,
-    String? taskStatus,
+    String? referenceId,
+    ReferenceType? referenceType,
+    String? scheduleDefinitionId,
+    DateRangeEntity? activityDuration,
+    List<TagEntity>? variableTags,
+    TaskStatus? taskStatus,
   }) =>
       TaskActivityEntity(
         id: id ?? this.id,
@@ -95,29 +118,12 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         userId: userId ?? this.userId,
-        taskId: taskId ?? this.taskId,
-        subTaskId: subTaskId ?? this.subTaskId,
-        startAt: startAt ?? this.startAt,
-        dueDate: dueDate ?? this.dueDate,
-        variableTagIds: variableTagIds ?? this.variableTagIds,
+        referenceId: referenceId ?? this.referenceId,
+        referenceType: referenceType ?? this.referenceType,
+        activityDuration: activityDuration ?? this.activityDuration,
+        variableTags: variableTags ?? this.variableTags,
         taskStatus: taskStatus ?? this.taskStatus,
-        scheduledTaskId: scheduledTaskId ?? this.scheduledTaskId,
-      );
-
-  TaskActivityEntity toEntity() => TaskActivityEntity(
-        id: id,
-        updatedAt: updatedAt,
-        description: description,
-        createdAt: createdAt,
-        userId: userId,
-        taskId: taskId,
-        subTaskId: subTaskId,
-        startAt: startAt,
-        dueDate: dueDate,
-        spentTime: spentTime,
-        variableTagIds: variableTagIds,
-        taskStatus: taskStatus,
-        scheduledTaskId: scheduledTaskId,
+        scheduleDefinitionId: scheduleDefinitionId ?? this.scheduleDefinitionId,
       );
 
   /// Returns a list of properties that are used to determine equality.
@@ -127,12 +133,11 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        taskId,
-        subTaskId,
-        startAt,
-        dueDate,
-        spentTime,
+        referenceId,
+        referenceType,
+        activityDuration,
         taskStatus,
-        scheduledTaskId,
+        scheduleDefinitionId,
+        variableTags,
       ];
 }

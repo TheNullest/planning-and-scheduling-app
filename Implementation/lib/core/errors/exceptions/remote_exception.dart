@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// A class representing a remote failure or error.
 class RemoteException extends Failure {

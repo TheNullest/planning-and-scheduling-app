@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/enums/sync_action.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/domain/enums/hive/sync_action.dart';
 import 'package:zamaan/features/log/domain/entities/log.dart';
 
 part 'log.g.dart';

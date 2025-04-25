@@ -19,7 +19,7 @@ class _Titles {
   String get subtasks => '$_prefix.subtasks'.tr();
   String get tags => '$_prefix.tags'.tr();
   String get goals => '$_prefix.goals'.tr();
-  String get measurementUnits => '$_prefix.measurement_units'.tr();
+  String get customeCustomeMeasurementUnits => '$_prefix.measurement_units'.tr();
   String get categories => '$_prefix.categories'.tr();
   String get error => '$_prefix.error'.tr();
 }

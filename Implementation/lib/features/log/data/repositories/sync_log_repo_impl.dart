@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/log/data/models/remote/supabase/sync_log/sync_log.dart';
 import 'package:zamaan/features/log/data/sources/base/sync_log_data_source.dart';
 import 'package:zamaan/features/log/domain/entities/sync_log.dart';

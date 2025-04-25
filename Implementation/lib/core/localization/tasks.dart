@@ -40,7 +40,7 @@ class _TasksErrors {
   String get invalidPriority => '$_prefix.invalid_priority'.tr();
   String get invalidCategory => '$_prefix.invalid_category'.tr();
   String get invalidGoal => '$_prefix.invalid_goal'.tr();
-  String get invalidMeasurementUnit => '$_prefix.invalid_measurement_unit'.tr();
+  String get invalidCustomeMeasurementUnit => '$_prefix.invalid_measurement_unit'.tr();
   String get invalidStartDate => '$_prefix.invalid_start_date'.tr();
   String get invalidEndDate => '$_prefix.invalid_end_date'.tr();
   String get startDateAfterEndDate => '$_prefix.start_date_after_end_date'.tr();
@@ -65,8 +65,8 @@ class _TasksMessages {
   String get goalRemoved => '$_prefix.goal_removed'.tr();
   String get categoryAdded => '$_prefix.category_added'.tr();
   String get categoryRemoved => '$_prefix.category_removed'.tr();
-  String get measurementUnitAdded => '$_prefix.measurement_unit_added'.tr();
-  String get measurementUnitRemoved => '$_prefix.measurement_unit_removed'.tr();
+  String get customeCustomeMeasurementUnitAdded => '$_prefix.measurement_unit_added'.tr();
+  String get customeCustomeMeasurementUnitRemoved => '$_prefix.measurement_unit_removed'.tr();
   String get taskCanceled => '$_prefix.task_canceled'.tr();
   String get taskPaused => '$_prefix.task_paused'.tr();
 }

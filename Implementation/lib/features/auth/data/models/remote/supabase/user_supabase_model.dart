@@ -36,20 +36,15 @@ class UserSupabaseModel with _$UserSupabaseModel {
     @JsonKey(name: 'last_name') required String lastName,
     required String password,
     @JsonKey(name: 'email_address') required String emailAddress,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
     String? id,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @JsonKey(name: 'birth_date') DateTime? birthDate,
     @JsonKey(name: 'avatar_path') String? avatarPath,
     @JsonKey(name: 'bio') String? description,
   }) = _UserSupabaseModel;
 
-  /// Constructs an empty [UserSupabaseModel] instance for testing purposes.
-  factory UserSupabaseModel.empty() =>
-      UserSupabaseModel.fromEntity(UserEntity.forTest());
-
-  factory UserSupabaseModel.fromJson(Map<String, dynamic> json) =>
-      _$UserSupabaseModelFromJson(
+  factory UserSupabaseModel.fromJson(Map<String, dynamic> json) => _$UserSupabaseModelFromJson(
         json['user_metadata'] as Map<String, dynamic>,
       );
 
@@ -75,20 +70,6 @@ class UserSupabaseModel with _$UserSupabaseModel {
 
   @override
   Map<String, dynamic> toJson() => _$UserSupabaseModelToJson(this);
-
-  // /// Converts the `RemoteUserModel` instance to a Supabase meta data.
-  // ///
-  // /// - Returns: A map containing the user data formatted for Supabase.
-  // DataMap toSupabaseMetaData() => {
-  //       'id': id,
-  //       'created_at': createdAt.toIso8601String(),
-  //       'bio': description,
-  //       'user_name': userName,
-  //       'first_name': firstName,
-  //       'last_name': lastName,
-  //       'birth_date': birthDate?.toIso8601String(),
-  //       'avatar_path': avatarPath,
-  //     };
 }
 
 extension UserSupabaseModelX on UserSupabaseModel {
@@ -96,7 +77,8 @@ extension UserSupabaseModelX on UserSupabaseModel {
   ///
   /// - Returns: A `UserEntity` instance containing the user data.
   UserEntity toEntity() => UserEntity(
-        id: id,
+        id: id!,
+        userId: id!,
         userName: userName,
         password: '',
         firstName: firstName,

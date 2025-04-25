@@ -1,8 +1,15 @@
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/mappers/date_range.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/tag.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
+import 'package:zamaan/domain/enums/enums.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
+import 'package:zamaan/domain/enums/hive/reference_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/date_time_ranges/date_range/date_range_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tag/tag_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task_activity/task_activity_supabase_model.dart';
 
 class TaskActivityMapper
@@ -10,26 +17,35 @@ class TaskActivityMapper
   @override
   TaskActivityEntity toEntityFromHive(TaskActivityHiveModel model) =>
       tryCatchSimple<TaskActivityEntity>(
-        action: () => model.toEntity(),
+        action: () => model.copyWith(),
         failureType: FailureType.local,
       );
 
   @override
-  TaskActivityEntity toEntityFromSupabase(TaskActivitySupabaseModel model) =>
+  TaskActivityEntity toEntityFromSupabase(TaskActivitySupabaseModel model,
+          {DataMap? relatedListModels}) =>
       tryCatchSimple<TaskActivityEntity>(
-        action: () => TaskActivityEntity(
-          id: model.id,
-          description: model.description,
-          createdAt: model.createdAt,
-          updatedAt: model.updatedAt,
-          userId: model.userId,
-          taskId: model.taskId,
-          startAt: model.startAt,
-          dueDate: model.dueDate,
-          subTaskId: model.subTaskId,
-          taskStatus: model.taskStatus,
-          spentTime: model.spentTime,
-        ),
+        action: () {
+          final tagsEntity = TagMapper().toEntitiesFromSupabase(
+            relatedListModels!['scheduled_times'] as List<TagSupabaseModel>,
+          );
+          final scheduledDateEntity = DateRangeMapper().toEntityFromSupabase(
+            relatedListModels['scheduled_date'] as DateRangeSupabaseModel,
+          );
+          return TaskActivityEntity(
+            id: model.id,
+            description: model.description,
+            createdAt: model.createdAt,
+            updatedAt: model.updatedAt,
+            userId: model.userId,
+            referenceId: model.refId,
+            referenceType: ReferenceType.fromName(model.refType),
+            taskStatus: TaskStatus.fromName(model.taskStatus),
+            scheduleDefinitionId: model.scheduleDefinitionId,
+            variableTags: tagsEntity,
+            activityDuration: scheduledDateEntity,
+          );
+        },
         failureType: FailureType.local,
       );
 

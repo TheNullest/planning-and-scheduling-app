@@ -3,7 +3,7 @@
 part of 'log.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
@@ -56,7 +56,5 @@ class LogHiveModelAdapter extends HiveBaseTypeAdapter<LogHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is LogHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is LogHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

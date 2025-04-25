@@ -108,7 +108,12 @@ class _SignUpViewState extends State<SignUpView> {
                       if (formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
                               AuthSignUpEvent(
-                                user: UserEntity.forTest().copyWith(
+                                user: UserEntity(
+                                  id: '',
+                                  userId: '',
+                                  createdAt: DateTime.now(),
+                                  avatarPath: '',
+                                  birthDate: DateTime.now(),
                                   userName: userNameController.text,
                                   firstName: firstNameController.text,
                                   lastName: lastNameController.text,

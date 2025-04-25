@@ -29,9 +29,9 @@ mixin _$UserSupabaseModel {
   String get password => throw _privateConstructorUsedError;
   @JsonKey(name: 'email_address')
   String get emailAddress => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'birth_date')
@@ -63,8 +63,8 @@ abstract class $UserSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'last_name') String lastName,
       String password,
       @JsonKey(name: 'email_address') String emailAddress,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       String? id,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'birth_date') DateTime? birthDate,
       @JsonKey(name: 'avatar_path') String? avatarPath,
@@ -91,8 +91,8 @@ class _$UserSupabaseModelCopyWithImpl<$Res, $Val extends UserSupabaseModel>
     Object? lastName = null,
     Object? password = null,
     Object? emailAddress = null,
+    Object? createdAt = null,
     Object? id = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? birthDate = freezed,
     Object? avatarPath = freezed,
@@ -119,14 +119,14 @@ class _$UserSupabaseModelCopyWithImpl<$Res, $Val extends UserSupabaseModel>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -161,8 +161,8 @@ abstract class _$$UserSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'last_name') String lastName,
       String password,
       @JsonKey(name: 'email_address') String emailAddress,
+      @JsonKey(name: 'created_at') DateTime createdAt,
       String? id,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'birth_date') DateTime? birthDate,
       @JsonKey(name: 'avatar_path') String? avatarPath,
@@ -187,8 +187,8 @@ class __$$UserSupabaseModelImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? password = null,
     Object? emailAddress = null,
+    Object? createdAt = null,
     Object? id = freezed,
-    Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? birthDate = freezed,
     Object? avatarPath = freezed,
@@ -215,14 +215,14 @@ class __$$UserSupabaseModelImplCopyWithImpl<$Res>
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -252,8 +252,8 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
       @JsonKey(name: 'last_name') required this.lastName,
       required this.password,
       @JsonKey(name: 'email_address') required this.emailAddress,
+      @JsonKey(name: 'created_at') required this.createdAt,
       this.id,
-      @JsonKey(name: 'created_at') this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'birth_date') this.birthDate,
       @JsonKey(name: 'avatar_path') this.avatarPath,
@@ -277,10 +277,10 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
   @JsonKey(name: 'email_address')
   final String emailAddress;
   @override
-  final String? id;
-  @override
   @JsonKey(name: 'created_at')
-  final DateTime? createdAt;
+  final DateTime createdAt;
+  @override
+  final String? id;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -296,7 +296,7 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
 
   @override
   String toString() {
-    return 'UserSupabaseModel(userName: $userName, firstName: $firstName, lastName: $lastName, password: $password, emailAddress: $emailAddress, id: $id, createdAt: $createdAt, updatedAt: $updatedAt, birthDate: $birthDate, avatarPath: $avatarPath, description: $description)';
+    return 'UserSupabaseModel(userName: $userName, firstName: $firstName, lastName: $lastName, password: $password, emailAddress: $emailAddress, createdAt: $createdAt, id: $id, updatedAt: $updatedAt, birthDate: $birthDate, avatarPath: $avatarPath, description: $description)';
   }
 
   @override
@@ -314,9 +314,9 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
                 other.password == password) &&
             (identical(other.emailAddress, emailAddress) ||
                 other.emailAddress == emailAddress) &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.birthDate, birthDate) ||
@@ -336,8 +336,8 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
       lastName,
       password,
       emailAddress,
-      id,
       createdAt,
+      id,
       updatedAt,
       birthDate,
       avatarPath,
@@ -367,8 +367,8 @@ abstract class _UserSupabaseModel implements UserSupabaseModel {
           @JsonKey(name: 'last_name') required final String lastName,
           required final String password,
           @JsonKey(name: 'email_address') required final String emailAddress,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
           final String? id,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt,
           @JsonKey(name: 'birth_date') final DateTime? birthDate,
           @JsonKey(name: 'avatar_path') final String? avatarPath,
@@ -393,10 +393,10 @@ abstract class _UserSupabaseModel implements UserSupabaseModel {
   @JsonKey(name: 'email_address')
   String get emailAddress;
   @override
-  String? get id;
-  @override
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt;
+  DateTime get createdAt;
+  @override
+  String? get id;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

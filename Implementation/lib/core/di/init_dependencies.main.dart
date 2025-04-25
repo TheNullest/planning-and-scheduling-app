@@ -47,15 +47,17 @@ void _mappers() {
     )
     ..registerFactory<Mapper<GoalEntity, GoalHiveModel, GoalSupabaseModel>>(GoalMapper.new)
     ..registerFactory<
-        Mapper<MeasurementUnitEntity, MeasurementUnitHiveModel, MeasurementUnitSupabaseModel>>(
-      MeasurementUnitMapper.new,
+        Mapper<CustomMeasurementUnitEntity, CustomMeasurementUnitHiveModel,
+            CustomMeasurementUnitSupabaseModel>>(
+      CustomeMeasurementUnitMapper.new,
     )
     ..registerFactory<Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel>>(
       SubTaskMapper.new,
     )
     ..registerFactory<
-        Mapper<ScheduledTaskEntity, ScheduledTaskHiveModel, ScheduledTaskSupabaseModel>>(
-      ScheduledTaskMapper.new,
+        Mapper<ScheduleDefinitionEntity, ScheduleDefinitionHiveModel,
+            ScheduleDefinitionSupabaseModel>>(
+      ScheduleDefinitionMapper.new,
     )
     ..registerFactory<Mapper<TagEntity, TagHiveModel, TagSupabaseModel>>(TagMapper.new)
     ..registerFactory<Mapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>(
@@ -118,14 +120,14 @@ void _datasources() {
     )
 
     // Measurement Unit
-    ..registerFactory<MeasurementUnitDataSource<MeasurementUnitHiveModel>>(
-      () => MeasurementUnitHiveDataSourceImpl(hiveBox: serviceLocator()),
+    ..registerFactory<CustomeMeasurementUnitDataSource<CustomMeasurementUnitHiveModel>>(
+      () => CustomeMeasurementUnitHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<MeasurementUnitDataSource<MeasurementUnitSupabaseModel>>(
-      () => MeasurementUnitSupabaseDataSourceImpl(
+    ..registerFactory<CustomeMeasurementUnitDataSource<CustomMeasurementUnitSupabaseModel>>(
+      () => CustomeMeasurementUnitSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.measurementUnit,
+        collectionPath: CollectionPaths.customeCustomeMeasurementUnit,
         mapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -133,14 +135,14 @@ void _datasources() {
     )
 
     // Scheduled Task
-    ..registerFactory<ScheduledTaskDataSource<ScheduledTaskHiveModel>>(
-      () => ScheduledTaskHiveDataSourceImpl(hiveBox: serviceLocator()),
+    ..registerFactory<ScheduleDefinitionDataSource<ScheduleDefinitionHiveModel>>(
+      () => ScheduleDefinitionHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<ScheduledTaskDataSource<ScheduledTaskSupabaseModel>>(
-      () => ScheduledTaskSupabaseDataSourceImpl(
+    ..registerFactory<ScheduleDefinitionDataSource<ScheduleDefinitionSupabaseModel>>(
+      () => ScheduleDefinitionSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.scheduledTask,
+        collectionPath: CollectionPaths.scheduleDefinition,
         mapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -263,8 +265,8 @@ void _repositories() {
     )
 
     // Measurement Unit
-    ..registerSingleton<MeasurementUnitRepository>(
-      MeasurementUnitRepositoryImpl(
+    ..registerSingleton<CustomeMeasurementUnitRepository>(
+      CustomeMeasurementUnitRepositoryImpl(
         localDataSource: serviceLocator(instanceName: InstanceNames.localHive),
         remoteDataSource: serviceLocator(instanceName: InstanceNames.remoteSupabase),
         mapper: serviceLocator(),
@@ -273,8 +275,8 @@ void _repositories() {
     )
 
     // Scheduled Task
-    ..registerSingleton<ScheduledTaskRepository>(
-      ScheduledTaskRepositoryImpl(
+    ..registerSingleton<ScheduleDefinitionRepository>(
+      ScheduleDefinitionRepositoryImpl(
         localDataSource: serviceLocator(instanceName: InstanceNames.localHive),
         remoteDataSource: serviceLocator(instanceName: InstanceNames.remoteSupabase),
         mapper: serviceLocator(),

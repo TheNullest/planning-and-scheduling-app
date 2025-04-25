@@ -3,6 +3,7 @@ import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/mappers/user.dart';
 import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
@@ -18,6 +19,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     required RemoteAuthDataSource remoteDataSource,
     required LocalAuthDataSource localDataSource,
     required NetworkConnectivityMonitor connectionChecker,
+    required this.mapper,
   })  : _remoteDataSource = remoteDataSource,
         _localDataSource = localDataSource,
         _connectionChecker = connectionChecker;
@@ -26,12 +28,13 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   final LocalAuthDataSource _localDataSource;
   final NetworkConnectivityMonitor _connectionChecker;
 
+  final UserMapper mapper;
   @override
   EResultFuture<UserEntity> getCurrentUser() async => tryCatchEither<UserEntity>(
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.getCurrentUser();
-            return Right(foldEither<UserEntity>(result).toEntity());
+            return Right(_toEntity(result));
           },
           onNotConnectedAction: () async => _localDataSource.getCurrentUser(),
         ),
@@ -42,10 +45,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.signIn(params);
-            final userEntity = foldEither<UserSupabaseModel>(result).toEntity();
-            await _localDataSource.storeCurrentUser(
-              UserHiveModel.fromEntity(userEntity),
-            );
+            final userEntity = _toEntity(result);
+            await _storeCurrentUser(userEntity);
 
             return Right(userEntity);
           },
@@ -70,12 +71,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         action: () async => _executeBasedOnConnection<UserEntity>(
           onConnectedAction: () async {
             final result = await _remoteDataSource.signUp(UserSupabaseModel.fromEntity(user));
-            final userEntity = foldEither<UserSupabaseModel>(result).toEntity().toEntity();
-            await _localDataSource.storeCurrentUser(
-              UserHiveModel.fromRemote(
-                foldEither<UserSupabaseModel>(result),
-              ),
-            );
+            final userEntity = _toEntity(result);
+            await _storeCurrentUser(userEntity);
             return Right(userEntity);
           },
           onNotConnectedAction: () => _throwNoConnectionException('signUp'),
@@ -101,13 +98,12 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
             final result = await _remoteDataSource.updateUser(
               UserSupabaseModel.fromEntity(user),
             );
-            final userEntity = foldEither<UserSupabaseModel>(result).toEntity().toEntity();
             await _localDataSource.storeCurrentUser(
               UserHiveModel.fromRemote(
                 foldEither<UserSupabaseModel>(result),
               ),
             );
-            return Right(userEntity);
+            return Right(_toEntity(result));
           },
           onNotConnectedAction: () => _throwNoConnectionException('update'),
         ),
@@ -147,4 +143,13 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   Never _throwNoConnectionException(String location) => throw RemoteException(
         message: 'No internet connection!',
       );
+
+  FutureVoid _storeCurrentUser(UserEntity userEntity) async {
+    await _localDataSource.storeCurrentUser(
+      UserHiveModel.fromEntity(userEntity),
+    );
+  }
+
+  UserEntity _toEntity(EResult<UserSupabaseModel> result) =>
+      mapper.toEntityFromSupabase(foldEither<UserSupabaseModel>(result));
 }

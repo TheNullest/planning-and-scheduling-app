@@ -3,7 +3,7 @@
 part of 'category_hive_model.dart';
 
 // **************************************************************************
-// HiveBaseTypeAdapterGenerator
+// TypeAdapterGenerator
 // **************************************************************************
 
 class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
@@ -17,14 +17,14 @@ class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CategoryHiveModel(
-      title: fields[11] as String,
-      colorCode: fields[12] as String,
-      iconCode: fields[13] as String,
-      id: fields[0] as String?,
+      id: fields[0] as String,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
       description: fields[3] as String?,
-      createdAt: fields[2] as DateTime?,
       updatedAt: fields[4] as DateTime?,
-      userId: fields[1] as String?,
+      title: fields[11] as String,
+      colorCode: fields[12] as int,
+      iconCode: fields[13] as int,
     );
   }
 

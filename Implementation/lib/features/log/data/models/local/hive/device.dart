@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/enums/os.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/domain/enums/hive/os.dart';
 import 'package:zamaan/features/log/domain/entities/device.dart';
 
 part 'device.g.dart';

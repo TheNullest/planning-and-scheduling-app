@@ -1,7 +1,7 @@
-import 'package:zamaan/core/enums/datasource_policy.dart';
-import 'package:zamaan/core/enums/enums.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
 abstract interface class TaskRepository implements BaseRepository<TaskEntity> {
@@ -9,6 +9,11 @@ abstract interface class TaskRepository implements BaseRepository<TaskEntity> {
     TaskStatus status, {
     DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
+
+  EResultFuture<List<TaskEntity>> getBatchArchived({
+    DataSourcePolicy policy = DataSourcePolicy.localOnly,
+  });
+
   EResultFuture<List<TaskEntity>> getBatchByPriority(
     Priority priority, {
     DataSourcePolicy policy = DataSourcePolicy.localOnly,
@@ -24,11 +29,6 @@ abstract interface class TaskRepository implements BaseRepository<TaskEntity> {
   });
   EResultFuture<List<TaskEntity>> getBatchByTags(
     List<String> tagIds, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
-
-  EResultFuture<TaskEntity?> getBatchByScheduledTaskId(
-    String schedulerId, {
     DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 }

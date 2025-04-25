@@ -20,29 +20,35 @@ GoalSupabaseModel _$GoalSupabaseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GoalSupabaseModel {
-  String get taskId => throw _privateConstructorUsedError;
-  String get measurementUnitId => throw _privateConstructorUsedError;
-  int get measurementUnitValue => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sub_task_id')
-  String? get subTaskId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get refId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ref_type')
+  String get refType => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'goal_constraint')
+  String get goalConstraint => throw _privateConstructorUsedError;
+  @JsonKey(name: 'minutely_target')
+  double get minutelyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hourly_target')
+  double get hourlyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'daily_target')
+  double get dailyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'weekly_target')
+  double get weeklyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'monthly_target')
+  double get monthlyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'yearly_target')
+  double get yearlyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'measurement_unit')
+  String? get measurementUnit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'custom_measurement_unit_id')
+  String? get customMeasurementUnitId => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_active_hour')
-  double? get perActiveHour => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_active_day')
-  double? get perActiveDay => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_active_week')
-  double? get perActiveWeek => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_active_month')
-  double? get perActiveMonth => throw _privateConstructorUsedError;
-  @JsonKey(name: 'per_active_year')
-  double? get perActiveYear => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
 
   /// Serializes this GoalSupabaseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -61,20 +67,23 @@ abstract class $GoalSupabaseModelCopyWith<$Res> {
       _$GoalSupabaseModelCopyWithImpl<$Res, GoalSupabaseModel>;
   @useResult
   $Res call(
-      {String taskId,
-      String measurementUnitId,
-      int measurementUnitValue,
-      String? id,
-      @JsonKey(name: 'sub_task_id') String? subTaskId,
-      @JsonKey(name: 'user_id') String? userId,
-      String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      {String id,
+      String refId,
+      @JsonKey(name: 'ref_type') String refType,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'goal_constraint') String goalConstraint,
+      @JsonKey(name: 'minutely_target') double minutelyTarget,
+      @JsonKey(name: 'hourly_target') double hourlyTarget,
+      @JsonKey(name: 'daily_target') double dailyTarget,
+      @JsonKey(name: 'weekly_target') double weeklyTarget,
+      @JsonKey(name: 'monthly_target') double monthlyTarget,
+      @JsonKey(name: 'yearly_target') double yearlyTarget,
+      @JsonKey(name: 'measurement_unit') String? measurementUnit,
+      @JsonKey(name: 'custom_measurement_unit_id')
+      String? customMeasurementUnitId,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'per_active_hour') double? perActiveHour,
-      @JsonKey(name: 'per_active_day') double? perActiveDay,
-      @JsonKey(name: 'per_active_week') double? perActiveWeek,
-      @JsonKey(name: 'per_active_month') double? perActiveMonth,
-      @JsonKey(name: 'per_active_year') double? perActiveYear});
+      String? description});
 }
 
 /// @nodoc
@@ -92,78 +101,88 @@ class _$GoalSupabaseModelCopyWithImpl<$Res, $Val extends GoalSupabaseModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = null,
-    Object? measurementUnitId = null,
-    Object? measurementUnitValue = null,
-    Object? id = freezed,
-    Object? subTaskId = freezed,
-    Object? userId = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? refId = null,
+    Object? refType = null,
+    Object? userId = null,
+    Object? createdAt = null,
+    Object? goalConstraint = null,
+    Object? minutelyTarget = null,
+    Object? hourlyTarget = null,
+    Object? dailyTarget = null,
+    Object? weeklyTarget = null,
+    Object? monthlyTarget = null,
+    Object? yearlyTarget = null,
+    Object? measurementUnit = freezed,
+    Object? customMeasurementUnitId = freezed,
     Object? updatedAt = freezed,
-    Object? perActiveHour = freezed,
-    Object? perActiveDay = freezed,
-    Object? perActiveWeek = freezed,
-    Object? perActiveMonth = freezed,
-    Object? perActiveYear = freezed,
+    Object? description = freezed,
   }) {
     return _then(_value.copyWith(
-      taskId: null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as String,
-      measurementUnitId: null == measurementUnitId
-          ? _value.measurementUnitId
-          : measurementUnitId // ignore: cast_nullable_to_non_nullable
-              as String,
-      measurementUnitValue: null == measurementUnitValue
-          ? _value.measurementUnitValue
-          : measurementUnitValue // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subTaskId: freezed == subTaskId
-          ? _value.subTaskId
-          : subTaskId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: freezed == userId
+              as String,
+      refId: null == refId
+          ? _value.refId
+          : refId // ignore: cast_nullable_to_non_nullable
+              as String,
+      refType: null == refType
+          ? _value.refType
+          : refType // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      goalConstraint: null == goalConstraint
+          ? _value.goalConstraint
+          : goalConstraint // ignore: cast_nullable_to_non_nullable
+              as String,
+      minutelyTarget: null == minutelyTarget
+          ? _value.minutelyTarget
+          : minutelyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      hourlyTarget: null == hourlyTarget
+          ? _value.hourlyTarget
+          : hourlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      dailyTarget: null == dailyTarget
+          ? _value.dailyTarget
+          : dailyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      weeklyTarget: null == weeklyTarget
+          ? _value.weeklyTarget
+          : weeklyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyTarget: null == monthlyTarget
+          ? _value.monthlyTarget
+          : monthlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      yearlyTarget: null == yearlyTarget
+          ? _value.yearlyTarget
+          : yearlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      measurementUnit: freezed == measurementUnit
+          ? _value.measurementUnit
+          : measurementUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customMeasurementUnitId: freezed == customMeasurementUnitId
+          ? _value.customMeasurementUnitId
+          : customMeasurementUnitId // ignore: cast_nullable_to_non_nullable
+              as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      perActiveHour: freezed == perActiveHour
-          ? _value.perActiveHour
-          : perActiveHour // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveDay: freezed == perActiveDay
-          ? _value.perActiveDay
-          : perActiveDay // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveWeek: freezed == perActiveWeek
-          ? _value.perActiveWeek
-          : perActiveWeek // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveMonth: freezed == perActiveMonth
-          ? _value.perActiveMonth
-          : perActiveMonth // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveYear: freezed == perActiveYear
-          ? _value.perActiveYear
-          : perActiveYear // ignore: cast_nullable_to_non_nullable
-              as double?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -177,20 +196,23 @@ abstract class _$$GoalSupabaseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String taskId,
-      String measurementUnitId,
-      int measurementUnitValue,
-      String? id,
-      @JsonKey(name: 'sub_task_id') String? subTaskId,
-      @JsonKey(name: 'user_id') String? userId,
-      String? description,
-      @JsonKey(name: 'created_at') DateTime? createdAt,
+      {String id,
+      String refId,
+      @JsonKey(name: 'ref_type') String refType,
+      @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'goal_constraint') String goalConstraint,
+      @JsonKey(name: 'minutely_target') double minutelyTarget,
+      @JsonKey(name: 'hourly_target') double hourlyTarget,
+      @JsonKey(name: 'daily_target') double dailyTarget,
+      @JsonKey(name: 'weekly_target') double weeklyTarget,
+      @JsonKey(name: 'monthly_target') double monthlyTarget,
+      @JsonKey(name: 'yearly_target') double yearlyTarget,
+      @JsonKey(name: 'measurement_unit') String? measurementUnit,
+      @JsonKey(name: 'custom_measurement_unit_id')
+      String? customMeasurementUnitId,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
-      @JsonKey(name: 'per_active_hour') double? perActiveHour,
-      @JsonKey(name: 'per_active_day') double? perActiveDay,
-      @JsonKey(name: 'per_active_week') double? perActiveWeek,
-      @JsonKey(name: 'per_active_month') double? perActiveMonth,
-      @JsonKey(name: 'per_active_year') double? perActiveYear});
+      String? description});
 }
 
 /// @nodoc
@@ -206,78 +228,88 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = null,
-    Object? measurementUnitId = null,
-    Object? measurementUnitValue = null,
-    Object? id = freezed,
-    Object? subTaskId = freezed,
-    Object? userId = freezed,
-    Object? description = freezed,
-    Object? createdAt = freezed,
+    Object? id = null,
+    Object? refId = null,
+    Object? refType = null,
+    Object? userId = null,
+    Object? createdAt = null,
+    Object? goalConstraint = null,
+    Object? minutelyTarget = null,
+    Object? hourlyTarget = null,
+    Object? dailyTarget = null,
+    Object? weeklyTarget = null,
+    Object? monthlyTarget = null,
+    Object? yearlyTarget = null,
+    Object? measurementUnit = freezed,
+    Object? customMeasurementUnitId = freezed,
     Object? updatedAt = freezed,
-    Object? perActiveHour = freezed,
-    Object? perActiveDay = freezed,
-    Object? perActiveWeek = freezed,
-    Object? perActiveMonth = freezed,
-    Object? perActiveYear = freezed,
+    Object? description = freezed,
   }) {
     return _then(_$GoalSupabaseModelImpl(
-      taskId: null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as String,
-      measurementUnitId: null == measurementUnitId
-          ? _value.measurementUnitId
-          : measurementUnitId // ignore: cast_nullable_to_non_nullable
-              as String,
-      measurementUnitValue: null == measurementUnitValue
-          ? _value.measurementUnitValue
-          : measurementUnitValue // ignore: cast_nullable_to_non_nullable
-              as int,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subTaskId: freezed == subTaskId
-          ? _value.subTaskId
-          : subTaskId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: freezed == userId
+              as String,
+      refId: null == refId
+          ? _value.refId
+          : refId // ignore: cast_nullable_to_non_nullable
+              as String,
+      refType: null == refType
+          ? _value.refType
+          : refType // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      description: freezed == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdAt: freezed == createdAt
+              as String,
+      createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as DateTime,
+      goalConstraint: null == goalConstraint
+          ? _value.goalConstraint
+          : goalConstraint // ignore: cast_nullable_to_non_nullable
+              as String,
+      minutelyTarget: null == minutelyTarget
+          ? _value.minutelyTarget
+          : minutelyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      hourlyTarget: null == hourlyTarget
+          ? _value.hourlyTarget
+          : hourlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      dailyTarget: null == dailyTarget
+          ? _value.dailyTarget
+          : dailyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      weeklyTarget: null == weeklyTarget
+          ? _value.weeklyTarget
+          : weeklyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      monthlyTarget: null == monthlyTarget
+          ? _value.monthlyTarget
+          : monthlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      yearlyTarget: null == yearlyTarget
+          ? _value.yearlyTarget
+          : yearlyTarget // ignore: cast_nullable_to_non_nullable
+              as double,
+      measurementUnit: freezed == measurementUnit
+          ? _value.measurementUnit
+          : measurementUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
+      customMeasurementUnitId: freezed == customMeasurementUnitId
+          ? _value.customMeasurementUnitId
+          : customMeasurementUnitId // ignore: cast_nullable_to_non_nullable
+              as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      perActiveHour: freezed == perActiveHour
-          ? _value.perActiveHour
-          : perActiveHour // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveDay: freezed == perActiveDay
-          ? _value.perActiveDay
-          : perActiveDay // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveWeek: freezed == perActiveWeek
-          ? _value.perActiveWeek
-          : perActiveWeek // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveMonth: freezed == perActiveMonth
-          ? _value.perActiveMonth
-          : perActiveMonth // ignore: cast_nullable_to_non_nullable
-              as double?,
-      perActiveYear: freezed == perActiveYear
-          ? _value.perActiveYear
-          : perActiveYear // ignore: cast_nullable_to_non_nullable
-              as double?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -286,65 +318,75 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
   const _$GoalSupabaseModelImpl(
-      {required this.taskId,
-      required this.measurementUnitId,
-      required this.measurementUnitValue,
-      required this.id,
-      @JsonKey(name: 'sub_task_id') this.subTaskId,
-      @JsonKey(name: 'user_id') this.userId,
-      this.description,
-      @JsonKey(name: 'created_at') this.createdAt,
+      {required this.id,
+      required this.refId,
+      @JsonKey(name: 'ref_type') required this.refType,
+      @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'goal_constraint') required this.goalConstraint,
+      @JsonKey(name: 'minutely_target') required this.minutelyTarget,
+      @JsonKey(name: 'hourly_target') required this.hourlyTarget,
+      @JsonKey(name: 'daily_target') required this.dailyTarget,
+      @JsonKey(name: 'weekly_target') required this.weeklyTarget,
+      @JsonKey(name: 'monthly_target') required this.monthlyTarget,
+      @JsonKey(name: 'yearly_target') required this.yearlyTarget,
+      @JsonKey(name: 'measurement_unit') this.measurementUnit,
+      @JsonKey(name: 'custom_measurement_unit_id') this.customMeasurementUnitId,
       @JsonKey(name: 'updated_at') this.updatedAt,
-      @JsonKey(name: 'per_active_hour') this.perActiveHour,
-      @JsonKey(name: 'per_active_day') this.perActiveDay,
-      @JsonKey(name: 'per_active_week') this.perActiveWeek,
-      @JsonKey(name: 'per_active_month') this.perActiveMonth,
-      @JsonKey(name: 'per_active_year') this.perActiveYear});
+      this.description});
 
   factory _$GoalSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$GoalSupabaseModelImplFromJson(json);
 
   @override
-  final String taskId;
+  final String id;
   @override
-  final String measurementUnitId;
+  final String refId;
   @override
-  final int measurementUnitValue;
-  @override
-  final String? id;
-  @override
-  @JsonKey(name: 'sub_task_id')
-  final String? subTaskId;
+  @JsonKey(name: 'ref_type')
+  final String refType;
   @override
   @JsonKey(name: 'user_id')
-  final String? userId;
-  @override
-  final String? description;
+  final String userId;
   @override
   @JsonKey(name: 'created_at')
-  final DateTime? createdAt;
+  final DateTime createdAt;
+  @override
+  @JsonKey(name: 'goal_constraint')
+  final String goalConstraint;
+  @override
+  @JsonKey(name: 'minutely_target')
+  final double minutelyTarget;
+  @override
+  @JsonKey(name: 'hourly_target')
+  final double hourlyTarget;
+  @override
+  @JsonKey(name: 'daily_target')
+  final double dailyTarget;
+  @override
+  @JsonKey(name: 'weekly_target')
+  final double weeklyTarget;
+  @override
+  @JsonKey(name: 'monthly_target')
+  final double monthlyTarget;
+  @override
+  @JsonKey(name: 'yearly_target')
+  final double yearlyTarget;
+  @override
+  @JsonKey(name: 'measurement_unit')
+  final String? measurementUnit;
+  @override
+  @JsonKey(name: 'custom_measurement_unit_id')
+  final String? customMeasurementUnitId;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
-  @JsonKey(name: 'per_active_hour')
-  final double? perActiveHour;
-  @override
-  @JsonKey(name: 'per_active_day')
-  final double? perActiveDay;
-  @override
-  @JsonKey(name: 'per_active_week')
-  final double? perActiveWeek;
-  @override
-  @JsonKey(name: 'per_active_month')
-  final double? perActiveMonth;
-  @override
-  @JsonKey(name: 'per_active_year')
-  final double? perActiveYear;
+  final String? description;
 
   @override
   String toString() {
-    return 'GoalSupabaseModel(taskId: $taskId, measurementUnitId: $measurementUnitId, measurementUnitValue: $measurementUnitValue, id: $id, subTaskId: $subTaskId, userId: $userId, description: $description, createdAt: $createdAt, updatedAt: $updatedAt, perActiveHour: $perActiveHour, perActiveDay: $perActiveDay, perActiveWeek: $perActiveWeek, perActiveMonth: $perActiveMonth, perActiveYear: $perActiveYear)';
+    return 'GoalSupabaseModel(id: $id, refId: $refId, refType: $refType, userId: $userId, createdAt: $createdAt, goalConstraint: $goalConstraint, minutelyTarget: $minutelyTarget, hourlyTarget: $hourlyTarget, dailyTarget: $dailyTarget, weeklyTarget: $weeklyTarget, monthlyTarget: $monthlyTarget, yearlyTarget: $yearlyTarget, measurementUnit: $measurementUnit, customMeasurementUnitId: $customMeasurementUnitId, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -352,51 +394,57 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GoalSupabaseModelImpl &&
-            (identical(other.taskId, taskId) || other.taskId == taskId) &&
-            (identical(other.measurementUnitId, measurementUnitId) ||
-                other.measurementUnitId == measurementUnitId) &&
-            (identical(other.measurementUnitValue, measurementUnitValue) ||
-                other.measurementUnitValue == measurementUnitValue) &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.subTaskId, subTaskId) ||
-                other.subTaskId == subTaskId) &&
+            (identical(other.refId, refId) || other.refId == refId) &&
+            (identical(other.refType, refType) || other.refType == refType) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
+            (identical(other.goalConstraint, goalConstraint) ||
+                other.goalConstraint == goalConstraint) &&
+            (identical(other.minutelyTarget, minutelyTarget) ||
+                other.minutelyTarget == minutelyTarget) &&
+            (identical(other.hourlyTarget, hourlyTarget) ||
+                other.hourlyTarget == hourlyTarget) &&
+            (identical(other.dailyTarget, dailyTarget) ||
+                other.dailyTarget == dailyTarget) &&
+            (identical(other.weeklyTarget, weeklyTarget) ||
+                other.weeklyTarget == weeklyTarget) &&
+            (identical(other.monthlyTarget, monthlyTarget) ||
+                other.monthlyTarget == monthlyTarget) &&
+            (identical(other.yearlyTarget, yearlyTarget) ||
+                other.yearlyTarget == yearlyTarget) &&
+            (identical(other.measurementUnit, measurementUnit) ||
+                other.measurementUnit == measurementUnit) &&
+            (identical(
+                    other.customMeasurementUnitId, customMeasurementUnitId) ||
+                other.customMeasurementUnitId == customMeasurementUnitId) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.perActiveHour, perActiveHour) ||
-                other.perActiveHour == perActiveHour) &&
-            (identical(other.perActiveDay, perActiveDay) ||
-                other.perActiveDay == perActiveDay) &&
-            (identical(other.perActiveWeek, perActiveWeek) ||
-                other.perActiveWeek == perActiveWeek) &&
-            (identical(other.perActiveMonth, perActiveMonth) ||
-                other.perActiveMonth == perActiveMonth) &&
-            (identical(other.perActiveYear, perActiveYear) ||
-                other.perActiveYear == perActiveYear));
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      taskId,
-      measurementUnitId,
-      measurementUnitValue,
       id,
-      subTaskId,
+      refId,
+      refType,
       userId,
-      description,
       createdAt,
+      goalConstraint,
+      minutelyTarget,
+      hourlyTarget,
+      dailyTarget,
+      weeklyTarget,
+      monthlyTarget,
+      yearlyTarget,
+      measurementUnit,
+      customMeasurementUnitId,
       updatedAt,
-      perActiveHour,
-      perActiveDay,
-      perActiveWeek,
-      perActiveMonth,
-      perActiveYear);
+      description);
 
   /// Create a copy of GoalSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -417,62 +465,72 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
 
 abstract class _GoalSupabaseModel implements GoalSupabaseModel {
   const factory _GoalSupabaseModel(
-          {required final String taskId,
-          required final String measurementUnitId,
-          required final int measurementUnitValue,
-          required final String? id,
-          @JsonKey(name: 'sub_task_id') final String? subTaskId,
-          @JsonKey(name: 'user_id') final String? userId,
-          final String? description,
-          @JsonKey(name: 'created_at') final DateTime? createdAt,
-          @JsonKey(name: 'updated_at') final DateTime? updatedAt,
-          @JsonKey(name: 'per_active_hour') final double? perActiveHour,
-          @JsonKey(name: 'per_active_day') final double? perActiveDay,
-          @JsonKey(name: 'per_active_week') final double? perActiveWeek,
-          @JsonKey(name: 'per_active_month') final double? perActiveMonth,
-          @JsonKey(name: 'per_active_year') final double? perActiveYear}) =
-      _$GoalSupabaseModelImpl;
+      {required final String id,
+      required final String refId,
+      @JsonKey(name: 'ref_type') required final String refType,
+      @JsonKey(name: 'user_id') required final String userId,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      @JsonKey(name: 'goal_constraint') required final String goalConstraint,
+      @JsonKey(name: 'minutely_target') required final double minutelyTarget,
+      @JsonKey(name: 'hourly_target') required final double hourlyTarget,
+      @JsonKey(name: 'daily_target') required final double dailyTarget,
+      @JsonKey(name: 'weekly_target') required final double weeklyTarget,
+      @JsonKey(name: 'monthly_target') required final double monthlyTarget,
+      @JsonKey(name: 'yearly_target') required final double yearlyTarget,
+      @JsonKey(name: 'measurement_unit') final String? measurementUnit,
+      @JsonKey(name: 'custom_measurement_unit_id')
+      final String? customMeasurementUnitId,
+      @JsonKey(name: 'updated_at') final DateTime? updatedAt,
+      final String? description}) = _$GoalSupabaseModelImpl;
 
   factory _GoalSupabaseModel.fromJson(Map<String, dynamic> json) =
       _$GoalSupabaseModelImpl.fromJson;
 
   @override
-  String get taskId;
+  String get id;
   @override
-  String get measurementUnitId;
+  String get refId;
   @override
-  int get measurementUnitValue;
-  @override
-  String? get id;
-  @override
-  @JsonKey(name: 'sub_task_id')
-  String? get subTaskId;
+  @JsonKey(name: 'ref_type')
+  String get refType;
   @override
   @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  String? get description;
+  String get userId;
   @override
   @JsonKey(name: 'created_at')
-  DateTime? get createdAt;
+  DateTime get createdAt;
+  @override
+  @JsonKey(name: 'goal_constraint')
+  String get goalConstraint;
+  @override
+  @JsonKey(name: 'minutely_target')
+  double get minutelyTarget;
+  @override
+  @JsonKey(name: 'hourly_target')
+  double get hourlyTarget;
+  @override
+  @JsonKey(name: 'daily_target')
+  double get dailyTarget;
+  @override
+  @JsonKey(name: 'weekly_target')
+  double get weeklyTarget;
+  @override
+  @JsonKey(name: 'monthly_target')
+  double get monthlyTarget;
+  @override
+  @JsonKey(name: 'yearly_target')
+  double get yearlyTarget;
+  @override
+  @JsonKey(name: 'measurement_unit')
+  String? get measurementUnit;
+  @override
+  @JsonKey(name: 'custom_measurement_unit_id')
+  String? get customMeasurementUnitId;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;
   @override
-  @JsonKey(name: 'per_active_hour')
-  double? get perActiveHour;
-  @override
-  @JsonKey(name: 'per_active_day')
-  double? get perActiveDay;
-  @override
-  @JsonKey(name: 'per_active_week')
-  double? get perActiveWeek;
-  @override
-  @JsonKey(name: 'per_active_month')
-  double? get perActiveMonth;
-  @override
-  @JsonKey(name: 'per_active_year')
-  double? get perActiveYear;
+  String? get description;
 
   /// Create a copy of GoalSupabaseModel
   /// with the given fields replaced by the non-null parameter values.

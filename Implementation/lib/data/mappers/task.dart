@@ -1,36 +1,52 @@
-import 'package:zamaan/core/enums/failure_type.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/typedef.dart';
+import 'package:zamaan/data/mappers/category.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/tag.dart';
 import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/domain/enums/enums.dart';
+import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/category/category_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tag/tag_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task/task_supabase_model.dart';
 
 class TaskMapper extends Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
   @override
   TaskEntity toEntityFromHive(TaskHiveModel model) => tryCatchSimple<TaskEntity>(
-        action: () => model.toEntity(),
+        action: () => model.copyWith(),
         failureType: FailureType.local,
       );
 
   @override
-  TaskEntity toEntityFromSupabase(TaskSupabaseModel model) => tryCatchSimple<TaskEntity>(
-        action: () => TaskEntity(
-          id: model.id,
-          description: model.description,
-          createdAt: model.createdAt,
-          updatedAt: model.updatedAt,
-          userId: model.userId,
-          title: model.title,
-          colorCode: model.colorCode,
-          iconCode: model.iconCode,
-          priority: model.priority!,
-          archived: model.archived!,
-          dueDate: model.dueDate,
-          categoryIds: [],
-          fixedTagIds: [],
-          scheduledTaskId: model.scheduledTaskId,
-          totalSpentTime: model.totalSpentTime,
-        ),
+  TaskEntity toEntityFromSupabase(TaskSupabaseModel model, {DataMap? relatedListModels}) =>
+      tryCatchSimple<TaskEntity>(
+        action: () {
+          final tagsEntity = TagMapper().toEntitiesFromSupabase(
+            relatedListModels!['scheduled_times'] as List<TagSupabaseModel>,
+          );
+
+          final categoriesEntity = CategoryMapper().toEntitiesFromSupabase(
+            relatedListModels['scheduled_times'] as List<CategorySupabaseModel>,
+          );
+
+          return TaskEntity(
+            id: model.id,
+            description: model.description,
+            createdAt: model.createdAt,
+            updatedAt: model.updatedAt,
+            userId: model.userId,
+            title: model.title,
+            colorCode: model.colorCode,
+            iconCode: model.iconCode,
+            priority: Priority.fromName(model.priority),
+            archived: model.archived,
+            taskStatus: TaskStatus.fromName(model.taskStatus),
+            categories: categoriesEntity,
+            fixedTags: tagsEntity,
+            totalSpentTime: model.totalSpentTime,
+          );
+        },
         failureType: FailureType.local,
       );
 

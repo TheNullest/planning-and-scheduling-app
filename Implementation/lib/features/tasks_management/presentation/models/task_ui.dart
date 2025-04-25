@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/category_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/goal_ui.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/scheduled_task_ui.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/schedule_definition_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/sub_task_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/tag_ui.dart';
 
@@ -23,7 +23,7 @@ class TaskUI extends BaseUIModel {
     required this.totalSpentTime,
     required this.subTasks,
     required this.goal,
-    required this.scheduledTask,
+    required this.scheduleDefinition,
   });
 
   final String title;
@@ -37,7 +37,7 @@ class TaskUI extends BaseUIModel {
   final Duration totalSpentTime;
   final List<SubTaskUI> subTasks;
   final GoalUI goal;
-  final ScheduledTaskUI scheduledTask;
+  final List<ScheduleDefinitionUI> scheduleDefinition;
 
   @override
   TaskUI copyWith({
@@ -54,7 +54,7 @@ class TaskUI extends BaseUIModel {
     DateTime? dueDate,
     Duration? totalSpentTime,
     List<SubTaskUI>? subTasks,
-    ScheduledTaskUI? scheduledTask,
+    List<ScheduleDefinitionUI>? scheduleDefinition,
     GoalUI? goal,
   }) {
     return TaskUI(
@@ -70,7 +70,7 @@ class TaskUI extends BaseUIModel {
       priority: priority ?? this.priority,
       dueDate: dueDate ?? this.dueDate,
       totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-      scheduledTask: scheduledTask ?? this.scheduledTask,
+      scheduleDefinition: scheduleDefinition ?? this.scheduleDefinition,
       subTasks: subTasks ?? this.subTasks,
       goal: goal ?? this.goal,
     );

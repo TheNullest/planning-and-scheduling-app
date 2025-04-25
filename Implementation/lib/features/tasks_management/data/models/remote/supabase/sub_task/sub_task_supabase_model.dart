@@ -11,16 +11,16 @@ part 'sub_task_supabase_model.g.dart';
 )
 class SubTaskSupabaseModel with _$SubTaskSupabaseModel {
   const factory SubTaskSupabaseModel({
-    @JsonKey(name: 'task_id') required String taskId,
     required String title,
-    required String? id,
+    required String id,
+    required String priority,
+    required String status,
+    @JsonKey(name: 'task_id') required String taskId,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
-    String? description,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
-    @JsonKey(name: 'user_id') String? userId,
     @JsonKey(name: 'total_spent_time') Duration? totalSpentTime,
-    int? priority,
-    int? status,
+    String? description,
   }) = _SubTaskSupabaseModel;
 
   /// Creates a [SubTaskSupabaseModel] from a [SubTaskEntity].
@@ -32,16 +32,13 @@ class SubTaskSupabaseModel with _$SubTaskSupabaseModel {
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        priority: entity.priority,
-        status: entity.status,
+        priority: entity.priority.name,
+        status: entity.status.name,
       );
 
   /// Parses a JSON map into a [SubTaskSupabaseModel] instance.
   factory SubTaskSupabaseModel.fromJson(Map<String, dynamic> json) =>
       _$SubTaskSupabaseModelFromJson(json);
-
-  /// Returns an empty [SubTaskSupabaseModel] instance.
-  factory SubTaskSupabaseModel.empty() => SubTaskSupabaseModel.fromEntity(SubTaskEntity.empty());
 
   @override
   Map<String, dynamic> toJson() => _$SubTaskSupabaseModelToJson(this);

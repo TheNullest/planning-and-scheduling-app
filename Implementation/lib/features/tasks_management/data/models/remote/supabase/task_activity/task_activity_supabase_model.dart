@@ -11,23 +11,16 @@ part 'task_activity_supabase_model.g.dart';
 )
 class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
   const factory TaskActivitySupabaseModel({
-    @JsonKey(name: 'main_task_id') required String taskId,
-    @JsonKey(name: 'sub_task_id') required String subTaskId,
-    @JsonKey(name: 'start_at') required DateTime startAt,
-    required String? id,
+    @JsonKey(name: 'ref_type') required String refType,
+    @JsonKey(name: 'ref_id') required String refId,
+    required String id,
     @JsonKey(name: 'task_status') required String taskStatus,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'variable_tags') required List<String> variableTags,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? description,
-    @JsonKey(name: 'created_at') DateTime? createdAt,
-    @JsonKey(name: 'user_id') String? userId,
-    @JsonKey(name: 'scheduled_task_id') String? scheduledTaskId,
-    @JsonKey(name: 'due_date') DateTime? dueDate,
-    @JsonKey(
-      name: 'spent_time',
-      fromJson: _durationFromJson,
-      toJson: _durationToJson,
-    )
-    Duration? spentTime,
+    @JsonKey(name: 'schedule_definition_id') String? scheduleDefinitionId,
   }) = _TaskActivitySupabaseModel;
 
   /// Creates a [TaskActivitySupabaseModel] from a JSON map.
@@ -37,74 +30,18 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
   /// Converts a [TaskActivityEntity] (domain entity) into a [TaskActivitySupabaseModel].
   factory TaskActivitySupabaseModel.fromEntity(TaskActivityEntity entity) =>
       TaskActivitySupabaseModel(
-        taskId: entity.taskId,
-        subTaskId: entity.subTaskId,
-        startAt: entity.startAt,
+        refId: entity.referenceId,
+        refType: entity.referenceType.name,
         id: entity.id,
         updatedAt: entity.updatedAt,
         description: entity.description,
         createdAt: entity.createdAt,
         userId: entity.userId,
-        dueDate: entity.dueDate,
-        spentTime: entity.spentTime,
-        taskStatus: entity.taskStatus,
-        scheduledTaskId: entity.scheduledTaskId,
+        taskStatus: entity.taskStatus.name,
+        scheduleDefinitionId: entity.scheduleDefinitionId,
+        variableTags: entity.variableTags.map((item) => item.id).toList(),
       );
 
   @override
   Map<String, dynamic> toJson() => _$TaskActivitySupabaseModelToJson(this);
-}
-
-/// Converts a JSON value into a [Duration].
-///
-/// If the value is an integer, it is treated as the total number of seconds.
-/// If the value is a String (e.g. "2 days 3 hours 30 minutes"), it is parsed accordingly.
-Duration? _durationFromJson(dynamic value) {
-  if (value == null) return null;
-  if (value is int) return Duration(seconds: value);
-  if (value is String) return _parseIntervalToDuration(value);
-  throw Exception('Unsupported format for spentTime: $value');
-}
-
-/// Converts a [Duration] into a JSON value.
-///
-/// In this example, we simply use the total seconds.
-dynamic _durationToJson(Duration? duration) {
-  if (duration == null) return null;
-  return duration.inSeconds;
-}
-
-/// Parses an interval string (e.g. "2 days 3 hours 30 minutes")
-/// and returns a [Duration] representing the total time.
-Duration _parseIntervalToDuration(String interval) {
-  // The regular expression looks for days, hours, minutes, and seconds.
-  final regExp = RegExp(
-    r'(?:(\d+)\s*days?)|(?:(\d+)\s*hours?)|(?:(\d+)\s*minutes?)|(?:(\d+)\s*seconds?)',
-    caseSensitive: false,
-  );
-
-  var totalSeconds = 0;
-
-  // Process each match found in the interval string.
-  final matches = regExp.allMatches(interval);
-  for (final match in matches) {
-    // Group 1: Days
-    if (match.group(1) != null) {
-      totalSeconds += int.parse(match.group(1)!) * 86400; // 1 day = 86400 seconds
-    }
-    // Group 2: Hours
-    if (match.group(2) != null) {
-      totalSeconds += int.parse(match.group(2)!) * 3600; // 1 hour = 3600 seconds
-    }
-    // Group 3: Minutes
-    if (match.group(3) != null) {
-      totalSeconds += int.parse(match.group(3)!) * 60; // 1 minute = 60 seconds
-    }
-    // Group 4: Seconds
-    if (match.group(4) != null) {
-      totalSeconds += int.parse(match.group(4)!);
-    }
-  }
-
-  return Duration(seconds: totalSeconds);
 }

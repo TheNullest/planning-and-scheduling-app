@@ -1,6 +1,6 @@
-import 'package:zamaan/core/enums/datasource_policy.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
+import 'package:zamaan/domain/enums/datasource_policy.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
 abstract interface class TaskActivityRepository implements BaseRepository<TaskActivityEntity> {
