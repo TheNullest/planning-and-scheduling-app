@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/presentation_shared/enums/interval_unit.dart';
@@ -47,13 +48,15 @@ class ScheduledIntervalHiveModel extends ScheduledIntervalEntity {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required super.scheduleDefinitionId,
     required super.intervalUnit,
     required super.intervalValue,
-    required super.scheduledTimes,
     required super.repeatCount,
+    required super.scheduledTimes,
+    required super.timeExceptions,
+    required super.dateExceptions,
+    super.updatedAt,
+    super.description,
   });
 
   /// Creates a [ScheduledIntervalHiveModel] from a [ScheduledIntervalEntity].
@@ -72,6 +75,8 @@ class ScheduledIntervalHiveModel extends ScheduledIntervalEntity {
       intervalValue: entity.intervalValue,
       scheduledTimes: entity.scheduledTimes,
       repeatCount: entity.repeatCount,
+      dateExceptions: entity.dateExceptions,
+      timeExceptions: entity.timeExceptions,
     );
   }
 
@@ -79,6 +84,7 @@ class ScheduledIntervalHiveModel extends ScheduledIntervalEntity {
   ///
   /// Any parameter not provided retains its current value.
   /// This method supports immutability by creating a modified copy of the instance.
+  @override
   @override
   ScheduledIntervalHiveModel copyWith({
     String? id,
@@ -89,20 +95,24 @@ class ScheduledIntervalHiveModel extends ScheduledIntervalEntity {
     String? scheduleDefinitionId,
     IntervalUnit? intervalUnit,
     double? intervalValue,
-    List<TimeRangeEntity>? scheduledTimes,
     int? repeatCount,
+    List<TimeRangeEntity>? scheduledTimes,
+    List<TimeRangeEntity>? timeExceptions,
+    List<DateRangeEntity>? dateExceptions,
   }) {
     return ScheduledIntervalHiveModel(
       id: id ?? this.id,
       userId: userId ?? this.userId,
       createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
       description: description ?? this.description,
+      updatedAt: updatedAt ?? this.updatedAt,
       scheduleDefinitionId: scheduleDefinitionId ?? this.scheduleDefinitionId,
       intervalUnit: intervalUnit ?? this.intervalUnit,
       intervalValue: intervalValue ?? this.intervalValue,
-      scheduledTimes: scheduledTimes ?? List.from(this.scheduledTimes),
       repeatCount: repeatCount ?? this.repeatCount,
+      scheduledTimes: scheduledTimes ?? List.from(this.scheduledTimes), // Avoid reference sharing
+      timeExceptions: timeExceptions ?? List.from(this.timeExceptions),
+      dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
     );
   }
 }

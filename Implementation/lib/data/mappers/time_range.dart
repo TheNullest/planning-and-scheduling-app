@@ -16,7 +16,7 @@ class TimeRangeMapper extends Mapper<TimeRangeEntity, TimeRangeHiveModel, TimeRa
 
   @override
   TimeRangeEntity toEntityFromSupabase(TimeRangeSupabaseModel model,
-          {DataMap? relatedListModels}) =>
+          {DataMap? relatedListModels,}) =>
       tryCatchSimple<TimeRangeEntity>(
         action: () => TimeRangeEntity(
           id: model.id,

@@ -1,5 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
@@ -39,13 +40,15 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required this.scheduleDefinitionId,
     required this.intervalUnit,
     required this.intervalValue,
-    required this.scheduledTimes,
     required this.repeatCount,
+    required this.scheduledTimes,
+    required this.timeExceptions,
+    required this.dateExceptions,
+    super.description,
+    super.updatedAt,
   });
 
   /// The ID of the schedule definition associated with this interval.
@@ -70,6 +73,12 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
   @HiveField(15)
   final List<TimeRangeEntity> scheduledTimes;
 
+  @HiveField(16)
+  final List<TimeRangeEntity> timeExceptions;
+
+  @HiveField(17)
+  final List<DateRangeEntity> dateExceptions;
+
   /// Creates a modified copy of this [ScheduledIntervalEntity].
   ///
   /// Any provided values will replace the corresponding properties.
@@ -86,6 +95,8 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     double? intervalValue,
     int? repeatCount,
     List<TimeRangeEntity>? scheduledTimes,
+    List<TimeRangeEntity>? timeExceptions,
+    List<DateRangeEntity>? dateExceptions,
   }) {
     return ScheduledIntervalEntity(
       id: id ?? this.id,
@@ -98,6 +109,8 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
       intervalValue: intervalValue ?? this.intervalValue,
       repeatCount: repeatCount ?? this.repeatCount,
       scheduledTimes: scheduledTimes ?? List.from(this.scheduledTimes), // Avoid reference sharing
+      timeExceptions: timeExceptions ?? List.from(this.timeExceptions),
+      dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
     );
   }
 }

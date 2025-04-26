@@ -23,7 +23,7 @@ class TaskActivityMapper
 
   @override
   TaskActivityEntity toEntityFromSupabase(TaskActivitySupabaseModel model,
-          {DataMap? relatedListModels}) =>
+          {DataMap? relatedListModels,}) =>
       tryCatchSimple<TaskActivityEntity>(
         action: () {
           final tagsEntity = TagMapper().toEntitiesFromSupabase(

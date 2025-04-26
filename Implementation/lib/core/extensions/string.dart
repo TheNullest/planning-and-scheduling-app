@@ -13,7 +13,7 @@ extension StringExtensions on String {
   TimeOfDay toTimeOfDay() {
     final parts = split(':');
     if (parts.length != 2) {
-      throw FormatException('Invalid time format. Expected "HH:mm".');
+      throw const FormatException('Invalid time format. Expected "HH:mm".');
     }
     final hour = int.parse(parts[0]);
     final minute = int.parse(parts[1]);

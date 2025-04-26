@@ -16,6 +16,8 @@ Map<String, dynamic> _$ScheduledIntervalSupabaseModelToJson(
       'interval_unit': instance.intervalUnit,
       'interval_value': instance.intervalValue,
       'scheduled_times': instance.scheduledTimes,
+      'time_exceptions': instance.timeExceptions,
+      'date_exceptions': instance.dateExceptions,
       'repeat_count': instance.repeatCount,
       'updated_at': instance.updatedAt?.toIso8601String(),
       'description': instance.description,
@@ -31,6 +33,12 @@ _$ScheduledIntervalSupabaseModelImpl
           intervalUnit: json['interval_unit'] as String,
           intervalValue: (json['interval_value'] as num).toDouble(),
           scheduledTimes: (json['scheduled_times'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
+          timeExceptions: (json['time_exceptions'] as List<dynamic>)
+              .map((e) => e as String)
+              .toList(),
+          dateExceptions: (json['date_exceptions'] as List<dynamic>)
               .map((e) => e as String)
               .toList(),
           repeatCount: (json['repeat_count'] as num).toInt(),
@@ -50,6 +58,8 @@ Map<String, dynamic> _$$ScheduledIntervalSupabaseModelImplToJson(
       'interval_unit': instance.intervalUnit,
       'interval_value': instance.intervalValue,
       'scheduled_times': instance.scheduledTimes,
+      'time_exceptions': instance.timeExceptions,
+      'date_exceptions': instance.dateExceptions,
       'repeat_count': instance.repeatCount,
       'updated_at': instance.updatedAt?.toIso8601String(),
       'description': instance.description,

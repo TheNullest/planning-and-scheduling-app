@@ -34,6 +34,10 @@ mixin _$ScheduledIntervalSupabaseModel {
   double get intervalValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'scheduled_times')
   List<String> get scheduledTimes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'time_exceptions')
+  List<String> get timeExceptions => throw _privateConstructorUsedError;
+  @JsonKey(name: 'date_exceptions')
+  List<String> get dateExceptions => throw _privateConstructorUsedError;
   @JsonKey(name: 'repeat_count')
   int get repeatCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -66,6 +70,8 @@ abstract class $ScheduledIntervalSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'interval_unit') String intervalUnit,
       @JsonKey(name: 'interval_value') double intervalValue,
       @JsonKey(name: 'scheduled_times') List<String> scheduledTimes,
+      @JsonKey(name: 'time_exceptions') List<String> timeExceptions,
+      @JsonKey(name: 'date_exceptions') List<String> dateExceptions,
       @JsonKey(name: 'repeat_count') int repeatCount,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
@@ -94,6 +100,8 @@ class _$ScheduledIntervalSupabaseModelCopyWithImpl<$Res,
     Object? intervalUnit = null,
     Object? intervalValue = null,
     Object? scheduledTimes = null,
+    Object? timeExceptions = null,
+    Object? dateExceptions = null,
     Object? repeatCount = null,
     Object? updatedAt = freezed,
     Object? description = freezed,
@@ -126,6 +134,14 @@ class _$ScheduledIntervalSupabaseModelCopyWithImpl<$Res,
       scheduledTimes: null == scheduledTimes
           ? _value.scheduledTimes
           : scheduledTimes // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      timeExceptions: null == timeExceptions
+          ? _value.timeExceptions
+          : timeExceptions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dateExceptions: null == dateExceptions
+          ? _value.dateExceptions
+          : dateExceptions // ignore: cast_nullable_to_non_nullable
               as List<String>,
       repeatCount: null == repeatCount
           ? _value.repeatCount
@@ -160,6 +176,8 @@ abstract class _$$ScheduledIntervalSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'interval_unit') String intervalUnit,
       @JsonKey(name: 'interval_value') double intervalValue,
       @JsonKey(name: 'scheduled_times') List<String> scheduledTimes,
+      @JsonKey(name: 'time_exceptions') List<String> timeExceptions,
+      @JsonKey(name: 'date_exceptions') List<String> dateExceptions,
       @JsonKey(name: 'repeat_count') int repeatCount,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
@@ -187,6 +205,8 @@ class __$$ScheduledIntervalSupabaseModelImplCopyWithImpl<$Res>
     Object? intervalUnit = null,
     Object? intervalValue = null,
     Object? scheduledTimes = null,
+    Object? timeExceptions = null,
+    Object? dateExceptions = null,
     Object? repeatCount = null,
     Object? updatedAt = freezed,
     Object? description = freezed,
@@ -220,6 +240,14 @@ class __$$ScheduledIntervalSupabaseModelImplCopyWithImpl<$Res>
           ? _value._scheduledTimes
           : scheduledTimes // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      timeExceptions: null == timeExceptions
+          ? _value._timeExceptions
+          : timeExceptions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      dateExceptions: null == dateExceptions
+          ? _value._dateExceptions
+          : dateExceptions // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       repeatCount: null == repeatCount
           ? _value.repeatCount
           : repeatCount // ignore: cast_nullable_to_non_nullable
@@ -250,10 +278,16 @@ class _$ScheduledIntervalSupabaseModelImpl
       @JsonKey(name: 'interval_value') required this.intervalValue,
       @JsonKey(name: 'scheduled_times')
       required final List<String> scheduledTimes,
+      @JsonKey(name: 'time_exceptions')
+      required final List<String> timeExceptions,
+      @JsonKey(name: 'date_exceptions')
+      required final List<String> dateExceptions,
       @JsonKey(name: 'repeat_count') required this.repeatCount,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.description})
-      : _scheduledTimes = scheduledTimes;
+      : _scheduledTimes = scheduledTimes,
+        _timeExceptions = timeExceptions,
+        _dateExceptions = dateExceptions;
 
   factory _$ScheduledIntervalSupabaseModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -285,6 +319,24 @@ class _$ScheduledIntervalSupabaseModelImpl
     return EqualUnmodifiableListView(_scheduledTimes);
   }
 
+  final List<String> _timeExceptions;
+  @override
+  @JsonKey(name: 'time_exceptions')
+  List<String> get timeExceptions {
+    if (_timeExceptions is EqualUnmodifiableListView) return _timeExceptions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_timeExceptions);
+  }
+
+  final List<String> _dateExceptions;
+  @override
+  @JsonKey(name: 'date_exceptions')
+  List<String> get dateExceptions {
+    if (_dateExceptions is EqualUnmodifiableListView) return _dateExceptions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dateExceptions);
+  }
+
   @override
   @JsonKey(name: 'repeat_count')
   final int repeatCount;
@@ -296,7 +348,7 @@ class _$ScheduledIntervalSupabaseModelImpl
 
   @override
   String toString() {
-    return 'ScheduledIntervalSupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, scheduleDefinitionId: $scheduleDefinitionId, intervalUnit: $intervalUnit, intervalValue: $intervalValue, scheduledTimes: $scheduledTimes, repeatCount: $repeatCount, updatedAt: $updatedAt, description: $description)';
+    return 'ScheduledIntervalSupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, scheduleDefinitionId: $scheduleDefinitionId, intervalUnit: $intervalUnit, intervalValue: $intervalValue, scheduledTimes: $scheduledTimes, timeExceptions: $timeExceptions, dateExceptions: $dateExceptions, repeatCount: $repeatCount, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -316,6 +368,10 @@ class _$ScheduledIntervalSupabaseModelImpl
                 other.intervalValue == intervalValue) &&
             const DeepCollectionEquality()
                 .equals(other._scheduledTimes, _scheduledTimes) &&
+            const DeepCollectionEquality()
+                .equals(other._timeExceptions, _timeExceptions) &&
+            const DeepCollectionEquality()
+                .equals(other._dateExceptions, _dateExceptions) &&
             (identical(other.repeatCount, repeatCount) ||
                 other.repeatCount == repeatCount) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -335,6 +391,8 @@ class _$ScheduledIntervalSupabaseModelImpl
       intervalUnit,
       intervalValue,
       const DeepCollectionEquality().hash(_scheduledTimes),
+      const DeepCollectionEquality().hash(_timeExceptions),
+      const DeepCollectionEquality().hash(_dateExceptions),
       repeatCount,
       updatedAt,
       description);
@@ -369,6 +427,10 @@ abstract class _ScheduledIntervalSupabaseModel
       @JsonKey(name: 'interval_value') required final double intervalValue,
       @JsonKey(name: 'scheduled_times')
       required final List<String> scheduledTimes,
+      @JsonKey(name: 'time_exceptions')
+      required final List<String> timeExceptions,
+      @JsonKey(name: 'date_exceptions')
+      required final List<String> dateExceptions,
       @JsonKey(name: 'repeat_count') required final int repeatCount,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? description}) = _$ScheduledIntervalSupabaseModelImpl;
@@ -396,6 +458,12 @@ abstract class _ScheduledIntervalSupabaseModel
   @override
   @JsonKey(name: 'scheduled_times')
   List<String> get scheduledTimes;
+  @override
+  @JsonKey(name: 'time_exceptions')
+  List<String> get timeExceptions;
+  @override
+  @JsonKey(name: 'date_exceptions')
+  List<String> get dateExceptions;
   @override
   @JsonKey(name: 'repeat_count')
   int get repeatCount;

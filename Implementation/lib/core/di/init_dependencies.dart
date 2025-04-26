@@ -92,8 +92,8 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/category/category_supabase_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goal/goal_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/custom_measurement_unit/custom_measurement_unit_supabase_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goal/goal_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_definition/schedule_definition_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub_task/sub_task_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tag/tag_supabase_model.dart';

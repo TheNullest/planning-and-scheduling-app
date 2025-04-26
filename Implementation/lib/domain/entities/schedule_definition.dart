@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/scheduled_day.dart';
-import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
+import 'package:zamaan/domain/entities/scheduled_day.dart';
+import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
 /// Represents the scheduling definition for a task, including repetition patterns

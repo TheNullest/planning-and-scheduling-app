@@ -18,6 +18,8 @@ class ScheduledIntervalSupabaseModel with _$ScheduledIntervalSupabaseModel {
     @JsonKey(name: 'interval_unit') required String intervalUnit,
     @JsonKey(name: 'interval_value') required double intervalValue,
     @JsonKey(name: 'scheduled_times') required List<String> scheduledTimes,
+    @JsonKey(name: 'time_exceptions') required List<String> timeExceptions,
+    @JsonKey(name: 'date_exceptions') required List<String> dateExceptions,
     @JsonKey(name: 'repeat_count') required int repeatCount,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? description,
@@ -35,6 +37,8 @@ class ScheduledIntervalSupabaseModel with _$ScheduledIntervalSupabaseModel {
         intervalUnit: entity.intervalUnit.name,
         intervalValue: entity.intervalValue,
         scheduledTimes: entity.scheduledTimes.map((item) => item.id).toList(),
+        timeExceptions: entity.timeExceptions.map((item) => item.id).toList(),
+        dateExceptions: entity.dateExceptions.map((item) => item.id).toList(),
       );
 
   factory ScheduledIntervalSupabaseModel.fromJson(Map<String, dynamic> json) =>

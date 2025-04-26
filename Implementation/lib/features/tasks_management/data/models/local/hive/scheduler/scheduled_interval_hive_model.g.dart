@@ -20,20 +20,22 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
       id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      description: fields[3] as String?,
-      updatedAt: fields[4] as DateTime?,
       scheduleDefinitionId: fields[11] as String,
       intervalUnit: fields[12] as IntervalUnit,
       intervalValue: fields[13] as double,
-      scheduledTimes: (fields[15] as List).cast<TimeRangeEntity>(),
       repeatCount: fields[14] as int,
+      scheduledTimes: (fields[15] as List).cast<TimeRangeEntity>(),
+      timeExceptions: (fields[16] as List).cast<TimeRangeEntity>(),
+      dateExceptions: (fields[17] as List).cast<DateRangeEntity>(),
+      updatedAt: fields[4] as DateTime?,
+      description: fields[3] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ScheduledIntervalHiveModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(11)
       ..write(obj.scheduleDefinitionId)
       ..writeByte(12)
@@ -44,6 +46,10 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
       ..write(obj.repeatCount)
       ..writeByte(15)
       ..write(obj.scheduledTimes)
+      ..writeByte(16)
+      ..write(obj.timeExceptions)
+      ..writeByte(17)
+      ..write(obj.dateExceptions)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
