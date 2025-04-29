@@ -53,8 +53,6 @@ class GoalEntity extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required this.refType,
     required this.refId,
     required this.measurementUnit,
@@ -66,6 +64,8 @@ class GoalEntity extends BaseEntityAbstraction {
     required this.monthlyTarget,
     required this.yearlyTarget,
     required this.customMeasurementUnitId,
+    super.description,
+    super.updatedAt,
   });
 
   /// Creates a complete goal configuration.

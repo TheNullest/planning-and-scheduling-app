@@ -8,7 +8,7 @@ part of 'task_status.dart';
 
 class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
   @override
-  final int typeId = 108;
+  final int typeId = 112;
 
   @override
   TaskStatus read(BinaryReader reader) {

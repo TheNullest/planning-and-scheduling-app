@@ -9,7 +9,7 @@ part of 'custom_measurement_unit_hive_model.dart';
 class CustomMeasurementUnitHiveModelAdapter
     extends HiveBaseTypeAdapter<CustomMeasurementUnitHiveModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 16;
 
   @override
   CustomMeasurementUnitHiveModel read(BinaryReader reader) {

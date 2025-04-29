@@ -8,7 +8,7 @@ part of 'tag_hive_model.dart';
 
 class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
   @override
-  final int typeId = 8;
+  final int typeId = 21;
 
   @override
   TagHiveModel read(BinaryReader reader) {

@@ -18,9 +18,11 @@ Map<String, dynamic> _$ScheduleDefinitionSupabaseModelToJson(
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
       'scheduled_times': instance.scheduledTimes,
-      'scheduled_days': instance.scheduledDays,
-      'scheduled_intervals': instance.scheduledIntervals,
-      'scheduled_date_range': instance.scheduledDateRange,
+      'scheduled_day_definitions': instance.scheduledDayDefinitions,
+      'scheduledIntervalDefinitions': instance.scheduledIntervalDefinitions,
+      'enforce_schedule_bounds': instance.enforceScheduleBounds,
+      'start_at': instance.startAt?.toIso8601String(),
+      'end_at': instance.endAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'description': instance.description,
     };
@@ -43,13 +45,21 @@ _$ScheduleDefinitionSupabaseModelImpl
           scheduledTimes: (json['scheduled_times'] as List<dynamic>)
               .map((e) => e as String)
               .toList(),
-          scheduledDays: (json['scheduled_days'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
-          scheduledIntervals: (json['scheduled_intervals'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
-          scheduledDateRange: json['scheduled_date_range'] as String?,
+          scheduledDayDefinitions:
+              (json['scheduled_day_definitions'] as List<dynamic>)
+                  .map((e) => e as String)
+                  .toList(),
+          scheduledIntervalDefinitions:
+              (json['scheduledIntervalDefinitions'] as List<dynamic>)
+                  .map((e) => e as String)
+                  .toList(),
+          enforceScheduleBounds: json['enforce_schedule_bounds'] as bool,
+          startAt: json['start_at'] == null
+              ? null
+              : DateTime.parse(json['start_at'] as String),
+          endAt: json['end_at'] == null
+              ? null
+              : DateTime.parse(json['end_at'] as String),
           updatedAt: json['updated_at'] == null
               ? null
               : DateTime.parse(json['updated_at'] as String),
@@ -68,9 +78,11 @@ Map<String, dynamic> _$$ScheduleDefinitionSupabaseModelImplToJson(
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
       'scheduled_times': instance.scheduledTimes,
-      'scheduled_days': instance.scheduledDays,
-      'scheduled_intervals': instance.scheduledIntervals,
-      'scheduled_date_range': instance.scheduledDateRange,
+      'scheduled_day_definitions': instance.scheduledDayDefinitions,
+      'scheduledIntervalDefinitions': instance.scheduledIntervalDefinitions,
+      'enforce_schedule_bounds': instance.enforceScheduleBounds,
+      'start_at': instance.startAt?.toIso8601String(),
+      'end_at': instance.endAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'description': instance.description,
     };

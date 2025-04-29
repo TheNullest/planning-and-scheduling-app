@@ -43,8 +43,9 @@ class DateRangeEntity {
 
   /// Returns true if this range contains [date]
   bool isWithin(DateTime date) {
-    return (date.isAfter(start!) || date.isAtSameMomentAs(start!)) &&
-        (end != null && (date.isBefore(end!) || date.isAtSameMomentAs(end!)));
+    final isAfter = start == null || date.isAfter(start!) || date.isAtSameMomentAs(start!);
+    final isBefore = end == null || date.isBefore(end!) || date.isAtSameMomentAs(end!);
+    return isAfter && isBefore;
   }
 
   DateRangeEntity copyWith({

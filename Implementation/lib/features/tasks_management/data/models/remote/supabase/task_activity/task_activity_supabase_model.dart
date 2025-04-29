@@ -11,16 +11,17 @@ part 'task_activity_supabase_model.g.dart';
 )
 class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
   const factory TaskActivitySupabaseModel({
+    required String id,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'ref_type') required String refType,
     @JsonKey(name: 'ref_id') required String refId,
-    required String id,
     @JsonKey(name: 'task_status') required String taskStatus,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'user_id') required String userId,
-    @JsonKey(name: 'variable_tags') required List<String> variableTags,
+    @JsonKey(name: 'variable_tag_ids') required List<String> variableTagIds,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
+    @JsonKey(name: 'scheduler_id') String? schedulerId,
+    @JsonKey(name: 'scheduler_type') String? schedulerType,
     String? description,
-    @JsonKey(name: 'schedule_definition_id') String? scheduleDefinitionId,
   }) = _TaskActivitySupabaseModel;
 
   /// Creates a [TaskActivitySupabaseModel] from a JSON map.
@@ -38,8 +39,8 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
         createdAt: entity.createdAt,
         userId: entity.userId,
         taskStatus: entity.taskStatus.name,
-        scheduleDefinitionId: entity.scheduleDefinitionId,
-        variableTags: entity.variableTags.map((item) => item.id).toList(),
+        schedulerId: entity.schedulerId,
+        variableTagIds: entity.variableTagIds,
       );
 
   @override

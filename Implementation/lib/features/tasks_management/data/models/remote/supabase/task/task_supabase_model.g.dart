@@ -16,8 +16,8 @@ Map<String, dynamic> _$TaskSupabaseModelToJson(TaskSupabaseModel instance) =>
       'priority': instance.priority,
       'created_at': instance.createdAt.toIso8601String(),
       'archived': instance.archived,
-      'categories': instance.categories,
-      'fixed_tags': instance.fixedTags,
+      'category_ids': instance.categoryIds,
+      'fixed_tag_ids': instance.fixedTagIds,
       'user_id': instance.userId,
       'total_spent_time': instance.totalSpentTime.inMicroseconds,
       'description': instance.description,
@@ -35,10 +35,10 @@ _$TaskSupabaseModelImpl _$$TaskSupabaseModelImplFromJson(
       priority: json['priority'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
       archived: json['archived'] as bool,
-      categories: (json['categories'] as List<dynamic>)
+      categoryIds: (json['category_ids'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      fixedTags: (json['fixed_tags'] as List<dynamic>)
+      fixedTagIds: (json['fixed_tag_ids'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
       userId: json['user_id'] as String,
@@ -61,8 +61,8 @@ Map<String, dynamic> _$$TaskSupabaseModelImplToJson(
       'priority': instance.priority,
       'created_at': instance.createdAt.toIso8601String(),
       'archived': instance.archived,
-      'categories': instance.categories,
-      'fixed_tags': instance.fixedTags,
+      'category_ids': instance.categoryIds,
+      'fixed_tag_ids': instance.fixedTagIds,
       'user_id': instance.userId,
       'total_spent_time': instance.totalSpentTime.inMicroseconds,
       'description': instance.description,

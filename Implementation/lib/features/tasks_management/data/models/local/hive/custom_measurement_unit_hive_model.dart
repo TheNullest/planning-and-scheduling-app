@@ -1,20 +1,22 @@
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 
 part 'custom_measurement_unit_hive_model.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: ClassHiveTypeIds.customMeasurementUnit) // Unique Type ID for Hive
 class CustomMeasurementUnitHiveModel extends CustomMeasurementUnitEntity {
-  CustomMeasurementUnitHiveModel(
-      {required super.id,
-      required super.userId,
-      required super.createdAt,
-      required super.description,
-      required super.updatedAt,
-      required super.title,
-      required super.isDouble,
-      required super.iconCode,});
+  CustomMeasurementUnitHiveModel({
+    required super.id,
+    required super.userId,
+    required super.createdAt,
+    required super.description,
+    required super.updatedAt,
+    required super.title,
+    required super.isDouble,
+    required super.iconCode,
+  });
 
   /// Creates a Hive model from a domain entity
   factory CustomMeasurementUnitHiveModel.fromEntity(CustomMeasurementUnitEntity entity) {

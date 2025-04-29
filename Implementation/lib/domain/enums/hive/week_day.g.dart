@@ -8,52 +8,52 @@ part of 'week_day.dart';
 
 class WeekDayAdapter extends TypeAdapter<WeekDay> {
   @override
-  final int typeId = 109;
+  final int typeId = 113;
 
   @override
   WeekDay read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return WeekDay.saturday;
-      case 1:
-        return WeekDay.sunday;
-      case 2:
         return WeekDay.monday;
-      case 3:
+      case 1:
         return WeekDay.tuesday;
-      case 4:
+      case 2:
         return WeekDay.wednesday;
-      case 5:
+      case 3:
         return WeekDay.thursday;
-      case 6:
+      case 4:
         return WeekDay.friday;
-      default:
+      case 5:
         return WeekDay.saturday;
+      case 6:
+        return WeekDay.sunday;
+      default:
+        return WeekDay.monday;
     }
   }
 
   @override
   void write(BinaryWriter writer, WeekDay obj) {
     switch (obj) {
-      case WeekDay.saturday:
+      case WeekDay.monday:
         writer.writeByte(0);
         break;
-      case WeekDay.sunday:
+      case WeekDay.tuesday:
         writer.writeByte(1);
         break;
-      case WeekDay.monday:
+      case WeekDay.wednesday:
         writer.writeByte(2);
         break;
-      case WeekDay.tuesday:
+      case WeekDay.thursday:
         writer.writeByte(3);
         break;
-      case WeekDay.wednesday:
+      case WeekDay.friday:
         writer.writeByte(4);
         break;
-      case WeekDay.thursday:
+      case WeekDay.saturday:
         writer.writeByte(5);
         break;
-      case WeekDay.friday:
+      case WeekDay.sunday:
         writer.writeByte(6);
         break;
     }

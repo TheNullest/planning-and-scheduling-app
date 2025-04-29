@@ -9,6 +9,6 @@ abstract class GetByIdsUsecase<Repo extends BaseRepository<Entity>,
     extends UsecaseWithParams<Repo, List<Entity?>, DynamicParam<List<String>>> {
   GetByIdsUsecase(super.repository);
   @override
-  EResultFuture<List<Entity?>> call(DynamicParam<List<String>> params) async =>
+  EResultFuture<List<Entity>> call(DynamicParam<List<String>> params) async =>
       repository.getByIds(params.param, policy: params.policy);
 }

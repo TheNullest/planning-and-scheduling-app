@@ -8,7 +8,7 @@ part of 'goal_hive_model.dart';
 
 class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
-  final int typeId = 4;
+  final int typeId = 15;
 
   @override
   GoalHiveModel read(BinaryReader reader) {
@@ -20,8 +20,6 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      description: fields[3] as String?,
-      updatedAt: fields[4] as DateTime?,
       refType: fields[11] as ReferenceType,
       refId: fields[12] as String,
       measurementUnit: fields[13] as MeasurementUnit?,
@@ -33,6 +31,8 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       monthlyTarget: fields[19] as double,
       yearlyTarget: fields[20] as double,
       customMeasurementUnitId: fields[21] as String?,
+      description: fields[3] as String?,
+      updatedAt: fields[4] as DateTime?,
     );
   }
 

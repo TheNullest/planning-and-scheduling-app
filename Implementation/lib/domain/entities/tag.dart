@@ -22,7 +22,7 @@ import 'package:zamaan/domain/entities/task.dart';
 /// ```
 ///
 /// ## Relationships
-/// - Typically associated with [TaskEntity] through [TaskEntity.fixedTags]
+/// - Typically associated with [TaskEntity] through [TaskEntity.fixedTagIds]
 /// - Inherits all properties from [CategoryEntity]
 class TagEntity extends CategoryEntity {
   TagEntity({

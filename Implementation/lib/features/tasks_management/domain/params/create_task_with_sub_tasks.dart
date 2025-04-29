@@ -1,10 +1,12 @@
-import 'package:zamaan/domain/entities/sub_task.dart';
+import 'package:zamaan/domain/entities/scheduled_instance.dart';
 import 'package:zamaan/domain/entities/task.dart';
-import 'package:zamaan/domain/params/usecase_param.dart';
 
-class CreateTaskWithSubTasksParams extends UsecaseParam {
-  CreateTaskWithSubTasksParams({required this.task, required this.subTasks, super.policy});
+class CreateTaskWithSubTasksParams {
+  CreateTaskWithSubTasksParams({
+    required this.task,
+    required this.scheduleDefinitions,
+  });
 
   final TaskEntity task;
-  final List<SubTaskEntity> subTasks;
+  final List<ScheduledInstanceEntity> scheduleDefinitions;
 }

@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'goal_constraint.g.dart';
@@ -13,7 +14,7 @@ part 'goal_constraint.g.dart';
 /// print(GoalConstraint.fromName("step"));    // Output: GoalConstraint.step
 /// print(GoalConstraint.fromIndex(5, inPersian: true)); // Output: "مرحله‌ای"
 /// ```
-@HiveType(typeId: 100)
+@HiveType(typeId: EnumHiveTypeIds.goalConstraint)
 enum GoalConstraint {
   @HiveField(0)
   min('کمینه'), // Minimum required value

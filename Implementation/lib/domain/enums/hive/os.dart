@@ -1,5 +1,6 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'os.g.dart';
@@ -20,7 +21,7 @@ part 'os.g.dart';
 /// // Asynchronously detecting the device's OS
 /// OS.getOs().then((currentOs) => print(currentOs.name));
 /// ```
-@HiveType(typeId: 103)
+@HiveType(typeId: EnumHiveTypeIds.os)
 enum OS {
   @HiveField(0)
   android,

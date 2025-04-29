@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'repetition_type.g.dart';
 
 /// Enum representing different types of repetition for a task.
 /// This enum is used for UI purposes.
-@HiveType(typeId: 106)
+@HiveType(typeId: EnumHiveTypeIds.repetitionType)
 enum RepetitionType {
   @HiveField(0)
   weekly('هفتگی'),

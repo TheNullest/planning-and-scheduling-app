@@ -7,7 +7,6 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/enums/datasource_policy.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 
 abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
@@ -68,12 +67,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
       );
 
   @override
-  EResultFuture<HiveModel> getByValue(
-    String id, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-    String fieldName = 'id',
-  }) async =>
-      tryCatchEither(
+  EResultFuture<HiveModel> getById(String id) async => tryCatchEither(
         action: () async => _hiveServices.operator<HiveModel>(
           job: (box) async => box.get(id)!,
           boxName: _boxName,
@@ -82,14 +76,10 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
       );
 
   @override
-  EResultFuture<List<HiveModel>> getAllByValues(
-    List<String> values, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-    String fieldName = 'id',
-  }) async =>
+  EResultFuture<List<HiveModel>> getAllByIds(List<String> ids) async =>
       tryCatchEither<List<HiveModel>>(
         action: () async => _hiveServices.operator<List<HiveModel>>(
-          job: (box) async => values.map((id) => box.get(id)).whereType<HiveModel>().toList(),
+          job: (box) async => ids.map((id) => box.get(id)).whereType<HiveModel>().toList(),
           boxName: _boxName,
         ),
         failureType: FailureType.local,
@@ -133,27 +123,6 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
       tryCatchEither(
         action: () async => _hiveServices.operator<bool>(
           job: (box) async => box.containsKey(id),
-          boxName: _boxName,
-        ),
-        failureType: FailureType.local,
-      );
-
-  @override
-  EResultFuture<List<HiveModel>> getAllWithinDateRange({
-    required DateTime fromDate,
-    required DateTime toDate,
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-    String fieldName = 'created_at',
-  }) async =>
-      tryCatchEither(
-        action: () async => _hiveServices.operator<List<HiveModel>>(
-          job: (box) async => box.values
-              .where(
-                (item) =>
-                    item.createdAt.compareTo(fromDate) >= 0 &&
-                    item.createdAt.compareTo(toDate) <= 0,
-              )
-              .toList(),
           boxName: _boxName,
         ),
         failureType: FailureType.local,

@@ -32,10 +32,10 @@ mixin _$TaskSupabaseModel {
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   bool get archived => throw _privateConstructorUsedError;
-  @JsonKey(name: 'categories')
-  List<String> get categories => throw _privateConstructorUsedError;
-  @JsonKey(name: 'fixed_tags')
-  List<String> get fixedTags => throw _privateConstructorUsedError;
+  @JsonKey(name: 'category_ids')
+  List<String> get categoryIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fixed_tag_ids')
+  List<String> get fixedTagIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_spent_time')
@@ -69,8 +69,8 @@ abstract class $TaskSupabaseModelCopyWith<$Res> {
       String priority,
       @JsonKey(name: 'created_at') DateTime createdAt,
       bool archived,
-      @JsonKey(name: 'categories') List<String> categories,
-      @JsonKey(name: 'fixed_tags') List<String> fixedTags,
+      @JsonKey(name: 'category_ids') List<String> categoryIds,
+      @JsonKey(name: 'fixed_tag_ids') List<String> fixedTagIds,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
       String? description,
@@ -100,8 +100,8 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
     Object? priority = null,
     Object? createdAt = null,
     Object? archived = null,
-    Object? categories = null,
-    Object? fixedTags = null,
+    Object? categoryIds = null,
+    Object? fixedTagIds = null,
     Object? userId = null,
     Object? totalSpentTime = null,
     Object? description = freezed,
@@ -140,13 +140,13 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
               as bool,
-      categories: null == categories
-          ? _value.categories
-          : categories // ignore: cast_nullable_to_non_nullable
+      categoryIds: null == categoryIds
+          ? _value.categoryIds
+          : categoryIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      fixedTags: null == fixedTags
-          ? _value.fixedTags
-          : fixedTags // ignore: cast_nullable_to_non_nullable
+      fixedTagIds: null == fixedTagIds
+          ? _value.fixedTagIds
+          : fixedTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
       userId: null == userId
           ? _value.userId
@@ -185,8 +185,8 @@ abstract class _$$TaskSupabaseModelImplCopyWith<$Res>
       String priority,
       @JsonKey(name: 'created_at') DateTime createdAt,
       bool archived,
-      @JsonKey(name: 'categories') List<String> categories,
-      @JsonKey(name: 'fixed_tags') List<String> fixedTags,
+      @JsonKey(name: 'category_ids') List<String> categoryIds,
+      @JsonKey(name: 'fixed_tag_ids') List<String> fixedTagIds,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
       String? description,
@@ -214,8 +214,8 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
     Object? priority = null,
     Object? createdAt = null,
     Object? archived = null,
-    Object? categories = null,
-    Object? fixedTags = null,
+    Object? categoryIds = null,
+    Object? fixedTagIds = null,
     Object? userId = null,
     Object? totalSpentTime = null,
     Object? description = freezed,
@@ -254,13 +254,13 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
               as bool,
-      categories: null == categories
-          ? _value._categories
-          : categories // ignore: cast_nullable_to_non_nullable
+      categoryIds: null == categoryIds
+          ? _value._categoryIds
+          : categoryIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      fixedTags: null == fixedTags
-          ? _value._fixedTags
-          : fixedTags // ignore: cast_nullable_to_non_nullable
+      fixedTagIds: null == fixedTagIds
+          ? _value._fixedTagIds
+          : fixedTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
       userId: null == userId
           ? _value.userId
@@ -294,14 +294,14 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       required this.priority,
       @JsonKey(name: 'created_at') required this.createdAt,
       required this.archived,
-      @JsonKey(name: 'categories') required final List<String> categories,
-      @JsonKey(name: 'fixed_tags') required final List<String> fixedTags,
+      @JsonKey(name: 'category_ids') required final List<String> categoryIds,
+      @JsonKey(name: 'fixed_tag_ids') required final List<String> fixedTagIds,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'total_spent_time') required this.totalSpentTime,
       this.description,
       @JsonKey(name: 'updated_at') this.updatedAt})
-      : _categories = categories,
-        _fixedTags = fixedTags;
+      : _categoryIds = categoryIds,
+        _fixedTagIds = fixedTagIds;
 
   factory _$TaskSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskSupabaseModelImplFromJson(json);
@@ -326,22 +326,22 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
   final DateTime createdAt;
   @override
   final bool archived;
-  final List<String> _categories;
+  final List<String> _categoryIds;
   @override
-  @JsonKey(name: 'categories')
-  List<String> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
+  @JsonKey(name: 'category_ids')
+  List<String> get categoryIds {
+    if (_categoryIds is EqualUnmodifiableListView) return _categoryIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
+    return EqualUnmodifiableListView(_categoryIds);
   }
 
-  final List<String> _fixedTags;
+  final List<String> _fixedTagIds;
   @override
-  @JsonKey(name: 'fixed_tags')
-  List<String> get fixedTags {
-    if (_fixedTags is EqualUnmodifiableListView) return _fixedTags;
+  @JsonKey(name: 'fixed_tag_ids')
+  List<String> get fixedTagIds {
+    if (_fixedTagIds is EqualUnmodifiableListView) return _fixedTagIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_fixedTags);
+    return EqualUnmodifiableListView(_fixedTagIds);
   }
 
   @override
@@ -358,7 +358,7 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
 
   @override
   String toString() {
-    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, taskStatus: $taskStatus, priority: $priority, createdAt: $createdAt, archived: $archived, categories: $categories, fixedTags: $fixedTags, userId: $userId, totalSpentTime: $totalSpentTime, description: $description, updatedAt: $updatedAt)';
+    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, taskStatus: $taskStatus, priority: $priority, createdAt: $createdAt, archived: $archived, categoryIds: $categoryIds, fixedTagIds: $fixedTagIds, userId: $userId, totalSpentTime: $totalSpentTime, description: $description, updatedAt: $updatedAt)';
   }
 
   @override
@@ -381,9 +381,9 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
             (identical(other.archived, archived) ||
                 other.archived == archived) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories) &&
+                .equals(other._categoryIds, _categoryIds) &&
             const DeepCollectionEquality()
-                .equals(other._fixedTags, _fixedTags) &&
+                .equals(other._fixedTagIds, _fixedTagIds) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.totalSpentTime, totalSpentTime) ||
                 other.totalSpentTime == totalSpentTime) &&
@@ -405,8 +405,8 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       priority,
       createdAt,
       archived,
-      const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_fixedTags),
+      const DeepCollectionEquality().hash(_categoryIds),
+      const DeepCollectionEquality().hash(_fixedTagIds),
       userId,
       totalSpentTime,
       description,
@@ -439,8 +439,8 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
       required final String priority,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       required final bool archived,
-      @JsonKey(name: 'categories') required final List<String> categories,
-      @JsonKey(name: 'fixed_tags') required final List<String> fixedTags,
+      @JsonKey(name: 'category_ids') required final List<String> categoryIds,
+      @JsonKey(name: 'fixed_tag_ids') required final List<String> fixedTagIds,
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'total_spent_time') required final Duration totalSpentTime,
       final String? description,
@@ -471,11 +471,11 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
   @override
   bool get archived;
   @override
-  @JsonKey(name: 'categories')
-  List<String> get categories;
+  @JsonKey(name: 'category_ids')
+  List<String> get categoryIds;
   @override
-  @JsonKey(name: 'fixed_tags')
-  List<String> get fixedTags;
+  @JsonKey(name: 'fixed_tag_ids')
+  List<String> get fixedTagIds;
   @override
   @JsonKey(name: 'user_id')
   String get userId;

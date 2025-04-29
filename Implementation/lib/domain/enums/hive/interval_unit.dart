@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'interval_unit.g.dart';
@@ -15,7 +16,7 @@ part 'interval_unit.g.dart';
 /// print(IntervalUnit.fromName("days"));         // Output: IntervalUnit.days
 /// print(IntervalUnit.fromIndex(2, inPersian: true)); // Output: "هفته"
 /// ```
-@HiveType(typeId: 110)
+@HiveType(typeId: EnumHiveTypeIds.intevalUnit)
 enum IntervalUnit {
   /// Represents hours as an interval unit.
   @HiveField(0)

@@ -8,7 +8,7 @@ part of 'time_range_hive_model.dart';
 
 class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> {
   @override
-  final int typeId = 151;
+  final int typeId = 24;
 
   @override
   TimeRangeHiveModel read(BinaryReader reader) {

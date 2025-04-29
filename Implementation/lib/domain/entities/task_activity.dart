@@ -1,10 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
-import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
+import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 
 /// Represents a tracked work session for a task or subtask, including scheduling relationships.
@@ -36,14 +35,15 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required this.referenceId,
     required this.referenceType,
-    required this.activityDuration,
-    required this.variableTags,
-    required this.scheduleDefinitionId,
+    required this.dateTimeRangeId,
+    required this.variableTagIds,
     required this.taskStatus,
+    this.schedulerId,
+    this.schedulerType,
+    super.description,
+    super.updatedAt,
   });
 
   /// The ID of the associated task or subtask
@@ -67,49 +67,45 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   /// - Calculating duration via [calculatedSpentTime]
   /// - Schedule adherence validation
   @HiveField(13)
-  final DateRangeEntity activityDuration;
+  final String dateTimeRangeId;
 
   /// Dynamic tags associated with this specific work session
   ///
   /// Enables context-specific categorization different from
   /// the parent task's tags
   @HiveField(14)
-  final List<TagEntity> variableTags;
+  final List<String> variableTagIds;
 
   /// Reference to the schedule definition that triggered this activity
   ///
   /// Null indicates manual time tracking outside scheduling system
   @HiveField(15)
-  final String? scheduleDefinitionId;
+  final String? schedulerId;
+
+  @HiveField(16)
+  final SchedulerType? schedulerType;
 
   /// Current state of the work session
   ///
   /// Special states:
   /// - [TaskStatus.doneLate] : Finished outside
   ///   the parent schedule's active period
-  @HiveField(16)
+  @HiveField(17)
   final TaskStatus taskStatus;
-
-  /// The calculated duration of the work session
-  ///
-  /// Automatically derived from [activityDuration] difference.
-  /// Returns null if session hasn't ended (end time not set).
-  Duration? get calculatedSpentTime =>
-      activityDuration.isValid ? activityDuration.end?.difference(activityDuration.start!) : null;
 
   @override
   TaskActivityEntity copyWith({
     String? id,
-    int? order,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
     String? description,
     String? referenceId,
     ReferenceType? referenceType,
-    String? scheduleDefinitionId,
-    DateRangeEntity? activityDuration,
-    List<TagEntity>? variableTags,
+    SchedulerType? schedulerType,
+    String? schedulerId,
+    String? dateTimeRangeId,
+    List<String>? variableTagIds,
     TaskStatus? taskStatus,
   }) =>
       TaskActivityEntity(
@@ -120,10 +116,11 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         userId: userId ?? this.userId,
         referenceId: referenceId ?? this.referenceId,
         referenceType: referenceType ?? this.referenceType,
-        activityDuration: activityDuration ?? this.activityDuration,
-        variableTags: variableTags ?? this.variableTags,
+        dateTimeRangeId: dateTimeRangeId ?? this.dateTimeRangeId,
+        variableTagIds: variableTagIds ?? this.variableTagIds,
         taskStatus: taskStatus ?? this.taskStatus,
-        scheduleDefinitionId: scheduleDefinitionId ?? this.scheduleDefinitionId,
+        schedulerId: referenceId ?? this.schedulerId,
+        schedulerType: schedulerType ?? this.schedulerType,
       );
 
   /// Returns a list of properties that are used to determine equality.
@@ -135,9 +132,9 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         ...super.props,
         referenceId,
         referenceType,
-        activityDuration,
+        dateTimeRangeId,
         taskStatus,
-        scheduleDefinitionId,
-        variableTags,
+        schedulerId,
+        variableTagIds,
       ];
 }

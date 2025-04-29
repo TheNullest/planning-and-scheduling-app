@@ -133,12 +133,12 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            final response = await _localDataSource.getByValue(id);
+            final response = await _localDataSource.getById(id);
             final models = _mapper.foldEitherSingle<HiveModel>(response);
             return Right(_mapper.toEntityFromHive(models!));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response = await _remoteDataSource.getByValue(id);
+            final response = await _remoteDataSource.getById(id);
             final models = _mapper.foldEitherSingle<SupabaseModel?>(response);
             return Right(_mapper.toEntityFromSupabase(models as SupabaseModel));
           }
@@ -155,12 +155,12 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            final response = await _localDataSource.getAllByValues(ids);
+            final response = await _localDataSource.getAllByIds(ids);
             final result = _mapper.foldEitherList<HiveModel>(response);
             return Right(_mapper.toEntitiesFromHive(result));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response = await _remoteDataSource.getAllByValues(ids);
+            final response = await _remoteDataSource.getAllByIds(ids);
             final result = _mapper.foldEitherList<SupabaseModel>(response);
             return Right(_mapper.toEntitiesFromSupabase(result));
           }
@@ -219,31 +219,6 @@ abstract class BaseRepositoryImpl<
             return _remoteDataSource.exists(id);
           }
           return const Right(false);
-        },
-        failureType: FailureType.local,
-      );
-
-  @override
-  EResultFuture<List<Entity>> getWithinDateRange({
-    required DateTime fromDate,
-    required DateTime toDate,
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  }) async =>
-      tryCatchEither(
-        action: () async {
-          if (DataSourcePolicy.isLocal(policy)) {
-            final response =
-                await _localDataSource.getAllWithinDateRange(fromDate: fromDate, toDate: toDate);
-            final result = _mapper.foldEitherList<HiveModel>(response);
-            return Right(_mapper.toEntitiesFromHive(result));
-          }
-          if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            final response =
-                await _remoteDataSource.getAllWithinDateRange(fromDate: fromDate, toDate: toDate);
-            final result = _mapper.foldEitherList<SupabaseModel>(response);
-            return Right(_mapper.toEntitiesFromSupabase(result));
-          }
-          return const Right([]);
         },
         failureType: FailureType.local,
       );

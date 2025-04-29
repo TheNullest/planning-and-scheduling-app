@@ -1,17 +1,19 @@
 import 'package:zamaan/domain/enums/enums.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/task_activity_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/user_ui.dart';
 
 class ScheduleDefinitionUI extends BaseUIModel {
   ScheduleDefinitionUI({
-    required super.id,
-    required super.description,
-    required super.createdAt,
-    required super.updatedAt,
     required this.repetitionType,
     required this.timeUnit,
     required this.specificTimes,
     required this.repeats,
+    super.id,
+    super.description,
+    super.createdAt,
+    super.updatedAt,
+    super.user,
     this.startAt,
     this.dueDate,
   });
@@ -31,6 +33,7 @@ class ScheduleDefinitionUI extends BaseUIModel {
     DateTime? updatedAt,
     DateTime? startAtAt,
     DateTime? dueDate,
+    UserUI? user,
     RepetitionType? repetitionType,
     IntervalUnit? timeUnit, // hour, weekday, monthday, ...
     List<int>? specificTimes, // based on the timeUnit value, this can set value
@@ -46,6 +49,7 @@ class ScheduleDefinitionUI extends BaseUIModel {
       timeUnit: timeUnit ?? this.timeUnit,
       specificTimes: specificTimes ?? this.specificTimes,
       repeats: repeats ?? this.repeats,
+      user: user ?? this.user,
     );
   }
 }

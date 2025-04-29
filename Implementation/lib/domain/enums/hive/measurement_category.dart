@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'measurement_category.g.dart';
@@ -13,7 +14,7 @@ part 'measurement_category.g.dart';
 /// print(MeasurementCategory.fromName("mass"));    // Output: MeasurementCategory.mass
 /// print(MeasurementCategory.fromIndex(2, inPersian: true)); // Output: "مساحت"
 /// ```
-@HiveType(typeId: 101)
+@HiveType(typeId: EnumHiveTypeIds.measurementCategory)
 enum MeasurementCategory {
   @HiveField(0)
   length('طول'),

@@ -42,8 +42,8 @@ class TaskMapper extends Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
             priority: Priority.fromName(model.priority),
             archived: model.archived,
             taskStatus: TaskStatus.fromName(model.taskStatus),
-            categories: categoriesEntity,
-            fixedTags: tagsEntity,
+            categoryIds: categoriesEntity,
+            fixedTagIds: tagsEntity,
             totalSpentTime: model.totalSpentTime,
           );
         },
@@ -63,13 +63,14 @@ class TaskMapper extends Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
       );
 
   @override
-  List<TaskSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) => tryCatchSimple(
+  List<TaskSupabaseModel> fromJsonList(List<Map<MeasurementUnit, dynamic>> jsonList) =>
+      tryCatchSimple(
         action: () => jsonList.map(TaskSupabaseModel.fromJson).toList(),
         failureType: FailureType.local,
       );
 
   @override
-  List<Map<String, dynamic>> toJsonList(List<TaskSupabaseModel> items) {
+  List<Map<MeasurementUnit, dynamic>> toJsonList(List<TaskSupabaseModel> items) {
     return tryCatchSimple(
       action: () => items.map((item) => item.toJson()).toList(), // Implementing toJsonList
       failureType: FailureType.local,
@@ -77,13 +78,13 @@ class TaskMapper extends Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
   }
 
   @override
-  TaskSupabaseModel fromJson(Map<String, dynamic> json) => tryCatchSimple(
+  TaskSupabaseModel fromJson(Map<MeasurementUnit, dynamic> json) => tryCatchSimple(
         action: () => TaskSupabaseModel.fromJson(json),
         failureType: FailureType.local,
       );
 
   @override
-  Map<String, dynamic> toJson(TaskSupabaseModel item) => tryCatchSimple(
+  Map<MeasurementUnit, dynamic> toJson(TaskSupabaseModel item) => tryCatchSimple(
         action: () => item.toJson(),
         failureType: FailureType.local,
       );

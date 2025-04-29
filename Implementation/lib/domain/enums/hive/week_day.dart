@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'week_day.g.dart';
@@ -6,29 +7,31 @@ part 'week_day.g.dart';
 /// Represents the days of the week, with Persian translations for UI.
 /// This is strictly for UI purposes and **not intended for database storage**.
 ///
+/// **First day of week**: Monday (دوشنبه).
+///
 /// Example Usage:
 /// ```dart
-/// print(WeekDay.saturday.name); // Output: "Saturday"
-/// print(WeekDay.saturday.nameInPersian); // Output: "شنبه"
+/// print(WeekDay.monday.name); // Output: "monday"
+/// print(WeekDay.monday.nameInPersian); // Output: "دوشنبه"
 /// print(WeekDay.fromName("monday")); // Output: WeekDay.monday
-/// print(WeekDay.fromIndex(3, inPersian: true)); // Output: "سه‌شنبه"
+/// print(WeekDay.fromIndex(3, inPersian: true)); // Output: "پنج‌شنبه" (Thursday)
 /// ```
-@HiveType(typeId: 109)
+@HiveType(typeId: EnumHiveTypeIds.weekDay)
 enum WeekDay {
   @HiveField(0)
-  saturday('شنبه'),
-  @HiveField(1)
-  sunday('یکشنبه'),
-  @HiveField(2)
   monday('دوشنبه'),
-  @HiveField(3)
+  @HiveField(1)
   tuesday('سه‌شنبه'),
-  @HiveField(4)
+  @HiveField(2)
   wednesday('چهارشنبه'),
-  @HiveField(5)
+  @HiveField(3)
   thursday('پنج‌شنبه'),
+  @HiveField(4)
+  friday('جمعه'),
+  @HiveField(5)
+  saturday('شنبه'),
   @HiveField(6)
-  friday('جمعه');
+  sunday('یکشنبه');
 
   /// Persian equivalent used for UI display.
   const WeekDay(this._inPersian);
@@ -64,6 +67,13 @@ enum WeekDay {
     return inPersian ? item._inPersian : item.name;
   }
 
+  static WeekDay fromDateTimeIndex(int index) {
+    if (index < 0 || index >= WeekDay.values.length) {
+      throw Exception('The WeekDay index $index is not valid.');
+    }
+    return WeekDay.values[index];
+  }
+
   /// Returns the English name with proper capitalization.
   ///
   /// Example:
@@ -71,6 +81,8 @@ enum WeekDay {
   /// print(WeekDay.saturday.name); // Output: "Saturday"
   /// ```
   String get name => toString().substring(9).toSentenceCase();
+
+  int get dateTimeWeekDayIndex => index + 1;
 
   /// Returns the Persian name for UI display.
   ///

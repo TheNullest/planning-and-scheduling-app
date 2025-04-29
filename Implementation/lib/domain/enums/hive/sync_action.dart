@@ -1,12 +1,13 @@
 // Import the extension method providing 'toSentenceCase()'
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'sync_action.g.dart';
 
 /// Represents the type of synchronization action to be performed.
 /// Includes Persian translations and utility methods for lookup.
-@HiveType(typeId: 107)
+@HiveType(typeId: EnumHiveTypeIds.syncAction)
 enum SyncAction {
   @HiveField(0)
   create('ایجاد'),

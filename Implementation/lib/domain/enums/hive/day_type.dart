@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'day_type.g.dart';
@@ -16,7 +17,7 @@ part 'day_type.g.dart';
 /// print(DayType.fromName("monthDay"));  // Output: DayType.monthDay
 /// print(DayType.fromIndex(1, inPersian: true)); // Output: "روز ماه"
 /// ```
-@HiveType(typeId: 111)
+@HiveType(typeId: EnumHiveTypeIds.dayType)
 enum DayType {
   /// Represents a weekday.
   @HiveField(0)
@@ -80,4 +81,3 @@ enum DayType {
   /// ```
   String get nameInPersian => _inPersian;
 }
-

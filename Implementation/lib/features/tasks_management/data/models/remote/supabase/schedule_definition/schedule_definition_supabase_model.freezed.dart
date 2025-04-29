@@ -38,12 +38,18 @@ mixin _$ScheduleDefinitionSupabaseModel {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'scheduled_times')
   List<String> get scheduledTimes => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_days')
-  List<String> get scheduledDays => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_intervals')
-  List<String> get scheduledIntervals => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_date_range')
-  String? get scheduledDateRange => throw _privateConstructorUsedError;
+  @JsonKey(name: 'scheduled_day_definitions')
+  List<String> get scheduledDayDefinitions =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'scheduledIntervalDefinitions')
+  List<String> get scheduledIntervalDefinitions =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: 'enforce_schedule_bounds')
+  bool get enforceScheduleBounds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'start_at')
+  DateTime? get startAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_at')
+  DateTime? get endAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -76,9 +82,13 @@ abstract class $ScheduleDefinitionSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'scheduled_times') List<String> scheduledTimes,
-      @JsonKey(name: 'scheduled_days') List<String> scheduledDays,
-      @JsonKey(name: 'scheduled_intervals') List<String> scheduledIntervals,
-      @JsonKey(name: 'scheduled_date_range') String? scheduledDateRange,
+      @JsonKey(name: 'scheduled_day_definitions')
+      List<String> scheduledDayDefinitions,
+      @JsonKey(name: 'scheduledIntervalDefinitions')
+      List<String> scheduledIntervalDefinitions,
+      @JsonKey(name: 'enforce_schedule_bounds') bool enforceScheduleBounds,
+      @JsonKey(name: 'start_at') DateTime? startAt,
+      @JsonKey(name: 'end_at') DateTime? endAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
 }
@@ -108,9 +118,11 @@ class _$ScheduleDefinitionSupabaseModelCopyWithImpl<$Res,
     Object? userId = null,
     Object? createdAt = null,
     Object? scheduledTimes = null,
-    Object? scheduledDays = null,
-    Object? scheduledIntervals = null,
-    Object? scheduledDateRange = freezed,
+    Object? scheduledDayDefinitions = null,
+    Object? scheduledIntervalDefinitions = null,
+    Object? enforceScheduleBounds = null,
+    Object? startAt = freezed,
+    Object? endAt = freezed,
     Object? updatedAt = freezed,
     Object? description = freezed,
   }) {
@@ -151,18 +163,26 @@ class _$ScheduleDefinitionSupabaseModelCopyWithImpl<$Res,
           ? _value.scheduledTimes
           : scheduledTimes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledDays: null == scheduledDays
-          ? _value.scheduledDays
-          : scheduledDays // ignore: cast_nullable_to_non_nullable
+      scheduledDayDefinitions: null == scheduledDayDefinitions
+          ? _value.scheduledDayDefinitions
+          : scheduledDayDefinitions // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledIntervals: null == scheduledIntervals
-          ? _value.scheduledIntervals
-          : scheduledIntervals // ignore: cast_nullable_to_non_nullable
+      scheduledIntervalDefinitions: null == scheduledIntervalDefinitions
+          ? _value.scheduledIntervalDefinitions
+          : scheduledIntervalDefinitions // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledDateRange: freezed == scheduledDateRange
-          ? _value.scheduledDateRange
-          : scheduledDateRange // ignore: cast_nullable_to_non_nullable
-              as String?,
+      enforceScheduleBounds: null == enforceScheduleBounds
+          ? _value.enforceScheduleBounds
+          : enforceScheduleBounds // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endAt: freezed == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -194,9 +214,13 @@ abstract class _$$ScheduleDefinitionSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'scheduled_times') List<String> scheduledTimes,
-      @JsonKey(name: 'scheduled_days') List<String> scheduledDays,
-      @JsonKey(name: 'scheduled_intervals') List<String> scheduledIntervals,
-      @JsonKey(name: 'scheduled_date_range') String? scheduledDateRange,
+      @JsonKey(name: 'scheduled_day_definitions')
+      List<String> scheduledDayDefinitions,
+      @JsonKey(name: 'scheduledIntervalDefinitions')
+      List<String> scheduledIntervalDefinitions,
+      @JsonKey(name: 'enforce_schedule_bounds') bool enforceScheduleBounds,
+      @JsonKey(name: 'start_at') DateTime? startAt,
+      @JsonKey(name: 'end_at') DateTime? endAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
 }
@@ -225,9 +249,11 @@ class __$$ScheduleDefinitionSupabaseModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? createdAt = null,
     Object? scheduledTimes = null,
-    Object? scheduledDays = null,
-    Object? scheduledIntervals = null,
-    Object? scheduledDateRange = freezed,
+    Object? scheduledDayDefinitions = null,
+    Object? scheduledIntervalDefinitions = null,
+    Object? enforceScheduleBounds = null,
+    Object? startAt = freezed,
+    Object? endAt = freezed,
     Object? updatedAt = freezed,
     Object? description = freezed,
   }) {
@@ -268,18 +294,26 @@ class __$$ScheduleDefinitionSupabaseModelImplCopyWithImpl<$Res>
           ? _value._scheduledTimes
           : scheduledTimes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledDays: null == scheduledDays
-          ? _value._scheduledDays
-          : scheduledDays // ignore: cast_nullable_to_non_nullable
+      scheduledDayDefinitions: null == scheduledDayDefinitions
+          ? _value._scheduledDayDefinitions
+          : scheduledDayDefinitions // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledIntervals: null == scheduledIntervals
-          ? _value._scheduledIntervals
-          : scheduledIntervals // ignore: cast_nullable_to_non_nullable
+      scheduledIntervalDefinitions: null == scheduledIntervalDefinitions
+          ? _value._scheduledIntervalDefinitions
+          : scheduledIntervalDefinitions // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      scheduledDateRange: freezed == scheduledDateRange
-          ? _value.scheduledDateRange
-          : scheduledDateRange // ignore: cast_nullable_to_non_nullable
-              as String?,
+      enforceScheduleBounds: null == enforceScheduleBounds
+          ? _value.enforceScheduleBounds
+          : enforceScheduleBounds // ignore: cast_nullable_to_non_nullable
+              as bool,
+      startAt: freezed == startAt
+          ? _value.startAt
+          : startAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endAt: freezed == endAt
+          ? _value.endAt
+          : endAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -307,18 +341,21 @@ class _$ScheduleDefinitionSupabaseModelImpl
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'scheduled_times')
       required final List<String> scheduledTimes,
-      @JsonKey(name: 'scheduled_days')
-      required final List<String> scheduledDays,
-      @JsonKey(name: 'scheduled_intervals')
-      required final List<String> scheduledIntervals,
-      @JsonKey(name: 'scheduled_date_range') this.scheduledDateRange,
+      @JsonKey(name: 'scheduled_day_definitions')
+      required final List<String> scheduledDayDefinitions,
+      @JsonKey(name: 'scheduledIntervalDefinitions')
+      required final List<String> scheduledIntervalDefinitions,
+      @JsonKey(name: 'enforce_schedule_bounds')
+      required this.enforceScheduleBounds,
+      @JsonKey(name: 'start_at') this.startAt,
+      @JsonKey(name: 'end_at') this.endAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.description})
       : _monthDays = monthDays,
         _weekDays = weekDays,
         _scheduledTimes = scheduledTimes,
-        _scheduledDays = scheduledDays,
-        _scheduledIntervals = scheduledIntervals;
+        _scheduledDayDefinitions = scheduledDayDefinitions,
+        _scheduledIntervalDefinitions = scheduledIntervalDefinitions;
 
   factory _$ScheduleDefinitionSupabaseModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -368,28 +405,35 @@ class _$ScheduleDefinitionSupabaseModelImpl
     return EqualUnmodifiableListView(_scheduledTimes);
   }
 
-  final List<String> _scheduledDays;
+  final List<String> _scheduledDayDefinitions;
   @override
-  @JsonKey(name: 'scheduled_days')
-  List<String> get scheduledDays {
-    if (_scheduledDays is EqualUnmodifiableListView) return _scheduledDays;
+  @JsonKey(name: 'scheduled_day_definitions')
+  List<String> get scheduledDayDefinitions {
+    if (_scheduledDayDefinitions is EqualUnmodifiableListView)
+      return _scheduledDayDefinitions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scheduledDays);
+    return EqualUnmodifiableListView(_scheduledDayDefinitions);
   }
 
-  final List<String> _scheduledIntervals;
+  final List<String> _scheduledIntervalDefinitions;
   @override
-  @JsonKey(name: 'scheduled_intervals')
-  List<String> get scheduledIntervals {
-    if (_scheduledIntervals is EqualUnmodifiableListView)
-      return _scheduledIntervals;
+  @JsonKey(name: 'scheduledIntervalDefinitions')
+  List<String> get scheduledIntervalDefinitions {
+    if (_scheduledIntervalDefinitions is EqualUnmodifiableListView)
+      return _scheduledIntervalDefinitions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scheduledIntervals);
+    return EqualUnmodifiableListView(_scheduledIntervalDefinitions);
   }
 
   @override
-  @JsonKey(name: 'scheduled_date_range')
-  final String? scheduledDateRange;
+  @JsonKey(name: 'enforce_schedule_bounds')
+  final bool enforceScheduleBounds;
+  @override
+  @JsonKey(name: 'start_at')
+  final DateTime? startAt;
+  @override
+  @JsonKey(name: 'end_at')
+  final DateTime? endAt;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -398,7 +442,7 @@ class _$ScheduleDefinitionSupabaseModelImpl
 
   @override
   String toString() {
-    return 'ScheduleDefinitionSupabaseModel(id: $id, taskId: $taskId, repetitionType: $repetitionType, monthDays: $monthDays, weekDays: $weekDays, repeatCount: $repeatCount, userId: $userId, createdAt: $createdAt, scheduledTimes: $scheduledTimes, scheduledDays: $scheduledDays, scheduledIntervals: $scheduledIntervals, scheduledDateRange: $scheduledDateRange, updatedAt: $updatedAt, description: $description)';
+    return 'ScheduleDefinitionSupabaseModel(id: $id, taskId: $taskId, repetitionType: $repetitionType, monthDays: $monthDays, weekDays: $weekDays, repeatCount: $repeatCount, userId: $userId, createdAt: $createdAt, scheduledTimes: $scheduledTimes, scheduledDayDefinitions: $scheduledDayDefinitions, scheduledIntervalDefinitions: $scheduledIntervalDefinitions, enforceScheduleBounds: $enforceScheduleBounds, startAt: $startAt, endAt: $endAt, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -420,12 +464,15 @@ class _$ScheduleDefinitionSupabaseModelImpl
                 other.createdAt == createdAt) &&
             const DeepCollectionEquality()
                 .equals(other._scheduledTimes, _scheduledTimes) &&
-            const DeepCollectionEquality()
-                .equals(other._scheduledDays, _scheduledDays) &&
-            const DeepCollectionEquality()
-                .equals(other._scheduledIntervals, _scheduledIntervals) &&
-            (identical(other.scheduledDateRange, scheduledDateRange) ||
-                other.scheduledDateRange == scheduledDateRange) &&
+            const DeepCollectionEquality().equals(
+                other._scheduledDayDefinitions, _scheduledDayDefinitions) &&
+            const DeepCollectionEquality().equals(
+                other._scheduledIntervalDefinitions,
+                _scheduledIntervalDefinitions) &&
+            (identical(other.enforceScheduleBounds, enforceScheduleBounds) ||
+                other.enforceScheduleBounds == enforceScheduleBounds) &&
+            (identical(other.startAt, startAt) || other.startAt == startAt) &&
+            (identical(other.endAt, endAt) || other.endAt == endAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.description, description) ||
@@ -445,9 +492,11 @@ class _$ScheduleDefinitionSupabaseModelImpl
       userId,
       createdAt,
       const DeepCollectionEquality().hash(_scheduledTimes),
-      const DeepCollectionEquality().hash(_scheduledDays),
-      const DeepCollectionEquality().hash(_scheduledIntervals),
-      scheduledDateRange,
+      const DeepCollectionEquality().hash(_scheduledDayDefinitions),
+      const DeepCollectionEquality().hash(_scheduledIntervalDefinitions),
+      enforceScheduleBounds,
+      startAt,
+      endAt,
       updatedAt,
       description);
 
@@ -482,11 +531,14 @@ abstract class _ScheduleDefinitionSupabaseModel
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       @JsonKey(name: 'scheduled_times')
       required final List<String> scheduledTimes,
-      @JsonKey(name: 'scheduled_days')
-      required final List<String> scheduledDays,
-      @JsonKey(name: 'scheduled_intervals')
-      required final List<String> scheduledIntervals,
-      @JsonKey(name: 'scheduled_date_range') final String? scheduledDateRange,
+      @JsonKey(name: 'scheduled_day_definitions')
+      required final List<String> scheduledDayDefinitions,
+      @JsonKey(name: 'scheduledIntervalDefinitions')
+      required final List<String> scheduledIntervalDefinitions,
+      @JsonKey(name: 'enforce_schedule_bounds')
+      required final bool enforceScheduleBounds,
+      @JsonKey(name: 'start_at') final DateTime? startAt,
+      @JsonKey(name: 'end_at') final DateTime? endAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? description}) = _$ScheduleDefinitionSupabaseModelImpl;
 
@@ -520,14 +572,20 @@ abstract class _ScheduleDefinitionSupabaseModel
   @JsonKey(name: 'scheduled_times')
   List<String> get scheduledTimes;
   @override
-  @JsonKey(name: 'scheduled_days')
-  List<String> get scheduledDays;
+  @JsonKey(name: 'scheduled_day_definitions')
+  List<String> get scheduledDayDefinitions;
   @override
-  @JsonKey(name: 'scheduled_intervals')
-  List<String> get scheduledIntervals;
+  @JsonKey(name: 'scheduledIntervalDefinitions')
+  List<String> get scheduledIntervalDefinitions;
   @override
-  @JsonKey(name: 'scheduled_date_range')
-  String? get scheduledDateRange;
+  @JsonKey(name: 'enforce_schedule_bounds')
+  bool get enforceScheduleBounds;
+  @override
+  @JsonKey(name: 'start_at')
+  DateTime? get startAt;
+  @override
+  @JsonKey(name: 'end_at')
+  DateTime? get endAt;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

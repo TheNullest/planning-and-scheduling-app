@@ -6,10 +6,10 @@ import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/domain/enums/hive/priority.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/sources/bases/sub_task_data_source.dart';
+import 'package:zamaan/features/tasks_management/data/sources/local/bases/sub_task_data_source.dart';
 
 class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
-    implements SubTaskDataSource<SubTaskHiveModel> {
+    implements SubTaskLocalDataSource<SubTaskHiveModel> {
   // Just to add the testablity feature to the class,
   // we need to inject the [HiveInitializer<SubTaskHiveModel>] like this
   SubTaskHiveDataSourceImpl({HiveServices<SubTaskHiveModel>? hiveBox})

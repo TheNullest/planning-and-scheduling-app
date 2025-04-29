@@ -1,16 +1,17 @@
 import 'package:flutter/widgets.dart' show Color, IconData;
 
-import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
 
 class CategoryUI extends BaseUIModel {
   CategoryUI({
-    required super.id,
-    required super.description,
-    required super.createdAt,
-    required super.updatedAt,
     required this.title,
     required this.color,
     required this.icon,
+    super.id,
+    super.description,
+    super.createdAt,
+    super.updatedAt,
+    super.user,
   });
 
   final String title;

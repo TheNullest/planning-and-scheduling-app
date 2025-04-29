@@ -6,9 +6,10 @@ part of 'schedule_definition_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduleDefinitionHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleDefinitionHiveModel> {
+class ScheduleDefinitionHiveModelAdapter
+    extends TypeAdapter<ScheduleDefinitionHiveModel> {
   @override
-  final int typeId = 5;
+  final int typeId = 17;
 
   @override
   ScheduleDefinitionHiveModel read(BinaryReader reader) {
@@ -20,42 +21,48 @@ class ScheduleDefinitionHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleDef
       id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
+      taskId: fields[11] as String,
+      repetitionType: fields[15] as RepetitionType,
+      repeatCount: fields[16] as int,
+      scheduledTimeIds: (fields[14] as List).cast<String>(),
+      weekDays: (fields[17] as List).cast<WeekDay>(),
+      monthDays: (fields[18] as List).cast<int>(),
+      enforceScheduleBounds: fields[21] as bool,
+      scheduledDayDefinitionIds: (fields[19] as List).cast<String>(),
+      scheduledIntervalDefinitionIds: (fields[20] as List).cast<String>(),
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
-      taskId: fields[11] as String,
-      repetitionType: fields[13] as RepetitionType,
-      repeatCount: fields[15] as int,
-      scheduledTimes: (fields[14] as List).cast<TimeRangeEntity>(),
-      weekDays: (fields[16] as List).cast<WeekDay>(),
-      monthDays: (fields[17] as List).cast<int>(),
-      scheduledDays: (fields[18] as List).cast<ScheduledDayEntity>(),
-      scheduledIntervals: (fields[19] as List).cast<ScheduledIntervalEntity>(),
-      scheduledDateRange: fields[12] as DateRangeEntity?,
+      startAt: fields[12] as DateTime?,
+      endAt: fields[13] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ScheduleDefinitionHiveModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(16)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
-      ..write(obj.scheduledDateRange)
-      ..writeByte(14)
-      ..write(obj.scheduledTimes)
+      ..write(obj.startAt)
       ..writeByte(13)
-      ..write(obj.repetitionType)
+      ..write(obj.endAt)
+      ..writeByte(14)
+      ..write(obj.scheduledTimeIds)
       ..writeByte(15)
-      ..write(obj.repeatCount)
+      ..write(obj.repetitionType)
       ..writeByte(16)
-      ..write(obj.weekDays)
+      ..write(obj.repeatCount)
       ..writeByte(17)
-      ..write(obj.monthDays)
+      ..write(obj.weekDays)
       ..writeByte(18)
-      ..write(obj.scheduledDays)
+      ..write(obj.monthDays)
       ..writeByte(19)
-      ..write(obj.scheduledIntervals)
+      ..write(obj.scheduledDayDefinitionIds)
+      ..writeByte(20)
+      ..write(obj.scheduledIntervalDefinitionIds)
+      ..writeByte(21)
+      ..write(obj.enforceScheduleBounds)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

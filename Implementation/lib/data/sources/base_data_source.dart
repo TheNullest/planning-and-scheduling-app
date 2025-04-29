@@ -17,21 +17,9 @@ abstract class BaseDataSource<Model> {
 
   EResultFutureVoid updateBatch(List<Model> entities);
 
-  EResultFuture<Model> getByValue(
-    String targetValue, {
-    String fieldName = 'id',
-  });
+  EResultFuture<Model> getById(String id);
 
-  EResultFuture<List<Model>> getAllByValues(
-    List<String> targetValues, {
-    String fieldName = 'id',
-  });
-
-  EResultFuture<List<Model>> getAllWithinDateRange({
-    required DateTime fromDate,
-    required DateTime toDate,
-    String fieldName = 'created_at',
-  });
+  EResultFuture<List<Model>> getAllByIds(List<String> ids);
 }
 
 /// Converts a list of conditions into a string representation for query filtering.

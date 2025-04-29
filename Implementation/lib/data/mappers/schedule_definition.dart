@@ -1,19 +1,11 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/date_range.dart';
 import 'package:zamaan/data/mappers/mapper.dart';
-import 'package:zamaan/data/mappers/scheduled_day.dart';
-import 'package:zamaan/data/mappers/scheduled_interval.dart';
-import 'package:zamaan/data/mappers/time_range.dart';
 import 'package:zamaan/domain/entities/schedule_definition.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_definition_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/remote/supabase/date_time_ranges/date_range/date_range_supabase_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/remote/supabase/date_time_ranges/time_range/time_range_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_definition/schedule_definition_supabase_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/remote/supabase/scheduled_day/scheduled_day_supabase_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/remote/supabase/scheduled_interval/schuduled_interval_supabase_model.dart';
 
 class ScheduleDefinitionMapper extends Mapper<ScheduleDefinitionEntity, ScheduleDefinitionHiveModel,
     ScheduleDefinitionSupabaseModel> {
@@ -31,22 +23,6 @@ class ScheduleDefinitionMapper extends Mapper<ScheduleDefinitionEntity, Schedule
   }) =>
       tryCatchSimple<ScheduleDefinitionEntity>(
         action: () {
-          final scheduledTimesEntity = TimeRangeMapper().toEntitiesFromSupabase(
-            relatedListModels!['scheduled_times'] as List<TimeRangeSupabaseModel>,
-          );
-
-          final scheduledDateEntity = DateRangeMapper().toEntityFromSupabase(
-            relatedListModels['scheduled_date'] as DateRangeSupabaseModel,
-          );
-
-          final scheduledDays = ScheduledDayMapper().toEntitiesFromSupabase(
-            relatedListModels['scheduled_days'] as List<ScheduledDaySupabaseModel>,
-          );
-
-          final scheduledIntervals = ScheduledIntervalMapper().toEntitiesFromSupabase(
-            relatedListModels['scheduled_intervals'] as List<ScheduledIntervalSupabaseModel>,
-          );
-
           return ScheduleDefinitionEntity(
             id: model.id,
             description: model.description,
@@ -56,12 +32,14 @@ class ScheduleDefinitionMapper extends Mapper<ScheduleDefinitionEntity, Schedule
             taskId: model.taskId,
             repetitionType: RepetitionType.fromName(model.repetitionType),
             repeatCount: model.repeatCount,
-            scheduledTimes: scheduledTimesEntity,
-            scheduledDateRange: scheduledDateEntity,
+            scheduledTimeIds: model.scheduledTimes,
+            startAt: model.startAt,
+            endAt: model.endAt,
             weekDays: model.weekDays.map(WeekDay.fromName).toList(),
             monthDays: model.monthDays,
-            scheduledDays: scheduledDays,
-            scheduledIntervals: scheduledIntervals,
+            scheduledDayDefinitionIds: model.scheduledDayDefinitions,
+            scheduledIntervalDefinitionIds: model.scheduledIntervalDefinitions,
+            enforceScheduleBounds: model.enforceScheduleBounds,
           );
         },
         failureType: FailureType.local,

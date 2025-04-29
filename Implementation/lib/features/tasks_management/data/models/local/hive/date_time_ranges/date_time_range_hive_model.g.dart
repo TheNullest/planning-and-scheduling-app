@@ -8,7 +8,7 @@ part of 'date_time_range_hive_model.dart';
 
 class DateRangeHiveModelAdapter extends HiveBaseTypeAdapter<DateRangeHiveModel> {
   @override
-  final int typeId = 150;
+  final int typeId = 23;
 
   @override
   DateRangeHiveModel read(BinaryReader reader) {

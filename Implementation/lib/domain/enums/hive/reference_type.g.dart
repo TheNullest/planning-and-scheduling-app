@@ -8,7 +8,7 @@ part of 'reference_type.dart';
 
 class ReferenceTypeAdapter extends TypeAdapter<ReferenceType> {
   @override
-  final int typeId = 105;
+  final int typeId = 108;
 
   @override
   ReferenceType read(BinaryReader reader) {

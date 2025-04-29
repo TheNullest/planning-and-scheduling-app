@@ -8,5 +8,5 @@ class TasksManagerEvent with _$TasksManagerEvent {
     required CreateTaskWithSubTasksParams taskAndSubTasks,
   }) = _CreateTaskWithSubTasksEvent;
 
-  const factory TasksManagerEvent.fetchTodayTasks() = _FetchTodayTasks;
+  const factory TasksManagerEvent.fetchScheduledInstancesByDay(DateTime date) = _FetchScheduledInstancesByDay;
 }

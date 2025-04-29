@@ -8,7 +8,7 @@ part of 'user_hive_model.dart';
 
 class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 11;
 
   @override
   UserHiveModel read(BinaryReader reader) {

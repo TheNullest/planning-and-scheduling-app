@@ -20,9 +20,12 @@ class ScheduleDefinitionSupabaseModel with _$ScheduleDefinitionSupabaseModel {
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'scheduled_times') required List<String> scheduledTimes,
-    @JsonKey(name: 'scheduled_days') required List<String> scheduledDays,
-    @JsonKey(name: 'scheduled_intervals') required List<String> scheduledIntervals,
-    @JsonKey(name: 'scheduled_date_range') String? scheduledDateRange,
+    @JsonKey(name: 'scheduled_day_definitions') required List<String> scheduledDayDefinitions,
+    @JsonKey(name: 'scheduledIntervalDefinitions')
+    required List<String> scheduledIntervalDefinitions,
+    @JsonKey(name: 'enforce_schedule_bounds') required bool enforceScheduleBounds,
+    @JsonKey(name: 'start_at') DateTime? startAt,
+    @JsonKey(name: 'end_at') DateTime? endAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     String? description,
   }) = _ScheduleDefinitionSupabaseModel;
@@ -39,11 +42,13 @@ class ScheduleDefinitionSupabaseModel with _$ScheduleDefinitionSupabaseModel {
         repetitionType: entity.repetitionType.name,
         monthDays: entity.monthDays,
         repeatCount: entity.repeatCount,
-        scheduledDateRange: entity.scheduledDateRange!.id,
+        enforceScheduleBounds: entity.enforceScheduleBounds,
+        endAt: entity.endAt,
+        startAt: entity.startAt,
         weekDays: entity.weekDays.map((item) => item.name).toList(),
-        scheduledTimes: entity.scheduledTimes.map((item) => item.id).toList(),
-        scheduledDays: entity.scheduledDays.map((item) => item.id).toList(),
-        scheduledIntervals: entity.scheduledIntervals.map((item) => item.id).toList(),
+        scheduledTimes: entity.scheduledTimeIds,
+        scheduledDayDefinitions: entity.scheduledDayDefinitionIds,
+        scheduledIntervalDefinitions: entity.scheduledIntervalDefinitionIds,
       );
 
   /// Creates an instance from a JSON map.

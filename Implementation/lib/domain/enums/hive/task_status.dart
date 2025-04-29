@@ -1,10 +1,11 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'task_status.g.dart';
 
 /// Represents the different statuses a task can have, with Persian translations.
-@HiveType(typeId: 108)
+@HiveType(typeId: EnumHiveTypeIds.taskStatus)
 enum TaskStatus {
   @HiveField(0)
   inProgress('در حال اجرا'),

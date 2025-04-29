@@ -1,18 +1,19 @@
-import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/measurement_unit_ui.dart';
 
 class GoalUI extends BaseUIModel {
   GoalUI({
-    required super.id,
-    required super.description,
-    required super.createdAt,
-    required super.updatedAt,
     required this.customeCustomeMeasurementUnit,
     required this.perActiveHour,
     required this.perActiveDay,
     required this.perActiveWeek,
     required this.perActiveMonth,
     required this.perActiveYear,
+    super.id,
+    super.description,
+    super.createdAt,
+    super.updatedAt,
+    super.user,
   });
 
   final CustomeMeasurementUnitUI customeCustomeMeasurementUnit;
@@ -40,7 +41,8 @@ class GoalUI extends BaseUIModel {
         description: description ?? this.id,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,
-        customeCustomeMeasurementUnit: customeCustomeMeasurementUnit ?? this.customeCustomeMeasurementUnit,
+        customeCustomeMeasurementUnit:
+            customeCustomeMeasurementUnit ?? this.customeCustomeMeasurementUnit,
         perActiveHour: perActiveHour ?? this.perActiveHour,
         perActiveDay: perActiveDay ?? this.perActiveDay,
         perActiveWeek: perActiveWeek ?? this.perActiveWeek,

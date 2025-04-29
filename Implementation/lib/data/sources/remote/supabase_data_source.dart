@@ -105,17 +105,10 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
       );
 
   @override
-  EResultFuture<T> getByValue(
-    String targetValue, {
-    String fieldName = 'id',
-  }) async =>
-      tryCatchEither<T>(
+  EResultFuture<T> getById(String id) async => tryCatchEither<T>(
         action: () async {
-          final result = await client
-              .from(collectionPath)
-              .select(selectQuery)
-              .eq(fieldName, targetValue)
-              .single();
+          final result =
+              await client.from(collectionPath).select(selectQuery).eq('id', id).single();
           return Right(_mapper.fromJson(result) as T);
         },
         failureType: FailureType.remote,
@@ -129,35 +122,12 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
         failureType: FailureType.remote,
       );
   @override
-  EResultFuture<List<T>> getAllByValues(
-    List<String> targetValues, {
-    String fieldName = 'id',
-  }) async =>
-      tryCatchEither<List<T>>(
+  EResultFuture<List<T>> getAllByIds(List<String> ids) async => tryCatchEither<List<T>>(
         action: () async {
           final result = await client
               .from(collectionPath)
               .select(selectQuery)
-              .or(conditionToString(conditions: targetValues, join: ',', fieldName: fieldName));
-          return Right(_mapper.fromJsonList(result) as List<T>);
-        },
-        failureType: FailureType.remote,
-      );
-
-  @override
-  EResultFuture<List<T>> getAllWithinDateRange({
-    required DateTime fromDate,
-    required DateTime toDate,
-    String fieldName = 'created_at',
-  }) async =>
-      tryCatchEither<List<T>>(
-        action: () async {
-          final result = await client
-              .from(collectionPath)
-              .select(selectQuery)
-              .gte(fieldName, fromDate.toIso8601String())
-              .lte(fieldName, toDate.toIso8601String())
-              .order(fieldName, ascending: false);
+              .or(conditionToString(conditions: ids, join: ','));
           return Right(_mapper.fromJsonList(result) as List<T>);
         },
         failureType: FailureType.remote,

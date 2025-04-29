@@ -8,7 +8,7 @@ part of 'goal_constraint.dart';
 
 class GoalConstraintAdapter extends TypeAdapter<GoalConstraint> {
   @override
-  final int typeId = 100;
+  final int typeId = 102;
 
   @override
   GoalConstraint read(BinaryReader reader) {

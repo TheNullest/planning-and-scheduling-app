@@ -8,7 +8,7 @@ part of 'sync_action.dart';
 
 class SyncActionAdapter extends TypeAdapter<SyncAction> {
   @override
-  final int typeId = 107;
+  final int typeId = 111;
 
   @override
   SyncAction read(BinaryReader reader) {

@@ -1,9 +1,9 @@
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
-import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
+import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 
 part 'task_activity_hive_model.g.dart';
@@ -39,20 +39,21 @@ part 'task_activity_hive_model.g.dart';
 /// ```
 ///
 /// The Hive annotations ([HiveType] and [HiveField]) ensure proper serialization.
-@HiveType(typeId: 9)
+@HiveType(typeId: ClassHiveTypeIds.taskActivity) // Unique Type ID for Hive
 class TaskActivityHiveModel extends TaskActivityEntity {
   TaskActivityHiveModel({
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required super.referenceId,
     required super.referenceType,
-    required super.activityDuration,
-    required super.variableTags,
-    required super.scheduleDefinitionId,
+    required super.dateTimeRangeId,
+    required super.variableTagIds,
     required super.taskStatus,
+    super.schedulerId,
+    super.schedulerType,
+    super.description,
+    super.updatedAt,
   });
 
   /// Creates a [TaskActivityHiveModel] from a corresponding [TaskActivityEntity].
@@ -68,10 +69,11 @@ class TaskActivityHiveModel extends TaskActivityEntity {
       description: entity.description,
       referenceId: entity.referenceId,
       referenceType: entity.referenceType,
-      activityDuration: entity.activityDuration,
-      variableTags: entity.variableTags,
-      scheduleDefinitionId: entity.scheduleDefinitionId,
+      dateTimeRangeId: entity.dateTimeRangeId,
+      variableTagIds: entity.variableTagIds,
+      schedulerId: entity.schedulerId,
       taskStatus: entity.taskStatus,
+      schedulerType: entity.schedulerType,
     );
   }
 
@@ -84,16 +86,16 @@ class TaskActivityHiveModel extends TaskActivityEntity {
   @override
   TaskActivityHiveModel copyWith({
     String? id,
-    int? order,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
     String? description,
     String? referenceId,
     ReferenceType? referenceType,
-    String? scheduleDefinitionId,
-    DateRangeEntity? activityDuration,
-    List<TagEntity>? variableTags,
+    SchedulerType? schedulerType,
+    String? schedulerId,
+    String? dateTimeRangeId,
+    List<String>? variableTagIds,
     TaskStatus? taskStatus,
   }) {
     return TaskActivityHiveModel(
@@ -104,9 +106,10 @@ class TaskActivityHiveModel extends TaskActivityEntity {
       description: description ?? this.description,
       referenceId: referenceId ?? this.referenceId,
       referenceType: referenceType ?? this.referenceType,
-      activityDuration: activityDuration ?? this.activityDuration,
-      variableTags: variableTags ?? List.from(this.variableTags),
-      scheduleDefinitionId: scheduleDefinitionId ?? this.scheduleDefinitionId,
+      dateTimeRangeId: dateTimeRangeId ?? this.dateTimeRangeId,
+      variableTagIds: variableTagIds ?? List.from(this.variableTagIds),
+      schedulerId: schedulerId ?? this.schedulerId,
+      schedulerType: schedulerType ?? this.schedulerType,
       taskStatus: taskStatus ?? this.taskStatus,
     );
   }

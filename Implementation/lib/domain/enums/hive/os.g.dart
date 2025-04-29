@@ -8,7 +8,7 @@ part of 'os.dart';
 
 class OSAdapter extends TypeAdapter<OS> {
   @override
-  final int typeId = 103;
+  final int typeId = 106;
 
   @override
   OS read(BinaryReader reader) {

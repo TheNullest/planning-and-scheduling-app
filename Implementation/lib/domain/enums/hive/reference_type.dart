@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'reference_type.g.dart';
@@ -6,7 +7,7 @@ part 'reference_type.g.dart';
 /// Enum representing different reference types.
 /// This enum is used for categorizing references (e.g., a task vs. a sub-task)
 /// in the UI. It is strictly for UI purposes and is not meant for database storage.
-@HiveType(typeId: 105)
+@HiveType(typeId: EnumHiveTypeIds.referenceType)
 enum ReferenceType {
   @HiveField(0)
   task,

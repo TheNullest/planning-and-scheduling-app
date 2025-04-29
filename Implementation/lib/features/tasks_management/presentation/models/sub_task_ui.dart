@@ -1,18 +1,20 @@
 import 'package:zamaan/domain/enums/enums.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/base_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/goal_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/user_ui.dart';
 
 class SubTaskUI extends BaseUIModel {
   SubTaskUI({
-    required super.id,
-    required super.description,
-    required super.createdAt,
-    required super.updatedAt,
     required this.title,
     required this.totalSpentTime,
     required this.priority,
     required this.status,
     required this.goal,
+    super.id,
+    super.description,
+    super.createdAt,
+    super.updatedAt,
+    super.user,
     this.dueDate,
   });
 
@@ -35,6 +37,7 @@ class SubTaskUI extends BaseUIModel {
     DateTime? dueDate,
     Duration? totalSpentTime,
     GoalUI? goal,
+    UserUI? user,
   }) {
     return SubTaskUI(
       id: id ?? this.id,
@@ -47,6 +50,7 @@ class SubTaskUI extends BaseUIModel {
       totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       status: status ?? this.status,
       goal: goal ?? this.goal,
+      user: user ?? this.user,
     );
   }
 }

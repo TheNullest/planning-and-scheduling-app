@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 
@@ -31,7 +32,7 @@ part 'tag_hive_model.g.dart';
 /// ```
 ///
 /// The Hive annotations ([HiveType] and [HiveField]) ensure proper serialization.
-@HiveType(typeId: 8)
+@HiveType(typeId: ClassHiveTypeIds.tag) // Unique Type ID for Hive
 class TagHiveModel extends TagEntity {
   TagHiveModel({
     required super.id,

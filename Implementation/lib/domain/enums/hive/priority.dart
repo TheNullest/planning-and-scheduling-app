@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 
 part 'priority.g.dart';
@@ -13,7 +14,7 @@ part 'priority.g.dart';
 /// print(Priority.fromName("low"));         // Output: Priority.low
 /// print(Priority.fromIndex(3, inPersian: true)); // Output: "بالا"
 /// ```
-@HiveType(typeId: 104)
+@HiveType(typeId: EnumHiveTypeIds.priority)
 enum Priority {
   @HiveField(0)
   optional('دلخواه'),

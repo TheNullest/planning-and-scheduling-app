@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
 import 'package:zamaan/domain/enums/hive/measurement_category.dart';
 
@@ -15,7 +16,7 @@ part 'measurement_unit.g.dart';
 /// print(unit.nameInPersian);  // Output: "صفحه"
 /// print(unit.nextSmaller?.name); // Output: "Item"
 /// ```
-@HiveType(typeId: 102)
+@HiveType(typeId: EnumHiveTypeIds.measurementUnit)
 enum MeasurementUnit {
   // -------------------
   // Mass Category (Largest to Smallest)

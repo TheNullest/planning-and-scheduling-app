@@ -8,7 +8,7 @@ part of 'measurement_category.dart';
 
 class MeasurementCategoryAdapter extends TypeAdapter<MeasurementCategory> {
   @override
-  final int typeId = 101;
+  final int typeId = 104;
 
   @override
   MeasurementCategory read(BinaryReader reader) {

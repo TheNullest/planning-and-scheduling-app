@@ -1,7 +1,5 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/category.dart';
-import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
 /// Represents a task with configurable properties and time tracking capabilities.
@@ -31,17 +29,18 @@ class TaskEntity extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required this.title,
     required this.colorCode,
     required this.iconCode,
     required this.priority,
-    required this.categories,
-    required this.fixedTags,
+    required this.subTaskIds,
+    required this.categoryIds,
+    required this.fixedTagIds,
     required this.totalSpentTime,
     required this.archived,
     required this.taskStatus,
+    super.description,
+    super.updatedAt,
   });
 
   /// Short descriptive title (max 100 chars)
@@ -60,24 +59,27 @@ class TaskEntity extends BaseEntityAbstraction {
   @HiveField(14)
   final Priority priority;
 
-  /// Primary categorization groups
   @HiveField(15)
-  final List<CategoryEntity> categories;
+  final List<String> subTaskIds;
+
+  /// Primary categorization groups
+  @HiveField(16)
+  final List<String> categoryIds;
 
   /// Permanent tags that cannot be auto-removed
-  @HiveField(16)
-  final List<TagEntity> fixedTags;
+  @HiveField(17)
+  final List<String> fixedTagIds;
 
   /// Cumulative time spent across all activities
-  @HiveField(17)
+  @HiveField(18)
   final Duration totalSpentTime;
 
   /// Whether the task is hidden from main views
-  @HiveField(18)
+  @HiveField(19)
   final bool archived;
 
   /// Current lifecycle state
-  @HiveField(19)
+  @HiveField(20)
   final TaskStatus taskStatus;
 
   // ========================
@@ -129,22 +131,6 @@ class TaskEntity extends BaseEntityAbstraction {
 
   bool get requiresAttention => isActive && (isOverdue || priority == Priority.high);
 
-  // ========================
-  // Tag/Category Management
-  // ========================
-
-  bool hasCategory(String categoryId) => categories.any((c) => c.id == categoryId);
-
-  bool hasTag(String tagId) => fixedTags.any((t) => t.id == tagId);
-
-  TaskEntity addCategory(CategoryEntity category) => copyWith(
-        categories: List.from(categories)..add(category),
-      );
-
-  TaskEntity removeCategory(String categoryId) => copyWith(
-        categories: categories.where((c) => c.id != categoryId).toList(),
-      );
-
   @override
   TaskEntity copyWith({
     String? id,
@@ -155,10 +141,11 @@ class TaskEntity extends BaseEntityAbstraction {
     String? title,
     int? colorCode,
     int? iconCode,
-    List<CategoryEntity>? categories,
+    List<String>? subTaskIds,
+    List<String>? categoryIds,
     Priority? priority,
     bool? archived,
-    List<TagEntity>? fixedTags,
+    List<String>? fixedTagIds,
     Duration? totalSpentTime,
     TaskStatus? taskStatus,
   }) =>
@@ -171,10 +158,11 @@ class TaskEntity extends BaseEntityAbstraction {
         title: title ?? this.title,
         colorCode: colorCode ?? this.colorCode,
         iconCode: iconCode ?? this.iconCode,
-        categories: categories ?? List.from(this.categories),
+        categoryIds: categoryIds ?? List.from(this.categoryIds),
+        subTaskIds: subTaskIds ?? List.from(this.subTaskIds),
         priority: priority ?? this.priority,
         archived: archived ?? this.archived,
-        fixedTags: fixedTags ?? List.from(this.fixedTags),
+        fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
         taskStatus: taskStatus ?? this.taskStatus,
       );
@@ -183,13 +171,13 @@ class TaskEntity extends BaseEntityAbstraction {
   List<Object?> get props => [
         ...super.props,
         title,
-        categories,
+        categoryIds,
         createdAt,
         colorCode,
         iconCode,
         priority,
         archived,
-        fixedTags,
+        fixedTagIds,
         totalSpentTime,
         taskStatus,
       ];

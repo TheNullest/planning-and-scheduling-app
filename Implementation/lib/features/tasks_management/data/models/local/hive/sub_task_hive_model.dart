@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
@@ -35,19 +36,19 @@ part 'sub_task_hive_model.g.dart';
 /// ```
 ///
 /// The model is annotated with Hive type and field IDs for proper serialization.
-@HiveType(typeId: 7)
+@HiveType(typeId: ClassHiveTypeIds.subTask) // Unique Type ID for Hive
 class SubTaskHiveModel extends SubTaskEntity {
   SubTaskHiveModel({
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required super.taskId,
     required super.priority,
     required super.title,
     required super.status,
     required super.totalSpentTime,
+    super.description,
+    super.updatedAt,
   });
 
   /// Creates a [SubTaskHiveModel] from a corresponding [SubTaskEntity].

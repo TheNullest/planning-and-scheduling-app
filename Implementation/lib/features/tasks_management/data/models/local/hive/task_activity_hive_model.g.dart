@@ -8,7 +8,7 @@ part of 'task_activity_hive_model.dart';
 
 class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
   @override
-  final int typeId = 9;
+  final int typeId = 22;
 
   @override
   TaskActivityHiveModel read(BinaryReader reader) {
@@ -20,32 +20,35 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
       id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      description: fields[3] as String?,
-      updatedAt: fields[4] as DateTime?,
       referenceId: fields[11] as String,
       referenceType: fields[12] as ReferenceType,
-      activityDuration: fields[13] as DateRangeEntity,
-      variableTags: (fields[14] as List).cast<TagEntity>(),
-      scheduleDefinitionId: fields[15] as String?,
-      taskStatus: fields[16] as TaskStatus,
+      dateTimeRangeId: fields[13] as String,
+      variableTagIds: (fields[14] as List).cast<String>(),
+      taskStatus: fields[17] as TaskStatus,
+      schedulerId: fields[15] as String?,
+      schedulerType: fields[16] as SchedulerType?,
+      description: fields[3] as String?,
+      updatedAt: fields[4] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskActivityHiveModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(11)
       ..write(obj.referenceId)
       ..writeByte(12)
       ..write(obj.referenceType)
       ..writeByte(13)
-      ..write(obj.activityDuration)
+      ..write(obj.dateTimeRangeId)
       ..writeByte(14)
-      ..write(obj.variableTags)
+      ..write(obj.variableTagIds)
       ..writeByte(15)
-      ..write(obj.scheduleDefinitionId)
+      ..write(obj.schedulerId)
       ..writeByte(16)
+      ..write(obj.schedulerType)
+      ..writeByte(17)
       ..write(obj.taskStatus)
       ..writeByte(0)
       ..write(obj.id)

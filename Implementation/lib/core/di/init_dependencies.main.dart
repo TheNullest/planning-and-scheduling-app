@@ -90,11 +90,11 @@ void _hiveInit() {
 void _datasources() {
   serviceLocator
     // Category
-    ..registerFactory<CategoryDataSource<CategoryHiveModel>>(
+    ..registerFactory<CategoryLocalDataSource<CategoryHiveModel>>(
       () => CategoryHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<CategoryDataSource<CategorySupabaseModel>>(
+    ..registerFactory<CategoryLocalDataSource<CategorySupabaseModel>>(
       () => CategorySupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.category,
@@ -105,11 +105,11 @@ void _datasources() {
     )
 
     // Goal
-    ..registerFactory<GoalDataSource<GoalHiveModel>>(
+    ..registerFactory<GoalLocalDataSource<GoalHiveModel>>(
       () => GoalHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<GoalDataSource<GoalSupabaseModel>>(
+    ..registerFactory<GoalLocalDataSource<GoalSupabaseModel>>(
       () => GoalSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.goal,
@@ -120,11 +120,11 @@ void _datasources() {
     )
 
     // Measurement Unit
-    ..registerFactory<CustomeMeasurementUnitDataSource<CustomMeasurementUnitHiveModel>>(
+    ..registerFactory<CustomeMeasurementUnitLocalDataSource<CustomMeasurementUnitHiveModel>>(
       () => CustomeMeasurementUnitHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<CustomeMeasurementUnitDataSource<CustomMeasurementUnitSupabaseModel>>(
+    ..registerFactory<CustomeMeasurementUnitLocalDataSource<CustomMeasurementUnitSupabaseModel>>(
       () => CustomeMeasurementUnitSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.customeCustomeMeasurementUnit,
@@ -135,11 +135,11 @@ void _datasources() {
     )
 
     // Scheduled Task
-    ..registerFactory<ScheduleDefinitionDataSource<ScheduleDefinitionHiveModel>>(
+    ..registerFactory<ScheduleDefinitionLocalDataSource<ScheduleDefinitionHiveModel>>(
       () => ScheduleDefinitionHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<ScheduleDefinitionDataSource<ScheduleDefinitionSupabaseModel>>(
+    ..registerFactory<ScheduleDefinitionLocalDataSource<ScheduleDefinitionSupabaseModel>>(
       () => ScheduleDefinitionSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.scheduleDefinition,
@@ -150,11 +150,11 @@ void _datasources() {
     )
 
     // Sub Task
-    ..registerFactory<SubTaskDataSource<SubTaskHiveModel>>(
+    ..registerFactory<SubTaskLocalDataSource<SubTaskHiveModel>>(
       () => SubTaskHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<SubTaskDataSource<SubTaskSupabaseModel>>(
+    ..registerFactory<SubTaskLocalDataSource<SubTaskSupabaseModel>>(
       () => SubTaskSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.subTask,
@@ -165,11 +165,11 @@ void _datasources() {
     )
 
     // Tag
-    ..registerFactory<TagDataSource<TagHiveModel>>(
+    ..registerFactory<TagLocalDataSource<TagHiveModel>>(
       () => TagHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<TagDataSource<TagSupabaseModel>>(
+    ..registerFactory<TagLocalDataSource<TagSupabaseModel>>(
       () => TagSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.tag,
@@ -180,11 +180,11 @@ void _datasources() {
     )
 
     // Task Activity
-    ..registerFactory<TaskActivityDataSource<TaskActivityHiveModel>>(
+    ..registerFactory<TaskActivityLocalDataSource<TaskActivityHiveModel>>(
       () => TaskActivityHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<TaskActivityDataSource<TaskActivitySupabaseModel>>(
+    ..registerFactory<TaskActivityLocalDataSource<TaskActivitySupabaseModel>>(
       () => TaskActivitySupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.taskActivity,
@@ -195,11 +195,11 @@ void _datasources() {
     )
 
     // Task
-    ..registerFactory<TaskDataSource<TaskHiveModel>>(
+    ..registerFactory<TaskLocalDataSource<TaskHiveModel>>(
       () => TaskHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<TaskDataSource<TaskSupabaseModel>>(
+    ..registerFactory<TaskLocalDataSource<TaskSupabaseModel>>(
       () => TaskSupabaseDataSourceImpl(
         client: serviceLocator(),
         collectionPath: CollectionPaths.task,

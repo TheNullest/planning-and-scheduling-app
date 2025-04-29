@@ -8,7 +8,7 @@ part of 'task_hive_model.dart';
 
 class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 12;
 
   @override
   TaskHiveModel read(BinaryReader reader) {
@@ -20,24 +20,25 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      description: fields[3] as String?,
-      updatedAt: fields[4] as DateTime?,
       title: fields[11] as String,
       colorCode: fields[12] as int,
       iconCode: fields[13] as int,
       priority: fields[14] as Priority,
-      categories: (fields[15] as List).cast<CategoryEntity>(),
-      fixedTags: (fields[16] as List).cast<TagEntity>(),
-      totalSpentTime: fields[17] as Duration,
-      archived: fields[18] as bool,
-      taskStatus: fields[19] as TaskStatus,
+      subTaskIds: (fields[15] as List).cast<String>(),
+      categoryIds: (fields[16] as List).cast<String>(),
+      fixedTagIds: (fields[17] as List).cast<String>(),
+      totalSpentTime: fields[18] as Duration,
+      archived: fields[19] as bool,
+      taskStatus: fields[20] as TaskStatus,
+      description: fields[3] as String?,
+      updatedAt: fields[4] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -47,14 +48,16 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..writeByte(14)
       ..write(obj.priority)
       ..writeByte(15)
-      ..write(obj.categories)
+      ..write(obj.subTaskIds)
       ..writeByte(16)
-      ..write(obj.fixedTags)
+      ..write(obj.categoryIds)
       ..writeByte(17)
-      ..write(obj.totalSpentTime)
+      ..write(obj.fixedTagIds)
       ..writeByte(18)
-      ..write(obj.archived)
+      ..write(obj.totalSpentTime)
       ..writeByte(19)
+      ..write(obj.archived)
+      ..writeByte(20)
       ..write(obj.taskStatus)
       ..writeByte(0)
       ..write(obj.id)

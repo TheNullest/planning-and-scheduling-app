@@ -8,7 +8,7 @@ part of 'repetition_type.dart';
 
 class RepetitionTypeAdapter extends TypeAdapter<RepetitionType> {
   @override
-  final int typeId = 106;
+  final int typeId = 109;
 
   @override
   RepetitionType read(BinaryReader reader) {

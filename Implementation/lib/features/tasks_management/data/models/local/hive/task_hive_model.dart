@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/entities/category.dart';
-import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
@@ -45,23 +44,24 @@ part 'task_hive_model.g.dart';
 /// ```
 ///
 /// The Hive annotations ensure proper serialization for storage.
-@HiveType(typeId: 1)
+@HiveType(typeId: ClassHiveTypeIds.task) // Unique Type ID for Hive
 class TaskHiveModel extends TaskEntity {
   TaskHiveModel({
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required super.title,
     required super.colorCode,
     required super.iconCode,
     required super.priority,
-    required super.categories,
-    required super.fixedTags,
+    required super.subTaskIds,
+    required super.categoryIds,
+    required super.fixedTagIds,
     required super.totalSpentTime,
     required super.archived,
     required super.taskStatus,
+    super.description,
+    super.updatedAt,
   });
 
   /// Factory constructor that creates a [TaskHiveModel] instance from a [TaskEntity].
@@ -78,11 +78,12 @@ class TaskHiveModel extends TaskEntity {
       colorCode: entity.colorCode,
       iconCode: entity.iconCode,
       priority: entity.priority,
-      categories: List.from(entity.categories),
-      fixedTags: List.from(entity.fixedTags),
+      categoryIds: List.from(entity.categoryIds),
+      fixedTagIds: List.from(entity.fixedTagIds),
       totalSpentTime: entity.totalSpentTime,
       archived: entity.archived,
       taskStatus: entity.taskStatus,
+      subTaskIds: List.from(entity.subTaskIds),
     );
   }
 
@@ -93,18 +94,19 @@ class TaskHiveModel extends TaskEntity {
   @override
   TaskHiveModel copyWith({
     String? id,
-    String? userId,
     DateTime? createdAt,
-    String? description,
     DateTime? updatedAt,
+    String? userId,
+    String? description,
     String? title,
     int? colorCode,
     int? iconCode,
+    List<String>? subTaskIds,
+    List<String>? categoryIds,
     Priority? priority,
-    List<CategoryEntity>? categories,
-    List<TagEntity>? fixedTags,
-    Duration? totalSpentTime,
     bool? archived,
+    List<String>? fixedTagIds,
+    Duration? totalSpentTime,
     TaskStatus? taskStatus,
   }) {
     return TaskHiveModel(
@@ -117,11 +119,12 @@ class TaskHiveModel extends TaskEntity {
       colorCode: colorCode ?? this.colorCode,
       iconCode: iconCode ?? this.iconCode,
       priority: priority ?? this.priority,
-      categories: categories ?? List.from(this.categories),
-      fixedTags: fixedTags ?? List.from(this.fixedTags),
+      categoryIds: categoryIds ?? List.from(this.categoryIds),
+      fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
       totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       archived: archived ?? this.archived,
       taskStatus: taskStatus ?? this.taskStatus,
+      subTaskIds: subTaskIds ?? List.from(this.subTaskIds),
     );
   }
 }

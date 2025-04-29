@@ -114,12 +114,6 @@ abstract class BaseRepository<Entity> {
     DataSourcePolicy policy = DataSourcePolicy.localOnly,
   });
 
-  EResultFuture<List<Entity>> getWithinDateRange({
-    required DateTime fromDate,
-    required DateTime toDate,
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
-
   EResultFuture<bool> exists(
     String id, {
     DataSourcePolicy policy = DataSourcePolicy.localOnly,

@@ -8,7 +8,7 @@ part of 'measurement_unit.dart';
 
 class MeasurementUnitAdapter extends TypeAdapter<MeasurementUnit> {
   @override
-  final int typeId = 102;
+  final int typeId = 105;
 
   @override
   MeasurementUnit read(BinaryReader reader) {
@@ -205,7 +205,5 @@ class MeasurementUnitAdapter extends TypeAdapter<MeasurementUnit> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MeasurementUnitAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is MeasurementUnitAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

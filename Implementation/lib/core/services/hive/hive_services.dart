@@ -22,8 +22,9 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/date_tim
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_definition_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_definition_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_definition_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
@@ -66,7 +67,9 @@ class HiveServices<HiveModel> {
       GoalHiveModelAdapter(),
       CustomMeasurementUnitHiveModelAdapter(),
       ScheduleDefinitionHiveModelAdapter(),
-      ScheduledIntervalHiveModelAdapter(),
+      ScheduledDayDefinitionHiveModelAdapter(),
+      ScheduledIntervalDefinitionHiveModelAdapter(),
+      ScheduledInstanceHiveModelAdapter(),
       DateRangeHiveModelAdapter(),
       TimeRangeHiveModelAdapter(),
       SubTaskHiveModelAdapter(),
@@ -75,7 +78,6 @@ class HiveServices<HiveModel> {
       LogHiveModelAdapter(),
       SyncLogHiveModelAdapter(),
       DeviceHiveModelAdapter(),
-      ScheduledDayHiveModelAdapter(),
     ];
 
     for (final adapter in adapters) {

@@ -8,7 +8,7 @@ part of 'interval_unit.dart';
 
 class IntervalUnitAdapter extends TypeAdapter<IntervalUnit> {
   @override
-  final int typeId = 110;
+  final int typeId = 103;
 
   @override
   IntervalUnit read(BinaryReader reader) {

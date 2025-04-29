@@ -19,8 +19,8 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
     required String priority,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     required bool archived,
-    @JsonKey(name: 'categories') required List<String> categories,
-    @JsonKey(name: 'fixed_tags') required List<String> fixedTags,
+    @JsonKey(name: 'category_ids') required List<String> categoryIds,
+    @JsonKey(name: 'fixed_tag_ids') required List<String> fixedTagIds,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'total_spent_time') required Duration totalSpentTime,
     String? description,
@@ -40,8 +40,8 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
         archived: entity.archived,
         totalSpentTime: entity.totalSpentTime,
         taskStatus: entity.taskStatus.name,
-        categories: entity.categories.map((item) => item.id).toList(),
-        fixedTags: entity.categories.map((item) => item.id).toList(),
+        categoryIds: entity.categoryIds,
+        fixedTagIds: entity.categoryIds,
       );
 
   factory TaskSupabaseModel.fromJson(Map<String, dynamic> json) =>
