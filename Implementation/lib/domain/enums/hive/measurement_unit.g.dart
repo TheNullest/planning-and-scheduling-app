@@ -205,5 +205,7 @@ class MeasurementUnitAdapter extends TypeAdapter<MeasurementUnit> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MeasurementUnitAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is MeasurementUnitAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

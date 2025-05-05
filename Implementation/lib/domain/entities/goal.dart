@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/enums/hive/goal_constraint.dart';
 import 'package:zamaan/domain/enums/hive/measurement_unit.dart';
@@ -63,7 +62,7 @@ class GoalEntity extends BaseEntityAbstraction {
     required this.weeklyTarget,
     required this.monthlyTarget,
     required this.yearlyTarget,
-    required this.customMeasurementUnitId,
+     this.customMeasurementUnitId,
     super.description,
     super.updatedAt,
   });
@@ -79,53 +78,42 @@ class GoalEntity extends BaseEntityAbstraction {
   /// [measurementUnit]: Reference to user-defined units when needed.
 
   /// The type of associated work item (task/sub-task).
-  @HiveField(11)
   final ReferenceType refType;
 
   /// Identifier of the linked task or sub-task.
-  @HiveField(12)
   final String refId;
 
   /// Base unit for measuring progress.
-  @HiveField(13)
   final MeasurementUnit? measurementUnit;
 
   /// Defines whether the goal requires meeting a minimum
   /// or staying below a maximum value.
-  @HiveField(14)
   final GoalConstraint goalConstraint;
 
   /// Required progress amount per active hour as [hourlyTarget].
   /// - Example: 0.5 represents 30 minutes of focused work per hour.
-  @HiveField(15)
   final double minutelyTarget;
 
   /// Required progress amount per active hour as [hourlyTarget].
   /// - Example: 0.5 represents 30 minutes of focused work per hour.
-  @HiveField(16)
   final double hourlyTarget;
 
   /// Daily goal target as [dailyTarget].
   /// - Combines with hourly targets for partial day tracking.
-  @HiveField(17)
   final double dailyTarget;
 
   /// Weekly cumulative target as [weeklyTarget].
   /// - Used for longer-term progress tracking.
-  @HiveField(18)
   final double weeklyTarget;
 
   /// Monthly sustained effort target as [monthlyTarget].
-  @HiveField(19)
   final double monthlyTarget;
 
   /// Annual overall target as [yearlyTarget].
-  @HiveField(20)
   final double yearlyTarget;
 
   /// Reference to user-defined measurement units when applicable.
   /// - Used when [measurementUnit] is set to [MeasurementUnit.custom].
-  @HiveField(21)
   final String? customMeasurementUnitId;
 
   @override

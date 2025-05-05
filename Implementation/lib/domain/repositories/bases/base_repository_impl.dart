@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/enums/datasource_policy.dart';
@@ -11,24 +11,24 @@ import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
 abstract class BaseRepositoryImpl<
     Entity extends BaseEntityAbstraction,
-    HiveModel extends Entity,
+    HiveModel extends BaseEntityAbstraction,
     SupabaseModel,
     LocalDataSource extends BaseDataSource<HiveModel>,
     RemoteDataSource extends BaseDataSource<SupabaseModel>,
-    DataMapper extends Mapper<Entity, HiveModel, SupabaseModel>> extends BaseRepository<Entity> {
+    Mapper extends DataMapper<Entity, HiveModel, SupabaseModel>> extends BaseRepository<Entity> {
   BaseRepositoryImpl({
     required LocalDataSource localDataSource,
     required RemoteDataSource remoteDataSource,
-    required DataMapper mapper,
+    required Mapper dataMapper,
     required NetworkConnectivityMonitorCubit netConnectivity,
   })  : _localDataSource = localDataSource,
         _remoteDataSource = remoteDataSource,
-        _mapper = mapper,
+        _dataMapper = dataMapper,
         _netConnectivity = netConnectivity;
 
   final BaseDataSource<HiveModel> _localDataSource;
   final BaseDataSource<SupabaseModel> _remoteDataSource;
-  final DataMapper _mapper;
+  final Mapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
   @override
@@ -39,10 +39,10 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            return _localDataSource.create(_mapper.toHiveModel(entity));
+            return _localDataSource.create(_dataMapper.toHiveModel(entity));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            await _remoteDataSource.create(_mapper.toSupabaseModel(entity));
+            await _remoteDataSource.create(_dataMapper.toSupabaseModel(entity));
           }
           return const Right(null);
         },
@@ -57,10 +57,10 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            return _localDataSource.createBatch(_mapper.toHiveModels(entities));
+            return _localDataSource.createBatch(_dataMapper.toHiveModels(entities));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            await _remoteDataSource.createBatch(_mapper.toSupabaseModels(entities));
+            await _remoteDataSource.createBatch(_dataMapper.toSupabaseModels(entities));
           }
           return const Right(null);
         },
@@ -111,13 +111,13 @@ abstract class BaseRepositoryImpl<
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getAll();
-            final result = _mapper.foldEitherList(response);
-            return Right(_mapper.toEntitiesFromHive(result));
+            final result = _dataMapper.foldEitherList(response);
+            return Right(_dataMapper.toEntitiesFromHive(result));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getAll();
-            final result = _mapper.foldEitherList<SupabaseModel>(response);
-            return Right(_mapper.toEntitiesFromSupabase(result));
+            final result = _dataMapper.foldEitherList<SupabaseModel>(response);
+            return Right(_dataMapper.toEntitiesFromSupabase(result));
           }
 
           return const Right([]);
@@ -134,13 +134,13 @@ abstract class BaseRepositoryImpl<
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getById(id);
-            final models = _mapper.foldEitherSingle<HiveModel>(response);
-            return Right(_mapper.toEntityFromHive(models!));
+            final models = _dataMapper.foldEitherSingle<HiveModel>(response);
+            return Right(_dataMapper.toEntityFromHive(models!));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getById(id);
-            final models = _mapper.foldEitherSingle<SupabaseModel?>(response);
-            return Right(_mapper.toEntityFromSupabase(models as SupabaseModel));
+            final models = _dataMapper.foldEitherSingle<SupabaseModel?>(response);
+            return Right(_dataMapper.toEntityFromSupabase(models as SupabaseModel));
           }
           return const Right(null);
         },
@@ -156,13 +156,13 @@ abstract class BaseRepositoryImpl<
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
             final response = await _localDataSource.getAllByIds(ids);
-            final result = _mapper.foldEitherList<HiveModel>(response);
-            return Right(_mapper.toEntitiesFromHive(result));
+            final result = _dataMapper.foldEitherList<HiveModel>(response);
+            return Right(_dataMapper.toEntitiesFromHive(result));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
             final response = await _remoteDataSource.getAllByIds(ids);
-            final result = _mapper.foldEitherList<SupabaseModel>(response);
-            return Right(_mapper.toEntitiesFromSupabase(result));
+            final result = _dataMapper.foldEitherList<SupabaseModel>(response);
+            return Right(_dataMapper.toEntitiesFromSupabase(result));
           }
           return const Right([]);
         },
@@ -177,10 +177,10 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            return _localDataSource.update(_mapper.toHiveModel(entity));
+            return _localDataSource.update(_dataMapper.toHiveModel(entity));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            return _remoteDataSource.updateBatch([_mapper.toSupabaseModel(entity)]);
+            return _remoteDataSource.updateBatch([_dataMapper.toSupabaseModel(entity)]);
           }
           return const Right(null);
         },
@@ -195,10 +195,10 @@ abstract class BaseRepositoryImpl<
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
-            return _localDataSource.updateBatch(_mapper.toHiveModels(entities));
+            return _localDataSource.updateBatch(_dataMapper.toHiveModels(entities));
           }
           if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-            return _remoteDataSource.updateBatch(_mapper.toSupabaseModels(entities));
+            return _remoteDataSource.updateBatch(_dataMapper.toSupabaseModels(entities));
           }
           return const Right(null);
         },

@@ -11,9 +11,9 @@ abstract class ClassHiveTypeIds {
   static const int category = 14;
   static const int goal = 15;
   static const int customMeasurementUnit = 16;
-  static const int scheduleDefinition = 17;
-  static const int scheduledDayDefinition = 18;
-  static const int scheduledIntervalDefinition = 19;
+  static const int scheduleConstraints = 17;
+  static const int scheduledDay = 18;
+  static const int scheduledInterval = 19;
   static const int scheduledInstance = 20;
   static const int tag = 21;
   static const int taskActivity = 22;

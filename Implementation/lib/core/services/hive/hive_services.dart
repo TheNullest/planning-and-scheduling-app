@@ -21,10 +21,9 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_m
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_definition_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_definition_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_definition_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
@@ -67,8 +66,8 @@ class HiveServices<HiveModel> {
       GoalHiveModelAdapter(),
       CustomMeasurementUnitHiveModelAdapter(),
       ScheduleDefinitionHiveModelAdapter(),
-      ScheduledDayDefinitionHiveModelAdapter(),
-      ScheduledIntervalDefinitionHiveModelAdapter(),
+      ScheduledDayHiveModelAdapter(),
+      ScheduledIntervalHiveModelAdapter(),
       ScheduledInstanceHiveModelAdapter(),
       DateRangeHiveModelAdapter(),
       TimeRangeHiveModelAdapter(),

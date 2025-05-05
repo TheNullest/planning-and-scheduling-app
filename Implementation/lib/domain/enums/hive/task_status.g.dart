@@ -27,6 +27,8 @@ class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
         return TaskStatus.failed;
       case 6:
         return TaskStatus.cancelled;
+      case 7:
+        return TaskStatus.scheduled;
       default:
         return TaskStatus.inProgress;
     }
@@ -55,6 +57,9 @@ class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
         break;
       case TaskStatus.cancelled:
         writer.writeByte(6);
+        break;
+      case TaskStatus.scheduled:
+        writer.writeByte(7);
         break;
     }
   }

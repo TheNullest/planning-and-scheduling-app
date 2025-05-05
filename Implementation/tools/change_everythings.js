@@ -5,8 +5,8 @@ const path = require('path');
 const baseDir = path.join(__dirname, '../lib/');
 
 // Words to replace
-const targetWord = 'schuduled';
-const replacementWord = 'scheduled';
+const targetWord = 'ScheduleLimits';
+const replacementWord = 'ScheduleConstraint';
 
 // Function to recursively process folders and files
 function processDirectory(dir) {

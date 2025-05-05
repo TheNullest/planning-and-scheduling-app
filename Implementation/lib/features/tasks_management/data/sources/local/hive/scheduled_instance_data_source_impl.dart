@@ -11,8 +11,8 @@ class ScheduledInstanceHiveDataSourceImpl extends HiveDataSource<ScheduledInstan
   ScheduledInstanceHiveDataSourceImpl({
     HiveServices<ScheduledInstanceHiveModel>? hiveBox,
   })  : _hiveService = hiveBox ?? serviceLocator<HiveServices<ScheduledInstanceHiveModel>>(),
-        _boxName = HiveBoxConstants.scheduleDefinitionsBox,
-        super(hiveServices: hiveBox, HiveBoxConstants.scheduleDefinitionsBox);
+        _boxName = HiveBoxConstants.scheduleConstraintssBox,
+        super(hiveServices: hiveBox, HiveBoxConstants.scheduleConstraintssBox);
   final String _boxName;
   final HiveServices<ScheduledInstanceHiveModel> _hiveService;
 
@@ -22,6 +22,16 @@ class ScheduledInstanceHiveDataSourceImpl extends HiveDataSource<ScheduledInstan
   ) async =>
       _hiveService.operator<List<ScheduledInstanceHiveModel>>(
         job: (box) async => box.values.where((item) => item.startDateTime.day == date.day).toList(),
+        boxName: _boxName,
+      );
+
+  @override
+  EResultFuture<List<ScheduledInstanceHiveModel>> getBatchScheduledInstancesBySchedulers(
+    List<String> schedulerIds,
+  ) async =>
+      _hiveService.operator<List<ScheduledInstanceHiveModel>>(
+        job: (box) async =>
+            box.values.where((item) => schedulerIds.any((id) => item.schedulerId == id)).toList(),
         boxName: _boxName,
       );
 }

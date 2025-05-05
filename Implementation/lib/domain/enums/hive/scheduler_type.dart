@@ -7,13 +7,13 @@ part 'scheduler_type.g.dart';
 @HiveType(typeId: EnumHiveTypeIds.schedulerType)
 enum SchedulerType {
   @HiveField(0)
-  schedudleDefinition,
+  schedudleConstraint,
 
   @HiveField(1)
-  scheduleDay,
+  scheduledDay,
 
   @HiveField(2)
-  scheduleInterval;
+  scheduledInterval;
 
   static SchedulerType fromName(String name) => SchedulerType.values.firstWhere(
         (e) => e.name.toLowerCase() == name.toLowerCase(),

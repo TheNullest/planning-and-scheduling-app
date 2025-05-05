@@ -37,4 +37,9 @@ extension DateTimeExtensions on DateTime {
         .difference(DateTime(other.year, other.month, other.day))
         .inDays;
   }
+
+  bool isAtSameDate(DateTime other) => differenceInDays(other) == 0;
+
+  bool overlapsWith({required DateTime startDate, required DateTime endDate}) =>
+      isAfter(startDate) && isBefore(endDate);
 }

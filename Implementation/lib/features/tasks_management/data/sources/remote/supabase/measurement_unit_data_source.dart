@@ -6,7 +6,7 @@ class CustomeMeasurementUnitSupabaseDataSourceImpl
     extends SupabaseDataSource<CustomMeasurementUnitSupabaseModel>
     implements CustomeMeasurementUnitLocalDataSource<CustomMeasurementUnitSupabaseModel> {
   CustomeMeasurementUnitSupabaseDataSourceImpl({
-    required super.mapper,
+    required super.dataMapper,
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,

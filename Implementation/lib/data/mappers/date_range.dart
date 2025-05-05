@@ -1,12 +1,12 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/date_time_ranges/date_range/date_range_supabase_model.dart';
 
-class DateRangeMapper extends Mapper<DateRangeEntity, DateRangeHiveModel, DateRangeSupabaseModel> {
+class DateRangeDataMapper extends DataMapper<DateRangeEntity, DateRangeHiveModel, DateRangeSupabaseModel> {
   @override
   DateRangeEntity toEntityFromHive(DateRangeHiveModel model) => tryCatchSimple<DateRangeEntity>(
         action: () => model.copyWith(),

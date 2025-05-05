@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/extensions/time_of_day.dart';
 import 'package:zamaan/core/utils/uuid.dart' as uuid show isValidUUID;
 
 /// Represents a time range with start & optional end time.
@@ -43,13 +44,11 @@ class TimeRangeEntity {
   }
 
   /// Converts `TimeOfDay` to `DateTime` using a provided date.
-  DateTime startAsDateTime(DateTime date) =>
-      DateTime(date.year, date.month, date.day, start.hour, start.minute);
+  DateTime startAsDateTime(DateTime date) => start.toDateTime(date);
 
   /// Converts `TimeOfDay` to `DateTime` for `end`, using a provided date.
   /// If `end` is null, returns `DateTime.now()`.
-  DateTime endAsDateTime(DateTime date) =>
-      DateTime(date.year, date.month, date.day, end.hour, end.minute);
+  DateTime endAsDateTime(DateTime date) => end.toDateTime(date);
 
   /// Validates the time range
   bool get isValid =>
@@ -57,7 +56,7 @@ class TimeRangeEntity {
       (start.hour == end.hour && start.minute <= end.minute);
 
   /// Checks if a [time] falls within this range
-  bool contains(TimeOfDay time) {
+  bool overlapsWith(TimeOfDay time) {
     final startMinutes = start.hour * 60 + start.minute;
     final endMinutes = end.hour * 60 + end.minute;
     final timeMinutes = time.hour * 60 + time.minute;

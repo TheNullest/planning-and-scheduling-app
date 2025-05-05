@@ -18,7 +18,7 @@ import 'package:zamaan/domain/enums/hive/task_status.dart';
 ///     end: DateTime(2023, 10, 15, 16, 30),
 ///   ),
 ///   variableTags: [TagEntity(id: "urgent", title: "Urgent")],
-///   scheduleDefinitionId: "sched_789",
+///   scheduleConstraintsId: "sched_789",
 ///   taskStatus: TaskStatus.completed,
 ///   // Base entity fields
 ///   id: "activity_456",
@@ -37,9 +37,10 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     required super.createdAt,
     required this.referenceId,
     required this.referenceType,
-    required this.dateTimeRangeId,
     required this.variableTagIds,
     required this.taskStatus,
+    required this.startedAt,
+    this.endedAt,
     this.schedulerId,
     this.schedulerType,
     super.description,
@@ -67,22 +68,25 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   /// - Calculating duration via [calculatedSpentTime]
   /// - Schedule adherence validation
   @HiveField(13)
-  final String dateTimeRangeId;
+  final DateTime startedAt;
+
+  @HiveField(14)
+  final DateTime? endedAt;
 
   /// Dynamic tags associated with this specific work session
   ///
   /// Enables context-specific categorization different from
   /// the parent task's tags
-  @HiveField(14)
+  @HiveField(15)
   final List<String> variableTagIds;
 
   /// Reference to the schedule definition that triggered this activity
   ///
   /// Null indicates manual time tracking outside scheduling system
-  @HiveField(15)
+  @HiveField(16)
   final String? schedulerId;
 
-  @HiveField(16)
+  @HiveField(17)
   final SchedulerType? schedulerType;
 
   /// Current state of the work session
@@ -90,7 +94,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
   /// Special states:
   /// - [TaskStatus.doneLate] : Finished outside
   ///   the parent schedule's active period
-  @HiveField(17)
+  @HiveField(18)
   final TaskStatus taskStatus;
 
   @override
@@ -98,13 +102,14 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     String? id,
     DateTime? createdAt,
     DateTime? updatedAt,
+    DateTime? startedAt,
+    DateTime? endedAt,
     String? userId,
     String? description,
     String? referenceId,
     ReferenceType? referenceType,
     SchedulerType? schedulerType,
     String? schedulerId,
-    String? dateTimeRangeId,
     List<String>? variableTagIds,
     TaskStatus? taskStatus,
   }) =>
@@ -116,7 +121,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         userId: userId ?? this.userId,
         referenceId: referenceId ?? this.referenceId,
         referenceType: referenceType ?? this.referenceType,
-        dateTimeRangeId: dateTimeRangeId ?? this.dateTimeRangeId,
+        startedAt: startedAt ?? this.startedAt,
+        endedAt: endedAt ?? this.endedAt,
         variableTagIds: variableTagIds ?? this.variableTagIds,
         taskStatus: taskStatus ?? this.taskStatus,
         schedulerId: referenceId ?? this.schedulerId,
@@ -132,7 +138,8 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         ...super.props,
         referenceId,
         referenceType,
-        dateTimeRangeId,
+        startedAt,
+        endedAt,
         taskStatus,
         schedulerId,
         variableTagIds,

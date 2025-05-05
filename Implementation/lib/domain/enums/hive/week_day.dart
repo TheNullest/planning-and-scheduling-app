@@ -84,6 +84,8 @@ enum WeekDay {
 
   int get dateTimeWeekDayIndex => index + 1;
 
+  bool dateTimeWeekDayCompare(DateTime date) => dateTimeWeekDayIndex == date.weekday;
+
   /// Returns the Persian name for UI display.
   ///
   /// Example:

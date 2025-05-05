@@ -1,6 +1,6 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -9,7 +9,7 @@ import 'package:zamaan/domain/enums/hive/reference_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goal/goal_supabase_model.dart';
 
-class GoalMapper extends Mapper<GoalEntity, GoalHiveModel, GoalSupabaseModel> {
+class GoalDataMapper extends DataMapper<GoalEntity, GoalHiveModel, GoalSupabaseModel> {
   @override
   GoalEntity toEntityFromHive(GoalHiveModel model) => tryCatchSimple<GoalEntity>(
         action: () => model.copyWith(),

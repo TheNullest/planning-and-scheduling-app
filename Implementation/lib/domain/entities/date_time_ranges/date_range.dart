@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:zamaan/core/utils/date_time.dart';
 import 'package:zamaan/core/utils/uuid.dart' as uuid;
+import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 
 /// Represents a date range with start & end dates.
 /// Serialized with Hive to store it inside Hive-based entities.
@@ -10,6 +12,18 @@ class DateRangeEntity {
     this.start,
     this.end,
   });
+
+  factory DateRangeEntity.fromDates(DateTime start, DateTime end) => DateRangeEntity(
+        id: uuid.uuidGenerator,
+        start: start,
+        end: end,
+      );
+
+  factory DateRangeEntity.fromTimeRange(TimeRangeEntity time, DateTime date) => DateRangeEntity(
+        id: uuid.uuidGenerator,
+        start: time.startAsDateTime(date),
+        end: time.endAsDateTime(date),
+      );
 
   @HiveField(0)
   final String id;
@@ -42,11 +56,8 @@ class DateRangeEntity {
       (end == null || start!.isBefore(end!) || start!.isAtSameMomentAs(end!));
 
   /// Returns true if this range contains [date]
-  bool isWithin(DateTime date) {
-    final isAfter = start == null || date.isAfter(start!) || date.isAtSameMomentAs(start!);
-    final isBefore = end == null || date.isBefore(end!) || date.isAtSameMomentAs(end!);
-    return isAfter && isBefore;
-  }
+  bool overlapsWith(DateTime date) =>
+      isWithinDates(currentDate: date, fromDate: start, toDate: end);
 
   DateRangeEntity copyWith({
     String? id,

@@ -6,7 +6,7 @@ part of 'date_time_range_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DateRangeHiveModelAdapter extends HiveBaseTypeAdapter<DateRangeHiveModel> {
+class DateRangeHiveModelAdapter extends TypeAdapter<DateRangeHiveModel> {
   @override
   final int typeId = 23;
 

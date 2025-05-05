@@ -6,7 +6,7 @@ part of 'goal_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
+class GoalHiveModelAdapter extends TypeAdapter<GoalHiveModel> {
   @override
   final int typeId = 15;
 
@@ -80,5 +80,7 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GoalHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is GoalHiveModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

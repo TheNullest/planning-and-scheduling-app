@@ -3,7 +3,7 @@ import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/user.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
@@ -19,16 +19,17 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     required RemoteAuthDataSource remoteDataSource,
     required LocalAuthDataSource localDataSource,
     required NetworkConnectivityMonitor connectionChecker,
-    required this.mapper,
+    required DataMapper<UserEntity, UserHiveModel, UserSupabaseModel> mapper,
   })  : _remoteDataSource = remoteDataSource,
         _localDataSource = localDataSource,
-        _connectionChecker = connectionChecker;
+        _connectionChecker = connectionChecker,
+        _mapper = mapper;
 
   final RemoteAuthDataSource _remoteDataSource;
   final LocalAuthDataSource _localDataSource;
   final NetworkConnectivityMonitor _connectionChecker;
 
-  final UserMapper mapper;
+  final DataMapper<UserEntity, UserHiveModel, UserSupabaseModel> _mapper;
   @override
   EResultFuture<UserEntity> getCurrentUser() async => tryCatchEither<UserEntity>(
         action: () async => _executeBasedOnConnection<UserEntity>(
@@ -151,5 +152,5 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   UserEntity _toEntity(EResult<UserSupabaseModel> result) =>
-      mapper.toEntityFromSupabase(foldEither<UserSupabaseModel>(result));
+      _mapper.toEntityFromSupabase(foldEither<UserSupabaseModel>(result));
 }

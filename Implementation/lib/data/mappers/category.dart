@@ -1,12 +1,12 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/category/category_supabase_model.dart';
 
-class CategoryMapper extends Mapper<CategoryEntity, CategoryHiveModel, CategorySupabaseModel> {
+class CategoryDataMapper extends DataMapper<CategoryEntity, CategoryHiveModel, CategorySupabaseModel> {
   @override
   CategoryEntity toEntityFromHive(CategoryHiveModel model) => tryCatchSimple<CategoryEntity>(
         action: () => model.copyWith(),

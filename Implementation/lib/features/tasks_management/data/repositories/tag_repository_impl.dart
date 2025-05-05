@@ -1,4 +1,4 @@
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -13,11 +13,11 @@ class TagRepositoryImpl extends BaseRepositoryImpl<
     TagSupabaseModel,
     TagLocalDataSource<TagHiveModel>,
     SupabaseDataSource<TagSupabaseModel>,
-    Mapper<TagEntity, TagHiveModel, TagSupabaseModel>> implements TagRepository {
+    DataMapper<TagEntity, TagHiveModel, TagSupabaseModel>> implements TagRepository {
   TagRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
-    required super.mapper,
+    required super.dataMapper,
     required super.netConnectivity,
   });
 }

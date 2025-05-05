@@ -1,5 +1,5 @@
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -14,21 +14,21 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
         TaskActivitySupabaseModel,
         TaskActivityLocalDataSource<TaskActivityHiveModel>,
         SupabaseDataSource<TaskActivitySupabaseModel>,
-        Mapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>
+        DataMapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>
     implements TaskActivityRepository {
   TaskActivityRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
-    required super.mapper,
+    required super.dataMapper,
     required super.netConnectivity,
   })  : _localDataSource = localDataSource,
         _remoteDataSource = remoteDataSource,
-        _mapper = mapper,
+        _dataMapper = dataMapper,
         _netConnectivity = netConnectivity;
 
   final TaskActivityLocalDataSource<TaskActivityHiveModel> _localDataSource;
   final SupabaseDataSource<TaskActivitySupabaseModel> _remoteDataSource;
-  final Mapper _mapper;
+  final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
   // @override
@@ -40,13 +40,13 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
   //           final response = await _localDataSource.getBatchBySubTaskId(subTaskId);
-  //           final models = _mapper.foldEitherList<TaskActivityHiveModel>(response);
-  //           return Right(_mapper.toEntitiesFromHive(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
+  //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
   //           final response = await _remoteDataSource.getBatchBySubTaskId(subTaskId);
-  //           final models = _mapper.foldEitherList<TaskActivitySupabaseModel>(response);
-  //           return Right(_mapper.toEntitiesFromSupabase(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
+  //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
   //         return const Right([]);
   //       },
@@ -68,8 +68,8 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //             startAt: startAt,
   //             dueDate: dueDate,
   //           );
-  //           final models = _mapper.foldEitherList<TaskActivityHiveModel>(response);
-  //           return Right(_mapper.toEntitiesFromHive(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
+  //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
   //           final response = await _remoteDataSource.getBatchByTaskIdAndDateRange(
@@ -77,8 +77,8 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //             startAt: startAt,
   //             dueDate: dueDate,
   //           );
-  //           final models = _mapper.foldEitherList<TaskActivitySupabaseModel>(response);
-  //           return Right(_mapper.toEntitiesFromSupabase(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
+  //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
   //         return const Right([]);
   //       },
@@ -94,13 +94,13 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
   //           final response = await _localDataSource.getBatchByTaskId(taskId);
-  //           final models = _mapper.foldEitherList<TaskActivityHiveModel>(response);
-  //           return Right(_mapper.toEntitiesFromHive(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
+  //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
   //           final response = await _remoteDataSource.getBatchByTaskId(taskId);
-  //           final models = _mapper.foldEitherList<TaskActivitySupabaseModel>(response);
-  //           return Right(_mapper.toEntitiesFromSupabase(models));
+  //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
+  //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
   //         return const Right([]);
   //       },

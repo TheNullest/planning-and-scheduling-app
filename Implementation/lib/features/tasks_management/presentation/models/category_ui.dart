@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart' show Color, IconData;
+import 'package:zamaan/domain/entities/category.dart';
 
 import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
 
@@ -11,8 +12,23 @@ class CategoryUI extends BaseUIModel {
     super.description,
     super.createdAt,
     super.updatedAt,
-    super.user,
+    super.userId,
   });
+
+  factory CategoryUI.fromEntity({
+    required CategoryEntity entity,
+    String? userId,
+  }) =>
+      CategoryUI(
+        id: entity.id,
+        description: entity.description,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        title: entity.title,
+        color: Color(entity.colorCode),
+        icon: IconData(entity.iconCode),
+        userId: userId,
+      );
 
   final String title;
   final Color color;
@@ -27,6 +43,7 @@ class CategoryUI extends BaseUIModel {
     String? title,
     Color? color,
     IconData? icon,
+    String? userId,
   }) =>
       CategoryUI(
         id: id ?? this.id,
@@ -36,5 +53,6 @@ class CategoryUI extends BaseUIModel {
         title: title ?? this.title,
         color: color ?? this.color,
         icon: icon ?? this.icon,
+        userId: userId ?? this.userId,
       );
 }

@@ -5,7 +5,7 @@ import 'package:zamaan/features/tasks_management/data/sources/local/bases/tag_da
 class TagSupabaseDataSourceImpl extends SupabaseDataSource<TagSupabaseModel>
     implements TagLocalDataSource<TagSupabaseModel> {
   TagSupabaseDataSourceImpl({
-    required super.mapper,
+    required super.dataMapper,
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,

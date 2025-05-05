@@ -3,7 +3,7 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub
 
 class SubTaskSupabaseDataSourceImpl extends SupabaseDataSource<SubTaskSupabaseModel> {
   SubTaskSupabaseDataSourceImpl({
-    required super.mapper,
+    required super.dataMapper,
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,

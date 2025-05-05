@@ -2,23 +2,23 @@ import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/data/models/pagination_options.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 
 abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
   SupabaseDataSource({
-    required Mapper mapper,
+    required DataMapper dataMapper,
     required SupabaseClient client,
     required String collectionPath,
     required PaginationOptions defaultPagination,
-  })  : _mapper = mapper,
+  })  : _dataMapper = dataMapper,
         _client = client,
         _collectionPath = collectionPath,
         _defaultPagination = defaultPagination;
 
-  final Mapper _mapper;
+  final DataMapper _dataMapper;
 
   /// Cloud client instance for handling network operations.
   final SupabaseClient _client;
@@ -49,7 +49,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
   @override
   EResultFutureVoid createBatch(List<T> items) async => tryCatchEither(
         action: () async {
-          await client.from(collectionPath).insert(_mapper.toJsonList(items));
+          await client.from(collectionPath).insert(_dataMapper.toJsonList(items));
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -58,7 +58,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
   @override
   EResultFutureVoid updateBatch(List<T> items) async => tryCatchEither(
         action: () async {
-          await client.from(collectionPath).upsert(_mapper.toJsonList(items));
+          await client.from(collectionPath).upsert(_dataMapper.toJsonList(items));
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -99,7 +99,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
           // final result = await query;
 
           final result = await client.from(collectionPath).select(selectQuery);
-          return Right(_mapper.fromJsonList(result) as List<T>);
+          return Right(_dataMapper.fromJsonList(result) as List<T>);
         },
         failureType: FailureType.remote,
       );
@@ -109,14 +109,14 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
         action: () async {
           final result =
               await client.from(collectionPath).select(selectQuery).eq('id', id).single();
-          return Right(_mapper.fromJson(result) as T);
+          return Right(_dataMapper.fromJson(result) as T);
         },
         failureType: FailureType.remote,
       );
   @override
   EResultFutureVoid update(T entity) async => tryCatchEither(
         action: () async {
-          await client.from(collectionPath).update(_mapper.toJson(entity));
+          await client.from(collectionPath).update(_dataMapper.toJson(entity));
           return const Right(null);
         },
         failureType: FailureType.remote,
@@ -128,7 +128,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
               .from(collectionPath)
               .select(selectQuery)
               .or(conditionToString(conditions: ids, join: ','));
-          return Right(_mapper.fromJsonList(result) as List<T>);
+          return Right(_dataMapper.fromJsonList(result) as List<T>);
         },
         failureType: FailureType.remote,
       );
@@ -136,7 +136,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
   @override
   EResultFutureVoid create(T entity) async => tryCatchEither(
         action: () async {
-          await client.from(collectionPath).insert(_mapper.toJson(entity));
+          await client.from(collectionPath).insert(_dataMapper.toJson(entity));
           return const Right(null);
         },
         failureType: FailureType.remote,

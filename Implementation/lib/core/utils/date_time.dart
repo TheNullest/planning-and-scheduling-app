@@ -40,7 +40,7 @@ DateTime justDateUTC(DateTime date) => DateTime(date.year, date.month, date.day)
 /// );
 /// print(withinRange);  // true
 /// ```
-bool isBetweenDates({
+bool isWithinDates({
   required DateTime currentDate,
   DateTime? fromDate,
   DateTime? toDate,
@@ -50,6 +50,22 @@ bool isBetweenDates({
   final checkDate = justDate(currentDate);
 
   return checkDate.compareTo(effectiveFrom) >= 0 && checkDate.compareTo(effectiveTo) <= 0;
+}
+
+int compareDates({
+  DateTime? past,
+  DateTime? future,
+}) {
+  if (past == null) {
+    return 1;
+  } else if (future == null) {
+    return -1;
+  } else {
+    final pastDate = justDate(past);
+    final futureDate = justDate(future);
+
+    return pastDate.compareTo(futureDate);
+  }
 }
 
 /// Generates a PostgreSQL-compatible `date_trunc` SQL expression for timestamp grouping.

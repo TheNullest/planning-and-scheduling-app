@@ -47,6 +47,7 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 /// ```
 EResultFuture<T> tryCatchEither<T>({
   required EResultFuture<T> Function() action,
+  List<EResultFutureVoid Function()>? rollbackActions,
   FailureType? failureType,
   String? customMessage,
   Future Function()? onFinally,
@@ -62,8 +63,10 @@ EResultFuture<T> tryCatchEither<T>({
     final result = await action();
     return result;
   } on Failure catch (e) {
+    rollbackActions?.forEach((action) async => action());
     return Left(e);
   } on supabase.AuthException catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Handle specific supabase authentication exceptions.
     final exception = CustomAuthException(
       errorLocation: location,
@@ -73,6 +76,7 @@ EResultFuture<T> tryCatchEither<T>({
     );
     return Left(exception);
   } on supabase.PostgrestException catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Handle specific supabase Postgrest exceptions.
     final exception = RemoteException(
       errorLocation: location,
@@ -81,6 +85,7 @@ EResultFuture<T> tryCatchEither<T>({
     );
     return Left(exception);
   } on TimeoutException catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Handle timeout exceptions.
     final exceptionMessage =
         formattedMessage.isNotEmpty ? 'Timeout: $e $formattedMessage' : 'Timeout: $e';
@@ -90,6 +95,7 @@ EResultFuture<T> tryCatchEither<T>({
     );
     return Left(exception);
   } on FormatException catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Handle format exceptions.
     final exceptionMessage =
         formattedMessage.isNotEmpty ? 'Format error: $e $formattedMessage' : 'Format error: $e';
@@ -99,6 +105,7 @@ EResultFuture<T> tryCatchEither<T>({
     );
     return Left(exception);
   } catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Handle any other exceptions.
     final exceptionMessage = formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
     final exception = _mapFailureTypeToException(failureType, exceptionMessage, location);
@@ -146,6 +153,7 @@ EResultFuture<T> tryCatchEither<T>({
 /// ```
 T tryCatchSimple<T>({
   required T Function() action,
+  List<FutureVoid Function()>? rollbackActions,
   FailureType? failureType,
   String? customMessage,
   void Function()? onFinally,
@@ -154,6 +162,7 @@ T tryCatchSimple<T>({
     // Execute the action callback and return its result.
     return action();
   } catch (e) {
+    rollbackActions?.forEach((action) async => action());
     // Construct the exception message with the optional custom message.
     final exceptionMessage =
         (customMessage != null ? '\n ** $customMessage ** ' : ' ') + e.toString();

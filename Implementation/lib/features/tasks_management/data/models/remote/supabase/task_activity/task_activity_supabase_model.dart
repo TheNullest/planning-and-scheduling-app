@@ -18,6 +18,8 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
     @JsonKey(name: 'task_status') required String taskStatus,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'variable_tag_ids') required List<String> variableTagIds,
+    @JsonKey(name: 'start_at') required DateTime startedAt,
+    @JsonKey(name: 'end_at') DateTime? endedAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
     @JsonKey(name: 'scheduler_id') String? schedulerId,
     @JsonKey(name: 'scheduler_type') String? schedulerType,
@@ -41,6 +43,8 @@ class TaskActivitySupabaseModel with _$TaskActivitySupabaseModel {
         taskStatus: entity.taskStatus.name,
         schedulerId: entity.schedulerId,
         variableTagIds: entity.variableTagIds,
+        startedAt: entity.startedAt,
+        endedAt: entity.endedAt,
       );
 
   @override

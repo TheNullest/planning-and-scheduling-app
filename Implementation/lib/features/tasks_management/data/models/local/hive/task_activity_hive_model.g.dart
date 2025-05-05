@@ -6,7 +6,7 @@ part of 'task_activity_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
+class TaskActivityHiveModelAdapter extends TypeAdapter<TaskActivityHiveModel> {
   @override
   final int typeId = 22;
 
@@ -22,11 +22,12 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
       createdAt: fields[2] as DateTime,
       referenceId: fields[11] as String,
       referenceType: fields[12] as ReferenceType,
-      dateTimeRangeId: fields[13] as String,
-      variableTagIds: (fields[14] as List).cast<String>(),
-      taskStatus: fields[17] as TaskStatus,
-      schedulerId: fields[15] as String?,
-      schedulerType: fields[16] as SchedulerType?,
+      startedAt: fields[13] as DateTime,
+      variableTagIds: (fields[15] as List).cast<String>(),
+      taskStatus: fields[18] as TaskStatus,
+      endedAt: fields[14] as DateTime?,
+      schedulerId: fields[16] as String?,
+      schedulerType: fields[17] as SchedulerType?,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -35,20 +36,22 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
   @override
   void write(BinaryWriter writer, TaskActivityHiveModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(11)
       ..write(obj.referenceId)
       ..writeByte(12)
       ..write(obj.referenceType)
       ..writeByte(13)
-      ..write(obj.dateTimeRangeId)
+      ..write(obj.startedAt)
       ..writeByte(14)
-      ..write(obj.variableTagIds)
+      ..write(obj.endedAt)
       ..writeByte(15)
-      ..write(obj.schedulerId)
+      ..write(obj.variableTagIds)
       ..writeByte(16)
-      ..write(obj.schedulerType)
+      ..write(obj.schedulerId)
       ..writeByte(17)
+      ..write(obj.schedulerType)
+      ..writeByte(18)
       ..write(obj.taskStatus)
       ..writeByte(0)
       ..write(obj.id)

@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart' show IconData;
+import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
 
 class CustomeMeasurementUnitUI extends BaseUIModel {
@@ -10,12 +11,22 @@ class CustomeMeasurementUnitUI extends BaseUIModel {
     super.description,
     super.createdAt,
     super.updatedAt,
-    super.user,
-    this.value,
+    super.userId,
   });
 
+  factory CustomeMeasurementUnitUI.fromEntity(CustomMeasurementUnitEntity entity) =>
+      CustomeMeasurementUnitUI(
+        id: entity.id,
+        description: entity.description,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        userId: entity.userId,
+        title: entity.title,
+        isDouble: entity.isDouble,
+        icon: IconData(entity.iconCode),
+      );
+
   final String title;
-  final int? value;
   final bool isDouble;
   final IconData icon;
 
@@ -28,7 +39,7 @@ class CustomeMeasurementUnitUI extends BaseUIModel {
     DateTime? updatedAt,
     bool? isDouble,
     IconData? icon,
-    int? value,
+    String? userId,
   }) =>
       CustomeMeasurementUnitUI(
         id: id ?? this.id,
@@ -38,6 +49,6 @@ class CustomeMeasurementUnitUI extends BaseUIModel {
         title: title ?? this.title,
         isDouble: isDouble ?? this.isDouble,
         icon: icon ?? this.icon,
-        value: value ?? this.value,
+        userId: userId ?? this.userId,
       );
 }

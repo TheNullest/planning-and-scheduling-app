@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
@@ -30,19 +29,19 @@ class SubTaskEntity extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.description,
-    required super.updatedAt,
     required this.taskId,
     required this.priority,
     required this.title,
     required this.status,
     required this.totalSpentTime,
+    super.description,
+    super.updatedAt,
+    this.goalId,
   });
 
   /// The ID of the parent task this subtask belongs to.
   ///
   /// This field acts as a foreign key linking to a [TaskEntity].
-  @HiveField(11)
   final String taskId;
 
   /// The priority level of the subtask.
@@ -51,13 +50,11 @@ class SubTaskEntity extends BaseEntityAbstraction {
   /// - [Priority.low] ("کم")
   /// - [Priority.medium] ("متوسط")
   /// - [Priority.high] ("زیاد")
-  @HiveField(12)
   final Priority priority;
 
   /// A short, descriptive title for the subtask.
   ///
   /// Example: "Refactor authentication module"
-  @HiveField(13)
   final String title;
 
   /// The current status of the subtask.
@@ -66,15 +63,15 @@ class SubTaskEntity extends BaseEntityAbstraction {
   /// - [TaskStatus.inProgress] ("در حال انجام")
   /// - [TaskStatus.done] ("انجام شده")
   /// - [TaskStatus.doneLate] ("تکمیل خارج از برنامه")
-  @HiveField(14)
   final TaskStatus status;
 
   /// The total time spent on this subtask, aggregated from all [TaskActivityEntity] records.
   ///
   /// - This value is **automatically calculated** and should not be set manually.
   /// - Will be `null` if no time has been logged yet.
-  @HiveField(15)
   final Duration? totalSpentTime;
+
+  final String? goalId;
 
   @override
   SubTaskEntity copyWith({
@@ -88,6 +85,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
     String? title,
     Priority? priority,
     TaskStatus? status,
+    String? goalId,
   }) =>
       SubTaskEntity(
         id: id ?? this.id,
@@ -100,6 +98,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
         priority: priority ?? this.priority,
         status: status ?? this.status,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
+        goalId: goalId ?? this.goalId,
       );
 
   @override
@@ -110,5 +109,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
         priority,
         status,
         totalSpentTime,
+        goalId,
       ];
 }

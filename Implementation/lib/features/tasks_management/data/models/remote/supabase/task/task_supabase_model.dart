@@ -21,8 +21,13 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
     required bool archived,
     @JsonKey(name: 'category_ids') required List<String> categoryIds,
     @JsonKey(name: 'fixed_tag_ids') required List<String> fixedTagIds,
+    @JsonKey(name: 'sub_tsk_ids') required List<String> subTaskIds,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'total_spent_time') required Duration totalSpentTime,
+    @JsonKey(name: 'scheduled_interval_ids') required List<String> scheduledIntervalIds,
+    @JsonKey(name: 'scheduled_day_ids') required List<String> scheduledDayIds,
+    @JsonKey(name: 'scheduled_Instance_ids') required List<String> scheduledInstanceIds,
+    @JsonKey(name: 'schedule_constraint_Id') String? scheduleConstraintId,
     String? description,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _TaskSupabaseModel;
@@ -42,6 +47,11 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
         taskStatus: entity.taskStatus.name,
         categoryIds: entity.categoryIds,
         fixedTagIds: entity.categoryIds,
+        subTaskIds: List.from(entity.subTaskIds),
+        scheduledDayIds: List.from(entity.scheduledDayIds),
+        scheduledIntervalIds: List.from(entity.scheduledIntervalIds),
+        scheduledInstanceIds: List.from(entity.scheduledInstanceIds),
+        scheduleConstraintId: entity.scheduleConstraintId,
       );
 
   factory TaskSupabaseModel.fromJson(Map<String, dynamic> json) =>

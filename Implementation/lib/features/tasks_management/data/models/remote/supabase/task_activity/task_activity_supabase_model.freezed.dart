@@ -34,6 +34,10 @@ mixin _$TaskActivitySupabaseModel {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'variable_tag_ids')
   List<String> get variableTagIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'start_at')
+  DateTime get startedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_at')
+  DateTime? get endedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'scheduler_id')
@@ -66,6 +70,8 @@ abstract class $TaskActivitySupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'task_status') String taskStatus,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'variable_tag_ids') List<String> variableTagIds,
+      @JsonKey(name: 'start_at') DateTime startedAt,
+      @JsonKey(name: 'end_at') DateTime? endedAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') String? schedulerId,
       @JsonKey(name: 'scheduler_type') String? schedulerType,
@@ -95,6 +101,8 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
     Object? taskStatus = null,
     Object? userId = null,
     Object? variableTagIds = null,
+    Object? startedAt = null,
+    Object? endedAt = freezed,
     Object? updatedAt = freezed,
     Object? schedulerId = freezed,
     Object? schedulerType = freezed,
@@ -129,6 +137,14 @@ class _$TaskActivitySupabaseModelCopyWithImpl<$Res,
           ? _value.variableTagIds
           : variableTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      startedAt: null == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endedAt: freezed == endedAt
+          ? _value.endedAt
+          : endedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -166,6 +182,8 @@ abstract class _$$TaskActivitySupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'task_status') String taskStatus,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'variable_tag_ids') List<String> variableTagIds,
+      @JsonKey(name: 'start_at') DateTime startedAt,
+      @JsonKey(name: 'end_at') DateTime? endedAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') String? schedulerId,
       @JsonKey(name: 'scheduler_type') String? schedulerType,
@@ -194,6 +212,8 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
     Object? taskStatus = null,
     Object? userId = null,
     Object? variableTagIds = null,
+    Object? startedAt = null,
+    Object? endedAt = freezed,
     Object? updatedAt = freezed,
     Object? schedulerId = freezed,
     Object? schedulerType = freezed,
@@ -228,6 +248,14 @@ class __$$TaskActivitySupabaseModelImplCopyWithImpl<$Res>
           ? _value._variableTagIds
           : variableTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      startedAt: null == startedAt
+          ? _value.startedAt
+          : startedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endedAt: freezed == endedAt
+          ? _value.endedAt
+          : endedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
@@ -260,6 +288,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'variable_tag_ids')
       required final List<String> variableTagIds,
+      @JsonKey(name: 'start_at') required this.startedAt,
+      @JsonKey(name: 'end_at') this.endedAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'scheduler_id') this.schedulerId,
       @JsonKey(name: 'scheduler_type') this.schedulerType,
@@ -296,6 +326,12 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
   }
 
   @override
+  @JsonKey(name: 'start_at')
+  final DateTime startedAt;
+  @override
+  @JsonKey(name: 'end_at')
+  final DateTime? endedAt;
+  @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
   @override
@@ -309,7 +345,7 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
 
   @override
   String toString() {
-    return 'TaskActivitySupabaseModel(id: $id, createdAt: $createdAt, refType: $refType, refId: $refId, taskStatus: $taskStatus, userId: $userId, variableTagIds: $variableTagIds, updatedAt: $updatedAt, schedulerId: $schedulerId, schedulerType: $schedulerType, description: $description)';
+    return 'TaskActivitySupabaseModel(id: $id, createdAt: $createdAt, refType: $refType, refId: $refId, taskStatus: $taskStatus, userId: $userId, variableTagIds: $variableTagIds, startedAt: $startedAt, endedAt: $endedAt, updatedAt: $updatedAt, schedulerId: $schedulerId, schedulerType: $schedulerType, description: $description)';
   }
 
   @override
@@ -327,6 +363,9 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             const DeepCollectionEquality()
                 .equals(other._variableTagIds, _variableTagIds) &&
+            (identical(other.startedAt, startedAt) ||
+                other.startedAt == startedAt) &&
+            (identical(other.endedAt, endedAt) || other.endedAt == endedAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.schedulerId, schedulerId) ||
@@ -348,6 +387,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       taskStatus,
       userId,
       const DeepCollectionEquality().hash(_variableTagIds),
+      startedAt,
+      endedAt,
       updatedAt,
       schedulerId,
       schedulerType,
@@ -380,6 +421,8 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'variable_tag_ids')
       required final List<String> variableTagIds,
+      @JsonKey(name: 'start_at') required final DateTime startedAt,
+      @JsonKey(name: 'end_at') final DateTime? endedAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') final String? schedulerId,
       @JsonKey(name: 'scheduler_type') final String? schedulerType,
@@ -408,6 +451,12 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
   @override
   @JsonKey(name: 'variable_tag_ids')
   List<String> get variableTagIds;
+  @override
+  @JsonKey(name: 'start_at')
+  DateTime get startedAt;
+  @override
+  @JsonKey(name: 'end_at')
+  DateTime? get endedAt;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

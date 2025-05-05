@@ -14,26 +14,26 @@ class SchedulerTypeAdapter extends TypeAdapter<SchedulerType> {
   SchedulerType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return SchedulerType.schedudleDefinition;
+        return SchedulerType.schedudleConstraint;
       case 1:
-        return SchedulerType.scheduleDay;
+        return SchedulerType.scheduledDay;
       case 2:
-        return SchedulerType.scheduleInterval;
+        return SchedulerType.scheduledInterval;
       default:
-        return SchedulerType.schedudleDefinition;
+        return SchedulerType.schedudleConstraint;
     }
   }
 
   @override
   void write(BinaryWriter writer, SchedulerType obj) {
     switch (obj) {
-      case SchedulerType.schedudleDefinition:
+      case SchedulerType.schedudleConstraint:
         writer.writeByte(0);
         break;
-      case SchedulerType.scheduleDay:
+      case SchedulerType.scheduledDay:
         writer.writeByte(1);
         break;
-      case SchedulerType.scheduleInterval:
+      case SchedulerType.scheduledInterval:
         writer.writeByte(2);
         break;
     }

@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart' show Color, IconData;
 import 'package:zamaan/features/tasks_management/presentation/models/category_ui.dart';
-import 'package:zamaan/presentation_shared/models/entities/user_ui.dart';
 
 class TagUI extends CategoryUI {
   TagUI({
@@ -11,7 +10,7 @@ class TagUI extends CategoryUI {
     super.description,
     super.createdAt,
     super.updatedAt,
-    super.user,
+    super.userId,
   });
 
   @override
@@ -23,7 +22,7 @@ class TagUI extends CategoryUI {
     String? title,
     Color? color,
     IconData? icon,
-    UserUI? user,
+    String? userId,
   }) =>
       TagUI(
         id: id ?? this.id,
@@ -33,6 +32,6 @@ class TagUI extends CategoryUI {
         title: title ?? this.title,
         color: color ?? this.color,
         icon: icon ?? this.icon,
-        user: user ?? this.user,
+        userId: userId ?? this.userId,
       );
 }

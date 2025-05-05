@@ -3,7 +3,7 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goa
 
 class GoalSupabaseDataSourceImpl extends SupabaseDataSource<GoalSupabaseModel> {
   GoalSupabaseDataSourceImpl({
-    required super.mapper,
+    required super.dataMapper,
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,

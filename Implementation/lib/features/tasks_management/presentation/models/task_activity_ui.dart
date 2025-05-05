@@ -2,7 +2,6 @@ import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/sub_task_activity_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/tag_ui.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/task_ui.dart';
-import 'package:zamaan/presentation_shared/models/entities/user_ui.dart';
 
 class TaskActivityUI extends SubTaskActivityUI<TaskUI> {
   TaskActivityUI({
@@ -16,7 +15,7 @@ class TaskActivityUI extends SubTaskActivityUI<TaskUI> {
     super.description,
     super.createdAt,
     super.updatedAt,
-    super.user,
+    super.userId,
   });
 
   final List<SubTaskActivityUI> subTaskActivities;
@@ -33,7 +32,7 @@ class TaskActivityUI extends SubTaskActivityUI<TaskUI> {
     DateTime? endAt,
     List<TagUI>? variableTags,
     TaskStatus? status,
-    UserUI? user,
+    String? userId,
   }) =>
       TaskActivityUI(
         id: id ?? this.id,
@@ -46,6 +45,6 @@ class TaskActivityUI extends SubTaskActivityUI<TaskUI> {
         endAt: endAt ?? this.endAt,
         variableTags: variableTags ?? this.variableTags,
         status: status ?? this.status,
-        user: user ?? this.user,
+        userId: userId ?? this.userId,
       );
 }

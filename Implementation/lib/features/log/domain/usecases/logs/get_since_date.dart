@@ -8,5 +8,8 @@ class GetLogsUsecase extends UsecaseWithParams<LogRepository, void, GetWithDateR
 
   @override
   EResultFutureVoid call(GetWithDateRangeParams params) async => repository.getWithDateRange(
-      fromDate: params.fromDate, toDate: params.toDate, policy: params.policy,);
+        fromDate: params.fromDate,
+        toDate: params.toDate,
+        policy: params.policy,
+      );
 }

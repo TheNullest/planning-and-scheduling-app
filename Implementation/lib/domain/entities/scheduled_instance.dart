@@ -86,4 +86,17 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
       timezone: timezone ?? this.timezone,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        ...super.props,
+        startDateTime,
+        endDateTime,
+        schedulerId,
+        schedulerType,
+        sequenceNumber,
+        successPercentage,
+        timezone,
+        taskStatus,
+      ];
 }

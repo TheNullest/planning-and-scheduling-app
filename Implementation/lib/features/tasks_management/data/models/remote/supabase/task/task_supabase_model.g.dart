@@ -18,8 +18,13 @@ Map<String, dynamic> _$TaskSupabaseModelToJson(TaskSupabaseModel instance) =>
       'archived': instance.archived,
       'category_ids': instance.categoryIds,
       'fixed_tag_ids': instance.fixedTagIds,
+      'sub_tsk_ids': instance.subTaskIds,
       'user_id': instance.userId,
       'total_spent_time': instance.totalSpentTime.inMicroseconds,
+      'scheduled_interval_ids': instance.scheduledIntervalIds,
+      'scheduled_day_ids': instance.scheduledDayIds,
+      'scheduled_Instance_ids': instance.scheduledInstanceIds,
+      'schedule_constraint_Id': instance.scheduleConstraintId,
       'description': instance.description,
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
@@ -41,9 +46,22 @@ _$TaskSupabaseModelImpl _$$TaskSupabaseModelImplFromJson(
       fixedTagIds: (json['fixed_tag_ids'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      subTaskIds: (json['sub_tsk_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       userId: json['user_id'] as String,
       totalSpentTime:
           Duration(microseconds: (json['total_spent_time'] as num).toInt()),
+      scheduledIntervalIds: (json['scheduled_interval_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      scheduledDayIds: (json['scheduled_day_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      scheduledInstanceIds: (json['scheduled_Instance_ids'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      scheduleConstraintId: json['schedule_constraint_Id'] as String?,
       description: json['description'] as String?,
       updatedAt: json['updated_at'] == null
           ? null
@@ -63,8 +81,13 @@ Map<String, dynamic> _$$TaskSupabaseModelImplToJson(
       'archived': instance.archived,
       'category_ids': instance.categoryIds,
       'fixed_tag_ids': instance.fixedTagIds,
+      'sub_tsk_ids': instance.subTaskIds,
       'user_id': instance.userId,
       'total_spent_time': instance.totalSpentTime.inMicroseconds,
+      'scheduled_interval_ids': instance.scheduledIntervalIds,
+      'scheduled_day_ids': instance.scheduledDayIds,
+      'scheduled_Instance_ids': instance.scheduledInstanceIds,
+      'schedule_constraint_Id': instance.scheduleConstraintId,
       'description': instance.description,
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

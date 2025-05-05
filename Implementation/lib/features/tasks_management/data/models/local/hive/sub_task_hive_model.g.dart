@@ -6,7 +6,7 @@ part of 'sub_task_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
+class SubTaskHiveModelAdapter extends TypeAdapter<SubTaskHiveModel> {
   @override
   final int typeId = 13;
 
@@ -25,6 +25,7 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       title: fields[13] as String,
       status: fields[14] as TaskStatus,
       totalSpentTime: fields[15] as Duration?,
+      goalId: fields[16] as String?,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -33,7 +34,7 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
   @override
   void write(BinaryWriter writer, SubTaskHiveModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
@@ -44,6 +45,8 @@ class SubTaskHiveModelAdapter extends HiveBaseTypeAdapter<SubTaskHiveModel> {
       ..write(obj.status)
       ..writeByte(15)
       ..write(obj.totalSpentTime)
+      ..writeByte(16)
+      ..write(obj.goalId)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

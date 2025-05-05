@@ -1,27 +1,49 @@
-import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
+import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/features/tasks_management/presentation/models/measurement_unit_ui.dart';
+import 'package:zamaan/presentation_shared/models/entities/base_ui.dart';
 
 class GoalUI extends BaseUIModel {
   GoalUI({
     required this.customeCustomeMeasurementUnit,
-    required this.perActiveHour,
-    required this.perActiveDay,
-    required this.perActiveWeek,
-    required this.perActiveMonth,
-    required this.perActiveYear,
+    required this.minutelyTarget,
+    required this.hourlyTarget,
+    required this.dailyTarget,
+    required this.weeklyTarget,
+    required this.monthlyTarget,
+    required this.yearlyTarget,
     super.id,
     super.description,
     super.createdAt,
     super.updatedAt,
-    super.user,
+    super.userId,
   });
 
+  factory GoalUI.fromEntity({
+    required GoalEntity entity,
+    required CustomeMeasurementUnitUI customeCustomeMeasurementUnit,
+  }) =>
+      GoalUI(
+        id: entity.id,
+        description: entity.description,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        userId: entity.userId,
+        customeCustomeMeasurementUnit: customeCustomeMeasurementUnit,
+        minutelyTarget: entity.minutelyTarget,
+        hourlyTarget: entity.hourlyTarget,
+        dailyTarget: entity.dailyTarget,
+        weeklyTarget: entity.weeklyTarget,
+        monthlyTarget: entity.monthlyTarget,
+        yearlyTarget: entity.yearlyTarget,
+      );
+
   final CustomeMeasurementUnitUI customeCustomeMeasurementUnit;
-  final double perActiveHour;
-  final double perActiveDay;
-  final double perActiveWeek;
-  final double perActiveMonth;
-  final double perActiveYear;
+  final double minutelyTarget;
+  final double hourlyTarget;
+  final double dailyTarget;
+  final double weeklyTarget;
+  final double monthlyTarget;
+  final double yearlyTarget;
 
   @override
   GoalUI copyWith({
@@ -30,11 +52,13 @@ class GoalUI extends BaseUIModel {
     DateTime? createdAt,
     DateTime? updatedAt,
     CustomeMeasurementUnitUI? customeCustomeMeasurementUnit,
-    double? perActiveHour,
-    double? perActiveDay,
-    double? perActiveWeek,
-    double? perActiveMonth,
-    double? perActiveYear,
+    double? minutelyTarget,
+    double? hourlyTarget,
+    double? dailyTarget,
+    double? weeklyTarget,
+    double? monthlyTarget,
+    double? yearlyTarget,
+    String? userId,
   }) =>
       GoalUI(
         id: id ?? this.id,
@@ -43,10 +67,12 @@ class GoalUI extends BaseUIModel {
         updatedAt: updatedAt ?? this.updatedAt,
         customeCustomeMeasurementUnit:
             customeCustomeMeasurementUnit ?? this.customeCustomeMeasurementUnit,
-        perActiveHour: perActiveHour ?? this.perActiveHour,
-        perActiveDay: perActiveDay ?? this.perActiveDay,
-        perActiveWeek: perActiveWeek ?? this.perActiveWeek,
-        perActiveMonth: perActiveMonth ?? this.perActiveMonth,
-        perActiveYear: perActiveYear ?? this.perActiveYear,
+        minutelyTarget: minutelyTarget ?? this.minutelyTarget,
+        hourlyTarget: hourlyTarget ?? this.hourlyTarget,
+        dailyTarget: dailyTarget ?? this.dailyTarget,
+        weeklyTarget: weeklyTarget ?? this.weeklyTarget,
+        monthlyTarget: monthlyTarget ?? this.monthlyTarget,
+        yearlyTarget: yearlyTarget ?? this.yearlyTarget,
+        userId: userId ?? this.userId,
       );
 }

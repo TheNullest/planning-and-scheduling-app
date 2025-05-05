@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
+import 'package:zamaan/domain/entities/schedule_constraints.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
 /// Represents a task with configurable properties and time tracking capabilities.
@@ -25,6 +27,8 @@ import 'package:zamaan/domain/enums/enums.dart';
 
 @HiveType(typeId: 1)
 class TaskEntity extends BaseEntityAbstraction {
+  /// - [scheduledDayIds]: Advanced customization for specific scheduled days.
+  /// - [scheduledIntervalIds]: Interval-based scheduling for tasks.
   TaskEntity({
     required super.id,
     required super.userId,
@@ -39,48 +43,56 @@ class TaskEntity extends BaseEntityAbstraction {
     required this.totalSpentTime,
     required this.archived,
     required this.taskStatus,
+    required this.scheduledDayIds,
+    required this.scheduledIntervalIds,
+    required this.scheduledInstanceIds,
+    this.scheduleConstraintId,
     super.description,
     super.updatedAt,
   });
 
   /// Short descriptive title (max 100 chars)
-  @HiveField(11)
   final String title;
 
   /// ARGB color value (0xAARRGGBB format)
-  @HiveField(12)
   final int colorCode;
 
   /// Material Design icon code point
-  @HiveField(13)
   final int iconCode;
 
   /// Importance level for task prioritization
-  @HiveField(14)
   final Priority priority;
 
-  @HiveField(15)
   final List<String> subTaskIds;
 
   /// Primary categorization groups
-  @HiveField(16)
   final List<String> categoryIds;
 
   /// Permanent tags that cannot be auto-removed
-  @HiveField(17)
   final List<String> fixedTagIds;
 
   /// Cumulative time spent across all activities
-  @HiveField(18)
   final Duration totalSpentTime;
 
   /// Whether the task is hidden from main views
-  @HiveField(19)
   final bool archived;
 
   /// Current lifecycle state
-  @HiveField(20)
   final TaskStatus taskStatus;
+
+  final String? scheduleConstraintId;
+
+  /// Advanced custom scheduling logic for specific days.
+  ///
+  /// Contains user-defined rules for particular days (e.g., Sundays from 10 AM to 12 PM).
+  final List<String> scheduledDayIds;
+
+  /// Interval-based scheduling logic.
+  ///
+  /// Example: "Every 3 days from 9 AM to 11 AM".
+  final List<String> scheduledIntervalIds;
+
+  final List<String> scheduledInstanceIds;
 
   // ========================
   // Validation Methods
@@ -141,13 +153,17 @@ class TaskEntity extends BaseEntityAbstraction {
     String? title,
     int? colorCode,
     int? iconCode,
-    List<String>? subTaskIds,
+    List<String>? subTasks,
     List<String>? categoryIds,
     Priority? priority,
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
     TaskStatus? taskStatus,
+    String? scheduleConstraintId,
+    List<String>? scheduledDayIds,
+    List<String>? scheduledIntervalIds,
+    List<String>? scheduledInstanceIds,
   }) =>
       TaskEntity(
         id: id ?? this.id,
@@ -159,9 +175,13 @@ class TaskEntity extends BaseEntityAbstraction {
         colorCode: colorCode ?? this.colorCode,
         iconCode: iconCode ?? this.iconCode,
         categoryIds: categoryIds ?? List.from(this.categoryIds),
-        subTaskIds: subTaskIds ?? List.from(this.subTaskIds),
+        subTaskIds: subTasks ?? List.from(subTaskIds),
         priority: priority ?? this.priority,
         archived: archived ?? this.archived,
+        scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+        scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
+        scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
+        scheduledInstanceIds: scheduledInstanceIds ?? List.from(this.scheduledInstanceIds),
         fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
         taskStatus: taskStatus ?? this.taskStatus,
@@ -180,5 +200,9 @@ class TaskEntity extends BaseEntityAbstraction {
         fixedTagIds,
         totalSpentTime,
         taskStatus,
+        scheduledDayIds,
+        scheduledIntervalIds,
+        scheduleConstraintId,
+        scheduledInstanceIds,
       ];
 }

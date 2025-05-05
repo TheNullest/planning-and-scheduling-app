@@ -1,13 +1,13 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/mapper.dart';
+import 'package:zamaan/data/mappers/data_mapper.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub_task/sub_task_supabase_model.dart';
 
-class SubTaskMapper extends Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel> {
+class SubTaskDataMapper extends DataMapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel> {
   @override
   SubTaskEntity toEntityFromHive(SubTaskHiveModel model) => tryCatchSimple<SubTaskEntity>(
         action: () => model.copyWith(),
@@ -46,14 +46,13 @@ class SubTaskMapper extends Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupab
       );
 
   @override
-  List<SubTaskSupabaseModel> fromJsonList(List<Map<MeasurementUnit, dynamic>> jsonList) =>
-      tryCatchSimple(
+  List<SubTaskSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) => tryCatchSimple(
         action: () => jsonList.map(SubTaskSupabaseModel.fromJson).toList(),
         failureType: FailureType.local,
       );
 
   @override
-  List<Map<MeasurementUnit, dynamic>> toJsonList(List<SubTaskSupabaseModel> items) {
+  List<Map<String, dynamic>> toJsonList(List<SubTaskSupabaseModel> items) {
     return tryCatchSimple(
       action: () => items.map((item) => item.toJson()).toList(), // Implementing toJsonList
       failureType: FailureType.local,
@@ -61,13 +60,13 @@ class SubTaskMapper extends Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupab
   }
 
   @override
-  SubTaskSupabaseModel? fromJson(Map<MeasurementUnit, dynamic> json) => tryCatchSimple(
+  SubTaskSupabaseModel? fromJson(Map<String, dynamic> json) => tryCatchSimple(
         action: () => SubTaskSupabaseModel.fromJson(json),
         failureType: FailureType.local,
       );
 
   @override
-  Map<MeasurementUnit, dynamic> toJson(SubTaskSupabaseModel item) => tryCatchSimple(
+  Map<String, dynamic> toJson(SubTaskSupabaseModel item) => tryCatchSimple(
         action: () => item.toJson(),
         failureType: FailureType.local,
       );

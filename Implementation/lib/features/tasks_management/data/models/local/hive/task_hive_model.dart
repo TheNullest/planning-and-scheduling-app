@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
+import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
@@ -45,21 +46,25 @@ part 'task_hive_model.g.dart';
 ///
 /// The Hive annotations ensure proper serialization for storage.
 @HiveType(typeId: ClassHiveTypeIds.task) // Unique Type ID for Hive
-class TaskHiveModel extends TaskEntity {
+class TaskHiveModel extends BaseEntityAbstraction {
   TaskHiveModel({
     required super.id,
     required super.userId,
     required super.createdAt,
-    required super.title,
-    required super.colorCode,
-    required super.iconCode,
-    required super.priority,
-    required super.subTaskIds,
-    required super.categoryIds,
-    required super.fixedTagIds,
-    required super.totalSpentTime,
-    required super.archived,
-    required super.taskStatus,
+    required this.title,
+    required this.colorCode,
+    required this.iconCode,
+    required this.priority,
+    required this.subTaskIds,
+    required this.categoryIds,
+    required this.fixedTagIds,
+    required this.totalSpentTime,
+    required this.archived,
+    required this.taskStatus,
+    required this.scheduledDayIds,
+    required this.scheduledIntervalIds,
+    required this.scheduledInstanceIds,
+    this.scheduleConstraintId,
     super.description,
     super.updatedAt,
   });
@@ -78,14 +83,75 @@ class TaskHiveModel extends TaskEntity {
       colorCode: entity.colorCode,
       iconCode: entity.iconCode,
       priority: entity.priority,
-      categoryIds: List.from(entity.categoryIds),
-      fixedTagIds: List.from(entity.fixedTagIds),
+      categoryIds: entity.categoryIds,
+      fixedTagIds: entity.fixedTagIds,
       totalSpentTime: entity.totalSpentTime,
       archived: entity.archived,
       taskStatus: entity.taskStatus,
+      scheduleConstraintId: entity.scheduleConstraintId,
+      scheduledDayIds: List.from(entity.scheduledDayIds),
+      scheduledIntervalIds: List.from(entity.scheduledIntervalIds),
+      scheduledInstanceIds: List.from(entity.scheduledInstanceIds),
       subTaskIds: List.from(entity.subTaskIds),
     );
   }
+
+  /// Short descriptive title (max 100 chars)
+  @HiveField(11)
+  final String title;
+
+  /// ARGB color value (0xAARRGGBB format)
+  @HiveField(12)
+  final int colorCode;
+
+  /// Material Design icon code point
+  @HiveField(13)
+  final int iconCode;
+
+  /// Importance level for task prioritization
+  @HiveField(14)
+  final Priority priority;
+
+  @HiveField(15)
+  final List<String> subTaskIds;
+
+  /// Primary categorization groups
+  @HiveField(16)
+  final List<String> categoryIds;
+
+  /// Permanent tags that cannot be auto-removed
+  @HiveField(17)
+  final List<String> fixedTagIds;
+
+  /// Cumulative time spent across all activities
+  @HiveField(18)
+  final Duration totalSpentTime;
+
+  /// Whether the task is hidden from main views
+  @HiveField(19)
+  final bool archived;
+
+  /// Current lifecycle state
+  @HiveField(20)
+  final TaskStatus taskStatus;
+
+  @HiveField(21)
+  final String? scheduleConstraintId;
+
+  /// Advanced custom scheduling logic for specific days.
+  ///
+  /// Contains user-defined rules for particular days (e.g., Sundays from 10 AM to 12 PM).
+  @HiveField(22)
+  final List<String> scheduledDayIds;
+
+  /// Interval-based scheduling logic.
+  ///
+  /// Example: "Every 3 days from 9 AM to 11 AM".
+  @HiveField(23)
+  final List<String> scheduledIntervalIds;
+
+  @HiveField(24)
+  final List<String> scheduledInstanceIds;
 
   /// Returns a new instance of [TaskHiveModel] with updated values.
   ///
@@ -108,6 +174,10 @@ class TaskHiveModel extends TaskEntity {
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
     TaskStatus? taskStatus,
+    String? scheduleConstraintId,
+    List<String>? scheduledDayIds,
+    List<String>? scheduledIntervalIds,
+    List<String>? scheduledInstanceIds,
   }) {
     return TaskHiveModel(
       id: id ?? this.id,
@@ -125,6 +195,29 @@ class TaskHiveModel extends TaskEntity {
       archived: archived ?? this.archived,
       taskStatus: taskStatus ?? this.taskStatus,
       subTaskIds: subTaskIds ?? List.from(this.subTaskIds),
+      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+      scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
+      scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
+      scheduledInstanceIds: scheduledInstanceIds ?? List.from(this.scheduledInstanceIds),
     );
   }
+
+  @override
+  List<Object?> get props => [
+        ...super.props,
+        title,
+        categoryIds,
+        createdAt,
+        colorCode,
+        iconCode,
+        priority,
+        archived,
+        fixedTagIds,
+        totalSpentTime,
+        taskStatus,
+        scheduledDayIds,
+        scheduledIntervalIds,
+        scheduleConstraintId,
+        scheduledInstanceIds,
+      ];
 }

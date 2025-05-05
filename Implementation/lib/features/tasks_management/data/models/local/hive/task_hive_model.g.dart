@@ -6,7 +6,7 @@ part of 'task_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
+class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
   @override
   final int typeId = 12;
 
@@ -30,6 +30,10 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       totalSpentTime: fields[18] as Duration,
       archived: fields[19] as bool,
       taskStatus: fields[20] as TaskStatus,
+      scheduledDayIds: (fields[22] as List).cast<String>(),
+      scheduledIntervalIds: (fields[23] as List).cast<String>(),
+      scheduledInstanceIds: (fields[24] as List).cast<String>(),
+      scheduleConstraintId: fields[21] as String?,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -38,7 +42,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(19)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -59,6 +63,14 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..write(obj.archived)
       ..writeByte(20)
       ..write(obj.taskStatus)
+      ..writeByte(21)
+      ..write(obj.scheduleConstraintId)
+      ..writeByte(22)
+      ..write(obj.scheduledDayIds)
+      ..writeByte(23)
+      ..write(obj.scheduledIntervalIds)
+      ..writeByte(24)
+      ..write(obj.scheduledInstanceIds)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -77,5 +89,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      other is TaskHiveModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

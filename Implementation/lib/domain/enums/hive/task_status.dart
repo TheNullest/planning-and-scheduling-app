@@ -26,7 +26,10 @@ enum TaskStatus {
   failed('شکست خورده'),
 
   @HiveField(6)
-  cancelled('لغو شده');
+  cancelled('لغو شده'),
+
+  @HiveField(7)
+  scheduled('برنامه ریزی شده');
 
   /// Persian equivalent used for UI display.
   const TaskStatus(this._inPersian);

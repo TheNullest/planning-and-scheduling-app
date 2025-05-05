@@ -6,7 +6,7 @@ part of 'time_range_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> {
+class TimeRangeHiveModelAdapter extends TypeAdapter<TimeRangeHiveModel> {
   @override
   final int typeId = 24;
 
@@ -18,8 +18,8 @@ class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> 
     };
     return TimeRangeHiveModel(
       id: fields[0] as String,
-      start: fields[1] as TimeOfDay?,
-      end: fields[2] as TimeOfDay?,
+      start: fields[1] as int,
+      end: fields[2] as int,
     );
   }
 

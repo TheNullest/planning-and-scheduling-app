@@ -6,6 +6,6 @@ class CategorySupabaseDataSourceImpl extends SupabaseDataSource<CategorySupabase
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,
-    required super.mapper,
+    required super.dataMapper,
   });
 }

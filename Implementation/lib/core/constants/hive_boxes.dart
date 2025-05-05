@@ -11,7 +11,7 @@ abstract class HiveBoxConstants {
   static const String goalsBox = 'goalsBox';
   static const String categoriesBox = 'categoriesBox';
   static const String customeCustomeMeasurementUnitsBox = 'customeCustomeMeasurementUnitsBox';
-  static const String scheduleDefinitionsBox = 'scheduleDefinitionsBox';
+  static const String scheduleConstraintssBox = 'scheduleConstraintssBox';
   static const String tagsBox = 'tagsBox';
   static const String taskActivitysBox = 'taskActivitysBox';
 }
@@ -23,7 +23,7 @@ enum HiveBox {
   goalsBox(HiveBoxConstants.goalsBox),
   categoriesBox(HiveBoxConstants.categoriesBox),
   customeCustomeMeasurementUnitsBox(HiveBoxConstants.customeCustomeMeasurementUnitsBox),
-  scheduleDefinitionsBox(HiveBoxConstants.scheduleDefinitionsBox),
+  scheduleConstraintssBox(HiveBoxConstants.scheduleConstraintssBox),
   tagsBox(HiveBoxConstants.tagsBox),
   taskActivitysBox(HiveBoxConstants.taskActivitysBox);
 

@@ -4,7 +4,7 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sch
 class ScheduledInstanceSupabaseDataSourceImpl
     extends SupabaseDataSource<ScheduledInstanceSupabaseModel> {
   ScheduledInstanceSupabaseDataSourceImpl({
-    required super.mapper,
+    required super.dataMapper,
     required super.client,
     required super.collectionPath,
     required super.defaultPagination,

@@ -8,7 +8,7 @@ Future<void> intiDependencies() async {
 
   _hiveInit();
   _initAuth();
-  _mappers();
+  _data_mappers();
   _datasources();
   _repositories();
   _usecases();
@@ -40,31 +40,31 @@ Future<void> intiDependencies() async {
   _navigation();
 }
 
-void _mappers() {
+void _data_mappers() {
   serviceLocator
-    ..registerFactory<Mapper<CategoryEntity, CategoryHiveModel, CategorySupabaseModel>>(
-      CategoryMapper.new,
+    ..registerFactory<DataMapper<CategoryEntity, CategoryHiveModel, CategorySupabaseModel>>(
+      CategoryDataMapper.new,
     )
-    ..registerFactory<Mapper<GoalEntity, GoalHiveModel, GoalSupabaseModel>>(GoalMapper.new)
+    ..registerFactory<DataMapper<GoalEntity, GoalHiveModel, GoalSupabaseModel>>(GoalDataMapper.new)
     ..registerFactory<
-        Mapper<CustomMeasurementUnitEntity, CustomMeasurementUnitHiveModel,
+        DataMapper<CustomMeasurementUnitEntity, CustomMeasurementUnitHiveModel,
             CustomMeasurementUnitSupabaseModel>>(
-      CustomeMeasurementUnitMapper.new,
+      CustomeMeasurementUnitDataMapper.new,
     )
-    ..registerFactory<Mapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel>>(
-      SubTaskMapper.new,
+    ..registerFactory<DataMapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel>>(
+      SubTaskDataMapper.new,
     )
     ..registerFactory<
-        Mapper<ScheduleDefinitionEntity, ScheduleDefinitionHiveModel,
-            ScheduleDefinitionSupabaseModel>>(
-      ScheduleDefinitionMapper.new,
+        DataMapper<String, ScheduleConstraintHiveModel, ScheduleConstraintSupabaseModel>>(
+      ScheduleDefinitionDataMapper.new,
     )
-    ..registerFactory<Mapper<TagEntity, TagHiveModel, TagSupabaseModel>>(TagMapper.new)
-    ..registerFactory<Mapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>(
-      TaskActivityMapper.new,
+    ..registerFactory<DataMapper<TagEntity, TagHiveModel, TagSupabaseModel>>(TagDataMapper.new)
+    ..registerFactory<
+        DataMapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>(
+      TaskActivityDataMapper.new,
     )
-    ..registerFactory<Mapper<TaskEntity, TaskHiveModel, TaskSupabaseModel>>(TaskMapper.new)
-    ..registerFactory<Mapper<UserEntity, UserHiveModel, UserSupabaseModel>>(UserMapper.new);
+    ..registerFactory<DataMapper<TaskEntity, TaskHiveModel, TaskSupabaseModel>>(TaskDataMapper.new)
+    ..registerFactory<DataMapper<UserEntity, UserHiveModel, UserSupabaseModel>>(UserDataMapper.new);
 }
 
 void _hiveInit() {
@@ -135,14 +135,14 @@ void _datasources() {
     )
 
     // Scheduled Task
-    ..registerFactory<ScheduleDefinitionLocalDataSource<ScheduleDefinitionHiveModel>>(
+    ..registerFactory<ScheduleConstraintsLocalDataSource<ScheduleConstraintHiveModel>>(
       () => ScheduleDefinitionHiveDataSourceImpl(hiveBox: serviceLocator()),
       instanceName: InstanceNames.localHive,
     )
-    ..registerFactory<ScheduleDefinitionLocalDataSource<ScheduleDefinitionSupabaseModel>>(
+    ..registerFactory<ScheduleConstraintsLocalDataSource<ScheduleConstraintSupabaseModel>>(
       () => ScheduleDefinitionSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.scheduleDefinition,
+        collectionPath: CollectionPaths.scheduleConstraints,
         mapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -275,8 +275,8 @@ void _repositories() {
     )
 
     // Scheduled Task
-    ..registerSingleton<ScheduleDefinitionRepository>(
-      ScheduleDefinitionRepositoryImpl(
+    ..registerSingleton<ScheduleConstraintRepository>(
+      ScheduleConstraintRepositoryImpl(
         localDataSource: serviceLocator(instanceName: InstanceNames.localHive),
         remoteDataSource: serviceLocator(instanceName: InstanceNames.remoteSupabase),
         mapper: serviceLocator(),
@@ -383,7 +383,7 @@ void _usecases() {
 
     // Shared
     ..registerFactory(
-      () => CreateTaskWithSubTasksUsecase(
+      () => CreateTaskWithDependenciesUsecase(
         taskRepo: serviceLocator(),
         subTaskRepo: serviceLocator(),
       ),
