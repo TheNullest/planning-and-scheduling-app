@@ -6,7 +6,7 @@ part of 'scheduled_day_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduledDayHiveModelAdapter extends TypeAdapter<ScheduledDayHiveModel> {
+class ScheduledDayHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledDayHiveModel> {
   @override
   final int typeId = 18;
 

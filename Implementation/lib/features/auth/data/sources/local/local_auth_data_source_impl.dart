@@ -1,12 +1,10 @@
-import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/constants/hive_boxes.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
-import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
+import 'package:zamaan/features/auth/data/models/local/hive/remote_session_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 
@@ -20,72 +18,61 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   /// The [hiveBox] parameter is the Hive service used for local storage operations.
   /// If not provided, a default instance of [HiveServices<LocalUserModel>] is used.
   LocalAuthDataSourceImpl({
-    HiveServices<UserHiveModel>? hiveBox,
-  }) : _hiveBox = hiveBox ?? serviceLocator<HiveServices<UserHiveModel>>();
-
-  /// The name of the Hive box used for storing user data.
-  String get _boxName => HiveBoxConstants.usersBox;
+    HiveBoxRunner<RemoteSessionHiveModel>? hiveBox,
+  }) : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<RemoteSessionHiveModel>>();
 
   /// The Hive service used for local storage operations.
-  final HiveServices<UserHiveModel> _hiveBox;
+  final HiveBoxRunner<RemoteSessionHiveModel> _hiveBox;
 
   /// Retrieves the current user from the local storage.
   ///
-  /// Returns a [EResultFuture] containing the [UserHiveModel] of the current user
+  /// Returns a [EResultFuture] containing the [RemoteSessionHiveModel] of the current user
   /// or a [Failure] if an error occurs.
   @override
-  EResultFuture<UserHiveModel> getCurrentUser() async =>
-      tryCatchEither<UserHiveModel>(
-        action: () async => _hiveBox.operator<UserHiveModel>(
+  EResultFuture<RemoteSessionHiveModel> getCurrentUser() async =>
+      tryCatchEither<RemoteSessionHiveModel>(
+        action: () async => _hiveBox.runBoxOperation<RemoteSessionHiveModel>(
           job: (box) async => box.values.first,
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
 
   /// Stores the current user in the local storage.
   ///
-  /// The [user] parameter is the [UserHiveModel] object representing the user to be stored.
+  /// The [session] parameter is the [RemoteSessionHiveModel] object representing the user to be stored.
   ///
   /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
-  EResultFutureVoid storeCurrentUser(UserHiveModel user) async =>
-      tryCatchEither(
-        action: () async {
-          await _hiveBox.operator(
-            job: (box) async {
-              // Check if the user already exists in the database
-              // and throw an exception if it does.
-              // Otherwise, add the user to the database or update the existing user info.
-              final existing = box.values
-                  .where((u) => u.userName == user.userName && u.id != user.id);
-              if (existing.isNotEmpty) {
-                throw Exception(
-                  user.userName + AuthTexts.errors.entityExistsInDatabase,
-                );
-              }
-              await box.add(user);
-            },
-            boxName: _boxName,
-          );
-          return const Right(null);
-        },
+  EResultFutureVoid storeCurrentUser(RemoteSessionHiveModel session) async => tryCatchEither(
+        action: () async => _hiveBox.runBoxOperation(
+          job: (box) async {
+            // Check if the user already exists in the database
+            // and throw an exception if it does.
+            // Otherwise, add the user to the database or update the existing user info.
+            final existing = box.values
+                .where((u) => u.accessToken == session.accessToken && u.user.id != session.user.id);
+            if (existing.isNotEmpty) {
+              throw Exception(
+                session.user.userName + AuthTexts.errors.entityExistsInDatabase,
+              );
+            }
+            await box.add(session);
+          },
+        ),
         failureType: FailureType.local,
       );
 
   /// Updates the current user in the local storage.
   ///
-  /// The [user] parameter is the [UserHiveModel] object representing the user to be updated.
+  /// The [session] parameter is the [RemoteSessionHiveModel] object representing the user to be updated.
   ///
   /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
-  EResultFutureVoid updateCurrentUser(UserHiveModel user) async =>
-      tryCatchEither(
-        action: () async => _hiveBox.operator(
+  EResultFutureVoid updateCurrentUser(RemoteSessionHiveModel session) async => tryCatchEither(
+        action: () async => _hiveBox.runBoxOperation(
           job: (box) async {
-            await box.put(user.id, user);
+            await box.put(session.accessToken, session);
           },
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
@@ -95,13 +82,9 @@ class LocalAuthDataSourceImpl extends LocalAuthDataSource {
   /// Returns a [EResultFutureVoid] indicating the success or failure of the operation.
   @override
   EResultFutureVoid signOut() async => tryCatchEither(
-        action: () async {
-          await _hiveBox.operator(
-            job: (box) async => box.clear(),
-            boxName: _boxName,
-          );
-          return const Right(null);
-        },
+        action: () async => _hiveBox.runBoxOperation(
+          job: (box) async => box.clear(),
+        ),
         failureType: FailureType.local,
       );
 }

@@ -2,7 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/sub_task.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -15,13 +16,12 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/sub_task_data_source.dart';
 
 class SubTaskRepositoryImpl extends BaseRepositoryImpl<
-        SubTaskEntity,
-        SubTaskHiveModel,
-        SubTaskSupabaseModel,
-        SubTaskLocalDataSource<SubTaskHiveModel>,
-        SupabaseDataSource<SubTaskSupabaseModel>,
-        DataMapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel>>
-    implements SubTaskRepository {
+    SubTaskEntity,
+    SubTaskHiveModel,
+    SubTaskSupabaseModel,
+    SubTaskLocalDataSource<SubTaskHiveModel>,
+    SupabaseDataSource<SubTaskSupabaseModel, SubTaskDataMapper>,
+    SubTaskDataMapper> implements SubTaskRepository {
   SubTaskRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
@@ -33,7 +33,7 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
         _netConnectivity = netConnectivity;
 
   final SubTaskLocalDataSource<SubTaskHiveModel> _localDataSource;
-  final SupabaseDataSource<SubTaskSupabaseModel> _remoteDataSource;
+  final SupabaseDataSource<SubTaskSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 

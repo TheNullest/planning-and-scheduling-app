@@ -6,8 +6,7 @@ part of 'scheduled_interval_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduledIntervalHiveModelAdapter
-    extends TypeAdapter<ScheduledIntervalHiveModel> {
+class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledIntervalHiveModel> {
   @override
   final int typeId = 19;
 
@@ -27,6 +26,7 @@ class ScheduledIntervalHiveModelAdapter
       repeatCount: fields[14] as int?,
       scheduledTimeIds: (fields[15] as List).cast<String>(),
       enforceScheduleBounds: fields[16] as bool,
+      consecutiveOccurrences: fields[18] as int,
       startDate: fields[17] as DateTime,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
@@ -36,7 +36,7 @@ class ScheduledIntervalHiveModelAdapter
   @override
   void write(BinaryWriter writer, ScheduledIntervalHiveModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(11)
       ..write(obj.scheduleConstraintId)
       ..writeByte(12)
@@ -51,6 +51,8 @@ class ScheduledIntervalHiveModelAdapter
       ..write(obj.enforceScheduleBounds)
       ..writeByte(17)
       ..write(obj.startDate)
+      ..writeByte(18)
+      ..write(obj.consecutiveOccurrences)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

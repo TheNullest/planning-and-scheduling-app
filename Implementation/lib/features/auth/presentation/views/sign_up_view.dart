@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:zamaan/core/constants/routes/app_routes.dart';
+import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
-import 'package:zamaan/core/extensions/int_to_space_extension.dart';
+import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
@@ -51,7 +51,7 @@ class _SignUpViewState extends State<SignUpView> {
             if (state is AuthSuccessState) {
               showSnackBar(context, state.user.userName);
               context.userProvider.initUser(UserHiveModel.fromEntity(state.user));
-              navigatorPushRemoveUntil(context, AppRoutes.home);
+              navigatorPushRemoveUntil(context, AppRouteConfigs.home.route);
             }
           },
           builder: (context, state) {
@@ -133,7 +133,7 @@ class _SignUpViewState extends State<SignUpView> {
                     child: GestureDetector(
                       onTap: () => navigatorPushRemoveUntil(
                         context,
-                        AppRoutes.signIn,
+                        AppRouteConfigs.signIn.route,
                       ),
                       child: RichText(
                         text: TextSpan(

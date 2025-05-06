@@ -1,4 +1,3 @@
-export '../../presentation_shared/enums/interval_unit.dart';
 export 'hive/measurement_unit.dart';
 export 'hive/priority.dart';
 export 'hive/repetition_type.dart';

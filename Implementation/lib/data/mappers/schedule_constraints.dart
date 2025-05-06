@@ -1,55 +1,67 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/schedule_constraints.dart';
+import 'package:zamaan/domain/entities/schedule_constraints.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_constraints_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_constraint/schedule_constraint_supabase_model.dart';
 
-class ScheduleDefinitionDataMapper
-    extends DataMapper<String, ScheduleConstraintHiveModel, ScheduleConstraintSupabaseModel> {
+class ScheduleConstraintDataMapperImpl extends ScheduleConstraintDataMapper {
   @override
-  String toEntityFromHive(ScheduleConstraintHiveModel model) => tryCatchSimple<String>(
-        action: () => model.copyWith(),
+  ScheduleConstraintEntity toEntityFromHive(ScheduleConstraintHiveModel model) =>
+      tryCatchSimple<ScheduleConstraintEntity>(
+        action: () => ScheduleConstraintEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          taskId: model.taskId,
+          startAt: model.startAt,
+          endAt: model.endAt,
+          exceptionMonthDays: model.exceptionMonthDays,
+          exceptionWeekDays: model.exceptionWeekDays,
+          enforceScheduleBounds: model.enforceScheduleBounds,
+          exceptionDateIds: List.from(model.exceptionDateIds),
+          exceptionTimeIds: List.from(model.exceptionTimeIds),
+        ),
         failureType: FailureType.local,
       );
 
   @override
-  String toEntityFromSupabase(
+  ScheduleConstraintEntity toEntityFromSupabase(
     ScheduleConstraintSupabaseModel model, {
     DataMap? relatedListModels,
   }) =>
-      tryCatchSimple<String>(
-        action: () {
-          return String(
-            id: model.id,
-            description: model.description,
-            createdAt: model.createdAt,
-            updatedAt: model.updatedAt,
-            userId: model.userId,
-            taskId: model.taskId,
-            scheduledTimes: List.from(model.scheduledTimes),
-            startAt: model.startAt,
-            endAt: model.endAt,
-            weekDays: model.weekDays.map(WeekDay.fromName).toList(),
-            monthDays: List.from(model.monthDays),
-            enforceScheduleBounds: model.enforceScheduleBounds,
-            exceptionDateIds: List.from(model.exceptionDateIds),
-            exceptionTimeIds: List.from(model.exceptionTimeIds),
-          );
-        },
+      tryCatchSimple<ScheduleConstraintEntity>(
+        action: () => ScheduleConstraintEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          taskId: model.taskId,
+          startAt: model.startAt,
+          endAt: model.endAt,
+          exceptionMonthDays: model.exceptionMonthDays,
+          exceptionWeekDays: model.exceptionWeekDays.map(WeekDay.fromName).toList(),
+          enforceScheduleBounds: model.enforceScheduleBounds,
+          exceptionDateIds: List.from(model.exceptionDateIds),
+          exceptionTimeIds: List.from(model.exceptionTimeIds),
+        ),
         failureType: FailureType.local,
       );
 
   @override
-  ScheduleConstraintHiveModel toHiveModel(String entity) =>
+  ScheduleConstraintHiveModel toHiveModel(ScheduleConstraintEntity entity) =>
       tryCatchSimple<ScheduleConstraintHiveModel>(
         action: () => ScheduleConstraintHiveModel.fromEntity(entity),
         failureType: FailureType.local,
       );
 
   @override
-  ScheduleConstraintSupabaseModel toSupabaseModel(String entity) =>
+  ScheduleConstraintSupabaseModel toSupabaseModel(ScheduleConstraintEntity entity) =>
       tryCatchSimple<ScheduleConstraintSupabaseModel>(
         action: () => ScheduleConstraintSupabaseModel.fromEntity(entity),
         failureType: FailureType.local,

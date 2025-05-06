@@ -6,7 +6,7 @@ part of 'category_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CategoryHiveModelAdapter extends TypeAdapter<CategoryHiveModel> {
+class CategoryHiveModelAdapter extends HiveBaseTypeAdapter<CategoryHiveModel> {
   @override
   final int typeId = 14;
 

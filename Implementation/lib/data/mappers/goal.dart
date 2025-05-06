@@ -1,6 +1,6 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/goal.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -9,10 +9,27 @@ import 'package:zamaan/domain/enums/hive/reference_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goal/goal_supabase_model.dart';
 
-class GoalDataMapper extends DataMapper<GoalEntity, GoalHiveModel, GoalSupabaseModel> {
+class GoalDataMapperImpl extends GoalDataMapper {
   @override
   GoalEntity toEntityFromHive(GoalHiveModel model) => tryCatchSimple<GoalEntity>(
-        action: () => model.copyWith(),
+        action: () => GoalEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          refType: model.refType,
+          refId: model.refId,
+          customMeasurementUnitId: model.customMeasurementUnitId,
+          measurementUnit: model.measurementUnit,
+          goalConstraint: model.goalConstraint,
+          minutelyTarget: model.minutelyTarget,
+          hourlyTarget: model.hourlyTarget,
+          dailyTarget: model.dailyTarget,
+          weeklyTarget: model.weeklyTarget,
+          monthlyTarget: model.monthlyTarget,
+          yearlyTarget: model.yearlyTarget,
+        ),
         failureType: FailureType.local,
       );
 

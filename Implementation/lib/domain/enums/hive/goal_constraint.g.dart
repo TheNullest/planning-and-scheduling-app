@@ -6,7 +6,7 @@ part of 'goal_constraint.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class GoalConstraintAdapter extends TypeAdapter<GoalConstraint> {
+class GoalConstraintAdapter extends HiveBaseTypeAdapter<GoalConstraint> {
   @override
   final int typeId = 102;
 
@@ -65,7 +65,5 @@ class GoalConstraintAdapter extends TypeAdapter<GoalConstraint> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GoalConstraintAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is GoalConstraintAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

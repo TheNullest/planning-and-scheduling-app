@@ -1,6 +1,6 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/scheduled_instance.dart';
 import 'package:zamaan/domain/entities/scheduled_instance.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
@@ -8,8 +8,7 @@ import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/scheduled_instance/scheduled_instance_supabase_model.dart';
 
-class ScheduledInstanceDataMapper extends DataMapper<ScheduledInstanceEntity, ScheduledInstanceHiveModel,
-    ScheduledInstanceSupabaseModel> {
+class ScheduledInstanceDataMapperImpl extends ScheduledInstanceDataMapper {
   @override
   ScheduledInstanceEntity toEntityFromHive(ScheduledInstanceHiveModel model) =>
       tryCatchSimple<ScheduledInstanceEntity>(
@@ -29,6 +28,7 @@ class ScheduledInstanceDataMapper extends DataMapper<ScheduledInstanceEntity, Sc
             userId: model.userId,
             createdAt: model.createdAt,
             updatedAt: model.updatedAt,
+            taskId: model.taskId,
             description: model.exceptionReason,
             schedulerId: model.schedulerId,
             schedulerType: SchedulerType.fromName(model.schedulerType),

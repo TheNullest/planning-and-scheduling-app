@@ -6,8 +6,7 @@ part of 'scheduled_instance_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduledInstanceHiveModelAdapter
-    extends TypeAdapter<ScheduledInstanceHiveModel> {
+class ScheduledInstanceHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInstanceHiveModel> {
   @override
   final int typeId = 20;
 
@@ -20,6 +19,7 @@ class ScheduledInstanceHiveModelAdapter
     return ScheduledInstanceHiveModel(
       id: fields[0] as String,
       userId: fields[1] as String,
+      taskId: fields[19] as String,
       createdAt: fields[2] as DateTime,
       startDateTime: fields[11] as DateTime,
       endDateTime: fields[12] as DateTime,
@@ -37,7 +37,7 @@ class ScheduledInstanceHiveModelAdapter
   @override
   void write(BinaryWriter writer, ScheduledInstanceHiveModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(14)
       ..writeByte(11)
       ..write(obj.startDateTime)
       ..writeByte(12)
@@ -54,6 +54,8 @@ class ScheduledInstanceHiveModelAdapter
       ..write(obj.successPercentage)
       ..writeByte(18)
       ..write(obj.timezone)
+      ..writeByte(19)
+      ..write(obj.taskId)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

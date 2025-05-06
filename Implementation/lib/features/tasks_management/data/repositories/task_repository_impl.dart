@@ -1,5 +1,6 @@
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/task.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -13,8 +14,8 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
     TaskHiveModel,
     TaskSupabaseModel,
     TaskLocalDataSource<TaskHiveModel>,
-    SupabaseDataSource<TaskSupabaseModel>,
-    DataMapper<TaskEntity, TaskHiveModel, TaskSupabaseModel>> implements TaskRepository {
+    SupabaseDataSource<TaskSupabaseModel, TaskDataMapper>,
+    TaskDataMapper> implements TaskRepository {
   TaskRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
@@ -26,7 +27,7 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
         _netConnectivity = netConnectivity;
 
   final TaskLocalDataSource<TaskHiveModel> _localDataSource;
-  final SupabaseDataSource<TaskSupabaseModel> _remoteDataSource;
+  final SupabaseDataSource<TaskSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 

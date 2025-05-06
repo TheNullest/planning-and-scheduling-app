@@ -6,6 +6,10 @@ import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 
 abstract class RemoteAuthDataSource {
   Session? get currentUserSession;
+
+  EResultFuture<AuthResponse> setSession();
+  EResultFutureVoid restoreSession();
+  EResultFuture<Session?> listenAuthChanges();
   EResultFuture<UserSupabaseModel> getCurrentUser();
   EResultFuture<UserSupabaseModel> signUp(UserSupabaseModel userModel);
   EResultFuture<UserSupabaseModel> signIn(UserSignInParams params);

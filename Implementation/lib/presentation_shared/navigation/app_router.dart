@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:zamaan/core/constants/routes/app_routes.dart';
+import 'package:zamaan/features/navigation/presentation/views/error_view.dart';
 
 class AppRouter {
   AppRouter({required Map<String, Widget> views}) : _views = views;
@@ -7,42 +7,15 @@ class AppRouter {
   final Map<String, Widget> _views;
 
   Route<dynamic> generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      // Route for the sign-up view
-      case AppRoutes.signUp:
-        return _pageBuilder(
-          _views[settings.name]!,
-          settings,
-        );
-
-      // Route for the sign-in view
-      case AppRoutes.signIn:
-        return _pageBuilder(
-          _views[settings.name]!,
-          settings,
-        );
-
-      // Route for the settings view
-      case AppRoutes.settings:
-        return _pageBuilder(
-          _views[settings.name]!,
-          settings,
-        );
-
-      // Route for the main task view
-      case AppRoutes.home:
-        return _pageBuilder(
-          _views[settings.name]!,
-          settings,
-        );
-
-      // Default route for views under construction
-      default:
-        return _pageBuilder(
-          _views[settings.name]!,
-          settings,
-        );
+    final page = _views[settings.name];
+    if (page == null) {
+      // Handle undefined routes with a fallback widget
+      return _pageBuilder(
+        const ErrorView(), // Replace with your error page widget
+        settings,
+      );
     }
+    return _pageBuilder(page, settings);
   }
 
   /// Helper method to create a [PageRouteBuilder] with a fade transition.

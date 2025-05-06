@@ -19,44 +19,50 @@ mixin _$TasksManagerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)
-        createTaskWithDependencies,
+    required TResult Function(TaskVM newTask) createTask,
+    required TResult Function(SubTaskVM newSubTask) createSubTask,
+    required TResult Function() fetchAllTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult? Function(TaskVM newTask)? createTask,
+    TResult? Function(SubTaskVM newSubTask)? createSubTask,
+    TResult? Function()? fetchAllTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult Function(TaskVM newTask)? createTask,
+    TResult Function(SubTaskVM newSubTask)? createSubTask,
+    TResult Function()? fetchAllTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_CreateTaskWithDependenciesEvent value)
-        createTaskWithDependencies,
+    required TResult Function(_CreateTask value) createTask,
+    required TResult Function(_CreateSubTask value) createSubTask,
+    required TResult Function(_FetchAllTasks value) fetchAllTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult? Function(_CreateTask value)? createTask,
+    TResult? Function(_CreateSubTask value)? createSubTask,
+    TResult? Function(_FetchAllTasks value)? fetchAllTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult Function(_CreateTask value)? createTask,
+    TResult Function(_CreateSubTask value)? createSubTask,
+    TResult Function(_FetchAllTasks value)? fetchAllTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,8 +131,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)
-        createTaskWithDependencies,
+    required TResult Function(TaskVM newTask) createTask,
+    required TResult Function(SubTaskVM newSubTask) createSubTask,
+    required TResult Function() fetchAllTasks,
   }) {
     return started();
   }
@@ -135,8 +142,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult? Function(TaskVM newTask)? createTask,
+    TResult? Function(SubTaskVM newSubTask)? createSubTask,
+    TResult? Function()? fetchAllTasks,
   }) {
     return started?.call();
   }
@@ -145,8 +153,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult Function(TaskVM newTask)? createTask,
+    TResult Function(SubTaskVM newSubTask)? createSubTask,
+    TResult Function()? fetchAllTasks,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -159,8 +168,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_CreateTaskWithDependenciesEvent value)
-        createTaskWithDependencies,
+    required TResult Function(_CreateTask value) createTask,
+    required TResult Function(_CreateSubTask value) createSubTask,
+    required TResult Function(_FetchAllTasks value) fetchAllTasks,
   }) {
     return started(this);
   }
@@ -169,8 +179,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult? Function(_CreateTask value)? createTask,
+    TResult? Function(_CreateSubTask value)? createSubTask,
+    TResult? Function(_FetchAllTasks value)? fetchAllTasks,
   }) {
     return started?.call(this);
   }
@@ -179,8 +190,9 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult Function(_CreateTask value)? createTask,
+    TResult Function(_CreateSubTask value)? createSubTask,
+    TResult Function(_FetchAllTasks value)? fetchAllTasks,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -195,23 +207,20 @@ abstract class _Started implements TasksManagerEvent {
 }
 
 /// @nodoc
-abstract class _$$CreateTaskWithDependenciesEventImplCopyWith<$Res> {
-  factory _$$CreateTaskWithDependenciesEventImplCopyWith(
-          _$CreateTaskWithDependenciesEventImpl value,
-          $Res Function(_$CreateTaskWithDependenciesEventImpl) then) =
-      __$$CreateTaskWithDependenciesEventImplCopyWithImpl<$Res>;
+abstract class _$$CreateTaskImplCopyWith<$Res> {
+  factory _$$CreateTaskImplCopyWith(
+          _$CreateTaskImpl value, $Res Function(_$CreateTaskImpl) then) =
+      __$$CreateTaskImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CreateTaskWithDependenciesParams taskAndSubTasks});
+  $Res call({TaskVM newTask});
 }
 
 /// @nodoc
-class __$$CreateTaskWithDependenciesEventImplCopyWithImpl<$Res>
-    extends _$TasksManagerEventCopyWithImpl<$Res,
-        _$CreateTaskWithDependenciesEventImpl>
-    implements _$$CreateTaskWithDependenciesEventImplCopyWith<$Res> {
-  __$$CreateTaskWithDependenciesEventImplCopyWithImpl(
-      _$CreateTaskWithDependenciesEventImpl _value,
-      $Res Function(_$CreateTaskWithDependenciesEventImpl) _then)
+class __$$CreateTaskImplCopyWithImpl<$Res>
+    extends _$TasksManagerEventCopyWithImpl<$Res, _$CreateTaskImpl>
+    implements _$$CreateTaskImplCopyWith<$Res> {
+  __$$CreateTaskImplCopyWithImpl(
+      _$CreateTaskImpl _value, $Res Function(_$CreateTaskImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of TasksManagerEvent
@@ -219,83 +228,82 @@ class __$$CreateTaskWithDependenciesEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskAndSubTasks = null,
+    Object? newTask = null,
   }) {
-    return _then(_$CreateTaskWithDependenciesEventImpl(
-      taskAndSubTasks: null == taskAndSubTasks
-          ? _value.taskAndSubTasks
-          : taskAndSubTasks // ignore: cast_nullable_to_non_nullable
-              as CreateTaskWithDependenciesParams,
+    return _then(_$CreateTaskImpl(
+      newTask: null == newTask
+          ? _value.newTask
+          : newTask // ignore: cast_nullable_to_non_nullable
+              as TaskVM,
     ));
   }
 }
 
 /// @nodoc
 
-class _$CreateTaskWithDependenciesEventImpl
-    implements _CreateTaskWithDependenciesEvent {
-  const _$CreateTaskWithDependenciesEventImpl({required this.taskAndSubTasks});
+class _$CreateTaskImpl implements _CreateTask {
+  const _$CreateTaskImpl({required this.newTask});
 
   @override
-  final CreateTaskWithDependenciesParams taskAndSubTasks;
+  final TaskVM newTask;
 
   @override
   String toString() {
-    return 'TasksManagerEvent.createTaskWithDependencies(taskAndSubTasks: $taskAndSubTasks)';
+    return 'TasksManagerEvent.createTask(newTask: $newTask)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CreateTaskWithDependenciesEventImpl &&
-            (identical(other.taskAndSubTasks, taskAndSubTasks) ||
-                other.taskAndSubTasks == taskAndSubTasks));
+            other is _$CreateTaskImpl &&
+            (identical(other.newTask, newTask) || other.newTask == newTask));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, taskAndSubTasks);
+  int get hashCode => Object.hash(runtimeType, newTask);
 
   /// Create a copy of TasksManagerEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$CreateTaskWithDependenciesEventImplCopyWith<
-          _$CreateTaskWithDependenciesEventImpl>
-      get copyWith => __$$CreateTaskWithDependenciesEventImplCopyWithImpl<
-          _$CreateTaskWithDependenciesEventImpl>(this, _$identity);
+  _$$CreateTaskImplCopyWith<_$CreateTaskImpl> get copyWith =>
+      __$$CreateTaskImplCopyWithImpl<_$CreateTaskImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)
-        createTaskWithDependencies,
+    required TResult Function(TaskVM newTask) createTask,
+    required TResult Function(SubTaskVM newSubTask) createSubTask,
+    required TResult Function() fetchAllTasks,
   }) {
-    return createTaskWithDependencies(taskAndSubTasks);
+    return createTask(newTask);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult? Function(TaskVM newTask)? createTask,
+    TResult? Function(SubTaskVM newSubTask)? createSubTask,
+    TResult? Function()? fetchAllTasks,
   }) {
-    return createTaskWithDependencies?.call(taskAndSubTasks);
+    return createTask?.call(newTask);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(CreateTaskWithDependenciesParams taskAndSubTasks)?
-        createTaskWithDependencies,
+    TResult Function(TaskVM newTask)? createTask,
+    TResult Function(SubTaskVM newSubTask)? createSubTask,
+    TResult Function()? fetchAllTasks,
     required TResult orElse(),
   }) {
-    if (createTaskWithDependencies != null) {
-      return createTaskWithDependencies(taskAndSubTasks);
+    if (createTask != null) {
+      return createTask(newTask);
     }
     return orElse();
   }
@@ -304,50 +312,321 @@ class _$CreateTaskWithDependenciesEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_CreateTaskWithDependenciesEvent value)
-        createTaskWithDependencies,
+    required TResult Function(_CreateTask value) createTask,
+    required TResult Function(_CreateSubTask value) createSubTask,
+    required TResult Function(_FetchAllTasks value) fetchAllTasks,
   }) {
-    return createTaskWithDependencies(this);
+    return createTask(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult? Function(_CreateTask value)? createTask,
+    TResult? Function(_CreateSubTask value)? createSubTask,
+    TResult? Function(_FetchAllTasks value)? fetchAllTasks,
   }) {
-    return createTaskWithDependencies?.call(this);
+    return createTask?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_CreateTaskWithDependenciesEvent value)?
-        createTaskWithDependencies,
+    TResult Function(_CreateTask value)? createTask,
+    TResult Function(_CreateSubTask value)? createSubTask,
+    TResult Function(_FetchAllTasks value)? fetchAllTasks,
     required TResult orElse(),
   }) {
-    if (createTaskWithDependencies != null) {
-      return createTaskWithDependencies(this);
+    if (createTask != null) {
+      return createTask(this);
     }
     return orElse();
   }
 }
 
-abstract class _CreateTaskWithDependenciesEvent implements TasksManagerEvent {
-  const factory _CreateTaskWithDependenciesEvent(
-          {required final CreateTaskWithDependenciesParams taskAndSubTasks}) =
-      _$CreateTaskWithDependenciesEventImpl;
+abstract class _CreateTask implements TasksManagerEvent {
+  const factory _CreateTask({required final TaskVM newTask}) = _$CreateTaskImpl;
 
-  CreateTaskWithDependenciesParams get taskAndSubTasks;
+  TaskVM get newTask;
 
   /// Create a copy of TasksManagerEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$CreateTaskWithDependenciesEventImplCopyWith<
-          _$CreateTaskWithDependenciesEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$CreateTaskImplCopyWith<_$CreateTaskImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateSubTaskImplCopyWith<$Res> {
+  factory _$$CreateSubTaskImplCopyWith(
+          _$CreateSubTaskImpl value, $Res Function(_$CreateSubTaskImpl) then) =
+      __$$CreateSubTaskImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({SubTaskVM newSubTask});
+}
+
+/// @nodoc
+class __$$CreateSubTaskImplCopyWithImpl<$Res>
+    extends _$TasksManagerEventCopyWithImpl<$Res, _$CreateSubTaskImpl>
+    implements _$$CreateSubTaskImplCopyWith<$Res> {
+  __$$CreateSubTaskImplCopyWithImpl(
+      _$CreateSubTaskImpl _value, $Res Function(_$CreateSubTaskImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? newSubTask = null,
+  }) {
+    return _then(_$CreateSubTaskImpl(
+      newSubTask: null == newSubTask
+          ? _value.newSubTask
+          : newSubTask // ignore: cast_nullable_to_non_nullable
+              as SubTaskVM,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateSubTaskImpl implements _CreateSubTask {
+  const _$CreateSubTaskImpl({required this.newSubTask});
+
+  @override
+  final SubTaskVM newSubTask;
+
+  @override
+  String toString() {
+    return 'TasksManagerEvent.createSubTask(newSubTask: $newSubTask)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateSubTaskImpl &&
+            (identical(other.newSubTask, newSubTask) ||
+                other.newSubTask == newSubTask));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, newSubTask);
+
+  /// Create a copy of TasksManagerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateSubTaskImplCopyWith<_$CreateSubTaskImpl> get copyWith =>
+      __$$CreateSubTaskImplCopyWithImpl<_$CreateSubTaskImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(TaskVM newTask) createTask,
+    required TResult Function(SubTaskVM newSubTask) createSubTask,
+    required TResult Function() fetchAllTasks,
+  }) {
+    return createSubTask(newSubTask);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(TaskVM newTask)? createTask,
+    TResult? Function(SubTaskVM newSubTask)? createSubTask,
+    TResult? Function()? fetchAllTasks,
+  }) {
+    return createSubTask?.call(newSubTask);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(TaskVM newTask)? createTask,
+    TResult Function(SubTaskVM newSubTask)? createSubTask,
+    TResult Function()? fetchAllTasks,
+    required TResult orElse(),
+  }) {
+    if (createSubTask != null) {
+      return createSubTask(newSubTask);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateTask value) createTask,
+    required TResult Function(_CreateSubTask value) createSubTask,
+    required TResult Function(_FetchAllTasks value) fetchAllTasks,
+  }) {
+    return createSubTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CreateTask value)? createTask,
+    TResult? Function(_CreateSubTask value)? createSubTask,
+    TResult? Function(_FetchAllTasks value)? fetchAllTasks,
+  }) {
+    return createSubTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateTask value)? createTask,
+    TResult Function(_CreateSubTask value)? createSubTask,
+    TResult Function(_FetchAllTasks value)? fetchAllTasks,
+    required TResult orElse(),
+  }) {
+    if (createSubTask != null) {
+      return createSubTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateSubTask implements TasksManagerEvent {
+  const factory _CreateSubTask({required final SubTaskVM newSubTask}) =
+      _$CreateSubTaskImpl;
+
+  SubTaskVM get newSubTask;
+
+  /// Create a copy of TasksManagerEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CreateSubTaskImplCopyWith<_$CreateSubTaskImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FetchAllTasksImplCopyWith<$Res> {
+  factory _$$FetchAllTasksImplCopyWith(
+          _$FetchAllTasksImpl value, $Res Function(_$FetchAllTasksImpl) then) =
+      __$$FetchAllTasksImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchAllTasksImplCopyWithImpl<$Res>
+    extends _$TasksManagerEventCopyWithImpl<$Res, _$FetchAllTasksImpl>
+    implements _$$FetchAllTasksImplCopyWith<$Res> {
+  __$$FetchAllTasksImplCopyWithImpl(
+      _$FetchAllTasksImpl _value, $Res Function(_$FetchAllTasksImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$FetchAllTasksImpl implements _FetchAllTasks {
+  const _$FetchAllTasksImpl();
+
+  @override
+  String toString() {
+    return 'TasksManagerEvent.fetchAllTasks()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$FetchAllTasksImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(TaskVM newTask) createTask,
+    required TResult Function(SubTaskVM newSubTask) createSubTask,
+    required TResult Function() fetchAllTasks,
+  }) {
+    return fetchAllTasks();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function(TaskVM newTask)? createTask,
+    TResult? Function(SubTaskVM newSubTask)? createSubTask,
+    TResult? Function()? fetchAllTasks,
+  }) {
+    return fetchAllTasks?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(TaskVM newTask)? createTask,
+    TResult Function(SubTaskVM newSubTask)? createSubTask,
+    TResult Function()? fetchAllTasks,
+    required TResult orElse(),
+  }) {
+    if (fetchAllTasks != null) {
+      return fetchAllTasks();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_CreateTask value) createTask,
+    required TResult Function(_CreateSubTask value) createSubTask,
+    required TResult Function(_FetchAllTasks value) fetchAllTasks,
+  }) {
+    return fetchAllTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_CreateTask value)? createTask,
+    TResult? Function(_CreateSubTask value)? createSubTask,
+    TResult? Function(_FetchAllTasks value)? fetchAllTasks,
+  }) {
+    return fetchAllTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_CreateTask value)? createTask,
+    TResult Function(_CreateSubTask value)? createSubTask,
+    TResult Function(_FetchAllTasks value)? fetchAllTasks,
+    required TResult orElse(),
+  }) {
+    if (fetchAllTasks != null) {
+      return fetchAllTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchAllTasks implements TasksManagerEvent {
+  const factory _FetchAllTasks() = _$FetchAllTasksImpl;
 }
 
 /// @nodoc
@@ -358,8 +637,9 @@ mixin _$TasksManagerState {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -368,8 +648,9 @@ mixin _$TasksManagerState {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -378,8 +659,9 @@ mixin _$TasksManagerState {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -389,9 +671,9 @@ mixin _$TasksManagerState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -400,8 +682,9 @@ mixin _$TasksManagerState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -410,8 +693,9 @@ mixin _$TasksManagerState {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -483,8 +767,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) {
     return initial();
   }
@@ -496,8 +781,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) {
     return initial?.call();
   }
@@ -509,8 +795,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -526,9 +813,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) {
     return initial(this);
   }
@@ -540,8 +827,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) {
     return initial?.call(this);
   }
@@ -553,8 +841,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -613,8 +902,9 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) {
     return loading();
   }
@@ -626,8 +916,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) {
     return loading?.call();
   }
@@ -639,8 +930,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -656,9 +948,9 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) {
     return loading(this);
   }
@@ -670,8 +962,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) {
     return loading?.call(this);
   }
@@ -683,8 +976,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -772,8 +1066,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) {
     return successfulAction(successMessage);
   }
@@ -785,8 +1080,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) {
     return successfulAction?.call(successMessage);
   }
@@ -798,8 +1094,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) {
     if (successfulAction != null) {
@@ -815,9 +1112,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) {
     return successfulAction(this);
   }
@@ -829,8 +1126,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) {
     return successfulAction?.call(this);
   }
@@ -842,8 +1140,9 @@ class _$SuccessfulActionImpl implements _SuccessfulAction {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) {
     if (successfulAction != null) {
@@ -939,8 +1238,9 @@ class _$FailedActionImpl implements _FailedAction {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) {
     return failedAction(errorMessage);
   }
@@ -952,8 +1252,9 @@ class _$FailedActionImpl implements _FailedAction {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) {
     return failedAction?.call(errorMessage);
   }
@@ -965,8 +1266,9 @@ class _$FailedActionImpl implements _FailedAction {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) {
     if (failedAction != null) {
@@ -982,9 +1284,9 @@ class _$FailedActionImpl implements _FailedAction {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) {
     return failedAction(this);
   }
@@ -996,8 +1298,9 @@ class _$FailedActionImpl implements _FailedAction {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) {
     return failedAction?.call(this);
   }
@@ -1009,8 +1312,9 @@ class _$FailedActionImpl implements _FailedAction {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) {
     if (failedAction != null) {
@@ -1033,193 +1337,18 @@ abstract class _FailedAction implements TasksManagerState {
 }
 
 /// @nodoc
-abstract class _$$TodayTasksFetchedImplCopyWith<$Res> {
-  factory _$$TodayTasksFetchedImplCopyWith(_$TodayTasksFetchedImpl value,
-          $Res Function(_$TodayTasksFetchedImpl) then) =
-      __$$TodayTasksFetchedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<TaskUI> tasks});
+abstract class _$$TaskCreatedImplCopyWith<$Res> {
+  factory _$$TaskCreatedImplCopyWith(
+          _$TaskCreatedImpl value, $Res Function(_$TaskCreatedImpl) then) =
+      __$$TaskCreatedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TodayTasksFetchedImplCopyWithImpl<$Res>
-    extends _$TasksManagerStateCopyWithImpl<$Res, _$TodayTasksFetchedImpl>
-    implements _$$TodayTasksFetchedImplCopyWith<$Res> {
-  __$$TodayTasksFetchedImplCopyWithImpl(_$TodayTasksFetchedImpl _value,
-      $Res Function(_$TodayTasksFetchedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of TasksManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tasks = null,
-  }) {
-    return _then(_$TodayTasksFetchedImpl(
-      null == tasks
-          ? _value._tasks
-          : tasks // ignore: cast_nullable_to_non_nullable
-              as List<TaskUI>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$TodayTasksFetchedImpl implements _TodayTasksFetched {
-  const _$TodayTasksFetchedImpl(final List<TaskUI> tasks) : _tasks = tasks;
-
-  final List<TaskUI> _tasks;
-  @override
-  List<TaskUI> get tasks {
-    if (_tasks is EqualUnmodifiableListView) return _tasks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
-  }
-
-  @override
-  String toString() {
-    return 'TasksManagerState.todayTasksFetched(tasks: $tasks)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TodayTasksFetchedImpl &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
-  }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
-
-  /// Create a copy of TasksManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TodayTasksFetchedImplCopyWith<_$TodayTasksFetchedImpl> get copyWith =>
-      __$$TodayTasksFetchedImplCopyWithImpl<_$TodayTasksFetchedImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String successMessage) successfulAction,
-    required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
-  }) {
-    return todayTasksFetched(tasks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String successMessage)? successfulAction,
-    TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
-  }) {
-    return todayTasksFetched?.call(tasks);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String successMessage)? successfulAction,
-    TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
-    required TResult orElse(),
-  }) {
-    if (todayTasksFetched != null) {
-      return todayTasksFetched(tasks);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SuccessfulAction value) successfulAction,
-    required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
-  }) {
-    return todayTasksFetched(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SuccessfulAction value)? successfulAction,
-    TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
-  }) {
-    return todayTasksFetched?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SuccessfulAction value)? successfulAction,
-    TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
-    required TResult orElse(),
-  }) {
-    if (todayTasksFetched != null) {
-      return todayTasksFetched(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _TodayTasksFetched implements TasksManagerState {
-  const factory _TodayTasksFetched(final List<TaskUI> tasks) =
-      _$TodayTasksFetchedImpl;
-
-  List<TaskUI> get tasks;
-
-  /// Create a copy of TasksManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TodayTasksFetchedImplCopyWith<_$TodayTasksFetchedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TaskAndSubTasksCreatedImplCopyWith<$Res> {
-  factory _$$TaskAndSubTasksCreatedImplCopyWith(
-          _$TaskAndSubTasksCreatedImpl value,
-          $Res Function(_$TaskAndSubTasksCreatedImpl) then) =
-      __$$TaskAndSubTasksCreatedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TaskAndSubTasksCreatedImplCopyWithImpl<$Res>
-    extends _$TasksManagerStateCopyWithImpl<$Res, _$TaskAndSubTasksCreatedImpl>
-    implements _$$TaskAndSubTasksCreatedImplCopyWith<$Res> {
-  __$$TaskAndSubTasksCreatedImplCopyWithImpl(
-      _$TaskAndSubTasksCreatedImpl _value,
-      $Res Function(_$TaskAndSubTasksCreatedImpl) _then)
+class __$$TaskCreatedImplCopyWithImpl<$Res>
+    extends _$TasksManagerStateCopyWithImpl<$Res, _$TaskCreatedImpl>
+    implements _$$TaskCreatedImplCopyWith<$Res> {
+  __$$TaskCreatedImplCopyWithImpl(
+      _$TaskCreatedImpl _value, $Res Function(_$TaskCreatedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of TasksManagerState
@@ -1228,19 +1357,18 @@ class __$$TaskAndSubTasksCreatedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
-  const _$TaskAndSubTasksCreatedImpl();
+class _$TaskCreatedImpl implements _TaskCreated {
+  const _$TaskCreatedImpl();
 
   @override
   String toString() {
-    return 'TasksManagerState.taskAndSubTasksCreated()';
+    return 'TasksManagerState.taskCreated()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TaskAndSubTasksCreatedImpl);
+        (other.runtimeType == runtimeType && other is _$TaskCreatedImpl);
   }
 
   @override
@@ -1253,10 +1381,11 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<TaskUI> tasks) todayTasksFetched,
-    required TResult Function() taskAndSubTasksCreated,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
   }) {
-    return taskAndSubTasksCreated();
+    return taskCreated();
   }
 
   @override
@@ -1266,10 +1395,11 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult? Function()? taskAndSubTasksCreated,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
   }) {
-    return taskAndSubTasksCreated?.call();
+    return taskCreated?.call();
   }
 
   @override
@@ -1279,12 +1409,13 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<TaskUI> tasks)? todayTasksFetched,
-    TResult Function()? taskAndSubTasksCreated,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
     required TResult orElse(),
   }) {
-    if (taskAndSubTasksCreated != null) {
-      return taskAndSubTasksCreated();
+    if (taskCreated != null) {
+      return taskCreated();
     }
     return orElse();
   }
@@ -1296,11 +1427,11 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulAction value) successfulAction,
     required TResult Function(_FailedAction value) failedAction,
-    required TResult Function(_TodayTasksFetched value) todayTasksFetched,
-    required TResult Function(_TaskAndSubTasksCreated value)
-        taskAndSubTasksCreated,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
   }) {
-    return taskAndSubTasksCreated(this);
+    return taskCreated(this);
   }
 
   @override
@@ -1310,10 +1441,11 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulAction value)? successfulAction,
     TResult? Function(_FailedAction value)? failedAction,
-    TResult? Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult? Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
   }) {
-    return taskAndSubTasksCreated?.call(this);
+    return taskCreated?.call(this);
   }
 
   @override
@@ -1323,17 +1455,329 @@ class _$TaskAndSubTasksCreatedImpl implements _TaskAndSubTasksCreated {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulAction value)? successfulAction,
     TResult Function(_FailedAction value)? failedAction,
-    TResult Function(_TodayTasksFetched value)? todayTasksFetched,
-    TResult Function(_TaskAndSubTasksCreated value)? taskAndSubTasksCreated,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
     required TResult orElse(),
   }) {
-    if (taskAndSubTasksCreated != null) {
-      return taskAndSubTasksCreated(this);
+    if (taskCreated != null) {
+      return taskCreated(this);
     }
     return orElse();
   }
 }
 
-abstract class _TaskAndSubTasksCreated implements TasksManagerState {
-  const factory _TaskAndSubTasksCreated() = _$TaskAndSubTasksCreatedImpl;
+abstract class _TaskCreated implements TasksManagerState {
+  const factory _TaskCreated() = _$TaskCreatedImpl;
+}
+
+/// @nodoc
+abstract class _$$FetchedTasksImplCopyWith<$Res> {
+  factory _$$FetchedTasksImplCopyWith(
+          _$FetchedTasksImpl value, $Res Function(_$FetchedTasksImpl) then) =
+      __$$FetchedTasksImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<TaskVM> tasks});
+}
+
+/// @nodoc
+class __$$FetchedTasksImplCopyWithImpl<$Res>
+    extends _$TasksManagerStateCopyWithImpl<$Res, _$FetchedTasksImpl>
+    implements _$$FetchedTasksImplCopyWith<$Res> {
+  __$$FetchedTasksImplCopyWithImpl(
+      _$FetchedTasksImpl _value, $Res Function(_$FetchedTasksImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tasks = null,
+  }) {
+    return _then(_$FetchedTasksImpl(
+      null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<TaskVM>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FetchedTasksImpl implements _FetchedTasks {
+  const _$FetchedTasksImpl(final List<TaskVM> tasks) : _tasks = tasks;
+
+  final List<TaskVM> _tasks;
+  @override
+  List<TaskVM> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  String toString() {
+    return 'TasksManagerState.fetchedTasks(tasks: $tasks)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchedTasksImpl &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchedTasksImplCopyWith<_$FetchedTasksImpl> get copyWith =>
+      __$$FetchedTasksImplCopyWithImpl<_$FetchedTasksImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String successMessage) successfulAction,
+    required TResult Function(String errorMessage) failedAction,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
+  }) {
+    return fetchedTasks(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String successMessage)? successfulAction,
+    TResult? Function(String errorMessage)? failedAction,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
+  }) {
+    return fetchedTasks?.call(tasks);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String successMessage)? successfulAction,
+    TResult Function(String errorMessage)? failedAction,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
+    required TResult orElse(),
+  }) {
+    if (fetchedTasks != null) {
+      return fetchedTasks(tasks);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_SuccessfulAction value) successfulAction,
+    required TResult Function(_FailedAction value) failedAction,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
+  }) {
+    return fetchedTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_SuccessfulAction value)? successfulAction,
+    TResult? Function(_FailedAction value)? failedAction,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
+  }) {
+    return fetchedTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_SuccessfulAction value)? successfulAction,
+    TResult Function(_FailedAction value)? failedAction,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
+    required TResult orElse(),
+  }) {
+    if (fetchedTasks != null) {
+      return fetchedTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FetchedTasks implements TasksManagerState {
+  const factory _FetchedTasks(final List<TaskVM> tasks) = _$FetchedTasksImpl;
+
+  List<TaskVM> get tasks;
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchedTasksImplCopyWith<_$FetchedTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SubTaskCreatedImplCopyWith<$Res> {
+  factory _$$SubTaskCreatedImplCopyWith(_$SubTaskCreatedImpl value,
+          $Res Function(_$SubTaskCreatedImpl) then) =
+      __$$SubTaskCreatedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SubTaskCreatedImplCopyWithImpl<$Res>
+    extends _$TasksManagerStateCopyWithImpl<$Res, _$SubTaskCreatedImpl>
+    implements _$$SubTaskCreatedImplCopyWith<$Res> {
+  __$$SubTaskCreatedImplCopyWithImpl(
+      _$SubTaskCreatedImpl _value, $Res Function(_$SubTaskCreatedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TasksManagerState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SubTaskCreatedImpl implements _SubTaskCreated {
+  const _$SubTaskCreatedImpl();
+
+  @override
+  String toString() {
+    return 'TasksManagerState.subTaskCreated()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SubTaskCreatedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String successMessage) successfulAction,
+    required TResult Function(String errorMessage) failedAction,
+    required TResult Function() taskCreated,
+    required TResult Function(List<TaskVM> tasks) fetchedTasks,
+    required TResult Function() subTaskCreated,
+  }) {
+    return subTaskCreated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String successMessage)? successfulAction,
+    TResult? Function(String errorMessage)? failedAction,
+    TResult? Function()? taskCreated,
+    TResult? Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult? Function()? subTaskCreated,
+  }) {
+    return subTaskCreated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String successMessage)? successfulAction,
+    TResult Function(String errorMessage)? failedAction,
+    TResult Function()? taskCreated,
+    TResult Function(List<TaskVM> tasks)? fetchedTasks,
+    TResult Function()? subTaskCreated,
+    required TResult orElse(),
+  }) {
+    if (subTaskCreated != null) {
+      return subTaskCreated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_SuccessfulAction value) successfulAction,
+    required TResult Function(_FailedAction value) failedAction,
+    required TResult Function(_TaskCreated value) taskCreated,
+    required TResult Function(_FetchedTasks value) fetchedTasks,
+    required TResult Function(_SubTaskCreated value) subTaskCreated,
+  }) {
+    return subTaskCreated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_SuccessfulAction value)? successfulAction,
+    TResult? Function(_FailedAction value)? failedAction,
+    TResult? Function(_TaskCreated value)? taskCreated,
+    TResult? Function(_FetchedTasks value)? fetchedTasks,
+    TResult? Function(_SubTaskCreated value)? subTaskCreated,
+  }) {
+    return subTaskCreated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_SuccessfulAction value)? successfulAction,
+    TResult Function(_FailedAction value)? failedAction,
+    TResult Function(_TaskCreated value)? taskCreated,
+    TResult Function(_FetchedTasks value)? fetchedTasks,
+    TResult Function(_SubTaskCreated value)? subTaskCreated,
+    required TResult orElse(),
+  }) {
+    if (subTaskCreated != null) {
+      return subTaskCreated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SubTaskCreated implements TasksManagerState {
+  const factory _SubTaskCreated() = _$SubTaskCreatedImpl;
 }

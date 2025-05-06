@@ -6,7 +6,7 @@ part of 'priority.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class PriorityAdapter extends TypeAdapter<Priority> {
+class PriorityAdapter extends HiveBaseTypeAdapter<Priority> {
   @override
   final int typeId = 107;
 
@@ -55,7 +55,5 @@ class PriorityAdapter extends TypeAdapter<Priority> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is PriorityAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is PriorityAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

@@ -19,6 +19,7 @@ abstract class ClassHiveTypeIds {
   static const int taskActivity = 22;
   static const int dateRange = 23;
   static const int timeRange = 24;
+  static const int remoteSession = 25;
 }
 
 /// start from 101-150

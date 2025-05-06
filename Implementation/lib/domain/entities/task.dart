@@ -1,7 +1,4 @@
-import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/schedule_constraints.dart';
-import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 
 /// Represents a task with configurable properties and time tracking capabilities.
@@ -21,11 +18,10 @@ import 'package:zamaan/domain/enums/enums.dart';
 ///   id: "task_123",
 ///   userId: "user_456",
 ///   createdAt: DateTime(2023, 10, 1),
-///   description: "Complete UI/UX overhaul",
+///   description: "Complete VM/UX overhaul",
 /// );
 /// ```
 
-@HiveType(typeId: 1)
 class TaskEntity extends BaseEntityAbstraction {
   /// - [scheduledDayIds]: Advanced customization for specific scheduled days.
   /// - [scheduledIntervalIds]: Interval-based scheduling for tasks.
@@ -45,7 +41,6 @@ class TaskEntity extends BaseEntityAbstraction {
     required this.taskStatus,
     required this.scheduledDayIds,
     required this.scheduledIntervalIds,
-    required this.scheduledInstanceIds,
     this.scheduleConstraintId,
     super.description,
     super.updatedAt,
@@ -91,8 +86,6 @@ class TaskEntity extends BaseEntityAbstraction {
   ///
   /// Example: "Every 3 days from 9 AM to 11 AM".
   final List<String> scheduledIntervalIds;
-
-  final List<String> scheduledInstanceIds;
 
   // ========================
   // Validation Methods
@@ -163,7 +156,6 @@ class TaskEntity extends BaseEntityAbstraction {
     String? scheduleConstraintId,
     List<String>? scheduledDayIds,
     List<String>? scheduledIntervalIds,
-    List<String>? scheduledInstanceIds,
   }) =>
       TaskEntity(
         id: id ?? this.id,
@@ -181,7 +173,6 @@ class TaskEntity extends BaseEntityAbstraction {
         scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
         scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
         scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
-        scheduledInstanceIds: scheduledInstanceIds ?? List.from(this.scheduledInstanceIds),
         fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
         taskStatus: taskStatus ?? this.taskStatus,
@@ -203,6 +194,5 @@ class TaskEntity extends BaseEntityAbstraction {
         scheduledDayIds,
         scheduledIntervalIds,
         scheduleConstraintId,
-        scheduledInstanceIds,
       ];
 }

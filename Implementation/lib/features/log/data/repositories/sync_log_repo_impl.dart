@@ -29,7 +29,7 @@ class SyncLogRepoImpl implements SyncLogRepository<SyncLogEntity> {
           final response = await _syncLogSupabaseDataSource.getUnsyncedLogs(
             deviceId,
           );
-          final fold = foldEither<List<SyncLogSupabaseModel>>(response);
+          final fold = foldEitherRight<List<SyncLogSupabaseModel>>(response);
           final result = fold.map((item) => item.toEntity()).toList();
           return Right(result);
         },

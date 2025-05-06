@@ -6,7 +6,7 @@ part of 'task_activity_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskActivityHiveModelAdapter extends TypeAdapter<TaskActivityHiveModel> {
+class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveModel> {
   @override
   final int typeId = 22;
 

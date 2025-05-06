@@ -6,7 +6,7 @@ part of 'task_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
+class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   final int typeId = 12;
 
@@ -32,7 +32,6 @@ class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
       taskStatus: fields[20] as TaskStatus,
       scheduledDayIds: (fields[22] as List).cast<String>(),
       scheduledIntervalIds: (fields[23] as List).cast<String>(),
-      scheduledInstanceIds: (fields[24] as List).cast<String>(),
       scheduleConstraintId: fields[21] as String?,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
@@ -42,7 +41,7 @@ class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(18)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -69,8 +68,6 @@ class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
       ..write(obj.scheduledDayIds)
       ..writeByte(23)
       ..write(obj.scheduledIntervalIds)
-      ..writeByte(24)
-      ..write(obj.scheduledInstanceIds)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -89,7 +86,5 @@ class TaskHiveModelAdapter extends TypeAdapter<TaskHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TaskHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

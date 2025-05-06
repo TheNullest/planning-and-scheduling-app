@@ -24,6 +24,8 @@ mixin _$ScheduledInstanceSupabaseModel {
   String get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'task_id')
+  String get taskId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'start_date_time')
@@ -68,6 +70,7 @@ abstract class $ScheduledInstanceSupabaseModelCopyWith<$Res> {
   $Res call(
       {String id,
       @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'task_id') String taskId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'start_date_time') DateTime startDateTime,
       @JsonKey(name: 'end_date_time') DateTime endDateTime,
@@ -99,6 +102,7 @@ class _$ScheduledInstanceSupabaseModelCopyWithImpl<$Res,
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? taskId = null,
     Object? createdAt = null,
     Object? startDateTime = null,
     Object? endDateTime = null,
@@ -119,6 +123,10 @@ class _$ScheduledInstanceSupabaseModelCopyWithImpl<$Res,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -180,6 +188,7 @@ abstract class _$$ScheduledInstanceSupabaseModelImplCopyWith<$Res>
   $Res call(
       {String id,
       @JsonKey(name: 'user_id') String userId,
+      @JsonKey(name: 'task_id') String taskId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'start_date_time') DateTime startDateTime,
       @JsonKey(name: 'end_date_time') DateTime endDateTime,
@@ -210,6 +219,7 @@ class __$$ScheduledInstanceSupabaseModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? userId = null,
+    Object? taskId = null,
     Object? createdAt = null,
     Object? startDateTime = null,
     Object? endDateTime = null,
@@ -230,6 +240,10 @@ class __$$ScheduledInstanceSupabaseModelImplCopyWithImpl<$Res>
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       createdAt: null == createdAt
           ? _value.createdAt
@@ -286,6 +300,7 @@ class _$ScheduledInstanceSupabaseModelImpl
   const _$ScheduledInstanceSupabaseModelImpl(
       {required this.id,
       @JsonKey(name: 'user_id') required this.userId,
+      @JsonKey(name: 'task_id') required this.taskId,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'start_date_time') required this.startDateTime,
       @JsonKey(name: 'end_date_time') required this.endDateTime,
@@ -307,6 +322,9 @@ class _$ScheduledInstanceSupabaseModelImpl
   @override
   @JsonKey(name: 'user_id')
   final String userId;
+  @override
+  @JsonKey(name: 'task_id')
+  final String taskId;
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
@@ -343,7 +361,7 @@ class _$ScheduledInstanceSupabaseModelImpl
 
   @override
   String toString() {
-    return 'ScheduledInstanceSupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, startDateTime: $startDateTime, endDateTime: $endDateTime, schedulerId: $schedulerId, schedulerType: $schedulerType, taskStatus: $taskStatus, sequenceNumber: $sequenceNumber, successPercentage: $successPercentage, timezone: $timezone, updatedAt: $updatedAt, exceptionReason: $exceptionReason)';
+    return 'ScheduledInstanceSupabaseModel(id: $id, userId: $userId, taskId: $taskId, createdAt: $createdAt, startDateTime: $startDateTime, endDateTime: $endDateTime, schedulerId: $schedulerId, schedulerType: $schedulerType, taskStatus: $taskStatus, sequenceNumber: $sequenceNumber, successPercentage: $successPercentage, timezone: $timezone, updatedAt: $updatedAt, exceptionReason: $exceptionReason)';
   }
 
   @override
@@ -353,6 +371,7 @@ class _$ScheduledInstanceSupabaseModelImpl
             other is _$ScheduledInstanceSupabaseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.startDateTime, startDateTime) ||
@@ -383,6 +402,7 @@ class _$ScheduledInstanceSupabaseModelImpl
       runtimeType,
       id,
       userId,
+      taskId,
       createdAt,
       startDateTime,
       endDateTime,
@@ -418,6 +438,7 @@ abstract class _ScheduledInstanceSupabaseModel
   const factory _ScheduledInstanceSupabaseModel(
       {required final String id,
       @JsonKey(name: 'user_id') required final String userId,
+      @JsonKey(name: 'task_id') required final String taskId,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       @JsonKey(name: 'start_date_time') required final DateTime startDateTime,
       @JsonKey(name: 'end_date_time') required final DateTime endDateTime,
@@ -439,6 +460,9 @@ abstract class _ScheduledInstanceSupabaseModel
   @override
   @JsonKey(name: 'user_id')
   String get userId;
+  @override
+  @JsonKey(name: 'task_id')
+  String get taskId;
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;

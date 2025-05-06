@@ -6,7 +6,7 @@ part of 'scheduler_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SchedulerTypeAdapter extends TypeAdapter<SchedulerType> {
+class SchedulerTypeAdapter extends HiveBaseTypeAdapter<SchedulerType> {
   @override
   final int typeId = 110;
 
@@ -45,7 +45,5 @@ class SchedulerTypeAdapter extends TypeAdapter<SchedulerType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SchedulerTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is SchedulerTypeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

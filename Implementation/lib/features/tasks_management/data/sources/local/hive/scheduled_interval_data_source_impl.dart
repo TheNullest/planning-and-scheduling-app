@@ -1,6 +1,6 @@
-import 'package:zamaan/core/constants/hive_boxes.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/scheduled_interval_data_source.dart';
@@ -12,10 +12,17 @@ import 'package:zamaan/features/tasks_management/data/sources/local/bases/schedu
 class ScheduledIntervalHiveDataSourceImpl extends HiveDataSource<ScheduledIntervalHiveModel>
     implements ScheduledIntervalLocalDataSource<ScheduledIntervalHiveModel> {
   ScheduledIntervalHiveDataSourceImpl({
-    HiveServices<ScheduledIntervalHiveModel>? hiveBox,
-  })  : _hiveBox = hiveBox ?? serviceLocator<HiveServices<ScheduledIntervalHiveModel>>(),
-        _boxName = HiveBoxConstants.scheduleConstraintssBox,
-        super(hiveServices: hiveBox, HiveBoxConstants.scheduleConstraintssBox);
-  final String _boxName;
-  final HiveServices<ScheduledIntervalHiveModel> _hiveBox;
+    HiveBoxRunner<ScheduledIntervalHiveModel>? hiveBox,
+  })  : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<ScheduledIntervalHiveModel>>(),
+        super(hiveServices: hiveBox);
+  final HiveBoxRunner<ScheduledIntervalHiveModel> _hiveBox;
+
+  @override
+  EResultFuture<List<ScheduledIntervalHiveModel>> getBatchByConstraintId(
+    String constraintId,
+  ) async =>
+      _hiveBox.runBoxOperation(
+        job: (box) async =>
+            box.values.where((item) => item.scheduleConstraintId == constraintId).toList(),
+      );
 }

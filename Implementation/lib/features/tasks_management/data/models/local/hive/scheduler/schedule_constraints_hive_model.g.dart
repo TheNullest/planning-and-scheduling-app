@@ -6,8 +6,7 @@ part of 'schedule_constraints_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduleConstraintHiveModelAdapter
-    extends TypeAdapter<ScheduleConstraintHiveModel> {
+class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleConstraintHiveModel> {
   @override
   final int typeId = 17;
 

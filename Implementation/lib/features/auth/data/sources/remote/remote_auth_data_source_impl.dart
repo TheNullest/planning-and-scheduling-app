@@ -37,6 +37,24 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   @override
   Session? get currentUserSession => _auth.currentSession;
 
+  @override
+  EResultFutureVoid restoreSession() async => tryCatchEither(
+        action: () async {
+          final session = currentUserSession;
+          if (session != null &&
+              DateTime.fromMillisecondsSinceEpoch(session.expiresAt! * 1000)
+                  .isAfter(DateTime.now())) {
+            await setSession();
+          }
+          return const Right(null);
+        },
+        failureType: FailureType.remote,
+      );
+
+  @override
+  EResultFuture<AuthResponse> setSession() async =>
+      Right(await _auth.setSession(currentUserSession!.refreshToken!));
+
   /// Method to get the current user
   ///
   /// This method fetches the current user's data from the 'profiles' table.
@@ -67,6 +85,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
           );
         },
         failureType: FailureType.remote,
+        customMessage: StackTrace.current.toString(),
       );
 
   /// Method to sign in a user
@@ -199,7 +218,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
           await signIn(params);
 
           // Sign in the user with the provided email and password
-          final user = foldEither<UserSupabaseModel>(await signIn(params));
+          final user = foldEitherRight<UserSupabaseModel>(await signIn(params));
 
           // Remove the user from the 'profiles' table
           await _supabaseClient.from('profiles').delete().eq('id', user.id!);
@@ -234,4 +253,11 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
         },
         failureType: FailureType.remote,
       );
+
+  @override
+  EResultFuture<Session?> listenAuthChanges() async {
+    late Session? session;
+    _auth.onAuthStateChange.listen((event) => session = event.session);
+    return Right(session);
+  }
 }

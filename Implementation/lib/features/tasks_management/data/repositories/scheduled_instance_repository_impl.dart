@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/scheduled_instance.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -17,7 +17,7 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
     ScheduledInstanceHiveModel,
     ScheduledInstanceSupabaseModel,
     ScheduledInstanceLocalDataSource<ScheduledInstanceHiveModel>,
-    SupabaseDataSource<ScheduledInstanceSupabaseModel>,
+    SupabaseDataSource<ScheduledInstanceSupabaseModel, DataMapper>,
     DataMapper<ScheduledInstanceEntity, ScheduledInstanceHiveModel,
         ScheduledInstanceSupabaseModel>> implements ScheduledInstanceRepository {
   ScheduledInstanceRepositoryImpl({
@@ -31,7 +31,7 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
         _netConnectivity = netConnectivity;
 
   final ScheduledInstanceLocalDataSource<ScheduledInstanceHiveModel> _localDataSource;
-  final SupabaseDataSource<ScheduledInstanceSupabaseModel> _remoteDataSource;
+  final SupabaseDataSource<ScheduledInstanceSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
@@ -41,7 +41,7 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
   ) async =>
       tryCatchEither(
         action: () async {
-          final response = await _localDataSource.getBatchScheduledInstancesByDay(day);
+          final response = await _localDataSource.getBatchByDay(day);
           final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
           return Right(_dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>);
         },
@@ -49,14 +49,22 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
       );
 
   @override
-  EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesBySchedulers(
+  EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesBySchedulerIds(
     List<String> schedulerIds,
   ) async =>
       tryCatchEither(
         action: () async {
-          final response = await _localDataSource.getBatchScheduledInstancesBySchedulers(schedulerIds);
+          final response = await _localDataSource.getBatchBySchedulers(schedulerIds);
           final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
           return Right(_dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>);
+        },
+        failureType: FailureType.local,
+      );
+
+  @override
+  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds) async => tryCatchEither(
+        action: () async {
+          return _localDataSource.deleteBySchedulerIds(schedulerIds);
         },
         failureType: FailureType.local,
       );

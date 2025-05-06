@@ -3,6 +3,6 @@ import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/domain/usecases/create_batch_usecase.dart';
 
 class CreateBatchCustomeMeasurementUnitsUsecase
-    extends CreateBatchUsecase<CustomeMeasurementUnitRepository, CustomMeasurementUnitEntity> {
+    extends CreateBatchUsecase<CustomMeasurementUnitRepository, CustomMeasurementUnitEntity> {
   CreateBatchCustomeMeasurementUnitsUsecase(super.repository);
 }

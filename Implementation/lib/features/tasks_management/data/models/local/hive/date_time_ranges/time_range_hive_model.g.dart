@@ -6,7 +6,7 @@ part of 'time_range_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TimeRangeHiveModelAdapter extends TypeAdapter<TimeRangeHiveModel> {
+class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> {
   @override
   final int typeId = 24;
 
@@ -18,21 +18,35 @@ class TimeRangeHiveModelAdapter extends TypeAdapter<TimeRangeHiveModel> {
     };
     return TimeRangeHiveModel(
       id: fields[0] as String,
-      start: fields[1] as int,
-      end: fields[2] as int,
+      userId: fields[1] as String,
+      createdAt: fields[2] as DateTime,
+      parentId: fields[13] as String,
+      end: fields[12] as int?,
+      start: fields[11] as int?,
+      updatedAt: fields[4] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TimeRangeHiveModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(8)
+      ..writeByte(11)
+      ..write(obj.start)
+      ..writeByte(12)
+      ..write(obj.end)
+      ..writeByte(13)
+      ..write(obj.parentId)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.start)
+      ..write(obj.userId)
       ..writeByte(2)
-      ..write(obj.end);
+      ..write(obj.createdAt)
+      ..writeByte(3)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.updatedAt);
   }
 
   @override

@@ -20,7 +20,7 @@ class DeviceEntity with EquatableMixin {
   /// Constructs a new device entity with the specified properties.
   ///
   /// Parameters:
-  /// - [id]: Unique identifier for the device (e.g., UUID or database ID).
+  /// - [id]: Unique identifier for the device (e.g., UVMD or database ID).
   /// - [userId]: Identifier for the user to whom the device belongs.
   /// - [os]: Operating system of the device (e.g., Android, iOS).
   /// - [osVersion]: Version of the operating system running on the device.

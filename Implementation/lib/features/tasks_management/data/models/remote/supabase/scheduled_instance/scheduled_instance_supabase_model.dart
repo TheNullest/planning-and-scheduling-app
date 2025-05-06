@@ -13,6 +13,7 @@ class ScheduledInstanceSupabaseModel with _$ScheduledInstanceSupabaseModel {
   const factory ScheduledInstanceSupabaseModel({
     required String id,
     @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'task_id') required String taskId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'start_date_time') required DateTime startDateTime,
     @JsonKey(name: 'end_date_time') required DateTime endDateTime,
@@ -31,6 +32,7 @@ class ScheduledInstanceSupabaseModel with _$ScheduledInstanceSupabaseModel {
       ScheduledInstanceSupabaseModel(
         id: entity.id,
         userId: entity.userId,
+        taskId: entity.taskId,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
         startDateTime: entity.startDateTime,

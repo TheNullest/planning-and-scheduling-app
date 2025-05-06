@@ -8,8 +8,9 @@ extension TimeOfDayExtension on TimeOfDay {
 
   int toInt() => hour * 60 + minute;
 
-
   DateTime toDateTime(DateTime date) {
     return DateTime(date.year, date.month, date.day, hour, minute);
   }
+
+  Duration toDuration() => Duration(hours: hour, minutes: minute);
 }

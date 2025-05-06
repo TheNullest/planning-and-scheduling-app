@@ -5,6 +5,7 @@ import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
 
 abstract class AuthenticationRepository {
   EResultFuture<UserEntity> getCurrentUser();
+  EResultFutureVoid initialize();
   EResultFuture<UserEntity> signUp(UserEntity user);
   EResultFuture<UserEntity> signIn(UserSignInParams params);
   EResultFuture<UserEntity> update(UserEntity user);

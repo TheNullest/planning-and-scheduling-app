@@ -1,6 +1,5 @@
-import 'package:zamaan/core/constants/hive_boxes.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_constraints_hive_model.dart';
@@ -11,22 +10,20 @@ import 'package:zamaan/features/tasks_management/data/sources/local/bases/schedu
 /// This class extends [HiveDataSource] to leverage common data operations
 /// and provides additional methods for specific scheduleConstraints-related queries.
 class ScheduleDefinitionHiveDataSourceImpl extends HiveDataSource<ScheduleConstraintHiveModel>
-    implements ScheduleConstraintsLocalDataSource<ScheduleConstraintHiveModel> {
+    implements ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel> {
   /// Constructor for [ScheduleDefinitionHiveDataSourceImpl].
   ///
   /// The [hiveBox] parameter is optional and allows for dependency injection
-  /// to facilitate testing. If not provided, a default [HiveServices] is used.
+  /// to facilitate testing. If not provided, a default [HiveBoxRunner] is used.
   ScheduleDefinitionHiveDataSourceImpl({
-    HiveServices<ScheduleConstraintHiveModel>? hiveBox,
-  })  : _hiveBox = hiveBox ?? serviceLocator<HiveServices<ScheduleConstraintHiveModel>>(),
-        _boxName = HiveBoxConstants.scheduleConstraintssBox,
-        super(hiveServices: hiveBox, HiveBoxConstants.scheduleConstraintssBox);
-  final String _boxName;
-  final HiveServices<ScheduleConstraintHiveModel> _hiveBox;
+    HiveBoxRunner<ScheduleConstraintHiveModel>? hiveBox,
+  })  : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<ScheduleConstraintHiveModel>>(),
+        super(hiveServices: hiveBox);
+  final HiveBoxRunner<ScheduleConstraintHiveModel> _hiveBox;
 
   @override
   EResultFuture<List<ScheduleConstraintHiveModel>> getBatchSchedulesByDay(DateTime date) async {
-    return _hiveBox.operator<List<ScheduleConstraintHiveModel>>(
+    return _hiveBox.runBoxOperation<List<ScheduleConstraintHiveModel>>(
       job: (box) async => box.values.where((scheduleConstraints) {
         final bool inDateRange;
         if (scheduleConstraints.startAt != null) {
@@ -51,7 +48,6 @@ class ScheduleDefinitionHiveDataSourceImpl extends HiveDataSource<ScheduleConstr
 
         return inDateRange && (inWeekDay || inMonthDay);
       }).toList(),
-      boxName: _boxName,
     );
   }
 

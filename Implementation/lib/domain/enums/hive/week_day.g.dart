@@ -6,7 +6,7 @@ part of 'week_day.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class WeekDayAdapter extends TypeAdapter<WeekDay> {
+class WeekDayAdapter extends HiveBaseTypeAdapter<WeekDay> {
   @override
   final int typeId = 113;
 
@@ -65,7 +65,5 @@ class WeekDayAdapter extends TypeAdapter<WeekDay> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is WeekDayAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is WeekDayAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

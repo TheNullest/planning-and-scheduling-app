@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:zamaan/core/extensions/string.dart';
-import 'package:zamaan/core/utils/current_location.dart'; // Import the getCurrentLocation function
+import 'package:zamaan/core/utils/failure_location.dart'; // Import the getCurrentLocation function
 import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// An abstract class representing a failure or error.
@@ -13,7 +13,7 @@ abstract class Failure extends Equatable implements Exception {
     required this.message,
     DateTime? timestamp,
     String? errorLocation,
-  })  : errorLocation = errorLocation ?? getCurrentLocation(),
+  })  : errorLocation = errorLocation ?? '',
         timestamp = timestamp ?? DateTime.timestamp();
 
   /// A message describing the failure.
@@ -32,8 +32,7 @@ abstract class Failure extends Equatable implements Exception {
 
   /// Provides a string representation of the [Failure].
   @override
-  String toString() =>
-      kReleaseMode ? 'Error Message : $message' : _verboseToString();
+  String toString() => kReleaseMode ? 'Error Message : $message' : _verboseToString();
 
   String _verboseToString() => '''
        ⚠️ Failure Details ⚠️

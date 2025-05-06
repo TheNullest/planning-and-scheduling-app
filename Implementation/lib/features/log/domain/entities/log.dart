@@ -29,7 +29,7 @@ class LogEntity with EquatableMixin {
   /// Constructs a new log entry with the specified properties.
   ///
   /// Parameters:
-  /// - [id]: Unique identifier for the log entry (e.g., UUID or database ID).
+  /// - [id]: Unique identifier for the log entry (e.g., UVMD or database ID).
   /// - [userId]: Identifier for the user performing the action.
   /// - [deviceId]: Identifier for the device that generated the log.
   /// - [entityId]: Identifier of the entity affected by the logged action.

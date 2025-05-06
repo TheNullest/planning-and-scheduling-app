@@ -6,7 +6,7 @@ part of 'repetition_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class RepetitionTypeAdapter extends TypeAdapter<RepetitionType> {
+class RepetitionTypeAdapter extends HiveBaseTypeAdapter<RepetitionType> {
   @override
   final int typeId = 109;
 
@@ -60,7 +60,5 @@ class RepetitionTypeAdapter extends TypeAdapter<RepetitionType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is RepetitionTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is RepetitionTypeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

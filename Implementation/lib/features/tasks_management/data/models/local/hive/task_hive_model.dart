@@ -63,7 +63,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
     required this.taskStatus,
     required this.scheduledDayIds,
     required this.scheduledIntervalIds,
-    required this.scheduledInstanceIds,
     this.scheduleConstraintId,
     super.description,
     super.updatedAt,
@@ -91,7 +90,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
       scheduleConstraintId: entity.scheduleConstraintId,
       scheduledDayIds: List.from(entity.scheduledDayIds),
       scheduledIntervalIds: List.from(entity.scheduledIntervalIds),
-      scheduledInstanceIds: List.from(entity.scheduledInstanceIds),
       subTaskIds: List.from(entity.subTaskIds),
     );
   }
@@ -150,9 +148,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
   @HiveField(23)
   final List<String> scheduledIntervalIds;
 
-  @HiveField(24)
-  final List<String> scheduledInstanceIds;
-
   /// Returns a new instance of [TaskHiveModel] with updated values.
   ///
   /// Any provided parameter will override the current instance's corresponding field.
@@ -177,7 +172,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
     String? scheduleConstraintId,
     List<String>? scheduledDayIds,
     List<String>? scheduledIntervalIds,
-    List<String>? scheduledInstanceIds,
   }) {
     return TaskHiveModel(
       id: id ?? this.id,
@@ -198,7 +192,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
       scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
       scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
       scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
-      scheduledInstanceIds: scheduledInstanceIds ?? List.from(this.scheduledInstanceIds),
     );
   }
 
@@ -218,6 +211,5 @@ class TaskHiveModel extends BaseEntityAbstraction {
         scheduledDayIds,
         scheduledIntervalIds,
         scheduleConstraintId,
-        scheduledInstanceIds,
       ];
 }

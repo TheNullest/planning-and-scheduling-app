@@ -6,7 +6,7 @@ part of 'measurement_unit.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MeasurementUnitAdapter extends TypeAdapter<MeasurementUnit> {
+class MeasurementUnitAdapter extends HiveBaseTypeAdapter<MeasurementUnit> {
   @override
   final int typeId = 105;
 
@@ -205,7 +205,5 @@ class MeasurementUnitAdapter extends TypeAdapter<MeasurementUnit> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MeasurementUnitAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is MeasurementUnitAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

@@ -33,13 +33,14 @@ class LogRepoImpl implements LogRepository<LogEntity> {
 
   @override
   EResultFuture<List<LogEntity>> getLogs({
-    required DataSourcePolicy policy, List<String>? logIds,
+    required DataSourcePolicy policy,
+    List<String>? logIds,
   }) async =>
       tryCatchEither<List<LogEntity>>(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
             final response = await _logHiveDataSource.getLogs(logIds);
-            final hiveModels = foldEither<List<LogHiveModel>>(response);
+            final hiveModels = foldEitherRight<List<LogHiveModel>>(response);
             final result = hiveModels.map((item) => item.toEntity()).toList();
             return Right(result);
           }
@@ -47,7 +48,7 @@ class LogRepoImpl implements LogRepository<LogEntity> {
           final response = await _logSupabaseDataSource.getLogs(
             logIds,
           );
-          final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
+          final supabaseModels = foldEitherRight<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();
           return Right(result);
         },
@@ -67,7 +68,7 @@ class LogRepoImpl implements LogRepository<LogEntity> {
               fromDate: fromDate,
               toDate: toDate,
             );
-            final hiveModels = foldEither<List<LogHiveModel>>(response);
+            final hiveModels = foldEitherRight<List<LogHiveModel>>(response);
             final result = hiveModels.map((item) => item.toEntity()).toList();
             return Right(result);
           }
@@ -76,7 +77,7 @@ class LogRepoImpl implements LogRepository<LogEntity> {
             fromDate: fromDate,
             toDate: toDate,
           );
-          final supabaseModels = foldEither<List<LogSupabaseModel>>(response);
+          final supabaseModels = foldEitherRight<List<LogSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();
           return Right(result);
         },

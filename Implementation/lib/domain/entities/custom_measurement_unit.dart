@@ -7,7 +7,7 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 /// Each instance stores:
 /// - **[title]**: The descriptive name of the measurement unit (e.g., "Meter", "Kilogram").
 /// - **[isDouble]**: A flag indicating whether the measurement unit supports decimal values.
-/// - **[iconCode]**: An integer code that identifies an icon for visual representation in the UI.
+/// - **[iconCode]**: An integer code that identifies an icon for visual representation in the VM.
 ///
 /// This entity extends [BaseEntityAbstraction], inheriting common properties such as [id],
 /// [userId], [createdAt], [updatedAt], and [description].

@@ -9,7 +9,7 @@ import 'package:zamaan/domain/enums/enums.dart';
 /// ```dart
 /// SubTaskEntity(
 ///   taskId: "task_123", // Parent task ID
-///   title: "Design UI mockups",
+///   title: "Design VM mockups",
 ///   priority: Priority.medium,
 ///   status: TaskStatus.inProgress,
 ///   totalSpentTime: Duration(hours: 2),

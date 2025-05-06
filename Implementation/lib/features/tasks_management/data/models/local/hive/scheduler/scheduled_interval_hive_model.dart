@@ -3,7 +3,7 @@ import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
-import 'package:zamaan/presentation_shared/enums/interval_unit.dart';
+import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 
 part 'scheduled_interval_hive_model.g.dart';
 
@@ -54,33 +54,11 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     required this.repeatCount,
     required this.scheduledTimeIds,
     required this.enforceScheduleBounds,
+    required this.consecutiveOccurrences,
     required this.startDate,
     super.description,
     super.updatedAt,
   });
-
-  /// Creates a [ScheduledIntervalHiveModel] from a [ScheduledIntervalEntity].
-  ///
-  /// This factory method converts a domain entity into its corresponding Hive model
-  /// suitable for persistence.
-  factory ScheduledIntervalHiveModel.fromEntity(
-    ScheduledIntervalEntity entity,
-  ) {
-    return ScheduledIntervalHiveModel(
-      id: entity.id,
-      userId: entity.userId,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-      description: entity.description,
-      scheduleConstraintId: entity.scheduleConstraintId,
-      intervalUnit: entity.intervalUnit,
-      intervalValue: entity.intervalValue,
-      startDate: entity.startDate,
-      scheduledTimeIds: List.from(entity.scheduledTimeIds),
-      repeatCount: entity.repeatCount,
-      enforceScheduleBounds: entity.enforceScheduleBounds,
-    );
-  }
 
   /// The ID of the schedule definition associated with this interval.
   @HiveField(11)
@@ -108,6 +86,9 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
   @HiveField(17)
   final DateTime startDate;
 
+  @HiveField(18)
+  final int consecutiveOccurrences;
+
   /// Returns a new instance of [ScheduledIntervalHiveModel] with updated values.
   ///
   /// Any parameter not provided retains its current value.
@@ -124,6 +105,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     IntervalUnit? intervalUnit,
     double? intervalValue,
     int? repeatCount,
+    int? consecutiveOccurrences,
     List<String>? scheduledTimeIds,
     bool? enforceScheduleBounds,
   }) {
@@ -139,6 +121,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
       repeatCount: repeatCount ?? this.repeatCount,
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
       startDate: startDate ?? this.startDate,
+      consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
       scheduledTimeIds:
           scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Avoid reference sharing
     );
@@ -154,5 +137,6 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
         enforceScheduleBounds,
         scheduledTimeIds,
         startDate,
+        consecutiveOccurrences,
       ];
 }

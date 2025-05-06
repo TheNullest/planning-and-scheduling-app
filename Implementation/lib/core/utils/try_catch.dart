@@ -1,6 +1,7 @@
 // ignore_for_file: no_default_cases
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
@@ -9,7 +10,7 @@ import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
 import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
 import 'package:zamaan/core/errors/exceptions/unexpected_exception.dart';
-import 'package:zamaan/core/utils/current_location.dart';
+import 'package:zamaan/core/utils/failure_location.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 
@@ -53,7 +54,7 @@ EResultFuture<T> tryCatchEither<T>({
   Future Function()? onFinally,
 }) async {
   // Get the current location for logging or debugging purposes.
-  final location = getCurrentLocation();
+  final location = getFailureLocation();
 
   // Format the custom message if provided.
   final formattedMessage = customMessage != null ? '\n ** $customMessage **' : '';
@@ -105,6 +106,7 @@ EResultFuture<T> tryCatchEither<T>({
     );
     return Left(exception);
   } catch (e) {
+    log(customMessage!);
     rollbackActions?.forEach((action) async => action());
     // Handle any other exceptions.
     final exceptionMessage = formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
@@ -170,7 +172,7 @@ T tryCatchSimple<T>({
     // Throw a LocalException with the constructed message and current location.
     throw LocalException(
       message: exceptionMessage,
-      errorLocation: getCurrentLocation(),
+      errorLocation: getFailureLocation(),
     );
   } finally {
     // Execute the onFinally callback if provided.

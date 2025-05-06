@@ -3,6 +3,6 @@ import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
 import 'package:zamaan/domain/usecases/get_by_id_usecase.dart';
 
 class GetCustomeMeasurementUnitUsecase
-    extends GetByIdUsecase<CustomeMeasurementUnitRepository, CustomMeasurementUnitEntity> {
+    extends GetByIdUsecase<CustomMeasurementUnitRepository, CustomMeasurementUnitEntity> {
   GetCustomeMeasurementUnitUsecase(super.repository);
 }

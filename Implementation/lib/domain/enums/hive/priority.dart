@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'priority.g.dart';
 
-/// Represents the priority levels with Persian translations for UI display.
-/// This enum is strictly for UI purposes and **not intended for database storage**.
+/// Represents the priority levels with Persian translations for VM display.
+/// This enum is strictly for VM purposes and **not intended for database storage**.
 ///
 /// Example Usage:
 /// ```dart
@@ -34,7 +35,7 @@ enum Priority {
   /// Constructs a [Priority] with its Persian translation.
   const Priority(this._inPersian);
 
-  /// The Persian representation used for UI display.
+  /// The Persian representation used for VM display.
   final String _inPersian;
 
   /// Retrieves a [Priority] by its English name.
@@ -76,7 +77,7 @@ enum Priority {
   /// ```
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   ///
   /// Example:
   /// ```dart

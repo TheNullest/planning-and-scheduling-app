@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'repetition_type.g.dart';
 
 /// Enum representing different types of repetition for a task.
-/// This enum is used for UI purposes.
+/// This enum is used for VM purposes.
 @HiveType(typeId: EnumHiveTypeIds.repetitionType)
 enum RepetitionType {
   @HiveField(0)
@@ -29,7 +30,7 @@ enum RepetitionType {
   /// Constructs a [RepetitionType] with its localized Persian string.
   const RepetitionType(this._inPersian);
 
-  /// The Persian representation used for UI display.
+  /// The Persian representation used for VM display.
   final String _inPersian;
 
   /// Converts a string name to a [RepetitionType] enum value.
@@ -53,6 +54,6 @@ enum RepetitionType {
   /// It extracts the enum string using [toString()] and then processes it.
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name of the [RepetitionType] for UI display.
+  /// Returns the Persian name of the [RepetitionType] for VM display.
   String get nameInPersian => _inPersian;
 }

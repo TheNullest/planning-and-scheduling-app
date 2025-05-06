@@ -74,9 +74,7 @@ class _CustomTabBarWidgetState extends State<CustomTabBarWidget> {
                           ]
                         : null,
                     icon,
-                    color: index == selectedIndex
-                        ? AppPallete.gradient3
-                        : AppPallete.grey,
+                    color: index == selectedIndex ? AppPallete.gradient3 : AppPallete.grey,
                   ),
                 ),
               ),

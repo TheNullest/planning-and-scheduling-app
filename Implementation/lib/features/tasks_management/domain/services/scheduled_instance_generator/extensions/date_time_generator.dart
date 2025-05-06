@@ -1,37 +1,60 @@
 part of '../scheduled_instance_generator.dart';
 
 /// An extension that implements the core logic of generating dates and validating them
-/// against exceptions or interferences.
+/// against exception ranges.
 extension DateTimeGenerator on ScheduledInstanceGenerator {
-  /// Generates a series of dates starting from [pointDate] at intervals [stepDuration]
-  /// until either [maxOccurences] is reached or the scheduling end date is passed.
+  /// Generates a series of dates starting from [currentDate] until either the maximum number of occurrences
+  /// ([maxOccurences]) is reached or the scheduling end date is exceeded.
+  ///
+  /// The date is advanced using one of two mechanisms based on the scheduling strategy:
+  ///
+  /// • When [monthlySteps] is provided, the generator increments the month value by [monthlySteps],
+  ///   which is useful for month-day (or year-based) scheduling.
+  /// • Otherwise, [stepDuration] is used to add a fixed time interval (e.g., for weekday scheduling).
+  ///
+  /// Additionally, the [consecutiveOccurrences] parameter specifies how many consecutive occurrences should be
+  /// generated starting from each computed date. For example, if [consecutiveOccurrences] is greater than 1, the
+  /// same base date will be used to produce multiple consecutive occurrences (subject to the exception check)
+  /// before the date is incremented.
   ///
   /// Parameters:
-  /// - [maxOccurences]: Maximum number of date occurrences to generate.
-  /// - [pointDate]: The starting date/time.
-  /// - [generatedDates]: Reference list in which to append valid dates.
-  /// - [stepDuration]: Duration to add for each new date (required unless [targetDay] is set).
-  /// - [targetDay]: (Optional) For month-based scheduling so that the new date has a specific day.
+  /// - [maxOccurences]: The maximum number of date occurrences to generate.
+  /// - [currentDate]: The starting date/time from which to begin generating dates.
+  /// - [generatedDates]: A list that collects valid [DateTime] occurrences (excluding those that fall within an exception range).
+  /// - [consecutiveOccurrences]: The number of consecutive occurrences to generate for each computed date.
+  /// - [monthlySteps]: (Optional) The number of months to increment for month-based scheduling.
+  /// - [stepDuration]: (Optional) The duration to add for each new date when using time-based scheduling (required if [monthlySteps] is null).
   void _generateDates({
     required int maxOccurences,
-    required DateTime pointDate,
+    required DateTime currentDate,
     required List<DateTime> generatedDates,
+    required int consecutiveOccurrences,
+    int? monthlySteps,
     Duration? stepDuration,
-    int? targetDay,
   }) {
-    late var currentDate = pointDate;
-    // Continue generating dates until one of the termination conditions is met.
+    // Continue generating dates as long as both conditions are met:
+    // 1. The current date is on or before the schedule's end date.
+    // 2. The number of generated dates is less than maxOccurences.
     while (compareDates(past: currentDate, future: scheduleConstraint.endAt) <= 0 &&
         generatedDates.length < maxOccurences) {
-      // Only add the date if it is not within an exception date range.
-      if (!_isExceptionDate(currentDate)) {
-        generatedDates.add(currentDate);
-      }
+      // For each computed date, generate [occurrenceFrequency] consecutive occurrences.
+      // This helps in grouping or handling cases where several occurrences are considered to be consecutive.
+      for (var occurrence = 0; occurrence < consecutiveOccurrences; occurrence++) {
+        // Append the current date if it doesn't fall within any defined exception ranges.
+        if (!_isExceptionDate(currentDate)) {
+          generatedDates.add(currentDate);
+        }
 
-      // Move to the next date either by targeting a specific day-of-month or by adding stepDuration.
-      currentDate = targetDay != null
-          ? currentDate.copyWith(month: currentDate.month + 1, day: targetDay)
-          : currentDate.add(stepDuration!);
+        // Increment the current date:
+        // - If [monthlySteps] is provided, perform a month-based increment.
+        // - Otherwise, add the fixed [stepDuration] to advance the date.
+        currentDate = monthlySteps != null
+            ? currentDate.copyWith(
+                month: currentDate.month + monthlySteps,
+                day: currentDate.day,
+              )
+            : currentDate.add(stepDuration!);
+      }
     }
   }
 

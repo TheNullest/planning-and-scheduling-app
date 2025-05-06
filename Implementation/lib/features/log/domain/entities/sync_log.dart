@@ -18,7 +18,7 @@ class SyncLogEntity with EquatableMixin {
   /// Constructs a new synchronization log entry with the specified properties.
   ///
   /// Parameters:
-  /// - [id]: Unique identifier for the synchronization log entry (e.g., UUID or database ID).
+  /// - [id]: Unique identifier for the synchronization log entry (e.g., UVMD or database ID).
   /// - [deviceId]: Identifier for the device associated with the synchronization operation.
   /// - [userId]: Identifier for the user owning the device group.
   /// - [syncLogId]: Identifier linking this sync log to related logs or data.

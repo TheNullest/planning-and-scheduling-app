@@ -4,12 +4,16 @@ import 'package:zamaan/core/localization/app_locale_keys.dart';
 import 'package:zamaan/presentation_shared/models/route_config.dart';
 
 abstract class AppRouteConfigs {
+  AppRouteConfigs._();
+
   static final RouteConfig error = RouteConfig(
     titleKey: AppLocaleKeys.uiElements.titles.error,
     icon: Icons.error,
     route: AppRoutes.error,
     routeName: AppRouteNames.error,
   );
+
+  // Authentication views
   static final RouteConfig signUp = RouteConfig(
     titleKey: AppLocaleKeys.uiElements.titles.signUp,
     icon: Icons.today,
@@ -24,13 +28,15 @@ abstract class AppRouteConfigs {
     routeName: AppRouteNames.signIn,
   );
 
+  // Settings
   static final RouteConfig settings = RouteConfig(
     titleKey: AppLocaleKeys.uiElements.titles.settings,
-    icon: Icons.settings,
+    icon: Icons.route,
     route: AppRoutes.settings,
     routeName: AppRouteNames.settings,
   );
 
+  // Home
   static const RouteConfig home = RouteConfig(
     titleKey: '',
     icon: Icons.dashboard,
@@ -38,12 +44,20 @@ abstract class AppRouteConfigs {
     routeName: AppRouteNames.home,
   );
 
+  // Tasks
+
+  static final RouteConfig addNewTask = RouteConfig(
+    route: AppRoutes.addNewTask,
+    routeName: AppRouteNames.addNewTask,
+    icon: Icons.add,
+    titleKey: AppLocaleKeys.uiElements.titles.addNewTask, // e.g., localizes to 'Today Tasks'
+  );
+
   static final RouteConfig todayTasks = RouteConfig(
     route: AppRoutes.todayTasks,
     routeName: AppRouteNames.todayTasks,
     icon: Icons.today,
-    titleKey: AppLocaleKeys
-        .uiElements.titles.todayTasks, // e.g., localizes to 'Today Tasks'
+    titleKey: AppLocaleKeys.uiElements.titles.todayTasks, // e.g., localizes to 'Today Tasks'
   );
 
   static final RouteConfig activeTasks = RouteConfig(

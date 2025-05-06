@@ -6,7 +6,7 @@ part of 'tag_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TagHiveModelAdapter extends TypeAdapter<TagHiveModel> {
+class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
   @override
   final int typeId = 21;
 
@@ -56,7 +56,5 @@ class TagHiveModelAdapter extends TypeAdapter<TagHiveModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TagHiveModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TagHiveModelAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

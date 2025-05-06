@@ -16,12 +16,13 @@ import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/enums/hive/day_type.dart';
+import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/features/tasks_management/domain/params/generate_instances.dart';
 
 part 'extensions/date_time_generator.dart';
 part 'extensions/scheduler_processing.dart';
-part 'extensions/process_dates.dart';
+part 'extensions/process_steps.dart';
 part 'extensions/builder.dart';
 
 /// The `ScheduledInstanceGenerator` class is responsible for generating scheduled
@@ -85,17 +86,9 @@ class ScheduledInstanceGenerator {
   /// Date ranges where scheduling should not occur.
   late List<DateRangeEntity> exceptionDateRanges;
 
-  // Static constants defining time durations and occurrence limits.
-  static const Duration weeklyStepDuration = Duration(days: 7);
-  static const Duration monthlyStepDuration = Duration(days: 30);
-  static const Duration yearlyStepDuration = Duration(days: daysInYear);
-  static const int maxMonthDayOccurrences = 12;
-  static const int maxWeekDayOccurrences = 52;
-  static const int maxInstanceCount = 100;
-  static const int daysInYear = 365;
-
   // Internal store for generated scheduled instances.
   final _generatedInstances = <ScheduledInstanceEntity>[];
+
   // The reference date from which scheduling calculations start.
   late final DateTime _pointDate;
 

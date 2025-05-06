@@ -4,13 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
 import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
 import 'package:zamaan/core/localization/multi_assets_loader.dart';
 import 'package:zamaan/core/providers/user_provider.dart';
 import 'package:zamaan/core/utils/snackbars.dart';
 import 'package:zamaan/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/navigation/presentation/views/home_view.dart';
+import 'package:zamaan/features/tasks_management/presentation/blocs/scheduler/schedulers_manager_bloc.dart';
+import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
 import 'package:zamaan/presentation_shared/navigation/app_router.dart';
 import 'package:zamaan/presentation_shared/theme/app_dark_theme.dart';
 
@@ -29,6 +31,8 @@ void main() async {
           ),
           BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
           BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
+          BlocProvider(create: (_) => serviceLocator<TasksManagerBloc>()),
+          BlocProvider(create: (_) => serviceLocator<SchedulersManagerBloc>()),
         ],
         child: const Zamaan(),
       ),

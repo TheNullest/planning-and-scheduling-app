@@ -9,7 +9,7 @@ import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/platform/directory_wrapper.dart';
 import 'package:zamaan/core/platform/path_provider_wrapper.dart';
 import 'package:zamaan/core/platform/platform_wrapper.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/core/services/hive/hive_wrapper.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
@@ -30,7 +30,7 @@ void main() {
   late MockPathProviderWrapper mockPathProvider;
   late MockDirectoryrWrapper mockDirectory;
   late MockBox<UserHiveModel> mockBox;
-  late HiveServices<UserHiveModel> hiveServices;
+  late HiveBoxRunner<UserHiveModel> hiveServices;
   const boxName = HiveBoxConstants.usersBox;
   setUp(() {
     mockHive = MockHiveWrapper();
@@ -38,7 +38,7 @@ void main() {
     mockPlatform = MockPlatformWrapper();
     mockDirectory = MockDirectoryrWrapper();
     mockBox = MockBox<UserHiveModel>();
-    hiveServices = HiveServices<UserHiveModel>(
+    hiveServices = HiveBoxRunner<UserHiveModel>(
       hive: mockHive,
       pathProvider: mockPathProvider,
       platform: mockPlatform,
@@ -91,7 +91,7 @@ void main() {
     // Define a job that returns the integer 42.
     Future<int> job(Box<UserHiveModel> box) async => 42;
     // Act
-    final operatorResult = await hiveServices.operator<int>(
+    final operatorResult = await hiveServices.runBoxOperation<int>(
       boxName: boxName,
       job: job,
     );

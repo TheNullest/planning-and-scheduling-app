@@ -1,6 +1,7 @@
 {
   "ui_elements" :{
     "titles": {
+      "add_new_task": "Add New Task",
       "today_tasks": "Today's Tasks",
       "active_tasks": "Active Tasks",
       "accomplishment_tasks": "Completed Tasks",

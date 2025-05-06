@@ -2,12 +2,13 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'os.g.dart';
 
 /// Represents the operating system detected on the device.
-/// This enum is used for UI display and system logic (e.g., conditional code paths)
-/// and follows a consistent formatting pattern similar to other UI enums.
+/// This enum is used for VM display and system logic (e.g., conditional code paths)
+/// and follows a consistent formatting pattern similar to other VM enums.
 ///
 /// Example Usage:
 /// ```dart

@@ -1,13 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'interval_unit.g.dart';
 
-/// Represents time interval units with corresponding Persian translations for UI display.
+/// Represents time interval units with corresponding Persian translations for VM display.
 ///
 /// This enum is used for specifying units of time (such as when scheduling durations),
-/// and provides both English and Persian representations. It is designed for UI purposes only.
+/// and provides both English and Persian representations. It is designed for VM purposes only.
 ///
 /// **Example Usage:**
 /// ```dart
@@ -18,26 +19,34 @@ part 'interval_unit.g.dart';
 /// ```
 @HiveType(typeId: EnumHiveTypeIds.intevalUnit)
 enum IntervalUnit {
-  /// Represents hours as an interval unit.
+  /// Represents mintues as an interval unit.
   @HiveField(0)
+  minutes('دقیقه'),
+
+  /// Represents hours as an interval unit.
+  @HiveField(1)
   hours('ساعت'),
 
   /// Represents days as an interval unit.
-  @HiveField(1)
+  @HiveField(2)
   days('روز'),
 
   /// Represents weeks as an interval unit.
-  @HiveField(2)
+  @HiveField(3)
   weeks('هفته'),
 
   /// Represents months as an interval unit.
-  @HiveField(3)
-  months('ماه');
+  @HiveField(4)
+  months('ماه'),
+
+  /// Represents years as an interval unit.
+  @HiveField(5)
+  years('سال');
 
   /// Constructs an [IntervalUnit] with its Persian translation.
   const IntervalUnit(this._inPersian);
 
-  /// The Persian representation used for UI display.
+  /// The Persian representation used for VM display.
   final String _inPersian;
 
   /// Retrieves an [IntervalUnit] by its English name.
@@ -80,7 +89,7 @@ enum IntervalUnit {
   /// ```
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   ///
   /// **Example:**
   /// ```dart

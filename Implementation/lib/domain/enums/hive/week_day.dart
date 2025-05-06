@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'week_day.g.dart';
 
-/// Represents the days of the week, with Persian translations for UI.
-/// This is strictly for UI purposes and **not intended for database storage**.
+/// Represents the days of the week, with Persian translations for VM.
+/// This is strictly for VM purposes and **not intended for database storage**.
 ///
 /// **First day of week**: Monday (دوشنبه).
 ///
@@ -33,7 +34,7 @@ enum WeekDay {
   @HiveField(6)
   sunday('یکشنبه');
 
-  /// Persian equivalent used for UI display.
+  /// Persian equivalent used for VM display.
   const WeekDay(this._inPersian);
   final String _inPersian;
 
@@ -86,7 +87,7 @@ enum WeekDay {
 
   bool dateTimeWeekDayCompare(DateTime date) => dateTimeWeekDayIndex == date.weekday;
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   ///
   /// Example:
   /// ```dart

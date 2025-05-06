@@ -1,16 +1,35 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/task.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task/task_supabase_model.dart';
 
-class TaskDataMapper extends DataMapper<TaskEntity, TaskHiveModel, TaskSupabaseModel> {
+class TaskDataMapperImpl extends TaskDataMapper {
   @override
   TaskEntity toEntityFromHive(TaskHiveModel model) => tryCatchSimple<TaskEntity>(
-        action: () => model.copyWith(),
+        action: () => TaskEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          title: model.title,
+          colorCode: model.colorCode,
+          iconCode: model.iconCode,
+          priority: model.priority,
+          archived: model.archived,
+          taskStatus: model.taskStatus,
+          categoryIds: List.from(model.categoryIds),
+          fixedTagIds: List.from(model.fixedTagIds),
+          totalSpentTime: model.totalSpentTime,
+          subTaskIds: List.from(model.subTaskIds),
+          scheduleConstraintId: model.scheduleConstraintId,
+          scheduledDayIds: List.from(model.scheduledDayIds),
+          scheduledIntervalIds: List.from(model.scheduledIntervalIds),
+        ),
         failureType: FailureType.local,
       );
 
@@ -33,10 +52,9 @@ class TaskDataMapper extends DataMapper<TaskEntity, TaskHiveModel, TaskSupabaseM
           fixedTagIds: List.from(model.fixedTagIds),
           totalSpentTime: model.totalSpentTime,
           subTaskIds: List.from(model.subTaskIds),
-          scheduleConstraint: model.scheduleConstraintId,
-          scheduledDays: List.from(model.scheduledDayIds),
-          scheduledIntervals: List.from(model.scheduledIntervalIds),
-          scheduledInstances: List.from(model.scheduledInstanceIds),
+          scheduleConstraintId: model.scheduleConstraintId,
+          scheduledDayIds: List.from(model.scheduledDayIds),
+          scheduledIntervalIds: List.from(model.scheduledIntervalIds),
         ),
         failureType: FailureType.local,
       );

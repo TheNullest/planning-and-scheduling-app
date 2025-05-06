@@ -3,12 +3,12 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 
-@HiveType(typeId: 115)
 class ScheduledInstanceEntity extends BaseEntityAbstraction {
   ScheduledInstanceEntity({
     required super.id,
     required super.userId,
     required super.createdAt,
+    required this.taskId,
     required this.startDateTime,
     required this.endDateTime,
     required this.schedulerId,
@@ -49,6 +49,9 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
   @HiveField(18)
   final String timezone;
 
+  @HiveField(19)
+  final String taskId;
+
   /// Use inherited [description] field from BaseEntityAbstraction for:
   /// - Exception reasons
   /// - Special scheduling notes
@@ -58,6 +61,7 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
   ScheduledInstanceEntity copyWith({
     String? id,
     String? userId,
+    String? taskId,
     DateTime? createdAt,
     String? description,
     DateTime? updatedAt,
@@ -84,6 +88,7 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
       sequenceNumber: sequenceNumber ?? this.sequenceNumber,
       successPercentage: successPercentage ?? this.successPercentage,
       timezone: timezone ?? this.timezone,
+      taskId: taskId ?? this.taskId,
     );
   }
 
@@ -98,5 +103,6 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
         successPercentage,
         timezone,
         taskStatus,
+        taskId,
       ];
 }

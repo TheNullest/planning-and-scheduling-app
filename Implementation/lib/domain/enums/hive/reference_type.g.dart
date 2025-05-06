@@ -6,7 +6,7 @@ part of 'reference_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ReferenceTypeAdapter extends TypeAdapter<ReferenceType> {
+class ReferenceTypeAdapter extends HiveBaseTypeAdapter<ReferenceType> {
   @override
   final int typeId = 108;
 
@@ -40,7 +40,5 @@ class ReferenceTypeAdapter extends TypeAdapter<ReferenceType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReferenceTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is ReferenceTypeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

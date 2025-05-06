@@ -1,12 +1,12 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/tag.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tag/tag_supabase_model.dart';
 
-class TagDataMapper extends DataMapper<TagEntity, TagHiveModel, TagSupabaseModel> {
+class TagDataMapperImpl extends TagDataMapper {
   @override
   TagEntity toEntityFromHive(TagHiveModel model) => tryCatchSimple<TagEntity>(
         action: () => model.copyWith(),

@@ -26,7 +26,6 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
     @JsonKey(name: 'total_spent_time') required Duration totalSpentTime,
     @JsonKey(name: 'scheduled_interval_ids') required List<String> scheduledIntervalIds,
     @JsonKey(name: 'scheduled_day_ids') required List<String> scheduledDayIds,
-    @JsonKey(name: 'scheduled_Instance_ids') required List<String> scheduledInstanceIds,
     @JsonKey(name: 'schedule_constraint_Id') String? scheduleConstraintId,
     String? description,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
@@ -50,7 +49,6 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
         subTaskIds: List.from(entity.subTaskIds),
         scheduledDayIds: List.from(entity.scheduledDayIds),
         scheduledIntervalIds: List.from(entity.scheduledIntervalIds),
-        scheduledInstanceIds: List.from(entity.scheduledInstanceIds),
         scheduleConstraintId: entity.scheduleConstraintId,
       );
 

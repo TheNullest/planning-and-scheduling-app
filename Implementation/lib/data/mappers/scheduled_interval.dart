@@ -1,18 +1,31 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/scheduled_interval.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
+import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/scheduled_interval/scheduled_interval_supabase_model.dart';
-import 'package:zamaan/presentation_shared/enums/interval_unit.dart';
 
-class ScheduledIntervalDataMapper extends DataMapper<ScheduledIntervalEntity,
-    ScheduledIntervalHiveModel, ScheduledIntervalSupabaseModel> {
+class ScheduledIntervalDataMapperImpl extends ScheduledIntervalDataMapper {
   @override
   ScheduledIntervalEntity toEntityFromHive(ScheduledIntervalHiveModel model) =>
       tryCatchSimple<ScheduledIntervalEntity>(
-        action: () => model.copyWith(), // Converts the Hive model back to an entity.
+        action: () => ScheduledIntervalEntity(
+          id: model.id,
+          userId: model.userId,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          description: model.description,
+          startDate: model.startDate,
+          consecutiveOccurrences: model.consecutiveOccurrences,
+          scheduleConstraintId: model.scheduleConstraintId,
+          intervalUnit: model.intervalUnit,
+          intervalValue: model.intervalValue,
+          scheduledTimeIds: List.from(model.scheduledTimeIds),
+          repeatCount: model.repeatCount,
+          enforceScheduleBounds: model.enforceScheduleBounds,
+        ), // Converts the Hive model back to an entity.
         failureType: FailureType.local,
       );
 
@@ -28,6 +41,8 @@ class ScheduledIntervalDataMapper extends DataMapper<ScheduledIntervalEntity,
           createdAt: model.createdAt,
           updatedAt: model.updatedAt,
           description: model.description,
+          startDate: model.startAt,
+          consecutiveOccurrences: model.consecutiveOccurrences,
           scheduleConstraintId: model.scheduleConstraintId,
           intervalUnit: IntervalUnit.fromName(model.intervalUnit),
           intervalValue: model.intervalValue,
@@ -41,7 +56,21 @@ class ScheduledIntervalDataMapper extends DataMapper<ScheduledIntervalEntity,
   @override
   ScheduledIntervalHiveModel toHiveModel(ScheduledIntervalEntity entity) =>
       tryCatchSimple<ScheduledIntervalHiveModel>(
-        action: () => ScheduledIntervalHiveModel.fromEntity(entity),
+        action: () => ScheduledIntervalHiveModel(
+          id: entity.id,
+          userId: entity.userId,
+          createdAt: entity.createdAt,
+          updatedAt: entity.updatedAt,
+          description: entity.description,
+          startDate: entity.startDate,
+          consecutiveOccurrences: entity.consecutiveOccurrences,
+          scheduleConstraintId: entity.scheduleConstraintId,
+          intervalUnit: entity.intervalUnit,
+          intervalValue: entity.intervalValue,
+          scheduledTimeIds: List.from(entity.scheduledTimeIds),
+          repeatCount: entity.repeatCount,
+          enforceScheduleBounds: entity.enforceScheduleBounds,
+        ),
         failureType: FailureType.local,
       );
 

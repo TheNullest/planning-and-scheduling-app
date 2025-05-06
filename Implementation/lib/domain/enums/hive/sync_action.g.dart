@@ -6,7 +6,7 @@ part of 'sync_action.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SyncActionAdapter extends TypeAdapter<SyncAction> {
+class SyncActionAdapter extends HiveBaseTypeAdapter<SyncAction> {
   @override
   final int typeId = 111;
 
@@ -45,7 +45,5 @@ class SyncActionAdapter extends TypeAdapter<SyncAction> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SyncActionAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is SyncActionAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

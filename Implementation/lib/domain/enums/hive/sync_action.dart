@@ -2,6 +2,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'sync_action.g.dart';
 
@@ -16,7 +17,7 @@ enum SyncAction {
   @HiveField(2)
   delete('حذف');
 
-  /// Persian equivalent used for UI display or logging.
+  /// Persian equivalent used for VM display or logging.
   const SyncAction(this._inPersian);
   final String _inPersian;
 
@@ -67,7 +68,7 @@ enum SyncAction {
     return toString().split('.').last.toSentenceCase();
   }
 
-  /// Returns the Persian name for UI display or logging.
+  /// Returns the Persian name for VM display or logging.
   /// Example: `SyncAction.delete.nameInPersian` -> "حذف"
   String get nameInPersian => _inPersian;
 }

@@ -1,13 +1,14 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'day_type.g.dart';
 
-/// Represents different types of days with Persian translations for UI display.
+/// Represents different types of days with Persian translations for VM display.
 ///
 /// This enum specifies whether a day is categorized as a weekday or a specific day
-/// of the month. It is intended for UI purposes and includes functionality to retrieve
+/// of the month. It is intended for VM purposes and includes functionality to retrieve
 /// values based on name or index.
 ///
 /// **Example Usage:**
@@ -30,7 +31,7 @@ enum DayType {
   /// Constructs a [DayType] with its Persian translation.
   const DayType(this._inPersian);
 
-  /// The Persian representation used for UI display.
+  /// The Persian representation used for VM display.
   final String _inPersian;
 
   /// Retrieves a [DayType] by its English name.
@@ -73,7 +74,7 @@ enum DayType {
   /// ```
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   ///
   /// **Example:**
   /// ```dart

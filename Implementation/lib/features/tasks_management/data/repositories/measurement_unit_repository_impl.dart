@@ -1,4 +1,4 @@
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/measurement_unit.dart';
 
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
@@ -8,15 +8,14 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_m
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/custom_measurement_unit/custom_measurement_unit_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/measurement_unit_data_source.dart';
 
-class CustomeMeasurementUnitRepositoryImpl extends BaseRepositoryImpl<
+class CustomMeasurementUnitRepositoryImpl extends BaseRepositoryImpl<
     CustomMeasurementUnitEntity,
     CustomMeasurementUnitHiveModel,
     CustomMeasurementUnitSupabaseModel,
-    CustomeMeasurementUnitLocalDataSource<CustomMeasurementUnitHiveModel>,
-    SupabaseDataSource<CustomMeasurementUnitSupabaseModel>,
-    DataMapper<CustomMeasurementUnitEntity, CustomMeasurementUnitHiveModel,
-        CustomMeasurementUnitSupabaseModel>> implements CustomeMeasurementUnitRepository {
-  CustomeMeasurementUnitRepositoryImpl({
+    CustomMeasurementUnitLocalDataSource<CustomMeasurementUnitHiveModel>,
+    SupabaseDataSource<CustomMeasurementUnitSupabaseModel, CustomMeasurementUnitDataMapper>,
+    CustomMeasurementUnitDataMapper> implements CustomMeasurementUnitRepository {
+  CustomMeasurementUnitRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
     required super.dataMapper,

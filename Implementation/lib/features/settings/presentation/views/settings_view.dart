@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/cubits/user/app_user_cubit.dart';
 import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
@@ -17,7 +18,7 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppRouteConfigs.settings.routeName),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.arrow_back),

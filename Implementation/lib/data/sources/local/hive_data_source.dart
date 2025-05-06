@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/core/utils/uuid.dart';
@@ -13,64 +13,56 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
     extends BaseDataSource<HiveModel> {
   // Just to add the testablity feature to the class,
   // we need to inject the [HiveInitializer<HiveModel>] like this
-  HiveDataSource(
-    this._boxName, {
-    HiveServices<HiveModel>? hiveServices,
-  }) : _hiveServices = hiveServices ?? serviceLocator<HiveServices<HiveModel>>();
-  final String _boxName;
-  final HiveServices<HiveModel> _hiveServices;
+  HiveDataSource({
+    HiveBoxRunner<HiveModel>? hiveServices,
+  }) : _hiveServices = hiveServices ?? serviceLocator<HiveBoxRunner<HiveModel>>();
+  final HiveBoxRunner<HiveModel> _hiveServices;
 
   /// #### Saves the `[item]` to the Hive box conditionally.
   @override
-  EResultFutureVoid create(HiveModel newEntity) async => _hiveServices.operator(
+  EResultFutureVoid create(HiveModel newEntity) async => _hiveServices.runBoxOperation(
         job: (box) async => box.put(newEntity.id, newEntity),
-        boxName: _boxName,
       );
 
   @override
-  EResultFutureVoid createBatch(List<HiveModel> entities) async => _hiveServices.operator(
+  EResultFutureVoid createBatch(List<HiveModel> entities) async => _hiveServices.runBoxOperation(
         job: (box) async {
           final map = {for (final model in entities) model.id: model};
           return box.putAll(map);
         },
-        boxName: _boxName,
       );
 
   @override
   EResultFutureVoid delete(String id) async {
-    if (!isValidUUID(id)) {
+    if (!isValidUVMD(id)) {
       throw LocalException(
-        message: 'This $id is not a valid [UUID] ',
+        message: 'This $id is not a valid [UVMD] ',
         errorLocation: 'BaseLocalDataSourceAbstraction.deleteEntity',
       );
     }
-    return _hiveServices.operator<void>(
+    return _hiveServices.runBoxOperation<void>(
       job: (box) async => box.delete(id),
-      boxName: _boxName,
     );
   }
 
   @override
   EResultFutureVoid updateBatch(List<HiveModel> entities) async => tryCatchEither(
-        action: () async => _hiveServices.operator(
+        action: () async => _hiveServices.runBoxOperation(
           job: (box) async => box.putAll({for (final model in entities) model.id: model}),
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
 
   /// Retrieves all items from the Hive box.
   @override
-  EResultFuture<List<HiveModel>> getAll() async => _hiveServices.operator<List<HiveModel>>(
+  EResultFuture<List<HiveModel>> getAll() async => _hiveServices.runBoxOperation<List<HiveModel>>(
         job: (box) async => box.values.toList(),
-        boxName: _boxName,
       );
 
   @override
   EResultFuture<HiveModel> getById(String id) async => tryCatchEither(
-        action: () async => _hiveServices.operator<HiveModel>(
+        action: () async => _hiveServices.runBoxOperation<HiveModel>(
           job: (box) async => box.get(id)!,
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
@@ -78,9 +70,8 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   @override
   EResultFuture<List<HiveModel>> getAllByIds(List<String> ids) async =>
       tryCatchEither<List<HiveModel>>(
-        action: () async => _hiveServices.operator<List<HiveModel>>(
+        action: () async => _hiveServices.runBoxOperation<List<HiveModel>>(
           job: (box) async => ids.map((id) => box.get(id)).whereType<HiveModel>().toList(),
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
@@ -96,22 +87,21 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
 
   @override
   EResultFutureVoid deleteBatch(List<String> ids) async => tryCatchEither(
-        action: () async => _hiveServices.operator(
+        action: () async => _hiveServices.runBoxOperation(
           job: (box) async {
             final invalidKeys = <String>[];
 
             for (final key in ids) {
-              if (!isValidUUID(key)) invalidKeys.add(key);
+              if (!isValidUVMD(key)) invalidKeys.add(key);
             }
             if (invalidKeys.isNotEmpty) {
               throw LocalException(
-                message: 'This $id is not a valid [UUID] ',
+                message: 'This $id is not a valid [UVMD] ',
                 errorLocation: 'BaseLocalDataSourceAbstraction.deleteEntity',
               );
             }
             return box.deleteAll(ids);
           },
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );
@@ -121,9 +111,8 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
     String id,
   ) async =>
       tryCatchEither(
-        action: () async => _hiveServices.operator<bool>(
+        action: () async => _hiveServices.runBoxOperation<bool>(
           job: (box) async => box.containsKey(id),
-          boxName: _boxName,
         ),
         failureType: FailureType.local,
       );

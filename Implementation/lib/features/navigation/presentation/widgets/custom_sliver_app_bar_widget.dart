@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zamaan/features/settings/presentation/views/settings_view.dart';
+import 'package:zamaan/core/constants/routes/app_route_configs.dart';
+import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/presentation_shared/theme/app_dark_palette.dart';
 
 class CustomSliverAppBarWidget extends StatefulWidget {
@@ -12,8 +13,7 @@ class CustomSliverAppBarWidget extends StatefulWidget {
   final bool appBarDisplay;
 
   @override
-  State<CustomSliverAppBarWidget> createState() =>
-      _CustomSliverAppBarWidgetState();
+  State<CustomSliverAppBarWidget> createState() => _CustomSliverAppBarWidgetState();
 }
 
 class _CustomSliverAppBarWidgetState extends State<CustomSliverAppBarWidget>
@@ -29,11 +29,10 @@ class _CustomSliverAppBarWidgetState extends State<CustomSliverAppBarWidget>
       reverseDuration: const Duration(milliseconds: 200),
     );
 
-    headerSizeAnimation =
-        Tween<double>(begin: 0, end: 50).animate(headerAnimationController)
-          ..addListener(() {
-            setState(() {});
-          });
+    headerSizeAnimation = Tween<double>(begin: 0, end: 50).animate(headerAnimationController)
+      ..addListener(() {
+        setState(() {});
+      });
 
     super.initState();
   }
@@ -66,10 +65,7 @@ class _CustomSliverAppBarWidgetState extends State<CustomSliverAppBarWidget>
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsView()),
-              ),
+              onPressed: () => navigatorPushNamed(context, AppRouteConfigs.settings.route),
             ),
           ),
         ),

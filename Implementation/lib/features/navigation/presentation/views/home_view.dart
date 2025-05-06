@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:zamaan/core/constants/routes/app_route_configs.dart';
+import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_sliver_app_bar_widget.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_tab_bar_widget.dart';
 import 'package:zamaan/presentation_shared/models/tab_item.dart';
@@ -15,8 +17,7 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView>
-    with SingleTickerProviderStateMixin {
+class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -50,11 +51,7 @@ class _HomeViewState extends State<HomeView>
             return [
               CustomSliverAppBarWidget(
                 appBarDisplay: true,
-                viewTitle: widget.tabItems
-                    .elementAt(_tabController.index)
-                    .tabDetail
-                    .titleKey
-                    .tr(),
+                viewTitle: widget.tabItems.elementAt(_tabController.index).tabDetail.titleKey.tr(),
               ),
             ];
           },
@@ -67,23 +64,21 @@ class _HomeViewState extends State<HomeView>
               height: 50,
               child: CustomTabBarWidget(
                 tabController: _tabController,
-                icons:
-                    widget.tabItems.map((item) => item.tabDetail.icon).toList(),
+                icons: widget.tabItems.map((item) => item.tabDetail.icon).toList(),
               ),
             ),
 
             // Add new task
             floatingActionButton: SizedBox(
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () => navigatorPushNamed(context, AppRouteConfigs.addNewTask.route),
                 shape: const CircleBorder(),
                 child: const Icon(
                   Icons.add_task,
                 ),
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           ),
         ),
       ),

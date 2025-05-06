@@ -6,7 +6,7 @@ part of 'measurement_category.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MeasurementCategoryAdapter extends TypeAdapter<MeasurementCategory> {
+class MeasurementCategoryAdapter extends HiveBaseTypeAdapter<MeasurementCategory> {
   @override
   final int typeId = 104;
 

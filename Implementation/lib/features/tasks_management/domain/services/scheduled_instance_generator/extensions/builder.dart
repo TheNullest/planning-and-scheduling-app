@@ -28,6 +28,7 @@ extension Builder on ScheduledInstanceGenerator {
         schedulerType: schedulerType,
         dateRange: dateRange,
         sequenceNumber: sequenceNumber + 1,
+        taskId: scheduleConstraint.taskId,
       );
 
       // Append it to the generated instances list.
@@ -37,19 +38,28 @@ extension Builder on ScheduledInstanceGenerator {
 
   /// Constructs a [ScheduledInstanceEntity] from the provided parameters.
   ///
+  /// This method is responsible for creating a fully populated instance of
+  /// [ScheduledInstanceEntity] using the provided scheduler, scheduler type,
+  /// date range, sequence number, and task ID. It ensures that all required
+  /// fields are set appropriately.
+  ///
   /// Parameters:
-  /// - [scheduler]: The source scheduler entity (day, interval or constraint).
-  /// - [schedulerType]: The specific type of scheduler.
-  /// - [dateRange]: The date range during which the event occurs.
-  /// - [sequenceNumber]: The occurrence number for ordering.
+  /// - [taskId]: The unique identifier of the task associated with this instance.
+  /// - [scheduler]: The source scheduler entity, which can be a day, interval, or constraint.
+  /// - [schedulerType]: The specific type of scheduler, such as [SchedulerType.scheduledDay]
+  ///   or [SchedulerType.scheduledInterval].
+  /// - [dateRange]: The date range during which the event occurs. It includes the start
+  ///   and end times.
+  /// - [sequenceNumber]: The occurrence number for ordering the instances.
   ///
   /// Returns:
-  /// - A new [ScheduledInstanceEntity] fully populated.
+  /// - A new [ScheduledInstanceEntity] that is fully populated with the provided parameters.
   ///
   /// Example:
   /// ```dart
   /// // Build a scheduled instance with the provided parameters.
   /// final instance = _buildInstance(
+  ///   taskId: 'task123',
   ///   scheduler: myScheduler,
   ///   schedulerType: SchedulerType.scheduledDay,
   ///   dateRange: myDateRange,
@@ -57,6 +67,7 @@ extension Builder on ScheduledInstanceGenerator {
   /// );
   /// ```
   ScheduledInstanceEntity _buildInstance({
+    required String taskId,
     required BaseEntityAbstraction scheduler,
     required SchedulerType schedulerType,
     required DateRangeEntity dateRange,
@@ -73,5 +84,6 @@ extension Builder on ScheduledInstanceGenerator {
         schedulerId: scheduler.id,
         sequenceNumber: sequenceNumber,
         taskStatus: TaskStatus.scheduled,
+        taskId: taskId,
       );
 }

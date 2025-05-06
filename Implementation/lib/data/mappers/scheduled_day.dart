@@ -1,18 +1,29 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/scheduled_day.dart';
 import 'package:zamaan/domain/entities/scheduled_day.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/enums/hive/day_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/scheduled_day/scheduled_day_supabase_model.dart';
 
-class ScheduledDayDataMapper
-    extends DataMapper<ScheduledDayEntity, ScheduledDayHiveModel, ScheduledDaySupabaseModel> {
+class ScheduledDayDataMapperImpl extends ScheduledDayDataMapper {
   @override
   ScheduledDayEntity toEntityFromHive(ScheduledDayHiveModel model) =>
       tryCatchSimple<ScheduledDayEntity>(
-        action: () => model.copyWith(), // Ensures conversion from Hive model back to the entity.
+        action: () => ScheduledDayEntity(
+          id: model.id,
+          userId: model.userId,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          description: model.description,
+          scheduleConstraintId: model.scheduleConstraintId,
+          dayType: model.dayType,
+          dayValue: model.dayValue,
+          canRepeat: model.canRepeat,
+          scheduledTimeIds: List.from(model.scheduledTimeIds),
+          enforceScheduleBounds: model.enforceScheduleBounds,
+        ), // Ensures conversion from Hive model back to the entity.
         failureType: FailureType.local,
       );
 
@@ -32,7 +43,7 @@ class ScheduledDayDataMapper
           dayType: DayType.fromName(model.dayType),
           dayValue: model.dayValue,
           canRepeat: model.canRepeat,
-          scheduledTimeIds: List.from(model.scheduledTimes),
+          scheduledTimeIds: List.from(model.scheduledTimeIds),
           enforceScheduleBounds: model.enforceScheduleBounds,
         ),
         failureType: FailureType.local,

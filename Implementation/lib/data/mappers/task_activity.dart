@@ -1,6 +1,6 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/task_activity.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -9,8 +9,7 @@ import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task_activity/task_activity_supabase_model.dart';
 
-class TaskActivityDataMapper
-    extends DataMapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel> {
+class TaskActivityDataMapperImpl extends TaskActivityDataMapper {
   @override
   TaskActivityEntity toEntityFromHive(TaskActivityHiveModel model) =>
       tryCatchSimple<TaskActivityEntity>(

@@ -58,8 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _connectionChecker = connectionChecker,
         super(AuthInitialState()) {
     on<AuthEvent>(
-      (event, emit) =>
-          event is! AuthSignOutEvent ? emit(AuthLoadingState()) : null,
+      (event, emit) => event is! AuthSignOutEvent ? emit(AuthLoadingState()) : null,
     );
 
     on<AuthIsUserSignedInEvent>(_isUserSignedIn);
@@ -116,8 +115,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     if (event.confirmPassword.compareTo(event.user.password) != 0) {
       emit(
         AuthFailureState(
-          message: AuthTexts.errors
-              .passwordMismatch, // Emit failure state if passwords do not match
+          message:
+              AuthTexts.errors.passwordMismatch, // Emit failure state if passwords do not match
         ),
       );
     }

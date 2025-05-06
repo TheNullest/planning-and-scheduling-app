@@ -9,7 +9,7 @@ import 'package:zamaan/core/errors/exceptions/failure.dart';
 /// - Parameter either: The `Either` type containing a `Failure` or a value of type `T`.
 /// - Returns: The value of type `T` if the `Either` is a `Right`.
 /// - Throws: The contained `Failure` if the `Either` is a `Left`.
-T foldEither<T>(Either<Failure, dynamic> either) {
+T foldEitherRight<T>(Either<Failure, dynamic> either) {
   return either.fold(
     (left) => throw left,
     (right) => right as T,
@@ -19,9 +19,6 @@ T foldEither<T>(Either<Failure, dynamic> either) {
 T foldEitherJob<T>(Either<Failure, dynamic> either, Future Function()? right) {
   return either.fold(
     (left) => throw left,
-    (right) {
-      right();
-      return right as T;
-    },
+    (right) => right as T,
   );
 }

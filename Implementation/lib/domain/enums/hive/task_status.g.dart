@@ -6,7 +6,7 @@ part of 'task_status.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
+class TaskStatusAdapter extends HiveBaseTypeAdapter<TaskStatus> {
   @override
   final int typeId = 112;
 
@@ -70,7 +70,5 @@ class TaskStatusAdapter extends TypeAdapter<TaskStatus> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is TaskStatusAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is TaskStatusAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

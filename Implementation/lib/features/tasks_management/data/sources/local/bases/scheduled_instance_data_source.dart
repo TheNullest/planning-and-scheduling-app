@@ -7,7 +7,8 @@ abstract class ScheduledInstanceLocalDataSource<Model> extends BaseDataSource<Mo
   /// [date] - The date for which to retrieve the scheduled instances.
   ///
   /// Returns a [EResultFuture] containing a list of [Model] objects.
-  EResultFuture<List<Model>> getBatchScheduledInstancesByDay(DateTime date);
+  EResultFuture<List<Model>> getBatchByDay(DateTime date);
 
-  EResultFuture<List<Model>> getBatchScheduledInstancesBySchedulers(List<String> schedulerIds);
+  EResultFuture<List<Model>> getBatchBySchedulers(List<String> schedulerIds);
+  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds);
 }

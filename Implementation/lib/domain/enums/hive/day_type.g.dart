@@ -6,7 +6,7 @@ part of 'day_type.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DayTypeAdapter extends TypeAdapter<DayType> {
+class DayTypeAdapter extends HiveBaseTypeAdapter<DayType> {
   @override
   final int typeId = 101;
 
@@ -40,7 +40,5 @@ class DayTypeAdapter extends TypeAdapter<DayType> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DayTypeAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is DayTypeAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

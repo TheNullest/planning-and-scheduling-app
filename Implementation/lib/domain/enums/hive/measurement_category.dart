@@ -1,11 +1,12 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'measurement_category.g.dart';
 
-/// Represents measurement categories with Persian translations for UI display.
-/// This enum is strictly for UI purposes and **not intended for database storage**.
+/// Represents measurement categories with Persian translations for VM display.
+/// This enum is strictly for VM purposes and **not intended for database storage**.
 ///
 /// Example Usage:
 /// ```dart
@@ -43,7 +44,7 @@ enum MeasurementCategory {
   /// Constructs a [MeasurementCategory] with its Persian translation.
   const MeasurementCategory(this._inPersian);
 
-  /// The Persian representation used for UI display.
+  /// The Persian representation used for VM display.
   final String _inPersian;
 
   /// Retrieves a [MeasurementCategory] by its English name.
@@ -85,7 +86,7 @@ enum MeasurementCategory {
   /// ```
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   ///
   /// Example:
   /// ```dart

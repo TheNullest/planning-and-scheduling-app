@@ -1,16 +1,27 @@
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/sub_task.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/sub_task/sub_task_supabase_model.dart';
 
-class SubTaskDataMapper extends DataMapper<SubTaskEntity, SubTaskHiveModel, SubTaskSupabaseModel> {
+class SubTaskDataMapperImpl extends SubTaskDataMapper {
   @override
   SubTaskEntity toEntityFromHive(SubTaskHiveModel model) => tryCatchSimple<SubTaskEntity>(
-        action: () => model.copyWith(),
+        action: () => SubTaskEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          taskId: model.taskId,
+          title: model.title,
+          priority: model.priority,
+          status: model.status,
+          totalSpentTime: model.totalSpentTime,
+        ),
         failureType: FailureType.local,
       );
 

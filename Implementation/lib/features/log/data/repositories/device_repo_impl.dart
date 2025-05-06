@@ -21,17 +21,19 @@ class DeviceRepoImpl implements DeviceRepository<DeviceEntity> {
   final DeviceDataSource<DeviceHiveModel> _deviceHiveDataSource;
 
   @override
-  EResultFuture<DeviceEntity?> getDeviceById(
-          {required String id, required DataSourcePolicy policy,}) async =>
+  EResultFuture<DeviceEntity?> getDeviceById({
+    required String id,
+    required DataSourcePolicy policy,
+  }) async =>
       tryCatchEither(
         action: () async {
           if (DataSourcePolicy.isLocal(policy)) {
             final response = await _deviceHiveDataSource.getDeviceById(id);
-            final hiveModel = foldEither<DeviceHiveModel?>(response);
+            final hiveModel = foldEitherRight<DeviceHiveModel?>(response);
             return Right(hiveModel?.toEntity());
           }
           final response = await _deviceSupabaseDataSource.getDeviceById(id);
-          final supabaseModel = foldEither<DeviceSupabaseModel?>(response);
+          final supabaseModel = foldEitherRight<DeviceSupabaseModel?>(response);
           return Right(supabaseModel?.toEntity());
         },
         failureType: FailureType.local,
@@ -41,7 +43,7 @@ class DeviceRepoImpl implements DeviceRepository<DeviceEntity> {
   EResultFuture<List<DeviceEntity>> getDevices() async => tryCatchEither<List<DeviceEntity>>(
         action: () async {
           final response = await _deviceSupabaseDataSource.getDevices();
-          final supabaseModels = foldEither<List<DeviceSupabaseModel>>(response);
+          final supabaseModels = foldEitherRight<List<DeviceSupabaseModel>>(response);
           final result = supabaseModels.map((item) => item.toEntity()).toList();
           return Right(result);
         },

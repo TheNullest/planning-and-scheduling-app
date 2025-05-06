@@ -1,6 +1,5 @@
-import 'package:zamaan/core/constants/hive_boxes.dart';
-import 'package:zamaan/core/di/init_dependencies.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/di/init_dependencies.imports.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/task_activity_data_source.dart';
@@ -10,15 +9,12 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   // Just to add the testability feature to the class,
   // we need to inject the [HiveInitializer<TaskActivityHiveModel>] like this
   TaskActivityHiveDataSourceImpl({
-    HiveServices<TaskActivityHiveModel>? hiveBox,
-  })  : _hiveBox = hiveBox ?? serviceLocator<HiveServices<TaskActivityHiveModel>>(),
-        _boxName = HiveBoxConstants.taskActivitysBox,
+    HiveBoxRunner<TaskActivityHiveModel>? hiveBox,
+  })  : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<TaskActivityHiveModel>>(),
         super(
-          HiveBoxConstants.taskActivitysBox,
           hiveServices: hiveBox,
         );
-  final String _boxName;
-  final HiveServices<TaskActivityHiveModel> _hiveBox;
+  final HiveBoxRunner<TaskActivityHiveModel> _hiveBox;
 
   // /// Retrieves tasks based on a specific main task ID.
   // ///

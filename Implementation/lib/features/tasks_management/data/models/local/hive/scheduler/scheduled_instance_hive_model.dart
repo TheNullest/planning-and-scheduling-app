@@ -12,6 +12,7 @@ class ScheduledInstanceHiveModel extends ScheduledInstanceEntity {
   ScheduledInstanceHiveModel({
     required super.id,
     required super.userId,
+    required super.taskId,
     required super.createdAt,
     required super.startDateTime,
     required super.endDateTime,
@@ -30,6 +31,7 @@ class ScheduledInstanceHiveModel extends ScheduledInstanceEntity {
     return ScheduledInstanceHiveModel(
       id: entity.id,
       userId: entity.userId,
+      taskId: entity.taskId,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       startDateTime: entity.startDateTime,
@@ -39,41 +41,6 @@ class ScheduledInstanceHiveModel extends ScheduledInstanceEntity {
       taskStatus: entity.taskStatus,
       sequenceNumber: entity.sequenceNumber,
       description: entity.description, // Updated to use exception reason
-    );
-  }
-
-  /// Creates a copy of the current `ScheduledInstanceHiveModel` with optional updated fields.
-
-  @override
-  ScheduledInstanceHiveModel copyWith({
-    String? id,
-    String? userId,
-    DateTime? createdAt,
-    String? description,
-    DateTime? updatedAt,
-    DateTime? startDateTime,
-    DateTime? endDateTime,
-    String? schedulerId,
-    SchedulerType? schedulerType,
-    TaskStatus? taskStatus,
-    int? sequenceNumber,
-    int? successPercentage,
-    String? timezone,
-  }) {
-    return ScheduledInstanceHiveModel(
-      id: id ?? this.id,
-      userId: userId ?? this.userId,
-      createdAt: createdAt ?? this.createdAt,
-      description: description ?? this.description, // Updated to use exception reason
-      updatedAt: updatedAt ?? this.updatedAt,
-      startDateTime: startDateTime ?? this.startDateTime,
-      endDateTime: endDateTime ?? this.endDateTime,
-      schedulerId: schedulerId ?? this.schedulerId,
-      schedulerType: schedulerType ?? this.schedulerType,
-      taskStatus: taskStatus ?? this.taskStatus,
-      sequenceNumber: sequenceNumber ?? this.sequenceNumber,
-      successPercentage: successPercentage ?? this.successPercentage,
-      timezone: timezone ?? this.timezone,
     );
   }
 }

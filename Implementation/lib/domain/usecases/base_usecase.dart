@@ -9,7 +9,7 @@ abstract class UsecaseWithParams<Repo, ResultType, Params> {
   EResultFuture<ResultType> call(Params params);
 }
 
-abstract class UsecaseWithMultipleRepos<ResultType, Params> {
+abstract class UsecaseWithParamsAndMultipleRepos<ResultType, Params> {
   EResultFuture<ResultType> call(Params params);
 }
 
@@ -19,5 +19,9 @@ abstract class UsecaseWithoutParams<Repo, ResultType> {
 
   Repo get repository => _repository;
 
+  EResultFuture<ResultType> call();
+}
+
+abstract class UsecaseWithoutParamsWithMultipleRepos<ResultType> {
   EResultFuture<ResultType> call();
 }

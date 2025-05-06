@@ -9,5 +9,5 @@ class GetBatchInstanceBySchedulerUsecase extends UsecaseWithParams<ScheduledInst
 
   @override
   EResultFuture<List<ScheduledInstanceEntity>> call(List<String> params) async =>
-      repository.getBatchScheduledInstancesBySchedulers(params);
+      repository.getBatchScheduledInstancesBySchedulerIds(params);
 }

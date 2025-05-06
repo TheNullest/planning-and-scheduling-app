@@ -2,14 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/data/models/pagination_options.dart';
 import 'package:zamaan/data/sources/base_data_source.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
 
-abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
+abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseDataSource<T> {
   SupabaseDataSource({
-    required DataMapper dataMapper,
+    required Mapper dataMapper,
     required SupabaseClient client,
     required String collectionPath,
     required PaginationOptions defaultPagination,
@@ -18,7 +18,7 @@ abstract class SupabaseDataSource<T> extends BaseDataSource<T> {
         _collectionPath = collectionPath,
         _defaultPagination = defaultPagination;
 
-  final DataMapper _dataMapper;
+  final Mapper _dataMapper;
 
   /// Cloud client instance for handling network operations.
   final SupabaseClient _client;

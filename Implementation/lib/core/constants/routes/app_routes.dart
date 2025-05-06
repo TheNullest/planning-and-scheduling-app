@@ -1,4 +1,6 @@
-sealed class AppRoutes {
+abstract class AppRoutes {
+  AppRoutes._();
+
   // Authentication
   static const String signUp = '/auth/sign-up';
   static const String signIn = '/auth/sign-in';
@@ -9,7 +11,8 @@ sealed class AppRoutes {
   static const String profile = '$home/profile';
 
   // Nested App
-  static const String todayTasks = '$home/reminder';
+  static const String addNewTask = '$home/add-new-task';
+  static const String todayTasks = '$home/today-tasks';
   static const String activeTasks = '$home/active-tasks';
   static const String accomplishmentTasks = '$home/accomplishment-tasks';
   static const String reports = '$home/reports';
@@ -20,7 +23,9 @@ sealed class AppRoutes {
   static const String error = '/error';
 }
 
-sealed class AppRouteNames {
+abstract class AppRouteNames {
+  AppRouteNames._();
+
   // Authentication
   static const String signUp = 'SignUp';
   static const String signIn = 'SignIn';
@@ -31,7 +36,8 @@ sealed class AppRouteNames {
   static const String profile = 'Profile';
 
   // Nested App
-  static const String todayTasks = 'TodayTAasks';
+  static const String addNewTask = 'AddNewTask';
+  static const String todayTasks = 'TodayTasks';
   static const String activeTasks = 'ActiveTasks';
   static const String accomplishmentTasks = 'AccomplishmentTasks';
   static const String reports = 'Reports';

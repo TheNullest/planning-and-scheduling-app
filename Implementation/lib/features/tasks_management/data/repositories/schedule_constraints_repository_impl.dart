@@ -1,5 +1,6 @@
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/schedule_constraints.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/schedule_constraints.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -12,10 +13,9 @@ class ScheduleConstraintRepositoryImpl extends BaseRepositoryImpl<
     ScheduleConstraintEntity,
     ScheduleConstraintHiveModel,
     ScheduleConstraintSupabaseModel,
-    ScheduleConstraintsLocalDataSource<ScheduleConstraintHiveModel>,
-    SupabaseDataSource<ScheduleConstraintSupabaseModel>,
-    DataMapper<ScheduleConstraintEntity, ScheduleConstraintHiveModel,
-        ScheduleConstraintSupabaseModel>> implements ScheduleConstraintRepository {
+    ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel>,
+    SupabaseDataSource<ScheduleConstraintSupabaseModel, ScheduleConstraintDataMapper>,
+    ScheduleConstraintDataMapper> implements ScheduleConstraintRepository {
   ScheduleConstraintRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
@@ -26,8 +26,8 @@ class ScheduleConstraintRepositoryImpl extends BaseRepositoryImpl<
         _dataMapper = dataMapper,
         _netConnectivity = netConnectivity;
 
-  final ScheduleConstraintsLocalDataSource<ScheduleConstraintHiveModel> _localDataSource;
-  final SupabaseDataSource<ScheduleConstraintSupabaseModel> _remoteDataSource;
+  final ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel> _localDataSource;
+  final SupabaseDataSource<ScheduleConstraintSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 

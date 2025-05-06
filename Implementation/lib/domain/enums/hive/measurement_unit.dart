@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/enums/hive/measurement_category.dart';
 
 part 'measurement_unit.g.dart';
@@ -147,7 +148,7 @@ enum MeasurementUnit {
   @HiveField(34)
   custom('اختیاری', MeasurementCategory.custom);
 
-  /// Persian equivalent used for UI display.
+  /// Persian equivalent used for VM display.
   const MeasurementUnit(this._inPersian, this.category);
   final String _inPersian;
   final MeasurementCategory category;
@@ -217,6 +218,6 @@ enum MeasurementUnit {
   /// Returns the English name with proper capitalization.
   String get name => toString().split('.').last.toSentenceCase();
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   String get nameInPersian => _inPersian;
 }

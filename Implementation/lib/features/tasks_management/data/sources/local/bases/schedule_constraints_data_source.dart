@@ -7,7 +7,7 @@ import 'package:zamaan/data/sources/local/hive_data_source.dart';
 /// This class extends [HiveDataSource] to leverage common data
 /// operations
 /// and provides additional methods for specific task-related queries.
-abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<Model> {
+abstract class ScheduleConstraintLocalDataSource<Model> extends BaseDataSource<Model> {
   EResultFuture<List<Model>> getBatchSchedulesByDay(DateTime date);
 
   // /// Retrieves tasks based on main task IDs and a date range.

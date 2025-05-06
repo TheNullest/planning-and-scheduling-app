@@ -6,7 +6,7 @@ part of 'os.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class OSAdapter extends TypeAdapter<OS> {
+class OSAdapter extends HiveBaseTypeAdapter<OS> {
   @override
   final int typeId = 106;
 
@@ -65,7 +65,5 @@ class OSAdapter extends TypeAdapter<OS> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is OSAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+      other is OSAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

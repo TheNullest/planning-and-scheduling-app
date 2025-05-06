@@ -1,5 +1,6 @@
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/data/mappers/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/data_mapper.dart';
+import 'package:zamaan/data/mappers/bases/task_activity.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -9,13 +10,12 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/tas
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/task_activity_data_source.dart';
 
 class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
-        TaskActivityEntity,
-        TaskActivityHiveModel,
-        TaskActivitySupabaseModel,
-        TaskActivityLocalDataSource<TaskActivityHiveModel>,
-        SupabaseDataSource<TaskActivitySupabaseModel>,
-        DataMapper<TaskActivityEntity, TaskActivityHiveModel, TaskActivitySupabaseModel>>
-    implements TaskActivityRepository {
+    TaskActivityEntity,
+    TaskActivityHiveModel,
+    TaskActivitySupabaseModel,
+    TaskActivityLocalDataSource<TaskActivityHiveModel>,
+    SupabaseDataSource<TaskActivitySupabaseModel, TaskActivityDataMapper>,
+    TaskActivityDataMapper> implements TaskActivityRepository {
   TaskActivityRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
@@ -27,7 +27,7 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
         _netConnectivity = netConnectivity;
 
   final TaskActivityLocalDataSource<TaskActivityHiveModel> _localDataSource;
-  final SupabaseDataSource<TaskActivitySupabaseModel> _remoteDataSource;
+  final SupabaseDataSource<TaskActivitySupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
 

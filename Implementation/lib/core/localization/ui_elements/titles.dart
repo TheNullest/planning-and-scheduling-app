@@ -3,6 +3,7 @@ part of '../app_locale_keys.dart';
 class _Titles {
   const _Titles();
   static const _prefix = 'ui_elements.titles';
+  String get addNewTask => '$_prefix.add_new_task'.tr();
   String get todayTasks => '$_prefix.today_tasks'.tr();
   String get activeTasks => '$_prefix.active_tasks'.tr();
   String get accomplishmentTasks => '$_prefix.accomplishment_tasks'.tr();

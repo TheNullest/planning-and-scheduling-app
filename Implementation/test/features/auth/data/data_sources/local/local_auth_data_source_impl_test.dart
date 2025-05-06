@@ -4,11 +4,11 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
 import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-import 'package:zamaan/core/services/hive/hive_services.dart';
+import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/auth/data/sources/local/local_auth_data_source_impl.dart';
 
-class MockHiveServices extends Mock implements HiveServices<UserHiveModel> {}
+class MockHiveServices extends Mock implements HiveBoxRunner<UserHiveModel> {}
 
 void main() {
   late LocalAuthDataSourceImpl dataSource;
@@ -24,7 +24,7 @@ void main() {
   group('LocalAuthDataSourceImpl', () {
     test('getCurrentUser returns user on success', () async {
       when(
-        () => mockHiveServices.operator<UserHiveModel>(
+        () => mockHiveServices.runBoxOperation<UserHiveModel>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -34,7 +34,7 @@ void main() {
 
       expect(result, equals(Right(testUser)));
       verify(
-        () => mockHiveServices.operator<UserHiveModel>(
+        () => mockHiveServices.runBoxOperation<UserHiveModel>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -43,7 +43,7 @@ void main() {
 
     test('getCurrentUser throws exception on failure', () async {
       when(
-        () => mockHiveServices.operator<UserHiveModel>(
+        () => mockHiveServices.runBoxOperation<UserHiveModel>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -51,7 +51,7 @@ void main() {
 
       expect(() => dataSource.getCurrentUser(), throwsA(isA<LocalException>()));
       verify(
-        () => mockHiveServices.operator<Either<Failure, UserHiveModel>>(
+        () => mockHiveServices.runBoxOperation<Either<Failure, UserHiveModel>>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -60,7 +60,7 @@ void main() {
 
     test('storeCurrentUser stores user on success', () async {
       when(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -70,7 +70,7 @@ void main() {
 
       expect(result, equals(Future.value()));
       verify(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -79,7 +79,7 @@ void main() {
 
     test('storeCurrentUser throws exception if user exists', () async {
       when(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -90,7 +90,7 @@ void main() {
         throwsA(isA<Exception>()),
       );
       verify(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -99,7 +99,7 @@ void main() {
 
     test('signOut clears user data on success', () async {
       when(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -109,7 +109,7 @@ void main() {
 
       expect(result, equals(const Right(null)));
       verify(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -118,7 +118,7 @@ void main() {
 
     test('signOut throws exception on failure', () async {
       when(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),
@@ -126,7 +126,7 @@ void main() {
 
       expect(() => dataSource.signOut(), throwsA(isA<LocalException>()));
       verify(
-        () => mockHiveServices.operator<void>(
+        () => mockHiveServices.runBoxOperation<void>(
           job: any(named: 'job'),
           boxName: HiveBoxConstants.usersBox,
         ),

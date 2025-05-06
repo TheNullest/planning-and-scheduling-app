@@ -1,12 +1,12 @@
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
-import 'package:zamaan/domain/enums/enums.dart';
+import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 
 /// Represents an interval-based scheduling configuration.
 ///
 /// This entity defines how often a task repeats within specified intervals
-/// (e.g., every 3 days or every 2 hours) and includes details about the
-/// scheduled times and repetition count.
+/// (e.g., every 3 days or every 2 hours) and includes details about the scheduled
+/// times, repetition count, and configuration of consecutive occurrences.
 ///
 /// **Example Usage:**
 /// ```dart
@@ -16,14 +16,17 @@ import 'package:zamaan/domain/enums/enums.dart';
 ///   createdAt: DateTime.now(),
 ///   updatedAt: DateTime.now(),
 ///   description: 'Do the task every 3 days based on scheduled times',
-///   scheduleConstraintsId: 'schedule_001',
+///   scheduleConstraintId: 'schedule_001',
 ///   intervalUnit: IntervalUnit.days,
 ///   intervalValue: 3,
-///   timeRanges: [
-///     TimeRange(start: DateTime(2025, 5, 1, 9, 0), end: DateTime(2025, 5, 1, 12, 0)),
-///     TimeRange(start: DateTime(2025, 5, 3, 14, 0), end: DateTime(2025, 5, 3, 16, 0)),
+///   scheduledTimeIds: [
+///     'timeRange_1',
+///     'timeRange_2',
 ///   ],
 ///   repeatCount: 5,
+///   enforceScheduleBounds: true,
+///   startDate: DateTime(2025, 5, 1),
+///   consecutiveOccurrences: 1,
 /// );
 /// ```
 class ScheduledIntervalEntity extends BaseEntityAbstraction {
@@ -38,43 +41,43 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     required this.scheduledTimeIds,
     required this.enforceScheduleBounds,
     required this.startDate,
+    this.consecutiveOccurrences = 1,
     super.description,
     super.updatedAt,
   });
 
-  /// Constructs a [ScheduledIntervalEntity] with the given properties.
-  ///
-  /// - [scheduleConstraintId]: The ID of the schedule definition to which this interval belongs.
-  /// - [intervalUnit]: The unit of time for the interval (e.g., hours, days).
-  /// - [intervalValue]: The numeric value of the interval (e.g., every 3 days).
-  /// - [scheduledTimeIds]: The time ranges within the interval when the task should occur.
-  /// - [repeatCount]: Specifies how many times the interval repeats.
-
-  /// The ID of the schedule definition associated with this interval.
+  /// The ID of the schedule constraint to which this interval configuration belongs.
   final String scheduleConstraintId;
 
-  /// The unit of time for the interval (e.g., hours, days, weeks, months).
+  /// The unit of time defining the interval (e.g., minute, hour, day, week, month, or year).
   final IntervalUnit intervalUnit;
 
-  /// The numeric value of the interval, defining how often the task repeats (e.g., every 3 days).
+  /// The magnitude of the interval.
+  /// For instance, an intervalValue of 3 with an intervalUnit of days indicates "every 3 days."
   final double intervalValue;
 
-  /// Specifies how many times the interval repeats.
+  /// Specifies how many times the interval is intended to repeat.
+  /// A null value may indicate an indefinite repetition or be handled by your business logic.
   final int? repeatCount;
 
-  /// The time ranges when the task should occur within the interval.
-  ///
-  /// Each [TimeRangeEntity] specifies the start and end times for scheduled occurrences.
+  /// The identifiers for the scheduled time ranges within an interval.
+  /// Each identifier corresponds to a specific [TimeRangeEntity] where the task should occur.
   final List<String> scheduledTimeIds;
 
+  /// Determines whether the scheduling should strictly adhere to configured schedule bounds.
   final bool enforceScheduleBounds;
 
+  /// The starting date for this scheduling configuration.
   final DateTime startDate;
+
+  /// The number of consecutive occurrences to generate for each computed base date.
+  /// For example, a value of 1 means a single occurrence per interval, while a higher value produces multiple consecutive dates.
+  final int consecutiveOccurrences;
 
   /// Creates a modified copy of this [ScheduledIntervalEntity].
   ///
-  /// Any provided values will replace the corresponding properties.
-  /// If a property is omitted, the original value is retained.
+  /// Any provided parameters will replace the corresponding property, while properties not
+  /// provided will retain their existing values.
   @override
   ScheduledIntervalEntity copyWith({
     String? id,
@@ -86,6 +89,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     String? scheduleConstraintId,
     IntervalUnit? intervalUnit,
     double? intervalValue,
+    int? consecutiveOccurrences,
     int? repeatCount,
     bool? enforceScheduleBounds,
     List<String>? scheduledTimeIds,
@@ -99,10 +103,12 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
       scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
       intervalUnit: intervalUnit ?? this.intervalUnit,
       intervalValue: intervalValue ?? this.intervalValue,
+      consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
       repeatCount: repeatCount ?? this.repeatCount,
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
       startDate: startDate ?? this.startDate,
-      scheduledTimeIds: scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Avoid reference sharing
+      scheduledTimeIds:
+          scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Creates a new list instance.
     );
   }
 
@@ -116,5 +122,6 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
         enforceScheduleBounds,
         scheduledTimeIds,
         startDate,
+        consecutiveOccurrences,
       ];
 }

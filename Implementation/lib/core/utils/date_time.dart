@@ -1,4 +1,4 @@
-import 'package:zamaan/presentation_shared/enums/interval_unit.dart';
+import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 
 /// Creates a new [DateTime] object containing only the year, month, and day components.
 /// Strips time information by returning a date at midnight in the local time zone.
@@ -79,5 +79,5 @@ int compareDates({
 /// final query = toDateTruncQuery("created_at", unit: TimeUnit.month);
 /// print(query);  // date_trunc('month', created_at)
 /// ```
-String toDateTruncQuery(String field, {IntervalUnit unit = IntervalUnit.day}) =>
+String toDateTruncQuery(String field, {IntervalUnit unit = IntervalUnit.days}) =>
     'date_trunc("${unit.name}", $field)';

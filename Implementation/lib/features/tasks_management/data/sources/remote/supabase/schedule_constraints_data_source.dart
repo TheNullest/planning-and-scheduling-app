@@ -1,8 +1,9 @@
+import 'package:zamaan/data/mappers/bases/schedule_constraints.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_constraint/schedule_constraint_supabase_model.dart';
 
 class ScheduleDefinitionSupabaseDataSourceImpl
-    extends SupabaseDataSource<ScheduleConstraintSupabaseModel> {
+    extends SupabaseDataSource<ScheduleConstraintSupabaseModel, ScheduleConstraintDataMapper> {
   ScheduleDefinitionSupabaseDataSourceImpl({
     required super.dataMapper,
     required super.client,

@@ -2,28 +2,34 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class HiveBoxConstants {
   HiveBoxConstants._();
+  static const String remoteSessionsBox = 'remoteSessionsBox';
   static const String usersBox = 'usersBox';
   static const String devicesBox = 'devicesBox';
-  static const String deviceSyncRecordBox = 'deviceSyncRecordBox';
+  static const String logsBox = 'logsBox';
   static const String syncLogsBox = 'syncLogsBox';
-  static const String mainTasksBox = 'mainTasksBox';
+  static const String tasksBox = 'mainTasksBox';
   static const String subTasksBox = 'subTasksBox';
   static const String goalsBox = 'goalsBox';
   static const String categoriesBox = 'categoriesBox';
-  static const String customeCustomeMeasurementUnitsBox = 'customeCustomeMeasurementUnitsBox';
-  static const String scheduleConstraintssBox = 'scheduleConstraintssBox';
+  static const String customMeasurementUnitsBox = 'customMeasurementUnitsBox';
+  static const String scheduleConstraintsBox = 'scheduleConstraintsBox';
+  static const String scheduledDaysBox = 'scheduledDaysBox';
+  static const String scheduledIntervalsBox = 'scheduledIntervalsBox';
+  static const String scheduledInstancesBox = 'scheduledInstancesBox';
+  static const String dateRangesBox = 'dateRangesBox';
+  static const String timeRangesBox = 'timeRangesBox';
   static const String tagsBox = 'tagsBox';
   static const String taskActivitysBox = 'taskActivitysBox';
 }
 
 enum HiveBox {
   users(HiveBoxConstants.usersBox),
-  mainTasks(HiveBoxConstants.mainTasksBox),
+  mainTasks(HiveBoxConstants.tasksBox),
   subTasksBox(HiveBoxConstants.subTasksBox),
   goalsBox(HiveBoxConstants.goalsBox),
   categoriesBox(HiveBoxConstants.categoriesBox),
-  customeCustomeMeasurementUnitsBox(HiveBoxConstants.customeCustomeMeasurementUnitsBox),
-  scheduleConstraintssBox(HiveBoxConstants.scheduleConstraintssBox),
+  customeCustomeMeasurementUnitsBox(HiveBoxConstants.customMeasurementUnitsBox),
+  scheduleConstraintssBox(HiveBoxConstants.scheduleConstraintsBox),
   tagsBox(HiveBoxConstants.tagsBox),
   taskActivitysBox(HiveBoxConstants.taskActivitysBox);
 

@@ -1,6 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/core/extensions/string.dart';
+import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 
 part 'task_status.g.dart';
 
@@ -31,7 +32,7 @@ enum TaskStatus {
   @HiveField(7)
   scheduled('برنامه ریزی شده');
 
-  /// Persian equivalent used for UI display.
+  /// Persian equivalent used for VM display.
   const TaskStatus(this._inPersian);
   final String _inPersian;
 
@@ -48,18 +49,6 @@ enum TaskStatus {
       (e) => e.toString().split('.').last.toLowerCase() == lowerCaseName,
       orElse: () => throw FormatException('Invalid TaskStatus name: $name'),
     );
-    // Alternative using switch (less flexible if enum names change slightly):
-    // switch (name.toLowerCase().replaceAll(' ', '')) { // Normalize input
-    //   case 'scheduled': return TaskStatus.scheduled;
-    //   case 'inprogress': return TaskStatus.inProgress;
-    //   case 'paused': return TaskStatus.paused;
-    //   case 'completed': return TaskStatus.completed;
-    //   case 'overdue': return TaskStatus.overdue;
-    //   case 'failed': return TaskStatus.failed;
-    //   case 'canceled': // Match the enum value spelling
-    //   case 'cancelled': return TaskStatus.canceled; // Allow alternative spelling
-    //   default: throw FormatException('Invalid TaskStatus name: $name');
-    // }
   }
 
   /// Retrieves either the English (Sentence Case) or Persian name using its index.
@@ -85,6 +74,6 @@ enum TaskStatus {
     return toString().split('.').last.toSentenceCase();
   }
 
-  /// Returns the Persian name for UI display.
+  /// Returns the Persian name for VM display.
   String get nameInPersian => _inPersian;
 }

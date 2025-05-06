@@ -11,6 +11,7 @@ Map<String, dynamic> _$ScheduledInstanceSupabaseModelToJson(
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
+      'task_id': instance.taskId,
       'created_at': instance.createdAt.toIso8601String(),
       'start_date_time': instance.startDateTime.toIso8601String(),
       'end_date_time': instance.endDateTime.toIso8601String(),
@@ -29,6 +30,7 @@ _$ScheduledInstanceSupabaseModelImpl
         _$ScheduledInstanceSupabaseModelImpl(
           id: json['id'] as String,
           userId: json['user_id'] as String,
+          taskId: json['task_id'] as String,
           createdAt: DateTime.parse(json['created_at'] as String),
           startDateTime: DateTime.parse(json['start_date_time'] as String),
           endDateTime: DateTime.parse(json['end_date_time'] as String),
@@ -49,6 +51,7 @@ Map<String, dynamic> _$$ScheduledInstanceSupabaseModelImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'user_id': instance.userId,
+      'task_id': instance.taskId,
       'created_at': instance.createdAt.toIso8601String(),
       'start_date_time': instance.startDateTime.toIso8601String(),
       'end_date_time': instance.endDateTime.toIso8601String(),
