@@ -1,9 +1,10 @@
 import 'package:zamaan/domain/enums/enums.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/goal_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/goal_vm.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class SubTaskVM extends BaseViewModel {
   SubTaskVM({
+    required this.taskId,
     required this.title,
     required this.totalSpentTime,
     required this.priority,
@@ -17,7 +18,7 @@ class SubTaskVM extends BaseViewModel {
     this.dueDate,
     super.entityState,
   });
-
+  final String taskId;
   final String title;
   final Priority priority;
   final TaskStatus status;
@@ -28,6 +29,7 @@ class SubTaskVM extends BaseViewModel {
   @override
   SubTaskVM copyWith({
     String? id,
+    String? taskId,
     String? description,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -41,6 +43,7 @@ class SubTaskVM extends BaseViewModel {
   }) {
     return SubTaskVM(
       id: id ?? this.id,
+      taskId: taskId ?? this.taskId,
       description: description ?? this.description,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

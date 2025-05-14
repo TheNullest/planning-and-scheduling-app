@@ -17,7 +17,7 @@ class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> 
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TimeRangeHiveModel(
-      id: fields[0] as String,
+      id: fields[0] as String?,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       parentId: fields[13] as String,

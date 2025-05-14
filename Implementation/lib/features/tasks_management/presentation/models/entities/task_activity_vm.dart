@@ -1,7 +1,7 @@
 import 'package:zamaan/domain/enums/hive/task_status.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/sub_task_activity_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/tag_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/task/task_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/sub_task_activity_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/tag_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/task/task_vm.dart';
 
 class TaskActivityVM extends SubTaskActivityVM<TaskVM> {
   TaskActivityVM({

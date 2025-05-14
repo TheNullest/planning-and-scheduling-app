@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/entities/task.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/task/task_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/task/task_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/goal_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/mappers/sub_task_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
@@ -10,9 +10,9 @@ import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 class TaskVMMapper extends ViewModelMapper<TaskVM, TaskEntity> {
   @override
   TaskEntity toEntity(TaskVM model) => TaskEntity(
-        id: model.id!,
-        userId: model.userId!,
-        createdAt: model.createdAt!,
+        id: model.id,
+        userId: model.userId ?? '',
+        createdAt: model.createdAt ?? DateTime.now(),
         title: model.title,
         colorCode: model.color.hashCode,
         iconCode: model.icon.codePoint,

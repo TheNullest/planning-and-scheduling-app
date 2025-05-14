@@ -17,7 +17,7 @@ class TaskActivityHiveModelAdapter extends HiveBaseTypeAdapter<TaskActivityHiveM
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskActivityHiveModel(
-      id: fields[0] as String,
+      id: fields[0] as String?,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       referenceId: fields[11] as String,

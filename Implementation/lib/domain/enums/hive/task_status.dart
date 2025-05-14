@@ -30,7 +30,10 @@ enum TaskStatus {
   cancelled('لغو شده'),
 
   @HiveField(7)
-  scheduled('برنامه ریزی شده');
+  scheduled('برنامه ریزی شده'),
+
+  @HiveField(8)
+  pending('در انتظار');
 
   /// Persian equivalent used for VM display.
   const TaskStatus(this._inPersian);

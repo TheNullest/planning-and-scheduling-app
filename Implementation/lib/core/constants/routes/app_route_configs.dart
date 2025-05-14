@@ -53,6 +53,13 @@ abstract class AppRouteConfigs {
     titleKey: AppLocaleKeys.uiElements.titles.addNewTask, // e.g., localizes to 'Today Tasks'
   );
 
+  static final RouteConfig editTask = RouteConfig(
+    route: AppRoutes.editTask,
+    routeName: AppRouteNames.editTask,
+    icon: Icons.edit,
+    titleKey: AppLocaleKeys.uiElements.titles.editTask, // e.g., localizes to 'Today Tasks'
+  );
+
   static final RouteConfig todayTasks = RouteConfig(
     route: AppRoutes.todayTasks,
     routeName: AppRouteNames.todayTasks,

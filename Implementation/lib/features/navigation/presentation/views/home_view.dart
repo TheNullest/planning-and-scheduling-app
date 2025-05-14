@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:zamaan/core/constants/hero_tags.dart';
 import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_sliver_app_bar_widget.dart';
@@ -71,6 +72,7 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
             // Add new task
             floatingActionButton: SizedBox(
               child: FloatingActionButton(
+                heroTag: HeroTagConstants.navigateToAddNewTaskViewFab,
                 onPressed: () => navigatorPushNamed(context, AppRouteConfigs.addNewTask.route),
                 shape: const CircleBorder(),
                 child: const Icon(

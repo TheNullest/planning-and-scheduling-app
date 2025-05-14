@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/enums/hive/day_type.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/time_range_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/time_range_vm.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class ScheduledDayVM extends BaseViewModel {

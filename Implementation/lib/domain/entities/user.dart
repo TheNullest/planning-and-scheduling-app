@@ -27,7 +27,6 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 @HiveType(typeId: 2)
 class UserEntity extends BaseEntityAbstraction {
   UserEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.userName,
@@ -39,6 +38,7 @@ class UserEntity extends BaseEntityAbstraction {
     required this.avatarPath,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// Unique username (3-20 characters, letters/numbers/_)

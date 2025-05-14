@@ -7,7 +7,7 @@ abstract class HiveBoxConstants {
   static const String devicesBox = 'devicesBox';
   static const String logsBox = 'logsBox';
   static const String syncLogsBox = 'syncLogsBox';
-  static const String tasksBox = 'mainTasksBox';
+  static const String tasksBox = 'tasksBox';
   static const String subTasksBox = 'subTasksBox';
   static const String goalsBox = 'goalsBox';
   static const String categoriesBox = 'categoriesBox';

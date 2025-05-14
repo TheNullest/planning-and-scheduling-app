@@ -5,7 +5,6 @@ import 'package:zamaan/domain/enums/hive/task_status.dart';
 
 class ScheduledInstanceEntity extends BaseEntityAbstraction {
   ScheduledInstanceEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.taskId,
@@ -19,6 +18,7 @@ class ScheduledInstanceEntity extends BaseEntityAbstraction {
     super.updatedAt,
     this.successPercentage = 0,
     this.timezone = 'UTC',
+    super.id,
   }) : assert(
           successPercentage >= 0 && successPercentage <= 100,
           'Success percentage must be between 0-100',

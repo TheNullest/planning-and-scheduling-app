@@ -3,16 +3,13 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
-import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 
 /// Implementation of the RemoteAuthDataSource interface
 ///
@@ -38,18 +35,21 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   Session? get currentUserSession => _auth.currentSession;
 
   @override
-  EResultFutureVoid restoreSession() async => tryCatchEither(
-        action: () async {
-          final session = currentUserSession;
-          if (session != null &&
-              DateTime.fromMillisecondsSinceEpoch(session.expiresAt! * 1000)
-                  .isAfter(DateTime.now())) {
-            await setSession();
-          }
-          return const Right(null);
-        },
-        failureType: FailureType.remote,
+  EResultFutureVoid restoreSession() async {
+    try {
+      final session = currentUserSession;
+      if (session != null &&
+          DateTime.fromMillisecondsSinceEpoch(session.expiresAt! * 1000).isAfter(DateTime.now())) {
+        await setSession();
+      }
+      return const Right(null);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<void>(
+        e: e.toString(),
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   @override
   EResultFuture<AuthResponse> setSession() async =>
@@ -62,31 +62,26 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<UserSupabaseModel> getCurrentUser() async => tryCatchEither<UserSupabaseModel>(
-        action: () async {
-          if (currentUserSession != null) {
-            // Fetch user data from the 'profiles' table
-            final userData = await _supabaseClient
-                .from('profiles')
-                .select()
-                .eq('id', currentUserSession!.user.id)
-                .single();
-            // Return the user data as a RemoteUserModel
-            return Right(
-              UserSupabaseModel.fromJson(userData)
-                  .copyWith(emailAddress: currentUserSession!.user.email!),
-            );
-          }
-
-          // Throw an exception if the user is not signed in
-          throw RemoteException(
-            message: AuthTexts.errors.userNotSignedIn,
-            statusCode: '401',
-          );
-        },
-        failureType: FailureType.remote,
-        customMessage: StackTrace.current.toString(),
-      );
+  EResultFuture<UserSupabaseModel> getCurrentUser() async {
+    try {
+      if (currentUserSession != null) {
+        // Fetch user data from the 'profiles' table
+        final userData = await _supabaseClient
+            .from('profiles')
+            .select()
+            .eq('id', currentUserSession!.user.id)
+            .single();
+        // Return the user data as a RemoteUserModel
+        return Right(
+          UserSupabaseModel.fromJson(userData)
+              .copyWith(emailAddress: currentUserSession!.user.email),
+        );
+      }
+      throw Exception('No User');
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<UserSupabaseModel>(e: e, stackTrace: stackTrace);
+    }
+  }
 
   /// Method to sign in a user
   ///
@@ -97,12 +92,21 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<UserSupabaseModel> signIn(UserSignInParams params) async => _getUser(
+  EResultFuture<UserSupabaseModel> signIn(UserSignInParams params) async {
+    try {
+      return _getUser(
         () async => _auth.signInWithPassword(
           password: params.password,
           email: params.email,
         ),
       );
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<UserSupabaseModel>(
+        e: e.toString(),
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   /// Method to sign up a new user
   ///
@@ -113,13 +117,22 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<UserSupabaseModel> signUp(UserSupabaseModel userModel) async => _getUser(
+  EResultFuture<UserSupabaseModel> signUp(UserSupabaseModel userModel) async {
+    try {
+      return _getUser(
         () async => _auth.signUp(
-          password: userModel.password,
+          password: userModel.password!,
           email: userModel.emailAddress,
           data: userModel.toJson(),
         ),
       );
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<UserSupabaseModel>(
+        e: e,
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   /// Method to sign out the current user
   ///
@@ -127,13 +140,17 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing `true` if successful, or an error.
   @override
-  EResultFuture<bool> signOut() async => tryCatchEither(
-        action: () async {
-          await _auth.signOut();
-          return const Right(true);
-        },
-        failureType: FailureType.remote,
+  EResultFuture<bool> signOut() async {
+    try {
+      await _auth.signOut();
+      return const Right(true);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<bool>(
+        e: e,
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   /// Method to update the current user's information
   ///
@@ -144,38 +161,45 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   @override
-  EResultFuture<UserSupabaseModel> updateUser(UserSupabaseModel entity) async =>
-      tryCatchEither<UserSupabaseModel>(
-        action: () async {
-          // Update the user's information
-          final result = await _auth.updateUser(
-            UserAttributes(
-              data: entity.toJson(),
-              email: entity.emailAddress,
-              password: entity.password,
-            ),
-          );
-
-          // Return the updated user data as a RemoteUserModel
-          return Right(
-            UserSupabaseModel.fromJson(result.user!.toJson()),
-          );
-        },
-        failureType: FailureType.remote,
+  EResultFuture<UserSupabaseModel> updateUser(UserSupabaseModel entity) async {
+    try {
+      // Update the user's information
+      final result = await _auth.updateUser(
+        UserAttributes(
+          data: entity.toJson(),
+          email: entity.emailAddress,
+          password: entity.password,
+        ),
       );
+
+      // Return the updated user data as a RemoteUserModel
+      return Right(
+        UserSupabaseModel.fromJsonUserAccount(result.user!.toJson()),
+      );
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<UserSupabaseModel>(
+        e: e,
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
-  EResultFutureVoid changePassword(ChangePasswordParams params) async => tryCatchEither(
-        action: () async {
-          // Verify the user's credentials by signing in with the provided email and password
-          await signIn(params);
+  EResultFutureVoid changePassword(ChangePasswordParams params) async {
+    try {
+      // Verify the user's credentials by signing in with the provided email and password
+      await signIn(params);
 
-          // Reset the user's password
-          await _auth.updateUser(UserAttributes(password: params.newPassword));
-          return const Right(null);
-        },
-        failureType: FailureType.remote,
+      // Reset the user's password
+      await _auth.updateUser(UserAttributes(password: params.newPassword));
+      return const Right(null);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<void>(
+        e: e,
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   // TODO[FIXME]: mprove this method to handle different scenarios and remove hardcoded values.
   // - Validate the email format before making the request.
@@ -183,50 +207,57 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   // - Use a secure method to generate a new password instead of hardcoding it.
   // - Ensure proper error handling and logging.
   @override
-  EResultFutureVoid resetPassword(String email) async => tryCatchEither(
-        action: () async {
-          final response =
-              await _supabaseClient.from('profiles').select('id').eq('user_name', 'moien').single();
+  EResultFutureVoid resetPassword(String email) async {
+    try {
+      final response =
+          await _supabaseClient.from('profiles').select('id').eq('user_name', 'moien').single();
 
-          log(response['id'] as String);
+      log(response['id'] as String);
 
-          log(_auth.currentUser!.role!);
-          // Reset the user's password
-          await _auth.admin.updateUserById(
-            response['id'] as String,
-            attributes: AdminUserAttributes(password: 'Aa@123456'),
-          );
-
-          await _auth.signOut();
-
-          return const Right(null);
-        },
-        failureType: FailureType.remote,
+      log(_auth.currentUser!.role!);
+      // Reset the user's password
+      await _auth.admin.updateUserById(
+        response['id'] as String,
+        attributes: AdminUserAttributes(password: 'Aa@123456'),
       );
+
+      await _auth.signOut();
+
+      return const Right(null);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<void>(
+        e: e,
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   /// Method to delete the current user's account
   ///
   /// This method deletes the current user's account.
   ///
   /// - Returns: A `ResultFuture` containing `true` if successful, or an error.
+  //TODO[FIXME]: Implement this method to handle delete user account properly.
   @override
-  EResultFuture<bool> deleteUserAccount(UserSignInParams params) => tryCatchEither<bool>(
-        action: () async {
-          //TODO: [FIXME]: Implement this method to handle delete user account properly.
+  EResultFuture<bool> deleteUserAccount(UserSignInParams params) async {
+    try {
+      // Sign in the user with the provided email and password to verify their credentials
+      await signIn(params);
 
-          // Sign in the user with the provided email and password to verify their credentials
-          await signIn(params);
+      // Sign in the user with the provided email and password
+      final user = foldEitherRight<UserSupabaseModel>(await signIn(params));
 
-          // Sign in the user with the provided email and password
-          final user = foldEitherRight<UserSupabaseModel>(await signIn(params));
+      // Remove the user from the 'profiles' table
+      await _supabaseClient.from('profiles').delete().eq('id', user.id);
 
-          // Remove the user from the 'profiles' table
-          await _supabaseClient.from('profiles').delete().eq('id', user.id!);
-
-          return const Right(true);
-        },
-        failureType: FailureType.remote,
+      return const Right(true);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<bool>(
+        e: e,
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   /// Private method to handle user-related actions
   ///
@@ -238,26 +269,43 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
   EResultFuture<UserSupabaseModel> _getUser(
     Future<AuthResponse> Function() fn,
-  ) async =>
-      tryCatchEither<UserSupabaseModel>(
-        action: () async {
-          // Execute the provided function and return the user data
-          final response = await fn();
+  ) async {
+    try {
+      // Execute the provided function and return the user data
+      final response = await fn();
 
-          final user = response.user!.toJson();
-          log(user.toString());
+      final user = response.user!.toJson();
+      log(user.toString());
 
-          return Right(
-            UserSupabaseModel.fromJson(response.user!.toJson()),
-          );
-        },
-        failureType: FailureType.remote,
+      return Right(
+        UserSupabaseModel.fromJson(response.user!.toJson()),
       );
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<UserSupabaseModel>(
+        e: e,
+        stackTrace: stackTrace,
+      );
+    }
+  }
 
   @override
   EResultFuture<Session?> listenAuthChanges() async {
-    late Session? session;
-    _auth.onAuthStateChange.listen((event) => session = event.session);
-    return Right(session);
+    try {
+      final completer = Completer<Session?>();
+      late final StreamSubscription sub;
+      sub = _auth.onAuthStateChange.listen((event) {
+        if (!completer.isCompleted) {
+          completer.complete(event.session);
+          sub.cancel();
+        }
+      });
+      final session = await completer.future;
+      return Right(session);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<Session?>(
+        e: e,
+        stackTrace: stackTrace,
+      );
+    }
   }
 }

@@ -26,7 +26,6 @@ import 'package:zamaan/domain/entities/task.dart';
 /// - Inherits all properties from [CategoryEntity]
 class TagEntity extends CategoryEntity {
   TagEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required super.description,
@@ -34,6 +33,7 @@ class TagEntity extends CategoryEntity {
     required super.title,
     required super.colorCode,
     required super.iconCode,
+    super.id,
   });
 
   @override

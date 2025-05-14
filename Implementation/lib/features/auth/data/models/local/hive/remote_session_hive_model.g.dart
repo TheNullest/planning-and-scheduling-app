@@ -17,10 +17,10 @@ class RemoteSessionHiveModelAdapter extends HiveBaseTypeAdapter<RemoteSessionHiv
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RemoteSessionHiveModel(
-      accessToken: fields[0] as String,
-      refreshToken: fields[1] as String,
-      expiresAt: fields[2] as int,
-      user: fields[3] as UserHiveModel,
+      accessToken: fields[1] as String,
+      refreshToken: fields[2] as String,
+      expiresAt: fields[3] as int,
+      userId: fields[0] as String,
     );
   }
 
@@ -29,13 +29,13 @@ class RemoteSessionHiveModelAdapter extends HiveBaseTypeAdapter<RemoteSessionHiv
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.accessToken)
+      ..write(obj.userId)
       ..writeByte(1)
-      ..write(obj.refreshToken)
+      ..write(obj.accessToken)
       ..writeByte(2)
-      ..write(obj.expiresAt)
+      ..write(obj.refreshToken)
       ..writeByte(3)
-      ..write(obj.user);
+      ..write(obj.expiresAt);
   }
 
   @override

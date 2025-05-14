@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/date_range_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/date_range_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 
 class DateRangeVMMapper extends ViewModelMapper<DateRangeVM, DateRangeEntity> {

@@ -1,6 +1,5 @@
 import 'package:zamaan/core/di/init_dependencies.imports.dart';
 import 'package:zamaan/core/services/hive/hive_box_runner.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
 import 'package:zamaan/domain/enums/failure_type.dart';
@@ -33,17 +32,15 @@ class ScheduledInstanceHiveDataSourceImpl extends HiveDataSource<ScheduledInstan
       );
 
   @override
-  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds) async => tryCatchEither(
-        action: () async => _hiveService.runBoxOperation(
-          job: (box) async {
-            final instances = box.values
-                .where((item) => schedulerIds.contains(item.schedulerId))
-                .map((item) => item.id)
-                .toList();
+  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds) async =>
+      _hiveService.runBoxOperation(
+        job: (box) async {
+          final instances = box.values
+              .where((item) => schedulerIds.contains(item.schedulerId))
+              .map((item) => item.id)
+              .toList();
 
-            return box.deleteAll(instances);
-          },
-        ),
-        failureType: FailureType.local,
+          return box.deleteAll(instances);
+        },
       );
 }

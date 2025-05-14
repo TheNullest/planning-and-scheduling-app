@@ -2,7 +2,7 @@ import 'package:zamaan/domain/aggregates/schedule_constraint_aggregate.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/schedule_constraints.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/schedule_constraint_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/schedule_constraint_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/date_range_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/mappers/time_range_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';

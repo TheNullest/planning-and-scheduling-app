@@ -3,8 +3,9 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 
 class ValidationExceptions extends Failure {
   ValidationExceptions({
-    required super.message,
     required this.exceptions,
+    required super.message,
+    required super.stackTrace,
     super.timestamp,
   });
   final List<String> exceptions;

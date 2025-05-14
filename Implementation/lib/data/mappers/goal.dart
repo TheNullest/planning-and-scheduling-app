@@ -1,9 +1,8 @@
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/goal.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/enums/enums.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/enums/hive/goal_constraint.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
@@ -11,89 +10,112 @@ import 'package:zamaan/features/tasks_management/data/models/remote/supabase/goa
 
 class GoalDataMapperImpl extends GoalDataMapper {
   @override
-  GoalEntity toEntityFromHive(GoalHiveModel model) => tryCatchSimple<GoalEntity>(
-        action: () => GoalEntity(
-          id: model.id,
-          description: model.description,
-          createdAt: model.createdAt,
-          updatedAt: model.updatedAt,
-          userId: model.userId,
-          refType: model.refType,
-          refId: model.refId,
-          customMeasurementUnitId: model.customMeasurementUnitId,
-          measurementUnit: model.measurementUnit,
-          goalConstraint: model.goalConstraint,
-          minutelyTarget: model.minutelyTarget,
-          hourlyTarget: model.hourlyTarget,
-          dailyTarget: model.dailyTarget,
-          weeklyTarget: model.weeklyTarget,
-          monthlyTarget: model.monthlyTarget,
-          yearlyTarget: model.yearlyTarget,
-        ),
-        failureType: FailureType.local,
+  GoalEntity toEntityFromHive(GoalHiveModel model) {
+    try {
+      return GoalEntity(
+        id: model.id,
+        description: model.description,
+        createdAt: model.createdAt,
+        updatedAt: model.updatedAt,
+        userId: model.userId,
+        refType: model.refType,
+        refId: model.refId,
+        customMeasurementUnitId: model.customMeasurementUnitId,
+        measurementUnit: model.measurementUnit,
+        goalConstraint: model.goalConstraint,
+        minutelyTarget: model.minutelyTarget,
+        hourlyTarget: model.hourlyTarget,
+        dailyTarget: model.dailyTarget,
+        weeklyTarget: model.weeklyTarget,
+        monthlyTarget: model.monthlyTarget,
+        yearlyTarget: model.yearlyTarget,
       );
-
-  @override
-  GoalEntity toEntityFromSupabase(GoalSupabaseModel model, {DataMap? relatedListModels}) =>
-      tryCatchSimple<GoalEntity>(
-        action: () => GoalEntity(
-          id: model.id,
-          description: model.description,
-          createdAt: model.createdAt,
-          updatedAt: model.updatedAt,
-          userId: model.userId,
-          refType: ReferenceType.fromName(model.refType),
-          refId: model.refId,
-          customMeasurementUnitId: model.customMeasurementUnitId,
-          measurementUnit: model.measurementUnit != null
-              ? MeasurementUnit.fromName(model.measurementUnit!)
-              : null,
-          goalConstraint: GoalConstraint.fromName(model.goalConstraint),
-          minutelyTarget: model.minutelyTarget,
-          hourlyTarget: model.hourlyTarget,
-          dailyTarget: model.dailyTarget,
-          weeklyTarget: model.weeklyTarget,
-          monthlyTarget: model.monthlyTarget,
-          yearlyTarget: model.yearlyTarget,
-        ),
-        failureType: FailureType.local,
-      );
-
-  @override
-  GoalHiveModel toHiveModel(GoalEntity entity) => tryCatchSimple<GoalHiveModel>(
-        action: () => GoalHiveModel.fromEntity(entity),
-        failureType: FailureType.local,
-      );
-
-  @override
-  GoalSupabaseModel toSupabaseModel(GoalEntity entity) => tryCatchSimple<GoalSupabaseModel>(
-        action: () => GoalSupabaseModel.fromEntity(entity),
-        failureType: FailureType.local,
-      );
-
-  @override
-  List<GoalSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) => tryCatchSimple(
-        action: () => jsonList.map(GoalSupabaseModel.fromJson).toList(),
-        failureType: FailureType.local,
-      );
-
-  @override
-  List<Map<String, dynamic>> toJsonList(List<GoalSupabaseModel> items) {
-    return tryCatchSimple(
-      action: () => items.map((item) => item.toJson()).toList(), // Implementing toJsonList
-      failureType: FailureType.local,
-    );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
   }
 
   @override
-  GoalSupabaseModel fromJson(Map<String, dynamic> json) => tryCatchSimple(
-        action: () => GoalSupabaseModel.fromJson(json),
-        failureType: FailureType.local,
+  GoalEntity toEntityFromSupabase(
+    GoalSupabaseModel model, {
+    DataMap? relatedListModels,
+  }) {
+    try {
+      return GoalEntity(
+        id: model.id,
+        description: model.description,
+        createdAt: model.createdAt,
+        updatedAt: model.updatedAt,
+        userId: model.userId,
+        refType: ReferenceType.fromName(model.refType),
+        refId: model.refId,
+        customMeasurementUnitId: model.customMeasurementUnitId,
+        measurementUnit:
+            model.measurementUnit != null ? MeasurementUnit.fromName(model.measurementUnit!) : null,
+        goalConstraint: GoalConstraint.fromName(model.goalConstraint),
+        minutelyTarget: model.minutelyTarget,
+        hourlyTarget: model.hourlyTarget,
+        dailyTarget: model.dailyTarget,
+        weeklyTarget: model.weeklyTarget,
+        monthlyTarget: model.monthlyTarget,
+        yearlyTarget: model.yearlyTarget,
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  Map<String, dynamic> toJson(GoalSupabaseModel item) => tryCatchSimple(
-        action: () => item.toJson(),
-        failureType: FailureType.local,
-      );
+  GoalHiveModel toHiveModel(GoalEntity entity) {
+    try {
+      return GoalHiveModel.fromEntity(entity);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  GoalSupabaseModel toSupabaseModel(GoalEntity entity) {
+    try {
+      return GoalSupabaseModel.fromEntity(entity);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  List<GoalSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) {
+    try {
+      return jsonList.map(GoalSupabaseModel.fromJson).toList();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  List<Map<String, dynamic>> toJsonList(List<GoalSupabaseModel> items) {
+    try {
+      return items.map((item) => item.toJson()).toList();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  GoalSupabaseModel fromJson(Map<String, dynamic> json) {
+    try {
+      return GoalSupabaseModel.fromJson(json);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  Map<String, dynamic> toJson(GoalSupabaseModel item) {
+    try {
+      return item.toJson();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 }

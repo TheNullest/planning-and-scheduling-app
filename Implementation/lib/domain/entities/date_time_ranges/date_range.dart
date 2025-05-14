@@ -70,7 +70,7 @@ class DateRangeEntity extends BaseEntityAbstraction {
 
   /// Validates all range properties
   bool get isValid =>
-      uuid.isValidUVMD(id) &&
+      uuid.isValidUUID(id) &&
       (end == null || start!.isBefore(end!) || start!.isAtSameMomentAs(end!));
 
   /// Returns true if this range contains [date]

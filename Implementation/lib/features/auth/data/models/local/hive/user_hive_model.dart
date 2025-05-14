@@ -37,9 +37,9 @@ class UserHiveModel extends UserEntity {
         emailAddress: entity.emailAddress,
       );
   factory UserHiveModel.fromRemote(UserSupabaseModel entity) => UserHiveModel(
-        id: entity.id!,
+        id: entity.id,
         userName: entity.userName,
-        password: entity.password,
+        password: entity.password!,
         firstName: entity.firstName,
         lastName: entity.lastName,
         description: entity.description,
@@ -47,7 +47,7 @@ class UserHiveModel extends UserEntity {
         updatedAt: entity.updatedAt,
         birthDate: entity.birthDate,
         avatarPath: entity.avatarPath,
-        emailAddress: entity.emailAddress,
+        emailAddress: entity.emailAddress ?? '',
       );
 
   @override

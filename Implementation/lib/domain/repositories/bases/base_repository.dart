@@ -1,5 +1,4 @@
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/enums/datasource_policy.dart';
 
 /// Abstract base repository interface for managing entities in local and remote data sources.
 ///
@@ -15,9 +14,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A future containing a list of nullable entities.
-  EResultFuture<List<Entity>> getAll({
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFuture<List<Entity>> getAll();
 
   /// Retrieves a single entity by its unique identifier from local, remote, or both data sources.
   ///
@@ -26,10 +23,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A future containing the nullable entity.
-  EResultFuture<Entity?> getById(
-    String id, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFuture<Entity?> getById(String id);
 
   /// Retrieves multiple entities by their unique identifiers from local, remote, or both data sources.
   ///
@@ -38,10 +32,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A future containing a list of nullable entities.
-  EResultFuture<List<Entity>> getByIds(
-    List<String> ids, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFuture<List<Entity>> getByIds(List<String> ids);
 
   /// Creates a single entity in local, remote, or both data sources.
   ///
@@ -50,10 +41,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid create(
-    Entity entity, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFuture<String> create(Entity entity);
 
   /// Updates a single entity in local, remote, or both data sources.
   ///
@@ -62,10 +50,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid update(
-    Entity entity, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFutureVoid update(Entity entity);
 
   /// Deletes a single entity by its unique identifier from local, remote, or both data sources.
   ///
@@ -73,10 +58,7 @@ abstract class BaseRepository<Entity> {
   /// - [id]: The unique identifier of the entity to delete.
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid delete(
-    String id, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFutureVoid delete(String id);
 
   /// Deletes multiple entities by their unique identifiers in local, remote, or both data sources.
   ///
@@ -85,10 +67,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid deleteBatch(
-    List<String> ids, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFutureVoid deleteBatch(List<String> ids);
 
   /// Creates multiple entities in a batch operation in local, remote, or both data sources.
   ///
@@ -97,10 +76,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid createBatch(
-    List<Entity> entities, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFutureVoid createBatch(List<Entity> entities);
 
   /// Updates multiple entities in a batch operation in local, remote, or both data sources.
   ///
@@ -109,13 +85,7 @@ abstract class BaseRepository<Entity> {
   ///
   /// **Returns:**
   /// - A void future indicating success or failure of the operation.
-  EResultFutureVoid updateBatch(
-    List<Entity> entities, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFutureVoid updateBatch(List<Entity> entities);
 
-  EResultFuture<bool> exists(
-    String id, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  });
+  EResultFuture<bool> exists(String id);
 }

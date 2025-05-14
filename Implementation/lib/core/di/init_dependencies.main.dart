@@ -8,12 +8,11 @@ Future<void> intiDependencies() async {
 
   await _supabase();
   _hiveServices();
-  _initAuth();
   _dataMappers();
   _viewModelMappers();
   _datasources();
   _repositories();
-  _authBlocs();
+  _initAuth();
   _taskManagerBloc();
   _navigator();
 

@@ -54,7 +54,7 @@ class _ZamaanState extends State<Zamaan> {
   void initState() {
     super.initState();
     _appRouter = serviceLocator<AppRouter>();
-    context.read<AuthBloc>().add(AuthIsUserSignedInEvent());
+    context.read<AuthBloc>().add(AuthInitializeEvent());
   }
 
   @override

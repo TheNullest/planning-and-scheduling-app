@@ -29,6 +29,8 @@ class TaskStatusAdapter extends HiveBaseTypeAdapter<TaskStatus> {
         return TaskStatus.cancelled;
       case 7:
         return TaskStatus.scheduled;
+      case 8:
+        return TaskStatus.pending;
       default:
         return TaskStatus.inProgress;
     }
@@ -60,6 +62,9 @@ class TaskStatusAdapter extends HiveBaseTypeAdapter<TaskStatus> {
         break;
       case TaskStatus.scheduled:
         writer.writeByte(7);
+        break;
+      case TaskStatus.pending:
+        writer.writeByte(8);
         break;
     }
   }

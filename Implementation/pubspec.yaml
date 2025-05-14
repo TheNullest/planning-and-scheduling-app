@@ -21,6 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.0
+  flutter_colorpicker: ^1.1.0
   flutter_dotenv: ^5.2.1
   flutter_gen: ^5.10.0
   flutter_local_notifications: ^18.0.1

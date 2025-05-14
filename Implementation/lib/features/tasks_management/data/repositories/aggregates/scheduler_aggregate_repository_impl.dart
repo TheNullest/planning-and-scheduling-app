@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/fold_either.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/domain/aggregates/schedule_constraint_aggregate.dart';
@@ -12,7 +12,6 @@ import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/schedule_constraints.dart';
 import 'package:zamaan/domain/entities/scheduled_day.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/repositories/aggregates/scheduler_aggregate_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
@@ -78,138 +77,147 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
       ScheduledIntervalSupabaseModel> _intervalMapper;
 
   final _constraintEntitiesCached = <ScheduleConstraintEntity>[];
-
   @override
-  EResultFutureVoid batchCascadeDelete(List<String> constraintIds) async => tryCatchEither(
-        action: () async {
-          final schedulerIds = constraintIds;
-          final schedulersResult = await getBatchByIds(constraintIds);
-          final schedulers = foldEitherRight<List<SchedulersAggregateEntity>>(schedulersResult);
+  EResultFutureVoid batchCascadeDelete(List<String> constraintIds) async {
+    try {
+      // Create a mutable copy of the provided constraint IDs.
+      final schedulerIds = List<String>.from(constraintIds);
 
-          final dateRangeIds = schedulers
-              .expand(
-                (aggregate) =>
-                    aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionDateIds,
+      // Retrieve scheduler aggregate entities.
+      final schedulersResult = await getBatchByIds(constraintIds);
+      final schedulers = foldEitherRight<List<SchedulersAggregateEntity>>(schedulersResult);
+
+      // Extract date range IDs from each scheduler aggregate.
+      final dateRangeIds = schedulers
+          .expand(
+            (aggregate) =>
+                aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionDateIds,
+          )
+          .toList();
+
+      // Extract time range IDs by merging several collections.
+      final timeRangeIds = schedulers.expand((aggregate) {
+        final times =
+            aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionTimeIds.toList()
+              ..addAll(
+                aggregate.dayAggregates.expand((day) => day.scheduledDay.scheduledTimeIds).toList(),
               )
-              .toList();
-          final timeRangeIds = schedulers.expand(
-            (aggregate) {
-              final times =
-                  aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionTimeIds.toList()
-                    ..addAll(
-                      aggregate.dayAggregates
-                          .expand((day) => day.scheduledDay.scheduledTimeIds)
-                          .toList(),
-                    )
-                    ..addAll(
-                      aggregate.intervalAggregates
-                          .expand((interval) => interval.scheduledInterval.scheduledTimeIds)
-                          .toList(),
-                    );
-              return times;
-            },
-          ).toList();
+              ..addAll(
+                aggregate.intervalAggregates
+                    .expand((interval) => interval.scheduledInterval.scheduledTimeIds)
+                    .toList(),
+              );
+        return times;
+      }).toList();
 
-          final days = schedulers
-              .expand((item) => item.dayAggregates.map((day) => day.scheduledDay.id))
-              .toList();
-          final intervals = schedulers
-              .expand(
-                (item) => item.intervalAggregates.map((interval) => interval.scheduledInterval.id),
-              )
-              .toList();
-          schedulerIds
-            ..addAll(days)
-            ..addAll(intervals);
+      // Get scheduled day and interval IDs.
+      final days = schedulers
+          .expand((item) => item.dayAggregates.map((day) => day.scheduledDay.id))
+          .toList();
 
-          //delete
+      final intervals = schedulers
+          .expand(
+            (item) => item.intervalAggregates.map((interval) => interval.scheduledInterval.id),
+          )
+          .toList();
 
-          await _instanceLocalDataSource.deleteBySchedulerIds(schedulerIds);
+      // Append days and intervals to the scheduler IDs.
+      schedulerIds
+        ..addAll(days)
+        ..addAll(intervals);
 
-          await _dateRangeLocalDataSource.deleteBatch(dateRangeIds);
-          await _timeRangeLocalDataSource.deleteBatch(timeRangeIds);
+      // Perform deletion on all related data.
+      await _instanceLocalDataSource.deleteBySchedulerIds(schedulerIds);
+      await _dateRangeLocalDataSource.deleteBatch(dateRangeIds);
+      await _timeRangeLocalDataSource.deleteBatch(timeRangeIds);
+      await _dayLocalDataSource.deleteBatch(days);
+      await _intervalLocalDataSource.deleteBatch(intervals);
+      await _constraintLocalDataSource.deleteBatch(constraintIds);
 
-          await _dayLocalDataSource.deleteBatch(days);
-          await _intervalLocalDataSource.deleteBatch(intervals);
-          await _constraintLocalDataSource.deleteBatch(constraintIds);
-
-          return const Right(null);
-        },
-        failureType: FailureType.local,
-      );
+      return const Right(null);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFutureVoid cascadeDelete(String constraintId) async => batchCascadeDelete([constraintId]);
+  EResultFutureVoid cascadeDelete(String constraintId) async {
+    // Delegate to batchCascadeDelete using a single-element list.
+    return batchCascadeDelete([constraintId]);
+  }
 
   @override
-  EResultFuture<List<SchedulersAggregateEntity>> getBatch() async => tryCatchEither(
-        action: () async {
-          final constraintsResult = await _constraintLocalDataSource.getAll();
-          final constraintHives =
-              foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
-          _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
-          return getBatchByIds(_constraintEntitiesCached.map((item) => item.id).toList());
-        },
-      );
+  EResultFuture<List<SchedulersAggregateEntity>> getBatch() async {
+    try {
+      final constraintsResult = await _constraintLocalDataSource.getAll();
+      final constraintHives = foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
+
+      // Cache all retrieved constraint entities.
+      _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
+
+      // Retrieve aggregates for all cached constraint IDs.
+      final cachedIds = _constraintEntitiesCached.map((item) => item.id).toList();
+      return await getBatchByIds(cachedIds);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFuture<List<SchedulersAggregateEntity>> getBatchByIds(List<String> constriantIds) async =>
-      tryCatchEither(
-        action: () async {
-          final aggregates = <SchedulersAggregateEntity>[];
+  EResultFuture<List<SchedulersAggregateEntity>> getBatchByIds(List<String> constraintIds) async {
+    try {
+      final aggregates = <SchedulersAggregateEntity>[];
 
-          if (_constraintEntitiesCached.isEmpty) {
-            final constraintsResult = await _constraintLocalDataSource.getAllByIds(constriantIds);
-            final constraintHives =
-                foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
-            _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
-          }
+      // If the cache is empty, load constraint entities.
+      if (_constraintEntitiesCached.isEmpty) {
+        final constraintsResult = await _constraintLocalDataSource.getAllByIds(constraintIds);
+        final constraintHives =
+            foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
+        _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
+      }
 
-          for (final constraint in _constraintEntitiesCached) {
-            final (
-              timesResult,
-              datesResult,
-              instancesReuslt,
-              dayAggregatesResult,
-              intervalAggregatesResult,
-            ) = (
-              await _timeRangeLocalDataSource.getAllByIds(constraint.exceptionTimeIds),
-              await _dateRangeLocalDataSource.getAllByIds(constraint.exceptionDateIds),
-              await _instanceLocalDataSource.getBatchBySchedulers([constraint.id]),
-              await _dayLocalDataSource.getBatchByConstraintId(constraint.id),
-              await _intervalLocalDataSource.getBatchByConstraintId(constraint.id),
-            );
+      // For each cached constraint, retrieve associated data and build aggregates.
+      for (final constraint in _constraintEntitiesCached) {
+        final timesResult =
+            await _timeRangeLocalDataSource.getAllByIds(constraint.exceptionTimeIds);
+        final datesResult =
+            await _dateRangeLocalDataSource.getAllByIds(constraint.exceptionDateIds);
 
-            // Constraint Aggregate
-            final constraintAggregate = _fillConstraintRequirements(
-              timesResult,
-              datesResult,
-              constraint,
-            );
+        final dayAggregatesResult = await _dayLocalDataSource.getBatchByConstraintId(constraint.id);
+        final intervalAggregatesResult =
+            await _intervalLocalDataSource.getBatchByConstraintId(constraint.id);
 
-            // Day Aggregates
-            final dayAggregates = await _fillDayAggregates(
-              _dayMapper.toEntityFromHiveFoldEitherList(dayAggregatesResult),
-            );
+        // Build the constraint aggregate.
+        final constraintAggregate = _fillConstraintRequirements(
+          timesResult,
+          datesResult,
+          constraint,
+        );
 
-            // interval Aggregates
+        // Build day aggregates.
+        final dayAggregates = await _fillDayAggregates(
+          _dayMapper.toEntityFromHiveFoldEitherList(dayAggregatesResult),
+        );
 
-            final intervalAggregates = await _fillIntervalAggregates(
-              _intervalMapper.toEntityFromHiveFoldEitherList(intervalAggregatesResult),
-            );
+        // Build interval aggregates.
+        final intervalAggregates = await _fillIntervalAggregates(
+          _intervalMapper.toEntityFromHiveFoldEitherList(intervalAggregatesResult),
+        );
 
-            aggregates.add(
-              SchedulersAggregateEntity(
-                scheduleConstraintAggregate: constraintAggregate,
-                dayAggregates: dayAggregates,
-                intervalAggregates: intervalAggregates,
-              ),
-            );
-          }
+        aggregates.add(
+          SchedulersAggregateEntity(
+            scheduleConstraintAggregate: constraintAggregate,
+            dayAggregates: dayAggregates,
+            intervalAggregates: intervalAggregates,
+          ),
+        );
+      }
 
-          return Right(aggregates);
-        },
-      );
+      return Right(aggregates);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   ScheduleConstraintAggregate _fillConstraintRequirements(
     EResult<List<TimeRangeHiveModel>> timesResult,
@@ -233,7 +241,8 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
 
   @override
   EResultFuture<SchedulersAggregateEntity> getById(String aggregateId) async => Right(
-      foldEitherRight<List<SchedulersAggregateEntity>>(await getBatchByIds([aggregateId])).first);
+        foldEitherRight<List<SchedulersAggregateEntity>>(await getBatchByIds([aggregateId])).first,
+      );
 
   Future<List<ScheduledDayAggregate>> _fillDayAggregates(
     List<ScheduledDayEntity> days,

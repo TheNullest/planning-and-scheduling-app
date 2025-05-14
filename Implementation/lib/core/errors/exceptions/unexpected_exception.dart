@@ -5,7 +5,7 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 class UnexpectedException extends Failure {
   UnexpectedException({
     required super.message,
-    super.errorLocation,
+    required super.stackTrace,
     super.timestamp,
   });
 

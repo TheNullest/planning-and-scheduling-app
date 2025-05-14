@@ -6,28 +6,6 @@ part of 'task_supabase_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$TaskSupabaseModelToJson(TaskSupabaseModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'color_code': instance.colorCode,
-      'icon_code': instance.iconCode,
-      'task_status': instance.taskStatus,
-      'priority': instance.priority,
-      'created_at': instance.createdAt.toIso8601String(),
-      'archived': instance.archived,
-      'category_ids': instance.categoryIds,
-      'fixed_tag_ids': instance.fixedTagIds,
-      'sub_tsk_ids': instance.subTaskIds,
-      'user_id': instance.userId,
-      'total_spent_time': instance.totalSpentTime.inMicroseconds,
-      'scheduled_interval_ids': instance.scheduledIntervalIds,
-      'scheduled_day_ids': instance.scheduledDayIds,
-      'schedule_constraint_Id': instance.scheduleConstraintId,
-      'description': instance.description,
-      'updated_at': instance.updatedAt?.toIso8601String(),
-    };
-
 _$TaskSupabaseModelImpl _$$TaskSupabaseModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TaskSupabaseModelImpl(

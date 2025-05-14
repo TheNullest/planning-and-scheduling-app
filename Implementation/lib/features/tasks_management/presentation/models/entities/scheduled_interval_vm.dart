@@ -1,7 +1,7 @@
 import 'package:zamaan/domain/aggregates/scheduled_interval_aggregate.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
 import 'package:zamaan/domain/enums/hive/interval_unit.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/time_range_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/time_range_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/time_range_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 

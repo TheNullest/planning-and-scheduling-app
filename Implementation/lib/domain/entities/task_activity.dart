@@ -32,7 +32,6 @@ import 'package:zamaan/domain/enums/hive/task_status.dart';
 
 class TaskActivityEntity extends BaseEntityAbstraction {
   TaskActivityEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.referenceId,
@@ -45,6 +44,7 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     this.schedulerType,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// The ID of the associated task or subtask

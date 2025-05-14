@@ -1,0 +1,6 @@
+import 'package:zamaan/domain/repositories/sub_task_repository.dart';
+import 'package:zamaan/domain/usecases/delete_batch_usecase.dart';
+
+class DeleteBatchSubTasksUsecase extends DeleteBatchUsecase<SubTaskRepository> {
+  DeleteBatchSubTasksUsecase(super.repository);
+}

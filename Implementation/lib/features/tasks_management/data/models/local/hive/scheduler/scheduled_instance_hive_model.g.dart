@@ -17,7 +17,7 @@ class ScheduledInstanceHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledIns
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ScheduledInstanceHiveModel(
-      id: fields[0] as String,
+      id: fields[0] as String?,
       userId: fields[1] as String,
       taskId: fields[19] as String,
       createdAt: fields[2] as DateTime,

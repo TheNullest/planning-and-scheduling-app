@@ -1,16 +1,16 @@
 import 'package:zamaan/domain/entities/goal.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/measurement_unit_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/measurement_unit_vm.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class GoalVM extends BaseViewModel {
   GoalVM({
-    required this.customMeasurementUnit,
-    required this.minutelyTarget,
-    required this.hourlyTarget,
-    required this.dailyTarget,
-    required this.weeklyTarget,
-    required this.monthlyTarget,
-    required this.yearlyTarget,
+    this.minutelyTarget = 0,
+    this.hourlyTarget = 0,
+    this.dailyTarget = 0,
+    this.weeklyTarget = 0,
+    this.monthlyTarget = 0,
+    this.yearlyTarget = 0,
+    this.customMeasurementUnit,
     super.id,
     super.description,
     super.createdAt,
@@ -38,7 +38,7 @@ class GoalVM extends BaseViewModel {
         yearlyTarget: entity.yearlyTarget,
       );
 
-  final CustomeMeasurementUnitVM customMeasurementUnit;
+  final CustomeMeasurementUnitVM? customMeasurementUnit;
   final double minutelyTarget;
   final double hourlyTarget;
   final double dailyTarget;

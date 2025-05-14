@@ -1,8 +1,6 @@
-import 'package:zamaan/core/constants/hive_boxes.dart';
 import 'package:zamaan/core/services/hive/hive_box_runner.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/sources/base/device_data_source.dart';
 
@@ -11,54 +9,64 @@ class DeviceHiveDataSourceImpl implements DeviceDataSource<DeviceHiveModel> {
 
   /// The Hive service used for local storage operations.
   final HiveBoxRunner<DeviceHiveModel> _hiveBox;
-  String get _boxName => HiveBoxConstants.devicesBox;
+  @override
+  EResultFuture<List<DeviceHiveModel>> getDevices() async {
+    try {
+      return await _hiveBox.runBoxOperation<List<DeviceHiveModel>>(
+        job: (box) async => box.values.toList(),
+      );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFuture<List<DeviceHiveModel>> getDevices() async => tryCatchEither<List<DeviceHiveModel>>(
-        action: () async => _hiveBox.runBoxOperation<List<DeviceHiveModel>>(
-          job: (box) async => box.values.toList(),
-        ),
-        failureType: FailureType.local,
+  EResultFutureVoid registerDevice(DeviceHiveModel device) async {
+    try {
+      return await _hiveBox.runBoxOperation(
+        job: (box) async {
+          await box.add(device);
+        },
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFutureVoid registerDevice(DeviceHiveModel device) async => tryCatchEither(
-        action: () async => _hiveBox.runBoxOperation(
-          job: (box) async {
-            await box.add(device);
-          },
-        ),
-        failureType: FailureType.local,
+  EResultFutureVoid unregisterDevice(String id) async {
+    try {
+      return await _hiveBox.runBoxOperation(
+        job: (box) async {
+          await box.delete(id);
+        },
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFutureVoid unregisterDevice(String id) async => tryCatchEither(
-        action: () async => _hiveBox.runBoxOperation(
-          job: (box) async {
-            await box.delete(id);
-          },
-        ),
-        failureType: FailureType.local,
+  EResultFutureVoid updateDeviceInfo(DeviceHiveModel device) async {
+    try {
+      return await _hiveBox.runBoxOperation(
+        job: (box) async {
+          await box.put(device.id, device);
+        },
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFutureVoid updateDeviceInfo(DeviceHiveModel device) async => tryCatchEither(
-        action: () async => _hiveBox.runBoxOperation(
-          job: (box) async {
-            await box.put(device.id, device);
-          },
-        ),
-        failureType: FailureType.local,
+  EResultFuture<DeviceHiveModel?> getDeviceById(String id) async {
+    try {
+      return await _hiveBox.runBoxOperation<DeviceHiveModel?>(
+        job: (box) async => box.get(id),
       );
-
-  @override
-  EResultFuture<DeviceHiveModel?> getDeviceById(
-    String id,
-  ) async =>
-      tryCatchEither<DeviceHiveModel?>(
-        action: () async => _hiveBox.runBoxOperation<DeviceHiveModel?>(
-          job: (box) async => box.get(id),
-        ),
-        failureType: FailureType.local,
-      );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 }

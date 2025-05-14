@@ -49,7 +49,6 @@ import 'package:zamaan/domain/enums/hive/reference_type.dart';
 /// ```
 class GoalEntity extends BaseEntityAbstraction {
   GoalEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.refType,
@@ -62,9 +61,10 @@ class GoalEntity extends BaseEntityAbstraction {
     required this.weeklyTarget,
     required this.monthlyTarget,
     required this.yearlyTarget,
-     this.customMeasurementUnitId,
+    this.customMeasurementUnitId,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// Creates a complete goal configuration.

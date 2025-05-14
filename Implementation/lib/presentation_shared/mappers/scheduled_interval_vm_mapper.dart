@@ -1,6 +1,6 @@
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/scheduled_interval_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/scheduled_interval_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/time_range_vm_mapper.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 

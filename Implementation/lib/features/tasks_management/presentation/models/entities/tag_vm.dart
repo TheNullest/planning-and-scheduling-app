@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart' show Color, IconData;
-import 'package:zamaan/features/tasks_management/presentation/models/category_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/category_vm.dart';
 
 class TagVM extends CategoryVM {
   TagVM({

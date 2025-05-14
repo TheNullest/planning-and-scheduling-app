@@ -32,7 +32,6 @@ class CustomMeasurementUnitEntity extends BaseEntityAbstraction {
   /// - [isDouble]: If true, values for this measurement unit are expected to be stored as doubles.
   /// - [iconCode]: An integer code representing an associated icon for the measurement unit.
   CustomMeasurementUnitEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required super.description,
@@ -40,6 +39,7 @@ class CustomMeasurementUnitEntity extends BaseEntityAbstraction {
     required this.title,
     required this.isDouble,
     required this.iconCode,
+    super.id,
   });
 
   /// A human-readable title for the measurement unit.

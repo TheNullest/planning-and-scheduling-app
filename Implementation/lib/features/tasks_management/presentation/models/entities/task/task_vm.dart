@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/enums/ui_entity_state.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/goal_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/sub_task_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/goal_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/sub_task_vm.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class TaskVM extends BaseViewModel {

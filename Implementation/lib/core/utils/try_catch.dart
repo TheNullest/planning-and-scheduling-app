@@ -1,18 +1,15 @@
-// ignore_for_file: no_default_cases
+// import 'dart:async';
+// import 'dart:developer';
 
-import 'dart:async';
-import 'dart:developer';
-
-import 'package:dartz/dartz.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
-import 'package:zamaan/core/errors/exceptions/custom_auth_exception.dart';
-import 'package:zamaan/core/errors/exceptions/failure.dart';
-import 'package:zamaan/core/errors/exceptions/local_exception.dart';
-import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
-import 'package:zamaan/core/errors/exceptions/unexpected_exception.dart';
-import 'package:zamaan/core/utils/failure_location.dart';
-import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
+// import 'package:dartz/dartz.dart';
+// import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
+// import 'package:zamaan/core/errors/exceptions/custom_auth_exception.dart';
+// import 'package:zamaan/core/errors/exceptions/failure.dart';
+// import 'package:zamaan/core/errors/exceptions/local_exception.dart';
+// import 'package:zamaan/core/errors/exceptions/remote_exception.dart';
+// import 'package:zamaan/core/errors/exceptions/unexpected_exception.dart';
+// import 'package:zamaan/core/utils/typedef.dart';
+// import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// Executes the given [action] and catches any exceptions that occur,
 /// converting them into a [Failure] or a custom exception.
@@ -46,77 +43,74 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 ///   (value) => print('Value: $value'),
 /// );
 /// ```
-EResultFuture<T> tryCatchEither<T>({
-  required EResultFuture<T> Function() action,
-  List<EResultFutureVoid Function()>? rollbackActions,
-  FailureType? failureType,
-  String? customMessage,
-  Future Function()? onFinally,
-}) async {
-  // Get the current location for logging or debugging purposes.
-  final location = getFailureLocation();
+// EResultFuture<T> tryCatchEither<T>({
+//   required EResultFuture<T> Function() action,
+//   List<EResultFutureVoid Function()>? rollbackActions,
+//   FailureType? failureType,
+//   String? customMessage,
+//   Future Function()? onFinally,
+// }) async {
+//   // Format the custom message if provided.
+//   final formattedMessage = customMessage != null ? '\n ** $customMessage **' : '';
 
-  // Format the custom message if provided.
-  final formattedMessage = customMessage != null ? '\n ** $customMessage **' : '';
-
-  try {
-    // Execute the provided action and await its result.
-    final result = await action();
-    return result;
-  } on Failure catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    return Left(e);
-  } on supabase.AuthException catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    // Handle specific supabase authentication exceptions.
-    final exception = CustomAuthException(
-      errorLocation: location,
-      code: e.code,
-      statusCode: e.statusCode,
-      message: '${e.message} $formattedMessage',
-    );
-    return Left(exception);
-  } on supabase.PostgrestException catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    // Handle specific supabase Postgrest exceptions.
-    final exception = RemoteException(
-      errorLocation: location,
-      code: e.code,
-      message: formattedMessage.isNotEmpty ? '${e.message} $formattedMessage' : e.message,
-    );
-    return Left(exception);
-  } on TimeoutException catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    // Handle timeout exceptions.
-    final exceptionMessage =
-        formattedMessage.isNotEmpty ? 'Timeout: $e $formattedMessage' : 'Timeout: $e';
-    final exception = RemoteException(
-      errorLocation: location,
-      message: exceptionMessage,
-    );
-    return Left(exception);
-  } on FormatException catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    // Handle format exceptions.
-    final exceptionMessage =
-        formattedMessage.isNotEmpty ? 'Format error: $e $formattedMessage' : 'Format error: $e';
-    final exception = LocalException(
-      message: exceptionMessage,
-      errorLocation: location,
-    );
-    return Left(exception);
-  } catch (e) {
-    log(customMessage!);
-    rollbackActions?.forEach((action) async => action());
-    // Handle any other exceptions.
-    final exceptionMessage = formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
-    final exception = _mapFailureTypeToException(failureType, exceptionMessage, location);
-    return Left(exception);
-  } finally {
-    // Execute the onFinally callback if provided.
-    if (onFinally != null) await onFinally();
-  }
-}
+//   try {
+//     // Execute the provided action and await its result.
+//     final result = await action();
+//     return result;
+//   } on Failure catch (e) {
+//     rollbackActions?.forEach((action) async => action());
+//     return Left(e);
+//   } on supabase.AuthException catch (e, stackTrace) {
+//     rollbackActions?.forEach((action) async => action());
+//     // Handle specific supabase authentication exceptions.
+//     final exception = CustomAuthException(
+//       stackTrace: stackTrace,
+//       code: e.code,
+//       statusCode: e.statusCode,
+//       message: '${e.message} $formattedMessage',
+//     );
+//     return Left(exception);
+//   } on supabase.PostgrestException catch (e, stackTrace) {
+//     rollbackActions?.forEach((action) async => action());
+//     // Handle specific supabase Postgrest exceptions.
+//     final exception = RemoteException(
+//       stackTrace: stackTrace,
+//       code: e.code,
+//       message: formattedMessage.isNotEmpty ? '${e.message} $formattedMessage' : e.message,
+//     );
+//     return Left(exception);
+//   } on TimeoutException catch (e, stackTrace) {
+//     rollbackActions?.forEach((action) async => action());
+//     // Handle timeout exceptions.
+//     final exceptionMessage =
+//         formattedMessage.isNotEmpty ? 'Timeout: $e $formattedMessage' : 'Timeout: $e';
+//     final exception = RemoteException(
+//       stackTrace: stackTrace,
+//       message: exceptionMessage,
+//     );
+//     return Left(exception);
+//   } on FormatException catch (e, stackTrace) {
+//     rollbackActions?.forEach((action) async => action());
+//     // Handle format exceptions.
+//     final exceptionMessage =
+//         formattedMessage.isNotEmpty ? 'Format error: $e $formattedMessage' : 'Format error: $e';
+//     final exception = LocalException(
+//       message: exceptionMessage,
+//       stackTrace: stackTrace,
+//     );
+//     return Left(exception);
+//   } on Exception catch (e, stackTrace) {
+//     log(customMessage!);
+//     rollbackActions?.forEach((action) async => action());
+//     // Handle any other exceptions.
+//     final exceptionMessage = formattedMessage.isNotEmpty ? '$e $formattedMessage' : e.toString();
+//     final exception = _mapFailureTypeToException(failureType, exceptionMessage, stackTrace);
+//     return Left(exception);
+//   } finally {
+//     // Execute the onFinally callback if provided.
+//     if (onFinally != null) await onFinally();
+//   }
+// }
 
 /// Executes a synchronous [action] and catches any exceptions that occur,
 /// rethrowing them as a [LocalException] with additional context.
@@ -153,32 +147,32 @@ EResultFuture<T> tryCatchEither<T>({
 ///   print('Failure: $e');
 /// }
 /// ```
-T tryCatchSimple<T>({
-  required T Function() action,
-  List<FutureVoid Function()>? rollbackActions,
-  FailureType? failureType,
-  String? customMessage,
-  void Function()? onFinally,
-}) {
-  try {
-    // Execute the action callback and return its result.
-    return action();
-  } catch (e) {
-    rollbackActions?.forEach((action) async => action());
-    // Construct the exception message with the optional custom message.
-    final exceptionMessage =
-        (customMessage != null ? '\n ** $customMessage ** ' : ' ') + e.toString();
+// T tryCatchSimple<T>({
+//   required T Function() action,
+//   List<FutureVoid Function()>? rollbackActions,
+//   FailureType? failureType,
+//   String? customMessage,
+//   void Function()? onFinally,
+// }) {
+//   try {
+//     // Execute the action callback and return its result.
+//     return action();
+//   } on Exception catch (e, stackTrace) {
+//     rollbackActions?.forEach((action) async => action());
+//     // Construct the exception message with the optional custom message.
+//     final exceptionMessage =
+//         (customMessage != null ? '\n ** $customMessage ** ' : ' ') + e.toString();
 
-    // Throw a LocalException with the constructed message and current location.
-    throw LocalException(
-      message: exceptionMessage,
-      errorLocation: getFailureLocation(),
-    );
-  } finally {
-    // Execute the onFinally callback if provided.
-    if (onFinally != null) onFinally();
-  }
-}
+//     // Throw a LocalException with the constructed message and current location.
+//     throw LocalException(
+//       message: exceptionMessage,
+//       stackTrace: stackTrace,
+//     );
+//   } finally {
+//     // Execute the onFinally callback if provided.
+//     if (onFinally != null) onFinally();
+//   }
+// }
 
 /// Maps a [FailureType] (if provided) along with a [message] and [location],
 /// to an appropriate [Failure] instance.
@@ -201,29 +195,29 @@ T tryCatchSimple<T>({
 /// final failure = _mapFailureTypeToException(FailureType.remote, 'Error occurred', 'main.dart:42');
 /// print(failure);
 /// ```
-Failure _mapFailureTypeToException(
-  FailureType? failureType,
-  String message,
-  String location,
-) {
-  switch (failureType) {
-    case FailureType.local:
-      // Return a LocalException for local failures.
-      return LocalException(
-        message: message,
-        errorLocation: location,
-      );
-    case FailureType.remote:
-      // Return a RemoteException for remote failures.
-      return RemoteException(
-        message: message,
-        errorLocation: location,
-      );
-    default:
-      // Return an UnexpectedException for any other failure types or if failureType is null.
-      return UnexpectedException(
-        message: message,
-        errorLocation: location,
-      );
-  }
-}
+// Failure _mapFailureTypeToException(
+//   FailureType? failureType,
+//   String message,
+//   StackTrace stackTrace,
+// ) {
+//   switch (failureType) {
+//     case FailureType.local:
+//       // Return a LocalException for local failures.
+//       return LocalException(
+//         message: message,
+//         stackTrace: stackTrace,
+//       );
+//     case FailureType.remote:
+//       // Return a RemoteException for remote failures.
+//       return RemoteException(
+//         message: message,
+//         stackTrace: stackTrace,
+//       );
+//     default:
+//       // Return an UnexpectedException for any other failure types or if failureType is null.
+//       return UnexpectedException(
+//         message: message,
+//         stackTrace: stackTrace,
+//       );
+//   }
+// }

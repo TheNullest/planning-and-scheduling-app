@@ -8,7 +8,7 @@ import 'package:zamaan/features/tasks_management/domain/usecases/scheduled_insta
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduled_instance/generate_instances.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduler/create_batch_schedulers_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduler/get_batch_schedulers_usecase.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/schedulers_aggregate_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/schedulers_aggregate_vm.dart';
 
 part 'schedulers_manager_event.dart';
 part 'schedulers_manager_state.dart';

@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/scheduled_instance.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
 import 'package:zamaan/domain/repositories/scheduled_instance_repository.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
@@ -34,38 +33,38 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
   final SupabaseDataSource<ScheduledInstanceSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
-
   @override
-  EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesByDay(
-    DateTime day,
-  ) async =>
-      tryCatchEither(
-        action: () async {
-          final response = await _localDataSource.getBatchByDay(day);
-          final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
-          return Right(_dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>);
-        },
-        failureType: FailureType.local,
-      );
+  EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesByDay(DateTime day) async {
+    try {
+      final response = await _localDataSource.getBatchByDay(day);
+      final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
+      final entities = _dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>;
+      return Right(entities);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
   EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesBySchedulerIds(
-    List<String> schedulerIds,
-  ) async =>
-      tryCatchEither(
-        action: () async {
-          final response = await _localDataSource.getBatchBySchedulers(schedulerIds);
-          final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
-          return Right(_dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>);
-        },
-        failureType: FailureType.local,
-      );
+      List<String> schedulerIds) async {
+    try {
+      final response = await _localDataSource.getBatchBySchedulers(schedulerIds);
+      final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);
+      final entities = _dataMapper.toEntitiesFromHive(models) as List<ScheduledInstanceEntity>;
+      return Right(entities);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds) async => tryCatchEither(
-        action: () async {
-          return _localDataSource.deleteBySchedulerIds(schedulerIds);
-        },
-        failureType: FailureType.local,
-      );
+  EResultFutureVoid deleteBySchedulerIds(List<String> schedulerIds) async {
+    try {
+      // Assuming _localDataSource.deleteBySchedulerIds returns an EResultFutureVoid already.
+      return await _localDataSource.deleteBySchedulerIds(schedulerIds);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 }

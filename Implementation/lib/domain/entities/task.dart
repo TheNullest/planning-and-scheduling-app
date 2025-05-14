@@ -26,7 +26,6 @@ class TaskEntity extends BaseEntityAbstraction {
   /// - [scheduledDayIds]: Advanced customization for specific scheduled days.
   /// - [scheduledIntervalIds]: Interval-based scheduling for tasks.
   TaskEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.title,
@@ -44,6 +43,7 @@ class TaskEntity extends BaseEntityAbstraction {
     this.scheduleConstraintId,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// Short descriptive title (max 100 chars)

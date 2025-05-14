@@ -14,6 +14,9 @@ void _taskManagerBloc() {
       () => TasksManagerBloc(
         createTaskUsecase: serviceLocator(),
         createSubTaskUsecase: serviceLocator(),
+        deleteTaskUsecase: serviceLocator(),
+        deleteBatchSubTasksUsecase: serviceLocator(),
+        updateTaskUsecase: serviceLocator(),
         getBatchSubTasksUsecase: serviceLocator(),
         getBatchTasksUsecase: serviceLocator(),
         subTaskVMMapper: serviceLocator(),
@@ -27,10 +30,13 @@ void _taskMangerUsecases() {
 
     // Task
     ..registerFactory(() => CreateTaskUsecase(serviceLocator()))
+    ..registerFactory(() => DeleteTaskUsecase(serviceLocator()))
     ..registerFactory(() => GetBatchTasksUsecase(serviceLocator()))
+    ..registerFactory(() => UpdateTaskUsecase(serviceLocator()))
 
     // SubTask
     ..registerFactory(() => CreateSubTaskUsecase(serviceLocator()))
+    ..registerFactory(() => DeleteBatchSubTasksUsecase(serviceLocator()))
     ..registerFactory(() => GetBatchSubTasksByIdsUsecase(serviceLocator()));
 }
 

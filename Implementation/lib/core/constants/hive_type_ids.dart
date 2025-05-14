@@ -38,3 +38,7 @@ abstract class EnumHiveTypeIds {
   static const int taskStatus = 112;
   static const int weekDay = 113;
 }
+
+abstract class DartClassHiveTypeIds {
+  static const int duration = 151;
+}

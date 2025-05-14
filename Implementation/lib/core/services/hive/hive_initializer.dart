@@ -27,6 +27,7 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_m
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/objects/duration_hive_model.g.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_constraints_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
@@ -75,9 +76,9 @@ class HiveInitializerImpl extends HiveInitializer {
     await hive.initFlutter(directory.path);
 
     final modelAdapters = <HiveBaseTypeAdapter>[
-      UserHiveModelAdapter(),
-      RemoteSessionHiveModelAdapter(),
       TaskHiveModelAdapter(),
+      RemoteSessionHiveModelAdapter(),
+      UserHiveModelAdapter(),
       CategoryHiveModelAdapter(),
       GoalHiveModelAdapter(),
       CustomMeasurementUnitHiveModelAdapter(),
@@ -111,12 +112,11 @@ class HiveInitializerImpl extends HiveInitializer {
       WeekDayAdapter(),
     ];
 
-    modelAdapters.addAll(enumAdapters);
+    final dartClassAdapters = <HiveBaseTypeAdapter>[DurationAdapter()];
 
-    for (final adapter in modelAdapters) {
-      if (!hive.isAdapterRegistered(adapter.typeId)) {
-        hive.registerAdapter(adapter);
-      }
+    final adapters = enumAdapters + dartClassAdapters + modelAdapters;
+    for (final adapter in adapters) {
+      adapter.registerAdapter();
     }
   }
 }

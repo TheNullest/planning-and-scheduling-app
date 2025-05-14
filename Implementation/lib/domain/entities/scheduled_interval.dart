@@ -31,7 +31,6 @@ import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 /// ```
 class ScheduledIntervalEntity extends BaseEntityAbstraction {
   ScheduledIntervalEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.scheduleConstraintId,
@@ -44,6 +43,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     this.consecutiveOccurrences = 1,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// The ID of the schedule constraint to which this interval configuration belongs.

@@ -1,3 +1,5 @@
+import 'package:zamaan/core/extensions/string.dart';
+
 enum FailureType {
   validation,
   local,
@@ -5,19 +7,5 @@ enum FailureType {
   authentication,
   unexpected;
 
-  @override
-  String toString() {
-    switch (this) {
-      case FailureType.validation:
-        return 'validation';
-      case FailureType.local:
-        return 'local';
-      case FailureType.remote:
-        return 'remote';
-      case FailureType.authentication:
-        return 'authentication';
-      case FailureType.unexpected:
-        return 'unexpected';
-    }
-  }
+  String get name => toString().substring(9).toSentenceCase();
 }

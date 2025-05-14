@@ -10,7 +10,6 @@ import 'package:zamaan/domain/enums/hive/day_type.dart';
 ///
 class ScheduledDayEntity extends BaseEntityAbstraction {
   ScheduledDayEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.scheduleConstraintId,
@@ -21,6 +20,7 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
     required this.enforceScheduleBounds,
     super.description,
     super.updatedAt,
+    super.id,
   });
 
   /// Constructs a [ScheduledDayEntity] with the given properties.
@@ -81,7 +81,8 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
       scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
       dayType: dayType ?? this.dayType,
       dayValue: dayValue ?? this.dayValue,
-      scheduledTimeIds: scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Avoid reference sharing
+      scheduledTimeIds:
+          scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Avoid reference sharing
       canRepeat: canRepeat ?? this.canRepeat,
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
     );

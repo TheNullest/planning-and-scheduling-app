@@ -26,7 +26,6 @@ import 'package:zamaan/domain/enums/enums.dart';
 /// - The `totalSpentTime` is automatically aggregated from linked [TaskActivityEntity] instances.
 class SubTaskEntity extends BaseEntityAbstraction {
   SubTaskEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required this.taskId,
@@ -37,6 +36,7 @@ class SubTaskEntity extends BaseEntityAbstraction {
     super.description,
     super.updatedAt,
     this.goalId,
+    super.id,
   });
 
   /// The ID of the parent task this subtask belongs to.

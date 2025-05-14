@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/enums/hive/task_status.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/tag_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/tag_vm.dart';
 import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class SubTaskActivityVM<SubTaskVM> extends BaseViewModel {

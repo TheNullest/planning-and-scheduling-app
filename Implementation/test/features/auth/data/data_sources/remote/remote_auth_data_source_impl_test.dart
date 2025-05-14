@@ -5,8 +5,7 @@ import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source
 
 import '../../../domain/usecases/_authentication_repository.mock.dart';
 
-class MockConnectionChecker extends Mock
-    implements NetworkConnectivityMonitor {}
+class MockConnectionChecker extends Mock implements NetworkConnectivityMonitor {}
 
 class MockSupabaseClient extends Mock implements SupabaseClient {}
 
@@ -33,8 +32,7 @@ void main() {
       aud: '',
       createdAt: tRemoteUserModel.createdAt.toIso8601String(),
     );
-    mockCurrentUserSession =
-        Session(accessToken: '', tokenType: '', user: mockUser);
+    mockCurrentUserSession = Session(accessToken: '', tokenType: '', user: mockUser);
     dataSource = RemoteAuthDataSourceImpl(
       connectionChecker: mockConnectionChecker,
       supabaseClient: mockSupabaseClient,
@@ -46,12 +44,11 @@ void main() {
         '[remoteDataSource.getCurrentUser] should return RemoteUserModel when there is a current user session',
         () async {
       // arrange
-      when(() => mockGoTrueClient.currentSession)
-          .thenReturn(mockCurrentUserSession);
+      when(() => mockGoTrueClient.currentSession).thenReturn(mockCurrentUserSession);
       when(() => mockSupabaseClient.auth).thenReturn(mockGoTrueClient);
       when(
         () async => Right(
-          UserSupabaseModel.fromJson(
+          UserSupabaseModel.fromJsonUserProfile(
             await mockSupabaseClient
                 .from('profiles')
                 .select()

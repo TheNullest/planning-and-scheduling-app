@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/data/mappers/bases/sub_task.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/domain/enums/hive/priority.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository_impl.dart';
@@ -36,34 +35,36 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
   final SupabaseDataSource<SubTaskSupabaseModel, DataMapper> _remoteDataSource;
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
+  @override
+  EResultFuture<List<SubTaskEntity>> getBatchByPriority(Priority priority) async {
+    try {
+      final response = await _localDataSource.getBatchByPriority(priority);
+      final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
+      return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByPriority(Priority priority) async => tryCatchEither(
-        action: () async {
-          final response = await _localDataSource.getBatchByPriority(priority);
-          final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
-          return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
-        },
-        failureType: FailureType.local,
-      );
+  EResultFuture<List<SubTaskEntity>> getBatchByStatus(TaskStatus status) async {
+    try {
+      final response = await _localDataSource.getBatchByStatus(status);
+      final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
+      return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByStatus(TaskStatus status) async => tryCatchEither(
-        action: () async {
-          final response = await _localDataSource.getBatchByStatus(status);
-          final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
-          return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
-        },
-        failureType: FailureType.local,
-      );
-
-  @override
-  EResultFuture<List<SubTaskEntity>> getBatchByTaskId(String taskId) async => tryCatchEither(
-        action: () async {
-          final response = await _localDataSource.getBatchByTaskId(taskId);
-          final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
-          return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
-        },
-        failureType: FailureType.local,
-      );
+  EResultFuture<List<SubTaskEntity>> getBatchByTaskId(String taskId) async {
+    try {
+      final response = await _localDataSource.getBatchByTaskId(taskId);
+      final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
+      return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 }

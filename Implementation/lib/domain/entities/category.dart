@@ -25,7 +25,6 @@ import 'package:zamaan/domain/entities/tag.dart';
 /// - Icon codes typically reference Material Design icon code points
 class CategoryEntity extends BaseEntityAbstraction {
   CategoryEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required super.description,
@@ -33,6 +32,7 @@ class CategoryEntity extends BaseEntityAbstraction {
     required this.title,
     required this.colorCode,
     required this.iconCode,
+    super.id,
   });
 
   /// The display name of the category

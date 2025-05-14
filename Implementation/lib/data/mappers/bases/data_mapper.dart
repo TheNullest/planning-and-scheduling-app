@@ -1,8 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/errors/exceptions/failure.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/errors/exceptions/local_exception.dart';
 import 'package:zamaan/core/utils/typedef.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 
 /// Abstract mapper interface for entity conversions.
 ///
@@ -21,28 +20,49 @@ abstract class DataMapper<Entity, Hive, Supabase> {
   Supabase toSupabaseModel(Entity entity);
 
   /// Converts a list of Hive models to a list of domain entities.
-  List<Entity> toEntitiesFromHive(List<Hive> models) => tryCatchSimple<List<Entity>>(
-        action: () => models.map(toEntityFromHive).toList(),
-        failureType: FailureType.local,
-      );
+  List<Entity> toEntitiesFromHive(List<Hive> models) {
+    try {
+      return models.map(toEntityFromHive).toList();
+    } on Exception catch (e, stackTrace) {
+      throw LocalException(message: e.toString(), stackTrace: stackTrace);
+    }
+  }
 
   /// Converts a list of Supabase models to a list of domain entities.
-  List<Entity> toEntitiesFromSupabase(List<Supabase> models) => tryCatchSimple<List<Entity>>(
-        action: () => models.map(toEntityFromSupabase).toList(),
-        failureType: FailureType.local,
+  List<Entity> toEntitiesFromSupabase(List<Supabase> models) {
+    try {
+      return models.map(toEntityFromSupabase).toList();
+    } on Exception catch (e, stackTrace) {
+      throw LocalException(
+        message: e.toString(),
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   /// Converts a list of domain entities to a list of Hive models.
-  List<Hive> toHiveModels(List<Entity> entities) => tryCatchSimple<List<Hive>>(
-        action: () => entities.map(toHiveModel).toList(),
-        failureType: FailureType.local,
+  List<Hive> toHiveModels(List<Entity> entities) {
+    try {
+      return entities.map(toHiveModel).toList();
+    } on Exception catch (e, stackTrace) {
+      throw LocalException(
+        message: e.toString(),
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   /// Converts a list of domain entities to a list of Supabase models.
-  List<Supabase> toSupabaseModels(List<Entity> entities) => tryCatchSimple<List<Supabase>>(
-        action: () => entities.map(toSupabaseModel).toList(),
-        failureType: FailureType.local,
+  List<Supabase> toSupabaseModels(List<Entity> entities) {
+    try {
+      return entities.map(toSupabaseModel).toList();
+    } on Exception catch (e, stackTrace) {
+      throw LocalException(
+        message: e.toString(),
+        stackTrace: stackTrace,
       );
+    }
+  }
 
   T? foldEitherSingle<T>(Either<Failure, T?> either) {
     return either.fold(

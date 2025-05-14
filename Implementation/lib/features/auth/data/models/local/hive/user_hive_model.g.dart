@@ -27,7 +27,7 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
       emailAddress: fields[15] as String,
       birthDate: fields[16] as DateTime?,
       avatarPath: fields[17] as String?,
-      id: fields[0] as String,
+      id: fields[0] as String?,
       userId: fields[1] as String,
     );
   }

@@ -1,78 +1,107 @@
-import 'package:zamaan/core/utils/try_catch.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/time_range.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/time_range/time_range_supabase_model.dart';
 
 class TimeRangeDataMapperImpl extends TimeRangeDataMapper {
   @override
-  TimeRangeEntity toEntityFromHive(TimeRangeHiveModel model) => tryCatchSimple<TimeRangeEntity>(
-        action: () => model.copyWith(),
-        failureType: FailureType.local,
+  TimeRangeEntity toEntityFromHive(TimeRangeHiveModel model) {
+    try {
+      return TimeRangeEntity(
+        id: model.id,
+        start: model.start,
+        end: model.end,
+        createdAt: model.createdAt,
+        parentId: model.parentId,
+        userId: model.userId,
+        updatedAt: model.updatedAt,
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
   TimeRangeEntity toEntityFromSupabase(
     TimeRangeSupabaseModel model, {
     DataMap? relatedListModels,
-  }) =>
-      tryCatchSimple<TimeRangeEntity>(
-        action: () => TimeRangeEntity(
-          id: model.id,
-          start: model.start,
-          end: model.end,
-          createdAt: model.createdAt,
-          parentId: model.parentId,
-          userId: model.userId,
-          updatedAt: model.updatedAt,
-        ),
-        failureType: FailureType.local,
+  }) {
+    try {
+      return TimeRangeEntity(
+        id: model.id,
+        start: model.start,
+        end: model.end,
+        createdAt: model.createdAt,
+        parentId: model.parentId,
+        userId: model.userId,
+        updatedAt: model.updatedAt,
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  TimeRangeHiveModel toHiveModel(TimeRangeEntity model) => tryCatchSimple<TimeRangeHiveModel>(
-        action: () => TimeRangeHiveModel(
-          id: model.id,
-          start: model.start,
-          end: model.end,
-          createdAt: model.createdAt,
-          parentId: model.parentId,
-          userId: model.userId,
-          updatedAt: model.updatedAt,
-        ),
-        failureType: FailureType.local,
+  TimeRangeHiveModel toHiveModel(TimeRangeEntity model) {
+    try {
+      return TimeRangeHiveModel(
+        id: model.id,
+        start: model.start,
+        end: model.end,
+        createdAt: model.createdAt,
+        parentId: model.parentId,
+        userId: model.userId,
+        updatedAt: model.updatedAt,
       );
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  TimeRangeSupabaseModel toSupabaseModel(TimeRangeEntity entity) =>
-      tryCatchSimple<TimeRangeSupabaseModel>(
-        action: () => TimeRangeSupabaseModel.fromEntity(entity),
-        failureType: FailureType.local,
-      );
+  TimeRangeSupabaseModel toSupabaseModel(TimeRangeEntity entity) {
+    try {
+      return TimeRangeSupabaseModel.fromEntity(entity);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  List<TimeRangeSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) => tryCatchSimple(
-        action: () => jsonList.map(TimeRangeSupabaseModel.fromJson).toList(),
-        failureType: FailureType.local,
-      );
+  List<TimeRangeSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) {
+    try {
+      return jsonList.map(TimeRangeSupabaseModel.fromJson).toList();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  List<Map<String, dynamic>> toJsonList(List<TimeRangeSupabaseModel> items) => tryCatchSimple(
-        action: () => items.map((item) => item.toJson()).toList(),
-        failureType: FailureType.local,
-      );
+  List<Map<String, dynamic>> toJsonList(List<TimeRangeSupabaseModel> items) {
+    try {
+      return items.map((item) => item.toJson()).toList();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  TimeRangeSupabaseModel? fromJson(Map<String, dynamic> json) => tryCatchSimple(
-        action: () => TimeRangeSupabaseModel.fromJson(json),
-        failureType: FailureType.local,
-      );
+  TimeRangeSupabaseModel? fromJson(Map<String, dynamic> json) {
+    try {
+      return TimeRangeSupabaseModel.fromJson(json);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   @override
-  Map<String, dynamic> toJson(TimeRangeSupabaseModel item) => tryCatchSimple(
-        action: () => item.toJson(),
-        failureType: FailureType.local,
-      );
+  Map<String, dynamic> toJson(TimeRangeSupabaseModel item) {
+    try {
+      return item.toJson();
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 }

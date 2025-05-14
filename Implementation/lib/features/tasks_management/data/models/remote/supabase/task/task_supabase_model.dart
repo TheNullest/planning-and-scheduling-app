@@ -5,10 +5,6 @@ part 'task_supabase_model.freezed.dart';
 part 'task_supabase_model.g.dart';
 
 @freezed
-@JsonSerializable(
-  createToJson: true,
-  createFactory: false,
-)
 class TaskSupabaseModel with _$TaskSupabaseModel {
   const factory TaskSupabaseModel({
     required String id,
@@ -54,7 +50,4 @@ class TaskSupabaseModel with _$TaskSupabaseModel {
 
   factory TaskSupabaseModel.fromJson(Map<String, dynamic> json) =>
       _$TaskSupabaseModelFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _$TaskSupabaseModelToJson(this);
 }

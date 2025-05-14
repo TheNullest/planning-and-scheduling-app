@@ -5,7 +5,7 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 class CustomAuthException extends RemoteException {
   CustomAuthException({
     required super.message,
-    super.errorLocation,
+    required super.stackTrace,
     super.code,
     super.statusCode,
     super.requestedUrl,

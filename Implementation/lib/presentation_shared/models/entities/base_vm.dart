@@ -4,11 +4,11 @@ abstract class BaseViewModel {
   BaseViewModel({
     this.id,
     this.description,
-    this.createdAt,
+    DateTime? createdAt,
     this.updatedAt,
     this.userId,
     this.entityState = VMEntityState.unchanged,
-  });
+  }) : createdAt = createdAt ?? DateTime.now();
 
   final String? id;
   final String? description;

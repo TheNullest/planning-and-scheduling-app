@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:zamaan/core/utils/uuid.dart';
 
 /// An abstract base class for entities, providing common fields and functionality.
 ///
@@ -11,12 +12,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 /// - `updatedAt`: The timestamp when the entity was last updated, can be null if not updated.
 abstract class BaseEntityAbstraction with EquatableMixin {
   BaseEntityAbstraction({
-    required this.id,
     required this.userId,
     required this.createdAt,
+    String? id,
     this.description,
     this.updatedAt,
-  });
+  }) : id = id ?? uuidGenerator;
 
   /// Creates a new `BaseEntityAbstraction` with the specified properties.
   ///

@@ -17,7 +17,7 @@ class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleCon
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ScheduleConstraintHiveModel(
-      id: fields[0] as String,
+      id: fields[0] as String?,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       taskId: fields[11] as String,

@@ -12,5 +12,17 @@ class TasksManagerEvent with _$TasksManagerEvent {
     required SubTaskVM newSubTask,
   }) = _CreateSubTask;
 
-  const factory TasksManagerEvent.fetchAllTasks() = _FetchAllTasks;
+  const factory TasksManagerEvent.deleteTask({
+    required TaskVM task,
+  }) = _DeleteTask;
+
+  const factory TasksManagerEvent.deleteBatchSubTasks({
+    required List<String> subTaskIds,
+  }) = _DeleteBatchSubTasks;
+
+  const factory TasksManagerEvent.updateTask({
+    required TaskVM task,
+  }) = _UpdateTask;
+
+  const factory TasksManagerEvent.fetchActiveTasks() = _FetchActiveTasks;
 }

@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/entities/task_activity.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/task_activity_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/task_activity_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 
 class TaskActivityVMMapper extends ViewModelMapper<TaskActivityVM, TaskActivityEntity> {

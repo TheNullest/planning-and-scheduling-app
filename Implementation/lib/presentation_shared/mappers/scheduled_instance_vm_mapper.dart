@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/entities/scheduled_instance.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/scheduled_instance_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/scheduled_instance_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 
 class ScheduledInstanceVMMapper extends ViewModelMapper<ScheduledInstanceVM, ScheduledInstanceEntity> {

@@ -15,7 +15,6 @@ class ScheduleConstraintEntity extends BaseEntityAbstraction {
   /// - [taskId]: The ID of the main task associated with this schedule.
   /// - [startAt]: Defines the start and end dates for the schedule.
   ScheduleConstraintEntity({
-    required super.id,
     required super.userId,
     required super.createdAt,
     required super.description,
@@ -28,6 +27,7 @@ class ScheduleConstraintEntity extends BaseEntityAbstraction {
     super.updatedAt,
     this.startAt,
     this.endAt,
+    super.id,
   });
 
   /// The [taskId] of the main task associated with this schedule.

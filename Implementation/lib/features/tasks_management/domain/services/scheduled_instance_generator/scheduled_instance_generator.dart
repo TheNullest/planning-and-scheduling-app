@@ -3,6 +3,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/extensions/date_time.dart';
 import 'package:zamaan/core/utils/date_time.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/core/utils/uuid.dart';
@@ -106,28 +107,31 @@ class ScheduledInstanceGenerator {
   /// ```
   EResultFuture<List<ScheduledInstanceEntity>> generateInstances(
     GenerateInstanceParams params,
-  ) async =>
-      tryCatchEither<List<ScheduledInstanceEntity>>(
-        action: () async {
-          _init(params);
+  ) async {
+    try {
+      _init(params);
 
-          // Remove any previously generated instances.
-          _generatedInstances.clear();
-          // Set the starting point for scheduling.
-          _pointDate = scheduledInstances.isNotEmpty
-              ? DateTime.now()
-              : scheduleConstraint.startAt ?? scheduleConstraint.createdAt;
+      // Remove any previously generated instances.
+      _generatedInstances.clear();
+      // Set the starting point for scheduling.
+      _pointDate = scheduledInstances.isNotEmpty
+          ? DateTime.now()
+          : scheduleConstraint.startAt ?? scheduleConstraint.createdAt;
 
-          // Process the constraint conditions.
-          _constraintProcessing();
-          // Generate instances using day-based scheduling rules.
-          _dayProcessing(days);
-          // Generate instances using interval-based scheduling rules.
-          _intervalProcessing(intervals);
+      // Process the constraint conditions.
+      _constraintProcessing();
+      // Generate instances using day-based scheduling rules.
+      _dayProcessing(days);
+      // Generate instances using interval-based scheduling rules.
+      _intervalProcessing(intervals);
 
-          // Return the populated list as a successful result.
-          return Right(_generatedInstances);
-        },
-        failureType: FailureType.local,
+      // Return the populated list as a successful result.
+      return Right(_generatedInstances);
+    } on Exception catch (e, stackTrace) {
+      return failureTypeDetectorLeft<List<ScheduledInstanceEntity>>(
+        e: e,
+        stackTrace: stackTrace,
       );
+    }
+  }
 }

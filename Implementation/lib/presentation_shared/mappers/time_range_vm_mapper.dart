@@ -1,6 +1,6 @@
 import 'package:zamaan/core/extensions/time_of_day.dart';
 import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/time_range_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/models/entities/time_range_vm.dart';
 import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 
 class TimeRangeVMMapper extends ViewModelMapper<TimeRangeVM, TimeRangeEntity> {

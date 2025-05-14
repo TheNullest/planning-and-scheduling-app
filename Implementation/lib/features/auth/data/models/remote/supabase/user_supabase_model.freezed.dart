@@ -26,12 +26,12 @@ mixin _$UserSupabaseModel {
   String get firstName => throw _privateConstructorUsedError;
   @JsonKey(name: 'last_name')
   String get lastName => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  @JsonKey(name: 'email_address')
-  String get emailAddress => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  String? get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email_address')
+  String? get emailAddress => throw _privateConstructorUsedError;
+  String? get password => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'birth_date')
@@ -61,10 +61,10 @@ abstract class $UserSupabaseModelCopyWith<$Res> {
       {@JsonKey(name: 'user_name') String userName,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String password,
-      @JsonKey(name: 'email_address') String emailAddress,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      String? id,
+      String id,
+      @JsonKey(name: 'email_address') String? emailAddress,
+      String? password,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'birth_date') DateTime? birthDate,
       @JsonKey(name: 'avatar_path') String? avatarPath,
@@ -89,10 +89,10 @@ class _$UserSupabaseModelCopyWithImpl<$Res, $Val extends UserSupabaseModel>
     Object? userName = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? password = null,
-    Object? emailAddress = null,
     Object? createdAt = null,
-    Object? id = freezed,
+    Object? id = null,
+    Object? emailAddress = freezed,
+    Object? password = freezed,
     Object? updatedAt = freezed,
     Object? birthDate = freezed,
     Object? avatarPath = freezed,
@@ -111,21 +111,21 @@ class _$UserSupabaseModelCopyWithImpl<$Res, $Val extends UserSupabaseModel>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailAddress: freezed == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -159,10 +159,10 @@ abstract class _$$UserSupabaseModelImplCopyWith<$Res>
       {@JsonKey(name: 'user_name') String userName,
       @JsonKey(name: 'first_name') String firstName,
       @JsonKey(name: 'last_name') String lastName,
-      String password,
-      @JsonKey(name: 'email_address') String emailAddress,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      String? id,
+      String id,
+      @JsonKey(name: 'email_address') String? emailAddress,
+      String? password,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'birth_date') DateTime? birthDate,
       @JsonKey(name: 'avatar_path') String? avatarPath,
@@ -185,10 +185,10 @@ class __$$UserSupabaseModelImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? firstName = null,
     Object? lastName = null,
-    Object? password = null,
-    Object? emailAddress = null,
     Object? createdAt = null,
-    Object? id = freezed,
+    Object? id = null,
+    Object? emailAddress = freezed,
+    Object? password = freezed,
     Object? updatedAt = freezed,
     Object? birthDate = freezed,
     Object? avatarPath = freezed,
@@ -207,21 +207,21 @@ class __$$UserSupabaseModelImplCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as String,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailAddress: freezed == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
+              as String?,
+      password: freezed == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -250,10 +250,10 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
       {@JsonKey(name: 'user_name') required this.userName,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') required this.lastName,
-      required this.password,
-      @JsonKey(name: 'email_address') required this.emailAddress,
       @JsonKey(name: 'created_at') required this.createdAt,
-      this.id,
+      required this.id,
+      @JsonKey(name: 'email_address') this.emailAddress,
+      this.password,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'birth_date') this.birthDate,
       @JsonKey(name: 'avatar_path') this.avatarPath,
@@ -272,15 +272,15 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
   @JsonKey(name: 'last_name')
   final String lastName;
   @override
-  final String password;
-  @override
-  @JsonKey(name: 'email_address')
-  final String emailAddress;
-  @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
-  final String? id;
+  final String id;
+  @override
+  @JsonKey(name: 'email_address')
+  final String? emailAddress;
+  @override
+  final String? password;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -296,7 +296,7 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
 
   @override
   String toString() {
-    return 'UserSupabaseModel(userName: $userName, firstName: $firstName, lastName: $lastName, password: $password, emailAddress: $emailAddress, createdAt: $createdAt, id: $id, updatedAt: $updatedAt, birthDate: $birthDate, avatarPath: $avatarPath, description: $description)';
+    return 'UserSupabaseModel(userName: $userName, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, id: $id, emailAddress: $emailAddress, password: $password, updatedAt: $updatedAt, birthDate: $birthDate, avatarPath: $avatarPath, description: $description)';
   }
 
   @override
@@ -310,13 +310,13 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
                 other.firstName == firstName) &&
             (identical(other.lastName, lastName) ||
                 other.lastName == lastName) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.emailAddress, emailAddress) ||
-                other.emailAddress == emailAddress) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.emailAddress, emailAddress) ||
+                other.emailAddress == emailAddress) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.birthDate, birthDate) ||
@@ -334,10 +334,10 @@ class _$UserSupabaseModelImpl implements _UserSupabaseModel {
       userName,
       firstName,
       lastName,
-      password,
-      emailAddress,
       createdAt,
       id,
+      emailAddress,
+      password,
       updatedAt,
       birthDate,
       avatarPath,
@@ -365,10 +365,10 @@ abstract class _UserSupabaseModel implements UserSupabaseModel {
           {@JsonKey(name: 'user_name') required final String userName,
           @JsonKey(name: 'first_name') required final String firstName,
           @JsonKey(name: 'last_name') required final String lastName,
-          required final String password,
-          @JsonKey(name: 'email_address') required final String emailAddress,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
-          final String? id,
+          required final String id,
+          @JsonKey(name: 'email_address') final String? emailAddress,
+          final String? password,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt,
           @JsonKey(name: 'birth_date') final DateTime? birthDate,
           @JsonKey(name: 'avatar_path') final String? avatarPath,
@@ -388,15 +388,15 @@ abstract class _UserSupabaseModel implements UserSupabaseModel {
   @JsonKey(name: 'last_name')
   String get lastName;
   @override
-  String get password;
-  @override
-  @JsonKey(name: 'email_address')
-  String get emailAddress;
-  @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  String? get id;
+  String get id;
+  @override
+  @JsonKey(name: 'email_address')
+  String? get emailAddress;
+  @override
+  String? get password;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

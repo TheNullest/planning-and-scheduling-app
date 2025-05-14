@@ -12,6 +12,7 @@ abstract class AppRoutes {
 
   // Nested App
   static const String addNewTask = '$home/add-new-task';
+  static const String editTask = '$home/edit-task';
   static const String todayTasks = '$home/today-tasks';
   static const String activeTasks = '$home/active-tasks';
   static const String accomplishmentTasks = '$home/accomplishment-tasks';
@@ -37,6 +38,7 @@ abstract class AppRouteNames {
 
   // Nested App
   static const String addNewTask = 'AddNewTask';
+  static const String editTask = 'EditTask';
   static const String todayTasks = 'TodayTasks';
   static const String activeTasks = 'ActiveTasks';
   static const String accomplishmentTasks = 'AccomplishmentTasks';

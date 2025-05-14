@@ -6,7 +6,7 @@ import 'package:zamaan/domain/enums/failure_type.dart';
 class RemoteException extends Failure {
   RemoteException({
     required super.message,
-    super.errorLocation,
+    required super.stackTrace,
     this.code,
     this.statusCode,
     this.requestedUrl,

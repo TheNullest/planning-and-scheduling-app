@@ -9,9 +9,9 @@ class TasksManagerState with _$TasksManagerState {
   const factory TasksManagerState.failedAction(String errorMessage) = _FailedAction;
 
   // Tasks
-  const factory TasksManagerState.taskCreated() = _TaskCreated;
+  const factory TasksManagerState.taskCreated(String taskId) = _TaskCreated;
   const factory TasksManagerState.fetchedTasks(List<TaskVM> tasks) = _FetchedTasks;
 
   // SubTasks
-  const factory TasksManagerState.subTaskCreated() = _SubTaskCreated;
+  const factory TasksManagerState.subTaskCreated(String subTaskId) = _SubTaskCreated;
 }
