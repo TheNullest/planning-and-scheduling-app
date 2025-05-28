@@ -35,7 +35,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
     required this.totalSpentTime,
     super.description,
     super.updatedAt,
-    this.goalId,
     super.id,
   });
 
@@ -71,8 +70,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
   /// - Will be `null` if no time has been logged yet.
   final Duration? totalSpentTime;
 
-  final String? goalId;
-
   @override
   SubTaskEntity copyWith({
     String? id,
@@ -98,7 +95,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
         priority: priority ?? this.priority,
         status: status ?? this.status,
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        goalId: goalId ?? this.goalId,
       );
 
   @override
@@ -109,6 +105,5 @@ class SubTaskEntity extends BaseEntityAbstraction {
         priority,
         status,
         totalSpentTime,
-        goalId,
       ];
 }

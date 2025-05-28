@@ -23,8 +23,6 @@ import 'package:zamaan/domain/enums/enums.dart';
 /// ```
 
 class TaskEntity extends BaseEntityAbstraction {
-  /// - [scheduledDayIds]: Advanced customization for specific scheduled days.
-  /// - [scheduledIntervalIds]: Interval-based scheduling for tasks.
   TaskEntity({
     required super.userId,
     required super.createdAt,
@@ -32,15 +30,11 @@ class TaskEntity extends BaseEntityAbstraction {
     required this.colorCode,
     required this.iconCode,
     required this.priority,
-    required this.subTaskIds,
     required this.categoryIds,
     required this.fixedTagIds,
     required this.totalSpentTime,
     required this.archived,
     required this.taskStatus,
-    required this.scheduledDayIds,
-    required this.scheduledIntervalIds,
-    this.scheduleConstraintId,
     super.description,
     super.updatedAt,
     super.id,
@@ -58,8 +52,6 @@ class TaskEntity extends BaseEntityAbstraction {
   /// Importance level for task prioritization
   final Priority priority;
 
-  final List<String> subTaskIds;
-
   /// Primary categorization groups
   final List<String> categoryIds;
 
@@ -74,18 +66,6 @@ class TaskEntity extends BaseEntityAbstraction {
 
   /// Current lifecycle state
   final TaskStatus taskStatus;
-
-  final String? scheduleConstraintId;
-
-  /// Advanced custom scheduling logic for specific days.
-  ///
-  /// Contains user-defined rules for particular days (e.g., Sundays from 10 AM to 12 PM).
-  final List<String> scheduledDayIds;
-
-  /// Interval-based scheduling logic.
-  ///
-  /// Example: "Every 3 days from 9 AM to 11 AM".
-  final List<String> scheduledIntervalIds;
 
   // ========================
   // Validation Methods
@@ -146,16 +126,12 @@ class TaskEntity extends BaseEntityAbstraction {
     String? title,
     int? colorCode,
     int? iconCode,
-    List<String>? subTasks,
     List<String>? categoryIds,
     Priority? priority,
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
     TaskStatus? taskStatus,
-    String? scheduleConstraintId,
-    List<String>? scheduledDayIds,
-    List<String>? scheduledIntervalIds,
   }) =>
       TaskEntity(
         id: id ?? this.id,
@@ -167,12 +143,8 @@ class TaskEntity extends BaseEntityAbstraction {
         colorCode: colorCode ?? this.colorCode,
         iconCode: iconCode ?? this.iconCode,
         categoryIds: categoryIds ?? List.from(this.categoryIds),
-        subTaskIds: subTasks ?? List.from(subTaskIds),
         priority: priority ?? this.priority,
         archived: archived ?? this.archived,
-        scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
-        scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
-        scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
         fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
         taskStatus: taskStatus ?? this.taskStatus,
@@ -191,8 +163,5 @@ class TaskEntity extends BaseEntityAbstraction {
         fixedTagIds,
         totalSpentTime,
         taskStatus,
-        scheduledDayIds,
-        scheduledIntervalIds,
-        scheduleConstraintId,
       ];
 }

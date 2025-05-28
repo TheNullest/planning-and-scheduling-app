@@ -58,11 +58,21 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
   }
 
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByTaskId(String taskId) async {
+  EResultFuture<List<SubTaskEntity>> getBatchByTaskIds(List<String> taskIds) async {
     try {
-      final response = await _localDataSource.getBatchByTaskId(taskId);
+      final response = await _localDataSource.getBatchByTaskIds(taskIds);
       final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
       return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
+
+  @override
+  EResultFutureVoid deleteByTaskId(String taskId) async {
+    try {
+      final response = await _localDataSource.deleteByTaskId(taskId);
+      return response;
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }

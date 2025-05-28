@@ -25,10 +25,6 @@ class TaskDataMapperImpl extends TaskDataMapper {
         categoryIds: List.from(model.categoryIds),
         fixedTagIds: List.from(model.fixedTagIds),
         totalSpentTime: model.totalSpentTime,
-        subTaskIds: List.from(model.subTaskIds),
-        scheduleConstraintId: model.scheduleConstraintId,
-        scheduledDayIds: List.from(model.scheduledDayIds),
-        scheduledIntervalIds: List.from(model.scheduledIntervalIds),
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -53,10 +49,6 @@ class TaskDataMapperImpl extends TaskDataMapper {
         categoryIds: List.from(model.categoryIds),
         fixedTagIds: List.from(model.fixedTagIds),
         totalSpentTime: model.totalSpentTime,
-        subTaskIds: List.from(model.subTaskIds),
-        scheduleConstraintId: model.scheduleConstraintId,
-        scheduledDayIds: List.from(model.scheduledDayIds),
-        scheduledIntervalIds: List.from(model.scheduledIntervalIds),
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

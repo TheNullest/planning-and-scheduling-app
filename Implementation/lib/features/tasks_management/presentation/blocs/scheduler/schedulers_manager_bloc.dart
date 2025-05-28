@@ -8,7 +8,6 @@ import 'package:zamaan/features/tasks_management/domain/usecases/scheduled_insta
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduled_instance/generate_instances.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduler/create_batch_schedulers_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/scheduler/get_batch_schedulers_usecase.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/schedulers_aggregate_vm.dart';
 
 part 'schedulers_manager_event.dart';
 part 'schedulers_manager_state.dart';
@@ -49,13 +48,13 @@ class SchedulersManagerBloc extends Bloc<SchedulerManagerEvent, SchedulerManager
     Emitter<SchedulerManagerState> emit,
   ) async {
     final response = await _getBatchSchedulersUsecase();
-    response.fold(
-      (failure) => emit(_FailedActionState(failure.message)),
-      (schedulers) => emit(
-        //TODO[FIXME]: should convert from scheduleAggregateEntities to schedulerAggregateVMs
-        const SchedulerManagerState.schedulersFetched([]),
-      ),
-    );
+    // response.fold(
+    //   (failure) => emit(_FailedActionState(failure.message)),
+    //   (schedulers) => emit(
+    //     //TODO[FIXME]: should convert from scheduleAggregateEntities to schedulerAggregateVMs
+    //     const SchedulerManagerState.schedulersFetched([]),
+    //   ),
+    // );
   }
 
   FutureVoid _createBatchSchedulers(

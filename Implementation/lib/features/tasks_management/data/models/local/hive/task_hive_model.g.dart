@@ -24,15 +24,11 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       colorCode: fields[12] as int,
       iconCode: fields[13] as int,
       priority: fields[14] as Priority,
-      subTaskIds: (fields[15] as List).cast<String>(),
-      categoryIds: (fields[16] as List).cast<String>(),
-      fixedTagIds: (fields[17] as List).cast<String>(),
-      totalSpentTime: fields[18] as Duration,
-      archived: fields[19] as bool,
-      taskStatus: fields[20] as TaskStatus,
-      scheduledDayIds: (fields[22] as List).cast<String>(),
-      scheduledIntervalIds: (fields[23] as List).cast<String>(),
-      scheduleConstraintId: fields[21] as String?,
+      categoryIds: (fields[15] as List).cast<String>(),
+      fixedTagIds: (fields[16] as List).cast<String>(),
+      totalSpentTime: fields[17] as Duration,
+      archived: fields[18] as bool,
+      taskStatus: fields[19] as TaskStatus,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -41,7 +37,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(14)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -51,23 +47,15 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..writeByte(14)
       ..write(obj.priority)
       ..writeByte(15)
-      ..write(obj.subTaskIds)
-      ..writeByte(16)
       ..write(obj.categoryIds)
-      ..writeByte(17)
+      ..writeByte(16)
       ..write(obj.fixedTagIds)
-      ..writeByte(18)
+      ..writeByte(17)
       ..write(obj.totalSpentTime)
-      ..writeByte(19)
+      ..writeByte(18)
       ..write(obj.archived)
-      ..writeByte(20)
+      ..writeByte(19)
       ..write(obj.taskStatus)
-      ..writeByte(21)
-      ..write(obj.scheduleConstraintId)
-      ..writeByte(22)
-      ..write(obj.scheduledDayIds)
-      ..writeByte(23)
-      ..write(obj.scheduledIntervalIds)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

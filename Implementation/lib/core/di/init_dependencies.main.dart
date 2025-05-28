@@ -9,7 +9,7 @@ Future<void> intiDependencies() async {
   await _supabase();
   _hiveServices();
   _dataMappers();
-  _viewModelMappers();
+  // _viewModelMappers();
   _datasources();
   _repositories();
   _initAuth();

@@ -51,8 +51,9 @@ void _navigator() {
           AppRoutes.settings: (context, settings) => serviceLocator<SettingsView>(),
           AppRoutes.addNewTask: (context, settings) => serviceLocator<TaskUpsertView>(),
           AppRoutes.editTask: (context, settings) {
-            final initialTask = settings.arguments as TaskVM?;
-            return TaskUpsertView(initialTask: initialTask);
+            return TaskUpsertView(
+              arguments: settings.arguments as TaskUpsertArguments?,
+            );
           },
         },
       ),

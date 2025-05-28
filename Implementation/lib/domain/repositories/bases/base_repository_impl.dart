@@ -60,17 +60,9 @@ abstract class BaseRepositoryImpl<
 
   @override
   EResultFutureVoid delete(
-    String id, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  }) async {
+    String id,) async {
     try {
-      if (DataSourcePolicy.isLocal(policy)) {
         return _localDataSource.delete(id);
-      }
-      if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-        await _remoteDataSource.deleteBatch([id]);
-      }
-      return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }

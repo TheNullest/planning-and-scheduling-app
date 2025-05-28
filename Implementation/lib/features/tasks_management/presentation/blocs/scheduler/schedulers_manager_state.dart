@@ -10,9 +10,9 @@ class SchedulerManagerState with _$SchedulerManagerState {
   const factory SchedulerManagerState.failedAction(String errorMessage) = _FailedActionState;
 
   // Scheduled Instances
-  const factory SchedulerManagerState.schedulersFetched(
-    List<SchedulersAggregateVM> schedulersAggregates,
-  ) = _ScheduledInstancesFetchedState;
+  // const factory SchedulerManagerState.schedulersFetched(
+  //   List<SchedulersAggregateVM> schedulersAggregates,
+  // ) = _ScheduledInstancesFetchedState;
 
   const factory SchedulerManagerState.instancesGeneratedAndCreated(
     List<ScheduledInstanceEntity> instances,

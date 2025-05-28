@@ -1,320 +1,173 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:provider/provider.dart';
+import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/core/localization/app_locale_keys.dart';
-import 'package:zamaan/domain/enums/hive/priority.dart';
-import 'package:zamaan/domain/enums/hive/task_status.dart';
-import 'package:zamaan/domain/enums/ui_entity_state.dart';
+import 'package:zamaan/features/tasks_management/presentation/argument_models/task_upsert_arguments.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/goal_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/sub_task_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/task/task_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/states/task_upsert_form_states.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/task_upsert/sub_tasks_manager.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/task_upsert/task_form_controller.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/task_upsert/task_upsert_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/sub_tasks_list.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/task_form.dart';
 
-class TaskUpsertView extends StatefulWidget {
-  const TaskUpsertView({super.key, this.initialTask});
-
-  final TaskVM? initialTask;
-
+class TaskUpsertView extends StatelessWidget {
+  const TaskUpsertView({
+    super.key,
+    this.arguments,
+  });
+  final TaskUpsertArguments? arguments;
   @override
-  State<TaskUpsertView> createState() => _TaskUpsertViewState();
+  Widget build(BuildContext context) {
+    final taskUpsertVM = arguments != null
+        ? TaskUpsertVM.fromEntity(task: arguments!.task, subTasks: arguments!.subTasks)
+        : TaskUpsertVM();
+
+    return ChangeNotifierProvider<TaskUpsertVM>(
+      create: (_) => taskUpsertVM,
+      child: const _TaskUpsertForm(),
+    );
+  }
 }
 
-class _TaskUpsertViewState extends State<TaskUpsertView> {
-  TaskVM? _task;
-  final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  Color _selectedColor = Colors.blue;
-  IconData _selectedIcon = Icons.task;
-  Priority _selectedPriority = Priority.medium;
-  TaskStatus _selectedStatus = TaskStatus.scheduled;
-  bool _archived = false;
+class _TaskUpsertForm extends StatefulWidget {
+  const _TaskUpsertForm();
 
-  // Subtask fields
-  final _subTaskTitleController = TextEditingController();
-  Priority _subTaskPriority = Priority.medium;
-  TaskStatus _subTaskStatus = TaskStatus.pending;
-  Duration _subTaskDuration = Duration.zero;
-  GoalVM? _subTaskGoal;
+  @override
+  State<_TaskUpsertForm> createState() => _TaskUpsertFormState();
+}
 
-  // Task data
-  final _categoryIds = <String>[];
-  final _fixedTagIds = <String>[];
-  final _scheduledDayIds = <String>[];
-  final _scheduledIntervalIds = <String>[];
-  String? _scheduleConstraintId;
-  final _totalSpentTime = Duration.zero;
-
-  // UI state
-  String? _createdTaskId;
-
-  late SubTaskVM? _newSubTask;
+class _TaskUpsertFormState extends State<_TaskUpsertForm> {
+  late final TaskUpsertVM taskUpsertVM;
+  late final TasksManagerBloc tasksManagerBloc;
+  @override
+  void initState() {
+    super.initState();
+    tasksManagerBloc = context.read<TasksManagerBloc>();
+    taskUpsertVM = context.read<TaskUpsertVM>();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isTaskTitleFilled = _titleController.text.trim().isNotEmpty;
-    final isSubTaskTitleFilled = _subTaskTitleController.text.trim().isNotEmpty;
-
     return BlocListener<TasksManagerBloc, TasksManagerState>(
       listener: (context, state) {
         state.maybeWhen(
           taskCreated: (taskId) {
-            setState(() {
-              _createdTaskId = taskId;
-              _task = _task!.copyWith(id: taskId);
-              _createSubTask(context);
-            });
+            taskUpsertVM.handleTaskCreated(taskId);
+            tasksManagerBloc.add(
+              TasksManagerEvent.createSubTask(
+                newSubTask:
+                    taskUpsertVM.subTasksManager.subTaskVMs.first.subTaskFormController.toEntity,
+              ),
+            );
           },
-          subTaskCreated: (subTaskId) {
-            final subTask = _newSubTask!.copyWith(id: subTaskId);
-            setState(() {
-              _task = _task!.copyWith(
-                subTasks: List<SubTaskVM>.from(_task!.subTasks)..add(subTask),
-              );
-              _newSubTask = null;
-              // Optionally show a snackbar or clear subtask fields
-              _subTaskTitleController.clear();
-              _subTaskPriority = Priority.medium;
-              _subTaskStatus = TaskStatus.pending;
-              _subTaskDuration = Duration.zero;
-              _subTaskGoal = null;
-
-              _updateTask(context);
-            });
-          },
-          orElse: () {},
+          taskUpdated: () => taskUpsertVM.handleTaskUpdated(),
+          subTaskCreated: (subTaskId) =>
+              taskUpsertVM.subTasksManager.handleSubTaskCreated(subTaskId),
+          subTaskDeleted: (subTaskId) =>
+              taskUpsertVM.subTasksManager.handleSubTaskDeleted(subTaskId),
+          subTaskUpdated: (subTaskId) =>
+              taskUpsertVM.subTasksManager.handleSubTaskUpdated(subTaskId),
+          orElse: () => const Center(child: CircularProgressIndicator()),
         );
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.initialTask == null
-                ? AppLocaleKeys.uiElements.titles.addNewTask
-                : AppLocaleKeys.uiElements.titles.editTask,
+          title: Selector<TaskUpsertVM, bool>(
+            selector: (_, vm) => vm.isItNew,
+            builder: (context, isNew, _) => Text(
+              isNew
+                  ? AppLocaleKeys.uiElements.titles.addNewTask
+                  : AppLocaleKeys.uiElements.titles.editTask,
+            ),
           ),
+          automaticallyImplyLeading: false,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
-                  validator: (v) => v == null || v.isEmpty ? 'Enter a title' : null,
-                  onChanged: (_) => setState(() {}),
-                ),
-                const SizedBox(height: 12),
-                Row(
-                  children: [
-                    const Text('Color:'),
-                    const SizedBox(width: 8),
-                    GestureDetector(
-                      onTap: () async {
-                        final color = await showDialog<Color>(
-                          context: context,
-                          builder: (_) => AlertDialog(
-                            title: const Text('Pick a color'),
-                            content: SingleChildScrollView(
-                              child: BlockPicker(
-                                pickerColor: _selectedColor,
-                                onColorChanged: (c) => Navigator.of(context).pop(c),
+        body: Form(
+          key: GlobalKey<FormState>(),
+          child: CustomScrollView(
+            slivers: [
+              ChangeNotifierProvider<TaskFormController>.value(
+                value: taskUpsertVM.taskFormController,
+                child: const TaskFormWidget(),
+              ),
+              32.sliverSizedBoxHeight,
+
+              // Button row for submitting/updating the subtask.
+              SliverPadding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                sliver: ChangeNotifierProvider<TaskUpsertFormStates>.value(
+                  value: taskUpsertVM.taskUpsertFormStates,
+                  child: Consumer<TaskUpsertFormStates>(
+                    builder: (context, formStates, _) => SliverToBoxAdapter(
+                      child: Row(
+                        children: [
+                          // Upsert Button
+                          ElevatedButton.icon(
+                            icon: Icon(formStates.actionButtonIcon),
+                            label: Text(formStates.actionButtonTitle),
+                            onPressed: formStates.isUpsertButtonActive
+                                ? () {
+                                    final entity = taskUpsertVM.taskFormController.toEntity;
+                                    final evetn = taskUpsertVM.isItNew
+                                        ? TasksManagerEvent.createTask(
+                                            newTask: entity,
+                                          )
+                                        : TasksManagerEvent.updateTask(
+                                            task: entity,
+                                          );
+
+                                    tasksManagerBloc.add(evetn);
+                                  }
+                                : null,
+                          ),
+
+                          // Back Button
+                          ElevatedButton.icon(
+                            icon: Icon(formStates.backButtonIcon),
+                            label: Text(formStates.backButtonTitle),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+
+                          // Reset Button
+                          ElevatedButton.icon(
+                            icon: Icon(formStates.resetButtonIcon),
+                            label: Text(formStates.resetButtonTitle),
+                            onPressed: formStates.isResetButtonActive
+                                ? () => taskUpsertVM.taskFormController.resetValues()
+                                : null,
+                          ),
+
+                          // Delete Button
+                          ElevatedButton.icon(
+                            icon: Icon(formStates.deleteButtonIcon),
+                            label: Text(formStates.deleteButtonTitle),
+                            onPressed: () => tasksManagerBloc.add(
+                              TasksManagerEvent.deleteTask(
+                                taskId: taskUpsertVM.taskFormController.id,
                               ),
                             ),
                           ),
-                        );
-                        if (color != null) setState(() => _selectedColor = color);
-                      },
-                      child: CircleAvatar(backgroundColor: _selectedColor),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                DropdownButton<IconData>(
-                  value: _selectedIcon,
-                  items: [
-                    Icons.task,
-                    Icons.star,
-                    Icons.work,
-                    Icons.home,
-                  ]
-                      .map(
-                        (icon) => DropdownMenuItem(
-                          value: icon,
-                          child: Icon(icon),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (icon) => setState(() => _selectedIcon = icon!),
-                ),
-                const SizedBox(height: 12),
-                DropdownButton<Priority>(
-                  value: _selectedPriority,
-                  items: Priority.values
-                      .map(
-                        (p) => DropdownMenuItem(
-                          value: p,
-                          child: Text(p.name),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (p) => setState(() => _selectedPriority = p!),
-                ),
-                const SizedBox(height: 12),
-                DropdownButton<TaskStatus>(
-                  value: _selectedStatus,
-                  items: TaskStatus.values
-                      .map(
-                        (s) => DropdownMenuItem(
-                          value: s,
-                          child: Text(s.name),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (s) => setState(() => _selectedStatus = s!),
-                ),
-                const SizedBox(height: 12),
-                SwitchListTile(
-                  title: const Text('Archived'),
-                  value: _archived,
-                  onChanged: (v) => setState(() => _archived = v),
-                ),
-                const Divider(height: 32),
-                const Text('Add SubTask', style: TextStyle(fontWeight: FontWeight.bold)),
-                TextFormField(
-                  controller: _subTaskTitleController,
-                  decoration: const InputDecoration(labelText: 'SubTask Title'),
-                  onChanged: (_) => setState(() {}),
-                ),
-                DropdownButton<Priority>(
-                  value: _subTaskPriority,
-                  items: Priority.values
-                      .map(
-                        (p) => DropdownMenuItem(
-                          value: p,
-                          child: Text(p.name),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (p) => setState(() => _subTaskPriority = p!),
-                ),
-                DropdownButton<TaskStatus>(
-                  value: _subTaskStatus,
-                  items: TaskStatus.values
-                      .map(
-                        (s) => DropdownMenuItem(
-                          value: s,
-                          child: Text(s.name),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (s) => setState(() => _subTaskStatus = s!),
-                ),
-                Row(
-                  children: [
-                    // "OK" button: create task and its required subtask
-                    if (_createdTaskId == null)
-                      ElevatedButton.icon(
-                        icon: Icon(widget.initialTask == null ? Icons.check : Icons.save),
-                        label: Text(widget.initialTask == null ? 'OK' : 'Update'),
-                        onPressed: (isTaskTitleFilled && isSubTaskTitleFilled)
-                            ? () {
-                                if (widget.initialTask == null) {
-                                  _createTaskAndFirstSubTask(context);
-                                } else {
-                                  _updateTask(context); // Call update event
-                                }
-                              }
-                            : null,
-                      ),
-                    // "Add to Task" button: add more subtasks after task created
-                    if (_createdTaskId != null)
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.check),
-                        label: const Text('Add to Task'),
-                        onPressed: isSubTaskTitleFilled
-                            ? () {
-                                _createSubTask(
-                                  context,
-                                );
-                              }
-                            : null,
-                      ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                if (_task != null && _task!.subTasks.isNotEmpty)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Pending SubTasks:',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      ..._task!.subTasks.map(
-                        (st) => ListTile(
-                          title: Text(st.title),
-                          subtitle: Text('Priority: ${st.priority.name}'),
-                        ),
-                      ),
-                    ],
                   ),
-              ],
-            ),
+                ),
+              ),
+
+              // Spacer
+              12.sliverSizedBoxHeight,
+
+              // SubTasks list
+              ChangeNotifierProvider<SubTasksManager>.value(
+                value: taskUpsertVM.subTasksManager,
+                child: const SubTasksListWidget(),
+              ),
+            ],
           ),
         ),
       ),
     );
-  }
-
-// Only keep one subtask in the pending list for the initial creation
-  void _createTaskAndFirstSubTask(BuildContext context) {
-    if (_formKey.currentState!.validate() && _subTaskTitleController.text.trim().isNotEmpty) {
-      _task = TaskVM(
-        title: _titleController.text,
-        color: _selectedColor,
-        icon: _selectedIcon,
-        priority: _selectedPriority,
-        categoryIds: _categoryIds,
-        fixedTagIds: _fixedTagIds,
-        totalSpentTime: _totalSpentTime,
-        subTasks: <SubTaskVM>[],
-        goal: null,
-        archived: _archived,
-        taskStatus: _selectedStatus,
-        scheduleConstraintId: _scheduleConstraintId,
-        scheduledDayIds: _scheduledDayIds,
-        scheduledIntervalIds: _scheduledIntervalIds,
-      );
-
-      context.read<TasksManagerBloc>().add(
-            TasksManagerEvent.createTask(newTask: _task!),
-          );
-    }
-  }
-
-  void _createSubTask(
-    BuildContext context,
-  ) {
-    if (_createdTaskId != null) {
-      _newSubTask = SubTaskVM(
-        title: _subTaskTitleController.text,
-        totalSpentTime: _subTaskDuration,
-        priority: _subTaskPriority,
-        status: _subTaskStatus,
-        goal: _subTaskGoal ?? GoalVM(),
-        entityState: VMEntityState.newEntity,
-        taskId: _createdTaskId!, // Use the created task ID if available, else null
-      );
-      context.read<TasksManagerBloc>().add(
-            TasksManagerEvent.createSubTask(newSubTask: _newSubTask!),
-          );
-    }
-  }
-
-  void _updateTask(BuildContext context) {
-    context.read<TasksManagerBloc>().add(
-          TasksManagerEvent.updateTask(task: _task!),
-        );
   }
 }

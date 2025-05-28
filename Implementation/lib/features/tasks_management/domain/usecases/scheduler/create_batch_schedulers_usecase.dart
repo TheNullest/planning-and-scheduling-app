@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/utils/failure_type_detector.dart';
-import 'package:zamaan/core/utils/try_catch.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/aggregates/schedulers_aggregate.dart';
 import 'package:zamaan/domain/repositories/date_range_repository.dart';

@@ -741,8 +741,6 @@ mixin _$SchedulerManagerState {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) =>
@@ -753,8 +751,6 @@ mixin _$SchedulerManagerState {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) =>
@@ -765,8 +761,6 @@ mixin _$SchedulerManagerState {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -778,8 +772,6 @@ mixin _$SchedulerManagerState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) =>
@@ -790,7 +782,6 @@ mixin _$SchedulerManagerState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) =>
@@ -801,7 +792,6 @@ mixin _$SchedulerManagerState {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -876,8 +866,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) {
@@ -891,8 +879,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) {
@@ -906,8 +892,6 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -925,8 +909,6 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) {
@@ -940,7 +922,6 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) {
@@ -954,7 +935,6 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1015,8 +995,6 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) {
@@ -1030,8 +1008,6 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) {
@@ -1045,8 +1021,6 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1064,8 +1038,6 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) {
@@ -1079,7 +1051,6 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) {
@@ -1093,7 +1064,6 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1185,8 +1155,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) {
@@ -1200,8 +1168,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) {
@@ -1215,8 +1181,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1234,8 +1198,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) {
@@ -1249,7 +1211,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) {
@@ -1263,7 +1224,6 @@ class _$SuccessfulActionStateImpl implements _SuccessfulActionState {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1362,8 +1322,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) {
@@ -1377,8 +1335,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) {
@@ -1392,8 +1348,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1411,8 +1365,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) {
@@ -1426,7 +1378,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) {
@@ -1440,7 +1391,6 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1463,200 +1413,6 @@ abstract class _FailedActionState implements SchedulerManagerState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FailedActionStateImplCopyWith<_$FailedActionStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ScheduledInstancesFetchedStateImplCopyWith<$Res> {
-  factory _$$ScheduledInstancesFetchedStateImplCopyWith(
-          _$ScheduledInstancesFetchedStateImpl value,
-          $Res Function(_$ScheduledInstancesFetchedStateImpl) then) =
-      __$$ScheduledInstancesFetchedStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<SchedulersAggregateVM> schedulersAggregates});
-}
-
-/// @nodoc
-class __$$ScheduledInstancesFetchedStateImplCopyWithImpl<$Res>
-    extends _$SchedulerManagerStateCopyWithImpl<$Res,
-        _$ScheduledInstancesFetchedStateImpl>
-    implements _$$ScheduledInstancesFetchedStateImplCopyWith<$Res> {
-  __$$ScheduledInstancesFetchedStateImplCopyWithImpl(
-      _$ScheduledInstancesFetchedStateImpl _value,
-      $Res Function(_$ScheduledInstancesFetchedStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SchedulerManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? schedulersAggregates = null,
-  }) {
-    return _then(_$ScheduledInstancesFetchedStateImpl(
-      null == schedulersAggregates
-          ? _value._schedulersAggregates
-          : schedulersAggregates // ignore: cast_nullable_to_non_nullable
-              as List<SchedulersAggregateVM>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ScheduledInstancesFetchedStateImpl
-    implements _ScheduledInstancesFetchedState {
-  const _$ScheduledInstancesFetchedStateImpl(
-      final List<SchedulersAggregateVM> schedulersAggregates)
-      : _schedulersAggregates = schedulersAggregates;
-
-  final List<SchedulersAggregateVM> _schedulersAggregates;
-  @override
-  List<SchedulersAggregateVM> get schedulersAggregates {
-    if (_schedulersAggregates is EqualUnmodifiableListView)
-      return _schedulersAggregates;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_schedulersAggregates);
-  }
-
-  @override
-  String toString() {
-    return 'SchedulerManagerState.schedulersFetched(schedulersAggregates: $schedulersAggregates)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ScheduledInstancesFetchedStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._schedulersAggregates, _schedulersAggregates));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_schedulersAggregates));
-
-  /// Create a copy of SchedulerManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ScheduledInstancesFetchedStateImplCopyWith<
-          _$ScheduledInstancesFetchedStateImpl>
-      get copyWith => __$$ScheduledInstancesFetchedStateImplCopyWithImpl<
-          _$ScheduledInstancesFetchedStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String successMessage) successfulAction,
-    required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
-    required TResult Function(List<ScheduledInstanceEntity> instances)
-        instancesGeneratedAndCreated,
-  }) {
-    return schedulersFetched(schedulersAggregates);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String successMessage)? successfulAction,
-    TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
-    TResult? Function(List<ScheduledInstanceEntity> instances)?
-        instancesGeneratedAndCreated,
-  }) {
-    return schedulersFetched?.call(schedulersAggregates);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String successMessage)? successfulAction,
-    TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
-    TResult Function(List<ScheduledInstanceEntity> instances)?
-        instancesGeneratedAndCreated,
-    required TResult orElse(),
-  }) {
-    if (schedulersFetched != null) {
-      return schedulersFetched(schedulersAggregates);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_SuccessfulActionState value) successfulAction,
-    required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
-    required TResult Function(_InstancesGeneratedAndCreated value)
-        instancesGeneratedAndCreated,
-  }) {
-    return schedulersFetched(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_SuccessfulActionState value)? successfulAction,
-    TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
-    TResult? Function(_InstancesGeneratedAndCreated value)?
-        instancesGeneratedAndCreated,
-  }) {
-    return schedulersFetched?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_SuccessfulActionState value)? successfulAction,
-    TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
-    TResult Function(_InstancesGeneratedAndCreated value)?
-        instancesGeneratedAndCreated,
-    required TResult orElse(),
-  }) {
-    if (schedulersFetched != null) {
-      return schedulersFetched(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ScheduledInstancesFetchedState
-    implements SchedulerManagerState {
-  const factory _ScheduledInstancesFetchedState(
-          final List<SchedulersAggregateVM> schedulersAggregates) =
-      _$ScheduledInstancesFetchedStateImpl;
-
-  List<SchedulersAggregateVM> get schedulersAggregates;
-
-  /// Create a copy of SchedulerManagerState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ScheduledInstancesFetchedStateImplCopyWith<
-          _$ScheduledInstancesFetchedStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1746,8 +1502,6 @@ class _$InstancesGeneratedAndCreatedImpl
     required TResult Function() loading,
     required TResult Function(String successMessage) successfulAction,
     required TResult Function(String errorMessage) failedAction,
-    required TResult Function(List<SchedulersAggregateVM> schedulersAggregates)
-        schedulersFetched,
     required TResult Function(List<ScheduledInstanceEntity> instances)
         instancesGeneratedAndCreated,
   }) {
@@ -1761,8 +1515,6 @@ class _$InstancesGeneratedAndCreatedImpl
     TResult? Function()? loading,
     TResult? Function(String successMessage)? successfulAction,
     TResult? Function(String errorMessage)? failedAction,
-    TResult? Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult? Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
   }) {
@@ -1776,8 +1528,6 @@ class _$InstancesGeneratedAndCreatedImpl
     TResult Function()? loading,
     TResult Function(String successMessage)? successfulAction,
     TResult Function(String errorMessage)? failedAction,
-    TResult Function(List<SchedulersAggregateVM> schedulersAggregates)?
-        schedulersFetched,
     TResult Function(List<ScheduledInstanceEntity> instances)?
         instancesGeneratedAndCreated,
     required TResult orElse(),
@@ -1795,8 +1545,6 @@ class _$InstancesGeneratedAndCreatedImpl
     required TResult Function(_Loading value) loading,
     required TResult Function(_SuccessfulActionState value) successfulAction,
     required TResult Function(_FailedActionState value) failedAction,
-    required TResult Function(_ScheduledInstancesFetchedState value)
-        schedulersFetched,
     required TResult Function(_InstancesGeneratedAndCreated value)
         instancesGeneratedAndCreated,
   }) {
@@ -1810,7 +1558,6 @@ class _$InstancesGeneratedAndCreatedImpl
     TResult? Function(_Loading value)? loading,
     TResult? Function(_SuccessfulActionState value)? successfulAction,
     TResult? Function(_FailedActionState value)? failedAction,
-    TResult? Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult? Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
   }) {
@@ -1824,7 +1571,6 @@ class _$InstancesGeneratedAndCreatedImpl
     TResult Function(_Loading value)? loading,
     TResult Function(_SuccessfulActionState value)? successfulAction,
     TResult Function(_FailedActionState value)? failedAction,
-    TResult Function(_ScheduledInstancesFetchedState value)? schedulersFetched,
     TResult Function(_InstancesGeneratedAndCreated value)?
         instancesGeneratedAndCreated,
     required TResult orElse(),

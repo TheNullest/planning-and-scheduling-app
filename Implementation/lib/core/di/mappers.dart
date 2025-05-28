@@ -57,11 +57,11 @@ void _dataMappers() {
     );
 }
 
-void _viewModelMappers() {
-  serviceLocator
-    // SubTask
-    ..registerFactory<ViewModelMapper<SubTaskVM, SubTaskEntity>>(SubTaskVMMapper.new)
+// void _viewModelMappers() {
+//   serviceLocator
+//     // SubTask
+//     ..registerFactory<ViewModelMapper<SubTaskUpsertVM, SubTaskEntity>>(SubTaskVMMapper.new)
 
-    // Task
-    ..registerFactory<ViewModelMapper<TaskVM, TaskEntity>>(TaskVMMapper.new);
-}
+//     // Task
+//     ..registerFactory<ViewModelMapper<TaskVM, TaskEntity>>(TaskVMMapper.new);
+// }

@@ -12,7 +12,11 @@ abstract class SubTaskLocalDataSource<Model> extends BaseDataSource<Model> {
     TaskStatus status,
   );
 
-  EResultFuture<List<Model>> getBatchByTaskId(
+  EResultFuture<List<Model>> getBatchByTaskIds(
+    List<String> taskIds,
+  );
+
+  EResultFutureVoid deleteByTaskId(
     String taskId,
   );
 }

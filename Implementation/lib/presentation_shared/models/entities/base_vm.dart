@@ -1,27 +1,47 @@
-import 'package:zamaan/domain/enums/ui_entity_state.dart';
+import 'package:flutter/material.dart';
 
-abstract class BaseViewModel {
-  BaseViewModel({
-    this.id,
-    this.description,
-    DateTime? createdAt,
-    this.updatedAt,
-    this.userId,
-    this.entityState = VMEntityState.unchanged,
-  }) : createdAt = createdAt ?? DateTime.now();
+abstract class BaseViewModel<Entity> with ChangeNotifier {
+  BaseViewModel();
 
-  final String? id;
-  final String? description;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final String? userId;
-  final VMEntityState entityState;
+  /// Can display the from controller or not?
+  bool _isLocked = true;
+  bool get isLocked => _isLocked;
+  @protected
+  set isLocked(bool value) {
+    _isLocked = value;
+    notifyListeners();
+  }
 
-  BaseViewModel copyWith({
-    String? id,
-    String? description,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? userId,
-  });
+  /// Updatable or Creatable ?
+  bool _isItNew = true;
+  bool get isItNew => _isItNew;
+  @protected
+  set isItNew(bool value) {
+    _isItNew = value;
+    notifyListeners();
+  }
+
+  /// The update button could be enabled or not
+  bool _hasChages = false;
+  bool get hasChanges => _hasChages;
+  @protected
+  set hasChanges(bool value) {
+    _hasChages = value;
+    notifyListeners();
+  }
+
+  void notifyChanges(bool isChanged) {
+    _hasChages = isChanged && isValid;
+  }
+
+  void reset() {
+    hasChanges = false;
+    notifyListeners();
+  }
+
+  bool get isValid;
+
+  // Buttons
+  String get actionButtonText => isItNew ? 'Create' : 'Update';
+  IconData get actionButtonIcon => isItNew ? Icons.check : Icons.save;
 }

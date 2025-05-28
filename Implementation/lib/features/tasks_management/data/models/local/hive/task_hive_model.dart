@@ -55,15 +55,11 @@ class TaskHiveModel extends BaseEntityAbstraction {
     required this.colorCode,
     required this.iconCode,
     required this.priority,
-    required this.subTaskIds,
     required this.categoryIds,
     required this.fixedTagIds,
     required this.totalSpentTime,
     required this.archived,
     required this.taskStatus,
-    required this.scheduledDayIds,
-    required this.scheduledIntervalIds,
-    this.scheduleConstraintId,
     super.description,
     super.updatedAt,
   });
@@ -87,10 +83,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
       totalSpentTime: entity.totalSpentTime,
       archived: entity.archived,
       taskStatus: entity.taskStatus,
-      scheduleConstraintId: entity.scheduleConstraintId,
-      scheduledDayIds: List.from(entity.scheduledDayIds),
-      scheduledIntervalIds: List.from(entity.scheduledIntervalIds),
-      subTaskIds: List.from(entity.subTaskIds),
     );
   }
 
@@ -110,43 +102,25 @@ class TaskHiveModel extends BaseEntityAbstraction {
   @HiveField(14)
   final Priority priority;
 
-  @HiveField(15)
-  final List<String> subTaskIds;
-
   /// Primary categorization groups
-  @HiveField(16)
+  @HiveField(15)
   final List<String> categoryIds;
 
   /// Permanent tags that cannot be auto-removed
-  @HiveField(17)
+  @HiveField(16)
   final List<String> fixedTagIds;
 
   /// Cumulative time spent across all activities
-  @HiveField(18)
+  @HiveField(17)
   final Duration totalSpentTime;
 
   /// Whether the task is hidden from main views
-  @HiveField(19)
+  @HiveField(18)
   final bool archived;
 
   /// Current lifecycle state
-  @HiveField(20)
+  @HiveField(19)
   final TaskStatus taskStatus;
-
-  @HiveField(21)
-  final String? scheduleConstraintId;
-
-  /// Advanced custom scheduling logic for specific days.
-  ///
-  /// Contains user-defined rules for particular days (e.g., Sundays from 10 AM to 12 PM).
-  @HiveField(22)
-  final List<String> scheduledDayIds;
-
-  /// Interval-based scheduling logic.
-  ///
-  /// Example: "Every 3 days from 9 AM to 11 AM".
-  @HiveField(23)
-  final List<String> scheduledIntervalIds;
 
   /// Returns a new instance of [TaskHiveModel] with updated values.
   ///
@@ -162,16 +136,12 @@ class TaskHiveModel extends BaseEntityAbstraction {
     String? title,
     int? colorCode,
     int? iconCode,
-    List<String>? subTaskIds,
     List<String>? categoryIds,
     Priority? priority,
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
     TaskStatus? taskStatus,
-    String? scheduleConstraintId,
-    List<String>? scheduledDayIds,
-    List<String>? scheduledIntervalIds,
   }) {
     return TaskHiveModel(
       id: id ?? this.id,
@@ -188,10 +158,6 @@ class TaskHiveModel extends BaseEntityAbstraction {
       totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       archived: archived ?? this.archived,
       taskStatus: taskStatus ?? this.taskStatus,
-      subTaskIds: subTaskIds ?? List.from(this.subTaskIds),
-      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
-      scheduledDayIds: scheduledDayIds ?? List.from(this.scheduledDayIds),
-      scheduledIntervalIds: scheduledIntervalIds ?? List.from(this.scheduledIntervalIds),
     );
   }
 
@@ -208,8 +174,5 @@ class TaskHiveModel extends BaseEntityAbstraction {
         fixedTagIds,
         totalSpentTime,
         taskStatus,
-        scheduledDayIds,
-        scheduledIntervalIds,
-        scheduleConstraintId,
       ];
 }

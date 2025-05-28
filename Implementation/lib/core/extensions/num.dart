@@ -9,4 +9,7 @@ extension DoubleToSpaceExtension on num? {
   Widget get sizedBoxWidth => SizedBox(
         width: this!.toDouble(),
       );
+
+  Widget get sliverSizedBoxHeight => SliverToBoxAdapter(child: sizedBoxHeight);
+  Widget get sliverSizedBoxWidth => SliverToBoxAdapter(child: sizedBoxWidth);
 }

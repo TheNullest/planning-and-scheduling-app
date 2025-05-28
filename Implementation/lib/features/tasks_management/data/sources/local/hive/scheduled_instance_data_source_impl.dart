@@ -2,7 +2,6 @@ import 'package:zamaan/core/di/init_dependencies.imports.dart';
 import 'package:zamaan/core/services/hive/hive_box_runner.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/sources/local/hive_data_source.dart';
-import 'package:zamaan/domain/enums/failure_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/scheduled_instance_data_source.dart';
 

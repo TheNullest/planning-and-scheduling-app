@@ -50,7 +50,6 @@ class SubTaskHiveModel extends BaseEntityAbstraction {
     required this.title,
     required this.status,
     required this.totalSpentTime,
-    this.goalId,
     super.description,
     super.updatedAt,
   });
@@ -70,7 +69,6 @@ class SubTaskHiveModel extends BaseEntityAbstraction {
       title: entity.title,
       status: entity.status,
       totalSpentTime: entity.totalSpentTime,
-      goalId: entity.goalId,
     );
   }
 
@@ -111,9 +109,6 @@ class SubTaskHiveModel extends BaseEntityAbstraction {
   @HiveField(15)
   final Duration? totalSpentTime;
 
-  @HiveField(16)
-  final String? goalId;
-
   /// Returns a new instance of [SubTaskHiveModel] with modified values.
   ///
   /// Any parameter not provided will retain the existing value from the current instance.
@@ -152,6 +147,5 @@ class SubTaskHiveModel extends BaseEntityAbstraction {
         priority,
         status,
         totalSpentTime,
-        goalId,
       ];
 }

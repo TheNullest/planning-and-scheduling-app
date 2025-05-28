@@ -47,7 +47,7 @@ class ScheduledInstanceRepositoryImpl extends BaseRepositoryImpl<
 
   @override
   EResultFuture<List<ScheduledInstanceEntity>> getBatchScheduledInstancesBySchedulerIds(
-      List<String> schedulerIds) async {
+      List<String> schedulerIds,) async {
     try {
       final response = await _localDataSource.getBatchBySchedulers(schedulerIds);
       final models = _dataMapper.foldEitherList<ScheduledInstanceHiveModel>(response);

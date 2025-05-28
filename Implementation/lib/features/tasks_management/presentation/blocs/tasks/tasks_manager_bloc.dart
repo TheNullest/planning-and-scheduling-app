@@ -4,15 +4,14 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/create_sub_task_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/delete_batch_sub_tasks_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_batch_by_ids_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/delete_batch_sub_tasks_by_task_id_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/delete_sub_task_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_batch_sub_tasks_by_task_ids_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/update_sub_task_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/create_task_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/delete_task_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/get_batch_tasks_usecase.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/update_task_usecase.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/sub_task_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/task/task_vm.dart';
-import 'package:zamaan/presentation_shared/mappers/view_model_mapper.dart';
 
 part 'tasks_manager_bloc.freezed.dart';
 part 'tasks_manager_event.dart';
@@ -20,22 +19,22 @@ part 'tasks_manager_state.dart';
 
 class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
   TasksManagerBloc({
-    required ViewModelMapper<TaskVM, TaskEntity> taskVMMapper,
-    required ViewModelMapper<SubTaskVM, SubTaskEntity> subTaskVMMapper,
     required CreateTaskUsecase createTaskUsecase,
     required CreateSubTaskUsecase createSubTaskUsecase,
     required DeleteTaskUsecase deleteTaskUsecase,
-    required DeleteBatchSubTasksUsecase deleteBatchSubTasksUsecase,
+    required DeleteBatchSubTasksByTaskIdUsecase deleteBatchSubTasksByTaskIdUsecase,
+    required DeleteSubTaskUsecase deleteSubTaskUsecase,
     required UpdateTaskUsecase updateTaskUsecase,
+    required UpdateSubTaskUsecase updateSubTaskUsecase,
     required GetBatchTasksUsecase getBatchTasksUsecase,
-    required GetBatchSubTasksByIdsUsecase getBatchSubTasksUsecase,
-  })  : _taskVMMapper = taskVMMapper,
-        _subTaskVMMapper = subTaskVMMapper,
-        _createTaskUsecase = createTaskUsecase,
+    required GetBatchSubTasksByTaskIdsUsecase getBatchSubTasksUsecase,
+  })  : _createTaskUsecase = createTaskUsecase,
         _createSubTaskUsecase = createSubTaskUsecase,
         _deleteTaskUsecase = deleteTaskUsecase,
-        _deleteBatchSubTasksUsecase = deleteBatchSubTasksUsecase,
+        _deleteSubTaskUsecase = deleteSubTaskUsecase,
+        _deleteBatchSubTasksByTaskIdUsecase = deleteBatchSubTasksByTaskIdUsecase,
         _updateTaskUsecase = updateTaskUsecase,
+        _updateSubTaskUsecase = updateSubTaskUsecase,
         _getBatchTasksUsecase = getBatchTasksUsecase,
         _getBatchSubTasksByIdsUsecase = getBatchSubTasksUsecase,
         super(const _Initial()) {
@@ -45,23 +44,24 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         createTask: (e) async => _createTask(e, emit),
         createSubTask: (e) async => _createSubTask(e, emit),
         deleteTask: (e) async => _deleteTask(e, emit),
-        deleteBatchSubTasks: (e) async => _deleteBatchSubTasks(e, emit),
+        deleteSubTask: (e) async => _deleteSubTask(e, emit),
+        deleteBatchSubTasksByTaskId: (e) async => _deleteBatchSubTasks(e, emit),
         updateTask: (e) async => _updateTask(e, emit),
         fetchActiveTasks: (e) async => _fetchActiveTasks(e, emit),
+        updateSubTask: (e) async => _updateSubTask(e, emit),
       );
     });
   }
 
-  final ViewModelMapper<TaskVM, TaskEntity> _taskVMMapper;
-  final ViewModelMapper<SubTaskVM, SubTaskEntity> _subTaskVMMapper;
-
   final CreateTaskUsecase _createTaskUsecase;
   final CreateSubTaskUsecase _createSubTaskUsecase;
   final DeleteTaskUsecase _deleteTaskUsecase;
-  final DeleteBatchSubTasksUsecase _deleteBatchSubTasksUsecase;
+  final DeleteBatchSubTasksByTaskIdUsecase _deleteBatchSubTasksByTaskIdUsecase;
+  final DeleteSubTaskUsecase _deleteSubTaskUsecase;
   final UpdateTaskUsecase _updateTaskUsecase;
+  final UpdateSubTaskUsecase _updateSubTaskUsecase;
   final GetBatchTasksUsecase _getBatchTasksUsecase;
-  final GetBatchSubTasksByIdsUsecase _getBatchSubTasksByIdsUsecase;
+  final GetBatchSubTasksByTaskIdsUsecase _getBatchSubTasksByIdsUsecase;
 
   FutureVoid _handleStarted(Emitter<TasksManagerState> emit) async {
     emit(const TasksManagerState.loading());
@@ -74,13 +74,17 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     Emitter<TasksManagerState> emit,
   ) async {
     emit(const TasksManagerState.loading());
-    final response = await _createTaskUsecase(_taskVMMapper.toEntity(event.newTask));
-    response.fold(
-      (failure) => emit(_FailedAction(failure.message)),
-      (taskId) {
-        emit(_TaskCreated(taskId));
-      },
-    );
+    final tasksResponse = await _createTaskUsecase(event.newTask);
+
+    if (tasksResponse.isLeft()) {
+      final failure = tasksResponse.swap().getOrElse(() => throw Exception());
+      emit(TasksManagerState.failedAction(failure.message));
+      return;
+    }
+
+    final taskId = tasksResponse.getOrElse(() => '');
+    emit(_TaskCreated(taskId));
+
     await _fetchActiveTasks(const _FetchActiveTasks(), emit);
   }
 
@@ -89,7 +93,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     Emitter<TasksManagerState> emit,
   ) async {
     emit(const TasksManagerState.loading());
-    final response = await _deleteTaskUsecase(event.task.id!);
+    final response = await _deleteTaskUsecase(event.taskId);
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
       (taskId) {
@@ -98,17 +102,31 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     );
 
     await _deleteBatchSubTasks(
-      _DeleteBatchSubTasks(subTaskIds: event.task.subTasks.map((item) => item.id!).toList()),
+      _DeleteBatchSubTasksByTaskId(taskId: event.taskId),
       emit,
     );
   }
 
-  FutureVoid _deleteBatchSubTasks(
-    _DeleteBatchSubTasks event,
+  FutureVoid _deleteSubTask(
+    _DeleteSubTask event,
     Emitter<TasksManagerState> emit,
   ) async {
     emit(const TasksManagerState.loading());
-    final response = await _deleteBatchSubTasksUsecase(event.subTaskIds);
+    final response = await _deleteSubTaskUsecase(event.subTaskId);
+    response.fold(
+      (failure) => emit(_FailedAction(failure.message)),
+      (taskId) {
+        emit(_SubTaskDeleted(event.subTaskId));
+      },
+    );
+  }
+
+  FutureVoid _deleteBatchSubTasks(
+    _DeleteBatchSubTasksByTaskId event,
+    Emitter<TasksManagerState> emit,
+  ) async {
+    emit(const TasksManagerState.loading());
+    final response = await _deleteBatchSubTasksByTaskIdUsecase(event.taskId);
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
       (taskId) {
@@ -123,11 +141,26 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     Emitter<TasksManagerState> emit,
   ) async {
     emit(const TasksManagerState.loading());
-    final response = await _updateTaskUsecase(_taskVMMapper.toEntity(event.task));
+    final response = await _updateTaskUsecase(event.task);
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
       (_) {
-        emit(const _SuccessfulAction(''));
+        emit(const TasksManagerState.taskUpdated());
+      },
+    );
+    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+  }
+
+  FutureVoid _updateSubTask(
+    _UpdateSubTask event,
+    Emitter<TasksManagerState> emit,
+  ) async {
+    emit(const TasksManagerState.loading());
+    final response = await _updateSubTaskUsecase(event.subTask);
+    response.fold(
+      (failure) => emit(_FailedAction(failure.message)),
+      (_) {
+        emit(TasksManagerState.subTaskUpdated(event.subTask.id));
       },
     );
     await _fetchActiveTasks(const _FetchActiveTasks(), emit);
@@ -137,7 +170,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     _CreateSubTask event,
     Emitter<TasksManagerState> emit,
   ) async {
-    final response = await _createSubTaskUsecase(_subTaskVMMapper.toEntity(event.newSubTask));
+    final response = await _createSubTaskUsecase(event.newSubTask);
     emit(const TasksManagerState.loading());
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
@@ -158,8 +191,8 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     }
 
     final tasks = tasksResponse.getOrElse(() => []);
-    final subTaskIds = tasks.map((item) => item.subTaskIds).expand((ids) => ids).toList();
-    final subTasksResponse = await _getBatchSubTasksByIdsUsecase(subTaskIds);
+    final taskIds = tasks.map((item) => item.id).toList();
+    final subTasksResponse = await _getBatchSubTasksByIdsUsecase(taskIds);
 
     if (subTasksResponse.isLeft()) {
       final failure = subTasksResponse.swap().getOrElse(() => throw Exception());
@@ -169,11 +202,6 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
 
     final allSubTasks = subTasksResponse.getOrElse(() => []);
 
-    final taskVMs = tasks.map((task) {
-      final taskSubTasks = allSubTasks.where((subTask) => subTask.taskId == task.id).toList();
-      return _taskVMMapper.toVM(task, relations: {'subTasks': taskSubTasks});
-    }).toList();
-
-    emit(TasksManagerState.fetchedTasks(taskVMs));
+    emit(TasksManagerState.fetchedTasks(tasks: tasks, subTasks: allSubTasks));
   }
 }

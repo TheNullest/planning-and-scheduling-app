@@ -4,25 +4,35 @@ part of 'tasks_manager_bloc.dart';
 class TasksManagerEvent with _$TasksManagerEvent {
   const factory TasksManagerEvent.started() = _Started;
 
+  // Tasks
+  const factory TasksManagerEvent.fetchActiveTasks() = _FetchActiveTasks;
+
   const factory TasksManagerEvent.createTask({
-    required TaskVM newTask,
+    required TaskEntity newTask,
   }) = _CreateTask;
 
-  const factory TasksManagerEvent.createSubTask({
-    required SubTaskVM newSubTask,
-  }) = _CreateSubTask;
-
   const factory TasksManagerEvent.deleteTask({
-    required TaskVM task,
+    required String taskId,
   }) = _DeleteTask;
 
-  const factory TasksManagerEvent.deleteBatchSubTasks({
-    required List<String> subTaskIds,
-  }) = _DeleteBatchSubTasks;
-
   const factory TasksManagerEvent.updateTask({
-    required TaskVM task,
+    required TaskEntity task,
   }) = _UpdateTask;
 
-  const factory TasksManagerEvent.fetchActiveTasks() = _FetchActiveTasks;
+  // SubTasks
+  const factory TasksManagerEvent.createSubTask({
+    required SubTaskEntity newSubTask,
+  }) = _CreateSubTask;
+
+  const factory TasksManagerEvent.deleteBatchSubTasksByTaskId({
+    required String taskId,
+  }) = _DeleteBatchSubTasksByTaskId;
+
+  const factory TasksManagerEvent.updateSubTask({
+    required SubTaskEntity subTask,
+  }) = _UpdateSubTask;
+
+  const factory TasksManagerEvent.deleteSubTask({
+    required String subTaskId,
+  }) = _DeleteSubTask;
 }

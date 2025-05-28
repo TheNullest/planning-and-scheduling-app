@@ -36,18 +36,10 @@ mixin _$TaskSupabaseModel {
   List<String> get categoryIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'fixed_tag_ids')
   List<String> get fixedTagIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'sub_tsk_ids')
-  List<String> get subTaskIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'total_spent_time')
   Duration get totalSpentTime => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_interval_ids')
-  List<String> get scheduledIntervalIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'scheduled_day_ids')
-  List<String> get scheduledDayIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'schedule_constraint_Id')
-  String? get scheduleConstraintId => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -79,13 +71,8 @@ abstract class $TaskSupabaseModelCopyWith<$Res> {
       bool archived,
       @JsonKey(name: 'category_ids') List<String> categoryIds,
       @JsonKey(name: 'fixed_tag_ids') List<String> fixedTagIds,
-      @JsonKey(name: 'sub_tsk_ids') List<String> subTaskIds,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
-      @JsonKey(name: 'scheduled_interval_ids')
-      List<String> scheduledIntervalIds,
-      @JsonKey(name: 'scheduled_day_ids') List<String> scheduledDayIds,
-      @JsonKey(name: 'schedule_constraint_Id') String? scheduleConstraintId,
       String? description,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -115,12 +102,8 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
     Object? archived = null,
     Object? categoryIds = null,
     Object? fixedTagIds = null,
-    Object? subTaskIds = null,
     Object? userId = null,
     Object? totalSpentTime = null,
-    Object? scheduledIntervalIds = null,
-    Object? scheduledDayIds = null,
-    Object? scheduleConstraintId = freezed,
     Object? description = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -165,10 +148,6 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
           ? _value.fixedTagIds
           : fixedTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      subTaskIds: null == subTaskIds
-          ? _value.subTaskIds
-          : subTaskIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -177,18 +156,6 @@ class _$TaskSupabaseModelCopyWithImpl<$Res, $Val extends TaskSupabaseModel>
           ? _value.totalSpentTime
           : totalSpentTime // ignore: cast_nullable_to_non_nullable
               as Duration,
-      scheduledIntervalIds: null == scheduledIntervalIds
-          ? _value.scheduledIntervalIds
-          : scheduledIntervalIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      scheduledDayIds: null == scheduledDayIds
-          ? _value.scheduledDayIds
-          : scheduledDayIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      scheduleConstraintId: freezed == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
-              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -220,13 +187,8 @@ abstract class _$$TaskSupabaseModelImplCopyWith<$Res>
       bool archived,
       @JsonKey(name: 'category_ids') List<String> categoryIds,
       @JsonKey(name: 'fixed_tag_ids') List<String> fixedTagIds,
-      @JsonKey(name: 'sub_tsk_ids') List<String> subTaskIds,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'total_spent_time') Duration totalSpentTime,
-      @JsonKey(name: 'scheduled_interval_ids')
-      List<String> scheduledIntervalIds,
-      @JsonKey(name: 'scheduled_day_ids') List<String> scheduledDayIds,
-      @JsonKey(name: 'schedule_constraint_Id') String? scheduleConstraintId,
       String? description,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -254,12 +216,8 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
     Object? archived = null,
     Object? categoryIds = null,
     Object? fixedTagIds = null,
-    Object? subTaskIds = null,
     Object? userId = null,
     Object? totalSpentTime = null,
-    Object? scheduledIntervalIds = null,
-    Object? scheduledDayIds = null,
-    Object? scheduleConstraintId = freezed,
     Object? description = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -304,10 +262,6 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value._fixedTagIds
           : fixedTagIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      subTaskIds: null == subTaskIds
-          ? _value._subTaskIds
-          : subTaskIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -316,18 +270,6 @@ class __$$TaskSupabaseModelImplCopyWithImpl<$Res>
           ? _value.totalSpentTime
           : totalSpentTime // ignore: cast_nullable_to_non_nullable
               as Duration,
-      scheduledIntervalIds: null == scheduledIntervalIds
-          ? _value._scheduledIntervalIds
-          : scheduledIntervalIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      scheduledDayIds: null == scheduledDayIds
-          ? _value._scheduledDayIds
-          : scheduledDayIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      scheduleConstraintId: freezed == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
-              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -354,21 +296,12 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       required this.archived,
       @JsonKey(name: 'category_ids') required final List<String> categoryIds,
       @JsonKey(name: 'fixed_tag_ids') required final List<String> fixedTagIds,
-      @JsonKey(name: 'sub_tsk_ids') required final List<String> subTaskIds,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'total_spent_time') required this.totalSpentTime,
-      @JsonKey(name: 'scheduled_interval_ids')
-      required final List<String> scheduledIntervalIds,
-      @JsonKey(name: 'scheduled_day_ids')
-      required final List<String> scheduledDayIds,
-      @JsonKey(name: 'schedule_constraint_Id') this.scheduleConstraintId,
       this.description,
       @JsonKey(name: 'updated_at') this.updatedAt})
       : _categoryIds = categoryIds,
-        _fixedTagIds = fixedTagIds,
-        _subTaskIds = subTaskIds,
-        _scheduledIntervalIds = scheduledIntervalIds,
-        _scheduledDayIds = scheduledDayIds;
+        _fixedTagIds = fixedTagIds;
 
   factory _$TaskSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskSupabaseModelImplFromJson(json);
@@ -411,43 +344,12 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
     return EqualUnmodifiableListView(_fixedTagIds);
   }
 
-  final List<String> _subTaskIds;
-  @override
-  @JsonKey(name: 'sub_tsk_ids')
-  List<String> get subTaskIds {
-    if (_subTaskIds is EqualUnmodifiableListView) return _subTaskIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_subTaskIds);
-  }
-
   @override
   @JsonKey(name: 'user_id')
   final String userId;
   @override
   @JsonKey(name: 'total_spent_time')
   final Duration totalSpentTime;
-  final List<String> _scheduledIntervalIds;
-  @override
-  @JsonKey(name: 'scheduled_interval_ids')
-  List<String> get scheduledIntervalIds {
-    if (_scheduledIntervalIds is EqualUnmodifiableListView)
-      return _scheduledIntervalIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scheduledIntervalIds);
-  }
-
-  final List<String> _scheduledDayIds;
-  @override
-  @JsonKey(name: 'scheduled_day_ids')
-  List<String> get scheduledDayIds {
-    if (_scheduledDayIds is EqualUnmodifiableListView) return _scheduledDayIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_scheduledDayIds);
-  }
-
-  @override
-  @JsonKey(name: 'schedule_constraint_Id')
-  final String? scheduleConstraintId;
   @override
   final String? description;
   @override
@@ -456,7 +358,7 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
 
   @override
   String toString() {
-    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, taskStatus: $taskStatus, priority: $priority, createdAt: $createdAt, archived: $archived, categoryIds: $categoryIds, fixedTagIds: $fixedTagIds, subTaskIds: $subTaskIds, userId: $userId, totalSpentTime: $totalSpentTime, scheduledIntervalIds: $scheduledIntervalIds, scheduledDayIds: $scheduledDayIds, scheduleConstraintId: $scheduleConstraintId, description: $description, updatedAt: $updatedAt)';
+    return 'TaskSupabaseModel(id: $id, title: $title, colorCode: $colorCode, iconCode: $iconCode, taskStatus: $taskStatus, priority: $priority, createdAt: $createdAt, archived: $archived, categoryIds: $categoryIds, fixedTagIds: $fixedTagIds, userId: $userId, totalSpentTime: $totalSpentTime, description: $description, updatedAt: $updatedAt)';
   }
 
   @override
@@ -482,17 +384,9 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
                 .equals(other._categoryIds, _categoryIds) &&
             const DeepCollectionEquality()
                 .equals(other._fixedTagIds, _fixedTagIds) &&
-            const DeepCollectionEquality()
-                .equals(other._subTaskIds, _subTaskIds) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.totalSpentTime, totalSpentTime) ||
                 other.totalSpentTime == totalSpentTime) &&
-            const DeepCollectionEquality()
-                .equals(other._scheduledIntervalIds, _scheduledIntervalIds) &&
-            const DeepCollectionEquality()
-                .equals(other._scheduledDayIds, _scheduledDayIds) &&
-            (identical(other.scheduleConstraintId, scheduleConstraintId) ||
-                other.scheduleConstraintId == scheduleConstraintId) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -513,12 +407,8 @@ class _$TaskSupabaseModelImpl implements _TaskSupabaseModel {
       archived,
       const DeepCollectionEquality().hash(_categoryIds),
       const DeepCollectionEquality().hash(_fixedTagIds),
-      const DeepCollectionEquality().hash(_subTaskIds),
       userId,
       totalSpentTime,
-      const DeepCollectionEquality().hash(_scheduledIntervalIds),
-      const DeepCollectionEquality().hash(_scheduledDayIds),
-      scheduleConstraintId,
       description,
       updatedAt);
 
@@ -551,15 +441,8 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
       required final bool archived,
       @JsonKey(name: 'category_ids') required final List<String> categoryIds,
       @JsonKey(name: 'fixed_tag_ids') required final List<String> fixedTagIds,
-      @JsonKey(name: 'sub_tsk_ids') required final List<String> subTaskIds,
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'total_spent_time') required final Duration totalSpentTime,
-      @JsonKey(name: 'scheduled_interval_ids')
-      required final List<String> scheduledIntervalIds,
-      @JsonKey(name: 'scheduled_day_ids')
-      required final List<String> scheduledDayIds,
-      @JsonKey(name: 'schedule_constraint_Id')
-      final String? scheduleConstraintId,
       final String? description,
       @JsonKey(name: 'updated_at')
       final DateTime? updatedAt}) = _$TaskSupabaseModelImpl;
@@ -594,23 +477,11 @@ abstract class _TaskSupabaseModel implements TaskSupabaseModel {
   @JsonKey(name: 'fixed_tag_ids')
   List<String> get fixedTagIds;
   @override
-  @JsonKey(name: 'sub_tsk_ids')
-  List<String> get subTaskIds;
-  @override
   @JsonKey(name: 'user_id')
   String get userId;
   @override
   @JsonKey(name: 'total_spent_time')
   Duration get totalSpentTime;
-  @override
-  @JsonKey(name: 'scheduled_interval_ids')
-  List<String> get scheduledIntervalIds;
-  @override
-  @JsonKey(name: 'scheduled_day_ids')
-  List<String> get scheduledDayIds;
-  @override
-  @JsonKey(name: 'schedule_constraint_Id')
-  String? get scheduleConstraintId;
   @override
   String? get description;
   @override

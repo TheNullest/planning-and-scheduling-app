@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zamaan/core/constants/hero_tags.dart';
 import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
+import 'package:zamaan/domain/entities/sub_task.dart';
+import 'package:zamaan/domain/entities/task.dart';
+import 'package:zamaan/features/tasks_management/presentation/argument_models/task_upsert_arguments.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/models/entities/task/task_vm.dart';
-// ...existing imports...
 
 class ActiveTasksView extends StatefulWidget {
   const ActiveTasksView({super.key});
@@ -29,7 +30,7 @@ class _ActiveTasksViewState extends State<ActiveTasksView> {
       body: BlocBuilder<TasksManagerBloc, TasksManagerState>(
         builder: (context, state) {
           return state.maybeWhen(
-            fetchedTasks: (tasks) {
+            fetchedTasks: (tasks, allSubTasks) {
               if (tasks.isEmpty) {
                 return const Center(child: Text('No active tasks.'));
               }
@@ -37,49 +38,38 @@ class _ActiveTasksViewState extends State<ActiveTasksView> {
                 itemCount: tasks.length,
                 itemBuilder: (context, index) {
                   final task = tasks[index];
+                  final subTasks = allSubTasks.where((item) => item.taskId == task.id).toList();
                   final isExpanded = _expandedTaskId == task.id;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: task.color,
-                          child: Icon(task.icon, color: Colors.white),
+                          backgroundColor: Color(task.colorCode),
+                          child: Icon(
+                            IconData(task.iconCode, fontFamily: 'MaterialIcons'),
+                            color: Colors.black,
+                          ),
                         ),
                         title: Text(task.title),
                         subtitle: Text('Priority: ${task.priority.name}'),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            if (task.archived) const Icon(Icons.archive, color: Colors.grey),
-                            IconButton(
-                              icon: const Icon(Icons.delete, color: Colors.red),
-                              tooltip: 'Delete Task',
-                              onPressed: () {
-                                context.read<TasksManagerBloc>().add(
-                                      TasksManagerEvent.deleteTask(task: task),
-                                    );
-                              },
-                            ),
-                            Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
-                          ],
-                        ),
+                        trailing: Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
                         onTap: () {
                           setState(() {
                             _expandedTaskId = isExpanded ? null : task.id;
                           });
                         },
                         onLongPress: () {
-                          _openEditTask(context, task);
+                          _openEditTask(context, task, subTasks);
                         },
                       ),
-                      if (isExpanded && task.subTasks.isNotEmpty)
+                      if (isExpanded && subTasks.isNotEmpty)
                         Padding(
                           padding: const EdgeInsets.only(left: 32, right: 8, bottom: 8),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              ...task.subTasks.map(
+                              ...subTasks.map(
                                 (subTask) => ListTile(
                                   dense: true,
                                   leading: const Icon(Icons.subdirectory_arrow_right),
@@ -111,8 +101,13 @@ class _ActiveTasksViewState extends State<ActiveTasksView> {
     );
   }
 
-  Future<void> _openEditTask(BuildContext context, TaskVM task) async {
-    await navigatorPushNamed(context, AppRouteConfigs.editTask.route, arguments: task);
+  Future<void> _openEditTask(
+    BuildContext context,
+    TaskEntity task,
+    List<SubTaskEntity> subTasks,
+  ) async {
+    final values = TaskUpsertArguments(task: task, subTasks: subTasks);
+    await navigatorPushNamed(context, AppRouteConfigs.editTask.route, arguments: values);
     // Refresh the tasks list after returning
   }
 }

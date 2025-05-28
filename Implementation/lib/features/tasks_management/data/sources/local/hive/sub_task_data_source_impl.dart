@@ -21,7 +21,7 @@ class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
     Priority priority,
   ) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
-        job: (box) async => box.values.where((item) => item.priority == (priority.index)).toList(),
+        job: (box) async => box.values.where((item) => item.priority == priority).toList(),
       );
 
   @override
@@ -29,14 +29,22 @@ class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
     TaskStatus status,
   ) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
-        job: (box) async => box.values.where((item) => item.status == (status.index)).toList(),
+        job: (box) async => box.values.where((item) => item.status == status).toList(),
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getBatchByTaskId(
-    String taskId,
-  ) async =>
+  EResultFuture<List<SubTaskHiveModel>> getBatchByTaskIds(List<String> taskIds) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
-        job: (box) async => box.values.where((item) => item.taskId == taskId).toList(),
+        job: (box) async => box.values.where((item) => taskIds.contains(item.taskId)).toList(),
       );
+
+  @override
+  EResultFutureVoid deleteByTaskId(String taskId) async {
+    return _hiveBox.runBoxOperation<void>(
+      job: (box) async {
+        final keysToDelete = box.keys.where((key) => box.get(key)?.taskId == taskId).toList();
+        await box.deleteAll(keysToDelete);
+      },
+    );
+  }
 }
