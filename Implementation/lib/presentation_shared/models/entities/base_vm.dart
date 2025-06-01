@@ -22,20 +22,20 @@ abstract class BaseViewModel<Entity> with ChangeNotifier {
   }
 
   /// The update button could be enabled or not
-  bool _hasChages = false;
-  bool get hasChanges => _hasChages;
+  bool _hasValidChages = false;
+  bool get hasValidChanges => _hasValidChages;
   @protected
-  set hasChanges(bool value) {
-    _hasChages = value;
+  set hasValidChanges(bool value) {
+    _hasValidChages = value;
     notifyListeners();
   }
 
-  void notifyChanges(bool isChanged) {
-    _hasChages = isChanged && isValid;
+  void isModified(bool isChanged) {
+    _hasValidChages = isChanged && isValid;
   }
 
   void reset() {
-    hasChanges = false;
+    hasValidChanges = false;
     notifyListeners();
   }
 

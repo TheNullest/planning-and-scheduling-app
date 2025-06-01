@@ -1,11 +1,11 @@
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 
 abstract class PathProviderWrapper {
-  Future<Directory> getApplicationDocumentsDirectory();
+  Future<Directory> getAppDocDirectory();
 }
 
 class PathProviderWrapperImpl implements PathProviderWrapper {
   @override
-  Future<Directory> getApplicationDocumentsDirectory() =>
-      getApplicationDocumentsDirectory();
+  Future<Directory> getAppDocDirectory() => getApplicationDocumentsDirectory();
 }

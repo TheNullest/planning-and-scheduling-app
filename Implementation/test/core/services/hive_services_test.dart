@@ -57,7 +57,7 @@ void main() {
     when(() => mockDirectory.existsSync()).thenReturn(true);
 
     // Arrange: When the path provider is asked, return an actual Directory.
-    when(() => mockPathProvider.getApplicationDocumentsDirectory())
+    when(() => mockPathProvider.getAppDocDirectory())
         .thenAnswer((_) async => Directory(r'E:\Flutter.Dart\HiveFiles\test'));
 
     // Arrange: Stub Hive initialization.

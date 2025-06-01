@@ -2,11 +2,11 @@ const fs = require('fs');
 const path = require('path');
 
 // Base directory where the operation will start
-const baseDir = path.join(__dirname, '../lib/');
+const baseDir = path.join(__dirname, '../android/');
 
 // Words to replace
-const targetWord = 'base_vm_mapper';
-const replacementWord = 'view_model_mapper';
+const targetWord = 'just_for_gradle';
+const replacementWord = 'zamaan';
 
 // Function to recursively process folders and files
 function processDirectory(dir) {

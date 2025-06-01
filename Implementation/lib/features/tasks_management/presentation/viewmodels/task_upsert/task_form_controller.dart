@@ -6,7 +6,7 @@ import 'package:zamaan/features/tasks_management/presentation/viewmodels/bases/f
 
 class TaskFormController extends FormController<TaskEntity> {
   TaskFormController({
-    required super.notifyChanges,
+    required super.isModified,
     required super.userId,
   })  : _title = '',
         _color = Colors.red,
@@ -19,7 +19,7 @@ class TaskFormController extends FormController<TaskEntity> {
         _fixedTagIds = [];
 
   TaskFormController.fromEntity({
-    required super.notifyChanges,
+    required super.isModified,
     required TaskEntity task,
   })  : _title = task.title,
         _description = task.description,
@@ -73,7 +73,7 @@ class TaskFormController extends FormController<TaskEntity> {
   set title(String value) {
     _title = value;
 
-    notifyChanges(
+    isModified(
       isChanged(#title, _title),
     );
 
@@ -86,7 +86,7 @@ class TaskFormController extends FormController<TaskEntity> {
     if (_description != value) {
       _description = value;
 
-      notifyChanges(
+      isModified(
         isChanged(#description, _description),
       );
 
@@ -98,7 +98,7 @@ class TaskFormController extends FormController<TaskEntity> {
   Priority get priority => _priority;
   set priority(Priority value) {
     _priority = value;
-    notifyChanges(
+    isModified(
       isChanged(#priority, _priority),
     );
     notifyListeners();
@@ -108,19 +108,19 @@ class TaskFormController extends FormController<TaskEntity> {
   List<String> get categoryIds => List.unmodifiable(_categoryIds);
   void addCategoryId(String value) {
     _categoryIds.add(value);
-    notifyChanges(isChanged(#categoryIds, _categoryIds));
+    isModified(isChanged(#categoryIds, _categoryIds));
     notifyListeners();
   }
 
   void removeCategoryId(String value) {
     _categoryIds.remove(value);
-    notifyChanges(isChanged(#categoryIds, _categoryIds));
+    isModified(isChanged(#categoryIds, _categoryIds));
     notifyListeners();
   }
 
   void clearCategoryIds() {
     _categoryIds.clear();
-    notifyChanges(isChanged(#categoryIds, _categoryIds));
+    isModified(isChanged(#categoryIds, _categoryIds));
     notifyListeners();
   }
 
@@ -128,7 +128,7 @@ class TaskFormController extends FormController<TaskEntity> {
   List<String> get fixedTagIds => List.unmodifiable(_fixedTagIds);
   void addFixedTagId(String value) {
     _fixedTagIds.add(value);
-    notifyChanges(
+    isModified(
       isChanged(#fixedTagIds, _fixedTagIds),
     );
     notifyListeners();
@@ -136,7 +136,7 @@ class TaskFormController extends FormController<TaskEntity> {
 
   void removeFixedTagId(String value) {
     _fixedTagIds.remove(value);
-    notifyChanges(
+    isModified(
       isChanged(#fixedTagIds, _fixedTagIds),
     );
     notifyListeners();
@@ -144,7 +144,7 @@ class TaskFormController extends FormController<TaskEntity> {
 
   void clearFixedTagIds() {
     _fixedTagIds.clear();
-    notifyChanges(
+    isModified(
       isChanged(#fixedTagIds, _fixedTagIds),
     );
     notifyListeners();
@@ -154,7 +154,7 @@ class TaskFormController extends FormController<TaskEntity> {
   TaskStatus get status => _status;
   set status(TaskStatus value) {
     _status = value;
-    notifyChanges(
+    isModified(
       isChanged(#status, _status),
     );
     notifyListeners();
@@ -164,7 +164,7 @@ class TaskFormController extends FormController<TaskEntity> {
   int get iconCode => _iconCode;
   set iconCode(int value) {
     _iconCode = value;
-    notifyChanges(
+    isModified(
       isChanged(#iconCode, _iconCode),
     );
 
@@ -180,7 +180,7 @@ class TaskFormController extends FormController<TaskEntity> {
   Color get color => _color;
   set color(Color value) {
     _color = value;
-    notifyChanges(
+    isModified(
       isChanged(#colorCode, _color.toARGB32()),
     );
     notifyListeners();
@@ -190,22 +190,20 @@ class TaskFormController extends FormController<TaskEntity> {
   bool get archived => _archived;
   set archived(bool value) {
     _archived = value;
-    notifyChanges(
+    isModified(
       isChanged(#archived, _archived),
     );
     notifyListeners();
   }
 
-  void confirmValues(TaskEntity subTask) => initialize(subTask);
-
   @override
   TaskEntity get toEntity => TaskEntity(
-        id: originalValues[#id] as String? ?? '',
+        id: originalValues[#id] as String?,
         userId: originalValues[#userId] as String,
         createdAt: originalValues[#createdAt] as DateTime? ?? DateTime.now(),
         totalSpentTime: originalValues[#totalSpentTime] as Duration? ?? Duration.zero,
         updatedAt: (originalValues[#id] as String?) != null ? DateTime.now() : null,
-        description: _description,
+        description: _description ?? '',
         priority: _priority,
         title: _title,
         taskStatus: _status,
@@ -231,7 +229,7 @@ class TaskFormController extends FormController<TaskEntity> {
   @override
   bool get isValid {
     final title = _title.trim().isNotEmpty;
-    final description = _description?.trim().isNotEmpty ?? false;
+    const description = true;
     return title && description;
   }
 

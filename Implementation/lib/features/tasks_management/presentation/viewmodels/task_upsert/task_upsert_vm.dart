@@ -7,14 +7,14 @@ import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 class TaskUpsertVM extends BaseViewModel<TaskEntity> {
   TaskUpsertVM()
-      : taskUpsertFormStates = TaskUpsertFormStates(),
-        super()
+      : _taskUpsertFormStates = TaskUpsertFormStates(),
+        _subTasksManager = SubTasksManager()
 
   // _scheduledDays = [],
   // _scheduledIntervals = []
 
   {
-    taskFormController = TaskFormController(notifyChanges: notifyChanges, userId: '');
+    _taskFormController = TaskFormController(isModified: isModified, userId: '');
   }
 
   TaskUpsertVM.fromEntity({
@@ -24,50 +24,56 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
     // required List<ScheduledDayVM> scheduledDays,
     // required List<ScheduledIntervalVM> scheduledIntervals,
     // GoalVM? goalVM,
-  })  : subTasksManager = SubTasksManager.fromEntities(
+  })  : _subTasksManager = SubTasksManager.fromEntities(
           taskId: task.id,
           userId: task.userId,
           subTasks: subTasks,
         ),
-        taskUpsertFormStates = TaskUpsertFormStates.fromExisting()
+        _taskUpsertFormStates = TaskUpsertFormStates.fromExisting()
   // _goal = goalVM,
   // _scheduleConstraint = scheduleConstraint,
   // _scheduledDays = scheduledDays,
   // _scheduledIntervals = scheduledIntervals
   {
     isItNew = false;
-    taskFormController = TaskFormController.fromEntity(task: task, notifyChanges: notifyChanges);
+    _taskFormController = TaskFormController.fromEntity(task: task, isModified: isModified);
   }
 
-  late final TaskFormController taskFormController;
-  final TaskUpsertFormStates taskUpsertFormStates;
-  late final SubTasksManager subTasksManager;
+  late final TaskFormController _taskFormController;
+  TaskFormController get taskFormController => _taskFormController;
+
+  late final SubTasksManager _subTasksManager;
+  SubTasksManager get subTasksManager => _subTasksManager;
+
+  late final TaskUpsertFormStates _taskUpsertFormStates;
+  TaskUpsertFormStates get taskUpsertFormStates => _taskUpsertFormStates;
 
   @override
-  void notifyChanges(bool isChanged) {
-    super.notifyChanges(isChanged);
-    taskUpsertFormStates.isResetButtonActive = isChanged;
-    taskUpsertFormStates.isUpsertButtonActive = hasChanges;
+  void isModified(bool isChanged) {
+    super.isModified(isChanged);
+    _taskUpsertFormStates.isResetButtonActive = isChanged;
+    _taskUpsertFormStates.isUpsertButtonActive = hasValidChanges;
     notifyListeners();
   }
 
   void handleTaskCreated(String taskId) {
-    taskFormController.addToOriginalValues({#id: taskId});
-    isItNew = false;
+    _taskFormController.updateOriginalValues(taskId);
+    _taskUpsertFormStates.handleTaskCreated();
+    _subTasksManager.handleTaskCreated(taskId: taskId, userId: _taskFormController.userId);
     notifyListeners();
   }
 
   void handleTaskUpdated() {
-    taskFormController.updateOriginalValues();
-    super.notifyChanges(false);
-    taskUpsertFormStates.isUpsertButtonActive = hasChanges;
+    _taskFormController.updateOriginalValues();
+    super.isModified(false);
+    _taskUpsertFormStates.isUpsertButtonActive = hasValidChanges;
     notifyListeners();
   }
 
   void clear() {
     // _goal = null;
-    taskFormController.clear();
-    subTasksManager.clear();
+    _taskFormController.clear();
+    _subTasksManager.clear();
     // _scheduleConstraint = null;
     // _scheduledDays.clear();
     // _scheduledIntervals.clear();
@@ -75,11 +81,19 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
   }
 
   @override
-  bool get isValid => taskFormController.isValid;
+  bool get isValid => _taskFormController.isValid;
 
   @override
   void dispose() {
-    taskFormController
+    _taskFormController
+      ..removeListener(notifyListeners)
+      ..dispose();
+
+    _subTasksManager
+      ..removeListener(notifyListeners)
+      ..dispose();
+
+    _taskUpsertFormStates
       ..removeListener(notifyListeners)
       ..dispose();
     super.dispose();

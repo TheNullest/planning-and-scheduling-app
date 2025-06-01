@@ -6,8 +6,7 @@ part of 'user_supabase_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UserSupabaseModelImpl _$$UserSupabaseModelImplFromJson(
-        Map<String, dynamic> json) =>
+_$UserSupabaseModelImpl _$$UserSupabaseModelImplFromJson(Map<String, dynamic> json) =>
     _$UserSupabaseModelImpl(
       userName: json['user_name'] as String,
       firstName: json['first_name'] as String,
@@ -16,18 +15,13 @@ _$UserSupabaseModelImpl _$$UserSupabaseModelImplFromJson(
       id: json['id'] as String,
       emailAddress: json['email_address'] as String?,
       password: json['password'] as String?,
-      updatedAt: json['updated_at'] == null
-          ? null
-          : DateTime.parse(json['updated_at'] as String),
-      birthDate: json['birth_date'] == null
-          ? null
-          : DateTime.parse(json['birth_date'] as String),
+      updatedAt: json['updated_at'] == null ? null : DateTime.parse(json['updated_at'] as String),
+      birthDate: json['birth_date'] == null ? null : DateTime.parse(json['birth_date'] as String),
       avatarPath: json['avatar_path'] as String?,
       description: json['bio'] as String?,
     );
 
-Map<String, dynamic> _$$UserSupabaseModelImplToJson(
-        _$UserSupabaseModelImpl instance) =>
+Map<String, dynamic> _$$UserSupabaseModelImplToJson(_$UserSupabaseModelImpl instance) =>
     <String, dynamic>{
       'user_name': instance.userName,
       'first_name': instance.firstName,

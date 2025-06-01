@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:zamaan/core/platform/directory_wrapper.dart';
@@ -68,7 +69,11 @@ class HiveInitializerImpl extends HiveInitializer {
     if (platform.isWindows) {
       directory.directory = Directory(r'E:\Flutter.Dart\HiveFiles\Zamaan');
     } else {
-      directory.directory = await pathProvider.getApplicationDocumentsDirectory();
+      try {
+        directory.directory = await pathProvider.getAppDocDirectory();
+      } on Exception catch (e) {
+        log(e.toString(), name: 'HiveInitializerImpl.init');
+      }
     }
     if (!directory.existsSync()) {
       await directory.create(recursive: true);

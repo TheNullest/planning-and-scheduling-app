@@ -5,9 +5,9 @@ import 'package:zamaan/features/tasks_management/presentation/viewmodels/bases/f
 
 class SubTaskFormController extends FormController<SubTaskEntity> {
   SubTaskFormController({
-    required super.notifyChanges,
-    required String taskId,
+    required super.isModified,
     required super.userId,
+    required String taskId,
   })  : _title = '',
         _priority = Priority.medium,
         _status = TaskStatus.scheduled,
@@ -15,7 +15,7 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
         _taskId = taskId;
 
   SubTaskFormController.fromEntity({
-    required super.notifyChanges,
+    required super.isModified,
     required SubTaskEntity subTask,
   })  : _totalSpentTime = subTask.totalSpentTime!,
         _title = subTask.title,
@@ -48,6 +48,7 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
       originalValues
         ..clear()
         ..addAll({
+          #id: null,
           #userId: userId,
           #taskId: _taskId,
         });
@@ -62,7 +63,7 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
   set title(String value) {
     _title = value;
 
-    notifyChanges(
+    isModified(
       isChanged(#title, _title),
     );
 
@@ -75,19 +76,18 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
     if (_description != value) {
       _description = value;
 
-      notifyChanges(
+      isModified(
         isChanged(#description, _description),
       );
-
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   late Priority _priority;
   Priority get priority => _priority;
   set priority(Priority value) {
     _priority = value;
-    notifyChanges(
+    isModified(
       isChanged(#priority, _priority),
     );
     notifyListeners();
@@ -97,7 +97,7 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
   TaskStatus get status => _status;
   set status(TaskStatus value) {
     _status = value;
-    notifyChanges(
+    isModified(
       isChanged(#status, _status),
     );
     notifyListeners();
@@ -105,26 +105,28 @@ class SubTaskFormController extends FormController<SubTaskEntity> {
 
   @override
   void resetValues() {
-    _title = originalValues[#title] as String;
-    _description = originalValues[#description] as String;
-    _priority = originalValues[#priority] as Priority;
-    _status = originalValues[#status] as TaskStatus;
+    title = originalValues[#title] as String;
+    description = originalValues[#description] as String;
+    priority = originalValues[#priority] as Priority;
+    status = originalValues[#status] as TaskStatus;
     super.resetValues();
   }
 
   @override
-  SubTaskEntity get toEntity => SubTaskEntity(
-        id: originalValues[#id] as String? ?? '',
-        userId: originalValues[#userId] as String,
-        taskId: originalValues[#taskId] as String,
-        createdAt: originalValues[#createdAt] as DateTime? ?? DateTime.now(),
-        totalSpentTime: originalValues[#totalSpentTime] as Duration? ?? Duration.zero,
-        updatedAt: (originalValues[#id] as String?) != null ? DateTime.now() : null,
-        description: _description,
-        priority: _priority,
-        title: _title,
-        status: _status,
-      );
+  SubTaskEntity get toEntity {
+    return SubTaskEntity(
+      id: originalValues[#id] as String?,
+      userId: originalValues[#userId] as String,
+      taskId: originalValues[#taskId] as String,
+      createdAt: originalValues[#createdAt] as DateTime? ?? DateTime.now(),
+      totalSpentTime: originalValues[#totalSpentTime] as Duration? ?? Duration.zero,
+      updatedAt: (originalValues[#id] as String?) != null ? DateTime.now() : null,
+      description: _description ?? '',
+      priority: _priority,
+      title: _title,
+      status: _status,
+    );
+  }
 
   void clear() {
     title = '';

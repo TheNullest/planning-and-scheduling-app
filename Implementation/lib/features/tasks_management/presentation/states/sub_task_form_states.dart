@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class TaskUpsertFormStates with ChangeNotifier {
-  TaskUpsertFormStates() : _isNew = true;
+class SubTaskUpsertFormStates with ChangeNotifier {
+  SubTaskUpsertFormStates() : _isNew = true;
 
-  TaskUpsertFormStates.fromExisting() : _isNew = false;
+  SubTaskUpsertFormStates.fromExisting() : _isNew = false;
 
   late bool _isNew;
   bool get isNew => _isNew;
@@ -35,15 +35,15 @@ class TaskUpsertFormStates with ChangeNotifier {
     notifyListeners();
   }
 
-  // Back button states
-  final IconData backButtonIcon = Icons.arrow_back;
-  final String backButtonTitle = 'Back';
+  // Cancel button states
+  final IconData cancelButtonIcon = Icons.cancel;
+  final String cancelButtonTitle = 'Cancel';
 
   // Delete button states
   final IconData deleteButtonIcon = Icons.delete;
   final String deleteButtonTitle = 'Delete';
 
-  bool get isDeleteButtonActive => !isNew;
+   bool get isDeleteButtonActive => !isNew;
 
   void handleTaskCreated() {
     isNew = false;

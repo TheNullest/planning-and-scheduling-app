@@ -1,7 +1,7 @@
 part of 'init_dependencies.imports.dart';
 
 final serviceLocator = GetIt.instance;
-Future<void> intiDependencies() async {
+Future<void> initDependencies() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await dotenv.load(fileName: 'secrets/.env');

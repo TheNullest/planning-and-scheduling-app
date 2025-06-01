@@ -174,7 +174,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
 
       // Return the updated user data as a RemoteUserModel
       return Right(
-        UserSupabaseModel.fromJsonUserAccount(result.user!.toJson()),
+        UserSupabaseModel.fromJsonUserAccount(result.user!.userMetadata!),
       );
     } on Exception catch (e, stackTrace) {
       return failureTypeDetectorLeft<UserSupabaseModel>(
@@ -274,11 +274,11 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
       // Execute the provided function and return the user data
       final response = await fn();
 
-      final user = response.user!.toJson();
+      final user = response.user!;
       log(user.toString());
 
       return Right(
-        UserSupabaseModel.fromJson(response.user!.toJson()),
+        UserSupabaseModel.fromJson(response.user!.userMetadata!),
       );
     } on Exception catch (e, stackTrace) {
       return failureTypeDetectorLeft<UserSupabaseModel>(

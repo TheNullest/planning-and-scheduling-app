@@ -29,6 +29,39 @@ Mocktail is used for writing unit tests and mocking dependencies, while bloc_tes
 
 The app follows the MVVM pattern, which separates the UI (View) from the business logic (ViewModel) and the data (Model). This makes the codebase more organized and easier to maintain.
 
+## Technologies and Patterns
+
+### Hive Configuration
+
+To ensure consistency and avoid collisions when working with Hive (NoSQL database), follow these conventions:
+
+```dart
+/*
+ * Hive TypeId and Field Ranges Convention:
+ *
+ * typeId Ranges:
+ * 0-9   : Base Models (Common shared models used across the app)
+ * 10-99  : App Models (Entities specific to the application's functionality)
+ * 100-149  : Enums (Enumeration types used throughout the app)
+ * 150-200  : Value Objects
+ *
+ * @HiveField Ranges:
+ * 0-9   : Base Model fields (Shared fields across multiple models)
+ * 10-99  : App Model fields (Fields specific to individual app entities)
+ *
+ * This structured range allocation ensures consistent mapping and avoids collisions
+ * when registering Hive adapters in the application.
+ */
+```
+
+**Key Rules**:
+
+- **Base Models** (e.g., `BaseEntity`, `TimestampMixin`): Use `typeId: 0-10` and `@HiveField: 0-10` for shared fields like `id` or `createdAt`.
+- **App Models** (e.g., `User`, `Task`): Use `typeId: 11-40` and `@HiveField: 11-40` for model-specific fields.
+- **Enums** (e.g., `UserRole`, `TaskPriority`): Use `typeId: 41-70` with `@HiveField` starting at `0` per enum.
+
+---
+
 ### Clean Architecture
 
 Clean Architecture principles are applied to ensure a clear separation of concerns and to make the app more scalable and maintainable. The architecture is divided into several layers:

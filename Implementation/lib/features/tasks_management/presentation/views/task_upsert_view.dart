@@ -12,6 +12,8 @@ import 'package:zamaan/features/tasks_management/presentation/viewmodels/task_up
 import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/sub_tasks_list.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/task_form.dart';
 
+import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/task_upsert_action_buttons.dart';
+
 class TaskUpsertView extends StatelessWidget {
   const TaskUpsertView({
     super.key,
@@ -39,13 +41,13 @@ class _TaskUpsertForm extends StatefulWidget {
 }
 
 class _TaskUpsertFormState extends State<_TaskUpsertForm> {
-  late final TaskUpsertVM taskUpsertVM;
-  late final TasksManagerBloc tasksManagerBloc;
+  late final TaskUpsertVM _taskUpsertVM;
+  late final TasksManagerBloc _tasksManagerBloc;
   @override
   void initState() {
     super.initState();
-    tasksManagerBloc = context.read<TasksManagerBloc>();
-    taskUpsertVM = context.read<TaskUpsertVM>();
+    _tasksManagerBloc = context.read<TasksManagerBloc>();
+    _taskUpsertVM = context.read<TaskUpsertVM>();
   }
 
   @override
@@ -54,21 +56,21 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
       listener: (context, state) {
         state.maybeWhen(
           taskCreated: (taskId) {
-            taskUpsertVM.handleTaskCreated(taskId);
-            tasksManagerBloc.add(
+            _taskUpsertVM.handleTaskCreated(taskId);
+            _tasksManagerBloc.add(
               TasksManagerEvent.createSubTask(
                 newSubTask:
-                    taskUpsertVM.subTasksManager.subTaskVMs.first.subTaskFormController.toEntity,
+                    _taskUpsertVM.subTasksManager.subTaskVMs.first.subTaskFormController.toEntity,
               ),
             );
           },
-          taskUpdated: () => taskUpsertVM.handleTaskUpdated(),
+          taskUpdated: () => _taskUpsertVM.handleTaskUpdated(),
           subTaskCreated: (subTaskId) =>
-              taskUpsertVM.subTasksManager.handleSubTaskCreated(subTaskId),
+              _taskUpsertVM.subTasksManager.handleSubTaskCreated(subTaskId),
           subTaskDeleted: (subTaskId) =>
-              taskUpsertVM.subTasksManager.handleSubTaskDeleted(subTaskId),
+              _taskUpsertVM.subTasksManager.handleSubTaskDeleted(subTaskId),
           subTaskUpdated: (subTaskId) =>
-              taskUpsertVM.subTasksManager.handleSubTaskUpdated(subTaskId),
+              _taskUpsertVM.subTasksManager.handleSubTaskUpdated(subTaskId),
           orElse: () => const Center(child: CircularProgressIndicator()),
         );
       },
@@ -89,7 +91,7 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
           child: CustomScrollView(
             slivers: [
               ChangeNotifierProvider<TaskFormController>.value(
-                value: taskUpsertVM.taskFormController,
+                value: _taskUpsertVM.taskFormController,
                 child: const TaskFormWidget(),
               ),
               32.sliverSizedBoxHeight,
@@ -98,58 +100,24 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
               SliverPadding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 sliver: ChangeNotifierProvider<TaskUpsertFormStates>.value(
-                  value: taskUpsertVM.taskUpsertFormStates,
-                  child: Consumer<TaskUpsertFormStates>(
-                    builder: (context, formStates, _) => SliverToBoxAdapter(
-                      child: Row(
-                        children: [
-                          // Upsert Button
-                          ElevatedButton.icon(
-                            icon: Icon(formStates.actionButtonIcon),
-                            label: Text(formStates.actionButtonTitle),
-                            onPressed: formStates.isUpsertButtonActive
-                                ? () {
-                                    final entity = taskUpsertVM.taskFormController.toEntity;
-                                    final evetn = taskUpsertVM.isItNew
-                                        ? TasksManagerEvent.createTask(
-                                            newTask: entity,
-                                          )
-                                        : TasksManagerEvent.updateTask(
-                                            task: entity,
-                                          );
-
-                                    tasksManagerBloc.add(evetn);
-                                  }
-                                : null,
-                          ),
-
-                          // Back Button
-                          ElevatedButton.icon(
-                            icon: Icon(formStates.backButtonIcon),
-                            label: Text(formStates.backButtonTitle),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-
-                          // Reset Button
-                          ElevatedButton.icon(
-                            icon: Icon(formStates.resetButtonIcon),
-                            label: Text(formStates.resetButtonTitle),
-                            onPressed: formStates.isResetButtonActive
-                                ? () => taskUpsertVM.taskFormController.resetValues()
-                                : null,
-                          ),
-
-                          // Delete Button
-                          ElevatedButton.icon(
-                            icon: Icon(formStates.deleteButtonIcon),
-                            label: Text(formStates.deleteButtonTitle),
-                            onPressed: () => tasksManagerBloc.add(
-                              TasksManagerEvent.deleteTask(
-                                taskId: taskUpsertVM.taskFormController.id,
-                              ),
-                            ),
-                          ),
-                        ],
+                  value: _taskUpsertVM.taskUpsertFormStates,
+                  child: SliverToBoxAdapter(
+                    child: TaskUpsertActionButtons(
+                      onInsert: () => _tasksManagerBloc.add(
+                        TasksManagerEvent.createTask(
+                          newTask: _taskUpsertVM.taskFormController.toEntity,
+                        ),
+                      ),
+                      onUpdate: () => _tasksManagerBloc.add(
+                        TasksManagerEvent.updateTask(
+                          task: _taskUpsertVM.taskFormController.toEntity,
+                        ),
+                      ),
+                      onReset: () => _taskUpsertVM.taskFormController.resetValues(),
+                      onDelete: () => _tasksManagerBloc.add(
+                        TasksManagerEvent.deleteTask(
+                          taskId: _taskUpsertVM.taskFormController.id!,
+                        ),
                       ),
                     ),
                   ),
@@ -161,7 +129,7 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
 
               // SubTasks list
               ChangeNotifierProvider<SubTasksManager>.value(
-                value: taskUpsertVM.subTasksManager,
+                value: _taskUpsertVM.subTasksManager,
                 child: const SubTasksListWidget(),
               ),
             ],

@@ -17,7 +17,7 @@ import 'package:zamaan/presentation_shared/navigation/app_router.dart';
 import 'package:zamaan/presentation_shared/theme/app_dark_theme.dart';
 
 void main() async {
-  await intiDependencies();
+  await initDependencies();
 
   runApp(
     EasyLocalization(

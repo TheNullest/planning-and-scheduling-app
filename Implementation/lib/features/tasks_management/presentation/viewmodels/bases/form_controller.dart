@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class FormController<Entity> extends ChangeNotifier {
   FormController({
-    required this.notifyChanges,
+    required this.isModified,
     required this.userId,
     Entity? entity,
   }) {
@@ -10,7 +10,7 @@ abstract class FormController<Entity> extends ChangeNotifier {
   }
 
   final String userId;
-  final void Function(bool isChanged) notifyChanges;
+  final void Function(bool isModified) isModified;
 
   @protected
   void initialize([Entity? entity]);
@@ -18,7 +18,7 @@ abstract class FormController<Entity> extends ChangeNotifier {
   @protected
   final Map<Symbol, dynamic> originalValues = {};
 
-  String get id => originalValues[#id] as String;
+  String? get id => originalValues[#id] as String?;
 
   void addToOriginalValues(Map<Symbol, dynamic> values) {
     originalValues.addAll(values);
@@ -41,7 +41,12 @@ abstract class FormController<Entity> extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateOriginalValues() => initialize(toEntity);
+  void updateOriginalValues([String? id]) {
+    initialize(toEntity);
+    if (id != null) {
+      addToOriginalValues({#id: id});
+    }
+  }
 
   bool get isValid;
 }
