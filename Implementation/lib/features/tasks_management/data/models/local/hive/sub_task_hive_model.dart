@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
+
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/entities/task.dart' show TaskEntity;

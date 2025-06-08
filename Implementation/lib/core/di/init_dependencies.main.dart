@@ -1,6 +1,6 @@
 part of 'init_dependencies.imports.dart';
 
-final serviceLocator = GetIt.instance;
+final GetIt serviceLocator = GetIt.instance;
 Future<void> initDependencies() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -12,8 +12,13 @@ Future<void> initDependencies() async {
   // _viewModelMappers();
   _datasources();
   _repositories();
-  _initAuth();
-  _taskManagerBloc();
+
+  // BLoCs
+  _authBloc();
+  _categoriesManagerBloc();
+  _tagsManagerBloc();
+  _tasksManagerBloc();
+
   _navigator();
 
   await serviceLocator<HiveInitializer>().init();

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/domain/enums/hive/priority.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
-import 'package:zamaan/features/tasks_management/presentation/viewmodels/sub_task_upsert/sub_task_form_controller.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/dropdown_button.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/dropdown_button.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_upsert_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/sub_task_form/sub_task_form_controller.dart';
 
 class SubTaskFormWidget extends StatefulWidget {
   const SubTaskFormWidget({super.key});
@@ -13,15 +14,15 @@ class SubTaskFormWidget extends StatefulWidget {
 }
 
 class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
-  late final SubTaskFormController _subTaskController;
+  late final SubTaskFormController _subTaskFormController;
   late final TextEditingController _titleController;
   late final TextEditingController _descriptionController;
 
   @override
   void didChangeDependencies() {
-    _subTaskController = context.read<SubTaskFormController>();
-    _titleController = TextEditingController(text: _subTaskController.title);
-    _descriptionController = TextEditingController(text: _subTaskController.description);
+    _subTaskFormController = context.read<SubTaskUpsertVM>().vmFormController;
+    _titleController = TextEditingController(text: _subTaskFormController.title);
+    _descriptionController = TextEditingController(text: _subTaskFormController.description);
     super.didChangeDependencies();
   }
 
@@ -34,9 +35,9 @@ class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
 
   void resetTextControllers() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _titleController.text = _subTaskController.title;
-      _descriptionController.text = _subTaskController.description ?? '';
-      _subTaskController.resetTextController = false;
+      _titleController.text = _subTaskFormController.title;
+      _descriptionController.text = _subTaskFormController.description ?? '';
+      _subTaskFormController.shouldResetInputs = false;
     });
   }
 
@@ -54,8 +55,8 @@ class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
                 // Title Field
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: Selector<SubTaskFormController, bool>(
-                    selector: (_, controller) => controller.resetTextController,
+                  child: Selector<SubTaskUpsertVM, bool>(
+                    selector: (_, vm) => vm.vmFormController.shouldResetInputs,
                     builder: (context, reset, _) {
                       if (reset) resetTextControllers();
                       return TextFormField(
@@ -65,8 +66,8 @@ class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) =>
-                            _subTaskController.isValid ? 'Title is required' : null,
-                        onChanged: (value) => _subTaskController.title = value,
+                            _subTaskFormController.isValid ? 'Title is required' : null,
+                        onChanged: (value) => _subTaskFormController.title = value,
                       );
                     },
                   ),
@@ -84,8 +85,8 @@ class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
                       border: OutlineInputBorder(),
                     ),
                     validator: (value) =>
-                        _subTaskController.isValid ? 'Description is required' : null,
-                    onChanged: (value) => _subTaskController.description = value,
+                        _subTaskFormController.isValid ? 'Description is required' : null,
+                    onChanged: (value) => _subTaskFormController.description = value,
                   ),
                 ),
 
@@ -97,23 +98,23 @@ class _SubTaskFormWidgetState extends State<SubTaskFormWidget> {
                   child: Row(
                     children: [
                       // Task Status Dropdown
-                      CustomDropdownButtonWidget<SubTaskFormController, TaskStatus>(
+                      CustomDropdownButtonWidget<SubTaskUpsertVM, TaskStatus>(
                         label: 'Status',
-                        selector: (_, controller) => controller.status,
+                        selector: (_, vm) => vm.vmFormController.status,
                         items: TaskStatus.values,
                         itemBuilder: (status) => Text(status.name),
-                        onChanged: (status) => _subTaskController.status = status!,
+                        onChanged: (status) => _subTaskFormController.status = status!,
                       ),
 
                       const SizedBox(width: 16),
 
                       // Priority Dropdown
-                      CustomDropdownButtonWidget<SubTaskFormController, Priority>(
+                      CustomDropdownButtonWidget<SubTaskUpsertVM, Priority>(
                         label: 'Priority',
-                        selector: (_, controller) => controller.priority,
+                        selector: (_, vm) => vm.vmFormController.priority,
                         items: Priority.values,
                         itemBuilder: (priority) => Text(priority.name),
-                        onChanged: (priority) => _subTaskController.priority = priority!,
+                        onChanged: (priority) => _subTaskFormController.priority = priority!,
                       ),
                     ],
                   ),

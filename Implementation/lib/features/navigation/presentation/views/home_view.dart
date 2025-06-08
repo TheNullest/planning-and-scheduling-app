@@ -5,6 +5,7 @@ import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_sliver_app_bar_widget.dart';
 import 'package:zamaan/features/navigation/presentation/widgets/custom_tab_bar_widget.dart';
+import 'package:zamaan/features/tasks_management/presentation/navigation_argument_models/task_upsert.dart';
 import 'package:zamaan/presentation_shared/models/tab_item.dart';
 
 class HomeView extends StatefulWidget {
@@ -73,7 +74,8 @@ class _HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin
             floatingActionButton: SizedBox(
               child: FloatingActionButton(
                 heroTag: HeroTagConstants.navigateToAddNewTaskViewFab,
-                onPressed: () => navigatorPushNamed(context, AppRouteConfigs.addNewTask.route),
+                onPressed: () => navigatorPushNamed(context,
+                    TaskUpsertNavigationArguments(routeConfig: AppRouteConfigs.addNewTask)),
                 shape: const CircleBorder(),
                 child: const Icon(
                   Icons.add_task,

@@ -41,6 +41,7 @@ class SchedulersManagerBloc extends Bloc<SchedulerManagerEvent, SchedulerManager
 
   FutureVoid _handleStarted(Emitter<SchedulerManagerState> emit) async {
     emit(const SchedulerManagerState.initial());
+    return;
   }
 
   FutureVoid _fetchBatchSchedulers(
@@ -48,6 +49,7 @@ class SchedulersManagerBloc extends Bloc<SchedulerManagerEvent, SchedulerManager
     Emitter<SchedulerManagerState> emit,
   ) async {
     final response = await _getBatchSchedulersUsecase();
+    return;
     // response.fold(
     //   (failure) => emit(_FailedActionState(failure.message)),
     //   (schedulers) => emit(
@@ -70,6 +72,7 @@ class SchedulersManagerBloc extends Bloc<SchedulerManagerEvent, SchedulerManager
         ),
       ),
     );
+    return;
   }
 
   FutureVoid _generateThenCreateInstances(
@@ -93,5 +96,6 @@ class SchedulersManagerBloc extends Bloc<SchedulerManagerEvent, SchedulerManager
         );
       },
     );
+    return;
   }
 }

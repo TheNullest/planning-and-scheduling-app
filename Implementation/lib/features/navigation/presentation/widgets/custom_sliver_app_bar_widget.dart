@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
+import 'package:zamaan/features/navigation/presentation/navigation_argument_models/settings_arguments.dart';
 import 'package:zamaan/presentation_shared/theme/app_dark_palette.dart';
 
 class CustomSliverAppBarWidget extends StatefulWidget {
@@ -65,7 +66,8 @@ class _CustomSliverAppBarWidgetState extends State<CustomSliverAppBarWidget>
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: IconButton(
               icon: const Icon(Icons.settings),
-              onPressed: () => navigatorPushNamed(context, AppRouteConfigs.settings.route),
+              onPressed: () => navigatorPushNamed(
+                  context, SettingsArguments(routeConfig: AppRouteConfigs.settings)),
             ),
           ),
         ),

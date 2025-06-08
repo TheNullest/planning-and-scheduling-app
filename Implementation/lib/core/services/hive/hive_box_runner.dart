@@ -47,6 +47,7 @@ class HiveBoxRunnerImpl<HiveModel> extends HiveBoxRunner<HiveModel> {
           encryptionCipher: HiveAesCipher(encryptionKey),
         );
       }
+
       final box = hive.box<HiveModel>(boxName);
       final result = await job(box);
       return Right(result);
@@ -55,3 +56,4 @@ class HiveBoxRunnerImpl<HiveModel> extends HiveBoxRunner<HiveModel> {
     }
   }
 }
+

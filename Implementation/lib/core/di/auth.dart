@@ -1,6 +1,6 @@
 part of 'init_dependencies.imports.dart';
 
-void _initAuth() {
+void _authBloc() {
   serviceLocator
 
     // DataSources

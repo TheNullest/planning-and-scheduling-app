@@ -49,4 +49,6 @@ extension ContextExt on BuildContext {
   /// This getter returns the current user information from the `UserProvider`, which
   /// can be used to display user-specific data or perform user-specific actions.
   UserHiveModel? get currentUser => userProvider.user;
+
+  String get currentUserId => currentUser?.id ?? '';
 }

@@ -45,16 +45,15 @@ abstract class AppRouteConfigs {
   );
 
   // Tasks
-
   static final RouteConfig addNewTask = RouteConfig(
-    route: AppRoutes.addNewTask,
+    route: AppRoutes.upsertTask,
     routeName: AppRouteNames.addNewTask,
     icon: Icons.add,
     titleKey: AppLocaleKeys.uiElements.titles.addNewTask, // e.g., localizes to 'Today Tasks'
   );
 
   static final RouteConfig editTask = RouteConfig(
-    route: AppRoutes.editTask,
+    route: AppRoutes.upsertTask,
     routeName: AppRouteNames.editTask,
     icon: Icons.edit,
     titleKey: AppLocaleKeys.uiElements.titles.editTask, // e.g., localizes to 'Today Tasks'
@@ -100,5 +99,21 @@ abstract class AppRouteConfigs {
     routeName: AppRouteNames.reminder,
     icon: Icons.notifications,
     titleKey: AppLocaleKeys.uiElements.titles.reminder,
+  );
+
+  // Categories
+  static final RouteConfig addNewCategory = RouteConfig(
+    route: AppRoutes.upsertCategory,
+    routeName: AppRouteNames.addNewCategory,
+    icon: Icons.add,
+    titleKey:
+        AppLocaleKeys.uiElements.titles.addNewCategory, // e.g., localizes to 'Add New Category'
+  );
+
+  static final RouteConfig editCategory = RouteConfig(
+    route: AppRoutes.upsertCategory,
+    routeName: AppRouteNames.editCategory,
+    icon: Icons.edit,
+    titleKey: AppLocaleKeys.uiElements.titles.editCategory, // e.g., localizes to 'Add New Category'
   );
 }

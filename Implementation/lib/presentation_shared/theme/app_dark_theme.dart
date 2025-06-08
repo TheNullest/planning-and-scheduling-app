@@ -12,7 +12,7 @@ class AppTheme {
           width: 3,
         ),
       );
-  static final darkThemeMode = ThemeData.dark().copyWith(
+  static final ThemeData darkThemeMode = ThemeData.dark().copyWith(
     chipTheme: const ChipThemeData(
       color: WidgetStatePropertyAll(AppPallete.backgroundColor),
       side: BorderSide.none,

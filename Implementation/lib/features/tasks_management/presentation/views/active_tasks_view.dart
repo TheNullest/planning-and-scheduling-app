@@ -5,8 +5,8 @@ import 'package:zamaan/core/constants/routes/app_route_configs.dart';
 import 'package:zamaan/core/utils/navigator.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/entities/task.dart';
-import 'package:zamaan/features/tasks_management/presentation/argument_models/task_upsert_arguments.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
+import 'package:zamaan/features/tasks_management/presentation/navigation_argument_models/task_upsert.dart';
 
 class ActiveTasksView extends StatefulWidget {
   const ActiveTasksView({super.key});
@@ -106,8 +106,10 @@ class _ActiveTasksViewState extends State<ActiveTasksView> {
     TaskEntity task,
     List<SubTaskEntity> subTasks,
   ) async {
-    final values = TaskUpsertArguments(task: task, subTasks: subTasks);
-    await navigatorPushNamed(context, AppRouteConfigs.editTask.route, arguments: values);
+    final arguments = TaskUpsertNavigationArguments(routeConfig: AppRouteConfigs.editTask)
+      ..addExtraArgument(#taskEntity, task)
+      ..addExtraArgument(#subTaskEntities, subTasks);
+    await navigatorPushNamed(context, arguments);
     // Refresh the tasks list after returning
   }
 }

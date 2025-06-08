@@ -22,5 +22,7 @@ class _Titles {
   String get goals => '$_prefix.goals'.tr();
   String get customeCustomeMeasurementUnits => '$_prefix.measurement_units'.tr();
   String get categories => '$_prefix.categories'.tr();
+  String get addNewCategory => '$_prefix.add_new_category'.tr();
+  String get editCategory => '$_prefix.edit_category'.tr();
   String get error => '$_prefix.error'.tr();
 }

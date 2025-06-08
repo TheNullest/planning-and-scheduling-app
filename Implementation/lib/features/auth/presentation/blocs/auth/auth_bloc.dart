@@ -104,6 +104,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit: emit,
       ), // Emit success state if user is signed in
     );
+    return;
   }
 
   // Handles user sign-up.

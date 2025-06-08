@@ -11,7 +11,6 @@ void _navigator() {
     ..registerFactory(() => const ReminderView())
     ..registerFactory(() => const CalendarView())
     ..registerFactory(() => const SettingsView())
-    ..registerFactory(() => const TaskUpsertView())
     ..registerFactory(
       () => HomeView(
         tabItems: [
@@ -49,12 +48,16 @@ void _navigator() {
           AppRoutes.signUp: (context, settings) => serviceLocator<SignUpView>(),
           AppRoutes.home: (context, settings) => serviceLocator<HomeView>(),
           AppRoutes.settings: (context, settings) => serviceLocator<SettingsView>(),
-          AppRoutes.addNewTask: (context, settings) => serviceLocator<TaskUpsertView>(),
-          AppRoutes.editTask: (context, settings) {
+          AppRoutes.upsertTask: (context, settings) {
             return TaskUpsertView(
-              arguments: settings.arguments as TaskUpsertArguments?,
+              arguments: settings.arguments! as TaskUpsertNavigationArguments,
             );
           },
+          // AppRoutes.upsertCategory: (context, settings) {
+          //   return CategoryUpsertView(
+          //     arguments: settings.arguments! as CategoryUpsertNavigationArguments,
+          //   );
+          // },
         },
       ),
     );

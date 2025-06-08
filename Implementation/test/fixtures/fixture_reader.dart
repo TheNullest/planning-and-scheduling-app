@@ -6,7 +6,7 @@ import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_m
 
 String fixtures(String fileName) => File('test/fixtures/$fileName').readAsStringSync();
 
-final testJson = fixtures('user.json');
+final String testJson = fixtures('user.json');
 final List<dynamic> testMaps = jsonDecode(testJson) as List<dynamic>;
 
 List<UserSupabaseModel> getRemoteUserModels() {

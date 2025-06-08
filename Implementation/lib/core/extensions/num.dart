@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 extension DoubleToSpaceExtension on num? {
   num validate({num value = 0}) => this ?? value;
 
+  Widget get rectSizedBox => SizedBox(
+        height: this!.toDouble(),
+        width: this!.toDouble(),
+      );
   Widget get sizedBoxHeight => SizedBox(
         height: this!.toDouble(),
       );

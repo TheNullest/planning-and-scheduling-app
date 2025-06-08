@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zamaan/core/di/init_dependencies.imports.dart';
+import 'package:zamaan/features/navigation/presentation/navigation_argument_models/navigation_arguments.dart';
 import 'package:zamaan/presentation_shared/navigation/app_router.dart';
 
 /// Navigates to a new route and removes all previous routes until
@@ -43,11 +44,10 @@ Future navigatorPushRemoveUntil(
 /// - Returns: A `Future` that completes when the navigation is finished.
 Future navigatorPushNamed(
   BuildContext context,
-  String route, {
-  Object? arguments,
-}) async =>
+  NavigationArguments arguments,
+) async =>
     Navigator.pushNamed(
       context,
-      route,
+      arguments.routeConfig.route,
       arguments: arguments,
     );

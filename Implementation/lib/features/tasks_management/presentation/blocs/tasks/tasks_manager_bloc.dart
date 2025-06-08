@@ -88,6 +88,21 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     await _fetchActiveTasks(const _FetchActiveTasks(), emit);
   }
 
+  FutureVoid _createSubTask(
+    _CreateSubTask event,
+    Emitter<TasksManagerState> emit,
+  ) async {
+    final response = await _createSubTaskUsecase(event.newSubTask);
+    emit(const TasksManagerState.loading());
+    response.fold(
+      (failure) => emit(_FailedAction(failure.message)),
+      (subTaskId) {
+        emit(_SubTaskCreated(subTaskId));
+      },
+    );
+    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+  }
+
   FutureVoid _deleteTask(
     _DeleteTask event,
     Emitter<TasksManagerState> emit,
@@ -119,6 +134,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         emit(_SubTaskDeleted(event.subTaskId));
       },
     );
+    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
   }
 
   FutureVoid _deleteBatchSubTasks(
@@ -166,20 +182,6 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     await _fetchActiveTasks(const _FetchActiveTasks(), emit);
   }
 
-  FutureVoid _createSubTask(
-    _CreateSubTask event,
-    Emitter<TasksManagerState> emit,
-  ) async {
-    final response = await _createSubTaskUsecase(event.newSubTask);
-    emit(const TasksManagerState.loading());
-    response.fold(
-      (failure) => emit(_FailedAction(failure.message)),
-      (subTaskId) {
-        emit(_SubTaskCreated(subTaskId));
-      },
-    );
-  }
-
   FutureVoid _fetchActiveTasks(_FetchActiveTasks e, Emitter<TasksManagerState> emit) async {
     emit(const TasksManagerState.loading());
     final tasksResponse = await _getBatchTasksUsecase();
@@ -187,7 +189,6 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     if (tasksResponse.isLeft()) {
       final failure = tasksResponse.swap().getOrElse(() => throw Exception());
       emit(TasksManagerState.failedAction(failure.message));
-      return;
     }
 
     final tasks = tasksResponse.getOrElse(() => []);
@@ -197,7 +198,6 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     if (subTasksResponse.isLeft()) {
       final failure = subTasksResponse.swap().getOrElse(() => throw Exception());
       emit(TasksManagerState.failedAction(failure.message));
-      return;
     }
 
     final allSubTasks = subTasksResponse.getOrElse(() => []);

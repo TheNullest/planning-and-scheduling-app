@@ -44,67 +44,67 @@ class MeasurementUnits {
 
 /// Represents mass units.
 class _MassUnits {
-  final ton = MeasurementUnit.ton;
-  final kilogram = MeasurementUnit.kilogram;
-  final gram = MeasurementUnit.gram;
-  final milligram = MeasurementUnit.milligram;
-  final microgram = MeasurementUnit.microgram;
-  final ounce = MeasurementUnit.ounce;
+  final MeasurementUnit ton = MeasurementUnit.ton;
+  final MeasurementUnit kilogram = MeasurementUnit.kilogram;
+  final MeasurementUnit gram = MeasurementUnit.gram;
+  final MeasurementUnit milligram = MeasurementUnit.milligram;
+  final MeasurementUnit microgram = MeasurementUnit.microgram;
+  final MeasurementUnit ounce = MeasurementUnit.ounce;
 }
 
 /// Represents length units.
 class _LengthUnits {
-  final kilometer = MeasurementUnit.kilometer;
-  final mile = MeasurementUnit.mile;
-  final meter = MeasurementUnit.meter;
-  final centimeter = MeasurementUnit.centimeter;
-  final millimeter = MeasurementUnit.millimeter;
-  final yard = MeasurementUnit.yard;
-  final foot = MeasurementUnit.foot;
-  final inch = MeasurementUnit.inch;
+  final MeasurementUnit kilometer = MeasurementUnit.kilometer;
+  final MeasurementUnit mile = MeasurementUnit.mile;
+  final MeasurementUnit meter = MeasurementUnit.meter;
+  final MeasurementUnit centimeter = MeasurementUnit.centimeter;
+  final MeasurementUnit millimeter = MeasurementUnit.millimeter;
+  final MeasurementUnit yard = MeasurementUnit.yard;
+  final MeasurementUnit foot = MeasurementUnit.foot;
+  final MeasurementUnit inch = MeasurementUnit.inch;
 }
 
 /// Represents area units.
 class _AreaUnits {
-  final hectare = MeasurementUnit.hectare;
-  final squareMeter = MeasurementUnit.squareMeter;
-  final squareCentimeter = MeasurementUnit.squareCentimeter;
+  final MeasurementUnit hectare = MeasurementUnit.hectare;
+  final MeasurementUnit squareMeter = MeasurementUnit.squareMeter;
+  final MeasurementUnit squareCentimeter = MeasurementUnit.squareCentimeter;
 }
 
 /// Represents volume units.
 class _VolumeUnits {
-  final cubicMeter = MeasurementUnit.cubicMeter;
-  final kiloliter = MeasurementUnit.kiloliter;
-  final liter = MeasurementUnit.liter;
-  final milliliter = MeasurementUnit.milliliter;
+  final MeasurementUnit cubicMeter = MeasurementUnit.cubicMeter;
+  final MeasurementUnit kiloliter = MeasurementUnit.kiloliter;
+  final MeasurementUnit liter = MeasurementUnit.liter;
+  final MeasurementUnit milliliter = MeasurementUnit.milliliter;
 }
 
 /// Represents time units.
 class _TimeUnits {
-  final hour = MeasurementUnit.hour;
-  final minute = MeasurementUnit.minute;
-  final second = MeasurementUnit.second;
-  final millisecond = MeasurementUnit.millisecond;
+  final MeasurementUnit hour = MeasurementUnit.hour;
+  final MeasurementUnit minute = MeasurementUnit.minute;
+  final MeasurementUnit second = MeasurementUnit.second;
+  final MeasurementUnit millisecond = MeasurementUnit.millisecond;
 }
 
 /// Represents currency units.
 class _CurrencyUnits {
-  final toman = MeasurementUnit;
-  final rial = MeasurementUnit.rial;
-  final dollar = MeasurementUnit.dollar;
-  final euro = MeasurementUnit.euro;
+  final Type toman = MeasurementUnit;
+  final MeasurementUnit rial = MeasurementUnit.rial;
+  final MeasurementUnit dollar = MeasurementUnit.dollar;
+  final MeasurementUnit euro = MeasurementUnit.euro;
 }
 
 /// Represents count units.
 class _CountUnits {
-  final book = MeasurementUnit.book;
-  final collection = MeasurementUnit.collection;
-  final page = MeasurementUnit.page;
-  final item = MeasurementUnit.item;
-  final number = MeasurementUnit.number;
+  final MeasurementUnit book = MeasurementUnit.book;
+  final MeasurementUnit collection = MeasurementUnit.collection;
+  final MeasurementUnit page = MeasurementUnit.page;
+  final MeasurementUnit item = MeasurementUnit.item;
+  final MeasurementUnit number = MeasurementUnit.number;
 }
 
 /// Represents custom units.
 class _CustomUnits {
-  final custom = MeasurementUnit.custom;
+  final MeasurementUnit custom = MeasurementUnit.custom;
 }

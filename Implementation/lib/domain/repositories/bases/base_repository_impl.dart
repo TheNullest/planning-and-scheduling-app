@@ -60,9 +60,10 @@ abstract class BaseRepositoryImpl<
 
   @override
   EResultFutureVoid delete(
-    String id,) async {
+    String id,
+  ) async {
     try {
-        return _localDataSource.delete(id);
+      return _localDataSource.delete(id);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }

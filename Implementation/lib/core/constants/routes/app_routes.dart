@@ -11,14 +11,16 @@ abstract class AppRoutes {
   static const String profile = '$home/profile';
 
   // Nested App
-  static const String addNewTask = '$home/add-new-task';
-  static const String editTask = '$home/edit-task';
+  static const String upsertTask = '$home/upsert-task';
   static const String todayTasks = '$home/today-tasks';
   static const String activeTasks = '$home/active-tasks';
   static const String accomplishmentTasks = '$home/accomplishment-tasks';
   static const String reports = '$home/reports';
   static const String calendar = '$home/calendar';
   static const String reminder = '$home/reminder';
+
+  // Category
+  static const String upsertCategory = '$home/upsert-category';
 
   // Error
   static const String error = '/error';
@@ -45,6 +47,10 @@ abstract class AppRouteNames {
   static const String reports = 'Reports';
   static const String calendar = 'Calendar';
   static const String reminder = 'Reminder';
+
+// Category
+  static const String addNewCategory = 'AddNewCategory';
+  static const String editCategory = 'EditCategory';
 
   // Error
   static const String error = 'Error';

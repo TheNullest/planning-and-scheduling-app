@@ -20,6 +20,8 @@
       "goals": "Goals",
       "measurement_units": "Measurement Units",
       "categories": "Categories",
+      "add_new_category": "Add New Category",
+      "edit_category": "Edit Category",
       "error": "error"
     },
     "labels": {

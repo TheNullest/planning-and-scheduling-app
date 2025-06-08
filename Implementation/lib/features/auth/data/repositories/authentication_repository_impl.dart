@@ -35,22 +35,26 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   EResultFuture<UserEntity?> initialize() async {
     try {
-      await _remoteDataSource.restoreSession();
-      final response = await _remoteDataSource.listenAuthChanges();
-      final session = foldEitherRight<Session?>(response);
-      final userResponse = await getCurrentUser();
+      return await _executeBasedOnConnection(
+          onConnectedAction: () async {
+            await _remoteDataSource.restoreSession();
+            final response = await _remoteDataSource.listenAuthChanges();
+            final session = foldEitherRight<Session?>(response);
+            final userResponse = await getCurrentUser();
 
-      if (session != null) {
-        final userEntity =
-            foldEitherRight<UserEntity>(userResponse).copyWith(emailAddress: session.user.email);
-        await _localDataSource.updateSession(_toRemoteSession(session));
-        await _localDataSource.updateUser(_mapper.toHiveModel(userEntity));
+            if (session != null) {
+              final userEntity = foldEitherRight<UserEntity>(userResponse)
+                  .copyWith(emailAddress: session.user.email);
+              await _localDataSource.updateSession(_toRemoteSession(session));
+              await _localDataSource.updateUser(_mapper.toHiveModel(userEntity));
 
-        return Right(userEntity);
-      } else {
-        await _localDataSource.signOut();
-        return const Right(null);
-      }
+              return Right(userEntity);
+            } else {
+              await _localDataSource.signOut();
+              return const Right(null);
+            }
+          },
+          onNotConnectedAction: getCurrentUser);
     } on Exception catch (e, stackTrace) {
       return failureTypeDetectorLeft<UserEntity?>(e: e, stackTrace: stackTrace);
     }
