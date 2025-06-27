@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
 import 'package:zamaan/domain/enums/hive/scheduler_type.dart';

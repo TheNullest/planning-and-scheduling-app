@@ -14,42 +14,52 @@ class RepetitionTypeAdapter extends HiveBaseTypeAdapter<RepetitionType> {
   RepetitionType read(BinaryReader reader) {
     switch (reader.readByte()) {
       case 0:
-        return RepetitionType.weekly;
-      case 1:
-        return RepetitionType.daily;
+        return RepetitionType.minutely;
       case 2:
-        return RepetitionType.weekdays;
+        return RepetitionType.hourly;
       case 3:
-        return RepetitionType.monthly;
+        return RepetitionType.weekly;
       case 4:
-        return RepetitionType.yearly;
+        return RepetitionType.daily;
       case 5:
+        return RepetitionType.weekdays;
+      case 6:
+        return RepetitionType.monthly;
+      case 7:
+        return RepetitionType.yearly;
+      case 8:
         return RepetitionType.custom;
       default:
-        return RepetitionType.weekly;
+        return RepetitionType.minutely;
     }
   }
 
   @override
   void write(BinaryWriter writer, RepetitionType obj) {
     switch (obj) {
-      case RepetitionType.weekly:
+      case RepetitionType.minutely:
         writer.writeByte(0);
         break;
-      case RepetitionType.daily:
-        writer.writeByte(1);
-        break;
-      case RepetitionType.weekdays:
+      case RepetitionType.hourly:
         writer.writeByte(2);
         break;
-      case RepetitionType.monthly:
+      case RepetitionType.weekly:
         writer.writeByte(3);
         break;
-      case RepetitionType.yearly:
+      case RepetitionType.daily:
         writer.writeByte(4);
         break;
-      case RepetitionType.custom:
+      case RepetitionType.weekdays:
         writer.writeByte(5);
+        break;
+      case RepetitionType.monthly:
+        writer.writeByte(6);
+        break;
+      case RepetitionType.yearly:
+        writer.writeByte(7);
+        break;
+      case RepetitionType.custom:
+        writer.writeByte(8);
         break;
     }
   }

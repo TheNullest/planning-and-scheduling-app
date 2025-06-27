@@ -82,7 +82,6 @@ class SubTaskEntity extends BaseEntityAbstraction {
     String? title,
     Priority? priority,
     TaskStatus? status,
-    String? goalId,
   }) =>
       SubTaskEntity(
         id: id ?? this.id,

@@ -31,7 +31,7 @@ void _tagsManagerBloc() {
     ..registerFactory(() => FetchAllTagsUsecase(serviceLocator()))
     ..registerFactory(() => UpdateTagUsecase(serviceLocator()))
 
-    // CategoriesManagerBloc
+    // ManagerBloc
     ..registerLazySingleton<TagsManagerBloc>(
       () => TagsManagerBloc(
         createUsecase: serviceLocator(),

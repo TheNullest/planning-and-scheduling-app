@@ -11,6 +11,7 @@ class TagDataMapperImpl extends TagDataMapper {
     try {
       return TagEntity(
         id: model.id,
+        taskId: model.taskId,
         description: model.description,
         createdAt: model.createdAt,
         updatedAt: model.updatedAt,
@@ -29,6 +30,7 @@ class TagDataMapperImpl extends TagDataMapper {
     try {
       return TagEntity(
         id: model.id,
+        taskId: model.taskId,
         description: model.description,
         createdAt: model.createdAt,
         updatedAt: model.updatedAt,

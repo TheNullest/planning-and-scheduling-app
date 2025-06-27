@@ -6,8 +6,18 @@ import 'package:zamaan/features/tasks_management/presentation/dialogs/category/c
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/category/category_chip.dart';
 
-class CategoriesChipListDialog extends StatelessWidget {
-  const CategoriesChipListDialog({super.key});
+Future<void> categoriesChipListDialog(
+        BuildContext context, CategoryVmsManager categoryVMsManager) async =>
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => ChangeNotifierProvider<CategoryVmsManager>.value(
+        value: categoryVMsManager,
+        child: const _CategoriesChipList(),
+      ),
+    );
+
+class _CategoriesChipList extends StatelessWidget {
+  const _CategoriesChipList();
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +46,7 @@ class CategoriesChipListDialog extends StatelessWidget {
                   ),
                   // Add New Category
                   GestureDetector(
-                    onTap: () async {
-                      final cat = categoryVMsManager.newItem();
-                      return showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        isDismissible: false,
-                        elevation: 5,
-                        builder: (_) => ChangeNotifierProvider<CategoryVmsManager>.value(
-                          value: categoryVMsManager,
-                          child: CategoryUpsertDialog(cat),
-                        ),
-                      );
-                    },
+                    onTap: () async => categoryUpsertDialog(context, categoryVMsManager.newItem()),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       margin: const EdgeInsets.all(5),

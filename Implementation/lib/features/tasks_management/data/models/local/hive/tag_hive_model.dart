@@ -1,7 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-
 import 'package:zamaan/domain/entities/tag.dart';
 
 part 'tag_hive_model.g.dart';
@@ -44,6 +43,7 @@ class TagHiveModel extends TagEntity {
     required super.title,
     required super.colorCode,
     required super.iconCode,
+    required super.taskId,
   });
 
   /// Creates a [TagHiveModel] from a corresponding [TagEntity].
@@ -53,6 +53,7 @@ class TagHiveModel extends TagEntity {
   factory TagHiveModel.fromEntity(TagEntity entity) {
     return TagHiveModel(
       id: entity.id,
+      taskId: entity.taskId,
       userId: entity.userId,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
@@ -70,6 +71,7 @@ class TagHiveModel extends TagEntity {
   @override
   TagHiveModel copyWith({
     String? id,
+    String? taskId,
     String? userId,
     DateTime? createdAt,
     String? description,
@@ -80,6 +82,7 @@ class TagHiveModel extends TagEntity {
   }) {
     return TagHiveModel(
       id: id ?? this.id,
+      taskId: taskId ?? this.taskId,
       userId: userId ?? this.userId,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

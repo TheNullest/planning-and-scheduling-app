@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/enums/enums.dart';
@@ -20,12 +19,7 @@ class GoalHiveModel extends BaseEntityAbstraction {
     required this.refId,
     required this.measurementUnit,
     required this.goalConstraint,
-    required this.minutelyTarget,
-    required this.hourlyTarget,
-    required this.dailyTarget,
-    required this.weeklyTarget,
-    required this.monthlyTarget,
-    required this.yearlyTarget,
+    required this.goalTargets,
     required this.customMeasurementUnitId,
     super.description,
     super.updatedAt,
@@ -43,12 +37,7 @@ class GoalHiveModel extends BaseEntityAbstraction {
       refId: entity.refId,
       customMeasurementUnitId: entity.customMeasurementUnitId,
       goalConstraint: entity.goalConstraint,
-      minutelyTarget: entity.minutelyTarget,
-      hourlyTarget: entity.hourlyTarget,
-      dailyTarget: entity.dailyTarget,
-      weeklyTarget: entity.weeklyTarget,
-      monthlyTarget: entity.monthlyTarget,
-      yearlyTarget: entity.yearlyTarget,
+      goalTargets: entity.goalTargets,
       measurementUnit: entity.measurementUnit,
     );
   }
@@ -63,44 +52,19 @@ class GoalHiveModel extends BaseEntityAbstraction {
 
   /// Base unit for measuring progress.
   @HiveField(13)
-  final MeasurementUnit? measurementUnit;
+  final MeasurementUnit measurementUnit;
 
   /// Defines whether the goal requires meeting a minimum
   /// or staying below a maximum value.
   @HiveField(14)
   final GoalConstraint goalConstraint;
 
-  /// Required progress amount per active hour as [hourlyTarget].
-  /// - Example: 0.5 represents 30 minutes of focused work per hour.
   @HiveField(15)
-  final double minutelyTarget;
-
-  /// Required progress amount per active hour as [hourlyTarget].
-  /// - Example: 0.5 represents 30 minutes of focused work per hour.
-  @HiveField(16)
-  final double hourlyTarget;
-
-  /// Daily goal target as [dailyTarget].
-  /// - Combines with hourly targets for partial day tracking.
-  @HiveField(17)
-  final double dailyTarget;
-
-  /// Weekly cumulative target as [weeklyTarget].
-  /// - Used for longer-term progress tracking.
-  @HiveField(18)
-  final double weeklyTarget;
-
-  /// Monthly sustained effort target as [monthlyTarget].
-  @HiveField(19)
-  final double monthlyTarget;
-
-  /// Annual overall target as [yearlyTarget].
-  @HiveField(20)
-  final double yearlyTarget;
+  final Map<RepetitionType, dynamic> goalTargets;
 
   /// Reference to user-defined measurement units when applicable.
   /// - Used when [measurementUnit] is set to [MeasurementUnit.custom].
-  @HiveField(21)
+  @HiveField(16)
   final String? customMeasurementUnitId;
 
   /// Creates a copy of the current `GoalHiveModel` with optional updated fields.
@@ -122,6 +86,7 @@ class GoalHiveModel extends BaseEntityAbstraction {
     double? weeklyTarget,
     double? monthlyTarget,
     double? yearlyTarget,
+    Map<RepetitionType, dynamic>? goalTargets,
   }) {
     return GoalHiveModel(
       id: id ?? this.id,
@@ -134,12 +99,7 @@ class GoalHiveModel extends BaseEntityAbstraction {
       customMeasurementUnitId: customMeasurementUnitId ?? this.customMeasurementUnitId,
       measurementUnit: measurementUnit ?? this.measurementUnit,
       goalConstraint: goalConstraint ?? this.goalConstraint,
-      minutelyTarget: minutelyTarget ?? this.minutelyTarget,
-      hourlyTarget: hourlyTarget ?? this.hourlyTarget,
-      dailyTarget: dailyTarget ?? this.dailyTarget,
-      weeklyTarget: weeklyTarget ?? this.weeklyTarget,
-      monthlyTarget: monthlyTarget ?? this.monthlyTarget,
-      yearlyTarget: yearlyTarget ?? this.yearlyTarget,
+      goalTargets: goalTargets ?? this.goalTargets,
     );
   }
 
@@ -151,10 +111,6 @@ class GoalHiveModel extends BaseEntityAbstraction {
         customMeasurementUnitId,
         goalConstraint,
         refId,
-        hourlyTarget,
-        dailyTarget,
-        weeklyTarget,
-        monthlyTarget,
-        yearlyTarget,
+        goalTargets,
       ];
 }

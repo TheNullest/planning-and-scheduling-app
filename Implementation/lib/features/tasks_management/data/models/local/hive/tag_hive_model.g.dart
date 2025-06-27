@@ -25,13 +25,16 @@ class TagHiveModelAdapter extends HiveBaseTypeAdapter<TagHiveModel> {
       title: fields[11] as String,
       colorCode: fields[12] as int,
       iconCode: fields[13] as int,
+      taskId: fields[14] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TagHiveModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
+      ..writeByte(14)
+      ..write(obj.taskId)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)

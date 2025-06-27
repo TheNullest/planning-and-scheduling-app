@@ -10,6 +10,7 @@ class TasksManagerState with _$TasksManagerState {
 
   // Tasks
   const factory TasksManagerState.taskCreated(String taskId) = _TaskCreated;
+  const factory TasksManagerState.taskDeleted(String taskId) = _TaskDeleted;
   const factory TasksManagerState.fetchedTasks({
     required List<TaskEntity> tasks,
     required List<SubTaskEntity> subTasks,
@@ -17,7 +18,7 @@ class TasksManagerState with _$TasksManagerState {
   const factory TasksManagerState.taskUpdated() = _TaskUpdated;
 
   // SubTasks
-  const factory TasksManagerState.subTaskCreated(String subTaskId) = _SubTaskCreated;
+  const factory TasksManagerState.subTaskCreated(SubTaskEntity subTask) = _SubTaskCreated;
   const factory TasksManagerState.subTaskUpdated(String subTaskId) = _SubTaskUpdated;
   const factory TasksManagerState.subTaskDeleted(String subTaskId) = _SubTaskDeleted;
 }

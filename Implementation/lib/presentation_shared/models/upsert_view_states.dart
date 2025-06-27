@@ -107,13 +107,4 @@ class UpsertViewStates with ChangeNotifier {
   // State Transition Methods
   //------------------------
 
-  /// Updates button states after successful entity creation:
-  ///   1. Switches from create to update mode
-  ///   2. Disables upsert button
-  ///   3. Disables reset button
-  void handleCreatedEntityState() {
-    isItNew = false;
-    isSaveButtonActive = false;
-    isResetButtonActive = false;
-  }
 }

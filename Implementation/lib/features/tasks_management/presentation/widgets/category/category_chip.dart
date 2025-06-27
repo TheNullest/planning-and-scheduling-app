@@ -12,7 +12,7 @@ class CategoryChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categoryVMsManager = context.read<CategoryVmsManager>();
-    final vmFormController = category.vmFormController;
+    final vmFormController = category;
 
     return ChangeNotifierProvider<CategoryUpsertVM>.value(
       value: category,
@@ -73,7 +73,7 @@ class CategoryChipWidget extends StatelessWidget {
 
                       // Icon
                       Selector<CategoryUpsertVM, IconData>(
-                        selector: (_, vm) => vm.vmFormController.icon,
+                        selector: (_, vm) => vm.icon,
                         builder: (_, icon, __) => Icon(
                           icon,
                           size: 20,
@@ -123,20 +123,7 @@ class CategoryChipWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () async {
-          manager.addListenersToVm(category);
-          manager.viewStates.isItNew = false;
-          return showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            isDismissible: false,
-            elevation: 10,
-            builder: (_) => ChangeNotifierProvider.value(
-              value: manager,
-              child: CategoryUpsertDialog(category),
-            ),
-          );
-        },
+        onTap: () async => categoryUpsertDialog(context, category),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(4),

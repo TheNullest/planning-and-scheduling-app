@@ -14,6 +14,7 @@ Map<String, dynamic> _$TagSupabaseModelToJson(TagSupabaseModel instance) =>
       'icon_code': instance.iconCode,
       'created_at': instance.createdAt.toIso8601String(),
       'user_id': instance.userId,
+      'task_id': instance.taskId,
       'description': instance.description,
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
@@ -27,6 +28,7 @@ _$TagSupabaseModelImpl _$$TagSupabaseModelImplFromJson(
       iconCode: (json['icon_code'] as num).toInt(),
       createdAt: DateTime.parse(json['created_at'] as String),
       userId: json['user_id'] as String,
+      taskId: json['task_id'] as String?,
       description: json['description'] as String?,
       updatedAt: json['updated_at'] == null
           ? null
@@ -42,6 +44,7 @@ Map<String, dynamic> _$$TagSupabaseModelImplToJson(
       'icon_code': instance.iconCode,
       'created_at': instance.createdAt.toIso8601String(),
       'user_id': instance.userId,
+      'task_id': instance.taskId,
       'description': instance.description,
       'updated_at': instance.updatedAt?.toIso8601String(),
     };

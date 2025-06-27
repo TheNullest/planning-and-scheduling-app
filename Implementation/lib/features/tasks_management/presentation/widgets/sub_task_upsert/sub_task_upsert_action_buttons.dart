@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_upsert_vm.dart';
-import 'package:zamaan/presentation_shared/models/states/upsert_view_states.dart';
+import 'package:zamaan/presentation_shared/models/upsert_view_states.dart';
 
 class SubTaskUpsertActionButtons extends StatelessWidget {
   const SubTaskUpsertActionButtons({required this.onCancel, required this.viewStates, super.key});
@@ -17,21 +17,21 @@ class SubTaskUpsertActionButtons extends StatelessWidget {
 
     return ActionButtonsWidget<SubTaskUpsertVM>(
       viewStates: viewStates,
-      onInsert: () => taskManagerBloc.add(
+      onSubmit: () => taskManagerBloc.add(
         TasksManagerEvent.createSubTask(
-          newSubTask: subTaskVM.vmFormController.toEntity,
+          newSubTask: subTaskVM.toEntity,
         ),
       ),
       onUpdate: () => taskManagerBloc.add(
         TasksManagerEvent.updateSubTask(
-          subTask: subTaskVM.vmFormController.toEntity,
+          subTask: subTaskVM.toEntity,
         ),
       ),
-      onReset: subTaskVM.vmFormController.resetValues,
+      onReset: subTaskVM.resetValues,
       onDelete: () {
         taskManagerBloc.add(
           TasksManagerEvent.deleteSubTask(
-            subTaskId: subTaskVM.vmFormController.toEntity.id,
+            subTaskId: subTaskVM.toEntity.id,
           ),
         );
       },

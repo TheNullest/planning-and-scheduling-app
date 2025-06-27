@@ -12,7 +12,7 @@ class TagChipWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tagVMsManager = context.read<TagVmsManager>();
-    final vmFormController = tag.vmFormController;
+    final tagVM = tag;
 
     return ChangeNotifierProvider<TagUpsertVM>.value(
       value: tag,
@@ -20,8 +20,8 @@ class TagChipWidget extends StatelessWidget {
         valueListenable: tag.isSelected,
         builder: (_, isSelected, __) {
           final chipBgColor = isSelected
-              ? vmFormController.color
-              : Color.lerp(vmFormController.color, Colors.black, 0.8)!; // 0.8 makes it much darker
+              ? tagVM.color
+              : Color.lerp(tagVM.color, Colors.black, 0.8)!; // 0.8 makes it much darker
           final brightness = ThemeData.estimateBrightnessForColor(chipBgColor);
           final luminance = chipBgColor.computeLuminance();
           final isDark = luminance < 0.8 && brightness == Brightness.dark;
@@ -59,12 +59,12 @@ class TagChipWidget extends StatelessWidget {
                                 color: isSelected ? Colors.white : Colors.transparent,
                                 borderRadius: BorderRadius.circular(11),
                                 border: Border.all(
-                                  color: isSelected ? vmFormController.color : Colors.grey.shade400,
+                                  color: isSelected ? tagVM.color : Colors.grey.shade400,
                                   width: 2,
                                 ),
                               ),
                               child: isSelected
-                                  ? Icon(Icons.check, size: 16, color: vmFormController.color)
+                                  ? Icon(Icons.check, size: 16, color: tagVM.color)
                                   : null,
                             ),
                             const SizedBox(width: 10),
@@ -73,7 +73,7 @@ class TagChipWidget extends StatelessWidget {
 
                       // Icon
                       Selector<TagUpsertVM, IconData>(
-                        selector: (_, vm) => vm.vmFormController.icon,
+                        selector: (_, vm) => vm.icon,
                         builder: (_, icon, __) => Icon(
                           icon,
                           size: 20,
@@ -84,7 +84,7 @@ class TagChipWidget extends StatelessWidget {
 
                       // Title
                       Text(
-                        vmFormController.title,
+                        tagVM.title,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: readableForeground,
@@ -97,7 +97,7 @@ class TagChipWidget extends StatelessWidget {
                       if (selectable)
                         _buildEditButton(
                           context,
-                          tagVMsManager,
+                          tagVMsManager.taskId,
                           tag,
                           isSelected,
                           readableForeground,
@@ -115,7 +115,7 @@ class TagChipWidget extends StatelessWidget {
 
   Widget _buildEditButton(
     BuildContext context,
-    TagVmsManager manager,
+    String? taskId,
     TagUpsertVM tag,
     bool isSelected,
     Color iconColor,
@@ -123,20 +123,7 @@ class TagChipWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () async {
-          manager.addListenersToVm(tag);
-          manager.viewStates.isItNew = false;
-          return showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            isDismissible: false,
-            elevation: 10,
-            builder: (_) => ChangeNotifierProvider.value(
-              value: manager,
-              child: TagUpsertDialog(tag),
-            ),
-          );
-        },
+        onTap: () async => tagUpsertDialog(context, tag, taskId),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(4),

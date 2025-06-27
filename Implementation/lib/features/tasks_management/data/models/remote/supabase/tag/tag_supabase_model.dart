@@ -17,6 +17,7 @@ class TagSupabaseModel with _$TagSupabaseModel {
     @JsonKey(name: 'icon_code') required int iconCode,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'user_id') required String userId,
+    @JsonKey(name: 'task_id')  String? taskId,
     String? description,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _TagSupabaseModel;
@@ -24,6 +25,7 @@ class TagSupabaseModel with _$TagSupabaseModel {
   /// Creates an instance of [TagSupabaseModel] from a [TagEntity].
   factory TagSupabaseModel.fromEntity(TagEntity entity) => TagSupabaseModel(
         id: entity.id,
+        taskId: entity.taskId,
         title: entity.title,
         colorCode: entity.colorCode,
         iconCode: entity.iconCode,

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zamaan/presentation_shared/models/states/upsert_view_states.dart';
+import 'package:zamaan/presentation_shared/models/upsert_view_states.dart';
 import 'package:zamaan/presentation_shared/models/viewmodels/base_vm.dart';
 
 class ActionButtonsWidget<VM extends BaseViewModel> extends StatelessWidget {
   const ActionButtonsWidget(
       {required this.onUpdate,
-      required this.onInsert,
+      required this.onSubmit,
       required this.onReset,
       required this.onDelete,
       required this.viewStates,
       super.key});
 
   final void Function() onUpdate;
-  final void Function() onInsert;
+  final void Function() onSubmit;
   final void Function() onReset;
   final void Function() onDelete;
   final UpsertViewStates viewStates;
@@ -39,7 +39,7 @@ class ActionButtonsWidget<VM extends BaseViewModel> extends StatelessWidget {
                     label: const Text('Save'),
                     onPressed: states.isActive
                         ? states.isItNew
-                            ? onInsert
+                            ? onSubmit
                             : onUpdate
                         : null,
                   );

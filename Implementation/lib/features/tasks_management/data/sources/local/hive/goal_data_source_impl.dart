@@ -15,16 +15,9 @@ class GoalHiveDataSourceImpl extends HiveDataSource<GoalHiveModel>
   final HiveBoxRunner<GoalHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<GoalHiveModel>> getGoalsByTaskId(
-    String taskId,
-  ) async =>
+  EResultFuture<List<GoalHiveModel>> getGoalsByRefIds(List<String> refIds) async =>
       _hiveBox.runBoxOperation<List<GoalHiveModel>>(
-        job: (box) async => box.values.where((goalModel) => goalModel.refType == taskId).toList(),
-      );
-
-  @override
-  EResultFuture<GoalHiveModel> getGoalBySubTaskId(String subTaskId) async =>
-      _hiveBox.runBoxOperation<GoalHiveModel>(
-        job: (box) async => box.values.firstWhere((goalModel) => goalModel.refId == subTaskId),
+        job: (box) async =>
+            box.values.where((goalModel) => refIds.contains(goalModel.refId)).toList(),
       );
 }

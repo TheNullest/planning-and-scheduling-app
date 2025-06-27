@@ -6,9 +6,16 @@ import 'package:zamaan/features/tasks_management/presentation/dialogs/tag/tag_up
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tag_chip.dart';
 
-class TagsChipListDialog extends StatelessWidget {
-  const TagsChipListDialog({super.key});
+Future<void> tagsChipListDialog(BuildContext context, TagVmsManager category) async =>
+    showModalBottomSheet(
+      context: context,
+      builder: (_) => ChangeNotifierProvider<TagVmsManager>.value(
+        value: category,
+        child: _TagsChipList(),
+      ),
+    );
 
+class _TagsChipList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tagVMsManager = context.read<TagVmsManager>();
@@ -28,7 +35,20 @@ class TagsChipListDialog extends StatelessWidget {
                 const Text('Select From Tags :'),
                 20.sizedBoxHeight,
                 Wrap(children: [
-                  ...tagVMsManager.items.map(
+                  ...tagVMsManager.itemsWithoutRelation.map(
+                    (tag) => TagChipWidget(
+                      selectable: true,
+                      tag: tag,
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Divider(
+                      height: 1,
+                      thickness: .5,
+                    ),
+                  ),
+                  ...tagVMsManager.relatedItems.map(
                     (tag) => TagChipWidget(
                       selectable: true,
                       tag: tag,
@@ -36,19 +56,8 @@ class TagsChipListDialog extends StatelessWidget {
                   ),
                   // Add New Tag
                   GestureDetector(
-                    onTap: () async {
-                      final cat = tagVMsManager.newItem();
-                      return showModalBottomSheet(
-                        context: context,
-                        isScrollControlled: true,
-                        isDismissible: false,
-                        elevation: 5,
-                        builder: (_) => ChangeNotifierProvider<TagVmsManager>.value(
-                          value: tagVMsManager,
-                          child: TagUpsertDialog(cat),
-                        ),
-                      );
-                    },
+                    onTap: () async =>
+                        tagUpsertDialog(context, tagVMsManager.newItem(), tagVMsManager.taskId),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       margin: const EdgeInsets.all(5),

@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/entities/task.dart';
 
@@ -27,6 +28,7 @@ import 'package:zamaan/domain/entities/task.dart';
 class TagEntity extends CategoryEntity {
   TagEntity({
     required super.userId,
+    required this.taskId,
     required super.createdAt,
     required super.description,
     required super.updatedAt,
@@ -36,9 +38,13 @@ class TagEntity extends CategoryEntity {
     super.id,
   });
 
+  @HiveField(14)
+  final String? taskId;
+
   @override
   TagEntity copyWith({
     String? id,
+    String? taskId,
     DateTime? createdAt,
     DateTime? updatedAt,
     String? userId,
@@ -49,6 +55,7 @@ class TagEntity extends CategoryEntity {
   }) =>
       TagEntity(
         id: id ?? this.id,
+        taskId: taskId ?? this.taskId,
         description: description ?? this.description,
         createdAt: createdAt ?? this.createdAt,
         updatedAt: updatedAt ?? this.updatedAt,

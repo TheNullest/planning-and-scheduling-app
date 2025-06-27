@@ -2,6 +2,7 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/enums/hive/goal_constraint.dart';
 import 'package:zamaan/domain/enums/hive/measurement_unit.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
+import 'package:zamaan/domain/enums/hive/repetition_type.dart';
 
 /// Represents a measurable target associated with specific tasks or activities.
 ///
@@ -55,12 +56,7 @@ class GoalEntity extends BaseEntityAbstraction {
     required this.refId,
     required this.measurementUnit,
     required this.goalConstraint,
-    required this.minutelyTarget,
-    required this.hourlyTarget,
-    required this.dailyTarget,
-    required this.weeklyTarget,
-    required this.monthlyTarget,
-    required this.yearlyTarget,
+    this.goalTargets = const {},
     this.customMeasurementUnitId,
     super.description,
     super.updatedAt,
@@ -84,33 +80,33 @@ class GoalEntity extends BaseEntityAbstraction {
   final String refId;
 
   /// Base unit for measuring progress.
-  final MeasurementUnit? measurementUnit;
+  final MeasurementUnit measurementUnit;
 
   /// Defines whether the goal requires meeting a minimum
   /// or staying below a maximum value.
   final GoalConstraint goalConstraint;
 
-  /// Required progress amount per active hour as [hourlyTarget].
-  /// - Example: 0.5 represents 30 minutes of focused work per hour.
-  final double minutelyTarget;
-
-  /// Required progress amount per active hour as [hourlyTarget].
-  /// - Example: 0.5 represents 30 minutes of focused work per hour.
-  final double hourlyTarget;
-
-  /// Daily goal target as [dailyTarget].
-  /// - Combines with hourly targets for partial day tracking.
-  final double dailyTarget;
-
-  /// Weekly cumulative target as [weeklyTarget].
-  /// - Used for longer-term progress tracking.
-  final double weeklyTarget;
-
-  /// Monthly sustained effort target as [monthlyTarget].
-  final double monthlyTarget;
-
-  /// Annual overall target as [yearlyTarget].
-  final double yearlyTarget;
+  /// Specifies the required target amounts for each repetition period (e.g., minutely, hourly, daily).
+  ///
+  /// This map uses [RepetitionType] as keys and the corresponding target values as values.
+  ///
+  /// The interpretation of each value depends on [goalConstraint]:
+  /// - **Range Constraint:** The value should be a `Range` object or a map like `{ "min": 0.5, "max": 1.0 }`, representing the allowed range for that period.
+  ///   - Example: `{ RepetitionType.hourly: { "min": 0.5, "max": 1.0 } }` means the hourly target must be between 0.5 and 1.0 units.
+  /// - **Minimum Constraint:** The value is the minimum required amount for the period.
+  ///   - Example: `{ RepetitionType.daily: 2.5 }` means at least 2.5 units per day.
+  /// - **Maximum Constraint:** The value is the maximum allowed amount for the period.
+  ///   - Example: `{ RepetitionType.weekly: 10 }` means no more than 10 units per week.
+  ///
+  /// Multiple periods can be specified simultaneously:
+  /// ```dart
+  /// goalTargets: {
+  ///   RepetitionType.hourly: 0.5, // At least 0.5 units per hour
+  ///   RepetitionType.daily: { "min": 2, "max": 3 }, // Between 2 and 3 units per day
+  ///   RepetitionType.weekly: 15, // At least 15 units per week
+  /// }
+  /// ```
+  final Map<RepetitionType, dynamic> goalTargets;
 
   /// Reference to user-defined measurement units when applicable.
   /// - Used when [measurementUnit] is set to [MeasurementUnit.custom].
@@ -128,12 +124,7 @@ class GoalEntity extends BaseEntityAbstraction {
     MeasurementUnit? measurementUnit,
     String? customMeasurementUnitId,
     GoalConstraint? goalConstraint,
-    double? minutelyTarget,
-    double? hourlyTarget,
-    double? dailyTarget,
-    double? weeklyTarget,
-    double? monthlyTarget,
-    double? yearlyTarget,
+    Map<RepetitionType, dynamic>? goalTargets,
   }) =>
       GoalEntity(
         id: id ?? this.id,
@@ -146,12 +137,7 @@ class GoalEntity extends BaseEntityAbstraction {
         measurementUnit: measurementUnit ?? this.measurementUnit,
         customMeasurementUnitId: customMeasurementUnitId ?? this.customMeasurementUnitId,
         goalConstraint: goalConstraint ?? this.goalConstraint,
-        minutelyTarget: minutelyTarget ?? this.minutelyTarget,
-        hourlyTarget: hourlyTarget ?? this.hourlyTarget,
-        dailyTarget: dailyTarget ?? this.dailyTarget,
-        weeklyTarget: weeklyTarget ?? this.weeklyTarget,
-        monthlyTarget: monthlyTarget ?? this.monthlyTarget,
-        yearlyTarget: yearlyTarget ?? this.yearlyTarget,
+        goalTargets: goalTargets ?? this.goalTargets,
       );
 
   @override
@@ -162,10 +148,6 @@ class GoalEntity extends BaseEntityAbstraction {
         customMeasurementUnitId,
         goalConstraint,
         refId,
-        hourlyTarget,
-        dailyTarget,
-        weeklyTarget,
-        monthlyTarget,
-        yearlyTarget,
+        goalTargets,
       ];
 }

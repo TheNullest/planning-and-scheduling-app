@@ -18,6 +18,7 @@ Future<void> initDependencies() async {
   _categoriesManagerBloc();
   _tagsManagerBloc();
   _tasksManagerBloc();
+  _goalsManagerBloc();
 
   _navigator();
 

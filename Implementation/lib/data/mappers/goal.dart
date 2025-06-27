@@ -23,12 +23,7 @@ class GoalDataMapperImpl extends GoalDataMapper {
         customMeasurementUnitId: model.customMeasurementUnitId,
         measurementUnit: model.measurementUnit,
         goalConstraint: model.goalConstraint,
-        minutelyTarget: model.minutelyTarget,
-        hourlyTarget: model.hourlyTarget,
-        dailyTarget: model.dailyTarget,
-        weeklyTarget: model.weeklyTarget,
-        monthlyTarget: model.monthlyTarget,
-        yearlyTarget: model.yearlyTarget,
+        goalTargets: model.goalTargets,
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -50,15 +45,9 @@ class GoalDataMapperImpl extends GoalDataMapper {
         refType: ReferenceType.fromName(model.refType),
         refId: model.refId,
         customMeasurementUnitId: model.customMeasurementUnitId,
-        measurementUnit:
-            model.measurementUnit != null ? MeasurementUnit.fromName(model.measurementUnit!) : null,
+        measurementUnit: MeasurementUnit.fromName(model.measurementUnit!),
         goalConstraint: GoalConstraint.fromName(model.goalConstraint),
-        minutelyTarget: model.minutelyTarget,
-        hourlyTarget: model.hourlyTarget,
-        dailyTarget: model.dailyTarget,
-        weeklyTarget: model.weeklyTarget,
-        monthlyTarget: model.monthlyTarget,
-        yearlyTarget: model.yearlyTarget,
+        goalTargets: model.goalTargets,
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

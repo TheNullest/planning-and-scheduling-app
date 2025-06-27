@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/sub_task_upsert_dialog.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_vms_manager.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_form.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_upsert_action_buttons.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_upsert_vm.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_card.dart';
 
 class SubTasksListWidget extends StatelessWidget {
   const SubTasksListWidget({super.key});
@@ -14,24 +14,33 @@ class SubTasksListWidget extends StatelessWidget {
     final subTaskManger = context.read<SubTaskVMsManager>();
     return Column(
       children: [
-        Selector<SubTaskVMsManager, ({bool isAddButtonActive, bool listUpdated})>(
-          selector: (_, manager) => (
-            isAddButtonActive: manager.isAddButtonActive,
-            listUpdated: manager.viewModelsListIsUpdated
-          ),
+        Selector<SubTaskVMsManager, bool>(
+          selector: (_, manager) => manager.listUpdated,
           builder: (_, vm, __) {
             return Column(
               children: [
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add New SubTask'),
-                  onPressed:
-                      subTaskManger.isAddButtonActive ? subTaskManger.addNewToViewModelsList : null,
-                ),
+                Selector<SubTaskVMsManager, bool>(
+                    selector: (_, manager) => manager.isEnabled,
+                    builder: (_, isEnabled, __) {
+                      return ElevatedButton.icon(
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add New SubTask'),
+                        onPressed: isEnabled
+                            ? () async => showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  builder: (_) => ChangeNotifierProvider<SubTaskUpsertVM>.value(
+                                    value: subTaskManger.newItem(),
+                                    child: const SubTaskUpsertDialog(),
+                                  ),
+                                )
+                            : null,
+                      );
+                    }),
                 // Spacer
                 12.sizedBoxHeight,
 
-                if (subTaskManger.viewModelsList.isNotEmpty)
+                if (subTaskManger.items.isNotEmpty)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -39,38 +48,10 @@ class SubTasksListWidget extends StatelessWidget {
                         'SubTasks:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      ...subTaskManger.viewModelsList.map(
+                      ...subTaskManger.items.map(
                         (subTaskVM) => ChangeNotifierProvider<SubTaskUpsertVM>(
-                          create: (_) => subTaskVM,
-                          child: ValueListenableProvider<bool>.value(
-                              value: subTaskVM.isLocked,
-                              child: Consumer<bool>(
-                                builder: (context, isItLocked, _) => !isItLocked
-                                    ? Column(
-                                        children: [
-                                          Column(
-                                            children: [
-                                              const SubTaskFormWidget(),
-                                              SubTaskUpsertActionButtons(
-                                                onCancel: subTaskManger.currentViewModelFormClosed,
-                                                viewStates: subTaskManger.viewStates,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      )
-                                    : ListTile(
-                                        title: Text(
-                                          subTaskVM.vmFormController.title,
-                                        ),
-                                        subtitle: Text(
-                                          'Priority: ${subTaskVM.vmFormController.priority.name}',
-                                        ),
-                                        onLongPress: () =>
-                                            subTaskManger.currentViewModelChanged(subTaskVM),
-                                      ),
-                              )),
-                        ),
+                            create: (_) => subTaskVM,
+                            child: SubTaskDisplayCard(subTaskVM: subTaskVM)),
                       ),
                     ],
                   )

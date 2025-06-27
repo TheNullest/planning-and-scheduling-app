@@ -119,7 +119,6 @@ class HiveInitializerImpl extends HiveInitializer {
 
     final dartClassAdapters = <HiveBaseTypeAdapter>[DurationAdapter()];
 
-
     final adapters = enumAdapters + dartClassAdapters + modelAdapters;
     for (final adapter in adapters) {
       adapter.registerAdapter();

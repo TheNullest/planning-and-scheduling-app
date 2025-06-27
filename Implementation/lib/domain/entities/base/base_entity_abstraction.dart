@@ -11,13 +11,14 @@ import 'package:zamaan/core/utils/uuid.dart';
 /// - `description`: A description of the entity, if any.
 /// - `updatedAt`: The timestamp when the entity was last updated, can be null if not updated.
 abstract class BaseEntityAbstraction with EquatableMixin {
-  BaseEntityAbstraction({
-    required this.userId,
-    required this.createdAt,
-    String? id,
-    this.description,
-    this.updatedAt,
-  }) : id = id ?? uuidGenerator;
+  BaseEntityAbstraction(
+      {required this.userId,
+      required this.createdAt,
+      String? id,
+      this.description,
+      this.updatedAt,
+      this.order})
+      : id = id ?? uuidGenerator;
 
   /// Creates a new `BaseEntityAbstraction` with the specified properties.
   ///
@@ -50,6 +51,9 @@ abstract class BaseEntityAbstraction with EquatableMixin {
   /// it should be set when the entity is updated.
   @HiveField(4)
   final DateTime? updatedAt;
+
+  @HiveField(5)
+  final int? order;
 
   /// Creates a copy of this class with potentially modified properties.
   ///

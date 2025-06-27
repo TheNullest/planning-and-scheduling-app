@@ -79,7 +79,6 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     if (tasksResponse.isLeft()) {
       final failure = tasksResponse.swap().getOrElse(() => throw Exception());
       emit(TasksManagerState.failedAction(failure.message));
-      return;
     }
 
     final taskId = tasksResponse.getOrElse(() => '');
@@ -97,7 +96,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
       (subTaskId) {
-        emit(_SubTaskCreated(subTaskId));
+        emit(_SubTaskCreated(event.newSubTask));
       },
     );
     await _fetchActiveTasks(const _FetchActiveTasks(), emit);
@@ -111,8 +110,8 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     final response = await _deleteTaskUsecase(event.taskId);
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
-      (taskId) {
-        emit(const _SuccessfulAction(''));
+      (_) {
+        emit(_TaskDeleted(event.taskId));
       },
     );
 

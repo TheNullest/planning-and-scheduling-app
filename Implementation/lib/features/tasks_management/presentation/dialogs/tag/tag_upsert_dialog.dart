@@ -1,52 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:zamaan/core/extensions/context_extension.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tags/tags_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/form_controllers/tag_form_controller.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_upsert_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
 import 'package:zamaan/presentation_shared/widgets/color_picker.dart';
 import 'package:zamaan/presentation_shared/widgets/icon_picker.dart';
 
-class TagUpsertDialog extends StatefulWidget {
-  const TagUpsertDialog(this.tag, {super.key});
+Future<void> tagUpsertDialog(BuildContext context, TagUpsertVM tag, String? taskId) async =>
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        minHeight: context.mediaQueryHeight,
+      ),
+      builder: (_) => ChangeNotifierProvider<TagUpsertVM>.value(
+        value: tag,
+        child: _TagUpsert(taskId),
+      ),
+    );
 
-  final TagUpsertVM tag;
+class _TagUpsert extends StatefulWidget {
+  const _TagUpsert(this.taskId);
+  final String? taskId;
 
   @override
-  State<TagUpsertDialog> createState() => _TagUpsertDialogState();
+  State<_TagUpsert> createState() => _TagUpsertState();
 }
 
-class _TagUpsertDialogState extends State<TagUpsertDialog> {
-  late final TagsManagerBloc tagsMangerBloc;
-  late final TagVmsManager tagVMsManager;
-  late final TagFormController tagFormController;
+class _TagUpsertState extends State<_TagUpsert> {
+  TagsManagerBloc get tagsMangerBloc => context.read<TagsManagerBloc>();
+  TagUpsertVM get tagVM => context.read<TagUpsertVM>();
+
   late final TextEditingController titleController;
   late final TextEditingController descriptionController;
 
   @override
   void initState() {
-    tagsMangerBloc = context.read<TagsManagerBloc>();
-    tagVMsManager = context.read<TagVmsManager>();
-    tagFormController = widget.tag.vmFormController;
-    titleController = TextEditingController(text: widget.tag.vmFormController.title);
-    descriptionController =
-        TextEditingController(text: widget.tag.vmFormController.description ?? '');
+    titleController = TextEditingController(text: tagVM.title);
+    descriptionController = TextEditingController(text: tagVM.description ?? '');
     super.initState();
   }
 
   void _onIconPicked(IconData icon) {
     setState(() {
-      tagFormController.icon = icon;
+      tagVM.icon = icon;
     });
   }
 
   void resetTextControllers() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      titleController.text = tagFormController.title;
-      descriptionController.text = tagFormController.description ?? '';
-      tagFormController.shouldResetInputs = false;
+      titleController.text = tagVM.title;
+      descriptionController.text = tagVM.description ?? '';
+      tagVM.shouldResetInputs = false;
     });
   }
 
@@ -73,89 +80,104 @@ class _TagUpsertDialogState extends State<TagUpsertDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Selector<TagVmsManager, String>(
-                  selector: (_, vmsManager) => vmsManager.viewStates.widgetTitle,
+              Selector<TagUpsertVM, String>(
+                  selector: (_, vm) => vm.viewStates.widgetTitle,
                   builder: (_, dialogTitle, __) {
                     return Text(
                       dialogTitle,
                       style: Theme.of(context).textTheme.headlineSmall,
                     );
                   }),
-              IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.close))
+              IconButton(
+                  onPressed: () {
+                    tagVM.resetValues();
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.close))
             ],
           ),
-          ChangeNotifierProvider<TagFormController>.value(
-            value: tagFormController,
-            child: Selector<TagFormController, bool>(
-                selector: (_, fromController) => fromController.shouldResetInputs,
-                builder: (context, reset, _) {
-                  if (reset) resetTextControllers();
-                  return Column(
-                    children: [
-                      // Title field
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: TextFormField(
-                          controller: titleController,
-                          decoration: const InputDecoration(labelText: 'Title'),
-                          validator: (v) => v == null || v.isEmpty ? 'Enter a title' : null,
-                          onChanged: (value) => tagFormController.title = value,
-                        ),
+          Selector<TagUpsertVM, bool>(
+              selector: (_, vm) => vm.shouldResetInputs,
+              builder: (context, reset, _) {
+                if (reset) resetTextControllers();
+                return Column(
+                  children: [
+                    // Title field
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextFormField(
+                        controller: titleController,
+                        decoration: const InputDecoration(labelText: 'Title'),
+                        validator: (v) => v == null || v.isEmpty ? 'Enter a title' : null,
+                        onChanged: (value) => tagVM.title = value,
                       ),
+                    ),
 
-                      // Desciption field
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: TextFormField(
-                          controller: descriptionController,
-                          decoration: const InputDecoration(labelText: 'Description'),
-                          validator: (v) => v == null || v.isEmpty ? 'Enter a title' : null,
-                          onChanged: (value) => tagFormController.description = value,
-                        ),
+                    // Desciption field
+                    Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: TextFormField(
+                        controller: descriptionController,
+                        decoration: const InputDecoration(labelText: 'Description'),
+                        validator: (v) => v == null || v.isEmpty ? 'Enter a title' : null,
+                        onChanged: (value) => tagVM.description = value,
                       ),
-                      // Spacer
-                      12.sizedBoxHeight,
+                    ),
+                    // Spacer
+                    12.sizedBoxHeight,
 
-                      Row(
-                        children: [
-                          //color picker
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Selector<TagFormController, Color>(
-                              selector: (_, fromController) => fromController.color,
-                              shouldRebuild: (oldColor, currentColer) => oldColor != currentColer,
-                              builder: (context, color, _) {
-                                return ColorPickerWidget(
-                                  onColorChanged: (changedColor) =>
-                                      tagFormController.color = changedColor,
-                                  color: color,
-                                );
-                              },
-                            ),
+                    Row(
+                      children: [
+                        //color picker
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Selector<TagUpsertVM, Color>(
+                            selector: (_, vm) => vm.color,
+                            shouldRebuild: (oldColor, currentColer) => oldColor != currentColer,
+                            builder: (context, color, _) {
+                              return ColorPickerWidget(
+                                onColorChanged: (changedColor) => tagVM.color = changedColor,
+                                color: color,
+                              );
+                            },
                           ),
+                        ),
 
-                          // Icon picker
-                          IconPickerWidget(
-                            onIconPicked: _onIconPicked,
-                            initIcon: tagFormController.icon,
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                }),
-          ),
+                        // Icon picker
+                        IconPickerWidget(
+                          onIconPicked: _onIconPicked,
+                          initIcon: tagVM.icon,
+                        ),
+                      ],
+                    ),
+                    Selector<TagUpsertVM, ({bool isRelatedToTask, String? taskId})>(
+                        selector: (_, vm) =>
+                            (isRelatedToTask: vm.isRelatedToTask, taskId: vm.taskId),
+                        builder: (context, values, _) {
+                          return SwitchListTile(
+                              title: const Text('Set to task'),
+                              subtitle: const Text('Mark this tag as related to a task.'),
+                              isThreeLine: true,
+                              contentPadding: const EdgeInsets.all(8),
+                              secondary: const Icon(Icons.task_alt_outlined),
+                              dense: true,
+                              activeColor: Colors.green,
+                              value: values.isRelatedToTask,
+                              onChanged: widget.taskId == null
+                                  ? null
+                                  : (value) => tagVM.taskId = value ? widget.taskId : null);
+                        }),
+                  ],
+                );
+              }),
           ActionButtonsWidget(
-            onInsert: () {
-              tagsMangerBloc.add(TagsManagerEvent.create(tagFormController.toEntity));
+            onSubmit: () {
+              tagsMangerBloc.add(TagsManagerEvent.create(tagVM.toEntity));
             },
-            onUpdate: () => tagsMangerBloc.add(TagsManagerEvent.update(tagFormController.toEntity)),
-            onDelete: () {
-              tagsMangerBloc.add(TagsManagerEvent.delete(tagFormController.id!));
-              tagVMsManager.removeFromItems(widget.tag);
-            },
-            onReset: tagFormController.resetValues,
-            viewStates: tagVMsManager.viewStates,
+            onUpdate: () => tagsMangerBloc.add(TagsManagerEvent.update(tagVM.toEntity)),
+            onDelete: () => tagsMangerBloc.add(TagsManagerEvent.delete(tagVM.id!)),
+            onReset: tagVM.resetValues,
+            viewStates: tagVM.viewStates,
           )
         ],
       ),

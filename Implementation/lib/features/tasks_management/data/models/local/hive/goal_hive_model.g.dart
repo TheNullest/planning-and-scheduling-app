@@ -22,15 +22,10 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       createdAt: fields[2] as DateTime,
       refType: fields[11] as ReferenceType,
       refId: fields[12] as String,
-      measurementUnit: fields[13] as MeasurementUnit?,
+      measurementUnit: fields[13] as MeasurementUnit,
       goalConstraint: fields[14] as GoalConstraint,
-      minutelyTarget: fields[15] as double,
-      hourlyTarget: fields[16] as double,
-      dailyTarget: fields[17] as double,
-      weeklyTarget: fields[18] as double,
-      monthlyTarget: fields[19] as double,
-      yearlyTarget: fields[20] as double,
-      customMeasurementUnitId: fields[21] as String?,
+      goalTargets: (fields[15] as Map).cast<RepetitionType, dynamic>(),
+      customMeasurementUnitId: fields[16] as String?,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -39,7 +34,7 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
   void write(BinaryWriter writer, GoalHiveModel obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(11)
       ..writeByte(11)
       ..write(obj.refType)
       ..writeByte(12)
@@ -49,18 +44,8 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       ..writeByte(14)
       ..write(obj.goalConstraint)
       ..writeByte(15)
-      ..write(obj.minutelyTarget)
+      ..write(obj.goalTargets)
       ..writeByte(16)
-      ..write(obj.hourlyTarget)
-      ..writeByte(17)
-      ..write(obj.dailyTarget)
-      ..writeByte(18)
-      ..write(obj.weeklyTarget)
-      ..writeByte(19)
-      ..write(obj.monthlyTarget)
-      ..writeByte(20)
-      ..write(obj.yearlyTarget)
-      ..writeByte(21)
       ..write(obj.customMeasurementUnitId)
       ..writeByte(0)
       ..write(obj.id)

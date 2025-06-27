@@ -30,18 +30,9 @@ mixin _$GoalSupabaseModel {
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'goal_constraint')
   String get goalConstraint => throw _privateConstructorUsedError;
-  @JsonKey(name: 'minutely_target')
-  double get minutelyTarget => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hourly_target')
-  double get hourlyTarget => throw _privateConstructorUsedError;
-  @JsonKey(name: 'daily_target')
-  double get dailyTarget => throw _privateConstructorUsedError;
-  @JsonKey(name: 'weekly_target')
-  double get weeklyTarget => throw _privateConstructorUsedError;
-  @JsonKey(name: 'monthly_target')
-  double get monthlyTarget => throw _privateConstructorUsedError;
-  @JsonKey(name: 'yearly_target')
-  double get yearlyTarget => throw _privateConstructorUsedError;
+  @JsonKey(name: 'goal_targets')
+  Map<RepetitionType, dynamic> get goalTargets =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'measurement_unit')
   String? get measurementUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'custom_measurement_unit_id')
@@ -73,12 +64,7 @@ abstract class $GoalSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'goal_constraint') String goalConstraint,
-      @JsonKey(name: 'minutely_target') double minutelyTarget,
-      @JsonKey(name: 'hourly_target') double hourlyTarget,
-      @JsonKey(name: 'daily_target') double dailyTarget,
-      @JsonKey(name: 'weekly_target') double weeklyTarget,
-      @JsonKey(name: 'monthly_target') double monthlyTarget,
-      @JsonKey(name: 'yearly_target') double yearlyTarget,
+      @JsonKey(name: 'goal_targets') Map<RepetitionType, dynamic> goalTargets,
       @JsonKey(name: 'measurement_unit') String? measurementUnit,
       @JsonKey(name: 'custom_measurement_unit_id')
       String? customMeasurementUnitId,
@@ -107,12 +93,7 @@ class _$GoalSupabaseModelCopyWithImpl<$Res, $Val extends GoalSupabaseModel>
     Object? userId = null,
     Object? createdAt = null,
     Object? goalConstraint = null,
-    Object? minutelyTarget = null,
-    Object? hourlyTarget = null,
-    Object? dailyTarget = null,
-    Object? weeklyTarget = null,
-    Object? monthlyTarget = null,
-    Object? yearlyTarget = null,
+    Object? goalTargets = null,
     Object? measurementUnit = freezed,
     Object? customMeasurementUnitId = freezed,
     Object? updatedAt = freezed,
@@ -143,30 +124,10 @@ class _$GoalSupabaseModelCopyWithImpl<$Res, $Val extends GoalSupabaseModel>
           ? _value.goalConstraint
           : goalConstraint // ignore: cast_nullable_to_non_nullable
               as String,
-      minutelyTarget: null == minutelyTarget
-          ? _value.minutelyTarget
-          : minutelyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      hourlyTarget: null == hourlyTarget
-          ? _value.hourlyTarget
-          : hourlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      dailyTarget: null == dailyTarget
-          ? _value.dailyTarget
-          : dailyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      weeklyTarget: null == weeklyTarget
-          ? _value.weeklyTarget
-          : weeklyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      monthlyTarget: null == monthlyTarget
-          ? _value.monthlyTarget
-          : monthlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      yearlyTarget: null == yearlyTarget
-          ? _value.yearlyTarget
-          : yearlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
+      goalTargets: null == goalTargets
+          ? _value.goalTargets
+          : goalTargets // ignore: cast_nullable_to_non_nullable
+              as Map<RepetitionType, dynamic>,
       measurementUnit: freezed == measurementUnit
           ? _value.measurementUnit
           : measurementUnit // ignore: cast_nullable_to_non_nullable
@@ -202,12 +163,7 @@ abstract class _$$GoalSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'goal_constraint') String goalConstraint,
-      @JsonKey(name: 'minutely_target') double minutelyTarget,
-      @JsonKey(name: 'hourly_target') double hourlyTarget,
-      @JsonKey(name: 'daily_target') double dailyTarget,
-      @JsonKey(name: 'weekly_target') double weeklyTarget,
-      @JsonKey(name: 'monthly_target') double monthlyTarget,
-      @JsonKey(name: 'yearly_target') double yearlyTarget,
+      @JsonKey(name: 'goal_targets') Map<RepetitionType, dynamic> goalTargets,
       @JsonKey(name: 'measurement_unit') String? measurementUnit,
       @JsonKey(name: 'custom_measurement_unit_id')
       String? customMeasurementUnitId,
@@ -234,12 +190,7 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? createdAt = null,
     Object? goalConstraint = null,
-    Object? minutelyTarget = null,
-    Object? hourlyTarget = null,
-    Object? dailyTarget = null,
-    Object? weeklyTarget = null,
-    Object? monthlyTarget = null,
-    Object? yearlyTarget = null,
+    Object? goalTargets = null,
     Object? measurementUnit = freezed,
     Object? customMeasurementUnitId = freezed,
     Object? updatedAt = freezed,
@@ -270,30 +221,10 @@ class __$$GoalSupabaseModelImplCopyWithImpl<$Res>
           ? _value.goalConstraint
           : goalConstraint // ignore: cast_nullable_to_non_nullable
               as String,
-      minutelyTarget: null == minutelyTarget
-          ? _value.minutelyTarget
-          : minutelyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      hourlyTarget: null == hourlyTarget
-          ? _value.hourlyTarget
-          : hourlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      dailyTarget: null == dailyTarget
-          ? _value.dailyTarget
-          : dailyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      weeklyTarget: null == weeklyTarget
-          ? _value.weeklyTarget
-          : weeklyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      monthlyTarget: null == monthlyTarget
-          ? _value.monthlyTarget
-          : monthlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
-      yearlyTarget: null == yearlyTarget
-          ? _value.yearlyTarget
-          : yearlyTarget // ignore: cast_nullable_to_non_nullable
-              as double,
+      goalTargets: null == goalTargets
+          ? _value._goalTargets
+          : goalTargets // ignore: cast_nullable_to_non_nullable
+              as Map<RepetitionType, dynamic>,
       measurementUnit: freezed == measurementUnit
           ? _value.measurementUnit
           : measurementUnit // ignore: cast_nullable_to_non_nullable
@@ -324,16 +255,13 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'goal_constraint') required this.goalConstraint,
-      @JsonKey(name: 'minutely_target') required this.minutelyTarget,
-      @JsonKey(name: 'hourly_target') required this.hourlyTarget,
-      @JsonKey(name: 'daily_target') required this.dailyTarget,
-      @JsonKey(name: 'weekly_target') required this.weeklyTarget,
-      @JsonKey(name: 'monthly_target') required this.monthlyTarget,
-      @JsonKey(name: 'yearly_target') required this.yearlyTarget,
+      @JsonKey(name: 'goal_targets')
+      required final Map<RepetitionType, dynamic> goalTargets,
       @JsonKey(name: 'measurement_unit') this.measurementUnit,
       @JsonKey(name: 'custom_measurement_unit_id') this.customMeasurementUnitId,
       @JsonKey(name: 'updated_at') this.updatedAt,
-      this.description});
+      this.description})
+      : _goalTargets = goalTargets;
 
   factory _$GoalSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$GoalSupabaseModelImplFromJson(json);
@@ -354,24 +282,15 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
   @override
   @JsonKey(name: 'goal_constraint')
   final String goalConstraint;
+  final Map<RepetitionType, dynamic> _goalTargets;
   @override
-  @JsonKey(name: 'minutely_target')
-  final double minutelyTarget;
-  @override
-  @JsonKey(name: 'hourly_target')
-  final double hourlyTarget;
-  @override
-  @JsonKey(name: 'daily_target')
-  final double dailyTarget;
-  @override
-  @JsonKey(name: 'weekly_target')
-  final double weeklyTarget;
-  @override
-  @JsonKey(name: 'monthly_target')
-  final double monthlyTarget;
-  @override
-  @JsonKey(name: 'yearly_target')
-  final double yearlyTarget;
+  @JsonKey(name: 'goal_targets')
+  Map<RepetitionType, dynamic> get goalTargets {
+    if (_goalTargets is EqualUnmodifiableMapView) return _goalTargets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_goalTargets);
+  }
+
   @override
   @JsonKey(name: 'measurement_unit')
   final String? measurementUnit;
@@ -386,7 +305,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
 
   @override
   String toString() {
-    return 'GoalSupabaseModel(id: $id, refId: $refId, refType: $refType, userId: $userId, createdAt: $createdAt, goalConstraint: $goalConstraint, minutelyTarget: $minutelyTarget, hourlyTarget: $hourlyTarget, dailyTarget: $dailyTarget, weeklyTarget: $weeklyTarget, monthlyTarget: $monthlyTarget, yearlyTarget: $yearlyTarget, measurementUnit: $measurementUnit, customMeasurementUnitId: $customMeasurementUnitId, updatedAt: $updatedAt, description: $description)';
+    return 'GoalSupabaseModel(id: $id, refId: $refId, refType: $refType, userId: $userId, createdAt: $createdAt, goalConstraint: $goalConstraint, goalTargets: $goalTargets, measurementUnit: $measurementUnit, customMeasurementUnitId: $customMeasurementUnitId, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -402,18 +321,8 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
                 other.createdAt == createdAt) &&
             (identical(other.goalConstraint, goalConstraint) ||
                 other.goalConstraint == goalConstraint) &&
-            (identical(other.minutelyTarget, minutelyTarget) ||
-                other.minutelyTarget == minutelyTarget) &&
-            (identical(other.hourlyTarget, hourlyTarget) ||
-                other.hourlyTarget == hourlyTarget) &&
-            (identical(other.dailyTarget, dailyTarget) ||
-                other.dailyTarget == dailyTarget) &&
-            (identical(other.weeklyTarget, weeklyTarget) ||
-                other.weeklyTarget == weeklyTarget) &&
-            (identical(other.monthlyTarget, monthlyTarget) ||
-                other.monthlyTarget == monthlyTarget) &&
-            (identical(other.yearlyTarget, yearlyTarget) ||
-                other.yearlyTarget == yearlyTarget) &&
+            const DeepCollectionEquality()
+                .equals(other._goalTargets, _goalTargets) &&
             (identical(other.measurementUnit, measurementUnit) ||
                 other.measurementUnit == measurementUnit) &&
             (identical(
@@ -435,12 +344,7 @@ class _$GoalSupabaseModelImpl implements _GoalSupabaseModel {
       userId,
       createdAt,
       goalConstraint,
-      minutelyTarget,
-      hourlyTarget,
-      dailyTarget,
-      weeklyTarget,
-      monthlyTarget,
-      yearlyTarget,
+      const DeepCollectionEquality().hash(_goalTargets),
       measurementUnit,
       customMeasurementUnitId,
       updatedAt,
@@ -471,12 +375,8 @@ abstract class _GoalSupabaseModel implements GoalSupabaseModel {
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       @JsonKey(name: 'goal_constraint') required final String goalConstraint,
-      @JsonKey(name: 'minutely_target') required final double minutelyTarget,
-      @JsonKey(name: 'hourly_target') required final double hourlyTarget,
-      @JsonKey(name: 'daily_target') required final double dailyTarget,
-      @JsonKey(name: 'weekly_target') required final double weeklyTarget,
-      @JsonKey(name: 'monthly_target') required final double monthlyTarget,
-      @JsonKey(name: 'yearly_target') required final double yearlyTarget,
+      @JsonKey(name: 'goal_targets')
+      required final Map<RepetitionType, dynamic> goalTargets,
       @JsonKey(name: 'measurement_unit') final String? measurementUnit,
       @JsonKey(name: 'custom_measurement_unit_id')
       final String? customMeasurementUnitId,
@@ -503,23 +403,8 @@ abstract class _GoalSupabaseModel implements GoalSupabaseModel {
   @JsonKey(name: 'goal_constraint')
   String get goalConstraint;
   @override
-  @JsonKey(name: 'minutely_target')
-  double get minutelyTarget;
-  @override
-  @JsonKey(name: 'hourly_target')
-  double get hourlyTarget;
-  @override
-  @JsonKey(name: 'daily_target')
-  double get dailyTarget;
-  @override
-  @JsonKey(name: 'weekly_target')
-  double get weeklyTarget;
-  @override
-  @JsonKey(name: 'monthly_target')
-  double get monthlyTarget;
-  @override
-  @JsonKey(name: 'yearly_target')
-  double get yearlyTarget;
+  @JsonKey(name: 'goal_targets')
+  Map<RepetitionType, dynamic> get goalTargets;
   @override
   @JsonKey(name: 'measurement_unit')
   String? get measurementUnit;

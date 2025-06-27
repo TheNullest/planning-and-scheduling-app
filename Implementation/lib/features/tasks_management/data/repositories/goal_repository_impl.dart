@@ -31,27 +31,16 @@ class GoalRepositoryImpl extends BaseRepositoryImpl<
 
   final GoalLocalDataSource<GoalHiveModel> _localDataSource;
   final SupabaseDataSource<GoalSupabaseModel, DataMapper> _remoteDataSource;
-  final DataMapper _dataMapper;
+  final GoalDataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
-  @override
-  EResultFuture<GoalEntity?> getGoalBySubTaskId(String subTaskId) async {
-    try {
-      final response = await _localDataSource.getGoalBySubTaskId(subTaskId);
-      final goalEntity =
-          _dataMapper.toEntityFromHive(_dataMapper.foldEitherSingle(response)) as GoalEntity?;
-      return Right(goalEntity);
-    } on Exception catch (e, stackTrace) {
-      throw failureTypeDetector(e: e, stackTrace: stackTrace);
-    }
-  }
 
   @override
-  EResultFuture<List<GoalEntity>> getGoalsByTaskId(String taskId) async {
+  EResultFuture<List<GoalEntity>> getGoalsByRefIds(List<String> refIds) async {
     try {
-      final response = await _localDataSource.getGoalsByTaskId(taskId);
-      final goals =
-          _dataMapper.toEntitiesFromHive(_dataMapper.foldEitherList(response)) as List<GoalEntity>;
-      return Right(goals);
+      final response = await _localDataSource.getGoalsByRefIds(refIds);
+      final goalEntity = _dataMapper
+          .toEntitiesFromHive(_dataMapper.foldEitherSingle<List<GoalHiveModel>>(response)!);
+      return Right(goalEntity);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }

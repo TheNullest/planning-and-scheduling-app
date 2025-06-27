@@ -10,21 +10,27 @@ part 'repetition_type.g.dart';
 @HiveType(typeId: EnumHiveTypeIds.repetitionType)
 enum RepetitionType {
   @HiveField(0)
-  weekly('هفتگی'),
+  minutely('دقیقه ای'),
 
   @HiveField(1)
-  daily('روزانه'),
+  hourly('ساعتی'),
 
   @HiveField(2)
-  weekdays('روزهای هفته'),
+  daily('روزانه'),
 
   @HiveField(3)
-  monthly('ماهانه'),
+  weekdays('روزهای هفته'),
 
   @HiveField(4)
-  yearly('سالانه'),
+  weekly('هفتگی'),
 
   @HiveField(5)
+  monthly('ماهانه'),
+
+  @HiveField(6)
+  yearly('سالانه'),
+
+  @HiveField(7)
   custom('سفارشی');
 
   /// Constructs a [RepetitionType] with its localized Persian string.

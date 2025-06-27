@@ -14,17 +14,24 @@ Map<String, dynamic> _$GoalSupabaseModelToJson(GoalSupabaseModel instance) =>
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
       'goal_constraint': instance.goalConstraint,
-      'minutely_target': instance.minutelyTarget,
-      'hourly_target': instance.hourlyTarget,
-      'daily_target': instance.dailyTarget,
-      'weekly_target': instance.weeklyTarget,
-      'monthly_target': instance.monthlyTarget,
-      'yearly_target': instance.yearlyTarget,
+      'goal_targets': instance.goalTargets
+          .map((k, e) => MapEntry(_$RepetitionTypeEnumMap[k]!, e)),
       'measurement_unit': instance.measurementUnit,
       'custom_measurement_unit_id': instance.customMeasurementUnitId,
       'updated_at': instance.updatedAt?.toIso8601String(),
       'description': instance.description,
     };
+
+const _$RepetitionTypeEnumMap = {
+  RepetitionType.minutely: 'minutely',
+  RepetitionType.hourly: 'hourly',
+  RepetitionType.weekly: 'weekly',
+  RepetitionType.daily: 'daily',
+  RepetitionType.weekdays: 'weekdays',
+  RepetitionType.monthly: 'monthly',
+  RepetitionType.yearly: 'yearly',
+  RepetitionType.custom: 'custom',
+};
 
 _$GoalSupabaseModelImpl _$$GoalSupabaseModelImplFromJson(
         Map<String, dynamic> json) =>
@@ -35,12 +42,9 @@ _$GoalSupabaseModelImpl _$$GoalSupabaseModelImplFromJson(
       userId: json['user_id'] as String,
       createdAt: DateTime.parse(json['created_at'] as String),
       goalConstraint: json['goal_constraint'] as String,
-      minutelyTarget: (json['minutely_target'] as num).toDouble(),
-      hourlyTarget: (json['hourly_target'] as num).toDouble(),
-      dailyTarget: (json['daily_target'] as num).toDouble(),
-      weeklyTarget: (json['weekly_target'] as num).toDouble(),
-      monthlyTarget: (json['monthly_target'] as num).toDouble(),
-      yearlyTarget: (json['yearly_target'] as num).toDouble(),
+      goalTargets: (json['goal_targets'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry($enumDecode(_$RepetitionTypeEnumMap, k), e),
+      ),
       measurementUnit: json['measurement_unit'] as String?,
       customMeasurementUnitId: json['custom_measurement_unit_id'] as String?,
       updatedAt: json['updated_at'] == null
@@ -58,12 +62,8 @@ Map<String, dynamic> _$$GoalSupabaseModelImplToJson(
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
       'goal_constraint': instance.goalConstraint,
-      'minutely_target': instance.minutelyTarget,
-      'hourly_target': instance.hourlyTarget,
-      'daily_target': instance.dailyTarget,
-      'weekly_target': instance.weeklyTarget,
-      'monthly_target': instance.monthlyTarget,
-      'yearly_target': instance.yearlyTarget,
+      'goal_targets': instance.goalTargets
+          .map((k, e) => MapEntry(_$RepetitionTypeEnumMap[k]!, e)),
       'measurement_unit': instance.measurementUnit,
       'custom_measurement_unit_id': instance.customMeasurementUnitId,
       'updated_at': instance.updatedAt?.toIso8601String(),

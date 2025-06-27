@@ -31,11 +31,13 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   final PaginationOptions _defaultPagination;
   PaginationOptions get defaultPagination => _defaultPagination;
 
+  SupabaseQueryBuilder get table => client.from(collectionPath);
+
   late String selectQuery = '*';
   @override
   EResultFutureVoid deleteBatch(List<String> ids) async {
     try {
-      await client.from(collectionPath).delete().or(conditionToString(conditions: ids, join: ','));
+      await table.delete().or(conditionToString(conditions: ids, join: ','));
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -45,7 +47,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFutureVoid createBatch(List<T> items) async {
     try {
-      await client.from(collectionPath).insert(_dataMapper.toJsonList(items));
+      await table.upsert(_dataMapper.toJsonList(items));
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -55,7 +57,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFutureVoid updateBatch(List<T> items) async {
     try {
-      await client.from(collectionPath).upsert(_dataMapper.toJsonList(items));
+      await table.upsert(_dataMapper.toJsonList(items));
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -65,7 +67,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFuture<bool> exists(String id) async {
     try {
-      final result = await client.from(collectionPath).select(selectQuery).eq('id', id).single();
+      final result = await table.select(selectQuery).eq('id', id).single();
       return Right(result.isNotEmpty);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -75,7 +77,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFuture<List<T>> getAll() async {
     try {
-      final result = await client.from(collectionPath).select(selectQuery);
+      final result = await table.select(selectQuery);
       return Right(_dataMapper.fromJsonList(result) as List<T>);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -85,7 +87,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFuture<T> getById(String id) async {
     try {
-      final result = await client.from(collectionPath).select(selectQuery).eq('id', id).single();
+      final result = await table.select(selectQuery).eq('id', id).single();
       return Right(_dataMapper.fromJson(result) as T);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -95,7 +97,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFutureVoid update(T entity) async {
     try {
-      await client.from(collectionPath).update(_dataMapper.toJson(entity));
+      await table.update(_dataMapper.toJson(entity));
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -118,7 +120,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFutureVoid create(T entity) async {
     try {
-      await client.from(collectionPath).insert(_dataMapper.toJson(entity));
+      await table.insert(_dataMapper.toJson(entity));
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -128,7 +130,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   @override
   EResultFutureVoid delete(String id) async {
     try {
-      await client.from(collectionPath).delete().eq('id', id);
+      await table.delete().eq('id', id);
       return const Right(null);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

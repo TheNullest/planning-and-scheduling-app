@@ -24,7 +24,7 @@ class SelectedCategoriesWidget extends StatelessWidget {
               ..initItems(cats)
               ..initSelectedItems(selectedIds),
             created: (cat) {
-              categoryVMsManager.addToItems(cat);
+              categoryVMsManager.addNewPersistedItem(cat);
               Navigator.pop(context);
               return;
             },
@@ -52,11 +52,8 @@ class SelectedCategoriesWidget extends StatelessWidget {
                             ? 'Select Categories'
                             : 'Add More Categories'),
                         icon: const Icon(Icons.add),
-                        onPressed: () async => showModalBottomSheet(
-                            context: context,
-                            builder: (_) => ChangeNotifierProvider<CategoryVmsManager>.value(
-                                value: categoryVMsManager,
-                                child: const CategoriesChipListDialog()))),
+                        onPressed: () async =>
+                            categoriesChipListDialog(context, categoryVMsManager)),
                   ],
                 );
               }),
