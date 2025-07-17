@@ -27,7 +27,7 @@ mixin _$ScheduledDaySupabaseModel {
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'schedule_constraint_id')
-  String get scheduleConstraintId => throw _privateConstructorUsedError;
+  String get taskId => throw _privateConstructorUsedError;
   @JsonKey(name: 'day_type')
   String get dayType => throw _privateConstructorUsedError;
   @JsonKey(name: 'day_value')
@@ -62,7 +62,7 @@ abstract class $ScheduledDaySupabaseModelCopyWith<$Res> {
       {String id,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'schedule_constraint_id') String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') String taskId,
       @JsonKey(name: 'day_type') String dayType,
       @JsonKey(name: 'day_value') String dayValue,
       @JsonKey(name: 'can_repeat') bool canRepeat,
@@ -91,7 +91,7 @@ class _$ScheduledDaySupabaseModelCopyWithImpl<$Res,
     Object? id = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? scheduleConstraintId = null,
+    Object? taskId = null,
     Object? dayType = null,
     Object? dayValue = null,
     Object? canRepeat = null,
@@ -113,9 +113,9 @@ class _$ScheduledDaySupabaseModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scheduleConstraintId: null == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       dayType: null == dayType
           ? _value.dayType
@@ -162,7 +162,7 @@ abstract class _$$ScheduledDaySupabaseModelImplCopyWith<$Res>
       {String id,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'schedule_constraint_id') String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') String taskId,
       @JsonKey(name: 'day_type') String dayType,
       @JsonKey(name: 'day_value') String dayValue,
       @JsonKey(name: 'can_repeat') bool canRepeat,
@@ -190,7 +190,7 @@ class __$$ScheduledDaySupabaseModelImplCopyWithImpl<$Res>
     Object? id = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? scheduleConstraintId = null,
+    Object? taskId = null,
     Object? dayType = null,
     Object? dayValue = null,
     Object? canRepeat = null,
@@ -212,9 +212,9 @@ class __$$ScheduledDaySupabaseModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scheduleConstraintId: null == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       dayType: null == dayType
           ? _value.dayType
@@ -255,8 +255,7 @@ class _$ScheduledDaySupabaseModelImpl implements _ScheduledDaySupabaseModel {
       {required this.id,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'schedule_constraint_id')
-      required this.scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') required this.taskId,
       @JsonKey(name: 'day_type') required this.dayType,
       @JsonKey(name: 'day_value') required this.dayValue,
       @JsonKey(name: 'can_repeat') required this.canRepeat,
@@ -281,7 +280,7 @@ class _$ScheduledDaySupabaseModelImpl implements _ScheduledDaySupabaseModel {
   final DateTime createdAt;
   @override
   @JsonKey(name: 'schedule_constraint_id')
-  final String scheduleConstraintId;
+  final String taskId;
   @override
   @JsonKey(name: 'day_type')
   final String dayType;
@@ -312,7 +311,7 @@ class _$ScheduledDaySupabaseModelImpl implements _ScheduledDaySupabaseModel {
 
   @override
   String toString() {
-    return 'ScheduledDaySupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, scheduleConstraintId: $scheduleConstraintId, dayType: $dayType, dayValue: $dayValue, canRepeat: $canRepeat, scheduledTimeIds: $scheduledTimeIds, enforceScheduleBounds: $enforceScheduleBounds, updatedAt: $updatedAt, description: $description)';
+    return 'ScheduledDaySupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, taskId: $taskId, dayType: $dayType, dayValue: $dayValue, canRepeat: $canRepeat, scheduledTimeIds: $scheduledTimeIds, enforceScheduleBounds: $enforceScheduleBounds, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -324,8 +323,7 @@ class _$ScheduledDaySupabaseModelImpl implements _ScheduledDaySupabaseModel {
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.scheduleConstraintId, scheduleConstraintId) ||
-                other.scheduleConstraintId == scheduleConstraintId) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.dayType, dayType) || other.dayType == dayType) &&
             (identical(other.dayValue, dayValue) ||
                 other.dayValue == dayValue) &&
@@ -348,7 +346,7 @@ class _$ScheduledDaySupabaseModelImpl implements _ScheduledDaySupabaseModel {
       id,
       userId,
       createdAt,
-      scheduleConstraintId,
+      taskId,
       dayType,
       dayValue,
       canRepeat,
@@ -379,8 +377,7 @@ abstract class _ScheduledDaySupabaseModel implements ScheduledDaySupabaseModel {
       {required final String id,
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'schedule_constraint_id')
-      required final String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') required final String taskId,
       @JsonKey(name: 'day_type') required final String dayType,
       @JsonKey(name: 'day_value') required final String dayValue,
       @JsonKey(name: 'can_repeat') required final bool canRepeat,
@@ -404,7 +401,7 @@ abstract class _ScheduledDaySupabaseModel implements ScheduledDaySupabaseModel {
   DateTime get createdAt;
   @override
   @JsonKey(name: 'schedule_constraint_id')
-  String get scheduleConstraintId;
+  String get taskId;
   @override
   @JsonKey(name: 'day_type')
   String get dayType;

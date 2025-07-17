@@ -5,21 +5,21 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/repositories/goal_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/delete_goal_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/delete_goal_use_case.dart';
 
 import '_goal_repository.mock.dart';
 
 void main() {
-  late DeleteGoalUsecase useCase;
+  late DeleteGoalUseCase useCase;
   late GoalRepository repository;
   final params = GoalEntity.empty().id;
   setUp(() {
     repository = MockGoalRepo();
-    useCase = DeleteGoalUsecase(repository);
+    useCase = DeleteGoalUseCase(repository);
   });
 
   test(
-      '[goal.deleteUsecase] must call the [GoalRepository.deleteEntity] and delete the entity then return the Right value',
+      '[goal.deleteUseCase] must call the [GoalRepository.deleteEntity] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteEntity(id: params))
@@ -39,7 +39,7 @@ void main() {
   });
 
   test(
-      '[goal.deleteUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUsecase fails',
+      '[goal.deleteUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteEntity(id: params))

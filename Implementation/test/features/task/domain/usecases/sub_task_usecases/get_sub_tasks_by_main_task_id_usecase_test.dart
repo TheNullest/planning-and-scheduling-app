@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/repositories/sub_task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_sub_tasks_by_task_id_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/sub_task/get_sub_tasks_by_task_id_use_case.dart';
 
 import '_sub_task_repository.mock.dart';
 
 void main() {
-  late GetSubTasksByMainTaskIdUsecase useCase;
+  late GetSubTasksByMainTaskIdUseCase useCase;
   late SubTaskRepository repository;
   setUp(() {
     repository = MockSubTaskRepo();
-    useCase = GetSubTasksByMainTaskIdUsecase(repository);
+    useCase = GetSubTasksByMainTaskIdUseCase(repository);
   });
 
   test(
-      '[subTask.GetSubTasksByMainTaskIdUsecase] must call the [SubTaskRepository.getSubTasksByMainTaskId] and return [List<SubTaskEntity>]',
+      '[subTask.GetSubTasksByMainTaskIdUseCase] must call the [SubTaskRepository.getSubTasksByMainTaskId] and return [List<SubTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getSubTasksByMainTaskId('1'))
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[subTask.GetSubTasksByMainTaskIdUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetSubTasksByMainTaskIdUsecase fails',
+      '[subTask.GetSubTasksByMainTaskIdUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetSubTasksByMainTaskIdUseCase fails',
       () async {
     //Arrange
     when(() => repository.getSubTasksByMainTaskId('1'))

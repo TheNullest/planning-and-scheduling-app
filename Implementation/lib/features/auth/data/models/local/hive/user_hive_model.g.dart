@@ -35,7 +35,7 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
   @override
   void write(BinaryWriter writer, UserHiveModel obj) {
     writer
-      ..writeByte(12)
+      ..writeByte(13)
       ..writeByte(11)
       ..write(obj.userName)
       ..writeByte(12)
@@ -59,7 +59,9 @@ class UserHiveModelAdapter extends HiveBaseTypeAdapter<UserHiveModel> {
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

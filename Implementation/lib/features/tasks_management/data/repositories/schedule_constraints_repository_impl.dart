@@ -1,4 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:zamaan/core/cubits/connection/network_connectivity_monitor_cubit.dart';
+import 'package:zamaan/core/utils/failure_type_detector.dart';
+import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/data_mapper.dart';
 import 'package:zamaan/data/mappers/bases/schedule_constraints.dart';
 import 'package:zamaan/data/sources/remote/supabase_data_source.dart';
@@ -9,14 +12,14 @@ import 'package:zamaan/features/tasks_management/data/models/local/hive/schedule
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_constraint/schedule_constraint_supabase_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/bases/schedule_constraints_data_source.dart';
 
-class ScheduleConstraintRepositoryImpl extends BaseRepositoryImpl<
-    ScheduleConstraintEntity,
-    ScheduleConstraintHiveModel,
-    ScheduleConstraintSupabaseModel,
-    ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel>,
-    SupabaseDataSource<ScheduleConstraintSupabaseModel, ScheduleConstraintDataMapper>,
-    ScheduleConstraintDataMapper> implements ScheduleConstraintRepository {
-  ScheduleConstraintRepositoryImpl({
+class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
+    ScheduleConstraintsEntity,
+    ScheduleConstraintsHiveModel,
+    ScheduleConstraintsSupabaseModel,
+    ScheduleConstraintsLocalDataSource<ScheduleConstraintsHiveModel>,
+    SupabaseDataSource<ScheduleConstraintsSupabaseModel, ScheduleConstraintsDataMapper>,
+    ScheduleConstraintsDataMapper> implements ScheduleConstraintsRepository {
+  ScheduleConstraintsRepositoryImpl({
     required super.localDataSource,
     required super.remoteDataSource,
     required super.dataMapper,
@@ -26,10 +29,22 @@ class ScheduleConstraintRepositoryImpl extends BaseRepositoryImpl<
         _dataMapper = dataMapper,
         _netConnectivity = netConnectivity;
 
-  final ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel> _localDataSource;
-  final SupabaseDataSource<ScheduleConstraintSupabaseModel, DataMapper> _remoteDataSource;
-  final DataMapper _dataMapper;
+  final ScheduleConstraintsLocalDataSource<ScheduleConstraintsHiveModel> _localDataSource;
+  final SupabaseDataSource<ScheduleConstraintsSupabaseModel, DataMapper> _remoteDataSource;
+  final ScheduleConstraintsDataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
+
+  @override
+  EResultFuture<ScheduleConstraintsEntity?> getByTaskId(String taskId) async {
+    try {
+      final response = await _localDataSource.getByTaskId(taskId);
+      final result = _dataMapper.foldEitherSingle(response);
+      if (result == null) return const Right(null);
+      return Right(_dataMapper.toEntityFromHive(result));
+    } on Exception catch (e, stackTrace) {
+      throw failureTypeDetector(e: e, stackTrace: stackTrace);
+    }
+  }
 
   // @override
   // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByDueDate(

@@ -13,12 +13,12 @@ class GenerateInstanceParams {
     required this.scheduledInstances,
     required this.dayTimeRanges,
     required this.intervalTimeRanges,
-    required this.exceptionTimeRanges,
-    required this.exceptionDateRanges,
+    required this.timeExceptionRanges,
+    required this.dateExceptionRanges,
   });
 
   /// Constraint defining the schedule’s start, end, and related information.
-  final ScheduleConstraintEntity scheduleConstraint;
+  final ScheduleConstraintsEntity scheduleConstraint;
 
   /// Contains day-based scheduled events.
   final List<ScheduledDayEntity> days;
@@ -36,8 +36,8 @@ class GenerateInstanceParams {
   final List<TimeRangeEntity> intervalTimeRanges;
 
   /// Time ranges where scheduling should not occur.
-  final List<TimeRangeEntity> exceptionTimeRanges;
+  final List<TimeRangeEntity> timeExceptionRanges;
 
   /// Date ranges where scheduling should not occur.
-  final List<DateRangeEntity> exceptionDateRanges;
+  final List<DateRangeEntity> dateExceptionRanges;
 }

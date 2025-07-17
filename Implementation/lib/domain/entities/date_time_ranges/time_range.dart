@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zamaan/core/extensions/int.dart';
+import 'package:zamaan/core/utils/uuid.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 
 /// A [TimeRangeEntity] represents a specific time interval within a day,
@@ -44,6 +45,17 @@ class TimeRangeEntity extends BaseEntityAbstraction {
     }
   }
 
+  factory TimeRangeEntity.setNewTimeRange(
+      {required int start, required int end, required String userId, required String parentId}) {
+    return TimeRangeEntity(
+        id: uuidGenerator,
+        userId: userId,
+        createdAt: DateTime.now(),
+        parentId: parentId,
+        start: start,
+        end: end);
+  }
+
   /// The starting time of this range.
   @HiveField(11)
   final int start;
@@ -57,7 +69,7 @@ class TimeRangeEntity extends BaseEntityAbstraction {
   final String parentId;
 
   /// Returns the duration between [start] and [end].
-  Duration get difference => (end - start).toDuration();
+  Duration get difference => (end - start).toDuration;
 
   /// Converts the [start] [Duration] to a [DateTime] on the specified [date].
   ///

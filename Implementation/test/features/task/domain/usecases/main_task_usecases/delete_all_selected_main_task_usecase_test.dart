@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/task/domain/repositories/main_task_repository.dart';
-import 'package:zamaan/features/task/domain/usecases/delete_all_selected_main_task_usecase.dart';
+import 'package:zamaan/features/task/domain/useCases/delete_all_selected_main_task_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedMainTasksUsecase useCase;
+  late DeleteAllSelectedMainTasksUseCase useCase;
   late MainTaskRepository repository;
   setUp(() {
     repository = MockMainTaskRepo();
-    useCase = DeleteAllSelectedMainTasksUsecase(repository);
+    useCase = DeleteAllSelectedMainTasksUseCase(repository);
   });
 
   test(
-      '[mainTask.deleteAllSelectedUsecase] must call the [MainTaskRepository.deleteAllSelected] and delete the entity then return the Right value',
+      '[mainTask.deleteAllSelectedUseCase] must call the [MainTaskRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([])).thenAnswer((_) async => const Right(null));
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[mainTask.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+      '[mainTask.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))

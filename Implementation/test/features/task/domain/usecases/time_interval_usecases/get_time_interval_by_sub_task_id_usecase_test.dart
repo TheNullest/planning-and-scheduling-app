@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/get_time_interval_by_sub_task_id_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/get_time_interval_by_sub_task_id_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
-  late GetTimeIntervalBySubTaskIdUsecase useCase;
+  late GetTimeIntervalBySubTaskIdUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = GetTimeIntervalBySubTaskIdUsecase(repository);
+    useCase = GetTimeIntervalBySubTaskIdUseCase(repository);
   });
 
   test(
-      '[timeInterval.GetTimeIntervalBySubTaskIdUsecase] must call the [TimeIntervalRepository.getTimeIntervalBySubTaskId] and return [List<SubTaskEntity>]',
+      '[timeInterval.GetTimeIntervalBySubTaskIdUseCase] must call the [TimeIntervalRepository.getTimeIntervalBySubTaskId] and return [List<SubTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getTimeIntervalBySubTaskId('1'))
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[timeInterval.GetTimeIntervalBySubTaskIdUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetTimeIntervalBySubTaskIdUsecase fails',
+      '[timeInterval.GetTimeIntervalBySubTaskIdUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetTimeIntervalBySubTaskIdUseCase fails',
       () async {
     //Arrange
     when(() => repository.getTimeIntervalBySubTaskId('1'))

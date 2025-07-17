@@ -1,20 +1,20 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/domain/usecases/delete_all_selected_users_usecase.dart';
+import 'package:zamaan/features/auth/domain/useCases/delete_all_selected_users_use_case.dart';
 
 import '_authentication_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedUsersUsecase useCase;
+  late DeleteAllSelectedUsersUseCase useCase;
   late AuthenticationRepository repository;
   setUp(() {
     repository = MockAuthRepo();
-    useCase = DeleteAllSelectedUsersUsecase(repository);
+    useCase = DeleteAllSelectedUsersUseCase(repository);
   });
 
-  group('user.deleteAllSelectedUsecase', () {
+  group('user.deleteAllSelectedUseCase', () {
     test(
-        '[user.deleteAllSelectedUsecase] must call the [AuthRepo.deleteAllSelected] and delete the entity then return the Right value',
+        '[user.deleteAllSelectedUseCase] must call the [AuthRepo.deleteAllSelected] and delete the entity then return the Right value',
         () async {
       // Arrange
       when(() => repository.deleteAllSelected([]))
@@ -33,7 +33,7 @@ void main() {
     });
 
     test(
-        '[user.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+        '[user.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
         () async {
       // Arrange
       when(() => repository.deleteAllSelected([]))

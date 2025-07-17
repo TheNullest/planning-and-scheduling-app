@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/get_tasks_by_tags_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task/get_tasks_by_tags_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late GetMainTasksByTagsUsecase useCase;
+  late GetMainTasksByTagsUseCase useCase;
   late MainTaskRepository repository;
   setUp(() {
     repository = MockMainTaskRepo();
-    useCase = GetMainTasksByTagsUsecase(repository);
+    useCase = GetMainTasksByTagsUseCase(repository);
   });
 
   test(
-      '[mainTask.GetMainTasksByTagsUsecase] must call the [MainTaskRepository.getMainTasksByTags] and return [List<MainTaskEntity>]',
+      '[mainTask.GetMainTasksByTagsUseCase] must call the [MainTaskRepository.getMainTasksByTags] and return [List<MainTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getMainTasksByTags([])).thenAnswer((_) async => const Right([]));
@@ -34,7 +34,7 @@ void main() {
   });
 
   test(
-      '[mainTask.GetMainTasksByTagsUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByTagsUsecase fails',
+      '[mainTask.GetMainTasksByTagsUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByTagsUseCase fails',
       () async {
     //Arrange
     when(() => repository.getMainTasksByTags([]))

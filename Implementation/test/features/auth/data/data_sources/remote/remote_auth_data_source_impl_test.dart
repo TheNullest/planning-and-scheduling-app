@@ -3,7 +3,7 @@ import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/data/models/remote/supabase/user_supabase_model.dart';
 import 'package:zamaan/features/auth/data/sources/remote/remote_auth_data_source_impl.dart';
 
-import '../../../domain/usecases/_authentication_repository.mock.dart';
+import '../../../domain/useCases/_authentication_repository.mock.dart';
 
 class MockConnectionChecker extends Mock implements NetworkConnectivityMonitor {}
 

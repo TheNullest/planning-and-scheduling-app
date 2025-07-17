@@ -7,22 +7,22 @@
 
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
-import 'package:zamaan/features/auth/domain/usecases/get_users_usecase.dart';
+import 'package:zamaan/features/auth/domain/useCases/get_users_use_case.dart';
 
 import '_authentication_repository.mock.dart';
 
 void main() {
-  late GetUsersUsecase useCase;
+  late GetUsersUseCase useCase;
   late AuthenticationRepository repository;
   late List<UserHiveModel> entities;
   setUp(() {
     repository = MockAuthRepo();
-    useCase = GetUsersUsecase(repository);
+    useCase = GetUsersUseCase(repository);
     entities = [];
   });
 
   test(
-      '[user.getAllUsecase] must call the [AuthRepo.getUsers] and return [List<UserEntity>]',
+      '[user.getAllUseCase] must call the [AuthRepo.getUsers] and return [List<UserEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities())
@@ -39,7 +39,7 @@ void main() {
   });
 
   test(
-      '[user.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[user.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities())

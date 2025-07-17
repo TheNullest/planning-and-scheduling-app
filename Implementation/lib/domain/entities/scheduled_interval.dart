@@ -16,7 +16,7 @@ import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 ///   createdAt: DateTime.now(),
 ///   updatedAt: DateTime.now(),
 ///   description: 'Do the task every 3 days based on scheduled times',
-///   scheduleConstraintId: 'schedule_001',
+///   taskId: 'schedule_001',
 ///   intervalUnit: IntervalUnit.days,
 ///   intervalValue: 3,
 ///   scheduledTimeIds: [
@@ -33,7 +33,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
   ScheduledIntervalEntity({
     required super.userId,
     required super.createdAt,
-    required this.scheduleConstraintId,
+    required this.taskId,
     required this.intervalUnit,
     required this.intervalValue,
     required this.repeatCount,
@@ -47,7 +47,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
   });
 
   /// The ID of the schedule constraint to which this interval configuration belongs.
-  final String scheduleConstraintId;
+  final String taskId;
 
   /// The unit of time defining the interval (e.g., minute, hour, day, week, month, or year).
   final IntervalUnit intervalUnit;
@@ -86,7 +86,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     String? description,
     DateTime? updatedAt,
     DateTime? startDate,
-    String? scheduleConstraintId,
+    String? taskId,
     IntervalUnit? intervalUnit,
     double? intervalValue,
     int? consecutiveOccurrences,
@@ -100,7 +100,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
       createdAt: createdAt ?? this.createdAt,
       description: description ?? this.description,
       updatedAt: updatedAt ?? this.updatedAt,
-      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+      taskId: taskId ?? this.taskId,
       intervalUnit: intervalUnit ?? this.intervalUnit,
       intervalValue: intervalValue ?? this.intervalValue,
       consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
@@ -115,7 +115,7 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        scheduleConstraintId,
+        taskId,
         intervalUnit,
         intervalValue,
         repeatCount,

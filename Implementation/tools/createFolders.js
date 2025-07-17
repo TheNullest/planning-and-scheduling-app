@@ -7,7 +7,7 @@ const path = require('path');
 //   { folder:   'lib/core/config' },
 //   { folder:   'lib/core/extensions' },
 //   { folder:   'lib/core/errors' },
-//   { folder:   'lib/core/usecases' },
+//   { folder:   'lib/core/useCases' },
 //   { folder:   'lib/core/datasources' },
 //   { folder:   'lib/core/repositories' },
 //   { folder:   'lib/core/utils' },
@@ -20,7 +20,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/task/domain/entities' },
 //   { folder: 'lib/features/task/domain/repositories' },
-//   { folder: 'lib/features/task/domain/usecases' },
+//   { folder: 'lib/features/task/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/task/presentation/views' },
 //   { folder: 'lib/features/task/presentation/viewmodels' },
@@ -34,7 +34,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/category/domain/entities' },
 //   { folder: 'lib/features/category/domain/repositories' },
-//   { folder: 'lib/features/category/domain/usecases' },
+//   { folder: 'lib/features/category/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/category/presentation/views' },
 //   { folder: 'lib/features/category/presentation/viewmodels' },
@@ -48,7 +48,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/goal/domain/entities' },
 //   { folder: 'lib/features/goal/domain/repositories' },
-//   { folder: 'lib/features/goal/domain/usecases' },
+//   { folder: 'lib/features/goal/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/goal/presentation/views' },
 //   { folder: 'lib/features/goal/presentation/viewmodels' },
@@ -62,7 +62,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/measurement_unit/domain/entities' },
 //   { folder: 'lib/features/measurement_unit/domain/repositories' },
-//   { folder: 'lib/features/measurement_unit/domain/usecases' },
+//   { folder: 'lib/features/measurement_unit/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/measurement_unit/presentation/views' },
 //   { folder: 'lib/features/measurement_unit/presentation/viewmodels' },
@@ -76,7 +76,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/sub_task/domain/entities' },
 //   { folder: 'lib/features/sub_task/domain/repositories' },
-//   { folder: 'lib/features/sub_task/domain/usecases' },
+//   { folder: 'lib/features/sub_task/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/sub_task/presentation/views' },
 //   { folder: 'lib/features/sub_task/presentation/viewmodels' },
@@ -90,7 +90,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/tag/domain/entities' },
 //   { folder: 'lib/features/tag/domain/repositories' },
-//   { folder: 'lib/features/tag/domain/usecases' },
+//   { folder: 'lib/features/tag/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/tag/presentation/views' },
 //   { folder: 'lib/features/tag/presentation/viewmodels' },
@@ -104,7 +104,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/task_scheduler/domain/entities' },
 //   { folder: 'lib/features/task_scheduler/domain/repositories' },
-//   { folder: 'lib/features/task_scheduler/domain/usecases' },
+//   { folder: 'lib/features/task_scheduler/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/task_scheduler/presentation/views' },
 //   { folder: 'lib/features/task_scheduler/presentation/viewmodels' },
@@ -118,7 +118,7 @@ const path = require('path');
 //   // Domain Layer
 //   { folder: 'lib/features/time_interval/domain/entities' },
 //   { folder: 'lib/features/time_interval/domain/repositories' },
-//   { folder: 'lib/features/time_interval/domain/usecases' },
+//   { folder: 'lib/features/time_interval/domain/useCases' },
 //   // Presentation Layer
 //   { folder: 'lib/features/time_interval/presentation/views' },
 //   { folder: 'lib/features/time_interval/presentation/viewmodels' },
@@ -145,7 +145,7 @@ const path = require('path');
 //     'lib/core/config' ,
 //     'lib/core/extensions' ,
 //     'lib/core/errors' ,
-//     'lib/core/usecases' ,
+//     'lib/core/useCases' ,
 //     'lib/core/datasources' ,
 //     'lib/core/repositories' ,
 //     'lib/core/utils' ,
@@ -158,7 +158,7 @@ const path = require('path');
 //   // Domain Layer
 //   'lib/features/task/domain/entities' ,
 //   'lib/features/task/domain/repositories' ,
-//   'lib/features/task/domain/usecases' ,
+//   'lib/features/task/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/task/presentation/views' ,
 //    'lib/features/task/presentation/viewmodels' ,
@@ -172,7 +172,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/category/domain/entities' ,
 //    'lib/features/category/domain/repositories' ,
-//    'lib/features/category/domain/usecases' ,
+//    'lib/features/category/domain/useCases' ,
 //   // Presentation Layer
 //   'lib/features/category/presentation/views' ,
 //   'lib/features/category/presentation/viewmodels' ,
@@ -186,7 +186,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/goal/domain/entities' ,
 //    'lib/features/goal/domain/repositories' ,
-//    'lib/features/goal/domain/usecases' ,
+//    'lib/features/goal/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/goal/presentation/views' ,
 //    'lib/features/goal/presentation/viewmodels' ,
@@ -200,7 +200,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/measurement_unit/domain/entities' ,
 //    'lib/features/measurement_unit/domain/repositories' ,
-//    'lib/features/measurement_unit/domain/usecases' ,
+//    'lib/features/measurement_unit/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/measurement_unit/presentation/views' ,
 //    'lib/features/measurement_unit/presentation/viewmodels' ,
@@ -214,7 +214,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/sub_task/domain/entities' ,
 //    'lib/features/sub_task/domain/repositories' ,
-//    'lib/features/sub_task/domain/usecases' ,
+//    'lib/features/sub_task/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/sub_task/presentation/views' ,
 //    'lib/features/sub_task/presentation/viewmodels' ,
@@ -228,7 +228,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/tag/domain/entities' ,
 //    'lib/features/tag/domain/repositories' ,
-//    'lib/features/tag/domain/usecases' ,
+//    'lib/features/tag/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/tag/presentation/views' ,
 //    'lib/features/tag/presentation/viewmodels' ,
@@ -242,7 +242,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/task_scheduler/domain/entities' ,
 //    'lib/features/task_scheduler/domain/repositories' ,
-//    'lib/features/task_scheduler/domain/usecases' ,
+//    'lib/features/task_scheduler/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/task_scheduler/presentation/views' ,
 //    'lib/features/task_scheduler/presentation/viewmodels' ,
@@ -256,7 +256,7 @@ const path = require('path');
 //   // Domain Layer
 //    'lib/features/time_interval/domain/entities' ,
 //    'lib/features/time_interval/domain/repositories' ,
-//    'lib/features/time_interval/domain/usecases' ,
+//    'lib/features/time_interval/domain/useCases' ,
 //   // Presentation Layer
 //    'lib/features/time_interval/presentation/views' ,
 //    'lib/features/time_interval/presentation/viewmodels' ,
@@ -264,7 +264,7 @@ const path = require('path');
 // ];
 
 const folders = [
-  '../lib/features/notification/domain/usecases',
+  '../lib/features/notification/domain/useCases',
   '../lib/features/notification/presentation/viewmodels',
   '../lib/features/notification/presentation/views',
   '../lib/features/notification/presentation/widget',

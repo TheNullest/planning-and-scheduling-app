@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/get_tasks_by_categories_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task/get_tasks_by_categories_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late GetMainTasksByCategoriesUsecase useCase;
+  late GetMainTasksByCategoriesUseCase useCase;
   late MainTaskRepository repository;
   setUp(() {
     repository = MockMainTaskRepo();
-    useCase = GetMainTasksByCategoriesUsecase(repository);
+    useCase = GetMainTasksByCategoriesUseCase(repository);
   });
 
   test(
-      '[mainTask.getMainTasksByCategoriesUsecase] must call the [MainTaskRepository.getMainTasksByCategories] and return [List<MainTaskEntity>]',
+      '[mainTask.getMainTasksByCategoriesUseCase] must call the [MainTaskRepository.getMainTasksByCategories] and return [List<MainTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getMainTasksByCategories([])).thenAnswer((_) async => const Right([]));
@@ -34,7 +34,7 @@ void main() {
   });
 
   test(
-      '[mainTask.getMainTasksByCategoriesUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getMainTasksByCategoriesUsecase fails',
+      '[mainTask.getMainTasksByCategoriesUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getMainTasksByCategoriesUseCase fails',
       () async {
     //Arrange
     when(() => repository.getMainTasksByCategories([]))

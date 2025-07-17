@@ -23,6 +23,6 @@ class ScheduledIntervalHiveDataSourceImpl extends HiveDataSource<ScheduledInterv
   ) async =>
       _hiveBox.runBoxOperation(
         job: (box) async =>
-            box.values.where((item) => item.scheduleConstraintId == constraintId).toList(),
+            box.values.where((item) => item.taskId == constraintId).toList(),
       );
 }

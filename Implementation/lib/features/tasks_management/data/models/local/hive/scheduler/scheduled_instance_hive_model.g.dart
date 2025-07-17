@@ -37,7 +37,7 @@ class ScheduledInstanceHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledIns
   @override
   void write(BinaryWriter writer, ScheduledInstanceHiveModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(11)
       ..write(obj.startDateTime)
       ..writeByte(12)
@@ -65,7 +65,9 @@ class ScheduledInstanceHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledIns
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

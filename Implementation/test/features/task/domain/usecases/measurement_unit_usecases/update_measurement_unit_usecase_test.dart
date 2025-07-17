@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/update_measurement_unit_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/update_measurement_unit_use_case.dart';
 
 import '_measurement_unit_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateMeasurementUnitUsecase useCase;
+  late UpdateMeasurementUnitUseCase useCase;
   late MeasurementUnitRepository repository;
   setUp(() {
     repository = MockMeasurementUnitRepo();
-    useCase = UpdateMeasurementUnitUsecase(repository);
+    useCase = UpdateMeasurementUnitUseCase(repository);
   });
 
   final params = CustomeMeasurementUnitEntity.empty();
   // Assert
   test(
-      '[measurementUnit.updateUsecase] must call the [MeasurementUnitRepository.updateEntity] and update the [MeasurementUnitModel] with the right data',
+      '[measurementUnit.updateUseCase] must call the [MeasurementUnitRepository.updateEntity] and update the [MeasurementUnitModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params)).thenAnswer((_) async => const Right(null));
@@ -35,7 +35,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test('[measurementUnit.updateUsecase.failureTest] must return failure when update fails',
+  test('[measurementUnit.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

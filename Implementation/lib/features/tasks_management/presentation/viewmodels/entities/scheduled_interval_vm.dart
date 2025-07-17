@@ -13,7 +13,7 @@
 //     required this.scheduledTimes,
 //     required this.startDate,
 //     required this.enforceScheduleBounds,
-//     required this.scheduleConstraintId,
+//     required this.taskId,
 //     this.consecutiveOccurrences = 1,
 //     super.id,
 //     super.description,
@@ -27,7 +27,7 @@
 //     required ScheduledIntervalAggregate entity,
 //   }) =>
 //       ScheduledIntervalVM(
-//         scheduleConstraintId: entity.scheduledInterval.scheduleConstraintId,
+//         taskId: entity.scheduledInterval.taskId,
 //         intervalUnit: entity.scheduledInterval.intervalUnit,
 //         intervalValue: entity.scheduledInterval.intervalValue,
 //         repeatCount: entity.scheduledInterval.repeatCount,
@@ -43,7 +43,7 @@
 
 //   final IntervalUnit intervalUnit;
 //   final double intervalValue;
-//   final String scheduleConstraintId;
+//   final String taskId;
 //   final int? repeatCount;
 //   final int consecutiveOccurrences;
 //   final List<TimeRangeVM> scheduledTimes;
@@ -55,7 +55,7 @@
 //           id: id ?? '',
 //           userId: userId ?? '',
 //           createdAt: createdAt ?? DateTime.now(),
-//           scheduleConstraintId: scheduleConstraintId,
+//           taskId: taskId,
 //           intervalUnit: intervalUnit,
 //           intervalValue: intervalValue,
 //           repeatCount: repeatCount,
@@ -77,7 +77,7 @@
 //     DateTime? updatedAt,
 //     DateTime? startDate,
 //     String? userId,
-//     String? scheduleConstraintId,
+//     String? taskId,
 //     IntervalUnit? intervalUnit,
 //     double? intervalValue,
 //     int? repeatCount,
@@ -98,6 +98,6 @@
 //         scheduledTimes: scheduledTimes ?? this.scheduledTimes,
 //         enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
 //         consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
-//         scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+//         taskId: taskId ?? this.taskId,
 //       );
 // }

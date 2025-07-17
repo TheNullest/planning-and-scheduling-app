@@ -5,21 +5,21 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/repositories/tag_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/delete_tag_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/delete_tag_use_case.dart';
 
 import '_tag_repository.mock.dart';
 
 void main() {
-  late DeleteTagUsecase useCase;
+  late DeleteTagUseCase useCase;
   late TagRepository repository;
   final params = CategoryEntity.empty().id;
   setUp(() {
     repository = MockTagRepo();
-    useCase = DeleteTagUsecase(repository);
+    useCase = DeleteTagUseCase(repository);
   });
 
   test(
-      '[tag.deleteUsecase] must call the [TagRepository.deleteEntity] and delete the entity then return the Right value',
+      '[tag.deleteUseCase] must call the [TagRepository.deleteEntity] and delete the entity then return the Right value',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: params))
@@ -39,7 +39,7 @@ void main() {
   });
 
   test(
-      '[tag.deleteUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUsecase fails',
+      '[tag.deleteUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUseCase fails',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: params))

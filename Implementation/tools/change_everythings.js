@@ -2,11 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 // Base directory where the operation will start
-const baseDir = path.join(__dirname, '../lib/features/tasks_management/presentation/blocs/goals');
-
+const baseDir = path.join(__dirname, '../lib');
 // Words to replace
-const targetWord = 'Tag';
-const replacementWord = 'Goal';
+const targetWord = 'exception_month_day';
+const replacementWord = 'month_day_exception';
+
+// Absolute path to this script file
+const scriptFilePath = path.resolve(__filename);
 
 // Function to recursively process folders and files
 function processDirectory(dir) {
@@ -14,6 +16,11 @@ function processDirectory(dir) {
 
   items.forEach(item => {
     const itemPath = path.join(dir, item.name);
+
+    // Skip this script file
+    if (path.resolve(itemPath) === scriptFilePath) {
+      return;
+    }
 
     // If it's a directory, rename it if necessary and process its contents
     if (item.isDirectory()) {

@@ -17,7 +17,7 @@ class CreateTaskWithDependenciesParams {
 
   final TaskEntity task;
   final List<SubTaskEntity> subTasks;
-  final ScheduleConstraintEntity scheduleConstraint;
+  final ScheduleConstraintsEntity scheduleConstraint;
   final List<ScheduledDayEntity> scheduledDays;
   final List<ScheduledIntervalEntity> scheduledIntervals;
   final List<ScheduledInstanceEntity> scheduledInstances;

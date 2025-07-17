@@ -5,27 +5,27 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/create_measurement_unit_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/create_measurement_unit_use_case.dart';
 
 import '_measurement_unit_repository.mock.dart';
 
 void main() {
-  late CreateMeasurementUnitUsecase usecase;
+  late CreateMeasurementUnitUseCase useCase;
   late MeasurementUnitRepository mockedRepository;
 
   setUp(() {
     mockedRepository = MockMeasurementUnitRepo();
-    usecase = CreateMeasurementUnitUsecase(mockedRepository);
+    useCase = CreateMeasurementUnitUseCase(mockedRepository);
   });
 
   final param = CustomeMeasurementUnitEntity.empty();
-  test('[measurementUnit.createUsecase] must call the [MeasurementUnitRepository.createEntity]',
+  test('[measurementUnit.createUseCase] must call the [MeasurementUnitRepository.createEntity]',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Right(null));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isRight(), true);
@@ -36,13 +36,13 @@ void main() {
   });
 
   test(
-      '[measurementUnit.createUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUsecase fails',
+      '[measurementUnit.createUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUseCase fails',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isLeft(), true);

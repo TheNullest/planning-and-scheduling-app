@@ -5,30 +5,30 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/get_time_interval_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/get_time_interval_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
   late TimeIntervalRepository mockedRepo;
-  late GetTimeIntervalUsecase usecase;
+  late GetTimeIntervalUseCase useCase;
   late TimeIntervalEntity param;
 
   setUp(() {
     mockedRepo = MockTimeIntervalRepo();
-    usecase = GetTimeIntervalUsecase(mockedRepo);
+    useCase = GetTimeIntervalUseCase(mockedRepo);
     param = TimeIntervalEntity.empty();
   });
 
   test(
-      '[timeInterval.getUsecase] must call the [TimeIntervalRepository.getEntity] and return [TimeIntervalEntity]',
+      '[timeInterval.getUseCase] must call the [TimeIntervalRepository.getEntity] and return [TimeIntervalEntity]',
       () async {
     //Arrange
     when(() => mockedRepo.getEntity(id: param.id))
         .thenAnswer((_) async => Right(param));
 
     // Act
-    final result = await usecase(param.id);
+    final result = await useCase(param.id);
 
     expect(result.isRight(), true);
 
@@ -38,14 +38,14 @@ void main() {
   });
 
   test(
-      '[timeInterval.getUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getUsecase fails',
+      '[timeInterval.getUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getUseCase fails',
       () async {
     //Arrange
     when(() => mockedRepo.getEntity(id: param.id))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
     // Act
-    final result = await usecase(param.id);
+    final result = await useCase(param.id);
 
     expect(result.isLeft(), true);
     expect(result, equals(const Left(HiveFailure('Error'))));

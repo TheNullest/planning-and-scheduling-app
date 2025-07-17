@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/delete_all_selected_time_intervals_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/delete_all_selected_time_intervals_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedTimeIntervalsUsecase useCase;
+  late DeleteAllSelectedTimeIntervalsUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = DeleteAllSelectedTimeIntervalsUsecase(repository);
+    useCase = DeleteAllSelectedTimeIntervalsUseCase(repository);
   });
 
   test(
-      '[timeInterval.deleteAllSelectedUsecase] must call the [TimeIntervalRepository.deleteAllSelected] and delete the entity then return the Right value',
+      '[timeInterval.deleteAllSelectedUseCase] must call the [TimeIntervalRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))
@@ -36,7 +36,7 @@ void main() {
   });
 
   test(
-      '[timeInterval.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+      '[timeInterval.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))

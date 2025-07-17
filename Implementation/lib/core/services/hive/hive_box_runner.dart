@@ -56,4 +56,3 @@ class HiveBoxRunnerImpl<HiveModel> extends HiveBoxRunner<HiveModel> {
     }
   }
 }
-

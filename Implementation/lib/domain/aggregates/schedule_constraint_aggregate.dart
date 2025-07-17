@@ -5,11 +5,11 @@ import 'package:zamaan/domain/entities/schedule_constraints.dart';
 class ScheduleConstraintAggregate {
   ScheduleConstraintAggregate({
     required this.scheduleConstraint,
-    required this.exceptionTimes,
-    required this.exceptionDates,
+    required this.timeExceptions,
+    required this.dateExceptions,
   });
 
-  final ScheduleConstraintEntity scheduleConstraint;
-  final List<TimeRangeEntity> exceptionTimes;
-  final List<DateRangeEntity> exceptionDates;
+  final ScheduleConstraintsEntity scheduleConstraint;
+  final List<TimeRangeEntity> timeExceptions;
+  final List<DateRangeEntity> dateExceptions;
 }

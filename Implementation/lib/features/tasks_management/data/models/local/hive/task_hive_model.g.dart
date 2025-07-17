@@ -37,7 +37,7 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
   @override
   void write(BinaryWriter writer, TaskHiveModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -65,7 +65,9 @@ class TaskHiveModelAdapter extends HiveBaseTypeAdapter<TaskHiveModel> {
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

@@ -4,19 +4,19 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/repositories/tag_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/fetch_all_tags_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/fetch_all_tags_use_case.dart';
 
 import '_tag_repository.mock.dart';
 
 void main() {
-  late FetchAllTagsUsecase useCase;
+  late FetchAllTagsUseCase useCase;
   late TagRepository repository;
   setUp(() {
     repository = MockTagRepo();
-    useCase = FetchAllTagsUsecase(repository);
+    useCase = FetchAllTagsUseCase(repository);
   });
 
-  test('[tag.getAllUsecase] must call the [TagRepository.getEntities] and return [List<TagEntity>]',
+  test('[tag.getAllUseCase] must call the [TagRepository.getEntities] and return [List<TagEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Right([]));
@@ -33,7 +33,7 @@ void main() {
   });
 
   test(
-      '[tag.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[tag.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Left(HiveFailure('Error')));

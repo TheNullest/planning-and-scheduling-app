@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zamaan/features/tasks_management/presentation/dialogs/category/category_upsert_dialog.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_vms_manager.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/category/category_upsert_form.dart';
 
 class CategoryChipWidget extends StatelessWidget {
   const CategoryChipWidget({required this.category, super.key, this.selectable = false});
@@ -123,7 +124,8 @@ class CategoryChipWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () async => categoryUpsertDialog(context, category),
+        onTap: () async => customShowModalBottomSheetDialog<CategoryUpsertVM>(
+            context, category, const CategoryUpsertFormWidget()),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(4),

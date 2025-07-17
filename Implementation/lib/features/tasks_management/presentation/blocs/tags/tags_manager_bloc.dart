@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zamaan/domain/entities/tag.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/create_tag_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/delete_tag_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/fetch_all_tags_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/update_tag_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/create_tag_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/delete_tag_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/fetch_all_tags_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/update_tag_use_case.dart';
 
 part 'tags_manager_event.dart';
 part 'tags_manager_state.dart';
@@ -12,14 +12,14 @@ part 'tags_manager_bloc.freezed.dart';
 
 class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
   TagsManagerBloc({
-    required FetchAllTagsUsecase fetchAllUsecase,
-    required CreateTagUsecase createUsecase,
-    required UpdateTagUsecase updateUsecase,
-    required DeleteTagUsecase deleteUsecase,
-  })  : _fetchAllUsecase = fetchAllUsecase,
-        _createUsecase = createUsecase,
-        _updateUsecase = updateUsecase,
-        _deleteUsecase = deleteUsecase,
+    required FetchAllTagsUseCase fetchAllUseCase,
+    required CreateTagUseCase createUseCase,
+    required UpdateTagUseCase updateUseCase,
+    required DeleteTagUseCase deleteUseCase,
+  })  : _fetchAllUseCase = fetchAllUseCase,
+        _createUseCase = createUseCase,
+        _updateUseCase = updateUseCase,
+        _deleteUseCase = deleteUseCase,
         super(const _Initial()) {
     on<TagsManagerEvent>((event, emit) async {
       await event.map(
@@ -32,10 +32,10 @@ class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
     });
   }
 
-  final FetchAllTagsUsecase _fetchAllUsecase;
-  final CreateTagUsecase _createUsecase;
-  final UpdateTagUsecase _updateUsecase;
-  final DeleteTagUsecase _deleteUsecase;
+  final FetchAllTagsUseCase _fetchAllUseCase;
+  final CreateTagUseCase _createUseCase;
+  final UpdateTagUseCase _updateUseCase;
+  final DeleteTagUseCase _deleteUseCase;
 
   Future<void> _handleStarted(Emitter<TagsManagerState> emit) async {
     emit(const TagsManagerState.loading());
@@ -47,7 +47,7 @@ class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
     Emitter<TagsManagerState> emit,
   ) async {
     emit(const TagsManagerState.loading());
-    final result = await _createUsecase(event.entity);
+    final result = await _createUseCase(event.entity);
     result.fold(
       (failure) => emit(TagsManagerState.failure(failure.toString())),
       (id) => emit(TagsManagerState.created(event.entity)),
@@ -59,10 +59,10 @@ class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
     Emitter<TagsManagerState> emit,
   ) async {
     emit(const TagsManagerState.loading());
-    final result = await _updateUsecase(event.entity);
+    final result = await _updateUseCase(event.entity);
     result.fold(
       (failure) => emit(TagsManagerState.failure(failure.toString())),
-      (_) => emit(TagsManagerState.updated(event.entity.id)),
+      (_) => emit(TagsManagerState.updated(event.entity)),
     );
   }
 
@@ -71,7 +71,7 @@ class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
     Emitter<TagsManagerState> emit,
   ) async {
     emit(const TagsManagerState.loading());
-    final result = await _deleteUsecase(event.id);
+    final result = await _deleteUseCase(event.id);
     result.fold(
       (failure) => emit(TagsManagerState.failure(failure.toString())),
       (_) => emit(TagsManagerState.deleted(event.id)),
@@ -83,7 +83,7 @@ class TagsManagerBloc extends Bloc<TagsManagerEvent, TagsManagerState> {
     Emitter<TagsManagerState> emit,
   ) async {
     emit(const TagsManagerState.loading());
-    final result = await _fetchAllUsecase();
+    final result = await _fetchAllUseCase();
     result.fold(
       (failure) => emit(TagsManagerState.failure(failure.toString())),
       (categories) => emit(TagsManagerState.fetched(categories)),

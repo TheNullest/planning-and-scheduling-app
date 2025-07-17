@@ -30,7 +30,7 @@ class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> 
   @override
   void write(BinaryWriter writer, TimeRangeHiveModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(11)
       ..write(obj.start)
       ..writeByte(12)
@@ -46,7 +46,9 @@ class TimeRangeHiveModelAdapter extends HiveBaseTypeAdapter<TimeRangeHiveModel> 
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

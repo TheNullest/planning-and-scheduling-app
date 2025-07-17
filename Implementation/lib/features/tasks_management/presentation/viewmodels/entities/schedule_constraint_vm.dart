@@ -7,10 +7,10 @@
 //   ScheduleConstraintVM({
 //     required this.startAt,
 //     required this.endAt,
-//     required this.exceptionTimes,
-//     required this.exceptionDates,
-//     required this.exceptionMonthDays,
-//     required this.exceptionWeekDays,
+//     required this.timeExceptions,
+//     required this.dateExceptions,
+//     required this.monthDayExceptions,
+//     required this.weekDayExceptions,
 //     required this.enforceScheduleBounds,
 //     required this.taskId,
 //     super.id,
@@ -23,10 +23,10 @@
 
 //   final DateTime? startAt;
 //   final DateTime? endAt;
-//   final List<TimeRangeVM> exceptionTimes;
-//   final List<DateRangeVM> exceptionDates;
-//   final List<int> exceptionMonthDays;
-//   final List<WeekDay> exceptionWeekDays;
+//   final List<TimeRangeVM> timeExceptions;
+//   final List<DateRangeVM> dateExceptions;
+//   final List<int> monthDayExceptions;
+//   final List<WeekDay> weekDayExceptions;
 //   final bool enforceScheduleBounds;
 //   final String taskId;
 
@@ -40,11 +40,11 @@
 //     DateTime? endAt,
 //     String? userId,
 //     String? taskId,
-//     List<WeekDay>? exceptionWeekDays,
-//     List<int>? exceptionMonthDays,
+//     List<WeekDay>? weekDayExceptions,
+//     List<int>? monthDayExceptions,
 //     List<TimeRangeVM>? scheduledTimes,
-//     List<TimeRangeVM>? exceptionTimes,
-//     List<DateRangeVM>? exceptionDates,
+//     List<TimeRangeVM>? timeExceptions,
+//     List<DateRangeVM>? dateExceptions,
 //     bool? enforceScheduleBounds,
 //   }) {
 //     return ScheduleConstraintVM(
@@ -56,10 +56,10 @@
 //       userId: userId ?? this.userId,
 //       taskId: taskId ?? this.taskId,
 //       startAt: startAt ?? this.startAt,
-//       exceptionWeekDays: exceptionWeekDays ?? List.from(this.exceptionWeekDays),
-//       exceptionMonthDays: exceptionMonthDays ?? List.from(this.exceptionMonthDays),
-//       exceptionTimes: exceptionTimes ?? List.from(this.exceptionTimes),
-//       exceptionDates: exceptionDates ?? List.from(this.exceptionDates),
+//       weekDayExceptions: weekDayExceptions ?? List.from(this.weekDayExceptions),
+//       monthDayExceptions: monthDayExceptions ?? List.from(this.monthDayExceptions),
+//       timeExceptions: timeExceptions ?? List.from(this.timeExceptions),
+//       dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
 //       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
 //     );
 //   }

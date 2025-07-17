@@ -1,18 +1,16 @@
+import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/schedule_constraints.dart';
 import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
-abstract interface class ScheduleConstraintRepository
-    extends BaseRepository<ScheduleConstraintEntity> {
-  // // Additional search methods specific to ScheduledTimeEntity
+abstract interface class ScheduleConstraintsRepository
+    extends BaseRepository<ScheduleConstraintsEntity> {
+  // Additional search methods specific to ScheduledTimeEntity
 
-  // /// Retrieves scheduled times by the main task ID.
-  // ///
-  // /// - [taskId] - The ID of the main task.
-  // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTaskId(
-  //   String taskId, {
-  //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  // });
+  /// Retrieves scheduled times by the main task ID.
+  ///
+  /// - [taskId] - The ID of the main task.
+  /// Returns a `ResultFuture<ScheduledTimeEntity>` containing the matching scheduled times.
+  EResultFuture<ScheduleConstraintsEntity?> getByTaskId(String taskId);
 
   // /// Retrieves scheduled times by their start time.
   // ///

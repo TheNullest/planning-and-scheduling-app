@@ -5,7 +5,7 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/delete_task_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/delete_task_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
@@ -19,7 +19,7 @@ void main() {
   });
 
   test(
-      '[mainTask.deleteUsecase] must call the [MainTaskRepository.deleteEntity] and delete the entity then return the Right value',
+      '[mainTask.deleteUseCase] must call the [MainTaskRepository.deleteEntity] and delete the entity then return the Right value',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: params)).thenAnswer((_) async => const Right(null));
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[mainTask.deleteUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUsecase fails',
+      '[mainTask.deleteUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUseCase fails',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: params))

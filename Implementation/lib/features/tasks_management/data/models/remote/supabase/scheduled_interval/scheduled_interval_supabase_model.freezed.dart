@@ -29,7 +29,7 @@ mixin _$ScheduledIntervalSupabaseModel {
   @JsonKey(name: 'start_at')
   DateTime get startAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'schedule_constraint_id')
-  String get scheduleConstraintId => throw _privateConstructorUsedError;
+  String get taskId => throw _privateConstructorUsedError;
   @JsonKey(name: 'interval_unit')
   String get intervalUnit => throw _privateConstructorUsedError;
   @JsonKey(name: 'interval_value')
@@ -69,7 +69,7 @@ abstract class $ScheduledIntervalSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'start_at') DateTime startAt,
-      @JsonKey(name: 'schedule_constraint_id') String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') String taskId,
       @JsonKey(name: 'interval_unit') String intervalUnit,
       @JsonKey(name: 'interval_value') double intervalValue,
       @JsonKey(name: 'consecutive_occurrences') int consecutiveOccurrences,
@@ -100,7 +100,7 @@ class _$ScheduledIntervalSupabaseModelCopyWithImpl<$Res,
     Object? userId = null,
     Object? createdAt = null,
     Object? startAt = null,
-    Object? scheduleConstraintId = null,
+    Object? taskId = null,
     Object? intervalUnit = null,
     Object? intervalValue = null,
     Object? consecutiveOccurrences = null,
@@ -127,9 +127,9 @@ class _$ScheduledIntervalSupabaseModelCopyWithImpl<$Res,
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scheduleConstraintId: null == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       intervalUnit: null == intervalUnit
           ? _value.intervalUnit
@@ -181,7 +181,7 @@ abstract class _$$ScheduledIntervalSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'start_at') DateTime startAt,
-      @JsonKey(name: 'schedule_constraint_id') String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') String taskId,
       @JsonKey(name: 'interval_unit') String intervalUnit,
       @JsonKey(name: 'interval_value') double intervalValue,
       @JsonKey(name: 'consecutive_occurrences') int consecutiveOccurrences,
@@ -211,7 +211,7 @@ class __$$ScheduledIntervalSupabaseModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? createdAt = null,
     Object? startAt = null,
-    Object? scheduleConstraintId = null,
+    Object? taskId = null,
     Object? intervalUnit = null,
     Object? intervalValue = null,
     Object? consecutiveOccurrences = null,
@@ -238,9 +238,9 @@ class __$$ScheduledIntervalSupabaseModelImplCopyWithImpl<$Res>
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      scheduleConstraintId: null == scheduleConstraintId
-          ? _value.scheduleConstraintId
-          : scheduleConstraintId // ignore: cast_nullable_to_non_nullable
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as String,
       intervalUnit: null == intervalUnit
           ? _value.intervalUnit
@@ -287,8 +287,7 @@ class _$ScheduledIntervalSupabaseModelImpl
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'start_at') required this.startAt,
-      @JsonKey(name: 'schedule_constraint_id')
-      required this.scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') required this.taskId,
       @JsonKey(name: 'interval_unit') required this.intervalUnit,
       @JsonKey(name: 'interval_value') required this.intervalValue,
       @JsonKey(name: 'consecutive_occurrences')
@@ -319,7 +318,7 @@ class _$ScheduledIntervalSupabaseModelImpl
   final DateTime startAt;
   @override
   @JsonKey(name: 'schedule_constraint_id')
-  final String scheduleConstraintId;
+  final String taskId;
   @override
   @JsonKey(name: 'interval_unit')
   final String intervalUnit;
@@ -353,7 +352,7 @@ class _$ScheduledIntervalSupabaseModelImpl
 
   @override
   String toString() {
-    return 'ScheduledIntervalSupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, startAt: $startAt, scheduleConstraintId: $scheduleConstraintId, intervalUnit: $intervalUnit, intervalValue: $intervalValue, consecutiveOccurrences: $consecutiveOccurrences, scheduledTimeIds: $scheduledTimeIds, enforceScheduleBounds: $enforceScheduleBounds, repeatCount: $repeatCount, updatedAt: $updatedAt, description: $description)';
+    return 'ScheduledIntervalSupabaseModel(id: $id, userId: $userId, createdAt: $createdAt, startAt: $startAt, taskId: $taskId, intervalUnit: $intervalUnit, intervalValue: $intervalValue, consecutiveOccurrences: $consecutiveOccurrences, scheduledTimeIds: $scheduledTimeIds, enforceScheduleBounds: $enforceScheduleBounds, repeatCount: $repeatCount, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -366,8 +365,7 @@ class _$ScheduledIntervalSupabaseModelImpl
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.scheduleConstraintId, scheduleConstraintId) ||
-                other.scheduleConstraintId == scheduleConstraintId) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.intervalUnit, intervalUnit) ||
                 other.intervalUnit == intervalUnit) &&
             (identical(other.intervalValue, intervalValue) ||
@@ -394,7 +392,7 @@ class _$ScheduledIntervalSupabaseModelImpl
       userId,
       createdAt,
       startAt,
-      scheduleConstraintId,
+      taskId,
       intervalUnit,
       intervalValue,
       consecutiveOccurrences,
@@ -429,8 +427,7 @@ abstract class _ScheduledIntervalSupabaseModel
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
       @JsonKey(name: 'start_at') required final DateTime startAt,
-      @JsonKey(name: 'schedule_constraint_id')
-      required final String scheduleConstraintId,
+      @JsonKey(name: 'schedule_constraint_id') required final String taskId,
       @JsonKey(name: 'interval_unit') required final String intervalUnit,
       @JsonKey(name: 'interval_value') required final double intervalValue,
       @JsonKey(name: 'consecutive_occurrences')
@@ -459,7 +456,7 @@ abstract class _ScheduledIntervalSupabaseModel
   DateTime get startAt;
   @override
   @JsonKey(name: 'schedule_constraint_id')
-  String get scheduleConstraintId;
+  String get taskId;
   @override
   @JsonKey(name: 'interval_unit')
   String get intervalUnit;

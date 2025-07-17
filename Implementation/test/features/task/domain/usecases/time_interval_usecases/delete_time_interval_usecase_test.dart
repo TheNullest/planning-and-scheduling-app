@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/delete_time_interval_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/delete_time_interval_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
-  late DeleteTimeIntervalUsecase useCase;
+  late DeleteTimeIntervalUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = DeleteTimeIntervalUsecase(repository);
+    useCase = DeleteTimeIntervalUseCase(repository);
   });
 
   test(
-      '[timeInterval.deleteUsecase] must call the [TimeIntervalRepository.deleteEntity] and delete the entity then return the Right value',
+      '[timeInterval.deleteUseCase] must call the [TimeIntervalRepository.deleteEntity] and delete the entity then return the Right value',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: '1'))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[timeInterval.deleteUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUsecase fails',
+      '[timeInterval.deleteUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUseCase fails',
       () async {
 // Arrange
     when(() => repository.deleteEntity(id: '1'))

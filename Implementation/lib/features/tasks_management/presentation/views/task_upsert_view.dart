@@ -11,8 +11,9 @@ import 'package:zamaan/features/tasks_management/presentation/navigation_argumen
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/task_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/scheduler/schedule_constraints.dart/schedule_constraints_card.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/sub_tasks_list.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/task_form.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/task_upsert/task_upsert_form.dart';
 
 class TaskUpsertView extends StatelessWidget {
   const TaskUpsertView({
@@ -59,14 +60,14 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
       listener: (context, state) {
         state.maybeWhen(
           taskCreated: (id) => taskUpsertVM.handleEntityCreated(id),
-          taskUpdated: () => taskUpsertVM.handleEntityUpdated(),
+          taskUpdated: (task) => taskUpsertVM.handleEntityUpdated(task),
           taskDeleted: (_) => Navigator.pop(context),
           subTaskCreated: (subTask) => taskUpsertVM.subTasksManager.addNewPersistedItem(subTask),
           subTaskDeleted: (id) {
             taskUpsertVM.subTasksManager.removeFromItems(id);
             Navigator.pop(context);
           },
-          subTaskUpdated: (id) => taskUpsertVM.subTasksManager.itemIsUpdated(id),
+          subTaskUpdated: (subTask) => taskUpsertVM.subTasksManager.itemIsUpdated(subTask),
           loading: () => const Center(child: CircularProgressIndicator()),
           orElse: () => const Center(
             child: CircularProgressIndicator(),
@@ -92,56 +93,53 @@ class _TaskUpsertFormState extends State<_TaskUpsertForm> {
           ),
           automaticallyImplyLeading: false,
         ),
-        body: Form(
-          key: GlobalKey<FormState>(),
-          child: CustomScrollView(
-            slivers: [
-              const TaskFormWidget(),
-              32.sliverSizedBoxHeight,
-
-              // Button row for submitting/updating the subtask.
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                sliver: SliverToBoxAdapter(
-                  child: ActionButtonsWidget(
-                    viewStates: taskUpsertVM.viewStates,
-                    onSubmit: () => taskManagerBloc.add(
-                      TasksManagerEvent.createTask(
-                        newTask: taskUpsertVM.toEntity,
-                      ),
+        body: CustomScrollView(
+          slivers: [
+            const TaskUpsertFormWidget(),
+            32.sliverSizedBoxHeight,
+            const SliverToBoxAdapter(child: ScheduleConstraintsCard()),
+            // Button row for submitting/updating the subtask.
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              sliver: SliverToBoxAdapter(
+                child: ActionButtonsWidget(
+                  viewStates: taskUpsertVM.viewStates,
+                  onSubmit: () => taskManagerBloc.add(
+                    TasksManagerEvent.createTask(
+                      newTask: taskUpsertVM.toEntity,
                     ),
-                    onUpdate: () => taskManagerBloc.add(
-                      TasksManagerEvent.updateTask(
-                        task: taskUpsertVM.toEntity,
-                      ),
-                    ),
-                    onReset: taskUpsertVM.resetValues,
-                    onDelete: () {
-                      taskManagerBloc.add(
-                        TasksManagerEvent.deleteTask(
-                          taskId: taskUpsertVM.id!,
-                        ),
-                      );
-                    },
                   ),
+                  onUpdate: () => taskManagerBloc.add(
+                    TasksManagerEvent.updateTask(
+                      task: taskUpsertVM.toEntity,
+                    ),
+                  ),
+                  onReset: taskUpsertVM.resetValues,
+                  onDelete: () {
+                    taskManagerBloc.add(
+                      TasksManagerEvent.deleteTask(
+                        taskId: taskUpsertVM.id!,
+                      ),
+                    );
+                  },
                 ),
               ),
+            ),
 
-              // Spacer
-              12.sliverSizedBoxHeight,
+            // Spacer
+            12.sliverSizedBoxHeight,
 
-              // SubTasks list
-              SliverToBoxAdapter(
-                child: Selector<TaskUpsertVM, SubTaskVMsManager>(
-                    selector: (_, vm) => vm.subTasksManager,
-                    builder: (_, subTasksManager, __) =>
-                        ChangeNotifierProvider<SubTaskVMsManager>.value(
-                          value: subTasksManager,
-                          child: const SubTasksListWidget(),
-                        )),
-              ),
-            ],
-          ),
+            // SubTasks list
+            SliverToBoxAdapter(
+              child: Selector<TaskUpsertVM, SubTaskVMsManager>(
+                  selector: (_, vm) => vm.subTasksManager,
+                  builder: (_, subTasksManager, __) =>
+                      ChangeNotifierProvider<SubTaskVMsManager>.value(
+                        value: subTasksManager,
+                        child: const SubTasksListWidget(),
+                      )),
+            ),
+          ],
         ),
       ),
     );

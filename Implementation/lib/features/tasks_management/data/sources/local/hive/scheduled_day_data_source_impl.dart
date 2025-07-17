@@ -21,6 +21,6 @@ class ScheduledDayHiveDataSourceImpl extends HiveDataSource<ScheduledDayHiveMode
   EResultFuture<List<ScheduledDayHiveModel>> getBatchByConstraintId(String constraintId) async =>
       _hiveBox.runBoxOperation(
         job: (box) async =>
-            box.values.where((item) => item.scheduleConstraintId == constraintId).toList(),
+            box.values.where((item) => item.taskId == constraintId).toList(),
       );
 }

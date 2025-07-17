@@ -1,11 +1,11 @@
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/domain/entities/scheduled_instance.dart';
 import 'package:zamaan/domain/repositories/scheduled_instance_repository.dart';
-import 'package:zamaan/domain/usecases/base_usecase.dart';
+import 'package:zamaan/domain/useCases/base_use_case.dart';
 
-class GetBatchScheduledInstancesByDayUsecase extends UsecaseWithParams<ScheduledInstanceRepository,
+class GetBatchScheduledInstancesByDayUseCase extends UseCaseWithParams<ScheduledInstanceRepository,
     List<ScheduledInstanceEntity>, DateTime> {
-  GetBatchScheduledInstancesByDayUsecase(super.repository);
+  GetBatchScheduledInstancesByDayUseCase(super.repository);
 
   @override
   EResultFuture<List<ScheduledInstanceEntity>> call(DateTime params) async =>

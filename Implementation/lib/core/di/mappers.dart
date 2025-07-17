@@ -34,7 +34,7 @@ void _dataMappers() {
     )
 
     // ScheduleConstraint
-    ..registerFactory<ScheduleConstraintDataMapper>(
+    ..registerFactory<ScheduleConstraintsDataMapper>(
       ScheduleConstraintDataMapperImpl.new,
     )
 
@@ -54,6 +54,16 @@ void _dataMappers() {
     // TaskActivity
     ..registerFactory<TaskActivityDataMapper>(
       TaskActivityDataMapperImpl.new,
+    )
+
+    // DateRange
+    ..registerFactory<DateRangeDataMapper>(
+      DateRangeDataMapperImpl.new,
+    )
+
+    // TimeRange
+    ..registerFactory<TimeRangeDataMapper>(
+      TimeRangeDataMapperImpl.new,
     );
 }
 

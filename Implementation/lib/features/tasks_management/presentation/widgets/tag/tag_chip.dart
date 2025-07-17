@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:zamaan/features/tasks_management/presentation/dialogs/tag/tag_upsert_dialog.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tag_upsert_form.dart';
 
 class TagChipWidget extends StatelessWidget {
   const TagChipWidget({required this.tag, super.key, this.selectable = false});
@@ -123,7 +124,8 @@ class TagChipWidget extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () async => tagUpsertDialog(context, tag, taskId),
+        onTap: () async => customShowModalBottomSheetDialog<TagUpsertVM>(
+            context, tag, TagUpsertFormWidget(taskId)),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(4),

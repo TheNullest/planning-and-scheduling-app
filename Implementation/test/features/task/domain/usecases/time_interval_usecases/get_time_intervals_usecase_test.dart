@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/get_time_intervals_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/get_time_intervals_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
-  late GetTimeIntervalsUsecase useCase;
+  late GetTimeIntervalsUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = GetTimeIntervalsUsecase(repository);
+    useCase = GetTimeIntervalsUseCase(repository);
   });
 
   test(
-      '[timeInterval.getAllUsecase] must call the [TagRepository.getEntities] and return [List<TimeIntervalEntity>]',
+      '[timeInterval.getAllUseCase] must call the [TagRepository.getEntities] and return [List<TimeIntervalEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities())
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[timeInterval.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[timeInterval.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities())

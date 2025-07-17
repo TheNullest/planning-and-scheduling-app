@@ -5,7 +5,7 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/update_task_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/update_task_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
@@ -21,7 +21,7 @@ void main() {
   final params = MainTaskEntity.empty();
   // Assert
   test(
-      '[mainTask.updateUsecase] must call the [MainTaskRepository.updateEntity] and update the [MainTaskModel] with the right data',
+      '[mainTask.updateUseCase] must call the [MainTaskRepository.updateEntity] and update the [MainTaskModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params)).thenAnswer((_) async => const Right(null));
@@ -36,7 +36,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test('[mainTask.updateUsecase.failureTest] must return failure when update fails', () async {
+  test('[mainTask.updateUseCase.failureTest] must return failure when update fails', () async {
     // Arrange
     const failure = HiveFailure('Update failed');
     when(() => repository.updateEntity(entity: params))

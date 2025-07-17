@@ -937,7 +937,7 @@ mixin _$GoalsManagerState {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) =>
@@ -948,7 +948,7 @@ mixin _$GoalsManagerState {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) =>
@@ -959,7 +959,7 @@ mixin _$GoalsManagerState {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -1067,7 +1067,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -1081,7 +1081,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -1095,7 +1095,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -1202,7 +1202,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -1216,7 +1216,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -1230,7 +1230,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -1364,7 +1364,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -1378,7 +1378,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -1392,7 +1392,7 @@ class _$FailureImpl implements _Failure {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -1534,7 +1534,7 @@ class _$CreatedImpl implements _Created {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -1548,7 +1548,7 @@ class _$CreatedImpl implements _Created {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -1562,7 +1562,7 @@ class _$CreatedImpl implements _Created {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -1638,7 +1638,7 @@ abstract class _$$UpdatedImplCopyWith<$Res> {
           _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
       __$$UpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String id});
+  $Res call({GoalEntity cat});
 }
 
 /// @nodoc
@@ -1654,13 +1654,13 @@ class __$$UpdatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? cat = null,
   }) {
     return _then(_$UpdatedImpl(
-      null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == cat
+          ? _value.cat
+          : cat // ignore: cast_nullable_to_non_nullable
+              as GoalEntity,
     ));
   }
 }
@@ -1668,14 +1668,14 @@ class __$$UpdatedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdatedImpl implements _Updated {
-  const _$UpdatedImpl(this.id);
+  const _$UpdatedImpl(this.cat);
 
   @override
-  final String id;
+  final GoalEntity cat;
 
   @override
   String toString() {
-    return 'GoalsManagerState.updated(id: $id)';
+    return 'GoalsManagerState.updated(cat: $cat)';
   }
 
   @override
@@ -1683,11 +1683,11 @@ class _$UpdatedImpl implements _Updated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdatedImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.cat, cat) || other.cat == cat));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, cat);
 
   /// Create a copy of GoalsManagerState
   /// with the given fields replaced by the non-null parameter values.
@@ -1704,11 +1704,11 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
-    return updated(id);
+    return updated(cat);
   }
 
   @override
@@ -1718,11 +1718,11 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
-    return updated?.call(id);
+    return updated?.call(cat);
   }
 
   @override
@@ -1732,13 +1732,13 @@ class _$UpdatedImpl implements _Updated {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
   }) {
     if (updated != null) {
-      return updated(id);
+      return updated(cat);
     }
     return orElse();
   }
@@ -1791,9 +1791,9 @@ class _$UpdatedImpl implements _Updated {
 }
 
 abstract class _Updated implements GoalsManagerState {
-  const factory _Updated(final String id) = _$UpdatedImpl;
+  const factory _Updated(final GoalEntity cat) = _$UpdatedImpl;
 
-  String get id;
+  GoalEntity get cat;
 
   /// Create a copy of GoalsManagerState
   /// with the given fields replaced by the non-null parameter values.
@@ -1874,7 +1874,7 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -1888,7 +1888,7 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -1902,7 +1902,7 @@ class _$DeletedImpl implements _Deleted {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),
@@ -2051,7 +2051,7 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     required TResult Function() loading,
     required TResult Function(String message) failure,
     required TResult Function(GoalEntity cat) created,
-    required TResult Function(String id) updated,
+    required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
     required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
   }) {
@@ -2065,7 +2065,7 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult? Function()? loading,
     TResult? Function(String message)? failure,
     TResult? Function(GoalEntity cat)? created,
-    TResult? Function(String id)? updated,
+    TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
     TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
   }) {
@@ -2079,7 +2079,7 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult Function()? loading,
     TResult Function(String message)? failure,
     TResult Function(GoalEntity cat)? created,
-    TResult Function(String id)? updated,
+    TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
     TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
     required TResult orElse(),

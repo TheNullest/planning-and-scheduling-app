@@ -31,7 +31,7 @@ class DateRangeHiveModelAdapter extends HiveBaseTypeAdapter<DateRangeHiveModel> 
   @override
   void write(BinaryWriter writer, DateRangeHiveModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(11)
       ..write(obj.start)
       ..writeByte(12)
@@ -47,7 +47,9 @@ class DateRangeHiveModelAdapter extends HiveBaseTypeAdapter<DateRangeHiveModel> 
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

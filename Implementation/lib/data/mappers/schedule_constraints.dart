@@ -6,37 +6,37 @@ import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_constraints_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/schedule_constraint/schedule_constraint_supabase_model.dart';
 
-class ScheduleConstraintDataMapperImpl extends ScheduleConstraintDataMapper {
+class ScheduleConstraintDataMapperImpl extends ScheduleConstraintsDataMapper {
   @override
-  ScheduleConstraintEntity toEntityFromHive(ScheduleConstraintHiveModel model) {
+  ScheduleConstraintsEntity toEntityFromHive(ScheduleConstraintsHiveModel model) {
     try {
-      return ScheduleConstraintEntity(
-        id: model.id,
-        description: model.description,
-        createdAt: model.createdAt,
-        updatedAt: model.updatedAt,
-        userId: model.userId,
-        taskId: model.taskId,
-        startAt: model.startAt,
-        endAt: model.endAt,
-        exceptionMonthDays: model.exceptionMonthDays,
-        exceptionWeekDays: model.exceptionWeekDays,
-        enforceScheduleBounds: model.enforceScheduleBounds,
-        exceptionDateIds: List.from(model.exceptionDateIds),
-        exceptionTimeIds: List.from(model.exceptionTimeIds),
-      );
+      return ScheduleConstraintsEntity(
+          id: model.id,
+          description: model.description,
+          createdAt: model.createdAt,
+          updatedAt: model.updatedAt,
+          userId: model.userId,
+          taskId: model.taskId,
+          startAt: model.startAt,
+          endAt: model.endAt,
+          monthDayExceptions: model.monthDayExceptions,
+          weekDayExceptions: model.weekDayExceptions,
+          enforceScheduleBounds: model.enforceScheduleBounds,
+          dateRangeExceptionIds: List.from(model.dateRangeExceptionIds),
+          timeRangeExceptionIds: List.from(model.timeRangeExceptionIds),
+          dateExceptions: List.from(model.dateExceptions));
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
   }
 
   @override
-  ScheduleConstraintEntity toEntityFromSupabase(
-    ScheduleConstraintSupabaseModel model, {
+  ScheduleConstraintsEntity toEntityFromSupabase(
+    ScheduleConstraintsSupabaseModel model, {
     DataMap? relatedListModels,
   }) {
     try {
-      return ScheduleConstraintEntity(
+      return ScheduleConstraintsEntity(
         id: model.id,
         description: model.description,
         createdAt: model.createdAt,
@@ -45,11 +45,12 @@ class ScheduleConstraintDataMapperImpl extends ScheduleConstraintDataMapper {
         taskId: model.taskId,
         startAt: model.startAt,
         endAt: model.endAt,
-        exceptionMonthDays: model.exceptionMonthDays,
-        exceptionWeekDays: model.exceptionWeekDays.map(WeekDay.fromName).toList(),
+        monthDayExceptions: model.monthDayExceptions,
+        weekDayExceptions: model.weekDayExceptions.map(WeekDay.fromName).toList(),
         enforceScheduleBounds: model.enforceScheduleBounds,
-        exceptionDateIds: List.from(model.exceptionDateIds),
-        exceptionTimeIds: List.from(model.exceptionTimeIds),
+        dateRangeExceptionIds: List.from(model.dateRangeExceptionIds),
+        timeRangeExceptionIds: List.from(model.timeRangeExceptionIds),
+        dateExceptions: List.from(model.dateExceptions),
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -57,34 +58,34 @@ class ScheduleConstraintDataMapperImpl extends ScheduleConstraintDataMapper {
   }
 
   @override
-  ScheduleConstraintHiveModel toHiveModel(ScheduleConstraintEntity entity) {
+  ScheduleConstraintsHiveModel toHiveModel(ScheduleConstraintsEntity entity) {
     try {
-      return ScheduleConstraintHiveModel.fromEntity(entity);
+      return ScheduleConstraintsHiveModel.fromEntity(entity);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
   }
 
   @override
-  ScheduleConstraintSupabaseModel toSupabaseModel(ScheduleConstraintEntity entity) {
+  ScheduleConstraintsSupabaseModel toSupabaseModel(ScheduleConstraintsEntity entity) {
     try {
-      return ScheduleConstraintSupabaseModel.fromEntity(entity);
+      return ScheduleConstraintsSupabaseModel.fromEntity(entity);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
   }
 
   @override
-  List<ScheduleConstraintSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) {
+  List<ScheduleConstraintsSupabaseModel> fromJsonList(List<Map<String, dynamic>> jsonList) {
     try {
-      return jsonList.map(ScheduleConstraintSupabaseModel.fromJson).toList();
+      return jsonList.map(ScheduleConstraintsSupabaseModel.fromJson).toList();
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
   }
 
   @override
-  List<Map<String, dynamic>> toJsonList(List<ScheduleConstraintSupabaseModel> items) {
+  List<Map<String, dynamic>> toJsonList(List<ScheduleConstraintsSupabaseModel> items) {
     try {
       return items.map((item) => item.toJson()).toList();
     } on Exception catch (e, stackTrace) {
@@ -93,16 +94,16 @@ class ScheduleConstraintDataMapperImpl extends ScheduleConstraintDataMapper {
   }
 
   @override
-  ScheduleConstraintSupabaseModel? fromJson(Map<String, dynamic> json) {
+  ScheduleConstraintsSupabaseModel? fromJson(Map<String, dynamic> json) {
     try {
-      return ScheduleConstraintSupabaseModel.fromJson(json);
+      return ScheduleConstraintsSupabaseModel.fromJson(json);
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
   }
 
   @override
-  Map<String, dynamic> toJson(ScheduleConstraintSupabaseModel item) {
+  Map<String, dynamic> toJson(ScheduleConstraintsSupabaseModel item) {
     try {
       return item.toJson();
     } on Exception catch (e, stackTrace) {

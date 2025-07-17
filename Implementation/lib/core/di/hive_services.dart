@@ -87,9 +87,9 @@ void _hiveBoxRunner() {
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),
     )
-    ..registerFactory<HiveBoxRunner<ScheduleConstraintHiveModel>>(
-      () => HiveBoxRunnerImpl<ScheduleConstraintHiveModel>(
-        boxName: HiveBoxConstants.tagsBox,
+    ..registerFactory<HiveBoxRunner<ScheduleConstraintsHiveModel>>(
+      () => HiveBoxRunnerImpl<ScheduleConstraintsHiveModel>(
+        boxName: HiveBoxConstants.scheduleConstraintsBox,
         hive: serviceLocator<HiveWrapper>(),
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),

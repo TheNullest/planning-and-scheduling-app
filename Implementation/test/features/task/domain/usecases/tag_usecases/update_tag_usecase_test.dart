@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/tag.dart';
 import 'package:zamaan/domain/repositories/tag_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/tag/update_tag_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/tag/update_tag_use_case.dart';
 
 import '_tag_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateTagUsecase useCase;
+  late UpdateTagUseCase useCase;
   late TagRepository repository;
   setUp(() {
     repository = MockTagRepo();
-    useCase = UpdateTagUsecase(repository);
+    useCase = UpdateTagUseCase(repository);
   });
 
   final params = TagEntity.empty();
   // Assert
   test(
-      '[tag.updateUsecase] must call the [TagRepository.updateEntity] update the [TagModel] with the right data',
+      '[tag.updateUseCase] must call the [TagRepository.updateEntity] update the [TagModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params))
@@ -36,7 +36,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test('[tag.updateUsecase.failureTest] must return failure when update fails',
+  test('[tag.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

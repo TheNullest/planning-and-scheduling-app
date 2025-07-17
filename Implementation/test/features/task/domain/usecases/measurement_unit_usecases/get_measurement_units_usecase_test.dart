@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/custom_measurement_unit.dart';
 import 'package:zamaan/domain/repositories/measurement_unit_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/get_measurement_units_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/measurement_unit/get_measurement_units_use_case.dart';
 
 import '_measurement_unit_repository.mock.dart';
 
 void main() {
-  late GetMeasurementUnitsUsecase useCase;
+  late GetMeasurementUnitsUseCase useCase;
   late MeasurementUnitRepository repository;
   setUp(() {
     repository = MockMeasurementUnitRepo();
-    useCase = GetMeasurementUnitsUsecase(repository);
+    useCase = GetMeasurementUnitsUseCase(repository);
   });
 
   test(
-      '[measurementUnit.getAllUsecase] must call the [MeasurementUnitRepository.getEntities] and return [List<MeasurementUnitEntity>]',
+      '[measurementUnit.getAllUseCase] must call the [MeasurementUnitRepository.getEntities] and return [List<MeasurementUnitEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Right([]));
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[measurementUnit.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[measurementUnit.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Left(HiveFailure('Error')));

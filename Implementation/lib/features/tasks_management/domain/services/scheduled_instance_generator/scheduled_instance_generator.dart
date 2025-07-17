@@ -38,8 +38,8 @@ part 'extensions/builder.dart';
 ///   scheduledInstances: preexistingInstances,
 ///   dayTimeRanges: myDayTimeRanges,
 ///   intervalTimeRanges: myIntervalTimeRanges,
-///   exceptionTimeRanges: myExceptionTimeRanges,
-///   exceptionDateRanges: myExceptionDateRanges,
+///   timeExceptionRanges: myTimeExceptionRanges,
+///   dateExceptionRanges: myDateExceptionRanges,
 /// );
 ///
 /// // Generate scheduled instances
@@ -57,12 +57,12 @@ class ScheduledInstanceGenerator {
     scheduledInstances = params.scheduledInstances;
     dayTimeRanges = params.dayTimeRanges;
     intervalTimeRanges = params.intervalTimeRanges;
-    exceptionTimeRanges = params.exceptionTimeRanges;
-    exceptionDateRanges = params.exceptionDateRanges;
+    timeExceptionRanges = params.timeExceptionRanges;
+    dateExceptionRanges = params.dateExceptionRanges;
   }
 
   /// Constraint defining the schedule’s start, end, and related information.
-  late ScheduleConstraintEntity scheduleConstraint;
+  late ScheduleConstraintsEntity scheduleConstraint;
 
   /// Contains day-based scheduled events.
   late List<ScheduledDayEntity> days;
@@ -80,10 +80,10 @@ class ScheduledInstanceGenerator {
   late List<TimeRangeEntity> intervalTimeRanges;
 
   /// Time ranges where scheduling should not occur.
-  late List<TimeRangeEntity> exceptionTimeRanges;
+  late List<TimeRangeEntity> timeExceptionRanges;
 
   /// Date ranges where scheduling should not occur.
-  late List<DateRangeEntity> exceptionDateRanges;
+  late List<DateRangeEntity> dateExceptionRanges;
 
   // Internal store for generated scheduled instances.
   final _generatedInstances = <ScheduledInstanceEntity>[];

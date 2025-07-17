@@ -4,21 +4,21 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/get_tasks_by_due_date_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task/get_tasks_by_due_date_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late GetMainTasksByDueDateUsecase useCase;
+  late GetMainTasksByDueDateUseCase useCase;
   late MainTaskRepository repository;
   setUp(() {
     repository = MockMainTaskRepo();
-    useCase = GetMainTasksByDueDateUsecase(repository);
+    useCase = GetMainTasksByDueDateUseCase(repository);
   });
 
   final param = DateTime.now();
   test(
-      '[mainTask.GetMainTasksByDueDateUsecase] must call the [MainTaskRepository.getMainTasksByDueDate] and return [List<MainTaskEntity>]',
+      '[mainTask.GetMainTasksByDueDateUseCase] must call the [MainTaskRepository.getMainTasksByDueDate] and return [List<MainTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getMainTasksByDueDate(param)).thenAnswer((_) async => const Right([]));
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[mainTask.GetMainTasksByDueDateUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByDueDateUsecase fails',
+      '[mainTask.GetMainTasksByDueDateUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByDueDateUseCase fails',
       () async {
     //Arrange
     when(() => repository.getMainTasksByDueDate(param))

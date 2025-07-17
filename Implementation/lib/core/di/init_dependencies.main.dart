@@ -15,10 +15,12 @@ Future<void> initDependencies() async {
 
   // BLoCs
   _authBloc();
+  _dateTimeRangesManagerBloc();
   _categoriesManagerBloc();
   _tagsManagerBloc();
   _tasksManagerBloc();
   _goalsManagerBloc();
+  _scheduleConstraints();
 
   _navigator();
 

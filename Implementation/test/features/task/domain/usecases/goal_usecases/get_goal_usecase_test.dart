@@ -5,30 +5,30 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/repositories/goal_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/unused/get_goal_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/unused/get_goal_use_case.dart';
 
 import '_goal_repository.mock.dart';
 
 void main() {
   late GoalRepository mockedRepo;
-  late GetGoalUsecase usecase;
+  late GetGoalUseCase useCase;
   late GoalEntity param;
 
   setUp(() {
     mockedRepo = MockGoalRepo();
-    usecase = GetGoalUsecase(mockedRepo);
+    useCase = GetGoalUseCase(mockedRepo);
     param = GoalEntity.empty();
   });
 
   test(
-      '[goal.getUsecase] must call the [GoalRepository.getEntity] and return [GoalEntity]',
+      '[goal.getUseCase] must call the [GoalRepository.getEntity] and return [GoalEntity]',
       () async {
     //Arrange
     when(() => mockedRepo.getEntity(id: param.id))
         .thenAnswer((_) async => Right(param));
 
     // Act
-    final result = await usecase(param.id);
+    final result = await useCase(param.id);
 
     //Assert
     expect(result.isRight(), true);
@@ -39,14 +39,14 @@ void main() {
   });
 
   test(
-      '[goal.getUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getUsecase fails',
+      '[goal.getUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getUseCase fails',
       () async {
     //Arrange
     when(() => mockedRepo.getEntity(id: param.id))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
     // Act
-    final result = await usecase(param.id);
+    final result = await useCase(param.id);
 
     // Assert
     expect(result.isLeft(), true);

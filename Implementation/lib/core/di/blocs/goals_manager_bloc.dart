@@ -20,24 +20,24 @@ void _goalsManagerBloc() {
       GoalRepositoryImpl(
         localDataSource: serviceLocator(),
         remoteDataSource: serviceLocator(),
-        dataMapper: serviceLocator<GoalDataMapper>(),
+        dataMapper: serviceLocator(),
         netConnectivity: serviceLocator(),
       ),
     )
 
-    // Usecases
-    ..registerFactory(() => CreateGoalUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteGoalUsecase(serviceLocator()))
-    ..registerFactory(() => FetchGoalsByRefsUsecase(serviceLocator()))
-    ..registerFactory(() => UpdateGoalUsecase(serviceLocator()))
+    // UseCases
+    ..registerFactory(() => CreateGoalUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteGoalUseCase(serviceLocator()))
+    ..registerFactory(() => FetchGoalsByRefsUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateGoalUseCase(serviceLocator()))
 
     // ManagerBloc
     ..registerLazySingleton<GoalsManagerBloc>(
       () => GoalsManagerBloc(
-        createUsecase: serviceLocator(),
-        fetchGoalsByRefsUsecase: serviceLocator(),
-        deleteUsecase: serviceLocator(),
-        updateUsecase: serviceLocator(),
+        createUseCase: serviceLocator(),
+        fetchGoalsByRefsUseCase: serviceLocator(),
+        deleteUseCase: serviceLocator(),
+        updateUseCase: serviceLocator(),
       ),
     );
 }

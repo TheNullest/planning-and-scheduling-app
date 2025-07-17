@@ -6,27 +6,29 @@ part of 'schedule_constraints_hive_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleConstraintHiveModel> {
+class ScheduleConstraintsHiveModelAdapter
+    extends HiveBaseTypeAdapter<ScheduleConstraintsHiveModel> {
   @override
   final int typeId = 17;
 
   @override
-  ScheduleConstraintHiveModel read(BinaryReader reader) {
+  ScheduleConstraintsHiveModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ScheduleConstraintHiveModel(
+    return ScheduleConstraintsHiveModel(
       id: fields[0] as String?,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       taskId: fields[11] as String,
       startAt: fields[12] as DateTime?,
       endAt: fields[13] as DateTime?,
-      exceptionWeekDays: (fields[15] as List).cast<WeekDay>(),
-      exceptionMonthDays: (fields[16] as List).cast<int>(),
-      exceptionTimeIds: (fields[17] as List).cast<String>(),
-      exceptionDateIds: (fields[18] as List).cast<String>(),
+      weekDayExceptions: (fields[15] as List).cast<WeekDay>(),
+      monthDayExceptions: (fields[16] as List).cast<int>(),
+      timeRangeExceptionIds: (fields[17] as List).cast<String>(),
+      dateRangeExceptionIds: (fields[18] as List).cast<String>(),
+      dateExceptions: (fields[19] as List?)?.cast<DateTime>() ?? [],
       enforceScheduleBounds: fields[14] as bool,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
@@ -34,9 +36,9 @@ class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleCon
   }
 
   @override
-  void write(BinaryWriter writer, ScheduleConstraintHiveModel obj) {
+  void write(BinaryWriter writer, ScheduleConstraintsHiveModel obj) {
     writer
-      ..writeByte(13)
+      ..writeByte(15)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
@@ -46,13 +48,15 @@ class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleCon
       ..writeByte(14)
       ..write(obj.enforceScheduleBounds)
       ..writeByte(15)
-      ..write(obj.exceptionWeekDays)
+      ..write(obj.weekDayExceptions)
       ..writeByte(16)
-      ..write(obj.exceptionMonthDays)
+      ..write(obj.monthDayExceptions)
       ..writeByte(17)
-      ..write(obj.exceptionTimeIds)
+      ..write(obj.timeRangeExceptionIds)
       ..writeByte(18)
-      ..write(obj.exceptionDateIds)
+      ..write(obj.dateRangeExceptionIds)
+      ..writeByte(19)
+      ..write(obj.dateExceptions)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -62,7 +66,9 @@ class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleCon
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override
@@ -71,7 +77,7 @@ class ScheduleConstraintHiveModelAdapter extends HiveBaseTypeAdapter<ScheduleCon
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ScheduleConstraintHiveModelAdapter &&
+      other is ScheduleConstraintsHiveModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/repositories/category_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/category/fetch_all_categories_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/category/fetch_all_categories_use_case.dart';
 
 import '_category_repository.mock.dart';
 
 void main() {
-  late FetchAllCategoriesUsecase useCase;
+  late FetchAllCategoriesUseCase useCase;
   late CategoryRepository repository;
   setUp(() {
     repository = MockCategoryRepo();
-    useCase = FetchAllCategoriesUsecase(repository);
+    useCase = FetchAllCategoriesUseCase(repository);
   });
 
   test(
-      '[category.getAllUsecase] must call the [CategoryRepository.getEntities] and return [List<CategoryEntity>]',
+      '[category.getAllUseCase] must call the [CategoryRepository.getEntities] and return [List<CategoryEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Right([]));
@@ -33,7 +33,7 @@ void main() {
   });
 
   test(
-      '[category.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[category.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities()).thenAnswer((_) async => const Left(HiveFailure('Error')));

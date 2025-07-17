@@ -1,12 +1,14 @@
 extension DateTimeExtensions on DateTime {
   /// Converts `DateTime` to a formatted string (e.g., "2025-04-24 14:30").
-  String toFormattedString({bool includeTime = true}) {
+  String get toDateString {
     final date =
         '${year.toString().padLeft(4, '0')}-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
-    if (!includeTime) return date;
+    return date;
+  }
 
+  String get toDateTimeString {
     final time = '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
-    return '$date $time';
+    return '$toDateString $time';
   }
 
   /// Extracts the date as a string (e.g., "2025-04-24").

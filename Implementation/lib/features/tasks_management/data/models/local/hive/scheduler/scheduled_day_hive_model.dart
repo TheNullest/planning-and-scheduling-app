@@ -44,7 +44,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required this.scheduleConstraintId,
+    required this.taskId,
     required this.dayType,
     required this.dayValue,
     required this.scheduledTimeIds,
@@ -65,7 +65,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
       createdAt: entity.createdAt,
       description: entity.description,
       updatedAt: entity.updatedAt,
-      scheduleConstraintId: entity.scheduleConstraintId,
+      taskId: entity.taskId,
       dayType: entity.dayType,
       dayValue: entity.dayValue,
       scheduledTimeIds: List.from(entity.scheduledTimeIds),
@@ -76,7 +76,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
 
   /// Reference to the parent schedule definition.
   @HiveField(11)
-  final String scheduleConstraintId;
+  final String taskId;
 
   /// Determines whether this schedule uses weekday or month-day logic.
   @HiveField(12)
@@ -110,7 +110,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
     DateTime? createdAt,
     String? description,
     DateTime? updatedAt,
-    String? scheduleConstraintId,
+    String? taskId,
     DayType? dayType,
     String? dayValue,
     List<String>? scheduledTimeIds,
@@ -123,7 +123,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
       createdAt: createdAt ?? this.createdAt,
       description: description ?? this.description,
       updatedAt: updatedAt ?? this.updatedAt,
-      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+      taskId: taskId ?? this.taskId,
       dayType: dayType ?? this.dayType,
       dayValue: dayValue ?? this.dayValue,
       scheduledTimeIds: scheduledTimeIds ?? List.from(this.scheduledTimeIds),
@@ -135,7 +135,7 @@ class ScheduledDayHiveModel extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        scheduleConstraintId,
+        taskId,
         dayType,
         dayValue,
         scheduledTimeIds,

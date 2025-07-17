@@ -9,47 +9,54 @@ import 'package:zamaan/features/tasks_management/data/sources/local/bases/schedu
 ///
 /// This class extends [HiveDataSource] to leverage common data operations
 /// and provides additional methods for specific scheduleConstraints-related queries.
-class ScheduleDefinitionHiveDataSourceImpl extends HiveDataSource<ScheduleConstraintHiveModel>
-    implements ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel> {
-  /// Constructor for [ScheduleDefinitionHiveDataSourceImpl].
+class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConstraintsHiveModel>
+    implements ScheduleConstraintsLocalDataSource<ScheduleConstraintsHiveModel> {
+  /// Constructor for [ScheduleConstraintsHiveDataSourceImpl].
   ///
   /// The [hiveBox] parameter is optional and allows for dependency injection
   /// to facilitate testing. If not provided, a default [HiveBoxRunner] is used.
-  ScheduleDefinitionHiveDataSourceImpl({
-    HiveBoxRunner<ScheduleConstraintHiveModel>? hiveBox,
-  })  : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<ScheduleConstraintHiveModel>>(),
+  ScheduleConstraintsHiveDataSourceImpl({
+    HiveBoxRunner<ScheduleConstraintsHiveModel>? hiveBox,
+  })  : _hiveBox = hiveBox ?? serviceLocator<HiveBoxRunner<ScheduleConstraintsHiveModel>>(),
         super(hiveServices: hiveBox);
-  final HiveBoxRunner<ScheduleConstraintHiveModel> _hiveBox;
+  final HiveBoxRunner<ScheduleConstraintsHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<ScheduleConstraintHiveModel>> getBatchSchedulesByDay(DateTime date) async {
-    return _hiveBox.runBoxOperation<List<ScheduleConstraintHiveModel>>(
-      job: (box) async => box.values.where((scheduleConstraints) {
-        final bool inDateRange;
-        if (scheduleConstraints.startAt != null) {
-          inDateRange = scheduleConstraints.startAt!.isBefore(date) &&
-              scheduleConstraints.startAt!.isAfter(date);
-        } else {
-          inDateRange = true;
-        }
-        final inWeekDay = scheduleConstraints.exceptionWeekDays
-            .any((weekDay) => weekDay.dateTimeWeekDayIndex == date.weekday);
-        final inMonthDay =
-            scheduleConstraints.exceptionMonthDays.any((monthDay) => monthDay == date.day);
+  EResultFuture<List<ScheduleConstraintsHiveModel>> getBatchSchedulesByDay(DateTime date) async =>
+      _hiveBox.runBoxOperation<List<ScheduleConstraintsHiveModel>>(
+        job: (box) async => box.values.where((scheduleConstraints) {
+          final bool inDateRange;
+          if (scheduleConstraints.startAt != null) {
+            inDateRange = scheduleConstraints.startAt!.isBefore(date) &&
+                scheduleConstraints.startAt!.isAfter(date);
+          } else {
+            inDateRange = true;
+          }
+          final inWeekDay = scheduleConstraints.weekDayExceptions
+              .any((weekDay) => weekDay.dateTimeWeekDayIndex == date.weekday);
+          final inMonthDay =
+              scheduleConstraints.monthDayExceptions.any((monthDay) => monthDay == date.day);
 
-        // // In Scheduled Intervals
-        // final inInterval = scheduleConstraints.scheduledIntervals.any((interval) {
-        //   switch (interval.intervalUnit) {
-        //     case IntervalUnit.hour:
-        //       final date = scheduleConstraints.scheduledDateRange!.start +
-        //           (interval.intervalValue * interval.repeatCount);
-        //   }
-        // });
+          // // In Scheduled Intervals
+          // final inInterval = scheduleConstraints.scheduledIntervals.any((interval) {
+          //   switch (interval.intervalUnit) {
+          //     case IntervalUnit.hour:
+          //       final date = scheduleConstraints.scheduledDateRange!.start +
+          //           (interval.intervalValue * interval.repeatCount);
+          //   }
+          // });
 
-        return inDateRange && (inWeekDay || inMonthDay);
-      }).toList(),
-    );
-  }
+          return inDateRange && (inWeekDay || inMonthDay);
+        }).toList(),
+      );
+
+  @override
+  EResultFuture<ScheduleConstraintsHiveModel?> getByTaskId(String taskId) async =>
+      _hiveBox.runBoxOperation<ScheduleConstraintsHiveModel?>(
+          job: (box) async => box.values.cast<ScheduleConstraintsHiveModel?>().singleWhere(
+                (item) => item?.taskId == taskId,
+                orElse: () => null,
+              ));
 
   // /// Retrieves tasks based on main scheduleConstraints IDs and a date range.
   // ///

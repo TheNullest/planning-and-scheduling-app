@@ -6,17 +6,19 @@ part of 'schedule_constraint_supabase_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$ScheduleConstraintSupabaseModelToJson(
-        ScheduleConstraintSupabaseModel instance) =>
+Map<String, dynamic> _$ScheduleConstraintsSupabaseModelToJson(
+        ScheduleConstraintsSupabaseModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'task_id': instance.taskId,
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
-      'exception_date_ids': instance.exceptionDateIds,
-      'exception_time_ids': instance.exceptionTimeIds,
-      'exception_week_days': instance.exceptionWeekDays,
-      'exception_month_days': instance.exceptionMonthDays,
+      'date_range_exception_ids': instance.dateRangeExceptionIds,
+      'time_range_exception_ids': instance.timeRangeExceptionIds,
+      'date_exceptions':
+          instance.dateExceptions.map((e) => e.toIso8601String()).toList(),
+      'week_day_exceptions': instance.weekDayExceptions,
+      'month_day_exceptions': instance.monthDayExceptions,
       'enforce_schedule_bounds': instance.enforceScheduleBounds,
       'start_at': instance.startAt?.toIso8601String(),
       'end_at': instance.endAt?.toIso8601String(),
@@ -31,16 +33,21 @@ _$ScheduleDefinitionSupabaseModelImpl
           taskId: json['task_id'] as String,
           userId: json['user_id'] as String,
           createdAt: DateTime.parse(json['created_at'] as String),
-          exceptionDateIds: (json['exception_date_ids'] as List<dynamic>)
+          dateRangeExceptionIds:
+              (json['date_range_exception_ids'] as List<dynamic>)
+                  .map((e) => e as String)
+                  .toList(),
+          timeRangeExceptionIds:
+              (json['time_range_exception_ids'] as List<dynamic>)
+                  .map((e) => e as String)
+                  .toList(),
+          dateExceptions: (json['date_exceptions'] as List<dynamic>)
+              .map((e) => DateTime.parse(e as String))
+              .toList(),
+          weekDayExceptions: (json['week_day_exceptions'] as List<dynamic>)
               .map((e) => e as String)
               .toList(),
-          exceptionTimeIds: (json['exception_time_ids'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
-          exceptionWeekDays: (json['exception_week_days'] as List<dynamic>)
-              .map((e) => e as String)
-              .toList(),
-          exceptionMonthDays: (json['exception_month_days'] as List<dynamic>)
+          monthDayExceptions: (json['month_day_exceptions'] as List<dynamic>)
               .map((e) => (e as num).toInt())
               .toList(),
           enforceScheduleBounds: json['enforce_schedule_bounds'] as bool,
@@ -63,10 +70,12 @@ Map<String, dynamic> _$$ScheduleDefinitionSupabaseModelImplToJson(
       'task_id': instance.taskId,
       'user_id': instance.userId,
       'created_at': instance.createdAt.toIso8601String(),
-      'exception_date_ids': instance.exceptionDateIds,
-      'exception_time_ids': instance.exceptionTimeIds,
-      'exception_week_days': instance.exceptionWeekDays,
-      'exception_month_days': instance.exceptionMonthDays,
+      'date_range_exception_ids': instance.dateRangeExceptionIds,
+      'time_range_exception_ids': instance.timeRangeExceptionIds,
+      'date_exceptions':
+          instance.dateExceptions.map((e) => e.toIso8601String()).toList(),
+      'week_day_exceptions': instance.weekDayExceptions,
+      'month_day_exceptions': instance.monthDayExceptions,
       'enforce_schedule_bounds': instance.enforceScheduleBounds,
       'start_at': instance.startAt?.toIso8601String(),
       'end_at': instance.endAt?.toIso8601String(),

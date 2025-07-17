@@ -7,6 +7,7 @@ analyzer:
     invalid_annotation_target: ignore
     lines_longer_than_80_chars: ignore
     strict_raw_type: ignore
+    unnecessary_lambdas: ignore
     use_if_null_to_convert_nulls_to_bools: ignore
 
 linter:

@@ -9,7 +9,7 @@
 //     required this.canRepeat,
 //     required this.scheduledTimes,
 //     required this.enforceScheduleBounds,
-//     required this.scheduleConstraintId,
+//     required this.taskId,
 //     super.id,
 //     super.description,
 //     super.createdAt,
@@ -27,7 +27,7 @@
 //   final bool canRepeat;
 //   final List<TimeRangeVM> scheduledTimes;
 //   final bool enforceScheduleBounds;
-//   final String scheduleConstraintId;
+//   final String taskId;
 
 //   @override
 //   BaseViewModel copyWith({
@@ -36,7 +36,7 @@
 //     DateTime? createdAt,
 //     DateTime? updatedAt,
 //     String? userId,
-//     String? scheduleConstraintId,
+//     String? taskId,
 //     DayType? dayType,
 //     String? dayValue,
 //     List<TimeRangeVM>? scheduledTimes,
@@ -45,7 +45,7 @@
 //   }) =>
 //       ScheduledDayVM(
 //         id: id ?? this.id,
-//         scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+//         taskId: taskId ?? this.taskId,
 //         description: description ?? this.description,
 //         createdAt: createdAt ?? this.createdAt,
 //         updatedAt: updatedAt ?? this.updatedAt,

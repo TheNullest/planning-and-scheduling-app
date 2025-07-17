@@ -2,7 +2,7 @@
 
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/domain/usecases/create_user_usecase.dart';
+import 'package:zamaan/features/auth/domain/useCases/create_user_use_case.dart';
 
 import '_authentication_repository.mock.dart';
 
@@ -26,8 +26,8 @@ void main() {
   });
 
   final params = UserEntity.forTest();
-  group('user.createUsecase', () {
-    test('[user.createUsecase] must call the [AuthRepo.createEntity]',
+  group('user.createUseCase', () {
+    test('[user.createUseCase] must call the [AuthRepo.createEntity]',
         () async {
       // Arrange
       // STUB
@@ -51,7 +51,7 @@ void main() {
     });
 
     test(
-        '[user.createUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUsecase fails',
+        '[user.createUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUseCase fails',
         () async {
       // Arrange
       // STUB

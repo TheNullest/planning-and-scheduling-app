@@ -20,24 +20,24 @@ void _categoriesManagerBloc() {
       CategoryRepositoryImpl(
         localDataSource: serviceLocator(),
         remoteDataSource: serviceLocator(),
-        dataMapper: serviceLocator<CategoryDataMapper>(),
+        dataMapper: serviceLocator(),
         netConnectivity: serviceLocator(),
       ),
     )
 
-    // Usecases
-    ..registerFactory(() => CreateCategoryUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteCategoryUsecase(serviceLocator()))
-    ..registerFactory(() => FetchAllCategoriesUsecase(serviceLocator()))
-    ..registerFactory(() => UpdateCategoryUsecase(serviceLocator()))
+    // UseCases
+    ..registerFactory(() => CreateCategoryUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteCategoryUseCase(serviceLocator()))
+    ..registerFactory(() => FetchAllCategoriesUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateCategoryUseCase(serviceLocator()))
 
     // CategoriesManagerBloc
     ..registerLazySingleton<CategoriesManagerBloc>(
       () => CategoriesManagerBloc(
-        createUsecase: serviceLocator(),
-        fetchAllUsecase: serviceLocator(),
-        deleteUsecase: serviceLocator(),
-        updateUsecase: serviceLocator(),
+        createUseCase: serviceLocator(),
+        fetchAllUseCase: serviceLocator(),
+        deleteUseCase: serviceLocator(),
+        updateUseCase: serviceLocator(),
       ),
     );
 }

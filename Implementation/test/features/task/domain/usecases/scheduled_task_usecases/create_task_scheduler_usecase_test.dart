@@ -5,28 +5,28 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/create_task_scheduler_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task_scheduler/create_task_scheduler_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
-  late CreateTaskSchedulerUsecase usecase;
+  late CreateTaskSchedulerUseCase useCase;
   late TaskSchedulerRepository mockedRepository;
 
   setUp(() {
     mockedRepository = MockTaskSchedulerRepo();
-    usecase = CreateTaskSchedulerUsecase(mockedRepository);
+    useCase = CreateTaskSchedulerUseCase(mockedRepository);
   });
 
   final param = TaskSchedulerEntity.empty();
   test(
-      '[scheduledTime.createUsecase] must call the [ScheduledTimeRepository.createEntity]',
+      '[scheduledTime.createUseCase] must call the [ScheduledTimeRepository.createEntity]',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Right(null));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isRight(), true);
@@ -37,13 +37,13 @@ void main() {
   });
 
   test(
-      '[scheduledTime.createUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUsecase fails',
+      '[scheduledTime.createUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUseCase fails',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isLeft(), true);

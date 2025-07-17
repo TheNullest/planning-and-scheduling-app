@@ -12,7 +12,7 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
   ScheduledDayEntity({
     required super.userId,
     required super.createdAt,
-    required this.scheduleConstraintId,
+    required this.taskId,
     required this.dayType,
     required this.dayValue,
     required this.scheduledTimeIds,
@@ -27,14 +27,14 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
   ///
   /// - [id]: Unique identifier for this entity.
   /// - [userId]: The user associated with this scheduled day.
-  /// - [scheduleConstraintId]: Reference to the parent schedule definition.
+  /// - [taskId]: Reference to the parent schedule definition.
   /// - [dayType]: Indicates whether this is a weekday or a day of the month.
   /// - [dayValue]: Specifies the day value (e.g., "sunday" or "15").
   /// - [scheduledTimeIds]: A list of active time periods for the scheduled day.
   /// - [canRepeat]: Determines whether the schedule recurs on subsequent matching days.
 
   /// Reference to the parent schedule definition.
-  final String scheduleConstraintId;
+  final String taskId;
 
   /// Determines whether this schedule uses weekday or month-day logic.
   final DayType dayType;
@@ -65,7 +65,7 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
     DateTime? createdAt,
     String? description,
     DateTime? updatedAt,
-    String? scheduleConstraintId,
+    String? taskId,
     DayType? dayType,
     String? dayValue,
     List<String>? scheduledTimeIds,
@@ -78,7 +78,7 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
       createdAt: createdAt ?? this.createdAt,
       description: description ?? this.description,
       updatedAt: updatedAt ?? this.updatedAt,
-      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+      taskId: taskId ?? this.taskId,
       dayType: dayType ?? this.dayType,
       dayValue: dayValue ?? this.dayValue,
       scheduledTimeIds:
@@ -91,7 +91,7 @@ class ScheduledDayEntity extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        scheduleConstraintId,
+        taskId,
         dayType,
         dayValue,
         scheduledTimeIds,

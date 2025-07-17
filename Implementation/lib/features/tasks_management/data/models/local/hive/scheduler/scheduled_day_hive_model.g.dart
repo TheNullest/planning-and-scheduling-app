@@ -20,7 +20,7 @@ class ScheduledDayHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledDayHiveM
       id: fields[0] as String?,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      scheduleConstraintId: fields[11] as String,
+      taskId: fields[11] as String,
       dayType: fields[12] as DayType,
       dayValue: fields[13] as String,
       scheduledTimeIds: (fields[14] as List).cast<String>(),
@@ -34,9 +34,9 @@ class ScheduledDayHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledDayHiveM
   @override
   void write(BinaryWriter writer, ScheduledDayHiveModel obj) {
     writer
+      ..writeByte(12)
       ..writeByte(11)
-      ..writeByte(11)
-      ..write(obj.scheduleConstraintId)
+      ..write(obj.taskId)
       ..writeByte(12)
       ..write(obj.dayType)
       ..writeByte(13)
@@ -56,7 +56,9 @@ class ScheduledDayHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledDayHiveM
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zamaan/domain/entities/goal.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/create_goal_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/delete_goal_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/fetch_goals_by_refs_usecase.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/update_goal_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/create_goal_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/delete_goal_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/fetch_goals_by_refs_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/update_goal_use_case.dart';
 
 part 'goals_manager_event.dart';
 part 'goals_manager_state.dart';
@@ -12,14 +12,14 @@ part 'goals_manager_bloc.freezed.dart';
 
 class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
   GoalsManagerBloc({
-    required FetchGoalsByRefsUsecase fetchGoalsByRefsUsecase,
-    required CreateGoalUsecase createUsecase,
-    required UpdateGoalUsecase updateUsecase,
-    required DeleteGoalUsecase deleteUsecase,
-  })  : _createUsecase = createUsecase,
-        _fetchGoalsByRefsUsecase = fetchGoalsByRefsUsecase,
-        _updateUsecase = updateUsecase,
-        _deleteUsecase = deleteUsecase,
+    required FetchGoalsByRefsUseCase fetchGoalsByRefsUseCase,
+    required CreateGoalUseCase createUseCase,
+    required UpdateGoalUseCase updateUseCase,
+    required DeleteGoalUseCase deleteUseCase,
+  })  : _createUseCase = createUseCase,
+        _fetchGoalsByRefsUseCase = fetchGoalsByRefsUseCase,
+        _updateUseCase = updateUseCase,
+        _deleteUseCase = deleteUseCase,
         super(const _Initial()) {
     on<GoalsManagerEvent>((event, emit) async {
       await event.map(
@@ -32,10 +32,10 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
     });
   }
 
-  final FetchGoalsByRefsUsecase _fetchGoalsByRefsUsecase;
-  final CreateGoalUsecase _createUsecase;
-  final UpdateGoalUsecase _updateUsecase;
-  final DeleteGoalUsecase _deleteUsecase;
+  final FetchGoalsByRefsUseCase _fetchGoalsByRefsUseCase;
+  final CreateGoalUseCase _createUseCase;
+  final UpdateGoalUseCase _updateUseCase;
+  final DeleteGoalUseCase _deleteUseCase;
 
   Future<void> _started(
     _Started event,
@@ -52,7 +52,7 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
     Emitter<GoalsManagerState> emit,
   ) async {
     emit(const GoalsManagerState.loading());
-    final result = await _fetchGoalsByRefsUsecase(e.refIds);
+    final result = await _fetchGoalsByRefsUseCase(e.refIds);
     result.fold((failure) => emit(GoalsManagerState.failure(failure.toString())),
         (goals) => emit(GoalsManagerState.fetchedByRefIds(goals)));
   }
@@ -62,7 +62,7 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
     Emitter<GoalsManagerState> emit,
   ) async {
     emit(const GoalsManagerState.loading());
-    final result = await _createUsecase(event.entity);
+    final result = await _createUseCase(event.entity);
     result.fold(
       (failure) => emit(GoalsManagerState.failure(failure.toString())),
       (id) => emit(GoalsManagerState.created(event.entity)),
@@ -73,10 +73,10 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
     _Update event,
     Emitter<GoalsManagerState> emit,
   ) async {
-    final result = await _updateUsecase(event.entity);
+    final result = await _updateUseCase(event.entity);
     result.fold(
       (failure) => emit(GoalsManagerState.failure(failure.toString())),
-      (_) => emit(GoalsManagerState.updated(event.entity.id)),
+      (_) => emit(GoalsManagerState.updated(event.entity)),
     );
   }
 
@@ -84,7 +84,7 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
     _Delete event,
     Emitter<GoalsManagerState> emit,
   ) async {
-    final result = await _deleteUsecase(event.id);
+    final result = await _deleteUseCase(event.id);
     result.fold(
       (failure) => emit(GoalsManagerState.failure(failure.toString())),
       (_) => emit(GoalsManagerState.deleted(event.id)),

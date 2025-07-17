@@ -5,16 +5,16 @@ import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/get_time_inteval_by_main_task_ids_and_date_range_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/get_time_inteval_by_main_task_ids_and_date_range_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
-  late GetTimeIntevalByMainTaskIdsAndDateRangeUsecase useCase;
+  late GetTimeIntevalByMainTaskIdsAndDateRangeUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = GetTimeIntevalByMainTaskIdsAndDateRangeUsecase(repository);
+    useCase = GetTimeIntevalByMainTaskIdsAndDateRangeUseCase(repository);
   });
 
   final startAt = DateTime.now();
@@ -25,7 +25,7 @@ void main() {
     endAt: endAt,
   );
   test(
-      '[timeInterval.GetTimeIntevalByMainTaskIdsAndDateRangeUsecase] must call the [TimeIntervalRepository.getTimeIntervalByMainTaskIdAndDateRange] and return [List<TimeIntervalEntity>]',
+      '[timeInterval.GetTimeIntevalByMainTaskIdsAndDateRangeUseCase] must call the [TimeIntervalRepository.getTimeIntervalByMainTaskIdAndDateRange] and return [List<TimeIntervalEntity>]',
       () async {
     //Arrange
     when(() => repository.getTimeIntervalByMainTaskIdAndDateRange(params))
@@ -44,7 +44,7 @@ void main() {
   });
 
   test(
-      '[timeInterval.GetTimeIntevalByMainTaskIdsAndDateRangeUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetTimeIntevalByMainTaskIdsAndDateRangeUsecase fails',
+      '[timeInterval.GetTimeIntevalByMainTaskIdsAndDateRangeUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetTimeIntevalByMainTaskIdsAndDateRangeUseCase fails',
       () async {
     //Arrange
     when(() => repository.getTimeIntervalByMainTaskIdAndDateRange(params))

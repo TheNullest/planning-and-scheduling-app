@@ -9,7 +9,7 @@ class GoalsManagerState with _$GoalsManagerState {
 
   const factory GoalsManagerState.created(GoalEntity cat) = _Created;
 
-  const factory GoalsManagerState.updated(String id) = _Updated;
+  const factory GoalsManagerState.updated(GoalEntity cat) = _Updated;
 
   const factory GoalsManagerState.deleted(String id) = _Deleted;
 

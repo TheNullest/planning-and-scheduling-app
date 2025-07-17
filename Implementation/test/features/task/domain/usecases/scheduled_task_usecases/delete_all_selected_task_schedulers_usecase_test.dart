@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/task_scheduler/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/task_scheduler/domain/usecases/delete_all_selected_task_schedulers_usecase.dart';
+import 'package:zamaan/features/task_scheduler/domain/useCases/delete_all_selected_task_schedulers_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedTaskSchedulersUsecase useCase;
+  late DeleteAllSelectedTaskSchedulersUseCase useCase;
   late TaskSchedulerRepository repository;
   setUp(() {
     repository = MockTaskSchedulerRepo();
-    useCase = DeleteAllSelectedTaskSchedulersUsecase(repository);
+    useCase = DeleteAllSelectedTaskSchedulersUseCase(repository);
   });
 
   test(
-      '[taskScheduler.deleteAllSelectedUsecase] must call the [TaskSchedulerRepository.deleteAllSelected] and delete the entity then return the Right value',
+      '[taskScheduler.deleteAllSelectedUseCase] must call the [TaskSchedulerRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[taskScheduler.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+      '[taskScheduler.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))

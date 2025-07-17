@@ -81,7 +81,7 @@ enum WeekDay {
   /// ```dart
   /// print(WeekDay.saturday.name); // Output: "Saturday"
   /// ```
-  String get name => toString().substring(9).toSentenceCase();
+  String get name => toString().substring(8).toSentenceCase();
 
   int get dateTimeWeekDayIndex => index + 1;
 

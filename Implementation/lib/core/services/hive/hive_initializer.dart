@@ -87,7 +87,7 @@ class HiveInitializerImpl extends HiveInitializer {
       CategoryHiveModelAdapter(),
       GoalHiveModelAdapter(),
       CustomMeasurementUnitHiveModelAdapter(),
-      ScheduleConstraintHiveModelAdapter(),
+      ScheduleConstraintsHiveModelAdapter(),
       ScheduledDayHiveModelAdapter(),
       ScheduledIntervalHiveModelAdapter(),
       ScheduledInstanceHiveModelAdapter(),

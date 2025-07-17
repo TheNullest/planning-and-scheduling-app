@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_scheduler_by_task_id_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task_scheduler/get_task_scheduler_by_task_id_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
-  late GetTaskSchedulerByTaskIdUsecase useCase;
+  late GetTaskSchedulerByTaskIdUseCase useCase;
   late TaskSchedulerRepository repository;
   setUp(() {
     repository = MockTaskSchedulerRepo();
-    useCase = GetTaskSchedulerByTaskIdUsecase(repository);
+    useCase = GetTaskSchedulerByTaskIdUseCase(repository);
   });
 
   test(
-      '[scheduledTime.GetScheduledTimeByTaskIdUsecase] must call the [ScheduledTimeRepository.getScheduledTimeByTaskId] and return [List<ScheduledTimeEntity>]',
+      '[scheduledTime.GetScheduledTimeByTaskIdUseCase] must call the [ScheduledTimeRepository.getScheduledTimeByTaskId] and return [List<ScheduledTimeEntity>]',
       () async {
     //Arrange
     when(() => repository.getTaskSchedulersByMainTaskId('1'))
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[scheduledTime.GetScheduledTimeByTaskIdUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetScheduledTimeByTaskIdUsecase fails',
+      '[scheduledTime.GetScheduledTimeByTaskIdUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetScheduledTimeByTaskIdUseCase fails',
       () async {
     //Arrange
     when(() => repository.getTaskSchedulersByMainTaskId('1'))

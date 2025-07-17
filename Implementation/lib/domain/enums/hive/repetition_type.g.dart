@@ -15,19 +15,19 @@ class RepetitionTypeAdapter extends HiveBaseTypeAdapter<RepetitionType> {
     switch (reader.readByte()) {
       case 0:
         return RepetitionType.minutely;
-      case 2:
+      case 1:
         return RepetitionType.hourly;
-      case 3:
-        return RepetitionType.weekly;
-      case 4:
+      case 2:
         return RepetitionType.daily;
-      case 5:
+      case 3:
         return RepetitionType.weekdays;
-      case 6:
+      case 4:
+        return RepetitionType.weekly;
+      case 5:
         return RepetitionType.monthly;
-      case 7:
+      case 6:
         return RepetitionType.yearly;
-      case 8:
+      case 7:
         return RepetitionType.custom;
       default:
         return RepetitionType.minutely;
@@ -41,25 +41,25 @@ class RepetitionTypeAdapter extends HiveBaseTypeAdapter<RepetitionType> {
         writer.writeByte(0);
         break;
       case RepetitionType.hourly:
-        writer.writeByte(2);
-        break;
-      case RepetitionType.weekly:
-        writer.writeByte(3);
+        writer.writeByte(1);
         break;
       case RepetitionType.daily:
-        writer.writeByte(4);
+        writer.writeByte(2);
         break;
       case RepetitionType.weekdays:
-        writer.writeByte(5);
+        writer.writeByte(3);
+        break;
+      case RepetitionType.weekly:
+        writer.writeByte(4);
         break;
       case RepetitionType.monthly:
-        writer.writeByte(6);
+        writer.writeByte(5);
         break;
       case RepetitionType.yearly:
-        writer.writeByte(7);
+        writer.writeByte(6);
         break;
       case RepetitionType.custom:
-        writer.writeByte(8);
+        writer.writeByte(7);
         break;
     }
   }

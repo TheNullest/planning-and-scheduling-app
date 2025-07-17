@@ -32,26 +32,26 @@ void _authBloc() {
 void _authBlocs() {
   serviceLocator
 
-    // Usecases
-    ..registerFactory(() => AuthInitializeUsecase(serviceLocator()))
-    ..registerFactory(() => SignUpUsecase(serviceLocator()))
-    ..registerFactory(() => SignInUsecase(serviceLocator()))
-    ..registerFactory(() => SignOutUsecase(serviceLocator()))
-    ..registerFactory(() => ChangePasswordUsecase(serviceLocator()))
-    ..registerFactory(() => ResetPasswordUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteAccountUsecase(serviceLocator()))
+    // UseCases
+    ..registerFactory(() => AuthInitializeUseCase(serviceLocator()))
+    ..registerFactory(() => SignUpUseCase(serviceLocator()))
+    ..registerFactory(() => SignInUseCase(serviceLocator()))
+    ..registerFactory(() => SignOutUseCase(serviceLocator()))
+    ..registerFactory(() => ChangePasswordUseCase(serviceLocator()))
+    ..registerFactory(() => ResetPasswordUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteAccountUseCase(serviceLocator()))
 
     // AuthBloc
     ..registerSingleton<AuthBloc>(
       AuthBloc(
-        authInitializeUsecase: serviceLocator(),
-        signUpUsecase: serviceLocator(),
-        signInUsecase: serviceLocator(),
-        signOutUsecase: serviceLocator(),
+        authInitializeUseCase: serviceLocator(),
+        signUpUseCase: serviceLocator(),
+        signInUseCase: serviceLocator(),
+        signOutUseCase: serviceLocator(),
         appUserCubit: serviceLocator(),
         changePasswordUseCase: serviceLocator(),
-        resetPasswordUsecase: serviceLocator(),
-        deleteAccountUsecase: serviceLocator(),
+        resetPasswordUseCase: serviceLocator(),
+        deleteAccountUseCase: serviceLocator(),
         connectionChecker: serviceLocator(),
       ),
     );

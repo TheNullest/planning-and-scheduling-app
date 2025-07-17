@@ -5,27 +5,27 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/repositories/category_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/category/create_category_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/category/create_category_use_case.dart';
 
 import '_category_repository.mock.dart';
 
 void main() {
-  late CreateCategoryUsecase usecase;
+  late CreateCategoryUseCase useCase;
   late CategoryRepository mockedRepository;
 
   setUp(() {
     mockedRepository = MockCategoryRepo();
-    usecase = CreateCategoryUsecase(mockedRepository);
+    useCase = CreateCategoryUseCase(mockedRepository);
   });
 
   final param = CategoryEntity.empty();
-  test('[category.createUsecase] must call the [CategoryRepo.createEntity]',
+  test('[category.createUseCase] must call the [CategoryRepo.createEntity]',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Right(null));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isRight(), true);
@@ -35,13 +35,13 @@ void main() {
   });
 
   test(
-      '[category.createUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUsecase fails',
+      '[category.createUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUseCase fails',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isLeft(), true);

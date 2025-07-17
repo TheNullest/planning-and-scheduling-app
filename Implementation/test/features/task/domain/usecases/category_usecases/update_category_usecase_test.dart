@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/domain/repositories/category_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/category/update_category_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/category/update_category_use_case.dart';
 
 import '_category_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateCategoryUsecase useCase;
+  late UpdateCategoryUseCase useCase;
   late CategoryRepository repository;
   setUp(() {
     repository = MockCategoryRepo();
-    useCase = UpdateCategoryUsecase(repository);
+    useCase = UpdateCategoryUseCase(repository);
   });
 
   final params = CategoryEntity.empty();
   // Assert
   test(
-      '[category.updateUsecase] must update the [CategoryModel] with the right data',
+      '[category.updateUseCase] must update the [CategoryModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[category.updateUsecase.failureTest] must return failure when update fails',
+      '[category.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

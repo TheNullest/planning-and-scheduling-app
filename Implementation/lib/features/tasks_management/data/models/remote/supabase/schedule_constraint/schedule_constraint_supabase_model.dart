@@ -9,16 +9,17 @@ part 'schedule_constraint_supabase_model.g.dart';
   createToJson: true,
   createFactory: false,
 )
-class ScheduleConstraintSupabaseModel with _$ScheduleConstraintSupabaseModel {
-  const factory ScheduleConstraintSupabaseModel({
+class ScheduleConstraintsSupabaseModel with _$ScheduleConstraintsSupabaseModel {
+  const factory ScheduleConstraintsSupabaseModel({
     required String id,
     @JsonKey(name: 'task_id') required String taskId,
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'exception_date_ids') required List<String> exceptionDateIds,
-    @JsonKey(name: 'exception_time_ids') required List<String> exceptionTimeIds,
-    @JsonKey(name: 'exception_week_days') required List<String> exceptionWeekDays,
-    @JsonKey(name: 'exception_month_days') required List<int> exceptionMonthDays,
+    @JsonKey(name: 'date_range_exception_ids') required List<String> dateRangeExceptionIds,
+    @JsonKey(name: 'time_range_exception_ids') required List<String> timeRangeExceptionIds,
+    @JsonKey(name: 'date_exceptions') required List<DateTime> dateExceptions,
+    @JsonKey(name: 'week_day_exceptions') required List<String> weekDayExceptions,
+    @JsonKey(name: 'month_day_exceptions') required List<int> monthDayExceptions,
     @JsonKey(name: 'enforce_schedule_bounds') required bool enforceScheduleBounds,
     @JsonKey(name: 'start_at') DateTime? startAt,
     @JsonKey(name: 'end_at') DateTime? endAt,
@@ -26,9 +27,9 @@ class ScheduleConstraintSupabaseModel with _$ScheduleConstraintSupabaseModel {
     String? description,
   }) = _ScheduleDefinitionSupabaseModel;
 
-  /// Creates an instance of [ScheduleConstraintSupabaseModel] from a domain [String].
-  factory ScheduleConstraintSupabaseModel.fromEntity(ScheduleConstraintEntity entity) =>
-      ScheduleConstraintSupabaseModel(
+  /// Creates an instance of [ScheduleConstraintsSupabaseModel] from a domain [String].
+  factory ScheduleConstraintsSupabaseModel.fromEntity(ScheduleConstraintsEntity entity) =>
+      ScheduleConstraintsSupabaseModel(
         taskId: entity.taskId,
         id: entity.id,
         updatedAt: entity.updatedAt,
@@ -38,16 +39,17 @@ class ScheduleConstraintSupabaseModel with _$ScheduleConstraintSupabaseModel {
         enforceScheduleBounds: entity.enforceScheduleBounds,
         endAt: entity.endAt,
         startAt: entity.startAt,
-        exceptionWeekDays: List.from(entity.exceptionWeekDays.map((item) => item.name).toList()),
-        exceptionMonthDays: List.from(entity.exceptionMonthDays),
-        exceptionTimeIds: List.from(entity.exceptionTimeIds),
-        exceptionDateIds: List.from(entity.exceptionDateIds),
+        weekDayExceptions: List.from(entity.weekDayExceptions.map((item) => item.name).toList()),
+        monthDayExceptions: List.from(entity.monthDayExceptions),
+        timeRangeExceptionIds: List.from(entity.timeRangeExceptionIds),
+        dateRangeExceptionIds: List.from(entity.dateRangeExceptionIds),
+        dateExceptions: List.from(entity.dateExceptions),
       );
 
   /// Creates an instance from a JSON map.
-  factory ScheduleConstraintSupabaseModel.fromJson(Map<String, dynamic> json) =>
-      _$ScheduleConstraintSupabaseModelFromJson(json);
+  factory ScheduleConstraintsSupabaseModel.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleConstraintsSupabaseModelFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$ScheduleConstraintSupabaseModelToJson(this);
+  Map<String, dynamic> toJson() => _$ScheduleConstraintsSupabaseModelToJson(this);
 }

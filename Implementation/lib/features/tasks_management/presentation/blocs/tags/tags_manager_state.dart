@@ -9,7 +9,7 @@ class TagsManagerState with _$TagsManagerState {
 
   const factory TagsManagerState.created(TagEntity cat) = _Created;
 
-  const factory TagsManagerState.updated(String id) = _Updated;
+  const factory TagsManagerState.updated(TagEntity cat) = _Updated;
 
   const factory TagsManagerState.deleted(String id) = _Deleted;
 

@@ -41,7 +41,7 @@ extension DateTimeGenerator on ScheduledInstanceGenerator {
       // This helps in grouping or handling cases where several occurrences are considered to be consecutive.
       for (var occurrence = 0; occurrence < consecutiveOccurrences; occurrence++) {
         // Append the current date if it doesn't fall within any defined exception ranges.
-        if (!_isExceptionDate(currentDate)) {
+        if (!_isDateException(currentDate)) {
           generatedDates.add(currentDate);
         }
 
@@ -113,6 +113,6 @@ extension DateTimeGenerator on ScheduledInstanceGenerator {
   ///
   /// Returns:
   /// - `true` if the date is an exception; otherwise `false`.
-  bool _isExceptionDate(DateTime date) =>
-      exceptionDateRanges.any((dateRange) => dateRange.overlapsWith(date));
+  bool _isDateException(DateTime date) =>
+      dateExceptionRanges.any((dateRange) => dateRange.overlapsWith(date));
 }

@@ -1,6 +1,6 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/features/auth/domain/usecases/delete_user_usecase.dart';
+import 'package:zamaan/features/auth/domain/useCases/delete_user_use_case.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
 import '_authentication_repository.mock.dart';
@@ -14,9 +14,9 @@ void main() {
     useCase = DeleteUserUseCase(repository);
   });
 
-  group('user.deleteUsecase', () {
+  group('user.deleteUseCase', () {
     test(
-        '[user.deleteUsecase] must call the [AuthRepo.deleteEntity] and delete the entity then return the Right value',
+        '[user.deleteUseCase] must call the [AuthRepo.deleteEntity] and delete the entity then return the Right value',
         () async {
       // Arrange
       when(() => repository.deleteEntity(id: params))
@@ -35,7 +35,7 @@ void main() {
     });
 
     test(
-        '[user.deleteUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUsecase fails',
+        '[user.deleteUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteUseCase fails',
         () async {
       // Arrange
       when(() => repository.deleteEntity(id: params))

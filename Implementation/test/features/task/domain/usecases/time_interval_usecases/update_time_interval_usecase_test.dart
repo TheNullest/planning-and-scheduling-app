@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/shell/domain/entities/time_interval_entity.dart';
 import 'package:zamaan/features/shell/domain/repositories/time_interval_repository.dart';
-import 'package:zamaan/features/shell/domain/usecases/time_interval_usecases/update_time_interval_usecase.dart';
+import 'package:zamaan/features/shell/domain/useCases/time_interval_useCases/update_time_interval_use_case.dart';
 
 import '_time_interval_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateTimeIntervalUsecase useCase;
+  late UpdateTimeIntervalUseCase useCase;
   late TimeIntervalRepository repository;
   setUp(() {
     repository = MockTimeIntervalRepo();
-    useCase = UpdateTimeIntervalUsecase(repository);
+    useCase = UpdateTimeIntervalUseCase(repository);
   });
 
   final params = TimeIntervalEntity.empty();
   // Assert
   test(
-      '[timeInterval.updateUsecase] must call the [TimeIntervalRepository.updateEntity] update the [TimeIntervalModel] with the right data',
+      '[timeInterval.updateUseCase] must call the [TimeIntervalRepository.updateEntity] update the [TimeIntervalModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params))
@@ -36,7 +36,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test('[tag.updateUsecase.failureTest] must return failure when update fails',
+  test('[tag.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

@@ -11,13 +11,13 @@ import 'package:zamaan/domain/entities/user.dart';
 import 'package:zamaan/domain/network/connection_checker.dart';
 import 'package:zamaan/features/auth/domain/params/change_passwrod_params.dart';
 import 'package:zamaan/features/auth/domain/params/user_signin_params.dart';
-import 'package:zamaan/features/auth/domain/usecases/change_password_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/delete_account_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/initialize_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/reset_password_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/sign_in_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/sign_out_usecase.dart';
-import 'package:zamaan/features/auth/domain/usecases/sign_up_usecase.dart';
+import 'package:zamaan/features/auth/domain/useCases/change_password_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/delete_account_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/initialize_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/reset_password_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/sign_in_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/sign_out_use_case.dart';
+import 'package:zamaan/features/auth/domain/useCases/sign_up_use_case.dart';
 import 'package:zamaan/features/auth/presentation/constants/auth_texts.dart';
 
 part 'auth_event.dart';
@@ -32,28 +32,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   /// Constructor to initialize the use cases and the AppUserCubit.
   ///
   /// - Parameters:
-  ///   - signUpUsecase: The use case for signing up a user.
-  ///   - signInUsecase: The use case for signing in a user.
-  ///   - currentUserUsecase: The use case for getting the current user.
-  ///   - signOutUsecase: The use case for signing out a user.
+  ///   - signUpUseCase: The use case for signing up a user.
+  ///   - signInUseCase: The use case for signing in a user.
+  ///   - currentUserUseCase: The use case for getting the current user.
+  ///   - signOutUseCase: The use case for signing out a user.
   ///   - appUserCubit: The cubit for managing the app user's state.
   AuthBloc({
-    required AuthInitializeUsecase authInitializeUsecase,
-    required SignUpUsecase signUpUsecase,
-    required SignInUsecase signInUsecase,
-    required SignOutUsecase signOutUsecase,
-    required ChangePasswordUsecase changePasswordUseCase,
-    required ResetPasswordUsecase resetPasswordUsecase,
-    required DeleteAccountUsecase deleteAccountUsecase,
+    required AuthInitializeUseCase authInitializeUseCase,
+    required SignUpUseCase signUpUseCase,
+    required SignInUseCase signInUseCase,
+    required SignOutUseCase signOutUseCase,
+    required ChangePasswordUseCase changePasswordUseCase,
+    required ResetPasswordUseCase resetPasswordUseCase,
+    required DeleteAccountUseCase deleteAccountUseCase,
     required AppUserCubit appUserCubit,
     required NetworkConnectivityMonitor connectionChecker,
-  })  : _authInitializeUsecase = authInitializeUsecase,
-        _signUpUsecase = signUpUsecase,
-        _signInUsecase = signInUsecase,
-        _deleteAccountUsecase = deleteAccountUsecase,
-        _signOutUsecase = signOutUsecase,
+  })  : _authInitializeUseCase = authInitializeUseCase,
+        _signUpUseCase = signUpUseCase,
+        _signInUseCase = signInUseCase,
+        _deleteAccountUseCase = deleteAccountUseCase,
+        _signOutUseCase = signOutUseCase,
         _changePasswordUseCase = changePasswordUseCase,
-        _resetPasswordUsecase = resetPasswordUsecase,
+        _resetPasswordUseCase = resetPasswordUseCase,
         _appUserCubit = appUserCubit,
         _connectionChecker = connectionChecker,
         super(AuthInitialState()) {
@@ -77,13 +77,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   // Private fields for the use cases and the AppUserCubit
-  final AuthInitializeUsecase _authInitializeUsecase;
-  final SignUpUsecase _signUpUsecase;
-  final SignInUsecase _signInUsecase;
-  final DeleteAccountUsecase _deleteAccountUsecase;
-  final SignOutUsecase _signOutUsecase;
-  final ChangePasswordUsecase _changePasswordUseCase;
-  final ResetPasswordUsecase _resetPasswordUsecase;
+  final AuthInitializeUseCase _authInitializeUseCase;
+  final SignUpUseCase _signUpUseCase;
+  final SignInUseCase _signInUseCase;
+  final DeleteAccountUseCase _deleteAccountUseCase;
+  final SignOutUseCase _signOutUseCase;
+  final ChangePasswordUseCase _changePasswordUseCase;
+  final ResetPasswordUseCase _resetPasswordUseCase;
   final AppUserCubit _appUserCubit;
   final NetworkConnectivityMonitor _connectionChecker;
 
@@ -92,7 +92,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthInitializeEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final result = await _authInitializeUsecase();
+    final result = await _authInitializeUseCase();
     result.fold(
       (failure) => emit(
         AuthFailureState(
@@ -120,7 +120,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     }
-    final response = await _signUpUsecase(event.user);
+    final response = await _signUpUseCase(event.user);
     response.fold(
       (failure) => emit(
         AuthFailureState(
@@ -140,7 +140,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignInEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final response = await _signInUsecase(event.params);
+    final response = await _signInUseCase(event.params);
     response.fold(
       (failure) => emit(
         AuthFailureState(
@@ -160,7 +160,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignOutEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final response = await _signOutUsecase();
+    final response = await _signOutUseCase();
     response.fold(
       (failure) => emit(
         AuthFailureState(
@@ -204,7 +204,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthResetPasswordEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final response = await _resetPasswordUsecase(event.email);
+    final response = await _resetPasswordUseCase(event.email);
     response.fold(
       (failure) => emit(
         AuthFailureState(
@@ -225,7 +225,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthDeleteAccountEvent event,
     Emitter<AuthState> emit,
   ) async {
-    final response = await _deleteAccountUsecase(event.params);
+    final response = await _deleteAccountUseCase(event.params);
     response.fold(
       (failure) => emit(
         AuthFailureState(

@@ -5,20 +5,20 @@ import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/get_tasks_by_status_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task/get_tasks_by_status_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late GetMainTasksByStatusUsecase useCase;
+  late GetMainTasksByStatusUseCase useCase;
   late MainTaskRepository repository;
   setUp(() {
     repository = MockMainTaskRepo();
-    useCase = GetMainTasksByStatusUsecase(repository);
+    useCase = GetMainTasksByStatusUseCase(repository);
   });
 
   test(
-      '[mainTask.GetMainTasksByStatusUsecase] must call the [MainTaskRepository.GetMainTasksByStatusUsecase] and return [List<MainTaskEntity>]',
+      '[mainTask.GetMainTasksByStatusUseCase] must call the [MainTaskRepository.GetMainTasksByStatusUseCase] and return [List<MainTaskEntity>]',
       () async {
     //Arrange
     when(() => repository.getMainTasksByStatus(TaskStatus.completed))
@@ -36,7 +36,7 @@ void main() {
   });
 
   test(
-      '[mainTask.GetMainTasksByStatusUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByStatusUsecase fails',
+      '[mainTask.GetMainTasksByStatusUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetMainTasksByStatusUseCase fails',
       () async {
     //Arrange
     when(() => repository.getMainTasksByStatus(TaskStatus.completed))

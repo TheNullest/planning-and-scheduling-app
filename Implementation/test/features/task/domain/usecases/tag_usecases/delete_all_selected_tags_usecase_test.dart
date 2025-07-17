@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/tag/domain/repositories/tag_repository.dart';
-import 'package:zamaan/features/tag/domain/usecases/delete_all_selected_tags_usecase.dart';
+import 'package:zamaan/features/tag/domain/useCases/delete_all_selected_tags_use_case.dart';
 
 import '_tag_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedTagsUsecase useCase;
+  late DeleteAllSelectedTagsUseCase useCase;
   late TagRepository repository;
   setUp(() {
     repository = MockTagRepo();
-    useCase = DeleteAllSelectedTagsUsecase(repository);
+    useCase = DeleteAllSelectedTagsUseCase(repository);
   });
 
   test(
-      '[tag.deleteAllSelectedUsecase] must call the [TagRepository.deleteAllSelected] and delete the entity then return the Right value',
+      '[tag.deleteAllSelectedUseCase] must call the [TagRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[tag.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+      '[tag.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))

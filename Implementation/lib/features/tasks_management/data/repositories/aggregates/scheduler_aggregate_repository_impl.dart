@@ -33,15 +33,15 @@ import 'package:zamaan/features/tasks_management/data/sources/local/bases/time_r
 
 class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
   SchedulerAggregateRepositoryImpl({
-    required ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel>
+    required ScheduleConstraintsLocalDataSource<ScheduleConstraintsHiveModel>
         constraintLocalDataSource,
     required ScheduledDayLocalDataSource<ScheduledDayHiveModel> dayLocalDataSource,
     required ScheduledIntervalLocalDataSource<ScheduledIntervalHiveModel> intervalLocalDataSource,
     required ScheduledInstanceLocalDataSource<ScheduledInstanceHiveModel> instanceLocalDataSource,
     required DateRangeLocalDataSource<DateRangeHiveModel> dateRangeLocalDataSource,
     required TimeRangeLocalDataSource<TimeRangeHiveModel> timeRangeLocalDataSource,
-    required DataMapper<ScheduleConstraintEntity, ScheduleConstraintHiveModel,
-            ScheduleConstraintSupabaseModel>
+    required DataMapper<ScheduleConstraintsEntity, ScheduleConstraintsHiveModel,
+            ScheduleConstraintsSupabaseModel>
         constraintMapper,
     required DataMapper<TimeRangeEntity, TimeRangeHiveModel, TimeRangeSupabaseModel> timeMapper,
     required DataMapper<DateRangeEntity, DateRangeHiveModel, DateRangeSupabaseModel> dateMapper,
@@ -62,21 +62,21 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
         _dayMapper = dayMapper,
         _intervalMapper = intervalMapper;
 
-  final ScheduleConstraintLocalDataSource<ScheduleConstraintHiveModel> _constraintLocalDataSource;
+  final ScheduleConstraintsLocalDataSource<ScheduleConstraintsHiveModel> _constraintLocalDataSource;
   final ScheduledDayLocalDataSource<ScheduledDayHiveModel> _dayLocalDataSource;
   final ScheduledIntervalLocalDataSource<ScheduledIntervalHiveModel> _intervalLocalDataSource;
   final ScheduledInstanceLocalDataSource<ScheduledInstanceHiveModel> _instanceLocalDataSource;
   final DateRangeLocalDataSource<DateRangeHiveModel> _dateRangeLocalDataSource;
   final TimeRangeLocalDataSource<TimeRangeHiveModel> _timeRangeLocalDataSource;
-  final DataMapper<ScheduleConstraintEntity, ScheduleConstraintHiveModel,
-      ScheduleConstraintSupabaseModel> _constraintMapper;
+  final DataMapper<ScheduleConstraintsEntity, ScheduleConstraintsHiveModel,
+      ScheduleConstraintsSupabaseModel> _constraintMapper;
   final DataMapper<TimeRangeEntity, TimeRangeHiveModel, TimeRangeSupabaseModel> _timeMapper;
   final DataMapper<DateRangeEntity, DateRangeHiveModel, DateRangeSupabaseModel> _dateMapper;
   final DataMapper<ScheduledDayEntity, ScheduledDayHiveModel, ScheduledDaySupabaseModel> _dayMapper;
   final DataMapper<ScheduledIntervalEntity, ScheduledIntervalHiveModel,
       ScheduledIntervalSupabaseModel> _intervalMapper;
 
-  final _constraintEntitiesCached = <ScheduleConstraintEntity>[];
+  final _constraintEntitiesCached = <ScheduleConstraintsEntity>[];
   @override
   EResultFutureVoid batchCascadeDelete(List<String> constraintIds) async {
     try {
@@ -91,14 +91,14 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
       final dateRangeIds = schedulers
           .expand(
             (aggregate) =>
-                aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionDateIds,
+                aggregate.scheduleConstraintAggregate.scheduleConstraint.dateRangeExceptionIds,
           )
           .toList();
 
       // Extract time range IDs by merging several collections.
       final timeRangeIds = schedulers.expand((aggregate) {
         final times =
-            aggregate.scheduleConstraintAggregate.scheduleConstraint.exceptionTimeIds.toList()
+            aggregate.scheduleConstraintAggregate.scheduleConstraint.timeRangeExceptionIds.toList()
               ..addAll(
                 aggregate.dayAggregates.expand((day) => day.scheduledDay.scheduledTimeIds).toList(),
               )
@@ -150,7 +150,8 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
   EResultFuture<List<SchedulersAggregateEntity>> getBatch() async {
     try {
       final constraintsResult = await _constraintLocalDataSource.getAll();
-      final constraintHives = foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
+      final constraintHives =
+          foldEitherRight<List<ScheduleConstraintsHiveModel>>(constraintsResult);
 
       // Cache all retrieved constraint entities.
       _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
@@ -172,16 +173,16 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
       if (_constraintEntitiesCached.isEmpty) {
         final constraintsResult = await _constraintLocalDataSource.getAllByIds(constraintIds);
         final constraintHives =
-            foldEitherRight<List<ScheduleConstraintHiveModel>>(constraintsResult);
+            foldEitherRight<List<ScheduleConstraintsHiveModel>>(constraintsResult);
         _constraintEntitiesCached.addAll(_constraintMapper.toEntitiesFromHive(constraintHives));
       }
 
       // For each cached constraint, retrieve associated data and build aggregates.
       for (final constraint in _constraintEntitiesCached) {
         final timesResult =
-            await _timeRangeLocalDataSource.getAllByIds(constraint.exceptionTimeIds);
+            await _timeRangeLocalDataSource.getAllByIds(constraint.timeRangeExceptionIds);
         final datesResult =
-            await _dateRangeLocalDataSource.getAllByIds(constraint.exceptionDateIds);
+            await _dateRangeLocalDataSource.getAllByIds(constraint.dateRangeExceptionIds);
 
         final dayAggregatesResult = await _dayLocalDataSource.getBatchByConstraintId(constraint.id);
         final intervalAggregatesResult =
@@ -222,7 +223,7 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
   ScheduleConstraintAggregate _fillConstraintRequirements(
     EResult<List<TimeRangeHiveModel>> timesResult,
     EResult<List<DateRangeHiveModel>> datesResult,
-    ScheduleConstraintEntity constraint,
+    ScheduleConstraintsEntity constraint,
   ) {
     final constraintTimeHives = _timeMapper.foldEitherList(timesResult);
     final constraintTimes = _timeMapper.toEntitiesFromHive(constraintTimeHives);
@@ -232,8 +233,8 @@ class SchedulerAggregateRepositoryImpl implements SchedulerAggregateRepository {
 
     final constraintAggregate = ScheduleConstraintAggregate(
       scheduleConstraint: constraint,
-      exceptionTimes: constraintTimes,
-      exceptionDates: constraintDates,
+      timeExceptions: constraintTimes,
+      dateExceptions: constraintDates,
     );
 
     return constraintAggregate;

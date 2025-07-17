@@ -5,26 +5,26 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/create_task_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/create_task_use_case.dart';
 
 import '_main_task_repository.mock.dart';
 
 void main() {
-  late CreateMainTaskUseCase usecase;
+  late CreateMainTaskUseCase useCase;
   late MainTaskRepository mockedRepository;
 
   setUp(() {
     mockedRepository = MockMainTaskRepo();
-    usecase = CreateMainTaskUseCase(mockedRepository);
+    useCase = CreateMainTaskUseCase(mockedRepository);
   });
 
   final param = MainTaskEntity.empty();
-  test('[mainTask.createUsecase] must call the [MainTaskRepository.createEntity]', () async {
+  test('[mainTask.createUseCase] must call the [MainTaskRepository.createEntity]', () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Right(null));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isRight(), true);
@@ -35,13 +35,13 @@ void main() {
   });
 
   test(
-      '[mainTask.createUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUsecase fails',
+      '[mainTask.createUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when createUseCase fails',
       () async {
     // Arrange
     // Act
     when(() => mockedRepository.createEntity(newEntity: param))
         .thenAnswer((_) async => const Left(HiveFailure('Error')));
-    final actualResult = await usecase(param);
+    final actualResult = await useCase(param);
 
     // Assert
     expect(actualResult.isLeft(), true);

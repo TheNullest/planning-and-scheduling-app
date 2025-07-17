@@ -32,7 +32,7 @@ class CustomMeasurementUnitHiveModelAdapter
   @override
   void write(BinaryWriter writer, CustomMeasurementUnitHiveModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(11)
       ..write(obj.title)
       ..writeByte(12)
@@ -48,7 +48,9 @@ class CustomMeasurementUnitHiveModelAdapter
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

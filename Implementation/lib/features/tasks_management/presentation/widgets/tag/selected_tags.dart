@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tags/tags_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/dialogs/tag/tags_chip_list.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tag_chip.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tags_chip_list.dart';
 
 class SelectedTagsWidget extends StatelessWidget {
   const SelectedTagsWidget({required this.selectedIds, super.key});
@@ -60,7 +61,8 @@ class SelectedTagsWidget extends StatelessWidget {
                       label: Text(
                           tagVMsManager.selectedItems.isEmpty ? 'Select tags' : 'Add More Tags'),
                       icon: const Icon(Icons.add),
-                      onPressed: () async => tagsChipListDialog(context, tagVMsManager)),
+                      onPressed: () async => customShowModalBottomSheetDialog<TagVmsManager>(
+                          context, tagVMsManager, const TagsChipListWiget())),
                   12.sizedBoxHeight,
                 ],
               );

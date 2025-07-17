@@ -3,43 +3,43 @@ part of '../init_dependencies.imports.dart';
 void _tasksManagerBloc() {
   _tasksManagerDataSoruces();
   _tasksManagerRepositories();
-  _tasksMangerUsecases();
+  _tasksManagerUseCases();
   serviceLocator
 
     // Category
-    ..registerFactory(() => CreateBatchCategoriesUsecase(serviceLocator()))
+    ..registerFactory(() => CreateBatchCategoriesUseCase(serviceLocator()))
 
     // TasksManager
     ..registerLazySingleton<TasksManagerBloc>(
       () => TasksManagerBloc(
-        createTaskUsecase: serviceLocator(),
-        createSubTaskUsecase: serviceLocator(),
-        deleteTaskUsecase: serviceLocator(),
-        deleteSubTaskUsecase: serviceLocator(),
-        deleteBatchSubTasksByTaskIdUsecase: serviceLocator(),
-        updateTaskUsecase: serviceLocator(),
-        updateSubTaskUsecase: serviceLocator(),
-        getBatchSubTasksUsecase: serviceLocator(),
-        getBatchTasksUsecase: serviceLocator(),
+        createTaskUseCase: serviceLocator(),
+        createSubTaskUseCase: serviceLocator(),
+        deleteTaskUseCase: serviceLocator(),
+        deleteSubTaskUseCase: serviceLocator(),
+        deleteBatchSubTasksByTaskIdUseCase: serviceLocator(),
+        updateTaskUseCase: serviceLocator(),
+        updateSubTaskUseCase: serviceLocator(),
+        getBatchSubTasksUseCase: serviceLocator(),
+        getBatchTasksUseCase: serviceLocator(),
       ),
     );
 }
 
-void _tasksMangerUsecases() {
+void _tasksManagerUseCases() {
   serviceLocator
 
     // Task
-    ..registerFactory(() => CreateTaskUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteTaskUsecase(serviceLocator()))
-    ..registerFactory(() => GetBatchTasksUsecase(serviceLocator()))
-    ..registerFactory(() => UpdateTaskUsecase(serviceLocator()))
+    ..registerFactory(() => CreateTaskUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteTaskUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchTasksUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateTaskUseCase(serviceLocator()))
 
     // SubTask
-    ..registerFactory(() => CreateSubTaskUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteSubTaskUsecase(serviceLocator()))
-    ..registerFactory(() => DeleteBatchSubTasksByTaskIdUsecase(serviceLocator()))
-    ..registerFactory(() => GetBatchSubTasksByTaskIdsUsecase(serviceLocator()))
-    ..registerFactory(() => UpdateSubTaskUsecase(serviceLocator()));
+    ..registerFactory(() => CreateSubTaskUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteSubTaskUseCase(serviceLocator()))
+    ..registerFactory(() => DeleteBatchSubTasksByTaskIdUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchSubTasksByTaskIdsUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateSubTaskUseCase(serviceLocator()));
 }
 
 void _tasksManagerDataSoruces() {
@@ -79,7 +79,7 @@ void _tasksManagerRepositories() {
       TaskRepositoryImpl(
         localDataSource: serviceLocator(),
         remoteDataSource: serviceLocator(),
-        dataMapper: serviceLocator<TaskDataMapper>(),
+        dataMapper: serviceLocator(),
         netConnectivity: serviceLocator(),
       ),
     )
@@ -89,7 +89,7 @@ void _tasksManagerRepositories() {
       SubTaskRepositoryImpl(
         localDataSource: serviceLocator(),
         remoteDataSource: serviceLocator(),
-        dataMapper: serviceLocator<SubTaskDataMapper>(),
+        dataMapper: serviceLocator(),
         netConnectivity: serviceLocator(),
       ),
     );

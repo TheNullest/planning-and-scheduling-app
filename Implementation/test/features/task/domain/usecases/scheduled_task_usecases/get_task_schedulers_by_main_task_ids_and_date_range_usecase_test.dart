@@ -5,16 +5,16 @@ import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_schedulers_by_task_ids_and_date_range_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task_scheduler/get_task_schedulers_by_task_ids_and_date_range_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
-  late GetTaskSchedulerByTaskIdsAndDateRangeUsecase useCase;
+  late GetTaskSchedulerByTaskIdsAndDateRangeUseCase useCase;
   late TaskSchedulerRepository repository;
   setUp(() {
     repository = MockTaskSchedulerRepo();
-    useCase = GetTaskSchedulerByTaskIdsAndDateRangeUsecase(repository);
+    useCase = GetTaskSchedulerByTaskIdsAndDateRangeUseCase(repository);
   });
 
   final startAt = DateTime.now();
@@ -25,7 +25,7 @@ void main() {
     endAt: endAt,
   );
   test(
-      '[scheduledTime.GetScheduledTimeByTaskIdsAndDateRangeUsecase] must call the [ScheduledTimeRepository.getScheduledTimeByTaskIdsAndDateRange] and return [List<ScheduledTimeEntity>]',
+      '[scheduledTime.GetScheduledTimeByTaskIdsAndDateRangeUseCase] must call the [ScheduledTimeRepository.getScheduledTimeByTaskIdsAndDateRange] and return [List<ScheduledTimeEntity>]',
       () async {
     //Arrange
     when(() => repository.getTaskSchedulersByMainTaskIdsAndDateRange(params))
@@ -44,7 +44,7 @@ void main() {
   });
 
   test(
-      '[scheduledTime.GetScheduledTimeByTaskIdsAndDateRangeUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetScheduledTimeByTaskIdsAndDateRangeUsecase fails',
+      '[scheduledTime.GetScheduledTimeByTaskIdsAndDateRangeUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when GetScheduledTimeByTaskIdsAndDateRangeUseCase fails',
       () async {
     //Arrange
     when(() => repository.getTaskSchedulersByMainTaskIdsAndDateRange(params))

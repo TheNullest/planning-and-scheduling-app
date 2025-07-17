@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
-import 'package:zamaan/features/tasks_management/presentation/dialogs/sub_task_upsert_dialog.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_card.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/sub_task_upsert/sub_task_upsert_form.dart';
 
 class SubTasksListWidget extends StatelessWidget {
   const SubTasksListWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final subTaskManger = context.read<SubTaskVMsManager>();
+    final subTaskManager = context.read<SubTaskVMsManager>();
     return Column(
       children: [
         Selector<SubTaskVMsManager, bool>(
@@ -26,21 +27,15 @@ class SubTasksListWidget extends StatelessWidget {
                         icon: const Icon(Icons.add),
                         label: const Text('Add New SubTask'),
                         onPressed: isEnabled
-                            ? () async => showModalBottomSheet(
-                                  context: context,
-                                  isScrollControlled: true,
-                                  builder: (_) => ChangeNotifierProvider<SubTaskUpsertVM>.value(
-                                    value: subTaskManger.newItem(),
-                                    child: const SubTaskUpsertDialog(),
-                                  ),
-                                )
+                            ? () async => customShowModalBottomSheetDialog<SubTaskUpsertVM>(
+                                context, subTaskManager.newItem(), const SubTaskUpsertFormWidget())
                             : null,
                       );
                     }),
                 // Spacer
                 12.sizedBoxHeight,
 
-                if (subTaskManger.items.isNotEmpty)
+                if (subTaskManager.items.isNotEmpty)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -48,7 +43,7 @@ class SubTasksListWidget extends StatelessWidget {
                         'SubTasks:',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      ...subTaskManger.items.map(
+                      ...subTaskManager.items.map(
                         (subTaskVM) => ChangeNotifierProvider<SubTaskUpsertVM>(
                             create: (_) => subTaskVM,
                             child: SubTaskDisplayCard(subTaskVM: subTaskVM)),

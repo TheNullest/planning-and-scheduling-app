@@ -56,9 +56,9 @@ abstract class BaseVmsManager<Entity extends BaseEntityAbstraction, ViewModel ex
     notifyListUpdated();
   }
 
-  void itemIsUpdated(String id) {
+  void itemIsUpdated(Entity updatedEntity) {
     _listUpdated = !_listUpdated;
-    _items.firstWhere((item) => item.id == id).handleEntityUpdated();
+    _items.firstWhere((item) => item.id == updatedEntity.id).handleEntityUpdated(updatedEntity);
     notifyListeners();
   }
 

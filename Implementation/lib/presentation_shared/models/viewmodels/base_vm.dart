@@ -190,8 +190,8 @@ abstract class BaseViewModel<Entity extends BaseEntityAbstraction> extends Chang
   /// Handles successful entity update workflow:
   ///   1. Updates original values with current form values
   ///   2. Resets modification tracking
-  void handleEntityUpdated() {
-    initialize(toEntity);
+  void handleEntityUpdated(Entity updatedEntity) {
+    initialize(updatedEntity);
   }
 
   /// Retrieves the original persisted value of a field identified by [key].

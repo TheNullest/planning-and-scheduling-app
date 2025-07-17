@@ -48,7 +48,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     required super.id,
     required super.userId,
     required super.createdAt,
-    required this.scheduleConstraintId,
+    required this.taskId,
     required this.intervalUnit,
     required this.intervalValue,
     required this.repeatCount,
@@ -62,7 +62,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
 
   /// The ID of the schedule definition associated with this interval.
   @HiveField(11)
-  final String scheduleConstraintId;
+  final String taskId;
 
   /// The unit of time for the interval (e.g., hours, days, weeks, months).
   @HiveField(12)
@@ -101,7 +101,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     String? description,
     DateTime? updatedAt,
     DateTime? startDate,
-    String? scheduleConstraintId,
+    String? taskId,
     IntervalUnit? intervalUnit,
     double? intervalValue,
     int? repeatCount,
@@ -115,7 +115,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
       createdAt: createdAt ?? this.createdAt,
       description: description ?? this.description,
       updatedAt: updatedAt ?? this.updatedAt,
-      scheduleConstraintId: scheduleConstraintId ?? this.scheduleConstraintId,
+      taskId: taskId ?? this.taskId,
       intervalUnit: intervalUnit ?? this.intervalUnit,
       intervalValue: intervalValue ?? this.intervalValue,
       repeatCount: repeatCount ?? this.repeatCount,
@@ -130,7 +130,7 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
   @override
   List<Object?> get props => [
         ...super.props,
-        scheduleConstraintId,
+        taskId,
         intervalUnit,
         intervalValue,
         repeatCount,

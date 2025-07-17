@@ -9,7 +9,7 @@ class CategoriesManagerState with _$CategoriesManagerState {
 
   const factory CategoriesManagerState.created(CategoryEntity cat) = _Created;
 
-  const factory CategoriesManagerState.updated(String id) = _Updated;
+  const factory CategoriesManagerState.updated(CategoryEntity cat) = _Updated;
 
   const factory CategoriesManagerState.deleted(String id) = _Deleted;
 

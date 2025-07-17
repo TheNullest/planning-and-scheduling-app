@@ -25,9 +25,9 @@ Map<String, dynamic> _$GoalSupabaseModelToJson(GoalSupabaseModel instance) =>
 const _$RepetitionTypeEnumMap = {
   RepetitionType.minutely: 'minutely',
   RepetitionType.hourly: 'hourly',
-  RepetitionType.weekly: 'weekly',
   RepetitionType.daily: 'daily',
   RepetitionType.weekdays: 'weekdays',
+  RepetitionType.weekly: 'weekly',
   RepetitionType.monthly: 'monthly',
   RepetitionType.yearly: 'yearly',
   RepetitionType.custom: 'custom',

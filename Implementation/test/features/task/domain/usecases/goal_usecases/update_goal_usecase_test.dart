@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/domain/repositories/goal_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/update_goal_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/update_goal_use_case.dart';
 
 import '_goal_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateGoalUsecase useCase;
+  late UpdateGoalUseCase useCase;
   late GoalRepository repository;
   setUp(() {
     repository = MockGoalRepo();
-    useCase = UpdateGoalUsecase(repository);
+    useCase = UpdateGoalUseCase(repository);
   });
 
   final params = GoalEntity.empty();
   // Assert
   test(
-      '[goal.updateUsecase] must call the [GoalRepository.updateEntity] and update the [GoalModel] with the right data',
+      '[goal.updateUseCase] must call the [GoalRepository.updateEntity] and update the [GoalModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params))
@@ -36,7 +36,7 @@ void main() {
     verifyNoMoreInteractions(repository);
   });
 
-  test('[goal.updateUsecase.failureTest] must return failure when update fails',
+  test('[goal.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

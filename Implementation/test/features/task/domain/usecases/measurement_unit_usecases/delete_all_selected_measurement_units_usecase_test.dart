@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/features/measurement_unit/domain/repositories/measurement_unit_repository.dart';
-import 'package:zamaan/features/measurement_unit/domain/usecases/delete_all_selected_measurement_units_usecase.dart';
+import 'package:zamaan/features/measurement_unit/domain/useCases/delete_all_selected_measurement_units_use_case.dart';
 
 import '_measurement_unit_repository.mock.dart';
 
 void main() {
-  late DeleteAllSelectedMeasurementUnitsUsecase useCase;
+  late DeleteAllSelectedMeasurementUnitsUseCase useCase;
   late MeasurementUnitRepository repository;
   setUp(() {
     repository = MockMeasurementUnitRepo();
-    useCase = DeleteAllSelectedMeasurementUnitsUsecase(repository);
+    useCase = DeleteAllSelectedMeasurementUnitsUseCase(repository);
   });
 
   test(
-      '[measurementUnit.deleteAllSelectedUsecase] must call the [MeasurementUnitRepository.deleteAllSelected] and delete the entity then return the Right value',
+      '[measurementUnit.deleteAllSelectedUseCase] must call the [MeasurementUnitRepository.deleteAllSelected] and delete the entity then return the Right value',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[measurementUnit.deleteAllSelectedUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUsecase fails',
+      '[measurementUnit.deleteAllSelectedUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when deleteAllSelectedUseCase fails',
       () async {
     // Arrange
     when(() => repository.deleteAllSelected([]))

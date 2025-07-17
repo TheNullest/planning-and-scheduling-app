@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/categories/categories_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/dialogs/category/categories_chip_list.dart';
+import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_vms_manager.dart';
+import 'package:zamaan/features/tasks_management/presentation/widgets/category/categories_chip_list.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/category/category_chip.dart';
 
 class SelectedCategoriesWidget extends StatelessWidget {
@@ -28,7 +29,7 @@ class SelectedCategoriesWidget extends StatelessWidget {
               Navigator.pop(context);
               return;
             },
-            updated: categoryVMsManager.itemIsUpdated,
+            updated: (cat) => categoryVMsManager.itemIsUpdated(cat),
             deleted: (_) => Navigator.pop(context),
             orElse: () => null),
         child: SingleChildScrollView(
@@ -52,8 +53,8 @@ class SelectedCategoriesWidget extends StatelessWidget {
                             ? 'Select Categories'
                             : 'Add More Categories'),
                         icon: const Icon(Icons.add),
-                        onPressed: () async =>
-                            categoriesChipListDialog(context, categoryVMsManager)),
+                        onPressed: () async => customShowModalBottomSheetDialog<CategoryVmsManager>(
+                            context, categoryVMsManager, const CategoriesChipList())),
                   ],
                 );
               }),

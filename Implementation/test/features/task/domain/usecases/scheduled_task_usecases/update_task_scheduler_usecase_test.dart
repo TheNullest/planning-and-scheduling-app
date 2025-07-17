@@ -5,23 +5,23 @@ import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/update_task_scheduler_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task_scheduler/update_task_scheduler_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
   // Arrange
-  late UpdateTaskSchedulerUsecase useCase;
+  late UpdateTaskSchedulerUseCase useCase;
   late TaskSchedulerRepository repository;
   setUp(() {
     repository = MockTaskSchedulerRepo();
-    useCase = UpdateTaskSchedulerUsecase(repository);
+    useCase = UpdateTaskSchedulerUseCase(repository);
   });
 
   final params = TaskSchedulerEntity.empty();
   // Assert
   test(
-      '[scheduledTime.updateUsecase] must call the [GoalRepository.updateEntity] and update the [ScheduledTimeModel] with the right data',
+      '[scheduledTime.updateUseCase] must call the [GoalRepository.updateEntity] and update the [ScheduledTimeModel] with the right data',
       () async {
     //Arrange
     when(() => repository.updateEntity(entity: params))
@@ -37,7 +37,7 @@ void main() {
   });
 
   test(
-      '[scheduledTime.updateUsecase.failureTest] must return failure when update fails',
+      '[scheduledTime.updateUseCase.failureTest] must return failure when update fails',
       () async {
     // Arrange
     const failure = HiveFailure('Update failed');

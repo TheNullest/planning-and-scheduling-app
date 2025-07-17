@@ -34,7 +34,7 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
   @override
   void write(BinaryWriter writer, GoalHiveModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(11)
       ..write(obj.refType)
       ..writeByte(12)
@@ -56,7 +56,9 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.updatedAt);
+      ..write(obj.updatedAt)
+      ..writeByte(5)
+      ..write(obj.order);
   }
 
   @override

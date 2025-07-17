@@ -4,20 +4,20 @@ import 'package:mocktail/mocktail.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
 import 'package:zamaan/domain/entities/task_scheduler.dart';
 import 'package:zamaan/domain/repositories/task_scheduler_repository.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task_scheduler/get_task_schedulers_usecase.dart';
+import 'package:zamaan/features/tasks_management/domain/useCases/task_scheduler/get_task_schedulers_use_case.dart';
 
 import '_task_scheduler_repository.mock.dart';
 
 void main() {
-  late GetTaskSchedulersUsecase useCase;
+  late GetTaskSchedulersUseCase useCase;
   late TaskSchedulerRepository repository;
   setUp(() {
     repository = MockTaskSchedulerRepo();
-    useCase = GetTaskSchedulersUsecase(repository);
+    useCase = GetTaskSchedulersUseCase(repository);
   });
 
   test(
-      '[scheduledTime.getAllUsecase] must call the [ScheduledTimeRepository.getEntities] and return [List<ScheduledTimeEntity>]',
+      '[scheduledTime.getAllUseCase] must call the [ScheduledTimeRepository.getEntities] and return [List<ScheduledTimeEntity>]',
       () async {
     //Arrange
     when(() => repository.getEntities())
@@ -35,7 +35,7 @@ void main() {
   });
 
   test(
-      '[scheduledTime.getAllUsecase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUsecase fails',
+      '[scheduledTime.getAllUseCase.failureTest] must return failure with [Left(HiveFailure("Error"))] data when getAllUseCase fails',
       () async {
     //Arrange
     when(() => repository.getEntities())

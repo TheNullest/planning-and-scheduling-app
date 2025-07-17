@@ -12,8 +12,9 @@ import 'package:zamaan/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:zamaan/features/auth/presentation/views/sign_in_view.dart';
 import 'package:zamaan/features/navigation/presentation/views/home_view.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/categories/categories_manager_bloc.dart';
+import 'package:zamaan/features/tasks_management/presentation/blocs/date_time_ranges/date_time_ranges_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/goals/goals_manager_bloc.dart';
-import 'package:zamaan/features/tasks_management/presentation/blocs/scheduler/schedulers_manager_bloc.dart';
+import 'package:zamaan/features/tasks_management/presentation/blocs/scheduler/constraints/schedule_constraints_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tags/tags_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
 import 'package:zamaan/presentation_shared/navigation/app_router.dart';
@@ -43,7 +44,8 @@ void main() async {
           BlocProvider(create: (_) => serviceLocator<CategoriesManagerBloc>()),
           BlocProvider(create: (_) => serviceLocator<TagsManagerBloc>()),
           BlocProvider(create: (_) => serviceLocator<GoalsManagerBloc>()),
-          BlocProvider(create: (_) => serviceLocator<SchedulersManagerBloc>()),
+          BlocProvider(create: (_) => serviceLocator<ScheduleConstraintsManagerBloc>()),
+          BlocProvider(create: (_) => serviceLocator<DateTimeRangesManagerBloc>()),
         ],
         child: const Zamaan(),
       ),
