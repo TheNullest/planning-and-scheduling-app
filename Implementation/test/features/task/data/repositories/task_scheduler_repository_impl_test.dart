@@ -1,27 +1,27 @@
 import 'package:zamaan/core/error/failures/failure.dart';
 import 'package:zamaan/core/error/failures/hive_failure.dart';
-import 'package:zamaan/domain/entities/task_scheduler.dart';
+import 'package:zamaan/domain/entities/task_planner.dart';
 import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/shell/domain/params/get_by_task_ids_and_date_range_params.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/sources/local/hive/hive_task_scheduler_data_source_impl.dart';
 
-class MockDataSource extends Mock implements HiveTaskSchedulerDataSourceImpl {}
+class MockDataSource extends Mock implements HiveTaskPlanrDataSourceImpl {}
 
 void main() {
-  late HiveTaskSchedulerDataSourceImpl mockDataSource;
-  late TaskSchedulerRepositoryImpl taskSchedulerRepo;
-  late TaskSchedulerHiveModel model;
-  late TaskSchedulerEntity entity;
+  late HiveTaskPlanrDataSourceImpl mockDataSource;
+  late TaskPlanrRepositoryImpl taskPlanrRepo;
+  late TaskPlanrHiveModel model;
+  late TaskPlanrEntity entity;
   late DateTime startAt;
   late DateTime endAt;
   late GetByTaskIdsAndDateRangeParams params;
   setUp(() {
     mockDataSource = MockDataSource();
-    taskSchedulerRepo = TaskSchedulerRepositoryImpl(mockDataSource);
-    entity = TaskSchedulerEntity.empty();
+    taskPlanrRepo = TaskPlanrRepositoryImpl(mockDataSource);
+    entity = TaskPlanrEntity.empty();
 
-    model = TaskSchedulerHiveModel.fromEntity(entity);
+    model = TaskPlanrHiveModel.fromEntity(entity);
     startAt = DateTime(2022);
     endAt = DateTime.now();
     params = GetByTaskIdsAndDateRangeParams(
@@ -33,42 +33,42 @@ void main() {
 
   group('createEntity', () {
     test(
-        '[taskSchedulerRepo.createEntity] must call the [createEntity] of the [dataSource] then returns [Right(null)] data',
+        '[taskPlanrRepo.createEntity] must call the [createEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(
         () => mockDataSource.createEntities(
-          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
+          newEntity: TaskPlanrHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Right(null));
 
-      final result = await taskSchedulerRepo.createEntity(newEntity: entity);
+      final result = await taskPlanrRepo.createEntity(newEntity: entity);
 
       expect(result.isRight(), true);
       expect(result, equals(const Right(null)));
       verify(
         () => mockDataSource.createEntities(
-          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
+          newEntity: TaskPlanrHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
         () => mockDataSource.createEntities(
-          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
+          newEntity: TaskPlanrHiveModel.fromEntity(entity),
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.createEntity(newEntity: entity);
+      final result = await taskPlanrRepo.createEntity(newEntity: entity);
 
       expect(result.isLeft(), true);
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.createEntities(
-          newEntity: TaskSchedulerHiveModel.fromEntity(entity),
+          newEntity: TaskPlanrHiveModel.fromEntity(entity),
         ),
       ).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -77,28 +77,28 @@ void main() {
 
   group('getEntities', () {
     test(
-        '[taskSchedulerRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getEntities] must call the [getEntities] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getEntities()).thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getEntities();
+      final result = await taskPlanrRepo.getEntities();
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getEntities.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getEntities.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getEntities())
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getEntities();
+      final result = await taskPlanrRepo.getEntities();
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getEntities()).called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
@@ -107,32 +107,32 @@ void main() {
 
   group('getEntity', () {
     test(
-        '[taskSchedulerRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(TaskSchedulerEntity)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getEntity] must call the [getEntity] of the [dataSource] then returns [Right(TaskPlanrEntity)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getEntity(id: model.id)).thenAnswer((_) async => Right(model));
 
-      final result = await taskSchedulerRepo.getEntity(id: entity.id);
+      final result = await taskPlanrRepo.getEntity(id: entity.id);
 
       expect(result.isRight(), true);
-      expect(result, Right<Failure, TaskSchedulerEntity>(entity));
+      expect(result, Right<Failure, TaskPlanrEntity>(entity));
       verify(() => mockDataSource.getEntity(id: model.id))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getEntity(id: model.id))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getEntity(id: entity.id);
+      final result = await taskPlanrRepo.getEntity(id: entity.id);
 
       expect(result.isLeft(), true);
       expect(
         result,
         equals(
-          const Left<Failure, TaskSchedulerEntity>(HiveFailure('Error')),
+          const Left<Failure, TaskPlanrEntity>(HiveFailure('Error')),
         ),
       );
       verify(() => mockDataSource.getEntity(id: model.id))
@@ -143,12 +143,12 @@ void main() {
 
   group('updateEntity', () {
     test(
-        '[taskSchedulerRepo.updateEntity] must call the [updateEntity] of the [dataSource] then returns [Right(null)] data',
+        '[taskPlanrRepo.updateEntity] must call the [updateEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(() => mockDataSource.updateEntity(entity: model))
           .thenAnswer((_) async => const Right(null));
 
-      final result = await taskSchedulerRepo.updateEntity(entity: entity);
+      final result = await taskPlanrRepo.updateEntity(entity: entity);
 
       expect(result.isRight(), true);
       expect(result, const Right(null));
@@ -158,12 +158,12 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.updateEntity(entity: model))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.updateEntity(entity: entity);
+      final result = await taskPlanrRepo.updateEntity(entity: entity);
 
       expect(result.isLeft(), true);
       expect(result, const Left(HiveFailure('Error')));
@@ -175,12 +175,12 @@ void main() {
 
   group('deleteEntity', () {
     test(
-        '[taskSchedulerRepo.deleteEntity] must call the [deleteEntity] of the [dataSource] then returns [Right(null)] data',
+        '[taskPlanrRepo.deleteEntity] must call the [deleteEntity] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(() => mockDataSource.deleteEntity(id: model.id))
           .thenAnswer((_) async => const Right(null));
 
-      final result = await taskSchedulerRepo.deleteEntity(id: entity.id);
+      final result = await taskPlanrRepo.deleteEntity(id: entity.id);
 
       expect(result.isRight(), true);
       expect(result, const Right(null));
@@ -190,12 +190,12 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.deleteEntity(id: model.id))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.deleteEntity(id: entity.id);
+      final result = await taskPlanrRepo.deleteEntity(id: entity.id);
 
       expect(result.isLeft(), true);
       expect(result, const Left(HiveFailure('Error')));
@@ -207,12 +207,12 @@ void main() {
 
   group('deleteAllSelected', () {
     test(
-        '[taskSchedulerRepo.deleteAllSelected] must call the [deleteAllSelected] of the [dataSource] then returns [Right(null)] data',
+        '[taskPlanrRepo.deleteAllSelected] must call the [deleteAllSelected] of the [dataSource] then returns [Right(null)] data',
         () async {
       when(() => mockDataSource.deleteAllSelected([model.id]))
           .thenAnswer((_) async => const Right(null));
 
-      final result = await taskSchedulerRepo.deleteAllSelected([model.id]);
+      final result = await taskPlanrRepo.deleteAllSelected([model.id]);
 
       expect(result.isRight(), true);
       expect(result, const Right(null));
@@ -222,12 +222,12 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.deleteAllSelected.failureTest] must return failure when deleteAllSelected fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.deleteAllSelected.failureTest] must return failure when deleteAllSelected fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.deleteAllSelected([model.id]))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.deleteAllSelected([model.id]);
+      final result = await taskPlanrRepo.deleteAllSelected([model.id]);
 
       expect(result.isLeft(), true);
       expect(result, const Left(HiveFailure('Error')));
@@ -237,24 +237,24 @@ void main() {
     });
   });
 
-  group('getTaskSchedulerByMainTaskIdsAndDateRange', () {
+  group('getTaskPlanrByMainTaskIdsAndDateRange', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulerByMainTaskIdsAndDateRange] must call the [getTaskSchedulerByMainTaskIdsAndDateRange] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrByMainTaskIdsAndDateRange] must call the [getTaskPlanrByMainTaskIdsAndDateRange] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(
-        () => mockDataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+        () => mockDataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
           mainTaskIds: [],
           startAt: startAt,
           endAt: endAt,
         ),
       ).thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByMainTaskIdsAndDateRange(params);
+      final result = await taskPlanrRepo.getTaskPlanrsByMainTaskIdsAndDateRange(params);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(
-        () => mockDataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+        () => mockDataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
           mainTaskIds: [],
           startAt: startAt,
           endAt: endAt,
@@ -264,23 +264,23 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByMainTaskIdsAndDateRange.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByMainTaskIdsAndDateRange.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockDataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+        () => mockDataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
           mainTaskIds: [],
           startAt: startAt,
           endAt: endAt,
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByMainTaskIdsAndDateRange(params);
+      final result = await taskPlanrRepo.getTaskPlanrsByMainTaskIdsAndDateRange(params);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
-        () => mockDataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+        () => mockDataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
           mainTaskIds: [],
           startAt: startAt,
           endAt: endAt,
@@ -290,31 +290,31 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersByEndTime', () {
+  group('getTaskPlanrsByEndTime', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByEndTime] must call the [getTaskSchedulersByEndTime] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsByEndTime] must call the [getTaskPlanrsByEndTime] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getBatchByDueDate(endAt)).thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByEndTime(endAt);
+      final result = await taskPlanrRepo.getTaskPlanrsByEndTime(endAt);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(() => mockDataSource.getBatchByDueDate(endAt))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByMainTaskIdsAndDateRange.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByMainTaskIdsAndDateRange.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getBatchByDueDate(endAt))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByEndTime(endAt);
+      final result = await taskPlanrRepo.getTaskPlanrsByEndTime(endAt);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getBatchByDueDate(endAt))
           .called(1); // Verify that get was only called once
@@ -322,43 +322,43 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersByMainTaskId', () {
+  group('getTaskPlanrsByMainTaskId', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByMainTaskId] must call the [getTaskSchedulersByMainTaskId] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
-      when(() => mockDataSource.getTaskSchedulersByMainTaskId('1'))
+        '[taskPlanrRepo.getTaskPlanrsByMainTaskId] must call the [getTaskPlanrsByMainTaskId] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
+      when(() => mockDataSource.getTaskPlanrsByMainTaskId('1'))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByMainTaskId('1');
+      final result = await taskPlanrRepo.getTaskPlanrsByMainTaskId('1');
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
-      verify(() => mockDataSource.getTaskSchedulersByMainTaskId('1'))
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
+      verify(() => mockDataSource.getTaskPlanrsByMainTaskId('1'))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByMainTaskId.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByMainTaskId.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getTaskSchedulersByMainTaskId('1'))
+      when(() => mockDataSource.getTaskPlanrsByMainTaskId('1'))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByMainTaskId('1');
+      final result = await taskPlanrRepo.getTaskPlanrsByMainTaskId('1');
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
-      verify(() => mockDataSource.getTaskSchedulersByMainTaskId('1'))
+      verify(() => mockDataSource.getTaskPlanrsByMainTaskId('1'))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
   });
 
-  group('getTaskSchedulersByRepetitionType', () {
+  group('getTaskPlanrsByRepetitionType', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByRepetitionType] must call the [getTaskSchedulersByRepetitionType] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsByRepetitionType] must call the [getTaskPlanrsByRepetitionType] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(
         () => mockDataSource.getBatchByRepetitionType(
           RepetitionType.every,
@@ -366,10 +366,10 @@ void main() {
       ).thenAnswer((_) async => const Right([]));
 
       final result =
-          await taskSchedulerRepo.getTaskSchedulersByRepetitionType(RepetitionType.every);
+          await taskPlanrRepo.getTaskPlanrsByRepetitionType(RepetitionType.every);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(
         () => mockDataSource.getBatchByRepetitionType(RepetitionType.every),
       ).called(1); // Verify that get was only called once
@@ -377,17 +377,17 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByRepetitionType.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByRepetitionType.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
         () => mockDataSource.getBatchByRepetitionType(RepetitionType.every),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
       final result =
-          await taskSchedulerRepo.getTaskSchedulersByRepetitionType(RepetitionType.every);
+          await taskPlanrRepo.getTaskPlanrsByRepetitionType(RepetitionType.every);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
         () => mockDataSource.getBatchByRepetitionType(RepetitionType.every),
@@ -396,32 +396,32 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersBySpecificTimes', () {
+  group('getTaskPlanrsBySpecificTimes', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersBySpecificTimes] must call the [getTaskSchedulersBySpecificTimes] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsBySpecificTimes] must call the [getTaskPlanrsBySpecificTimes] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getBatchBySpecificTimes([]))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersBySpecificTimes([]);
+      final result = await taskPlanrRepo.getTaskPlanrsBySpecificTimes([]);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(() => mockDataSource.getBatchBySpecificTimes([]))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersBySpecificTimes.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsBySpecificTimes.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getBatchBySpecificTimes([]))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersBySpecificTimes([]);
+      final result = await taskPlanrRepo.getTaskPlanrsBySpecificTimes([]);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getBatchBySpecificTimes([]))
           .called(1); // Verify that get was only called once
@@ -429,32 +429,32 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersByStartTime', () {
+  group('getTaskPlanrsByStartTime', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByStartTime] must call the [getTaskSchedulersByStartTime] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsByStartTime] must call the [getTaskPlanrsByStartTime] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getBatchByStartTime(startAt))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByStartTime(startAt);
+      final result = await taskPlanrRepo.getTaskPlanrsByStartTime(startAt);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(() => mockDataSource.getBatchByStartTime(startAt))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByStartTime.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByStartTime.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getBatchByStartTime(startAt))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByStartTime(startAt);
+      final result = await taskPlanrRepo.getTaskPlanrsByStartTime(startAt);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getBatchByStartTime(startAt))
           .called(1); // Verify that get was only called once
@@ -462,32 +462,32 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersByTimeUnit', () {
+  group('getTaskPlanrsByTimeUnit', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByTimeUnit] must call the [getTaskSchedulersByTimeUnit] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsByTimeUnit] must call the [getTaskPlanrsByTimeUnit] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(IntervalUnit.hour);
+      final result = await taskPlanrRepo.getTaskPlanrsByTimeUnit(IntervalUnit.hour);
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByTimeUnit.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByTimeUnit.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersByTimeUnit(IntervalUnit.hour);
+      final result = await taskPlanrRepo.getTaskPlanrsByTimeUnit(IntervalUnit.hour);
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(() => mockDataSource.getBatchByTimeUnit(IntervalUnit.hour))
           .called(1); // Verify that get was only called once
@@ -495,26 +495,26 @@ void main() {
     });
   });
 
-  group('getTaskSchedulersWithinDateRange', () {
+  group('getTaskPlanrsWithinDateRange', () {
     test(
-        '[taskSchedulerRepo.getTaskSchedulersWithinDateRange] must call the [getTaskSchedulersWithinDateRange] of the [dataSource] then returns [Right(List<TaskSchedulerEntity>)] data'
-        'which will turn into [Right(List<TaskSchedulerEntity>)] data', () async {
+        '[taskPlanrRepo.getTaskPlanrsWithinDateRange] must call the [getTaskPlanrsWithinDateRange] of the [dataSource] then returns [Right(List<TaskPlanrEntity>)] data'
+        'which will turn into [Right(List<TaskPlanrEntity>)] data', () async {
       when(
-        () => mockDataSource.getTaskSchedulersWithinDateRange(
+        () => mockDataSource.getTaskPlanrsWithinDateRange(
           startDate: startAt,
           dueDate: endAt,
         ),
       ).thenAnswer((_) async => const Right([]));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersWithinDateRange(
+      final result = await taskPlanrRepo.getTaskPlanrsWithinDateRange(
         startDate: startAt,
         endDate: endAt,
       );
 
       expect(result.isRight(), true);
-      expect(result, isA<Right<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Right<Failure, List<TaskPlanrEntity>>>());
       verify(
-        () => mockDataSource.getTaskSchedulersWithinDateRange(
+        () => mockDataSource.getTaskPlanrsWithinDateRange(
           startDate: startAt,
           dueDate: endAt,
         ),
@@ -523,25 +523,25 @@ void main() {
     });
 
     test(
-        '[taskSchedulerRepo.getTaskSchedulersByTimeUnit.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
+        '[taskPlanrRepo.getTaskPlanrsByTimeUnit.failureTests] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data',
         () async {
       when(
-        () => mockDataSource.getTaskSchedulersWithinDateRange(
+        () => mockDataSource.getTaskPlanrsWithinDateRange(
           startDate: startAt,
           dueDate: endAt,
         ),
       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await taskSchedulerRepo.getTaskSchedulersWithinDateRange(
+      final result = await taskPlanrRepo.getTaskPlanrsWithinDateRange(
         startDate: startAt,
         endDate: endAt,
       );
 
       expect(result.isLeft(), true);
-      expect(result, isA<Left<Failure, List<TaskSchedulerEntity>>>());
+      expect(result, isA<Left<Failure, List<TaskPlanrEntity>>>());
       expect(result, equals(const Left(HiveFailure('Error'))));
       verify(
-        () => mockDataSource.getTaskSchedulersWithinDateRange(
+        () => mockDataSource.getTaskPlanrsWithinDateRange(
           startDate: startAt,
           dueDate: endAt,
         ),

@@ -14,7 +14,7 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
   final HiveBoxRunner<TaskHiveModel> _hiveBox;
 
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchByCategories(
+  // EResultFuture<List<TaskHiveModel>> getByCategories(
   //   List<String> categoryIds,
   // ) async =>
   //     _hiveBox.operator<List<TaskHiveModel>>(
@@ -29,7 +29,7 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
   //     );
 
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchByPriority(
+  // EResultFuture<List<TaskHiveModel>> getByPriority(
   //   Priority priority,
   // ) async =>
   //     _hiveBox.operator<List<TaskHiveModel>>(
@@ -40,7 +40,7 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
   //     );
 
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchByFixedTags(
+  // EResultFuture<List<TaskHiveModel>> getByFixedTags(
   //   List<String> tagIds,
   // ) async =>
   //     _hiveBox.operator<List<TaskHiveModel>>(
@@ -53,7 +53,7 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
   //     );
 
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchByDueDateRange(
+  // EResultFuture<List<TaskHiveModel>> getByDueDateRange(
   //   DateTime fromDate,
   //   DateTime toDate,
   // ) async =>
@@ -70,14 +70,14 @@ class TaskHiveDataSourceImpl extends HiveDataSource<TaskHiveModel>
   //     );
 
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchByStatus(TaskStatus status) async =>
+  // EResultFuture<List<TaskHiveModel>> getByStatus(TaskStatus status) async =>
   //     _hiveBox.operator<List<TaskHiveModel>>(
   //       job: (box) async =>
   //           box.values.where((task) => task.taskStatus.compareTo(status.name) == 0).toList(),
   //       boxName: _boxName,
   //     );
   // @override
-  // EResultFuture<List<TaskHiveModel>> getBatchArchived() async =>
+  // EResultFuture<List<TaskHiveModel>> getArchived() async =>
   //     _hiveBox.operator<List<TaskHiveModel>>(
   //       job: (box) async => box.values.where((task) => task.archived == true).toList(),
   //       boxName: _boxName,

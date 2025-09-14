@@ -9,24 +9,24 @@
 // import 'package:zamaan/core/services/hive/hive_services.dart';
 // import 'package:zamaan/core/utils/uuid.dart';
 // import 'package:zamaan/data/sources/local/hive/hive_boxes.dart';
-// import 'package:zamaan/features/task_scheduler/data/models/task_scheduler_local_model.dart';
-// import 'package:zamaan/features/task_scheduler/data/sources/hive_task_scheduler_data_source_impl.dart';
+// import 'package:zamaan/features/task_planner/data/models/task_scheduler_local_model.dart';
+// import 'package:zamaan/features/task_planner/data/sources/hive_task_scheduler_data_source_impl.dart';
 
 // class MockHiveInit extends Mock
-//     implements HiveServices<TaskSchedulerHiveModel> {}
+//     implements HiveServices<TaskPlanrHiveModel> {}
 
 // void main() {
-//   late HiveTaskSchedulerDataSourceImpl dataSource;
-//   late HiveServices<TaskSchedulerHiveModel> mockHiveInit;
-//   late TaskSchedulerHiveModel model;
+//   late HiveTaskPlanrDataSourceImpl dataSource;
+//   late HiveServices<TaskPlanrHiveModel> mockHiveInit;
+//   late TaskPlanrHiveModel model;
 //   late List<String> keys;
 //   late DateTime startAt;
 //   late DateTime endAt;
-//   const boxName = HiveBoxConstants.taskSchedulersBox;
+//   const boxName = HiveBoxConstants.taskPlanrsBox;
 //   setUp(() {
 //     mockHiveInit = MockHiveInit();
-//     dataSource = HiveTaskSchedulerDataSourceImpl(hiveBox: mockHiveInit);
-//     model = TaskSchedulerHiveModel.empty();
+//     dataSource = HiveTaskPlanrDataSourceImpl(hiveBox: mockHiveInit);
+//     model = TaskPlanrHiveModel.empty();
 //     startAt = DateTime(2024);
 //     endAt = DateTime.now();
 //     keys = [
@@ -39,9 +39,9 @@
 //     ];
 //   });
 
-//   group('taskSchedulersDataSource', () {
+//   group('taskPlanrsDataSource', () {
 //     test(
-//         '[taskSchedulersDataSource.createEntity] must save entity to the box and returns [Right(null)] data',
+//         '[taskPlanrsDataSource.createEntity] must save entity to the box and returns [Right(null)] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -64,7 +64,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
+//         '[taskPlanrsDataSource.createEntity.failureTest] must return failure when createEntity fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -87,10 +87,10 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getEntities] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -101,10 +101,10 @@
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -113,10 +113,10 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getEntities.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -128,13 +128,13 @@
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -143,10 +143,10 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TaskSchedulerHiveModel)] data',
+//         '[taskPlanrsDataSource.getEntity] should retrieve entity by id from the box and returns [Right(TaskPlanrHiveModel)] data',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<TaskSchedulerHiveModel>(
+//         () => mockHiveInit.operator<TaskPlanrHiveModel>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -155,9 +155,9 @@
 //       final result = await dataSource.getEntity(id: model.id);
 
 //       expect(result.isRight(), true);
-//       expect(result, equals(Right<Failure, TaskSchedulerHiveModel>(model)));
+//       expect(result, equals(Right<Failure, TaskPlanrHiveModel>(model)));
 //       verify(
-//         () => mockHiveInit.operator<TaskSchedulerHiveModel>(
+//         () => mockHiveInit.operator<TaskPlanrHiveModel>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -166,10 +166,10 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
+//         '[taskPlanrsDataSource.getEntity.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<TaskSchedulerHiveModel>(
+//         () => mockHiveInit.operator<TaskPlanrHiveModel>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -181,13 +181,13 @@
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, TaskSchedulerHiveModel>(
+//           const Left<Failure, TaskPlanrHiveModel>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<TaskSchedulerHiveModel>(
+//         () => mockHiveInit.operator<TaskPlanrHiveModel>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -196,7 +196,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.updateEntity] must update entity in the box and returns [Right(null)] data',
+//         '[taskPlanrsDataSource.updateEntity] must update entity in the box and returns [Right(null)] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -219,7 +219,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
+//         '[taskPlanrsDataSource.updateEntity.failureTest] must return failure when updateEntity fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -242,7 +242,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.deleteEntity] must delete entity by id from the box and returns [Right(null)] data',
+//         '[taskPlanrsDataSource.deleteEntity] must delete entity by id from the box and returns [Right(null)] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -265,7 +265,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
+//         '[taskPlanrsDataSource.deleteEntity.failureTest] must return failure when deleteEntity fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -288,7 +288,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.deleteAllSelected] should delete from the box all the entities whose [ID] it has received and returns [Right(null)] data',
+//         '[taskPlanrsDataSource.deleteAllSelected] should delete from the box all the entities whose [ID] it has received and returns [Right(null)] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -311,7 +311,7 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.deleteAllSelected.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
+//         '[taskPlanrsDataSource.deleteAllSelected.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<void>(
@@ -334,17 +334,17 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskIdsAndDateRange] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByMainTaskIdsAndDateRange] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
 //       final result =
-//           await dataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+//           await dataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
 //         mainTaskIds: keys,
 //         startAt: startAt,
 //         endAt: endAt,
@@ -353,10 +353,10 @@
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -365,17 +365,17 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskIdsAndDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByMainTaskIdsAndDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
 //       final result =
-//           await dataSource.getTaskSchedulersByMainTaskIdsAndDateRange(
+//           await dataSource.getTaskPlanrsByMainTaskIdsAndDateRange(
 //         mainTaskIds: keys,
 //         startAt: startAt,
 //         endAt: endAt,
@@ -385,13 +385,13 @@
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -400,24 +400,24 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByEndTime] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByEndTime] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersByEndTime(endAt);
+//       final result = await dataSource.getTaskPlanrsByEndTime(endAt);
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -426,28 +426,28 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByEndTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByEndTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersByEndTime(endAt);
+//       final result = await dataSource.getTaskPlanrsByEndTime(endAt);
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -456,24 +456,24 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskId] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByMainTaskId] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersByMainTaskId('1');
+//       final result = await dataSource.getTaskPlanrsByMainTaskId('1');
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -482,28 +482,28 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersByMainTaskId('1');
+//       final result = await dataSource.getTaskPlanrsByMainTaskId('1');
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -512,25 +512,25 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByRepetitionType] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByRepetitionType] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
 //       final result = await dataSource
-//           .getTaskSchedulersByRepetitionType(RepetitionType.per);
+//           .getTaskPlanrsByRepetitionType(RepetitionType.per);
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -539,29 +539,29 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByRepetitionType.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByRepetitionType.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
 //       final result = await dataSource
-//           .getTaskSchedulersByRepetitionType(RepetitionType.per);
+//           .getTaskPlanrsByRepetitionType(RepetitionType.per);
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -570,24 +570,24 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersBySpecificTimes] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsBySpecificTimes] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersBySpecificTimes([]);
+//       final result = await dataSource.getTaskPlanrsBySpecificTimes([]);
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -596,28 +596,28 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersBySpecificTimes.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsBySpecificTimes.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersBySpecificTimes([]);
+//       final result = await dataSource.getTaskPlanrsBySpecificTimes([]);
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -626,24 +626,24 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByStartTime] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByStartTime] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersByStartTime(startAt);
+//       final result = await dataSource.getTaskPlanrsByStartTime(startAt);
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -652,28 +652,28 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByStartTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByStartTime.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersByStartTime(startAt);
+//       final result = await dataSource.getTaskPlanrsByStartTime(startAt);
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -682,24 +682,24 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByTimeUnit] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByTimeUnit] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersByTimeUnit(TimeUnit.day);
+//       final result = await dataSource.getTaskPlanrsByTimeUnit(TimeUnit.day);
 
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -708,28 +708,28 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersByTimeUnit.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsByTimeUnit.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersByTimeUnit(TimeUnit.day);
+//       final result = await dataSource.getTaskPlanrsByTimeUnit(TimeUnit.day);
 
 //       expect(result.isLeft(), true);
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -738,16 +738,16 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersWithinDateRange] should retrieve all entities from the box [Right([])] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsWithinDateRange] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getTaskSchedulersWithinDateRange(
+//       final result = await dataSource.getTaskPlanrsWithinDateRange(
 //         startDate: startAt,
 //         endDate: endAt,
 //       );
@@ -755,10 +755,10 @@
 //       expect(result.isRight(), true);
 //       expect(
 //         result,
-//         equals(const Right<Failure, List<TaskSchedulerHiveModel>>([])),
+//         equals(const Right<Failure, List<TaskPlanrHiveModel>>([])),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
@@ -767,16 +767,16 @@
 //     });
 
 //     test(
-//         '[taskSchedulersDataSource.getTaskSchedulersWithinDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[taskPlanrsDataSource.getTaskPlanrsWithinDateRange.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getTaskSchedulersWithinDateRange(
+//       final result = await dataSource.getTaskPlanrsWithinDateRange(
 //         startDate: startAt,
 //         endDate: endAt,
 //       );
@@ -785,13 +785,13 @@
 //       expect(
 //         result,
 //         equals(
-//           const Left<Failure, List<TaskSchedulerHiveModel>>(
+//           const Left<Failure, List<TaskPlanrHiveModel>>(
 //             HiveFailure('Error'),
 //           ),
 //         ),
 //       );
 //       verify(
-//         () => mockHiveInit.operator<List<TaskSchedulerHiveModel>>(
+//         () => mockHiveInit.operator<List<TaskPlanrHiveModel>>(
 //           job: any(named: 'job'),
 //           boxName: boxName,
 //         ),

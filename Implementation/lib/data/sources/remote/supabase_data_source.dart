@@ -75,7 +75,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   }
 
   @override
-  EResultFuture<List<T>> getAll() async {
+  EResultFuture<List<T>> get() async {
     try {
       final result = await table.select(selectQuery);
       return Right(_dataMapper.fromJsonList(result) as List<T>);
@@ -105,7 +105,7 @@ abstract class SupabaseDataSource<T, Mapper extends DataMapper> extends BaseData
   }
 
   @override
-  EResultFuture<List<T>> getAllByIds(List<String> ids) async {
+  EResultFuture<List<T>> getByIds(List<String> ids) async {
     try {
       final result = await client
           .from(collectionPath)

@@ -17,7 +17,7 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ScheduledIntervalHiveModel(
-      id: fields[0] as String?,
+      id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       taskId: fields[11] as String,
@@ -25,9 +25,8 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
       intervalValue: fields[13] as double,
       repeatCount: fields[14] as int?,
       scheduledTimeIds: (fields[15] as List).cast<String>(),
-      enforceScheduleBounds: fields[16] as bool,
-      consecutiveOccurrences: fields[18] as int,
-      startDate: fields[17] as DateTime,
+      consecutiveOccurrences: fields[17] as int,
+      startDate: fields[16] as DateTime,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
     );
@@ -36,7 +35,7 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
   @override
   void write(BinaryWriter writer, ScheduledIntervalHiveModel obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(13)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
@@ -48,10 +47,8 @@ class ScheduledIntervalHiveModelAdapter extends HiveBaseTypeAdapter<ScheduledInt
       ..writeByte(15)
       ..write(obj.scheduledTimeIds)
       ..writeByte(16)
-      ..write(obj.enforceScheduleBounds)
-      ..writeByte(17)
       ..write(obj.startDate)
-      ..writeByte(18)
+      ..writeByte(17)
       ..write(obj.consecutiveOccurrences)
       ..writeByte(0)
       ..write(obj.id)

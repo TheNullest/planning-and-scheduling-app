@@ -16,8 +16,8 @@ Map<String, dynamic> _$TaskActivitySupabaseModelToJson(
       'task_status': instance.taskStatus,
       'user_id': instance.userId,
       'variable_tag_ids': instance.variableTagIds,
-      'start_at': instance.startedAt.toIso8601String(),
-      'end_at': instance.endedAt?.toIso8601String(),
+      'start_time': instance.startedAt.toIso8601String(),
+      'end_time': instance.endedAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'scheduler_id': instance.schedulerId,
       'scheduler_type': instance.schedulerType,
@@ -36,10 +36,10 @@ _$TaskActivitySupabaseModelImpl _$$TaskActivitySupabaseModelImplFromJson(
       variableTagIds: (json['variable_tag_ids'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      startedAt: DateTime.parse(json['start_at'] as String),
-      endedAt: json['end_at'] == null
+      startedAt: DateTime.parse(json['start_time'] as String),
+      endedAt: json['end_time'] == null
           ? null
-          : DateTime.parse(json['end_at'] as String),
+          : DateTime.parse(json['end_time'] as String),
       updatedAt: json['updated_at'] == null
           ? null
           : DateTime.parse(json['updated_at'] as String),
@@ -58,8 +58,8 @@ Map<String, dynamic> _$$TaskActivitySupabaseModelImplToJson(
       'task_status': instance.taskStatus,
       'user_id': instance.userId,
       'variable_tag_ids': instance.variableTagIds,
-      'start_at': instance.startedAt.toIso8601String(),
-      'end_at': instance.endedAt?.toIso8601String(),
+      'start_time': instance.startedAt.toIso8601String(),
+      'end_time': instance.endedAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
       'scheduler_id': instance.schedulerId,
       'scheduler_type': instance.schedulerType,

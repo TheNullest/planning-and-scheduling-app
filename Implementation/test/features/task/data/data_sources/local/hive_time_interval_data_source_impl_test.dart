@@ -333,7 +333,7 @@
 //     });
 
 //     test(
-//         '[timeIntervalDataSource.getScheduledTimesByMainTaskId] should retrieve all entities from the box [Right([])] data ',
+//         '[timeIntervalDataSource.getPlannedTimesByMainTaskId] should retrieve all entities from the box [Right([])] data ',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
@@ -342,7 +342,7 @@
 //         ),
 //       ).thenAnswer((_) async => const Right([]));
 
-//       final result = await dataSource.getScheduledTimesByMainTaskId('1');
+//       final result = await dataSource.getPlannedTimesByMainTaskId('1');
 
 //       expect(result.isRight(), true);
 //       expect(
@@ -359,7 +359,7 @@
 //     });
 
 //     test(
-//         '[timeIntervalDataSource.getScheduledTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[timeIntervalDataSource.getPlannedTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(
@@ -368,7 +368,7 @@
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getScheduledTimesByMainTaskId('1');
+//       final result = await dataSource.getPlannedTimesByMainTaskId('1');
 
 //       expect(result.isLeft(), true);
 //       expect(
@@ -419,7 +419,7 @@
 //     });
 
 //     test(
-//         '[timeIntervalDataSource.getScheduledTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
+//         '[timeIntervalDataSource.getPlannedTimesByMainTaskId.failureTest] must return failure when getEntities fails with [Left(HiveFailure("Error"))] data ',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<List<TimeIntervalHiveModel>>(

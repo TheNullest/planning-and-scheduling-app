@@ -39,7 +39,7 @@ class CustomMeasurementUnitEntity extends BaseEntityAbstraction {
     required this.title,
     required this.isDouble,
     required this.iconCode,
-    super.id,
+    required super.id,
   });
 
   /// A human-readable title for the measurement unit.

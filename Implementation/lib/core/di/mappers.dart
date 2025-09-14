@@ -38,9 +38,14 @@ void _dataMappers() {
       ScheduleConstraintDataMapperImpl.new,
     )
 
-    // ScheduledDay
-    ..registerFactory<ScheduledDayDataMapper>(
-      ScheduledDayDataMapperImpl.new,
+    // ScheduledDayTime
+    ..registerFactory<ScheduledDayTimeDataMapper>(
+      ScheduledDayTimeDataMapperImpl.new,
+    )
+
+    // ScheuduledOccurrence
+    ..registerFactory<ScheduledOccurrenceDataMapper>(
+      ScheduledOccurrenceDataMapperImpl.new,
     )
 
     // ScheduledInterval

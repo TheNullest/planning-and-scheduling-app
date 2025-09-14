@@ -15,7 +15,7 @@ class TagsChipListWiget extends StatelessWidget {
     final tagVMsManager = context.read<TagVmsManager>();
 
     return Selector<TagVmsManager, bool>(
-        selector: (_, vmsManager) => vmsManager.listUpdated,
+        selector: (_, vmsManager) => vmsManager.isListUpdated,
         builder: (_, vms, __) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,

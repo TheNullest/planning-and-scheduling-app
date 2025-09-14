@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/categories/categories_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_upsert_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
+import 'package:zamaan/presentation_shared/widgets/action_buttons.dart';
 import 'package:zamaan/presentation_shared/widgets/color_picker.dart';
 import 'package:zamaan/presentation_shared/widgets/icon_picker.dart';
 
@@ -65,7 +65,7 @@ class _CategoryUpsertFormWidgetState extends State<CategoryUpsertFormWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Selector<CategoryUpsertVM, String>(
-                  selector: (_, vm) => vm.viewStates.widgetTitle,
+                  selector: (_, vm) => vm.viewStates.widgetTitle(vm.isNewItem.value),
                   builder: (_, dialogTitle, __) {
                     return Text(
                       dialogTitle,
@@ -142,6 +142,7 @@ class _CategoryUpsertFormWidgetState extends State<CategoryUpsertFormWidget> {
             },
             onReset: categoryVM.resetValues,
             viewStates: categoryVM.viewStates,
+            isNewItem: categoryVM.isNewItem.value,
           )
         ],
       ),

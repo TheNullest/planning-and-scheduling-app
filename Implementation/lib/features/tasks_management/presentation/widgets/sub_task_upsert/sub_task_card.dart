@@ -26,7 +26,9 @@ class SubTaskDisplayCard extends StatelessWidget {
           ],
         ),
         onTap: () async => customShowModalBottomSheetDialog<SubTaskUpsertVM>(
-            context, subTaskVM, const SubTaskUpsertFormWidget()),
+            context, subTaskVM, const SubTaskUpsertFormWidget(),
+            headerIcon: subTaskVM.viewStates.cancelButtonIcon(subTaskVM.isNewItem.value),
+            header: subTaskVM.viewStates.widgetTitle(subTaskVM.isNewItem.value)),
       ),
     );
   }

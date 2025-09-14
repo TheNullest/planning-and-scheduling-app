@@ -64,7 +64,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
 
   /// Retrieves all items from the Hive box.
   @override
-  EResultFuture<List<HiveModel>> getAll() async {
+  EResultFuture<List<HiveModel>> get() async {
     try {
       return await _hiveServices.runBoxOperation<List<HiveModel>>(
         job: (box) async => box.values.toList(),
@@ -86,7 +86,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   }
 
   @override
-  EResultFuture<List<HiveModel>> getAllByIds(List<String> ids) async {
+  EResultFuture<List<HiveModel>> getByIds(List<String> ids) async {
     try {
       return await _hiveServices.runBoxOperation<List<HiveModel>>(
         job: (box) async => ids.map((id) => box.get(id)).whereType<HiveModel>().toList(),
@@ -105,7 +105,7 @@ abstract class HiveDataSource<HiveModel extends BaseEntityAbstraction>
   @override
   EResultFutureVoid deleteBatch(List<String> ids) async {
     try {
-      return await _hiveServices.runBoxOperation(
+      return await _hiveServices.runBoxOperation<void>(
         job: (box) async => box.deleteAll(ids),
       );
     } on Exception catch (e, stackTrace) {

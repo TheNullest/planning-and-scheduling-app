@@ -1,23 +1,23 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/task_scheduler.dart';
+import 'package:zamaan/domain/entities/task_planner.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_scheduler_hive_model.dart';
 
 void main() {
-  final entity = TaskSchedulerEntity.empty();
-  final testModel = TaskSchedulerHiveModel.fromEntity(entity);
-  test('[hiveTaskSchedulerModel] must be a subclass of [TaskSchedulerEntity] ',
+  final entity = TaskPlanrEntity.empty();
+  final testModel = TaskPlanrHiveModel.fromEntity(entity);
+  test('[hiveTaskPlanrModel] must be a subclass of [TaskPlanrEntity] ',
       () {
     // Arrange => testModel
 
     // Assert
-    expect(testModel, isA<TaskSchedulerEntity>());
+    expect(testModel, isA<TaskPlanrEntity>());
     expect(testModel, isA<BaseEntityAbstraction>());
   });
 
-  group('hiveTaskSchedulerModel', () {
+  group('hiveTaskPlanrModel', () {
     test(
-        '[hiveTaskSchedulerModel.toEntity] must return a [TaskSchedulerEntity] with the right data',
+        '[hiveTaskPlanrModel.toEntity] must return a [TaskPlanrEntity] with the right data',
         () {
       // Arrange => testModel
       // Act
@@ -27,17 +27,17 @@ void main() {
     });
 
     test(
-        '[hiveTaskSchedulerModel.fromEntity] must return a [TaskSchedulerHiveModel] with the right data',
+        '[hiveTaskPlanrModel.fromEntity] must return a [TaskPlanrHiveModel] with the right data',
         () {
       // Arrange => testModel
       // Act
-      final actual = TaskSchedulerHiveModel.fromEntity(entity);
+      final actual = TaskPlanrHiveModel.fromEntity(entity);
       // Assert
       expect(actual, testModel);
     });
 
     test(
-        '[hiveTaskSchedulerModel.copyWith] must return a customed [RemoteUserModel]with the right data',
+        '[hiveTaskPlanrModel.copyWith] must return a customed [RemoteUserModel]with the right data',
         () {
       // Arrange
 

@@ -14,13 +14,11 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
     required super.userId,
     required super.createdAt,
     required this.taskId,
-    required this.startAt,
-    required this.endAt,
-    required this.weekDayExceptions,
-    required this.monthDayExceptions,
-    required this.timeRangeExceptionIds,
-    required this.dateRangeExceptionIds,
-    required this.dateExceptions,
+    required this.startDate,
+    required this.endDate,
+    required this.exceptionWeekDays,
+    required this.exceptionMonthDays,
+    required this.exceptionDates,
     required this.enforceScheduleBounds,
     super.description,
     super.updatedAt,
@@ -35,14 +33,12 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
       description: entity.description,
       updatedAt: entity.updatedAt,
       taskId: entity.taskId,
-      startAt: entity.startAt,
-      endAt: entity.endAt,
-      dateRangeExceptionIds: entity.dateRangeExceptionIds,
-      timeRangeExceptionIds: entity.timeRangeExceptionIds,
+      startDate: entity.startDate,
+      endDate: entity.endDate,
       enforceScheduleBounds: entity.enforceScheduleBounds,
-      dateExceptions: entity.dateExceptions,
-      weekDayExceptions: entity.weekDayExceptions,
-      monthDayExceptions: entity.monthDayExceptions,
+      exceptionDates: entity.exceptionDates,
+      exceptionWeekDays: entity.exceptionWeekDays,
+      exceptionMonthDays: entity.exceptionMonthDays,
     );
   }
 
@@ -50,14 +46,14 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
   @HiveField(11)
   final String taskId;
 
-  /// The [startAt] during which the schedule is active.
+  /// The [startDate] during which the schedule is active.
   ///
   /// This object encapsulates both the start and end times for the schedule.
   @HiveField(12)
-  final DateTime? startAt;
+  final DateTime? startDate;
 
   @HiveField(13)
-  final DateTime? endAt;
+  final DateTime? endDate;
 
   @HiveField(14)
   final bool enforceScheduleBounds;
@@ -66,22 +62,16 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
   ///
   /// Example: [WeekDay.monday, WeekDay.friday].
   @HiveField(15)
-  final List<WeekDay> weekDayExceptions;
+  final List<WeekDay> exceptionWeekDays;
 
   /// The specific days of the month for scheduling the task.
   ///
   /// Example: The 1st and 15th days of the month.
   @HiveField(16)
-  final List<int> monthDayExceptions;
+  final List<int> exceptionMonthDays;
 
   @HiveField(17)
-  final List<String> timeRangeExceptionIds;
-
-  @HiveField(18)
-  final List<String> dateRangeExceptionIds;
-
-  @HiveField(19)
-  final List<DateTime> dateExceptions;
+  final List<DateTime> exceptionDates;
 
   ScheduleConstraintsEntity get toEntity => ScheduleConstraintsEntity(
         id: id,
@@ -90,14 +80,12 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
         description: description,
         updatedAt: updatedAt,
         taskId: taskId,
-        startAt: startAt,
-        endAt: endAt,
-        timeRangeExceptionIds: List.from(timeRangeExceptionIds),
-        dateRangeExceptionIds: List.from(dateRangeExceptionIds),
-        dateExceptions: List.from(dateExceptions),
+        startDate: startDate,
+        endDate: endDate,
+        exceptionDates: List.from(exceptionDates),
         enforceScheduleBounds: enforceScheduleBounds,
-        monthDayExceptions: List.from(monthDayExceptions),
-        weekDayExceptions: List.from(weekDayExceptions),
+        exceptionMonthDays: List.from(exceptionMonthDays),
+        exceptionWeekDays: List.from(exceptionWeekDays),
       );
 
   /// Creates a copy of the current `ScheduleDefinitionHiveModel` with optional updated fields.
@@ -109,8 +97,8 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? description,
     String? taskId,
-    DateTime? startAt,
-    DateTime? endAt,
+    DateTime? startDate,
+    DateTime? endDate,
     RepetitionType? repetitionType,
     int? repeatCount,
     List<WeekDay>? weekDays,
@@ -118,10 +106,10 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
     List<String>? scheduledTimeIds,
     List<String>? timeRangeExceptionIds,
     List<String>? dateRangeExceptionIds,
-    List<int>? timeExceptions,
-    List<DateTime>? dateExceptions,
-    List<WeekDay>? weekDayExceptions,
-    List<int>? monthDayExceptions,
+    List<int>? exceptionTimes,
+    List<DateTime>? exceptionDates,
+    List<WeekDay>? exceptionWeekDays,
+    List<int>? exceptionMonthDays,
     bool? enforceScheduleBounds,
   }) {
     return ScheduleConstraintsHiveModel(
@@ -131,14 +119,12 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
       description: description ?? this.description,
       updatedAt: updatedAt ?? this.updatedAt,
       taskId: taskId ?? this.taskId,
-      startAt: startAt ?? this.startAt,
-      endAt: endAt ?? this.endAt,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
-      weekDayExceptions: weekDayExceptions ?? List.from(this.weekDayExceptions),
-      monthDayExceptions: monthDayExceptions ?? List.from(this.monthDayExceptions),
-      timeRangeExceptionIds: timeRangeExceptionIds ?? List.from(this.timeRangeExceptionIds),
-      dateRangeExceptionIds: dateRangeExceptionIds ?? List.from(this.dateRangeExceptionIds),
-      dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
+      exceptionWeekDays: exceptionWeekDays ?? List.from(this.exceptionWeekDays),
+      exceptionMonthDays: exceptionMonthDays ?? List.from(this.exceptionMonthDays),
+      exceptionDates: exceptionDates ?? List.from(this.exceptionDates),
     );
   }
 
@@ -146,13 +132,11 @@ class ScheduleConstraintsHiveModel extends BaseEntityAbstraction {
   List<Object?> get props => [
         ...super.props,
         taskId,
-        startAt,
-        monthDayExceptions,
-        weekDayExceptions,
-        monthDayExceptions,
+        startDate,
+        exceptionMonthDays,
+        exceptionWeekDays,
+        exceptionMonthDays,
         enforceScheduleBounds,
-        dateRangeExceptionIds,
-        timeRangeExceptionIds,
-        dateExceptions,
+        exceptionDates,
       ];
 }

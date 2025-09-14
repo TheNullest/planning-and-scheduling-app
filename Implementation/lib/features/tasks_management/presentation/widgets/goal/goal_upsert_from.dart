@@ -6,7 +6,6 @@ import 'package:zamaan/domain/enums/hive/repetition_type.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/goals/goals_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/goal_upsert_vm.dart';
 
-
 class GoalUpsertFormWidget extends StatefulWidget {
   const GoalUpsertFormWidget({super.key});
 
@@ -71,7 +70,8 @@ class _GoalUpsertFormWidgetState extends State<GoalUpsertFormWidget> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Text(goalVm.viewStates.widgetTitle, style: const TextStyle(fontSize: 18)),
+            Text(goalVm.viewStates.widgetTitle(goalVm.isNewItem.value),
+                style: const TextStyle(fontSize: 18)),
             16.sizedBoxHeight,
             TextField(
               controller: _descriptionCtrl,
@@ -147,7 +147,7 @@ class _GoalUpsertFormWidgetState extends State<GoalUpsertFormWidget> {
                   return ElevatedButton(
                     onPressed: isActive
                         ? () {
-                            goalVm.viewStates.isItNew
+                            goalVm.isNewItem.value
                                 ? goalsManagerBloc.add(GoalsManagerEvent.create(goalVm.toEntity))
                                 : goalsManagerBloc.add(GoalsManagerEvent.update(goalVm.toEntity));
                           }

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zamaan/domain/entities/category.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/category/create_category_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/category/delete_category_use_case.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/category/fetch_all_categories_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/category/get_categories_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/category/update_category_use_case.dart';
 
 part 'categories_manager_event.dart';
@@ -12,11 +12,11 @@ part 'categories_manager_bloc.freezed.dart';
 
 class CategoriesManagerBloc extends Bloc<CategoriesManagerEvent, CategoriesManagerState> {
   CategoriesManagerBloc({
-    required FetchAllCategoriesUseCase fetchAllUseCase,
+    required GetCategoriesUseCase getUseCase,
     required CreateCategoryUseCase createUseCase,
     required UpdateCategoryUseCase updateUseCase,
     required DeleteCategoryUseCase deleteUseCase,
-  })  : _fetchAllUseCase = fetchAllUseCase,
+  })  : _getUseCase = getUseCase,
         _createUseCase = createUseCase,
         _updateUseCase = updateUseCase,
         _deleteUseCase = deleteUseCase,
@@ -27,19 +27,19 @@ class CategoriesManagerBloc extends Bloc<CategoriesManagerEvent, CategoriesManag
         create: (e) async => _create(e, emit),
         update: (e) async => _update(e, emit),
         delete: (e) async => _delete(e, emit),
-        fetchAll: (e) async => _fetchAll(e, emit),
+        get: (e) async => _get(e, emit),
       );
     });
   }
 
-  final FetchAllCategoriesUseCase _fetchAllUseCase;
+  final GetCategoriesUseCase _getUseCase;
   final CreateCategoryUseCase _createUseCase;
   final UpdateCategoryUseCase _updateUseCase;
   final DeleteCategoryUseCase _deleteUseCase;
 
   Future<void> _handleStarted(Emitter<CategoriesManagerState> emit) async {
     emit(const CategoriesManagerState.loading());
-    await _fetchAll(const _FetchAll(), emit);
+    await _get(const _Get(), emit);
   }
 
   Future<void> _create(
@@ -78,15 +78,15 @@ class CategoriesManagerBloc extends Bloc<CategoriesManagerEvent, CategoriesManag
     );
   }
 
-  Future<void> _fetchAll(
-    _FetchAll event,
+  Future<void> _get(
+    _Get event,
     Emitter<CategoriesManagerState> emit,
   ) async {
     emit(const CategoriesManagerState.loading());
-    final result = await _fetchAllUseCase();
+    final result = await _getUseCase();
     result.fold(
       (failure) => emit(CategoriesManagerState.failure(failure.toString())),
-      (categories) => emit(CategoriesManagerState.fetched(categories)),
+      (categories) => emit(CategoriesManagerState.loaded(categories)),
     );
   }
 }

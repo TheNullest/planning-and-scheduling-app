@@ -1,12 +1,12 @@
-// import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
+// import 'package:zamaan/domain/entities/constraint_date_time_ranges/date_range.dart';
 // import 'package:zamaan/presentation_shared/models/entities/base_vm.dart';
 
 // class DateRangeVM extends BaseViewModel {
 //   DateRangeVM({
 //     required this.parentId,
-//     this.startAt,
-//     this.endAt,
-//     super.id,
+//     this.startTime,
+//     this.endTime,
+//     required super.id,
 //     super.description,
 //     super.createdAt,
 //     super.updatedAt,
@@ -19,14 +19,14 @@
 //   }) =>
 //       DateRangeVM(
 //         id: entity.id,
-//         startAt: entity.start,
-//         endAt: entity.end,
+//         startTime: entity.start,
+//         endTime: entity.end,
 //         userId: entity.userId,
 //         parentId: entity.parentId,
 //       );
 
-//   final DateTime? startAt;
-//   final DateTime? endAt;
+//   final DateTime? startTime;
+//   final DateTime? endTime;
 //   final String parentId;
 
 //   @override
@@ -37,8 +37,8 @@
 //     DateTime? updatedAt,
 //     String? userId,
 //     String? parentId,
-//     DateTime? startAt,
-//     DateTime? endAt,
+//     DateTime? startTime,
+//     DateTime? endTime,
 //   }) =>
 //       DateRangeVM(
 //         id: id ?? this.id,
@@ -46,8 +46,8 @@
 //         parentId: parentId ?? this.parentId,
 //         createdAt: createdAt ?? this.createdAt,
 //         updatedAt: updatedAt ?? this.updatedAt,
-//         startAt: startAt ?? this.startAt,
-//         endAt: endAt ?? this.endAt,
+//         startTime: startTime ?? this.startTime,
+//         endTime: endTime ?? this.endTime,
 //         userId: userId ?? this.userId,
 //       );
 // }

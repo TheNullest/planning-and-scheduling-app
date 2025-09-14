@@ -28,10 +28,10 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
       addToOriginalValues<int>(#colorCode, Colors.lightBlue.toARGB32());
       addToOriginalValues<int>(#iconCode, Icons.schedule.codePoint);
     }
-    _taskId = getOriginalValue<String?>(#taskId);
-    _title = getOriginalValue<String>(#title);
-    _icon = IconData(getOriginalValue<int>(#iconCode), fontFamily: 'MaterialIcons');
-    _color = Color(getOriginalValue<int>(#colorCode));
+    _taskId = getOriginalSignleValue<String?>(#taskId);
+    _title = getOriginalSignleValue<String>(#title);
+    _icon = IconData(getOriginalSignleValue<int>(#iconCode), fontFamily: 'MaterialIcons');
+    _color = Color(getOriginalSignleValue<int>(#colorCode));
     super.initialize(entity);
   }
 
@@ -39,7 +39,7 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
   String? get taskId => _taskId;
   set taskId(String? value) {
     _taskId = value;
-    processModification(#taskId, value);
+    processChanges(#taskId, value);
   }
 
   bool get isRelatedToTask => _taskId != null;
@@ -48,7 +48,7 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
   String get title => _title;
   set title(String value) {
     _title = value;
-    processModification(#title, value);
+    processChanges(#title, value);
   }
 
   late IconData _icon;
@@ -56,7 +56,7 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
   IconData get icon => _icon;
   set icon(IconData value) {
     _icon = value;
-    processModification(#iconCode, value.codePoint);
+    processChanges(#iconCode, value.codePoint);
   }
 
   late Color _color;
@@ -64,13 +64,13 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
   set color(Color value) {
     if (_color != value) {
       _color = value;
-      processModification(#colorCode, value.toARGB32());
+      processChanges(#colorCode, value.toARGB32());
     }
   }
 
   @override
   TagEntity get toEntity => TagEntity(
-        id: getOriginalValue<String?>(#id),
+        id: getOriginalSignleValue<String?>(#id)!,
         taskId: taskId,
         createdAt: getCreatedAt,
         updatedAt: getUpdatedAt,
@@ -83,10 +83,10 @@ class TagUpsertVM extends BaseViewModel<TagEntity> {
 
   @override
   void resetValues() {
-    _taskId = getOriginalValue<String?>(#taskId);
-    _title = getOriginalValue<String>(#title);
-    _color = Color(getOriginalValue<int>(#colorCode));
-    _icon = IconData(getOriginalValue<int>(#iconCode), fontFamily: 'MaterialIcons');
+    _taskId = getOriginalSignleValue<String?>(#taskId);
+    _title = getOriginalSignleValue<String>(#title);
+    _color = Color(getOriginalSignleValue<int>(#colorCode));
+    _icon = IconData(getOriginalSignleValue<int>(#iconCode), fontFamily: 'MaterialIcons');
     super.resetValues();
   }
 

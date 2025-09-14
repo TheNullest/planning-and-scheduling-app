@@ -18,7 +18,7 @@ class ScheduledIntervalHiveDataSourceImpl extends HiveDataSource<ScheduledInterv
   final HiveBoxRunner<ScheduledIntervalHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<ScheduledIntervalHiveModel>> getBatchByConstraintId(
+  EResultFuture<List<ScheduledIntervalHiveModel>> getByConstraintId(
     String constraintId,
   ) async =>
       _hiveBox.runBoxOperation(

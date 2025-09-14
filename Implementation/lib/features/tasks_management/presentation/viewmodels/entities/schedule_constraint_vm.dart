@@ -5,15 +5,15 @@
 
 // class ScheduleConstraintVM extends BaseViewModel {
 //   ScheduleConstraintVM({
-//     required this.startAt,
-//     required this.endAt,
-//     required this.timeExceptions,
-//     required this.dateExceptions,
-//     required this.monthDayExceptions,
-//     required this.weekDayExceptions,
+//     required this.startTime,
+//     required this.endTime,
+//     required this.exceptionTimes,
+//     required this.exceptionDates,
+//     required this.exceptionMonthDays,
+//     required this.exceptionWeekDays,
 //     required this.enforceScheduleBounds,
 //     required this.taskId,
-//     super.id,
+//     required super.id,
 //     super.description,
 //     super.createdAt,
 //     super.updatedAt,
@@ -21,12 +21,12 @@
 //     super.entityState,
 //   });
 
-//   final DateTime? startAt;
-//   final DateTime? endAt;
-//   final List<TimeRangeVM> timeExceptions;
-//   final List<DateRangeVM> dateExceptions;
-//   final List<int> monthDayExceptions;
-//   final List<WeekDay> weekDayExceptions;
+//   final DateTime? startTime;
+//   final DateTime? endTime;
+//   final List<TimeRangeVM> exceptionTimes;
+//   final List<DateRangeVM> exceptionDates;
+//   final List<int> exceptionMonthDays;
+//   final List<WeekDay> exceptionWeekDays;
 //   final bool enforceScheduleBounds;
 //   final String taskId;
 
@@ -36,15 +36,15 @@
 //     String? description,
 //     DateTime? createdAt,
 //     DateTime? updatedAt,
-//     DateTime? startAt,
-//     DateTime? endAt,
+//     DateTime? startTime,
+//     DateTime? endTime,
 //     String? userId,
 //     String? taskId,
-//     List<WeekDay>? weekDayExceptions,
-//     List<int>? monthDayExceptions,
+//     List<WeekDay>? exceptionWeekDays,
+//     List<int>? exceptionMonthDays,
 //     List<TimeRangeVM>? scheduledTimes,
-//     List<TimeRangeVM>? timeExceptions,
-//     List<DateRangeVM>? dateExceptions,
+//     List<TimeRangeVM>? exceptionTimes,
+//     List<DateRangeVM>? exceptionDates,
 //     bool? enforceScheduleBounds,
 //   }) {
 //     return ScheduleConstraintVM(
@@ -52,14 +52,14 @@
 //       description: description ?? this.description,
 //       createdAt: createdAt ?? this.createdAt,
 //       updatedAt: updatedAt ?? this.updatedAt,
-//       endAt: endAt ?? this.endAt,
+//       endTime: endTime ?? this.endTime,
 //       userId: userId ?? this.userId,
 //       taskId: taskId ?? this.taskId,
-//       startAt: startAt ?? this.startAt,
-//       weekDayExceptions: weekDayExceptions ?? List.from(this.weekDayExceptions),
-//       monthDayExceptions: monthDayExceptions ?? List.from(this.monthDayExceptions),
-//       timeExceptions: timeExceptions ?? List.from(this.timeExceptions),
-//       dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
+//       startTime: startTime ?? this.startTime,
+//       exceptionWeekDays: exceptionWeekDays ?? List.from(this.exceptionWeekDays),
+//       exceptionMonthDays: exceptionMonthDays ?? List.from(this.exceptionMonthDays),
+//       exceptionTimes: exceptionTimes ?? List.from(this.exceptionTimes),
+//       exceptionDates: exceptionDates ?? List.from(this.exceptionDates),
 //       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
 //     );
 //   }

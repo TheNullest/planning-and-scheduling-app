@@ -9,9 +9,9 @@ class ScheduleConstraintsManagerEvent with _$ScheduleConstraintsManagerEvent {
   const factory ScheduleConstraintsManagerEvent.update(
       ScheduleConstraintsEntity scheduleConstraints) = _Update;
 
-  const factory ScheduleConstraintsManagerEvent.fetchAll() = _FetchAll;
+  const factory ScheduleConstraintsManagerEvent.get() = _Get;
 
-  const factory ScheduleConstraintsManagerEvent.fetchByTaskId(String id) = _FetchByTaskId;
+  const factory ScheduleConstraintsManagerEvent.getByTaskId(String id) = _GetByTaskId;
 
   const factory ScheduleConstraintsManagerEvent.delete(String id) = _Delete;
 }

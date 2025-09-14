@@ -35,7 +35,7 @@ class TagEntity extends CategoryEntity {
     required super.title,
     required super.colorCode,
     required super.iconCode,
-    super.id,
+    required super.id,
   });
 
   @HiveField(14)

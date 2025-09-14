@@ -3,7 +3,7 @@ import 'package:zamaan/core/constants/hive_type_ids.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
-import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
+import 'package:zamaan/domain/enums/hive/schedule_type.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 
 part 'task_activity_hive_model.g.dart';
@@ -96,11 +96,11 @@ class TaskActivityHiveModel extends TaskActivityEntity {
     String? description,
     String? referenceId,
     ReferenceType? referenceType,
-    SchedulerType? schedulerType,
+    ScheduleType? schedulerType,
     String? schedulerId,
-    String? dateTimeRangeId,
+    String? constraintDateTimeRangeId,
     List<String>? variableTagIds,
-    TaskStatus? taskStatus,
+    TaskStatus? occurrenceStatus,
   }) {
     return TaskActivityHiveModel(
       id: id ?? this.id,
@@ -115,7 +115,7 @@ class TaskActivityHiveModel extends TaskActivityEntity {
       variableTagIds: variableTagIds ?? List.from(this.variableTagIds),
       schedulerId: schedulerId ?? this.schedulerId,
       schedulerType: schedulerType ?? this.schedulerType,
-      taskStatus: taskStatus ?? this.taskStatus,
+      taskStatus: occurrenceStatus ?? taskStatus,
     );
   }
 }

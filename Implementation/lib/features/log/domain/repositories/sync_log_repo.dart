@@ -16,7 +16,7 @@ import 'package:zamaan/features/log/domain/entities/sync_log.dart';
 ///
 /// ▸ All operations work directly with Supabase - no local persistence occurs.
 abstract interface class SyncLogRepository<T> {
-  /// Fetches unsynchronized logs for a user's device group from Supabase.
+  /// Getes unsynchronized logs for a user's device group from Supabase.
   ///
   /// Used to coordinate synchronization across multiple devices owned by the same user.
   ///

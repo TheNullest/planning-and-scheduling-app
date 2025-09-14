@@ -3,33 +3,59 @@ import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
 import 'package:zamaan/domain/entities/sub_task.dart';
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/enums/hive/reference_type.dart';
-import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
+import 'package:zamaan/domain/enums/hive/schedule_type.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 
-/// Represents a tracked work session for a task or subtask, including scheduling relationships.
+/// **Represents a concrete work session (activity log) for a task or subtask.**
 ///
-/// ## Example Usage
+/// This entity captures the **actual time spent** on a task or subtask,
+/// whether it was started manually or triggered by a scheduling system.
+///
+/// ### Purpose
+/// * Record **when work actually started and ended** on a specific task/subtask.
+/// * Track **status** (e.g., completed, done late, cancelled).
+/// * Optionally link this activity back to a **scheduled schedule** (via
+///   [schedulerId] and [schedulerType]) if it was generated from a scheduled occurrence.
+/// * Allow context-specific **variable tags** (for example, mood, urgency, or
+///   ad-hoc labels) that may differ from the parent task's own tags.
+///
+/// ### Relation to Scheduled Instances
+/// * A `ScheduledOccurrenceEntity` defines **when work is supposed to happen**
+///   (the scheduled schedule).
+/// * A `TaskActivityEntity` records **what actually happened** — the real
+///   work session that took place.
+///   Multiple `TaskActivityEntity` records can correspond to a single
+///   scheduled occurrence (for example, if a user starts and stops work several
+///   times during the scheduled window).
+///
+/// ### Typical Usage
 /// ```dart
 /// final activity = TaskActivityEntity(
 ///   referenceId: "task_123",
-///   referenceType: "task",
-///   dateRange: DateRange(
-///     start: DateTime(2023, 10, 15, 14, 0),
-///     end: DateTime(2023, 10, 15, 16, 30),
-///   ),
-///   variableTags: [TagEntity(id: "urgent", title: "Urgent")],
-///   scheduleConstraintsId: "sched_789",
+///   referenceType: ReferenceType.task,
+///   startedAt: DateTime(2023, 10, 15, 14, 0),
+///   endedAt: DateTime(2023, 10, 15, 16, 30),
+///   variableTagIds: ["urgent"],
+///   schedulerId: "sched_789", // optional link to a scheduled occurrence
+///   schedulerType: SchedulerType.scheduledDayTime,
 ///   taskStatus: TaskStatus.completed,
-///   // Base entity fields
 ///   id: "activity_456",
 ///   userId: "user_001",
 ///   createdAt: DateTime.now(),
 ///   description: "Client project work session",
 /// );
 ///
-/// print(activity.calculatedSpentTime); // Duration(hours: 2, minutes: 30)
+/// // Example: compute duration worked
+/// final duration = activity.endedAt!.difference(activity.startedAt);
+/// print(duration); // 2h 30m
 /// ```
-
+///
+/// ### Notes
+/// * If [schedulerId] is `null`, this activity was **manually started**
+///   and is not tied to any pre-defined schedule.
+/// * Use [variableTagIds] to tag the specific session with
+///   ad-hoc categories (for example “Deep Work” or “Quick Fix”)
+///   independent of the task’s permanent tags.
 class TaskActivityEntity extends BaseEntityAbstraction {
   TaskActivityEntity({
     required super.userId,
@@ -39,61 +65,60 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     required this.variableTagIds,
     required this.taskStatus,
     required this.startedAt,
+    required super.id,
     this.endedAt,
     this.schedulerId,
     this.schedulerType,
     super.description,
     super.updatedAt,
-    super.id,
   });
 
-  /// The ID of the associated task or subtask
+  /// The ID of the associated task or subtask.
   ///
-  /// - When [referenceType] = "task": Links to [TaskEntity.id]
-  /// - When [referenceType] = "subtask": Links to [SubTaskEntity.id]
+  /// - When [referenceType] is `task`: links to [TaskEntity.id].
+  /// - When [referenceType] is `subtask`: links to [SubTaskEntity.id].
   @HiveField(11)
   final String referenceId;
 
-  /// The type of entity referenced by [referenceId]
-  ///
-  /// Valid values:
-  /// - "task" : Parent task reference
-  /// - "subtask" : Child task reference
+  /// Indicates whether this activity references a **task** or a **subtask**.
   @HiveField(12)
   final ReferenceType referenceType;
 
-  /// The active time window for this work session
+  /// Timestamp when this work session actually began.
   ///
-  /// Used for:
-  /// - Calculating duration via [calculatedSpentTime]
-  /// - Schedule adherence validation
+  /// Used for duration calculations and progress tracking.
   @HiveField(13)
   final DateTime startedAt;
 
+  /// Timestamp when this work session ended.
+  ///
+  /// `null` if the session is still in progress.
   @HiveField(14)
   final DateTime? endedAt;
 
-  /// Dynamic tags associated with this specific work session
+  /// Ad-hoc or context-specific tags for this specific activity instance.
   ///
-  /// Enables context-specific categorization different from
-  /// the parent task's tags
+  /// These can differ from the parent task’s own tags.
   @HiveField(15)
   final List<String> variableTagIds;
 
-  /// Reference to the schedule definition that triggered this activity
+  /// Optional reference to the scheduler definition that triggered this activity.
   ///
-  /// Null indicates manual time tracking outside scheduling system
+  /// `null` if this session was manually created or started outside of any
+  /// predefined schedule.
   @HiveField(16)
   final String? schedulerId;
 
+  /// Type of scheduling strategy that originated this activity,
+  /// if it was created from a scheduled schedule.
   @HiveField(17)
-  final SchedulerType? schedulerType;
+  final ScheduleType? schedulerType;
 
-  /// Current state of the work session
+  /// The current state of this activity session.
   ///
-  /// Special states:
-  /// - [TaskStatus.doneLate] : Finished outside
-  ///   the parent schedule's active period
+  /// For example:
+  /// - [TaskStatus.done] when finished successfully.
+  /// - [TaskStatus.doneLate] if finished outside the scheduled window.
   @HiveField(18)
   final TaskStatus taskStatus;
 
@@ -108,10 +133,10 @@ class TaskActivityEntity extends BaseEntityAbstraction {
     String? description,
     String? referenceId,
     ReferenceType? referenceType,
-    SchedulerType? schedulerType,
+    ScheduleType? schedulerType,
     String? schedulerId,
     List<String>? variableTagIds,
-    TaskStatus? taskStatus,
+    TaskStatus? occurrenceStatus,
   }) =>
       TaskActivityEntity(
         id: id ?? this.id,
@@ -124,15 +149,12 @@ class TaskActivityEntity extends BaseEntityAbstraction {
         startedAt: startedAt ?? this.startedAt,
         endedAt: endedAt ?? this.endedAt,
         variableTagIds: variableTagIds ?? this.variableTagIds,
-        taskStatus: taskStatus ?? this.taskStatus,
-        schedulerId: referenceId ?? this.schedulerId,
+        taskStatus: occurrenceStatus ?? taskStatus,
+        schedulerId: schedulerId ?? this.schedulerId,
         schedulerType: schedulerType ?? this.schedulerType,
       );
 
-  /// Returns a list of properties that are used to determine equality.
-  ///
-  /// This method is used by the `equatable` package to compare instances of
-  /// `TaskActivityEntity`.
+  /// Properties used by `equatable` to compare instances.
   @override
   List<Object?> get props => [
         ...super.props,

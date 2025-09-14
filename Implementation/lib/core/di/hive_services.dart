@@ -94,9 +94,9 @@ void _hiveBoxRunner() {
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),
     )
-    ..registerFactory<HiveBoxRunner<ScheduledDayHiveModel>>(
-      () => HiveBoxRunnerImpl<ScheduledDayHiveModel>(
-        boxName: HiveBoxConstants.scheduledDaysBox,
+    ..registerFactory<HiveBoxRunner<ScheduledDayTimeHiveModel>>(
+      () => HiveBoxRunnerImpl<ScheduledDayTimeHiveModel>(
+        boxName: HiveBoxConstants.scheduledDayTimesBox,
         hive: serviceLocator<HiveWrapper>(),
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),
@@ -108,9 +108,9 @@ void _hiveBoxRunner() {
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),
     )
-    ..registerFactory<HiveBoxRunner<ScheduledInstanceHiveModel>>(
-      () => HiveBoxRunnerImpl<ScheduledInstanceHiveModel>(
-        boxName: HiveBoxConstants.scheduledInstancesBox,
+    ..registerFactory<HiveBoxRunner<ScheduledOccurrenceHiveModel>>(
+      () => HiveBoxRunnerImpl<ScheduledOccurrenceHiveModel>(
+        boxName: HiveBoxConstants.scheduledOccurrencesBox,
         hive: serviceLocator<HiveWrapper>(),
         secureStorage: serviceLocator<HiveEncryptionService>(),
       ),

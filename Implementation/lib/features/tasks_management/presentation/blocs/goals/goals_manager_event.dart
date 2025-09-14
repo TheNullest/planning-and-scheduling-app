@@ -17,5 +17,5 @@ class GoalsManagerEvent with _$GoalsManagerEvent {
     String id,
   ) = _Delete;
 
-  const factory GoalsManagerEvent.fetchByRefIds(List<String> refIds) = _FetchByRefIds;
+  const factory GoalsManagerEvent.getByRefIds(List<String> refIds) = _GetByRefIds;
 }

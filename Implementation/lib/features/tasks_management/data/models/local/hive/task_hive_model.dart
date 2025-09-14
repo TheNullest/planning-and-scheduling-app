@@ -141,7 +141,7 @@ class TaskHiveModel extends BaseEntityAbstraction {
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
-    TaskStatus? taskStatus,
+    TaskStatus? occurrenceStatus,
   }) {
     return TaskHiveModel(
       id: id ?? this.id,
@@ -157,7 +157,7 @@ class TaskHiveModel extends BaseEntityAbstraction {
       fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
       totalSpentTime: totalSpentTime ?? this.totalSpentTime,
       archived: archived ?? this.archived,
-      taskStatus: taskStatus ?? this.taskStatus,
+      taskStatus: occurrenceStatus ?? taskStatus,
     );
   }
 

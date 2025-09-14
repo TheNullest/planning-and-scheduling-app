@@ -10,8 +10,8 @@ Future<void> initDependencies() async {
   _hiveServices();
   _dataMappers();
   // _viewModelMappers();
-  _datasources();
-  _repositories();
+  // _datasources();
+  // _repositories();
 
   // BLoCs
   _authBloc();
@@ -20,7 +20,9 @@ Future<void> initDependencies() async {
   _tagsManagerBloc();
   _tasksManagerBloc();
   _goalsManagerBloc();
-  _scheduleConstraints();
+  _scheduleConstraintsManagerBloc();
+  _scheduledDayTimesManagerBloc();
+  _scheduledOccurrencesManagerBloc();
 
   _navigator();
 

@@ -1,4 +1,4 @@
-import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
 
 class ScheduledIntervalAggregate {

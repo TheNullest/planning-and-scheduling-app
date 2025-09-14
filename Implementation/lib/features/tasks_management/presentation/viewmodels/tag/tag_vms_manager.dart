@@ -13,17 +13,18 @@ class TagVmsManager extends BaseVmsManager<TagEntity, TagUpsertVM> {
   String? taskId;
 
   List<TagUpsertVM> get relatedItems => taskId != null
-      ? items
+      ? persistedItems
           .where(
             (item) => taskId == item.taskId,
           )
           .toList()
       : [];
 
-  List<TagUpsertVM> get itemsWithoutRelation => items.where((item) => item.taskId == null).toList();
+  List<TagUpsertVM> get itemsWithoutRelation =>
+      persistedItems.where((item) => item.taskId == null).toList();
 
   @override
-  TagUpsertVM newItem([TagUpsertVM? item]) => super.newItem(TagUpsertVM(userId: userId));
+  TagUpsertVM newItem([TagUpsertVM? item]) => TagUpsertVM(userId: userId);
 
   @override
   TagUpsertVM toViewModel(TagEntity entity) => TagUpsertVM.fromEntity(entity: entity);

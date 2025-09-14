@@ -6,33 +6,21 @@ import 'package:zamaan/core/platform/path_provider_wrapper.dart';
 import 'package:zamaan/core/platform/platform_wrapper.dart';
 import 'package:zamaan/core/services/hive/hive_wrapper.dart';
 import 'package:zamaan/data/hive_type_adapter/hive_base_type_adapter.dart';
-import 'package:zamaan/domain/enums/hive/day_type.dart';
-import 'package:zamaan/domain/enums/hive/goal_constraint.dart';
-import 'package:zamaan/domain/enums/hive/interval_unit.dart';
-import 'package:zamaan/domain/enums/hive/measurement_category.dart';
-import 'package:zamaan/domain/enums/hive/measurement_unit.dart';
-import 'package:zamaan/domain/enums/hive/os.dart';
-import 'package:zamaan/domain/enums/hive/priority.dart';
-import 'package:zamaan/domain/enums/hive/reference_type.dart';
-import 'package:zamaan/domain/enums/hive/repetition_type.dart';
-import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
-import 'package:zamaan/domain/enums/hive/sync_action.dart';
-import 'package:zamaan/domain/enums/hive/task_status.dart';
-import 'package:zamaan/domain/enums/hive/week_day.dart';
+import 'package:zamaan/domain/enums/enums.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/remote_session_hive_model.dart';
 import 'package:zamaan/features/auth/data/models/local/hive/user_hive_model.dart';
 import 'package:zamaan/features/log/data/models/local/hive/device.dart';
 import 'package:zamaan/features/log/data/models/local/hive/log.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/category_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/constraint_date_time_ranges/constraint_date_time_range_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/constraint_date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/custom_measurement_unit_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/goal_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/objects/duration_hive_model.g.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/schedule_constraints_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_hive_model.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_instance_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_day_time_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_interval_hive_model.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/scheduler/scheduled_occurrence_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/sub_task_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/tag_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
@@ -88,9 +76,9 @@ class HiveInitializerImpl extends HiveInitializer {
       GoalHiveModelAdapter(),
       CustomMeasurementUnitHiveModelAdapter(),
       ScheduleConstraintsHiveModelAdapter(),
-      ScheduledDayHiveModelAdapter(),
+      ScheduledDayTimeHiveModelAdapter(),
       ScheduledIntervalHiveModelAdapter(),
-      ScheduledInstanceHiveModelAdapter(),
+      ScheduledOccurrenceHiveModelAdapter(),
       DateRangeHiveModelAdapter(),
       TimeRangeHiveModelAdapter(),
       SubTaskHiveModelAdapter(),
@@ -111,10 +99,12 @@ class HiveInitializerImpl extends HiveInitializer {
       PriorityAdapter(),
       ReferenceTypeAdapter(),
       RepetitionTypeAdapter(),
-      SchedulerTypeAdapter(),
+      ScheduleTypeAdapter(),
       SyncActionAdapter(),
       TaskStatusAdapter(),
+      OccurrenceStatusAdapter(),
       WeekDayAdapter(),
+      ScheduledTimeModeAdapter()
     ];
 
     final dartClassAdapters = <HiveBaseTypeAdapter>[DurationAdapter()];

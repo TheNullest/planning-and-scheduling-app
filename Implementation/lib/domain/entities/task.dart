@@ -35,9 +35,8 @@ class TaskEntity extends BaseEntityAbstraction {
     required this.totalSpentTime,
     required this.archived,
     required this.taskStatus,
-    super.description,
+    required super.id, super.description,
     super.updatedAt,
-    super.id,
   });
 
   /// Short descriptive title (max 100 chars)
@@ -131,7 +130,7 @@ class TaskEntity extends BaseEntityAbstraction {
     bool? archived,
     List<String>? fixedTagIds,
     Duration? totalSpentTime,
-    TaskStatus? taskStatus,
+    TaskStatus? occurrenceStatus,
   }) =>
       TaskEntity(
         id: id ?? this.id,
@@ -147,7 +146,7 @@ class TaskEntity extends BaseEntityAbstraction {
         archived: archived ?? this.archived,
         fixedTagIds: fixedTagIds ?? List.from(this.fixedTagIds),
         totalSpentTime: totalSpentTime ?? this.totalSpentTime,
-        taskStatus: taskStatus ?? this.taskStatus,
+        taskStatus: occurrenceStatus ?? taskStatus,
       );
 
   @override

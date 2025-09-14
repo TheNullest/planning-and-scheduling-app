@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tags/tags_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_upsert_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
+import 'package:zamaan/presentation_shared/widgets/action_buttons.dart';
 import 'package:zamaan/presentation_shared/widgets/color_picker.dart';
 import 'package:zamaan/presentation_shared/widgets/icon_picker.dart';
 
@@ -67,7 +67,7 @@ class _TagUpsertFormWidgetState extends State<TagUpsertFormWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Selector<TagUpsertVM, String>(
-                  selector: (_, vm) => vm.viewStates.widgetTitle,
+                  selector: (_, vm) => vm.viewStates.widgetTitle(vm.isNewItem.value),
                   builder: (_, dialogTitle, __) {
                     return Text(
                       dialogTitle,
@@ -164,6 +164,7 @@ class _TagUpsertFormWidgetState extends State<TagUpsertFormWidget> {
             onDelete: () => tagsManagerBloc.add(TagsManagerEvent.delete(tagVM.id!)),
             onReset: tagVM.resetValues,
             viewStates: tagVM.viewStates,
+            isNewItem: tagVM.isNewItem.value,
           )
         ],
       ),

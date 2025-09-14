@@ -38,11 +38,10 @@ class SubTaskVMsManager extends BaseVmsManager<SubTaskEntity, SubTaskUpsertVM> {
 
   @override
   SubTaskUpsertVM newItem([SubTaskUpsertVM? item]) =>
-      SubTaskUpsertVM(userId: userId, taskId: _taskId);
+      super.newItem(SubTaskUpsertVM(userId: userId, taskId: _taskId));
 
   @override
   SubTaskUpsertVM toViewModel(SubTaskEntity entity) => SubTaskUpsertVM.fromEntity(
         entity: entity,
-        userId: userId,
-      )..addListener(notifyListeners);
+      );
 }

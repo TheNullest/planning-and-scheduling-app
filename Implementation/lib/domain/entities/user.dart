@@ -36,9 +36,8 @@ class UserEntity extends BaseEntityAbstraction {
     required this.emailAddress,
     required this.birthDate,
     required this.avatarPath,
-    super.description,
+    required super.id, super.description,
     super.updatedAt,
-    super.id,
   });
 
   /// Unique username (3-20 characters, letters/numbers/_)

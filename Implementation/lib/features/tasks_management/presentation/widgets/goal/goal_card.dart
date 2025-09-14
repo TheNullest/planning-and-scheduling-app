@@ -32,19 +32,18 @@ class GoalCardWidget extends StatelessWidget {
     return BlocListener<GoalsManagerBloc, GoalsManagerState>(
         listenWhen: (previous, current) => previous != current,
         listener: (context, state) => state.maybeWhen(
-              fetchedByRefIds: (goals) {
+              loadedByRefIds: (goals) {
                 if (goals.isNotEmpty) goalVm.initialize(goals.first);
                 return null;
               },
-              created: (goal) => goalVm.handleEntityCreated(goal.id),
-              updated: (goal) => goalVm.handleEntityUpdated(goal),
+              created: (goal) => goalVm.onEntityCreated(),
+              updated: (goal) => goalVm.onEntityUpdated(goal),
               orElse: () => {},
             ),
         child: ChangeNotifierProvider<GoalUpsertVM>.value(
           value: goalVm,
           child: Selector<GoalUpsertVM, ({bool isItNew, bool isItModified})>(
-              selector: (_, vm) =>
-                  (isItNew: vm.viewStates.isItNew, isItModified: vm.isModified.value),
+              selector: (_, vm) => (isItNew: vm.isNewItem.value, isItModified: vm.canReset.value),
               builder: (_, states, __) {
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),

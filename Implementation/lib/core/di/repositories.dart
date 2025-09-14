@@ -33,7 +33,7 @@ void _repositories() {
   //     ),
   //   )
 
-  //   // Schedulers
+  //   // Planners
   //   ..registerSingleton<ScheduleConstraintRepository>(
   //     ScheduleConstraintRepositoryImpl(
   //       localDataSource: serviceLocator(),

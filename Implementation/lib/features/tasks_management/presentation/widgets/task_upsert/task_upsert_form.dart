@@ -10,10 +10,10 @@ import 'package:zamaan/features/tasks_management/presentation/viewmodels/categor
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/task_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/category/selected_categories.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/dropdown_button.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/goal/goal_card.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/tag/selected_tags.dart';
 import 'package:zamaan/presentation_shared/widgets/color_picker.dart';
+import 'package:zamaan/presentation_shared/widgets/dropdown_button.dart';
 import 'package:zamaan/presentation_shared/widgets/icon_picker.dart';
 
 class TaskUpsertFormWidget extends StatelessWidget {
@@ -29,8 +29,12 @@ class TaskUpsertFormWidget extends StatelessWidget {
     if (taskVM.id != null) {
       context.read<GoalsManagerBloc>().add(GoalsManagerEvent.started(
           taskIds: [taskVM.id!],
-          subTaskIds:
-              context.read<TaskUpsertVM>().subTasksManager.items.map((item) => item.id!).toList()));
+          subTaskIds: context
+              .read<TaskUpsertVM>()
+              .subTasksManager
+              .persistedItems
+              .map((item) => item.id!)
+              .toList()));
     }
     return SliverToBoxAdapter(
       child: Selector<TaskUpsertVM, bool>(

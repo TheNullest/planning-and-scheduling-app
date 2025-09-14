@@ -16,5 +16,5 @@ class TagsManagerEvent with _$TagsManagerEvent {
     String id,
   ) = _Delete;
 
-  const factory TagsManagerEvent.fetchAll() = _FetchAll;
+  const factory TagsManagerEvent.get() = _Get;
 }

@@ -1,8 +1,8 @@
 import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/date_range.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/date_time_range_hive_model.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/date_range.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/constraint_date_time_ranges/constraint_date_time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/date_range/date_range_supabase_model.dart';
 
 class DateRangeDataMapperImpl extends DateRangeDataMapper {
@@ -11,8 +11,8 @@ class DateRangeDataMapperImpl extends DateRangeDataMapper {
     try {
       return DateRangeEntity(
         id: model.id,
-        start: model.start,
-        end: model.end,
+        startDate: model.startDate,
+        endDate: model.endDate,
         createdAt: model.createdAt,
         parentId: model.parentId,
         userId: model.userId,
@@ -34,8 +34,8 @@ class DateRangeDataMapperImpl extends DateRangeDataMapper {
     try {
       return DateRangeEntity(
         id: model.id,
-        start: model.start,
-        end: model.end,
+        startDate: model.startDate,
+        endDate: model.endDate,
         createdAt: model.createdAt,
         parentId: model.parentId,
         userId: model.userId,

@@ -36,9 +36,9 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
   final DataMapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByPriority(Priority priority) async {
+  EResultFuture<List<SubTaskEntity>> getByPriority(Priority priority) async {
     try {
-      final response = await _localDataSource.getBatchByPriority(priority);
+      final response = await _localDataSource.getByPriority(priority);
       final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
       return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
     } on Exception catch (e, stackTrace) {
@@ -47,9 +47,9 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
   }
 
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByStatus(TaskStatus status) async {
+  EResultFuture<List<SubTaskEntity>> getByStatus(TaskStatus status) async {
     try {
-      final response = await _localDataSource.getBatchByStatus(status);
+      final response = await _localDataSource.getByStatus(status);
       final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
       return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
     } on Exception catch (e, stackTrace) {
@@ -58,9 +58,9 @@ class SubTaskRepositoryImpl extends BaseRepositoryImpl<
   }
 
   @override
-  EResultFuture<List<SubTaskEntity>> getBatchByTaskIds(List<String> taskIds) async {
+  EResultFuture<List<SubTaskEntity>> getByTaskIds(List<String> taskIds) async {
     try {
-      final response = await _localDataSource.getBatchByTaskIds(taskIds);
+      final response = await _localDataSource.getByTaskIds(taskIds);
       final models = _dataMapper.foldEitherList<SubTaskHiveModel>(response);
       return Right(_dataMapper.toEntitiesFromHive(models) as List<SubTaskEntity>);
     } on Exception catch (e, stackTrace) {

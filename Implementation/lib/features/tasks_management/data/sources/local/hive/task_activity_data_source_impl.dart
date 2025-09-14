@@ -22,7 +22,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   // ///
   // /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel] objects.
   // @override
-  // EResultFuture<List<TaskActivityHiveModel>> getBatchByTaskId(
+  // EResultFuture<List<TaskActivityHiveModel>> getByTaskId(
   //   String taskId,
   // ) async {
   //   return _hiveBox.operator<List<TaskActivityHiveModel>>(
@@ -34,13 +34,13 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   // /// Retrieves a list of [TaskActivityHiveModel] by main task IDs and date range.
   // ///
   // /// [taskId] - List of main task IDs to filter the time intervals.
-  // /// [startAt] - Start date of the date range.
+  // /// [startTime] - Start date of the date range.
   // /// [dueDate] - End date of the date range.
   // /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel].
   // @override
-  // EResultFuture<List<TaskActivityHiveModel>> getBatchByTaskIdAndDateRange({
+  // EResultFuture<List<TaskActivityHiveModel>> getByTaskIdAndDateRange({
   //   required String taskId,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   // }) async {
   //   return _hiveBox.operator<List<TaskActivityHiveModel>>(
@@ -48,7 +48,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   //       return box.values.where((taskActivity) {
   //         if (taskId.compareTo(taskActivity.referenceId) != 0) return false;
 
-  //         final isInDateRange = (startAt == null || taskActivity.startAt.isAfter(startAt)) &&
+  //         final isInDateRange = (startTime == null || taskActivity.startTime.isAfter(startTime)) &&
   //             (dueDate == null || taskActivity.dueDate!.isBefore(dueDate));
   //         return isInDateRange;
   //       }).toList();
@@ -62,7 +62,7 @@ class TaskActivityHiveDataSourceImpl extends HiveDataSource<TaskActivityHiveMode
   // /// [subTaskId] - Sub task ID to filter the time intervals.
   // /// Returns a [EResultFuture] containing a list of [TaskActivityHiveModel].
   // @override
-  // EResultFuture<List<TaskActivityHiveModel>> getBatchBySubTaskId(
+  // EResultFuture<List<TaskActivityHiveModel>> getBySubTaskId(
   //   String subTaskId,
   // ) async {
   //   return _hiveBox.operator<List<TaskActivityHiveModel>>(

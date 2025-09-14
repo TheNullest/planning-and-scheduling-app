@@ -9,7 +9,7 @@ void _dateTimeRangesManagerBloc() {
     ..registerFactory<SupabaseDataSource<TimeRangeSupabaseModel, TimeRangeDataMapper>>(
       () => TimeRangeSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.timeRanges,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -22,7 +22,7 @@ void _dateTimeRangesManagerBloc() {
     ..registerFactory<SupabaseDataSource<DateRangeSupabaseModel, DateRangeDataMapper>>(
       () => DateRangeSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.dateRanges,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -51,33 +51,33 @@ void _dateTimeRangesManagerBloc() {
     // UseCases for TimeRange
     ..registerFactory(() => CreateBatchTimeRangesUseCase(serviceLocator()))
     ..registerFactory(() => DeleteBatchTimeRangesUseCase(serviceLocator()))
-    ..registerFactory(() => FetchBatchAllTimeRangesUseCase(serviceLocator()))
-    ..registerFactory(() => FetchBatchTimeRangesByIdsUseCase(serviceLocator()))
-    ..registerFactory(() => UpdateBatchTimeRangesUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchAllTimeRangesUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchTimeRangesByTaskIdUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateTimeRangesUseCase(serviceLocator()))
 
     // UseCases for DateRange
     ..registerFactory(() => CreateBatchDateRangesUseCase(serviceLocator()))
     ..registerFactory(() => DeleteBatchDateRangesUseCase(serviceLocator()))
-    ..registerFactory(() => FetchBatchAllDateRangesUseCase(serviceLocator()))
-    ..registerFactory(() => FetchBatchDateRangesByIdsUseCase(serviceLocator()))
-    ..registerFactory(() => UpdateBatchDateRangesUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchAllDateRangesUseCase(serviceLocator()))
+    ..registerFactory(() => GetBatchDateRangesByTaskIdUseCase(serviceLocator()))
+    ..registerFactory(() => UpdateDateRangesUseCase(serviceLocator()))
 
     // ManagerBloc
-    ..registerLazySingleton<DateTimeRangesManagerBloc>(
-      () => DateTimeRangesManagerBloc(
+    ..registerLazySingleton<ConstraintDateTimeRangesManagerBloc>(
+      () => ConstraintDateTimeRangesManagerBloc(
         // Time Range Prameters
         createBatchTimeRangesUseCase: serviceLocator(),
-        deleteBatchTimeRangesUseCase: serviceLocator(),
-        fetchBatchAllTimeRangesUseCase: serviceLocator(),
-        fetchBatchTimeRangesByIdsUseCase: serviceLocator(),
-        updateBatchTimeRangesUseCase: serviceLocator(),
+        deleteTimeRangesUseCase: serviceLocator(),
+        getTimeRangesUseCase: serviceLocator(),
+        getTimeRangesByTaskIdUseCase: serviceLocator(),
+        updateTimeRangesUseCase: serviceLocator(),
 
         // Date Range Prameters
         createBatchDateRangesUseCase: serviceLocator(),
-        deleteBatchDateRangesUseCase: serviceLocator(),
-        fetchBatchAllDateRangesUseCase: serviceLocator(),
-        fetchBatchDateRangesByIdsUseCase: serviceLocator(),
-        updateBatchDateRangesUseCase: serviceLocator(),
+        deleteDateRangesUseCase: serviceLocator(),
+        getDateRangesUseCase: serviceLocator(),
+        getDateRangesByTaskIdUseCase: serviceLocator(),
+        updateDateRangesUseCase: serviceLocator(),
       ),
     );
 }

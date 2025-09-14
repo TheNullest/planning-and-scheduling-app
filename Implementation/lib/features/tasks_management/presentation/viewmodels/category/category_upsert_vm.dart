@@ -23,9 +23,9 @@ class CategoryUpsertVM extends BaseViewModel<CategoryEntity> {
       addToOriginalValues<int>(#iconCode, Icons.schedule.codePoint);
     }
 
-    _title = getOriginalValue<String>(#title);
-    _icon = IconData(getOriginalValue<int>(#iconCode), fontFamily: 'MaterialIcons');
-    _color = Color(getOriginalValue<int>(#colorCode));
+    _title = getOriginalSignleValue<String>(#title);
+    _icon = IconData(getOriginalSignleValue<int>(#iconCode), fontFamily: 'MaterialIcons');
+    _color = Color(getOriginalSignleValue<int>(#colorCode));
     super.initialize(entity);
   }
 
@@ -34,7 +34,7 @@ class CategoryUpsertVM extends BaseViewModel<CategoryEntity> {
   set title(String value) {
     _title = value;
 
-    processModification(#title, value);
+    processChanges(#title, value);
   }
 
   late IconData _icon;
@@ -42,7 +42,7 @@ class CategoryUpsertVM extends BaseViewModel<CategoryEntity> {
   IconData get icon => _icon;
   set icon(IconData value) {
     _icon = value;
-    processModification(#iconCode, value.codePoint);
+    processChanges(#iconCode, value.codePoint);
   }
 
   late Color _color;
@@ -50,13 +50,13 @@ class CategoryUpsertVM extends BaseViewModel<CategoryEntity> {
   set color(Color value) {
     if (_color != value) {
       _color = value;
-      processModification(#colorCode, value.toARGB32());
+      processChanges(#colorCode, value.toARGB32());
     }
   }
 
   @override
   CategoryEntity get toEntity => CategoryEntity(
-        id: getOriginalValue<String?>(#id),
+        id: getOriginalSignleValue<String?>(#id)!,
         createdAt: getCreatedAt,
         updatedAt: getUpdatedAt,
         description: description.isNotEmpty ? description : null,
@@ -68,9 +68,9 @@ class CategoryUpsertVM extends BaseViewModel<CategoryEntity> {
 
   @override
   void resetValues() {
-    _title = getOriginalValue<String>(#title);
-    _color = Color(getOriginalValue<int>(#colorCode));
-    _icon = IconData(getOriginalValue<int>(#iconCode), fontFamily: 'MaterialIcons');
+    _title = getOriginalSignleValue<String>(#title);
+    _color = Color(getOriginalSignleValue<int>(#colorCode));
+    _icon = IconData(getOriginalSignleValue<int>(#iconCode), fontFamily: 'MaterialIcons');
     super.resetValues();
   }
 

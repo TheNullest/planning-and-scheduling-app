@@ -5,11 +5,11 @@
 // class SubTaskActivityVM<SubTaskVM> extends BaseViewModel {
 //   SubTaskActivityVM({
 //     required this.task,
-//     required this.startAt,
-//     required this.endAt,
+//     required this.startTime,
+//     required this.endTime,
 //     required this.variableTags,
 //     required this.status,
-//     super.id,
+//     required super.id,
 //     super.description,
 //     super.createdAt,
 //     super.updatedAt,
@@ -18,8 +18,8 @@
 //   });
 
 //   final SubTaskVM task;
-//   final DateTime startAt;
-//   final DateTime? endAt;
+//   final DateTime startTime;
+//   final DateTime? endTime;
 //   final List<TagVM> variableTags;
 //   final TaskStatus status;
 
@@ -30,8 +30,8 @@
 //     DateTime? createdAt,
 //     DateTime? updatedAt,
 //     SubTaskVM? task,
-//     DateTime? startAt,
-//     DateTime? endAt,
+//     DateTime? startTime,
+//     DateTime? endTime,
 //     List<TagVM>? variableTags,
 //     TaskStatus? status,
 //     String? userId,
@@ -42,8 +42,8 @@
 //         createdAt: createdAt ?? this.createdAt,
 //         updatedAt: updatedAt ?? this.updatedAt,
 //         task: task ?? this.task,
-//         startAt: startAt ?? this.startAt,
-//         endAt: endAt ?? this.endAt,
+//         startTime: startTime ?? this.startTime,
+//         endTime: endTime ?? this.endTime,
 //         variableTags: variableTags ?? this.variableTags,
 //         status: status ?? this.status,
 //         userId: userId ?? this.userId,

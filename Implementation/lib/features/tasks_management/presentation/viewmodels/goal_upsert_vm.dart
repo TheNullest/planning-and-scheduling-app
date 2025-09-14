@@ -38,10 +38,10 @@ class GoalUpsertVM extends BaseViewModel<GoalEntity> {
       addToOriginalValues<GoalConstraint>(#goalConstraint, GoalConstraint.step);
       addToOriginalValues<Map<RepetitionType, dynamic>>(#goalTargets, {});
     }
-    _customMeasurementUnitId = getOriginalValue<String?>(#customMeasurementUnitId);
-    _measurementUnit = getOriginalValue<MeasurementUnit>(#measurementUnit);
-    _goalConstraint = getOriginalValue<GoalConstraint>(#goalConstraint);
-    _goalTargets = Map.from(getOriginalValue<Map<RepetitionType, dynamic>>(#goalTargets));
+    _customMeasurementUnitId = getOriginalSignleValue<String?>(#customMeasurementUnitId);
+    _measurementUnit = getOriginalSignleValue<MeasurementUnit>(#measurementUnit);
+    _goalConstraint = getOriginalSignleValue<GoalConstraint>(#goalConstraint);
+    _goalTargets = Map.from(getOriginalSignleValue<Map<RepetitionType, dynamic>>(#goalTargets));
     super.initialize(entity);
   }
 
@@ -49,21 +49,21 @@ class GoalUpsertVM extends BaseViewModel<GoalEntity> {
   MeasurementUnit get measurementUnit => _measurementUnit;
   set measurementUnit(MeasurementUnit value) {
     _measurementUnit = value;
-    processModification(#measurementUnit, value);
+    processChanges(#measurementUnit, value);
   }
 
   late String? _customMeasurementUnitId;
   String? get customMeasurementUnitId => _customMeasurementUnitId;
   set customMeasurementUnitId(String? value) {
     _customMeasurementUnitId = value;
-    processModification(#customMeasurementUnitId, value);
+    processChanges(#customMeasurementUnitId, value);
   }
 
   late GoalConstraint _goalConstraint;
   GoalConstraint get goalConstraint => _goalConstraint;
   set goalConstraint(GoalConstraint value) {
     _goalConstraint = value;
-    processModification(#goalConstraint, value);
+    processChanges(#goalConstraint, value);
   }
 
   late Map<RepetitionType, dynamic> _goalTargets;
@@ -85,17 +85,17 @@ class GoalUpsertVM extends BaseViewModel<GoalEntity> {
     //You want to avoid adding new keys accidentally
     //You want to handle missing keys safely like this:
     _goalTargets[key] = value;
-    processModification(#goalTargets, _goalTargets);
+    processChanges(#goalTargets, _goalTargets);
   }
 
   void removeTarget(RepetitionType key) {
     _goalTargets.remove(key);
-    processModification(#goalTargets, _goalTargets);
+    processChanges(#goalTargets, _goalTargets);
   }
 
   @override
   GoalEntity get toEntity => GoalEntity(
-      id: getOriginalValue<String?>(#id),
+      id: getOriginalSignleValue<String?>(#id)!,
       userId: userId,
       createdAt: getCreatedAt,
       updatedAt: getUpdatedAt,
@@ -114,10 +114,10 @@ class GoalUpsertVM extends BaseViewModel<GoalEntity> {
 
   @override
   void resetValues() {
-    _measurementUnit = getOriginalValue<MeasurementUnit>(#measurementUnit);
-    _customMeasurementUnitId = getOriginalValue<String?>(#customMeasurementUnitId);
-    _goalConstraint = getOriginalValue<GoalConstraint>(#goalConstraint);
-    _goalTargets = Map.from(getOriginalValue<Map<RepetitionType, dynamic>>(#goalTargets));
+    _measurementUnit = getOriginalSignleValue<MeasurementUnit>(#measurementUnit);
+    _customMeasurementUnitId = getOriginalSignleValue<String?>(#customMeasurementUnitId);
+    _goalConstraint = getOriginalSignleValue<GoalConstraint>(#goalConstraint);
+    _goalTargets = Map.from(getOriginalSignleValue<Map<RepetitionType, dynamic>>(#goalTargets));
     super.resetValues();
   }
 }

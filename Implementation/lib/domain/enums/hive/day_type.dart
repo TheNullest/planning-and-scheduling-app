@@ -26,7 +26,11 @@ enum DayType {
 
   /// Represents a specific day of the month.
   @HiveField(1)
-  monthDay('روز ماه');
+  monthDay('روز ماه'),
+
+  /// Represents a specific date.
+  @HiveField(2)
+  fixedDate('تاریخ');
 
   /// Constructs a [DayType] with its Persian translation.
   const DayType(this._inPersian);
@@ -81,4 +85,31 @@ enum DayType {
   /// print(DayType.monthDay.nameInPersian); // Output: "روز ماه"
   /// ```
   String get nameInPersian => _inPersian;
+
+  /// Returns a formatted, human-readable label for a given [dayLabel]
+  /// based on the current [DayType].
+  ///
+  /// - For [DayType.weekDay], the label is returned as-is.
+  /// - For [DayType.monthDay], an ordinal suffix is appended (e.g., `"14"` → `"14th"`).
+  /// - For [DayType.fixedDate], the date string is converted to a localized format with weekday.
+  ///
+  /// This method is typically used in view models or presentation layers to display
+  /// user-friendly labels corresponding to the [DayType].
+  ///
+  /// **Example:**
+  /// ```dart
+  /// print(DayType.weekDay.getFormattedDayLabel('Monday'));     // Output: Monday
+  /// print(DayType.monthDay.getFormattedDayLabel('14'));        // Output: 14th
+  /// print(DayType.fixedDate.getFormattedDayLabel('2025/10/14')); // "Tuesday, 2025/10/14"
+  /// ```
+  String getFormattedDayLabel(String dayLabel) {
+    switch (this) {
+      case DayType.weekDay:
+        return dayLabel;
+      case DayType.monthDay:
+        return dayLabel.getMonthDayWithOrdinalSuffix;
+      case DayType.fixedDate:
+        return dayLabel.toDateStringWithWeekDay;
+    }
+  }
 }

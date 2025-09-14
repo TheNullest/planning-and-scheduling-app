@@ -18,17 +18,15 @@ class ScheduleConstraintsHiveModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ScheduleConstraintsHiveModel(
-      id: fields[0] as String?,
+      id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       taskId: fields[11] as String,
-      startAt: fields[12] as DateTime?,
-      endAt: fields[13] as DateTime?,
-      weekDayExceptions: (fields[15] as List).cast<WeekDay>(),
-      monthDayExceptions: (fields[16] as List).cast<int>(),
-      timeRangeExceptionIds: (fields[17] as List).cast<String>(),
-      dateRangeExceptionIds: (fields[18] as List).cast<String>(),
-      dateExceptions: (fields[19] as List?)?.cast<DateTime>() ?? [],
+      startDate: fields[12] as DateTime?,
+      endDate: fields[13] as DateTime?,
+      exceptionWeekDays: (fields[15] as List).cast<WeekDay>(),
+      exceptionMonthDays: (fields[16] as List).cast<int>(),
+      exceptionDates: (fields[17] as List).cast<DateTime>(),
       enforceScheduleBounds: fields[14] as bool,
       description: fields[3] as String?,
       updatedAt: fields[4] as DateTime?,
@@ -38,25 +36,21 @@ class ScheduleConstraintsHiveModelAdapter
   @override
   void write(BinaryWriter writer, ScheduleConstraintsHiveModel obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(13)
       ..writeByte(11)
       ..write(obj.taskId)
       ..writeByte(12)
-      ..write(obj.startAt)
+      ..write(obj.startDate)
       ..writeByte(13)
-      ..write(obj.endAt)
+      ..write(obj.endDate)
       ..writeByte(14)
       ..write(obj.enforceScheduleBounds)
       ..writeByte(15)
-      ..write(obj.weekDayExceptions)
+      ..write(obj.exceptionWeekDays)
       ..writeByte(16)
-      ..write(obj.monthDayExceptions)
+      ..write(obj.exceptionMonthDays)
       ..writeByte(17)
-      ..write(obj.timeRangeExceptionIds)
-      ..writeByte(18)
-      ..write(obj.dateRangeExceptionIds)
-      ..writeByte(19)
-      ..write(obj.dateExceptions)
+      ..write(obj.exceptionDates)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)

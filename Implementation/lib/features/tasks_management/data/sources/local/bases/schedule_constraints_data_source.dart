@@ -8,20 +8,20 @@ import 'package:zamaan/data/sources/local/hive_data_source.dart';
 /// operations
 /// and provides additional methods for specific task-related queries.
 abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<Model> {
-  EResultFuture<List<Model>> getBatchSchedulesByDay(DateTime date);
+  EResultFuture<List<Model>> getScheduleByDay(DateTime date);
   EResultFuture<Model?> getByTaskId(String taskId);
 
   // /// Retrieves tasks based on main task IDs and a date range.
   // ///
   // /// [taskIds] - List of main task IDs to filter the tasks.
-  // /// [startAt] - Start date for the date range filter.
+  // /// [startTime] - Start date for the date range filter.
   // /// [dueDate] - End date for the date range filter.
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByTaskIdsAndDateRange({
+  // EResultFuture<List<Model>> getByTaskIdsAndDateRange({
   //   required List<String> taskIds,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   // });
 
@@ -31,7 +31,7 @@ abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByDueDate(
+  // EResultFuture<List<Model>> getByDueDate(
   //   DateTime dueDate,
   // );
 
@@ -41,7 +41,7 @@ abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByTaskId(
+  // EResultFuture<List<Model>> getByTaskId(
   //   String taskId,
   // );
 
@@ -51,7 +51,7 @@ abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByRepetitionType(
+  // EResultFuture<List<Model>> getByRepetitionType(
   //   RepetitionType repetitionType,
   // );
 
@@ -61,18 +61,18 @@ abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchBySpecificTimes(
+  // EResultFuture<List<Model>> getBySpecificTimes(
   //   List<int> specificTimes,
   // );
 
   // /// Retrieves tasks scheduled after a specific start time.
   // ///
-  // /// [startAt] - The start time to filter the tasks.
+  // /// [startTime] - The start time to filter the tasks.
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByStartTime(
-  //   DateTime startAt,
+  // EResultFuture<List<Model>> getByStartTime(
+  //   DateTime startTime,
   // );
 
   // /// Retrieves tasks based on a time unit.
@@ -81,7 +81,7 @@ abstract class ScheduleConstraintsLocalDataSource<Model> extends BaseDataSource<
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model]
   // /// objects.
-  // EResultFuture<List<Model>> getBatchByTimeUnit(
+  // EResultFuture<List<Model>> getByTimeUnit(
   //   IntervalUnit timeUnit,
   // );
 }

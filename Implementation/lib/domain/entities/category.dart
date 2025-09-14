@@ -32,7 +32,7 @@ class CategoryEntity extends BaseEntityAbstraction {
     required this.title,
     required this.colorCode,
     required this.iconCode,
-    super.id,
+    required super.id,
   });
 
   /// The display name of the category

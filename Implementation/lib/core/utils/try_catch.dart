@@ -33,9 +33,9 @@
 /// Example:
 /// ```dart
 /// final result = await tryCatchEither<int>(
-///   action: () async => await fetchData(),
+///   action: () async => await getData(),
 ///   failureType: FailureType.remote,
-///   customMessage: 'Error fetching data',
+///   customMessage: 'Error geting data',
 ///   onFinally: () async => print('Cleanup complete'),
 /// );
 /// result.fold(

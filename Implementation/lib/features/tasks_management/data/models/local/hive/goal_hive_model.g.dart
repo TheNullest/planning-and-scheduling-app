@@ -17,7 +17,7 @@ class GoalHiveModelAdapter extends HiveBaseTypeAdapter<GoalHiveModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GoalHiveModel(
-      id: fields[0] as String?,
+      id: fields[0] as String,
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
       refType: fields[11] as ReferenceType,

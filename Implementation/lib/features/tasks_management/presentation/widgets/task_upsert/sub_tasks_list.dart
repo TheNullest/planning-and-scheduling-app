@@ -15,46 +15,43 @@ class SubTasksListWidget extends StatelessWidget {
     final subTaskManager = context.read<SubTaskVMsManager>();
     return Column(
       children: [
-        Selector<SubTaskVMsManager, bool>(
-          selector: (_, manager) => manager.listUpdated,
-          builder: (_, vm, __) {
-            return Column(
-              children: [
-                Selector<SubTaskVMsManager, bool>(
-                    selector: (_, manager) => manager.isEnabled,
-                    builder: (_, isEnabled, __) {
-                      return ElevatedButton.icon(
-                        icon: const Icon(Icons.add),
-                        label: const Text('Add New SubTask'),
-                        onPressed: isEnabled
-                            ? () async => customShowModalBottomSheetDialog<SubTaskUpsertVM>(
-                                context, subTaskManager.newItem(), const SubTaskUpsertFormWidget())
-                            : null,
-                      );
-                    }),
-                // Spacer
-                12.sizedBoxHeight,
+        Column(
+          children: [
+            Selector<SubTaskVMsManager, bool>(
+                selector: (_, manager) => manager.isEnabled,
+                builder: (_, isEnabled, __) {
+                  return ElevatedButton.icon(
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add New SubTask'),
+                    onPressed: isEnabled
+                        ? () async => customShowModalBottomSheetDialog<SubTaskUpsertVM>(
+                            context, subTaskManager.newItem(), const SubTaskUpsertFormWidget())
+                        : null,
+                  );
+                }),
+            // Spacer
+            12.sizedBoxHeight,
 
-                if (subTaskManager.items.isNotEmpty)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'SubTasks:',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      ...subTaskManager.items.map(
-                        (subTaskVM) => ChangeNotifierProvider<SubTaskUpsertVM>(
-                            create: (_) => subTaskVM,
-                            child: SubTaskDisplayCard(subTaskVM: subTaskVM)),
-                      ),
-                    ],
-                  )
-                else
-                  const SizedBox.shrink(),
-              ],
-            );
-          },
+            Selector<SubTaskVMsManager, bool>(
+              selector: (_, vm) => vm.isListUpdated,
+              builder: (_, __, ___) => subTaskManager.persistedItems.isNotEmpty
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'SubTasks:',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        ...subTaskManager.persistedItems.map(
+                          (subTaskVM) => ChangeNotifierProvider<SubTaskUpsertVM>(
+                              create: (_) => subTaskVM,
+                              child: SubTaskDisplayCard(subTaskVM: subTaskVM)),
+                        ),
+                      ],
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ],
         ),
       ],
     );

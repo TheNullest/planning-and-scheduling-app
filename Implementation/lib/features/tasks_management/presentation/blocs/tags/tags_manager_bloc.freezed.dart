@@ -22,7 +22,7 @@ mixin _$TagsManagerEvent {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$TagsManagerEvent {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$TagsManagerEvent {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,7 +50,7 @@ mixin _$TagsManagerEvent {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,7 +59,7 @@ mixin _$TagsManagerEvent {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,7 +68,7 @@ mixin _$TagsManagerEvent {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,7 +140,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) {
     return started();
   }
@@ -152,7 +152,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) {
     return started?.call();
   }
@@ -164,7 +164,7 @@ class _$StartedImpl implements _Started {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -180,7 +180,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) {
     return started(this);
   }
@@ -192,7 +192,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) {
     return started?.call(this);
   }
@@ -204,7 +204,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -290,7 +290,7 @@ class _$CreateImpl implements _Create {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) {
     return create(entity);
   }
@@ -302,7 +302,7 @@ class _$CreateImpl implements _Create {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) {
     return create?.call(entity);
   }
@@ -314,7 +314,7 @@ class _$CreateImpl implements _Create {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -330,7 +330,7 @@ class _$CreateImpl implements _Create {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) {
     return create(this);
   }
@@ -342,7 +342,7 @@ class _$CreateImpl implements _Create {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) {
     return create?.call(this);
   }
@@ -354,7 +354,7 @@ class _$CreateImpl implements _Create {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -448,7 +448,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) {
     return update(entity);
   }
@@ -460,7 +460,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) {
     return update?.call(entity);
   }
@@ -472,7 +472,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -488,7 +488,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) {
     return update(this);
   }
@@ -500,7 +500,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) {
     return update?.call(this);
   }
@@ -512,7 +512,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -606,7 +606,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) {
     return delete(id);
   }
@@ -618,7 +618,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) {
     return delete?.call(id);
   }
@@ -630,7 +630,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -646,7 +646,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) {
     return delete(this);
   }
@@ -658,7 +658,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) {
     return delete?.call(this);
   }
@@ -670,7 +670,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -693,18 +693,16 @@ abstract class _Delete implements TagsManagerEvent {
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res> {
-  factory _$$FetchAllImplCopyWith(
-          _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
-      __$$FetchAllImplCopyWithImpl<$Res>;
+abstract class _$$GetImplCopyWith<$Res> {
+  factory _$$GetImplCopyWith(_$GetImpl value, $Res Function(_$GetImpl) then) =
+      __$$GetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchAllImplCopyWithImpl<$Res>
-    extends _$TagsManagerEventCopyWithImpl<$Res, _$FetchAllImpl>
-    implements _$$FetchAllImplCopyWith<$Res> {
-  __$$FetchAllImplCopyWithImpl(
-      _$FetchAllImpl _value, $Res Function(_$FetchAllImpl) _then)
+class __$$GetImplCopyWithImpl<$Res>
+    extends _$TagsManagerEventCopyWithImpl<$Res, _$GetImpl>
+    implements _$$GetImplCopyWith<$Res> {
+  __$$GetImplCopyWithImpl(_$GetImpl _value, $Res Function(_$GetImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of TagsManagerEvent
@@ -713,18 +711,18 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl();
+class _$GetImpl implements _Get {
+  const _$GetImpl();
 
   @override
   String toString() {
-    return 'TagsManagerEvent.fetchAll()';
+    return 'TagsManagerEvent.get()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchAllImpl);
+        (other.runtimeType == runtimeType && other is _$GetImpl);
   }
 
   @override
@@ -737,9 +735,9 @@ class _$FetchAllImpl implements _FetchAll {
     required TResult Function(TagEntity entity) create,
     required TResult Function(TagEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function() fetchAll,
+    required TResult Function() get,
   }) {
-    return fetchAll();
+    return get();
   }
 
   @override
@@ -749,9 +747,9 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function(TagEntity entity)? create,
     TResult? Function(TagEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function()? fetchAll,
+    TResult? Function()? get,
   }) {
-    return fetchAll?.call();
+    return get?.call();
   }
 
   @override
@@ -761,11 +759,11 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function(TagEntity entity)? create,
     TResult Function(TagEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function()? fetchAll,
+    TResult Function()? get,
     required TResult orElse(),
   }) {
-    if (fetchAll != null) {
-      return fetchAll();
+    if (get != null) {
+      return get();
     }
     return orElse();
   }
@@ -777,9 +775,9 @@ class _$FetchAllImpl implements _FetchAll {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchAll value) fetchAll,
+    required TResult Function(_Get value) get,
   }) {
-    return fetchAll(this);
+    return get(this);
   }
 
   @override
@@ -789,9 +787,9 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchAll value)? fetchAll,
+    TResult? Function(_Get value)? get,
   }) {
-    return fetchAll?.call(this);
+    return get?.call(this);
   }
 
   @override
@@ -801,18 +799,18 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchAll value)? fetchAll,
+    TResult Function(_Get value)? get,
     required TResult orElse(),
   }) {
-    if (fetchAll != null) {
-      return fetchAll(this);
+    if (get != null) {
+      return get(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchAll implements TagsManagerEvent {
-  const factory _FetchAll() = _$FetchAllImpl;
+abstract class _Get implements TagsManagerEvent {
+  const factory _Get() = _$GetImpl;
 }
 
 /// @nodoc
@@ -825,7 +823,7 @@ mixin _$TagsManagerState {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -836,7 +834,7 @@ mixin _$TagsManagerState {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -847,7 +845,7 @@ mixin _$TagsManagerState {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -859,7 +857,7 @@ mixin _$TagsManagerState {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -870,7 +868,7 @@ mixin _$TagsManagerState {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -881,7 +879,7 @@ mixin _$TagsManagerState {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -955,7 +953,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return initial();
   }
@@ -969,7 +967,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return initial?.call();
   }
@@ -983,7 +981,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1001,7 +999,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return initial(this);
   }
@@ -1015,7 +1013,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return initial?.call(this);
   }
@@ -1029,7 +1027,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1090,7 +1088,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return loading();
   }
@@ -1104,7 +1102,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return loading?.call();
   }
@@ -1118,7 +1116,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1136,7 +1134,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return loading(this);
   }
@@ -1150,7 +1148,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -1164,7 +1162,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1252,7 +1250,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return failure(message);
   }
@@ -1266,7 +1264,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return failure?.call(message);
   }
@@ -1280,7 +1278,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1298,7 +1296,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return failure(this);
   }
@@ -1312,7 +1310,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return failure?.call(this);
   }
@@ -1326,7 +1324,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1422,7 +1420,7 @@ class _$CreatedImpl implements _Created {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return created(cat);
   }
@@ -1436,7 +1434,7 @@ class _$CreatedImpl implements _Created {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return created?.call(cat);
   }
@@ -1450,7 +1448,7 @@ class _$CreatedImpl implements _Created {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -1468,7 +1466,7 @@ class _$CreatedImpl implements _Created {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return created(this);
   }
@@ -1482,7 +1480,7 @@ class _$CreatedImpl implements _Created {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return created?.call(this);
   }
@@ -1496,7 +1494,7 @@ class _$CreatedImpl implements _Created {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -1592,7 +1590,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return updated(cat);
   }
@@ -1606,7 +1604,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return updated?.call(cat);
   }
@@ -1620,7 +1618,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -1638,7 +1636,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return updated(this);
   }
@@ -1652,7 +1650,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return updated?.call(this);
   }
@@ -1666,7 +1664,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -1762,7 +1760,7 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
     return deleted(id);
   }
@@ -1776,7 +1774,7 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
     return deleted?.call(id);
   }
@@ -1790,7 +1788,7 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -1808,7 +1806,7 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
     return deleted(this);
   }
@@ -1822,7 +1820,7 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
     return deleted?.call(this);
   }
@@ -1836,7 +1834,7 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -1859,20 +1857,20 @@ abstract class _Deleted implements TagsManagerState {
 }
 
 /// @nodoc
-abstract class _$$FetchedImplCopyWith<$Res> {
-  factory _$$FetchedImplCopyWith(
-          _$FetchedImpl value, $Res Function(_$FetchedImpl) then) =
-      __$$FetchedImplCopyWithImpl<$Res>;
+abstract class _$$GetedImplCopyWith<$Res> {
+  factory _$$GetedImplCopyWith(
+          _$GetedImpl value, $Res Function(_$GetedImpl) then) =
+      __$$GetedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<TagEntity> goals});
 }
 
 /// @nodoc
-class __$$FetchedImplCopyWithImpl<$Res>
-    extends _$TagsManagerStateCopyWithImpl<$Res, _$FetchedImpl>
-    implements _$$FetchedImplCopyWith<$Res> {
-  __$$FetchedImplCopyWithImpl(
-      _$FetchedImpl _value, $Res Function(_$FetchedImpl) _then)
+class __$$GetedImplCopyWithImpl<$Res>
+    extends _$TagsManagerStateCopyWithImpl<$Res, _$GetedImpl>
+    implements _$$GetedImplCopyWith<$Res> {
+  __$$GetedImplCopyWithImpl(
+      _$GetedImpl _value, $Res Function(_$GetedImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of TagsManagerState
@@ -1882,7 +1880,7 @@ class __$$FetchedImplCopyWithImpl<$Res>
   $Res call({
     Object? goals = null,
   }) {
-    return _then(_$FetchedImpl(
+    return _then(_$GetedImpl(
       null == goals
           ? _value._goals
           : goals // ignore: cast_nullable_to_non_nullable
@@ -1893,8 +1891,8 @@ class __$$FetchedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchedImpl implements _Fetched {
-  const _$FetchedImpl(final List<TagEntity> goals) : _goals = goals;
+class _$GetedImpl implements _Geted {
+  const _$GetedImpl(final List<TagEntity> goals) : _goals = goals;
 
   final List<TagEntity> _goals;
   @override
@@ -1906,14 +1904,14 @@ class _$FetchedImpl implements _Fetched {
 
   @override
   String toString() {
-    return 'TagsManagerState.fetched(goals: $goals)';
+    return 'TagsManagerState.loaded(goals: $goals)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchedImpl &&
+            other is _$GetedImpl &&
             const DeepCollectionEquality().equals(other._goals, _goals));
   }
 
@@ -1926,8 +1924,8 @@ class _$FetchedImpl implements _Fetched {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchedImplCopyWith<_$FetchedImpl> get copyWith =>
-      __$$FetchedImplCopyWithImpl<_$FetchedImpl>(this, _$identity);
+  _$$GetedImplCopyWith<_$GetedImpl> get copyWith =>
+      __$$GetedImplCopyWithImpl<_$GetedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1938,9 +1936,9 @@ class _$FetchedImpl implements _Fetched {
     required TResult Function(TagEntity cat) created,
     required TResult Function(TagEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<TagEntity> goals) fetched,
+    required TResult Function(List<TagEntity> goals) loaded,
   }) {
-    return fetched(goals);
+    return loaded(goals);
   }
 
   @override
@@ -1952,9 +1950,9 @@ class _$FetchedImpl implements _Fetched {
     TResult? Function(TagEntity cat)? created,
     TResult? Function(TagEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<TagEntity> goals)? fetched,
+    TResult? Function(List<TagEntity> goals)? loaded,
   }) {
-    return fetched?.call(goals);
+    return loaded?.call(goals);
   }
 
   @override
@@ -1966,11 +1964,11 @@ class _$FetchedImpl implements _Fetched {
     TResult Function(TagEntity cat)? created,
     TResult Function(TagEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<TagEntity> goals)? fetched,
+    TResult Function(List<TagEntity> goals)? loaded,
     required TResult orElse(),
   }) {
-    if (fetched != null) {
-      return fetched(goals);
+    if (loaded != null) {
+      return loaded(goals);
     }
     return orElse();
   }
@@ -1984,9 +1982,9 @@ class _$FetchedImpl implements _Fetched {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_Fetched value) fetched,
+    required TResult Function(_Geted value) loaded,
   }) {
-    return fetched(this);
+    return loaded(this);
   }
 
   @override
@@ -1998,9 +1996,9 @@ class _$FetchedImpl implements _Fetched {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_Fetched value)? fetched,
+    TResult? Function(_Geted value)? loaded,
   }) {
-    return fetched?.call(this);
+    return loaded?.call(this);
   }
 
   @override
@@ -2012,24 +2010,24 @@ class _$FetchedImpl implements _Fetched {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_Fetched value)? fetched,
+    TResult Function(_Geted value)? loaded,
     required TResult orElse(),
   }) {
-    if (fetched != null) {
-      return fetched(this);
+    if (loaded != null) {
+      return loaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _Fetched implements TagsManagerState {
-  const factory _Fetched(final List<TagEntity> goals) = _$FetchedImpl;
+abstract class _Geted implements TagsManagerState {
+  const factory _Geted(final List<TagEntity> goals) = _$GetedImpl;
 
   List<TagEntity> get goals;
 
   /// Create a copy of TagsManagerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchedImplCopyWith<_$FetchedImpl> get copyWith =>
+  _$$GetedImplCopyWith<_$GetedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

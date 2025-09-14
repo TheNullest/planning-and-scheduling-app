@@ -26,7 +26,7 @@ class _TasksEmptyStates {
   String get noTasks => '$_prefix.no_tasks'.tr();
   String get noCompleted => '$_prefix.no_completed'.tr();
   String get noResults => '$_prefix.no_results'.tr();
-  String get noScheduled => '$_prefix.no_scheduled'.tr();
+  String get noPlanned => '$_prefix.no_planned'.tr();
   String get noOverdue => '$_prefix.no_overdue'.tr();
   String get noCanceled => '$_prefix.no_canceled'.tr();
   String get noPaused => '$_prefix.no_paused'.tr();

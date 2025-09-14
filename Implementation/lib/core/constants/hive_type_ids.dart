@@ -12,9 +12,9 @@ abstract class ClassHiveTypeIds {
   static const int goal = 15;
   static const int customMeasurementUnit = 16;
   static const int scheduleConstraints = 17;
-  static const int scheduledDay = 18;
+  static const int scheduledDayTime = 18;
   static const int scheduledInterval = 19;
-  static const int scheduledInstance = 20;
+  static const int scheduledOccurrence = 20;
   static const int tag = 21;
   static const int taskActivity = 22;
   static const int dateRange = 23;
@@ -33,10 +33,12 @@ abstract class EnumHiveTypeIds {
   static const int priority = 107;
   static const int referenceType = 108;
   static const int repetitionType = 109;
-  static const int schedulerType = 110;
+  static const int scheduleType = 110;
   static const int syncAction = 111;
   static const int taskStatus = 112;
   static const int weekDay = 113;
+  static const int occurrenceStatus = 114;
+  static const int scheduledTimeMode = 115;
 }
 
 abstract class DartClassHiveTypeIds {

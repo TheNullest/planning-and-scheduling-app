@@ -18,14 +18,9 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
         _archived = false,
         _categoryIds = [],
         _fixedTagIds = [],
-        _subTasksManager = SubTaskVMsManager(userId: userId
-            // _goal = goalVM,
-            // _scheduleConstraint = scheduleConstraint,
-            // _scheduledDays = scheduledDays,
-            // _scheduledIntervals = scheduledIntervals
-            ),
+        _subTasksManager = SubTaskVMsManager(userId: userId),
         super(viewModelTitle: 'Task') {
-    // _scheduledDays = [],
+    // _scheduledDayTimes = [],
     // _scheduledIntervals = []
   }
 
@@ -33,7 +28,7 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
     required TaskEntity task,
     required List<SubTaskEntity> subTasks,
     // required ScheduleConstraintVM? scheduleConstraint,
-    // required List<ScheduledDayVM> scheduledDays,
+    // required List<ScheduledDayTimeVM> scheduledDayTimes,
     // required List<ScheduledIntervalVM> scheduledIntervals,
     // GoalVM? goalVM,
   })  : _title = task.title,
@@ -49,7 +44,7 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
           userId: task.userId,
           // _goal = goalVM,
           // _scheduleConstraint = scheduleConstraint,
-          // _scheduledDays = scheduledDays,
+          // _scheduledDayTimes = scheduledDayTimes,
           // _scheduledIntervals = scheduledIntervals
         )
           ..setTaskId(task.id)
@@ -97,14 +92,14 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
   String get title => _title;
   set title(String value) {
     _title = value;
-    processModification(#title, value);
+    processChanges(#title, value);
   }
 
   late Priority _priority;
   Priority get priority => _priority;
   set priority(Priority value) {
     _priority = value;
-    processModification(#priority, value);
+    processChanges(#priority, value);
   }
 
   late List<String> _categoryIds;
@@ -112,48 +107,48 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
 
   void selectCat(String catId) {
     _categoryIds.add(catId);
-    processModification(#categoryIds, _categoryIds);
+    processChanges(#categoryIds, _categoryIds);
   }
 
   void deselectCat(String catId) {
     _categoryIds.remove(catId);
-    processModification(#categoryIds, _categoryIds);
+    processChanges(#categoryIds, _categoryIds);
   }
 
   void clearCategoryIds() {
     _categoryIds.clear();
-    processModification(#categoryIds, _categoryIds);
+    processChanges(#categoryIds, _categoryIds);
   }
 
   late List<String> _fixedTagIds;
   List<String> get fixedTagIds => _fixedTagIds;
   void addFixedTagId(String value) {
     _fixedTagIds.add(value);
-    processModification(#fixedTagIds, _fixedTagIds);
+    processChanges(#fixedTagIds, _fixedTagIds);
   }
 
   void selectTag(String id) {
     _fixedTagIds.add(id);
-    processModification(#fixedTagIds, _fixedTagIds);
+    processChanges(#fixedTagIds, _fixedTagIds);
   }
 
   void deselectTag(String id) {
     _fixedTagIds.remove(id);
-    processModification(#fixedTagIds, _fixedTagIds);
+    processChanges(#fixedTagIds, _fixedTagIds);
   }
 
   late TaskStatus _status;
   TaskStatus get status => _status;
   set status(TaskStatus value) {
     _status = value;
-    processModification(#status, value);
+    processChanges(#status, value);
   }
 
   late int _iconCode;
   int get iconCode => _iconCode;
   set iconCode(int value) {
     _iconCode = value;
-    processModification(#iconCode, value);
+    processChanges(#iconCode, value);
   }
 
   IconData get icon => IconData(_iconCode, fontFamily: 'MaterialIcons');
@@ -165,23 +160,23 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
   Color get color => _color;
   set color(Color value) {
     _color = value;
-    processModification(#colorCode, value.toARGB32());
+    processChanges(#colorCode, value.toARGB32());
   }
 
   late bool _archived;
   bool get archived => _archived;
   set archived(bool value) {
     _archived = value;
-    processModification(#archived, value);
+    processChanges(#archived, value);
   }
 
   @override
   TaskEntity get toEntity => TaskEntity(
-        id: getOriginalValue<String?>(#id),
-        userId: getOriginalValue<String>(#userId),
+        id: getOriginalSignleValue<String?>(#id)!,
+        userId: getOriginalSignleValue<String>(#userId),
         createdAt: getCreatedAt,
         updatedAt: getUpdatedAt,
-        totalSpentTime: getOriginalValue<Duration?>(#totalSpentTime) ?? Duration.zero,
+        totalSpentTime: getOriginalSignleValue<Duration?>(#totalSpentTime) ?? Duration.zero,
         description: description.isNotEmpty ? description : null,
         priority: _priority,
         title: _title,
@@ -194,9 +189,9 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
       );
 
   @override
-  void handleEntityCreated(String id) {
-    _subTasksManager.setTaskId(id);
-    super.handleEntityCreated(id);
+  void onEntityCreated([TaskEntity? entity]) {
+    _subTasksManager.setTaskId(getOriginalSignleValue(#id));
+    super.onEntityCreated();
   }
 
   // Validation
@@ -209,17 +204,17 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
 
   @override
   void resetValues() {
-    _title = getOriginalValue<String>(#title);
+    _title = getOriginalSignleValue<String>(#title);
 
-    _categoryIds = List.from(getOriginalValue<List<String>>(#categoryIds));
-    _fixedTagIds = List.from(getOriginalValue<List<String>>(#fixedTagIds));
+    _categoryIds = getOriginalListValue<String>(#categoryIds);
+    _fixedTagIds = getOriginalListValue<String>(#fixedTagIds);
 
-    _priority = getOriginalValue<Priority>(#priority);
-    _status = getOriginalValue<TaskStatus>(#status);
+    _priority = getOriginalSignleValue<Priority>(#priority);
+    _status = getOriginalSignleValue<TaskStatus>(#status);
 
-    color = Color(getOriginalValue<int>(#colorCode));
-    _iconCode = getOriginalValue<int>(#iconCode);
-    _archived = getOriginalValue<bool>(#archived);
+    color = Color(getOriginalSignleValue<int>(#colorCode));
+    _iconCode = getOriginalSignleValue<int>(#iconCode);
+    _archived = getOriginalSignleValue<bool>(#archived);
 
     super.resetValues();
   }
@@ -231,7 +226,6 @@ class TaskUpsertVM extends BaseViewModel<TaskEntity> {
     if (hasListeners) {
       this
         ..removeListener(notifyListeners)
-        ..canUpsert.removeListener(syncButtonStates)
         ..dispose();
     }
     _subTasksManager.removeListener(notifyListeners);

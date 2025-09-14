@@ -23,7 +23,7 @@ mixin _$GoalsManagerEvent {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,7 +32,7 @@ mixin _$GoalsManagerEvent {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,7 +41,7 @@ mixin _$GoalsManagerEvent {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ mixin _$GoalsManagerEvent {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,7 +60,7 @@ mixin _$GoalsManagerEvent {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,7 +69,7 @@ mixin _$GoalsManagerEvent {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -198,7 +198,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) {
     return started(taskIds, subTaskIds);
   }
@@ -210,7 +210,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) {
     return started?.call(taskIds, subTaskIds);
   }
@@ -222,7 +222,7 @@ class _$StartedImpl implements _Started {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -238,7 +238,7 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) {
     return started(this);
   }
@@ -250,7 +250,7 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) {
     return started?.call(this);
   }
@@ -262,7 +262,7 @@ class _$StartedImpl implements _Started {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -360,7 +360,7 @@ class _$CreateImpl implements _Create {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) {
     return create(entity);
   }
@@ -372,7 +372,7 @@ class _$CreateImpl implements _Create {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) {
     return create?.call(entity);
   }
@@ -384,7 +384,7 @@ class _$CreateImpl implements _Create {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -400,7 +400,7 @@ class _$CreateImpl implements _Create {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) {
     return create(this);
   }
@@ -412,7 +412,7 @@ class _$CreateImpl implements _Create {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) {
     return create?.call(this);
   }
@@ -424,7 +424,7 @@ class _$CreateImpl implements _Create {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) {
     if (create != null) {
@@ -519,7 +519,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) {
     return update(entity);
   }
@@ -531,7 +531,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) {
     return update?.call(entity);
   }
@@ -543,7 +543,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -559,7 +559,7 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) {
     return update(this);
   }
@@ -571,7 +571,7 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) {
     return update?.call(this);
   }
@@ -583,7 +583,7 @@ class _$UpdateImpl implements _Update {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) {
     if (update != null) {
@@ -678,7 +678,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) {
     return delete(id);
   }
@@ -690,7 +690,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) {
     return delete?.call(id);
   }
@@ -702,7 +702,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -718,7 +718,7 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) {
     return delete(this);
   }
@@ -730,7 +730,7 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) {
     return delete?.call(this);
   }
@@ -742,7 +742,7 @@ class _$DeleteImpl implements _Delete {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -765,20 +765,20 @@ abstract class _Delete implements GoalsManagerEvent {
 }
 
 /// @nodoc
-abstract class _$$FetchByRefIdsImplCopyWith<$Res> {
-  factory _$$FetchByRefIdsImplCopyWith(
-          _$FetchByRefIdsImpl value, $Res Function(_$FetchByRefIdsImpl) then) =
-      __$$FetchByRefIdsImplCopyWithImpl<$Res>;
+abstract class _$$GetByRefIdsImplCopyWith<$Res> {
+  factory _$$GetByRefIdsImplCopyWith(
+          _$GetByRefIdsImpl value, $Res Function(_$GetByRefIdsImpl) then) =
+      __$$GetByRefIdsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<String> refIds});
 }
 
 /// @nodoc
-class __$$FetchByRefIdsImplCopyWithImpl<$Res>
-    extends _$GoalsManagerEventCopyWithImpl<$Res, _$FetchByRefIdsImpl>
-    implements _$$FetchByRefIdsImplCopyWith<$Res> {
-  __$$FetchByRefIdsImplCopyWithImpl(
-      _$FetchByRefIdsImpl _value, $Res Function(_$FetchByRefIdsImpl) _then)
+class __$$GetByRefIdsImplCopyWithImpl<$Res>
+    extends _$GoalsManagerEventCopyWithImpl<$Res, _$GetByRefIdsImpl>
+    implements _$$GetByRefIdsImplCopyWith<$Res> {
+  __$$GetByRefIdsImplCopyWithImpl(
+      _$GetByRefIdsImpl _value, $Res Function(_$GetByRefIdsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of GoalsManagerEvent
@@ -788,7 +788,7 @@ class __$$FetchByRefIdsImplCopyWithImpl<$Res>
   $Res call({
     Object? refIds = null,
   }) {
-    return _then(_$FetchByRefIdsImpl(
+    return _then(_$GetByRefIdsImpl(
       null == refIds
           ? _value._refIds
           : refIds // ignore: cast_nullable_to_non_nullable
@@ -799,8 +799,8 @@ class __$$FetchByRefIdsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchByRefIdsImpl implements _FetchByRefIds {
-  const _$FetchByRefIdsImpl(final List<String> refIds) : _refIds = refIds;
+class _$GetByRefIdsImpl implements _GetByRefIds {
+  const _$GetByRefIdsImpl(final List<String> refIds) : _refIds = refIds;
 
   final List<String> _refIds;
   @override
@@ -812,14 +812,14 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
 
   @override
   String toString() {
-    return 'GoalsManagerEvent.fetchByRefIds(refIds: $refIds)';
+    return 'GoalsManagerEvent.getByRefIds(refIds: $refIds)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchByRefIdsImpl &&
+            other is _$GetByRefIdsImpl &&
             const DeepCollectionEquality().equals(other._refIds, _refIds));
   }
 
@@ -832,8 +832,8 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchByRefIdsImplCopyWith<_$FetchByRefIdsImpl> get copyWith =>
-      __$$FetchByRefIdsImplCopyWithImpl<_$FetchByRefIdsImpl>(this, _$identity);
+  _$$GetByRefIdsImplCopyWith<_$GetByRefIdsImpl> get copyWith =>
+      __$$GetByRefIdsImplCopyWithImpl<_$GetByRefIdsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -843,9 +843,9 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     required TResult Function(GoalEntity entity) create,
     required TResult Function(GoalEntity entity) update,
     required TResult Function(String id) delete,
-    required TResult Function(List<String> refIds) fetchByRefIds,
+    required TResult Function(List<String> refIds) getByRefIds,
   }) {
-    return fetchByRefIds(refIds);
+    return getByRefIds(refIds);
   }
 
   @override
@@ -855,9 +855,9 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     TResult? Function(GoalEntity entity)? create,
     TResult? Function(GoalEntity entity)? update,
     TResult? Function(String id)? delete,
-    TResult? Function(List<String> refIds)? fetchByRefIds,
+    TResult? Function(List<String> refIds)? getByRefIds,
   }) {
-    return fetchByRefIds?.call(refIds);
+    return getByRefIds?.call(refIds);
   }
 
   @override
@@ -867,11 +867,11 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     TResult Function(GoalEntity entity)? create,
     TResult Function(GoalEntity entity)? update,
     TResult Function(String id)? delete,
-    TResult Function(List<String> refIds)? fetchByRefIds,
+    TResult Function(List<String> refIds)? getByRefIds,
     required TResult orElse(),
   }) {
-    if (fetchByRefIds != null) {
-      return fetchByRefIds(refIds);
+    if (getByRefIds != null) {
+      return getByRefIds(refIds);
     }
     return orElse();
   }
@@ -883,9 +883,9 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
     required TResult Function(_Delete value) delete,
-    required TResult Function(_FetchByRefIds value) fetchByRefIds,
+    required TResult Function(_GetByRefIds value) getByRefIds,
   }) {
-    return fetchByRefIds(this);
+    return getByRefIds(this);
   }
 
   @override
@@ -895,9 +895,9 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
     TResult? Function(_Delete value)? delete,
-    TResult? Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult? Function(_GetByRefIds value)? getByRefIds,
   }) {
-    return fetchByRefIds?.call(this);
+    return getByRefIds?.call(this);
   }
 
   @override
@@ -907,25 +907,25 @@ class _$FetchByRefIdsImpl implements _FetchByRefIds {
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
     TResult Function(_Delete value)? delete,
-    TResult Function(_FetchByRefIds value)? fetchByRefIds,
+    TResult Function(_GetByRefIds value)? getByRefIds,
     required TResult orElse(),
   }) {
-    if (fetchByRefIds != null) {
-      return fetchByRefIds(this);
+    if (getByRefIds != null) {
+      return getByRefIds(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchByRefIds implements GoalsManagerEvent {
-  const factory _FetchByRefIds(final List<String> refIds) = _$FetchByRefIdsImpl;
+abstract class _GetByRefIds implements GoalsManagerEvent {
+  const factory _GetByRefIds(final List<String> refIds) = _$GetByRefIdsImpl;
 
   List<String> get refIds;
 
   /// Create a copy of GoalsManagerEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchByRefIdsImplCopyWith<_$FetchByRefIdsImpl> get copyWith =>
+  _$$GetByRefIdsImplCopyWith<_$GetByRefIdsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -939,7 +939,7 @@ mixin _$GoalsManagerState {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -950,7 +950,7 @@ mixin _$GoalsManagerState {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -961,7 +961,7 @@ mixin _$GoalsManagerState {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -973,7 +973,7 @@ mixin _$GoalsManagerState {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -984,7 +984,7 @@ mixin _$GoalsManagerState {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -995,7 +995,7 @@ mixin _$GoalsManagerState {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1069,7 +1069,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return initial();
   }
@@ -1083,7 +1083,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return initial?.call();
   }
@@ -1097,7 +1097,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1115,7 +1115,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return initial(this);
   }
@@ -1129,7 +1129,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return initial?.call(this);
   }
@@ -1143,7 +1143,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1204,7 +1204,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return loading();
   }
@@ -1218,7 +1218,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return loading?.call();
   }
@@ -1232,7 +1232,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1250,7 +1250,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return loading(this);
   }
@@ -1264,7 +1264,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return loading?.call(this);
   }
@@ -1278,7 +1278,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1366,7 +1366,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return failure(message);
   }
@@ -1380,7 +1380,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return failure?.call(message);
   }
@@ -1394,7 +1394,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1412,7 +1412,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return failure(this);
   }
@@ -1426,7 +1426,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return failure?.call(this);
   }
@@ -1440,7 +1440,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1536,7 +1536,7 @@ class _$CreatedImpl implements _Created {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return created(cat);
   }
@@ -1550,7 +1550,7 @@ class _$CreatedImpl implements _Created {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return created?.call(cat);
   }
@@ -1564,7 +1564,7 @@ class _$CreatedImpl implements _Created {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -1582,7 +1582,7 @@ class _$CreatedImpl implements _Created {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return created(this);
   }
@@ -1596,7 +1596,7 @@ class _$CreatedImpl implements _Created {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return created?.call(this);
   }
@@ -1610,7 +1610,7 @@ class _$CreatedImpl implements _Created {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -1706,7 +1706,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return updated(cat);
   }
@@ -1720,7 +1720,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return updated?.call(cat);
   }
@@ -1734,7 +1734,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -1752,7 +1752,7 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return updated(this);
   }
@@ -1766,7 +1766,7 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return updated?.call(this);
   }
@@ -1780,7 +1780,7 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -1876,7 +1876,7 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
     return deleted(id);
   }
@@ -1890,7 +1890,7 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
     return deleted?.call(id);
   }
@@ -1904,7 +1904,7 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -1922,7 +1922,7 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
     return deleted(this);
   }
@@ -1936,7 +1936,7 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
     return deleted?.call(this);
   }
@@ -1950,7 +1950,7 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -1973,20 +1973,20 @@ abstract class _Deleted implements GoalsManagerState {
 }
 
 /// @nodoc
-abstract class _$$FetchedByRefIdsImplCopyWith<$Res> {
-  factory _$$FetchedByRefIdsImplCopyWith(_$FetchedByRefIdsImpl value,
-          $Res Function(_$FetchedByRefIdsImpl) then) =
-      __$$FetchedByRefIdsImplCopyWithImpl<$Res>;
+abstract class _$$GetedByRefIdsImplCopyWith<$Res> {
+  factory _$$GetedByRefIdsImplCopyWith(
+          _$GetedByRefIdsImpl value, $Res Function(_$GetedByRefIdsImpl) then) =
+      __$$GetedByRefIdsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<GoalEntity> goals});
 }
 
 /// @nodoc
-class __$$FetchedByRefIdsImplCopyWithImpl<$Res>
-    extends _$GoalsManagerStateCopyWithImpl<$Res, _$FetchedByRefIdsImpl>
-    implements _$$FetchedByRefIdsImplCopyWith<$Res> {
-  __$$FetchedByRefIdsImplCopyWithImpl(
-      _$FetchedByRefIdsImpl _value, $Res Function(_$FetchedByRefIdsImpl) _then)
+class __$$GetedByRefIdsImplCopyWithImpl<$Res>
+    extends _$GoalsManagerStateCopyWithImpl<$Res, _$GetedByRefIdsImpl>
+    implements _$$GetedByRefIdsImplCopyWith<$Res> {
+  __$$GetedByRefIdsImplCopyWithImpl(
+      _$GetedByRefIdsImpl _value, $Res Function(_$GetedByRefIdsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of GoalsManagerState
@@ -1996,7 +1996,7 @@ class __$$FetchedByRefIdsImplCopyWithImpl<$Res>
   $Res call({
     Object? goals = null,
   }) {
-    return _then(_$FetchedByRefIdsImpl(
+    return _then(_$GetedByRefIdsImpl(
       null == goals
           ? _value._goals
           : goals // ignore: cast_nullable_to_non_nullable
@@ -2007,8 +2007,8 @@ class __$$FetchedByRefIdsImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
-  const _$FetchedByRefIdsImpl(final List<GoalEntity> goals) : _goals = goals;
+class _$GetedByRefIdsImpl implements _GetedByRefIds {
+  const _$GetedByRefIdsImpl(final List<GoalEntity> goals) : _goals = goals;
 
   final List<GoalEntity> _goals;
   @override
@@ -2020,14 +2020,14 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
 
   @override
   String toString() {
-    return 'GoalsManagerState.fetchedByRefIds(goals: $goals)';
+    return 'GoalsManagerState.loadedByRefIds(goals: $goals)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchedByRefIdsImpl &&
+            other is _$GetedByRefIdsImpl &&
             const DeepCollectionEquality().equals(other._goals, _goals));
   }
 
@@ -2040,9 +2040,8 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchedByRefIdsImplCopyWith<_$FetchedByRefIdsImpl> get copyWith =>
-      __$$FetchedByRefIdsImplCopyWithImpl<_$FetchedByRefIdsImpl>(
-          this, _$identity);
+  _$$GetedByRefIdsImplCopyWith<_$GetedByRefIdsImpl> get copyWith =>
+      __$$GetedByRefIdsImplCopyWithImpl<_$GetedByRefIdsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2053,9 +2052,9 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     required TResult Function(GoalEntity cat) created,
     required TResult Function(GoalEntity cat) updated,
     required TResult Function(String id) deleted,
-    required TResult Function(List<GoalEntity> goals) fetchedByRefIds,
+    required TResult Function(List<GoalEntity> goals) loadedByRefIds,
   }) {
-    return fetchedByRefIds(goals);
+    return loadedByRefIds(goals);
   }
 
   @override
@@ -2067,9 +2066,9 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult? Function(GoalEntity cat)? created,
     TResult? Function(GoalEntity cat)? updated,
     TResult? Function(String id)? deleted,
-    TResult? Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult? Function(List<GoalEntity> goals)? loadedByRefIds,
   }) {
-    return fetchedByRefIds?.call(goals);
+    return loadedByRefIds?.call(goals);
   }
 
   @override
@@ -2081,11 +2080,11 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult Function(GoalEntity cat)? created,
     TResult Function(GoalEntity cat)? updated,
     TResult Function(String id)? deleted,
-    TResult Function(List<GoalEntity> goals)? fetchedByRefIds,
+    TResult Function(List<GoalEntity> goals)? loadedByRefIds,
     required TResult orElse(),
   }) {
-    if (fetchedByRefIds != null) {
-      return fetchedByRefIds(goals);
+    if (loadedByRefIds != null) {
+      return loadedByRefIds(goals);
     }
     return orElse();
   }
@@ -2099,9 +2098,9 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
     required TResult Function(_Deleted value) deleted,
-    required TResult Function(_FetchedByRefIds value) fetchedByRefIds,
+    required TResult Function(_GetedByRefIds value) loadedByRefIds,
   }) {
-    return fetchedByRefIds(this);
+    return loadedByRefIds(this);
   }
 
   @override
@@ -2113,9 +2112,9 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
     TResult? Function(_Deleted value)? deleted,
-    TResult? Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult? Function(_GetedByRefIds value)? loadedByRefIds,
   }) {
-    return fetchedByRefIds?.call(this);
+    return loadedByRefIds?.call(this);
   }
 
   @override
@@ -2127,25 +2126,25 @@ class _$FetchedByRefIdsImpl implements _FetchedByRefIds {
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
     TResult Function(_Deleted value)? deleted,
-    TResult Function(_FetchedByRefIds value)? fetchedByRefIds,
+    TResult Function(_GetedByRefIds value)? loadedByRefIds,
     required TResult orElse(),
   }) {
-    if (fetchedByRefIds != null) {
-      return fetchedByRefIds(this);
+    if (loadedByRefIds != null) {
+      return loadedByRefIds(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchedByRefIds implements GoalsManagerState {
-  const factory _FetchedByRefIds(final List<GoalEntity> goals) =
-      _$FetchedByRefIdsImpl;
+abstract class _GetedByRefIds implements GoalsManagerState {
+  const factory _GetedByRefIds(final List<GoalEntity> goals) =
+      _$GetedByRefIdsImpl;
 
   List<GoalEntity> get goals;
 
   /// Create a copy of GoalsManagerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchedByRefIdsImplCopyWith<_$FetchedByRefIdsImpl> get copyWith =>
+  _$$GetedByRefIdsImplCopyWith<_$GetedByRefIdsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

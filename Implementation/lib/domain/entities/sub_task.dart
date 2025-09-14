@@ -33,9 +33,8 @@ class SubTaskEntity extends BaseEntityAbstraction {
     required this.title,
     required this.status,
     required this.totalSpentTime,
-    super.description,
+    required super.id, super.description,
     super.updatedAt,
-    super.id,
   });
 
   /// The ID of the parent task this subtask belongs to.

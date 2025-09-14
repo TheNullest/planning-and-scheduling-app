@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:zamaan/domain/entities/goal.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/goal/create_goal_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/goal/delete_goal_use_case.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/goal/fetch_goals_by_refs_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/goal/get_goals_by_refs_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/goal/update_goal_use_case.dart';
 
 part 'goals_manager_event.dart';
@@ -12,12 +12,12 @@ part 'goals_manager_bloc.freezed.dart';
 
 class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
   GoalsManagerBloc({
-    required FetchGoalsByRefsUseCase fetchGoalsByRefsUseCase,
+    required GetGoalsByRefsUseCase getGoalsByRefsUseCase,
     required CreateGoalUseCase createUseCase,
     required UpdateGoalUseCase updateUseCase,
     required DeleteGoalUseCase deleteUseCase,
   })  : _createUseCase = createUseCase,
-        _fetchGoalsByRefsUseCase = fetchGoalsByRefsUseCase,
+        _getGoalsByRefsUseCase = getGoalsByRefsUseCase,
         _updateUseCase = updateUseCase,
         _deleteUseCase = deleteUseCase,
         super(const _Initial()) {
@@ -27,12 +27,12 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
         create: (e) async => _create(e, emit),
         update: (e) async => _update(e, emit),
         delete: (e) async => _delete(e, emit),
-        fetchByRefIds: (e) async => _fetchByRefIds(e, emit),
+        getByRefIds: (e) async => _getByRefIds(e, emit),
       );
     });
   }
 
-  final FetchGoalsByRefsUseCase _fetchGoalsByRefsUseCase;
+  final GetGoalsByRefsUseCase _getGoalsByRefsUseCase;
   final CreateGoalUseCase _createUseCase;
   final UpdateGoalUseCase _updateUseCase;
   final DeleteGoalUseCase _deleteUseCase;
@@ -43,18 +43,18 @@ class GoalsManagerBloc extends Bloc<GoalsManagerEvent, GoalsManagerState> {
   ) async {
     emit(const GoalsManagerState.loading());
     await Future.wait([
-      _fetchByRefIds(_FetchByRefIds(event.taskIds), emit),
+      _getByRefIds(_GetByRefIds(event.taskIds), emit),
     ]);
   }
 
-  Future<void> _fetchByRefIds(
-    _FetchByRefIds e,
+  Future<void> _getByRefIds(
+    _GetByRefIds e,
     Emitter<GoalsManagerState> emit,
   ) async {
     emit(const GoalsManagerState.loading());
-    final result = await _fetchGoalsByRefsUseCase(e.refIds);
+    final result = await _getGoalsByRefsUseCase(e.refIds);
     result.fold((failure) => emit(GoalsManagerState.failure(failure.toString())),
-        (goals) => emit(GoalsManagerState.fetchedByRefIds(goals)));
+        (goals) => emit(GoalsManagerState.loadedByRefIds(goals)));
   }
 
   Future<void> _create(

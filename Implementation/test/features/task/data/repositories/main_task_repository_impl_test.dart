@@ -410,29 +410,29 @@ void main() {
     });
   });
 
-  group('getMainTaskByTaskSchedulerId', () {
+  group('getMainTaskByTaskPlanrId', () {
     test(
-        '[mainTaskRepo.getMainTaskByTaskSchedulerId] must call the [getMainTaskByTaskSchedulerId] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
+        '[mainTaskRepo.getMainTaskByTaskPlanrId] must call the [getMainTaskByTaskPlanrId] of the [dataSource] then returns [Right(List<MainTaskHiveModel>)] data'
         'which will turn into [Right(List<MainTaskEntity>)] data', () async {
-      when(() => mockDataSource.getMainTaskByTaskSchedulerId('1'))
+      when(() => mockDataSource.getMainTaskByTaskPlanrId('1'))
           .thenAnswer((_) async => Right(model));
 
-      final result = await mainTaskRepo.getMainTaskByTaskSchedulerId('1');
+      final result = await mainTaskRepo.getMainTaskByTaskPlanrId('1');
 
       expect(result.isRight(), true);
       expect(result, equals(Right<Failure, MainTaskEntity>(entity)));
-      verify(() => mockDataSource.getMainTaskByTaskSchedulerId('1'))
+      verify(() => mockDataSource.getMainTaskByTaskPlanrId('1'))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });
 
     test(
-        '[mainTaskRepo.getMainTaskByTaskSchedulerId.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
+        '[mainTaskRepo.getMainTaskByTaskPlanrId.failureTest] must return failure when getEntity fails with [Left(HiveFailure("Error"))] data',
         () async {
-      when(() => mockDataSource.getMainTaskByTaskSchedulerId('1'))
+      when(() => mockDataSource.getMainTaskByTaskPlanrId('1'))
           .thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-      final result = await mainTaskRepo.getMainTaskByTaskSchedulerId('1');
+      final result = await mainTaskRepo.getMainTaskByTaskPlanrId('1');
 
       expect(result.isLeft(), true);
       expect(
@@ -441,7 +441,7 @@ void main() {
           const Left<Failure, List<MainTaskEntity>>(HiveFailure('Error')),
         ),
       );
-      verify(() => mockDataSource.getMainTaskByTaskSchedulerId('1'))
+      verify(() => mockDataSource.getMainTaskByTaskPlanrId('1'))
           .called(1); // Verify that get was only called once
       verifyNoMoreInteractions(mockDataSource);
     });

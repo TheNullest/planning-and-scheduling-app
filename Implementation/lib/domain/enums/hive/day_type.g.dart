@@ -17,6 +17,8 @@ class DayTypeAdapter extends HiveBaseTypeAdapter<DayType> {
         return DayType.weekDay;
       case 1:
         return DayType.monthDay;
+      case 2:
+        return DayType.fixedDate;
       default:
         return DayType.weekDay;
     }
@@ -30,6 +32,9 @@ class DayTypeAdapter extends HiveBaseTypeAdapter<DayType> {
         break;
       case DayType.monthDay:
         writer.writeByte(1);
+        break;
+      case DayType.fixedDate:
+        writer.writeByte(2);
         break;
     }
   }

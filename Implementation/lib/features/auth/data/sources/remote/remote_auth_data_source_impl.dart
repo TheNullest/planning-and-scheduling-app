@@ -57,7 +57,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
 
   /// Method to get the current user
   ///
-  /// This method fetches the current user's data from the 'profiles' table.
+  /// This method getes the current user's data from the 'profiles' table.
   /// If the user is not signed in, it throws a RemoteException.
   ///
   /// - Returns: A `ResultFuture` containing the `RemoteUserModel` or an error.
@@ -65,7 +65,7 @@ class RemoteAuthDataSourceImpl extends RemoteAuthDataSource {
   EResultFuture<UserSupabaseModel> getCurrentUser() async {
     try {
       if (currentUserSession != null) {
-        // Fetch user data from the 'profiles' table
+        // Get user data from the 'profiles' table
         final userData = await _supabaseClient
             .from('profiles')
             .select()

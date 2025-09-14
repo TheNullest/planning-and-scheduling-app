@@ -1,16 +1,16 @@
-import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/date_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/entities/schedule_constraints.dart';
-import 'package:zamaan/domain/entities/scheduled_day.dart';
-import 'package:zamaan/domain/entities/scheduled_instance.dart';
+import 'package:zamaan/domain/entities/scheduled_day_time.dart';
 import 'package:zamaan/domain/entities/scheduled_interval.dart';
+import 'package:zamaan/domain/entities/scheduled_occurrence.dart';
 
 class GenerateInstanceParams {
   GenerateInstanceParams({
     required this.scheduleConstraint,
     required this.days,
     required this.intervals,
-    required this.scheduledInstances,
+    required this.scheduledOccurrences,
     required this.dayTimeRanges,
     required this.intervalTimeRanges,
     required this.timeExceptionRanges,
@@ -21,13 +21,13 @@ class GenerateInstanceParams {
   final ScheduleConstraintsEntity scheduleConstraint;
 
   /// Contains day-based scheduled events.
-  final List<ScheduledDayEntity> days;
+  final List<ScheduledDayTimeEntity> days;
 
   /// Contains interval-based scheduled events.
   final List<ScheduledIntervalEntity> intervals;
 
-  /// Pre-existing scheduled instances.
-  final List<ScheduledInstanceEntity> scheduledInstances;
+  /// Pre-existing scheduled occurrences.
+  final List<ScheduledOccurrenceEntity> scheduledOccurrences;
 
   /// Time ranges for day-based scheduling.
   final List<TimeRangeEntity> dayTimeRanges;

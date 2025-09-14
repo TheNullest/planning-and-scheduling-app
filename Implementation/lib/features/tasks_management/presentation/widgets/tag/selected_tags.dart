@@ -5,6 +5,7 @@ import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tags/tags_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/tag/tag_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tag_chip.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/tag/tags_chip_list.dart';
@@ -23,9 +24,9 @@ class SelectedTagsWidget extends StatelessWidget {
         BlocListener<TagsManagerBloc, TagsManagerState>(
           listenWhen: (pervious, current) => current != pervious,
           listener: (context, state) => state.maybeWhen(
-              fetched: (tags) => tagVMsManager
+              loaded: (tags) => tagVMsManager
                 ..initItems(tags)
-                ..initSelectedItems(selectedIds),
+                ..initSelectedItems(itemIds: selectedIds),
               created: (cat) {
                 tagVMsManager.addNewPersistedItem(cat);
                 Navigator.pop(context);
@@ -42,14 +43,14 @@ class SelectedTagsWidget extends StatelessWidget {
         )
       ],
       child: SingleChildScrollView(
-        child: Selector<TagVmsManager, bool>(
-            selector: (_, vmsTag) => vmsTag.listUpdated,
-            builder: (_, __, ___) {
+        child: Selector<TagVmsManager, List<TagUpsertVM>>(
+            selector: (_, vmsTag) => vmsTag.selectedItems,
+            builder: (_, selectedTags, ___) {
               return Column(
                 children: [
                   Wrap(
                     children: [
-                      ...tagVMsManager.selectedItems.map(
+                      ...selectedTags.map(
                         (tag) => TagChipWidget(
                           tag: tag,
                         ),

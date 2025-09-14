@@ -608,7 +608,7 @@
 //     });
 
 //     test(
-//         '[mainTaskDataSource.getMainTaskByTaskSchedulerId] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
+//         '[mainTaskDataSource.getMainTaskByTaskPlanrId] should delete from the box all the entities whose [ID] it has received and returns [Right(List<MainTaskHiveModel>)] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<MainTaskHiveModel>(
@@ -617,7 +617,7 @@
 //         ),
 //       ).thenAnswer((_) async => Right(model));
 
-//       final result = await dataSource.getMainTaskByTaskSchedulerId('1');
+//       final result = await dataSource.getMainTaskByTaskPlanrId('1');
 
 //       expect(result.isRight(), true);
 //       expect(result, equals(Right<Failure, MainTaskHiveModel>(model)));
@@ -631,7 +631,7 @@
 //     });
 
 //     test(
-//         '[mainTaskDataSource.getMainTaskByTaskSchedulerId.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
+//         '[mainTaskDataSource.getMainTaskByTaskPlanrId.failureTest] must return failure when delete fails with [Left(HiveFailure("Error"))] data',
 //         () async {
 //       when(
 //         () => mockHiveInit.operator<MainTaskHiveModel>(
@@ -640,7 +640,7 @@
 //         ),
 //       ).thenAnswer((_) async => const Left(HiveFailure('Error')));
 
-//       final result = await dataSource.getMainTaskByTaskSchedulerId('1');
+//       final result = await dataSource.getMainTaskByTaskPlanrId('1');
 
 //       expect(result.isLeft(), true);
 //       expect(

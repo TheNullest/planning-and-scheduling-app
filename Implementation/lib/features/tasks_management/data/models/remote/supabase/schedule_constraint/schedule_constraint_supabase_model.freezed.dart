@@ -28,22 +28,18 @@ mixin _$ScheduleConstraintsSupabaseModel {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'date_range_exception_ids')
-  List<String> get dateRangeExceptionIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'time_range_exception_ids')
-  List<String> get timeRangeExceptionIds => throw _privateConstructorUsedError;
   @JsonKey(name: 'date_exceptions')
-  List<DateTime> get dateExceptions => throw _privateConstructorUsedError;
+  List<DateTime> get exceptionDates => throw _privateConstructorUsedError;
   @JsonKey(name: 'week_day_exceptions')
-  List<String> get weekDayExceptions => throw _privateConstructorUsedError;
+  List<String> get exceptionWeekDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'month_day_exceptions')
-  List<int> get monthDayExceptions => throw _privateConstructorUsedError;
+  List<int> get exceptionMonthDays => throw _privateConstructorUsedError;
   @JsonKey(name: 'enforce_schedule_bounds')
   bool get enforceScheduleBounds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'start_at')
-  DateTime? get startAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'end_at')
-  DateTime? get endAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'start_date')
+  DateTime? get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_date')
+  DateTime? get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -71,16 +67,12 @@ abstract class $ScheduleConstraintsSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'task_id') String taskId,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'date_range_exception_ids')
-      List<String> dateRangeExceptionIds,
-      @JsonKey(name: 'time_range_exception_ids')
-      List<String> timeRangeExceptionIds,
-      @JsonKey(name: 'date_exceptions') List<DateTime> dateExceptions,
-      @JsonKey(name: 'week_day_exceptions') List<String> weekDayExceptions,
-      @JsonKey(name: 'month_day_exceptions') List<int> monthDayExceptions,
+      @JsonKey(name: 'date_exceptions') List<DateTime> exceptionDates,
+      @JsonKey(name: 'week_day_exceptions') List<String> exceptionWeekDays,
+      @JsonKey(name: 'month_day_exceptions') List<int> exceptionMonthDays,
       @JsonKey(name: 'enforce_schedule_bounds') bool enforceScheduleBounds,
-      @JsonKey(name: 'start_at') DateTime? startAt,
-      @JsonKey(name: 'end_at') DateTime? endAt,
+      @JsonKey(name: 'start_date') DateTime? startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
 }
@@ -105,14 +97,12 @@ class _$ScheduleConstraintsSupabaseModelCopyWithImpl<$Res,
     Object? taskId = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? dateRangeExceptionIds = null,
-    Object? timeRangeExceptionIds = null,
-    Object? dateExceptions = null,
-    Object? weekDayExceptions = null,
-    Object? monthDayExceptions = null,
+    Object? exceptionDates = null,
+    Object? exceptionWeekDays = null,
+    Object? exceptionMonthDays = null,
     Object? enforceScheduleBounds = null,
-    Object? startAt = freezed,
-    Object? endAt = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? updatedAt = freezed,
     Object? description = freezed,
   }) {
@@ -133,37 +123,29 @@ class _$ScheduleConstraintsSupabaseModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateRangeExceptionIds: null == dateRangeExceptionIds
-          ? _value.dateRangeExceptionIds
-          : dateRangeExceptionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      timeRangeExceptionIds: null == timeRangeExceptionIds
-          ? _value.timeRangeExceptionIds
-          : timeRangeExceptionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      dateExceptions: null == dateExceptions
-          ? _value.dateExceptions
-          : dateExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionDates: null == exceptionDates
+          ? _value.exceptionDates
+          : exceptionDates // ignore: cast_nullable_to_non_nullable
               as List<DateTime>,
-      weekDayExceptions: null == weekDayExceptions
-          ? _value.weekDayExceptions
-          : weekDayExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionWeekDays: null == exceptionWeekDays
+          ? _value.exceptionWeekDays
+          : exceptionWeekDays // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      monthDayExceptions: null == monthDayExceptions
-          ? _value.monthDayExceptions
-          : monthDayExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionMonthDays: null == exceptionMonthDays
+          ? _value.exceptionMonthDays
+          : exceptionMonthDays // ignore: cast_nullable_to_non_nullable
               as List<int>,
       enforceScheduleBounds: null == enforceScheduleBounds
           ? _value.enforceScheduleBounds
           : enforceScheduleBounds // ignore: cast_nullable_to_non_nullable
               as bool,
-      startAt: freezed == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endAt: freezed == endAt
-          ? _value.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -191,16 +173,12 @@ abstract class _$$ScheduleDefinitionSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'task_id') String taskId,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'date_range_exception_ids')
-      List<String> dateRangeExceptionIds,
-      @JsonKey(name: 'time_range_exception_ids')
-      List<String> timeRangeExceptionIds,
-      @JsonKey(name: 'date_exceptions') List<DateTime> dateExceptions,
-      @JsonKey(name: 'week_day_exceptions') List<String> weekDayExceptions,
-      @JsonKey(name: 'month_day_exceptions') List<int> monthDayExceptions,
+      @JsonKey(name: 'date_exceptions') List<DateTime> exceptionDates,
+      @JsonKey(name: 'week_day_exceptions') List<String> exceptionWeekDays,
+      @JsonKey(name: 'month_day_exceptions') List<int> exceptionMonthDays,
       @JsonKey(name: 'enforce_schedule_bounds') bool enforceScheduleBounds,
-      @JsonKey(name: 'start_at') DateTime? startAt,
-      @JsonKey(name: 'end_at') DateTime? endAt,
+      @JsonKey(name: 'start_date') DateTime? startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       String? description});
 }
@@ -224,14 +202,12 @@ class __$$ScheduleDefinitionSupabaseModelImplCopyWithImpl<$Res>
     Object? taskId = null,
     Object? userId = null,
     Object? createdAt = null,
-    Object? dateRangeExceptionIds = null,
-    Object? timeRangeExceptionIds = null,
-    Object? dateExceptions = null,
-    Object? weekDayExceptions = null,
-    Object? monthDayExceptions = null,
+    Object? exceptionDates = null,
+    Object? exceptionWeekDays = null,
+    Object? exceptionMonthDays = null,
     Object? enforceScheduleBounds = null,
-    Object? startAt = freezed,
-    Object? endAt = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? updatedAt = freezed,
     Object? description = freezed,
   }) {
@@ -252,37 +228,29 @@ class __$$ScheduleDefinitionSupabaseModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dateRangeExceptionIds: null == dateRangeExceptionIds
-          ? _value._dateRangeExceptionIds
-          : dateRangeExceptionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      timeRangeExceptionIds: null == timeRangeExceptionIds
-          ? _value._timeRangeExceptionIds
-          : timeRangeExceptionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      dateExceptions: null == dateExceptions
-          ? _value._dateExceptions
-          : dateExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionDates: null == exceptionDates
+          ? _value._exceptionDates
+          : exceptionDates // ignore: cast_nullable_to_non_nullable
               as List<DateTime>,
-      weekDayExceptions: null == weekDayExceptions
-          ? _value._weekDayExceptions
-          : weekDayExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionWeekDays: null == exceptionWeekDays
+          ? _value._exceptionWeekDays
+          : exceptionWeekDays // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      monthDayExceptions: null == monthDayExceptions
-          ? _value._monthDayExceptions
-          : monthDayExceptions // ignore: cast_nullable_to_non_nullable
+      exceptionMonthDays: null == exceptionMonthDays
+          ? _value._exceptionMonthDays
+          : exceptionMonthDays // ignore: cast_nullable_to_non_nullable
               as List<int>,
       enforceScheduleBounds: null == enforceScheduleBounds
           ? _value.enforceScheduleBounds
           : enforceScheduleBounds // ignore: cast_nullable_to_non_nullable
               as bool,
-      startAt: freezed == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      endAt: freezed == endAt
-          ? _value.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -305,27 +273,21 @@ class _$ScheduleDefinitionSupabaseModelImpl
       @JsonKey(name: 'task_id') required this.taskId,
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'date_range_exception_ids')
-      required final List<String> dateRangeExceptionIds,
-      @JsonKey(name: 'time_range_exception_ids')
-      required final List<String> timeRangeExceptionIds,
       @JsonKey(name: 'date_exceptions')
-      required final List<DateTime> dateExceptions,
+      required final List<DateTime> exceptionDates,
       @JsonKey(name: 'week_day_exceptions')
-      required final List<String> weekDayExceptions,
+      required final List<String> exceptionWeekDays,
       @JsonKey(name: 'month_day_exceptions')
-      required final List<int> monthDayExceptions,
+      required final List<int> exceptionMonthDays,
       @JsonKey(name: 'enforce_schedule_bounds')
       required this.enforceScheduleBounds,
-      @JsonKey(name: 'start_at') this.startAt,
-      @JsonKey(name: 'end_at') this.endAt,
+      @JsonKey(name: 'start_date') this.startDate,
+      @JsonKey(name: 'end_date') this.endDate,
       @JsonKey(name: 'updated_at') this.updatedAt,
       this.description})
-      : _dateRangeExceptionIds = dateRangeExceptionIds,
-        _timeRangeExceptionIds = timeRangeExceptionIds,
-        _dateExceptions = dateExceptions,
-        _weekDayExceptions = weekDayExceptions,
-        _monthDayExceptions = monthDayExceptions;
+      : _exceptionDates = exceptionDates,
+        _exceptionWeekDays = exceptionWeekDays,
+        _exceptionMonthDays = exceptionMonthDays;
 
   factory _$ScheduleDefinitionSupabaseModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -342,64 +304,44 @@ class _$ScheduleDefinitionSupabaseModelImpl
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
-  final List<String> _dateRangeExceptionIds;
-  @override
-  @JsonKey(name: 'date_range_exception_ids')
-  List<String> get dateRangeExceptionIds {
-    if (_dateRangeExceptionIds is EqualUnmodifiableListView)
-      return _dateRangeExceptionIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dateRangeExceptionIds);
-  }
-
-  final List<String> _timeRangeExceptionIds;
-  @override
-  @JsonKey(name: 'time_range_exception_ids')
-  List<String> get timeRangeExceptionIds {
-    if (_timeRangeExceptionIds is EqualUnmodifiableListView)
-      return _timeRangeExceptionIds;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_timeRangeExceptionIds);
-  }
-
-  final List<DateTime> _dateExceptions;
+  final List<DateTime> _exceptionDates;
   @override
   @JsonKey(name: 'date_exceptions')
-  List<DateTime> get dateExceptions {
-    if (_dateExceptions is EqualUnmodifiableListView) return _dateExceptions;
+  List<DateTime> get exceptionDates {
+    if (_exceptionDates is EqualUnmodifiableListView) return _exceptionDates;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dateExceptions);
+    return EqualUnmodifiableListView(_exceptionDates);
   }
 
-  final List<String> _weekDayExceptions;
+  final List<String> _exceptionWeekDays;
   @override
   @JsonKey(name: 'week_day_exceptions')
-  List<String> get weekDayExceptions {
-    if (_weekDayExceptions is EqualUnmodifiableListView)
-      return _weekDayExceptions;
+  List<String> get exceptionWeekDays {
+    if (_exceptionWeekDays is EqualUnmodifiableListView)
+      return _exceptionWeekDays;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_weekDayExceptions);
+    return EqualUnmodifiableListView(_exceptionWeekDays);
   }
 
-  final List<int> _monthDayExceptions;
+  final List<int> _exceptionMonthDays;
   @override
   @JsonKey(name: 'month_day_exceptions')
-  List<int> get monthDayExceptions {
-    if (_monthDayExceptions is EqualUnmodifiableListView)
-      return _monthDayExceptions;
+  List<int> get exceptionMonthDays {
+    if (_exceptionMonthDays is EqualUnmodifiableListView)
+      return _exceptionMonthDays;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_monthDayExceptions);
+    return EqualUnmodifiableListView(_exceptionMonthDays);
   }
 
   @override
   @JsonKey(name: 'enforce_schedule_bounds')
   final bool enforceScheduleBounds;
   @override
-  @JsonKey(name: 'start_at')
-  final DateTime? startAt;
+  @JsonKey(name: 'start_date')
+  final DateTime? startDate;
   @override
-  @JsonKey(name: 'end_at')
-  final DateTime? endAt;
+  @JsonKey(name: 'end_date')
+  final DateTime? endDate;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
@@ -408,7 +350,7 @@ class _$ScheduleDefinitionSupabaseModelImpl
 
   @override
   String toString() {
-    return 'ScheduleConstraintsSupabaseModel(id: $id, taskId: $taskId, userId: $userId, createdAt: $createdAt, dateRangeExceptionIds: $dateRangeExceptionIds, timeRangeExceptionIds: $timeRangeExceptionIds, dateExceptions: $dateExceptions, weekDayExceptions: $weekDayExceptions, monthDayExceptions: $monthDayExceptions, enforceScheduleBounds: $enforceScheduleBounds, startAt: $startAt, endAt: $endAt, updatedAt: $updatedAt, description: $description)';
+    return 'ScheduleConstraintsSupabaseModel(id: $id, taskId: $taskId, userId: $userId, createdAt: $createdAt, exceptionDates: $exceptionDates, exceptionWeekDays: $exceptionWeekDays, exceptionMonthDays: $exceptionMonthDays, enforceScheduleBounds: $enforceScheduleBounds, startDate: $startDate, endDate: $endDate, updatedAt: $updatedAt, description: $description)';
   }
 
   @override
@@ -422,19 +364,16 @@ class _$ScheduleDefinitionSupabaseModelImpl
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             const DeepCollectionEquality()
-                .equals(other._dateRangeExceptionIds, _dateRangeExceptionIds) &&
+                .equals(other._exceptionDates, _exceptionDates) &&
             const DeepCollectionEquality()
-                .equals(other._timeRangeExceptionIds, _timeRangeExceptionIds) &&
+                .equals(other._exceptionWeekDays, _exceptionWeekDays) &&
             const DeepCollectionEquality()
-                .equals(other._dateExceptions, _dateExceptions) &&
-            const DeepCollectionEquality()
-                .equals(other._weekDayExceptions, _weekDayExceptions) &&
-            const DeepCollectionEquality()
-                .equals(other._monthDayExceptions, _monthDayExceptions) &&
+                .equals(other._exceptionMonthDays, _exceptionMonthDays) &&
             (identical(other.enforceScheduleBounds, enforceScheduleBounds) ||
                 other.enforceScheduleBounds == enforceScheduleBounds) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
             (identical(other.description, description) ||
@@ -449,14 +388,12 @@ class _$ScheduleDefinitionSupabaseModelImpl
       taskId,
       userId,
       createdAt,
-      const DeepCollectionEquality().hash(_dateRangeExceptionIds),
-      const DeepCollectionEquality().hash(_timeRangeExceptionIds),
-      const DeepCollectionEquality().hash(_dateExceptions),
-      const DeepCollectionEquality().hash(_weekDayExceptions),
-      const DeepCollectionEquality().hash(_monthDayExceptions),
+      const DeepCollectionEquality().hash(_exceptionDates),
+      const DeepCollectionEquality().hash(_exceptionWeekDays),
+      const DeepCollectionEquality().hash(_exceptionMonthDays),
       enforceScheduleBounds,
-      startAt,
-      endAt,
+      startDate,
+      endDate,
       updatedAt,
       description);
 
@@ -485,20 +422,16 @@ abstract class _ScheduleDefinitionSupabaseModel
       @JsonKey(name: 'task_id') required final String taskId,
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'date_range_exception_ids')
-      required final List<String> dateRangeExceptionIds,
-      @JsonKey(name: 'time_range_exception_ids')
-      required final List<String> timeRangeExceptionIds,
       @JsonKey(name: 'date_exceptions')
-      required final List<DateTime> dateExceptions,
+      required final List<DateTime> exceptionDates,
       @JsonKey(name: 'week_day_exceptions')
-      required final List<String> weekDayExceptions,
+      required final List<String> exceptionWeekDays,
       @JsonKey(name: 'month_day_exceptions')
-      required final List<int> monthDayExceptions,
+      required final List<int> exceptionMonthDays,
       @JsonKey(name: 'enforce_schedule_bounds')
       required final bool enforceScheduleBounds,
-      @JsonKey(name: 'start_at') final DateTime? startAt,
-      @JsonKey(name: 'end_at') final DateTime? endAt,
+      @JsonKey(name: 'start_date') final DateTime? startDate,
+      @JsonKey(name: 'end_date') final DateTime? endDate,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       final String? description}) = _$ScheduleDefinitionSupabaseModelImpl;
 
@@ -517,29 +450,23 @@ abstract class _ScheduleDefinitionSupabaseModel
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  @JsonKey(name: 'date_range_exception_ids')
-  List<String> get dateRangeExceptionIds;
-  @override
-  @JsonKey(name: 'time_range_exception_ids')
-  List<String> get timeRangeExceptionIds;
-  @override
   @JsonKey(name: 'date_exceptions')
-  List<DateTime> get dateExceptions;
+  List<DateTime> get exceptionDates;
   @override
   @JsonKey(name: 'week_day_exceptions')
-  List<String> get weekDayExceptions;
+  List<String> get exceptionWeekDays;
   @override
   @JsonKey(name: 'month_day_exceptions')
-  List<int> get monthDayExceptions;
+  List<int> get exceptionMonthDays;
   @override
   @JsonKey(name: 'enforce_schedule_bounds')
   bool get enforceScheduleBounds;
   @override
-  @JsonKey(name: 'start_at')
-  DateTime? get startAt;
+  @JsonKey(name: 'start_date')
+  DateTime? get startDate;
   @override
-  @JsonKey(name: 'end_at')
-  DateTime? get endAt;
+  @JsonKey(name: 'end_date')
+  DateTime? get endDate;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

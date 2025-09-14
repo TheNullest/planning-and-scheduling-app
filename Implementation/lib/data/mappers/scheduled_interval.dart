@@ -23,7 +23,6 @@ class ScheduledIntervalDataMapperImpl extends ScheduledIntervalDataMapper {
         intervalValue: model.intervalValue,
         scheduledTimeIds: List.from(model.scheduledTimeIds),
         repeatCount: model.repeatCount,
-        enforceScheduleBounds: model.enforceScheduleBounds,
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -42,14 +41,13 @@ class ScheduledIntervalDataMapperImpl extends ScheduledIntervalDataMapper {
         createdAt: model.createdAt,
         updatedAt: model.updatedAt,
         description: model.description,
-        startDate: model.startAt,
+        startDate: model.startTime,
         consecutiveOccurrences: model.consecutiveOccurrences,
         taskId: model.taskId,
         intervalUnit: IntervalUnit.fromName(model.intervalUnit),
         intervalValue: model.intervalValue,
         scheduledTimeIds: List.from(model.scheduledTimeIds),
         repeatCount: model.repeatCount,
-        enforceScheduleBounds: model.enforceScheduleBounds,
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
@@ -72,7 +70,6 @@ class ScheduledIntervalDataMapperImpl extends ScheduledIntervalDataMapper {
         intervalValue: entity.intervalValue,
         scheduledTimeIds: List.from(entity.scheduledTimeIds),
         repeatCount: entity.repeatCount,
-        enforceScheduleBounds: entity.enforceScheduleBounds,
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

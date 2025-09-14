@@ -7,7 +7,7 @@
 //     required this.title,
 //     required this.isDouble,
 //     required this.icon,
-//     super.id,
+//     required super.id,
 //     super.description,
 //     super.createdAt,
 //     super.updatedAt,

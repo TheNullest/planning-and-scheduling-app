@@ -19,7 +19,7 @@ class UserHiveModel extends UserEntity {
     required super.emailAddress,
     required super.birthDate,
     required super.avatarPath,
-    super.id = '',
+    required super.id,
     super.userId = '',
   });
 

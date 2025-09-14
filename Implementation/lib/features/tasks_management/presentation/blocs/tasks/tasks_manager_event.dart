@@ -5,7 +5,7 @@ class TasksManagerEvent with _$TasksManagerEvent {
   const factory TasksManagerEvent.started() = _Started;
 
   // Tasks
-  const factory TasksManagerEvent.fetchActiveTasks() = _FetchActiveTasks;
+  const factory TasksManagerEvent.getActiveTasks() = _GetActiveTasks;
 
   const factory TasksManagerEvent.createTask({
     required TaskEntity newTask,
@@ -24,7 +24,7 @@ class TasksManagerEvent with _$TasksManagerEvent {
     required SubTaskEntity newSubTask,
   }) = _CreateSubTask;
 
-  const factory TasksManagerEvent.deleteBatchSubTasksByTaskId({
+  const factory TasksManagerEvent.deleteSubTasksByTaskId({
     required String taskId,
   }) = _DeleteBatchSubTasksByTaskId;
 

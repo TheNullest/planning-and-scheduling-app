@@ -9,7 +9,7 @@ void _tagsManagerBloc() {
     ..registerFactory<SupabaseDataSource<TagSupabaseModel, TagDataMapper>>(
       () => TagSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.tags,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -28,14 +28,14 @@ void _tagsManagerBloc() {
     // UseCases
     ..registerFactory(() => CreateTagUseCase(serviceLocator()))
     ..registerFactory(() => DeleteTagUseCase(serviceLocator()))
-    ..registerFactory(() => FetchAllTagsUseCase(serviceLocator()))
+    ..registerFactory(() => GetTagsUseCase(serviceLocator()))
     ..registerFactory(() => UpdateTagUseCase(serviceLocator()))
 
     // ManagerBloc
     ..registerLazySingleton<TagsManagerBloc>(
       () => TagsManagerBloc(
         createUseCase: serviceLocator(),
-        fetchAllUseCase: serviceLocator(),
+        getUseCase: serviceLocator(),
         deleteUseCase: serviceLocator(),
         updateUseCase: serviceLocator(),
       ),

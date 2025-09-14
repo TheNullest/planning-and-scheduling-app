@@ -15,44 +15,44 @@ class ScheduleConstraintsSupabaseDataSourceImpl
   // String get selectQuery => '*, specific_times(*)';
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByDueDate(
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByDueDate(
   //   DateTime duedate,
   // ) async =>
-  //     getAllWithinDateRange(fromDate: DateTime.utc(1900), toDate: duedate, fieldName: 'due_date');
+  //     getWithinDateRange(fromDate: DateTime.utc(1900), toDate: duedate, fieldName: 'due_date');
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByRepetitionType(
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByRepetitionType(
   //   RepetitionType repetitionType,
   // ) async =>
-  //     getAllByValues(
+  //     getByValues(
   //       [repetitionType.name],
   //       fieldName: 'repetition_type',
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchBySpecificTimes(
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBySpecificTimes(
   //   List<int> specificTimes,
   // ) async =>
   //     const Right([]);
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByStartTime(
-  //   DateTime startAt,
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByStartTime(
+  //   DateTime startTime,
   // ) async =>
-  //     getAllWithinDateRange(
-  //       fromDate: startAt,
-  //       toDate: startAt.add(const Duration(days: 1)),
-  //       fieldName: 'will_start_at',
+  //     getWithinDateRange(
+  //       fromDate: startTime,
+  //       toDate: startTime.add(const Duration(days: 1)),
+  //       fieldName: 'will_start_time',
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByTaskId(String taskId) async =>
-  //     getAllByValues([taskId], fieldName: 'task_id');
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByTaskId(String taskId) async =>
+  //     getByValues([taskId], fieldName: 'task_id');
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByTaskIdsAndDateRange({
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByTaskIdsAndDateRange({
   //   required List<String> taskIds,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   // }) async =>
   //     tryCatchEither(
@@ -60,7 +60,7 @@ class ScheduleConstraintsSupabaseDataSourceImpl
   //         final result = await client
   //             .from('schedule_constraints')
   //             .select()
-  //             .gte('will_start_at', startAt!.toIso8601String())
+  //             .gte('will_start_time', startTime!.toIso8601String())
   //             .lte('due_date', dueDate!.toIso8601String())
   //             .or(conditionToString(conditions: taskIds, join: ',', fieldName: 'task_id'));
   //         return Right(_dataMapperfromJsonList(result));
@@ -69,8 +69,8 @@ class ScheduleConstraintsSupabaseDataSourceImpl
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getBatchByTimeUnit(
+  // EResultFuture<List<ScheduleDefinitionSupabaseModel>> getByTimeUnit(
   //   IntervalUnit timeUnit,
   // ) async =>
-  //     getAllByValues([timeUnit.name], fieldName: 'time_unit');
+  //     getByValues([timeUnit.name], fieldName: 'time_unit');
 }

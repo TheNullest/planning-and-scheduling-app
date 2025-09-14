@@ -50,6 +50,8 @@ class HiveBoxRunnerImpl<HiveModel> extends HiveBoxRunner<HiveModel> {
 
       final box = hive.box<HiveModel>(boxName);
       final result = await job(box);
+      // Ensure changes are persisted for write operations
+      await box.flush();
       return Right(result);
     } on Exception catch (e, stackTrace) {
       return failureTypeDetectorLeft<T>(e: e, stackTrace: stackTrace);

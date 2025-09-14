@@ -20,24 +20,10 @@ class UpsertViewStates with ChangeNotifier {
   // New/Existing Mode Flag
   //------------------------
 
-  late bool _isItNew = false;
-
-  /// Indicates whether the form is in "create new entity" mode (true)
-  /// or "update existing entity" mode (false)
-  bool get isItNew => _isItNew;
-
-  /// Toggles between create and update modes and notifies listeners
-  set isItNew(bool value) {
-    if (_isItNew != value) {
-      _isItNew = value;
-      notifyListeners();
-    }
-  }
-
   final String _insertTitle;
   final String _updateTitle;
 
-  String get widgetTitle => isItNew ? _insertTitle : _updateTitle;
+  String widgetTitle(bool isItNew) => isItNew ? _insertTitle : _updateTitle;
 
   late bool _isSaveButtonActive = false;
 
@@ -82,12 +68,12 @@ class UpsertViewStates with ChangeNotifier {
   /// Returns the appropriate icon for the cancel button:
   ///   - Create mode: Cancel icon (✖)
   ///   - Update mode: Back arrow (←)
-  IconData get cancelButtonIcon => isItNew ? Icons.cancel : Icons.arrow_back;
+  IconData cancelButtonIcon(bool isItNew) => isItNew ? Icons.cancel : Icons.arrow_back;
 
   /// Returns the appropriate label for the cancel button:
   ///   - Create mode: "Cancel"
   ///   - Update mode: "Close"
-  String get cancelButtonTitle => isItNew ? 'Cancel' : 'Close';
+  String cancelButtonTitle(bool isItNew) => isItNew ? 'Cancel' : 'Close';
 
   //------------------------
   // Delete Button
@@ -99,12 +85,7 @@ class UpsertViewStates with ChangeNotifier {
   /// Label for the delete button
   final String deleteButtonTitle = 'Delete';
 
-  /// Indicates whether the delete button should be visible and enabled:
-  ///   - Enabled only in update mode (existing entities)
-  bool get isDeleteButtonActive => !isItNew;
-
   //------------------------
   // State Transition Methods
   //------------------------
-
 }

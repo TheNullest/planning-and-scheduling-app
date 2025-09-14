@@ -16,5 +16,5 @@ class CategoriesManagerEvent with _$CategoriesManagerEvent {
     String id,
   ) = _Delete;
 
-  const factory CategoriesManagerEvent.fetchAll() = _FetchAll;
+  const factory CategoriesManagerEvent.get() = _Get;
 }

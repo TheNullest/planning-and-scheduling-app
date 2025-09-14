@@ -1,8 +1,8 @@
 import 'package:zamaan/core/utils/failure_type_detector.dart';
 import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/time_range.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
-import 'package:zamaan/features/tasks_management/data/models/local/hive/date_time_ranges/time_range_hive_model.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/time_range.dart';
+import 'package:zamaan/features/tasks_management/data/models/local/hive/constraint_date_time_ranges/time_range_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/time_range/time_range_supabase_model.dart';
 
 class TimeRangeDataMapperImpl extends TimeRangeDataMapper {

@@ -1,7 +1,7 @@
 import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/domain/repositories/task_repository.dart';
-import 'package:zamaan/domain/useCases/fetch_by_id_use_case.dart';
+import 'package:zamaan/domain/useCases/get_by_id_use_case.dart';
 
-class GetTaskByIdUseCase extends FetchByIdUseCase<TaskRepository, TaskEntity> {
+class GetTaskByIdUseCase extends GetByIdUseCase<TaskRepository, TaskEntity> {
   GetTaskByIdUseCase(super.repository);
 }

@@ -15,7 +15,7 @@ class CategoriesChipList extends StatelessWidget {
     final categoryVMsManager = context.read<CategoryVmsManager>();
 
     return Selector<CategoryVmsManager, bool>(
-        selector: (_, vmsManager) => vmsManager.listUpdated,
+        selector: (_, vmsManager) => vmsManager.isListUpdated,
         builder: (_, vms, __) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,7 +23,7 @@ class CategoriesChipList extends StatelessWidget {
               const Text('Select From Categories :'),
               20.sizedBoxHeight,
               Wrap(children: [
-                ...categoryVMsManager.items.map(
+                ...categoryVMsManager.persistedItems.map(
                   (category) => CategoryChipWidget(
                     selectable: true,
                     category: category,

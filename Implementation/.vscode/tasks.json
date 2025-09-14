@@ -10,6 +10,18 @@
 			"problemMatcher": [],
 			"label": "flutter: flutter gen-l10n",
 			"detail": ""
+		},
+		{
+			"type": "dart",
+			"command": "dart",
+			"cwd": "",
+			"args": [
+				"doc",
+				"."
+			],
+			"problemMatcher": [],
+			"label": "dart: dart doc .",
+			"detail": ""
 		}
 	]
 }

@@ -22,20 +22,20 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   final HiveBoxRunner<ScheduleConstraintsHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<ScheduleConstraintsHiveModel>> getBatchSchedulesByDay(DateTime date) async =>
+  EResultFuture<List<ScheduleConstraintsHiveModel>> getScheduleByDay(DateTime date) async =>
       _hiveBox.runBoxOperation<List<ScheduleConstraintsHiveModel>>(
         job: (box) async => box.values.where((scheduleConstraints) {
           final bool inDateRange;
-          if (scheduleConstraints.startAt != null) {
-            inDateRange = scheduleConstraints.startAt!.isBefore(date) &&
-                scheduleConstraints.startAt!.isAfter(date);
+          if (scheduleConstraints.startDate != null) {
+            inDateRange = scheduleConstraints.startDate!.isBefore(date) &&
+                scheduleConstraints.startDate!.isAfter(date);
           } else {
             inDateRange = true;
           }
-          final inWeekDay = scheduleConstraints.weekDayExceptions
+          final inWeekDay = scheduleConstraints.exceptionWeekDays
               .any((weekDay) => weekDay.dateTimeWeekDayIndex == date.weekday);
           final inMonthDay =
-              scheduleConstraints.monthDayExceptions.any((monthDay) => monthDay == date.day);
+              scheduleConstraints.exceptionMonthDays.any((monthDay) => monthDay == date.day);
 
           // // In Scheduled Intervals
           // final inInterval = scheduleConstraints.scheduledIntervals.any((interval) {
@@ -61,20 +61,20 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // /// Retrieves tasks based on main scheduleConstraints IDs and a date range.
   // ///
   // /// [taskIds] - List of main scheduleConstraints IDs to filter the tasks.
-  // /// [startAt] - Start date for the date range filter.
+  // /// [startTime] - Start date for the date range filter.
   // /// [dueDate] - End date for the date range filter.
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByTaskIdsAndDateRange({
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByTaskIdsAndDateRange({
   //   required List<String> taskIds,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   // }) async =>
   //     _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
   //       job: (box) async => box.values.where((scheduleConstraints) {
   //         final isWithinDateRange =
-  //             (startAt == null || scheduleConstraints.scheduledDateRange.isAfter(startAt)) &&
+  //             (startTime == null || scheduleConstraints.scheduledDateRange.isAfter(startTime)) &&
   //                 (dueDate == null || scheduleConstraints.dueDate!.isBefore(dueDate));
   //         if (!isWithinDateRange) return false;
   //         return taskIds.contains(scheduleConstraints.taskId);
@@ -88,7 +88,7 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByDueDate(
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByDueDate(
   //   DateTime dueDate,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
@@ -105,7 +105,7 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByTaskId(
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByTaskId(
   //   String taskId,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
@@ -121,7 +121,7 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByRepetitionType(
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByRepetitionType(
   //   RepetitionType repetitionType,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
@@ -141,7 +141,7 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchBySpecificTimes(
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBySpecificTimes(
   //   List<int> specificTimes,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
@@ -157,16 +157,16 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
 
   // /// Retrieves tasks scheduled after a specific start time.
   // ///
-  // /// [startAt] - The start time to filter the tasks.
+  // /// [startTime] - The start time to filter the tasks.
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByStartTime(
-  //   DateTime startAt,
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByStartTime(
+  //   DateTime startTime,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(
   //     job: (box) async => box.values
-  //         .where((scheduleConstraints) => scheduleConstraints.scheduledDateRange.isAfter(startAt))
+  //         .where((scheduleConstraints) => scheduleConstraints.scheduledDateRange.isAfter(startTime))
   //         .toList(),
   //     boxName: _boxName,
   //   );
@@ -178,7 +178,7 @@ class ScheduleConstraintsHiveDataSourceImpl extends HiveDataSource<ScheduleConst
   // ///
   // /// Returns a [EResultFuture] containing a list of [ScheduleDefinitionHiveModel] objects.
   // @override
-  // EResultFuture<List<ScheduleDefinitionHiveModel>> getBatchByTimeUnit(
+  // EResultFuture<List<ScheduleDefinitionHiveModel>> getByTimeUnit(
   //   IntervalUnit timeUnit,
   // ) async {
   //   return _hiveBox.operator<List<ScheduleDefinitionHiveModel>>(

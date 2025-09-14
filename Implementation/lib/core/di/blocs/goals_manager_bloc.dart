@@ -9,7 +9,7 @@ void _goalsManagerBloc() {
     ..registerFactory<SupabaseDataSource<GoalSupabaseModel, GoalDataMapper>>(
       () => GoalSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.goals,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -28,14 +28,14 @@ void _goalsManagerBloc() {
     // UseCases
     ..registerFactory(() => CreateGoalUseCase(serviceLocator()))
     ..registerFactory(() => DeleteGoalUseCase(serviceLocator()))
-    ..registerFactory(() => FetchGoalsByRefsUseCase(serviceLocator()))
+    ..registerFactory(() => GetGoalsByRefsUseCase(serviceLocator()))
     ..registerFactory(() => UpdateGoalUseCase(serviceLocator()))
 
     // ManagerBloc
     ..registerLazySingleton<GoalsManagerBloc>(
       () => GoalsManagerBloc(
         createUseCase: serviceLocator(),
-        fetchGoalsByRefsUseCase: serviceLocator(),
+        getGoalsByRefsUseCase: serviceLocator(),
         deleteUseCase: serviceLocator(),
         updateUseCase: serviceLocator(),
       ),

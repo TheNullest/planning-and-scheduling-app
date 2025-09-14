@@ -1,5 +1,5 @@
 import 'package:zamaan/domain/entities/base/base_entity_abstraction.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/time_range.dart';
 import 'package:zamaan/domain/enums/hive/interval_unit.dart';
 
 /// Represents an interval-based scheduling configuration.
@@ -38,12 +38,10 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     required this.intervalValue,
     required this.repeatCount,
     required this.scheduledTimeIds,
-    required this.enforceScheduleBounds,
     required this.startDate,
-    this.consecutiveOccurrences = 1,
+    required super.id, this.consecutiveOccurrences = 1,
     super.description,
     super.updatedAt,
-    super.id,
   });
 
   /// The ID of the schedule constraint to which this interval configuration belongs.
@@ -63,9 +61,6 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
   /// The identifiers for the scheduled time ranges within an interval.
   /// Each identifier corresponds to a specific [TimeRangeEntity] where the task should occur.
   final List<String> scheduledTimeIds;
-
-  /// Determines whether the scheduling should strictly adhere to configured schedule bounds.
-  final bool enforceScheduleBounds;
 
   /// The starting date for this scheduling configuration.
   final DateTime startDate;
@@ -91,7 +86,6 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
     double? intervalValue,
     int? consecutiveOccurrences,
     int? repeatCount,
-    bool? enforceScheduleBounds,
     List<String>? scheduledTimeIds,
   }) {
     return ScheduledIntervalEntity(
@@ -105,7 +99,6 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
       intervalValue: intervalValue ?? this.intervalValue,
       consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
       repeatCount: repeatCount ?? this.repeatCount,
-      enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
       startDate: startDate ?? this.startDate,
       scheduledTimeIds:
           scheduledTimeIds ?? List.from(this.scheduledTimeIds), // Creates a new list instance.
@@ -119,7 +112,6 @@ class ScheduledIntervalEntity extends BaseEntityAbstraction {
         intervalUnit,
         intervalValue,
         repeatCount,
-        enforceScheduleBounds,
         scheduledTimeIds,
         startDate,
         consecutiveOccurrences,

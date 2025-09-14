@@ -3,8 +3,6 @@ import 'package:zamaan/core/utils/typedef.dart';
 import 'package:zamaan/data/mappers/bases/task_activity.dart';
 import 'package:zamaan/domain/entities/task_activity.dart';
 import 'package:zamaan/domain/enums/enums.dart';
-import 'package:zamaan/domain/enums/hive/reference_type.dart';
-import 'package:zamaan/domain/enums/hive/scheduler_type.dart';
 import 'package:zamaan/features/tasks_management/data/models/local/hive/task_activity_hive_model.dart';
 import 'package:zamaan/features/tasks_management/data/models/remote/supabase/task_activity/task_activity_supabase_model.dart';
 
@@ -51,7 +49,7 @@ class TaskActivityDataMapperImpl extends TaskActivityDataMapper {
         variableTagIds: model.variableTagIds,
         startedAt: model.startedAt,
         endedAt: model.endedAt,
-        schedulerType: SchedulerType.fromName(model.schedulerType!),
+        schedulerType: ScheduleType.fromName(model.schedulerType!),
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

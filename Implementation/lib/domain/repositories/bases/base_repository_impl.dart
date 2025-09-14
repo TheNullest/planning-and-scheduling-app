@@ -29,6 +29,7 @@ abstract class BaseRepositoryImpl<
   final BaseDataSource<SupabaseModel> _remoteDataSource;
   final Mapper _dataMapper;
   final NetworkConnectivityMonitorCubit _netConnectivity;
+
   @override
   EResultFuture<String> create(Entity entity) async {
     try {
@@ -70,13 +71,11 @@ abstract class BaseRepositoryImpl<
   }
 
   @override
-  EResultFutureVoid deleteBatch(
-    List<String> ids, {
-    DataSourcePolicy policy = DataSourcePolicy.localOnly,
-  }) async {
+  EResultFutureVoid deleteBatch(List<String> ids,
+      {DataSourcePolicy policy = DataSourcePolicy.localOnly}) async {
     try {
       if (DataSourcePolicy.isLocal(policy)) {
-        return _localDataSource.deleteBatch(ids);
+        return await _localDataSource.deleteBatch(ids);
       }
       if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
         return _remoteDataSource.deleteBatch(ids);
@@ -88,17 +87,17 @@ abstract class BaseRepositoryImpl<
   }
 
   @override
-  EResultFuture<List<Entity>> getAll({
+  EResultFuture<List<Entity>> get({
     DataSourcePolicy policy = DataSourcePolicy.localOnly,
   }) async {
     try {
       if (DataSourcePolicy.isLocal(policy)) {
-        final response = await _localDataSource.getAll();
+        final response = await _localDataSource.get();
         final result = _dataMapper.foldEitherList(response);
         return Right(_dataMapper.toEntitiesFromHive(result));
       }
       if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-        final response = await _remoteDataSource.getAll();
+        final response = await _remoteDataSource.get();
         final result = _dataMapper.foldEitherList<SupabaseModel>(response);
         return Right(_dataMapper.toEntitiesFromSupabase(result));
       }
@@ -137,12 +136,12 @@ abstract class BaseRepositoryImpl<
   }) async {
     try {
       if (DataSourcePolicy.isLocal(policy)) {
-        final response = await _localDataSource.getAllByIds(ids);
+        final response = await _localDataSource.getByIds(ids);
         final result = _dataMapper.foldEitherList<HiveModel>(response);
         return Right(_dataMapper.toEntitiesFromHive(result));
       }
       if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-        final response = await _remoteDataSource.getAllByIds(ids);
+        final response = await _remoteDataSource.getByIds(ids);
         final result = _dataMapper.foldEitherList<SupabaseModel>(response);
         return Right(_dataMapper.toEntitiesFromSupabase(result));
       }
@@ -162,7 +161,7 @@ abstract class BaseRepositoryImpl<
         return _localDataSource.update(_dataMapper.toHiveModel(entity));
       }
       if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-        return _remoteDataSource.updateBatch([_dataMapper.toSupabaseModel(entity)]);
+        return _remoteDataSource.update(_dataMapper.toSupabaseModel(entity));
       }
       return const Right(null);
     } on Exception catch (e, stackTrace) {

@@ -15,7 +15,7 @@
 //     required this.enforceScheduleBounds,
 //     required this.taskId,
 //     this.consecutiveOccurrences = 1,
-//     super.id,
+//     required super.id,
 //     super.description,
 //     super.createdAt,
 //     super.updatedAt,

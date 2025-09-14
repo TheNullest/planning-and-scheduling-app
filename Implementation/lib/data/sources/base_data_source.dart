@@ -11,7 +11,7 @@ abstract class BaseDataSource<Model> {
 
   EResultFuture<bool> exists(String id);
 
-  EResultFuture<List<Model>> getAll();
+  EResultFuture<List<Model>> get();
 
   EResultFutureVoid update(Model entity);
 
@@ -19,7 +19,7 @@ abstract class BaseDataSource<Model> {
 
   EResultFuture<Model> getById(String id);
 
-  EResultFuture<List<Model>> getAllByIds(List<String> ids);
+  EResultFuture<List<Model>> getByIds(List<String> ids);
 }
 
 /// Converts a list of conditions into a string representation for query filtering.

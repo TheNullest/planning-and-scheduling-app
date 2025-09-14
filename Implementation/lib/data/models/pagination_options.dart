@@ -3,10 +3,10 @@ class PaginationOptions {
   const PaginationOptions({
     this.limit = 100,
     this.offset = 0,
-    this.fetchAll = false,
+    this.get = false,
   });
 
   final int limit;
   final int offset;
-  final bool fetchAll;
+  final bool get;
 }

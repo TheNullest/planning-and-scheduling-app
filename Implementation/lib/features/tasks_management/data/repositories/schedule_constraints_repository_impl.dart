@@ -47,19 +47,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   }
 
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByDueDate(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByDueDate(
   //   DateTime dueDate, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByDueDate(dueDate);
+  //           final response = await _localDataSource.getByDueDate(dueDate);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByDueDate(dueDate);
+  //           final response = await _remoteDataSource.getByDueDate(dueDate);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -69,19 +69,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByRepetitionType(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByRepetitionType(
   //   RepetitionType repetitionType, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByRepetitionType(repetitionType);
+  //           final response = await _localDataSource.getByRepetitionType(repetitionType);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByRepetitionType(repetitionType);
+  //           final response = await _remoteDataSource.getByRepetitionType(repetitionType);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -90,19 +90,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //       failureType: FailureType.local,
   //     );
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchBySpecificTimes(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getBySpecificTimes(
   //   List<int> specificTimes, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchBySpecificTimes(specificTimes);
+  //           final response = await _localDataSource.getBySpecificTimes(specificTimes);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchBySpecificTimes(specificTimes);
+  //           final response = await _remoteDataSource.getBySpecificTimes(specificTimes);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -112,19 +112,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByStartTime(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByStartTime(
   //   DateTime startTime, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByStartTime(startTime);
+  //           final response = await _localDataSource.getByStartTime(startTime);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByStartTime(startTime);
+  //           final response = await _remoteDataSource.getByStartTime(startTime);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -133,19 +133,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //       failureType: FailureType.local,
   //     );
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTaskId(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByTaskId(
   //   String taskId, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByTaskId(taskId);
+  //           final response = await _localDataSource.getByTaskId(taskId);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByTaskId(taskId);
+  //           final response = await _remoteDataSource.getByTaskId(taskId);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -155,19 +155,19 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTimeUnit(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByTimeUnit(
   //   IntervalUnit timeUnit, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByTimeUnit(timeUnit);
+  //           final response = await _localDataSource.getByTimeUnit(timeUnit);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByTimeUnit(timeUnit);
+  //           final response = await _remoteDataSource.getByTimeUnit(timeUnit);
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -177,27 +177,27 @@ class ScheduleConstraintsRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTaskIdsAndDateRange({
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByTaskIdsAndDateRange({
   //   required List<String> taskIds,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByTaskIdsAndDateRange(
+  //           final response = await _localDataSource.getByTaskIdsAndDateRange(
   //             taskIds: taskIds,
-  //             startAt: startAt,
+  //             startTime: startTime,
   //             dueDate: dueDate,
   //           );
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByTaskIdsAndDateRange(
+  //           final response = await _remoteDataSource.getByTaskIdsAndDateRange(
   //             taskIds: taskIds,
-  //             startAt: startAt,
+  //             startTime: startTime,
   //             dueDate: dueDate,
   //           );
   //           final models = _dataMapperfoldEitherList<ScheduleDefinitionSupabaseModel>(response);

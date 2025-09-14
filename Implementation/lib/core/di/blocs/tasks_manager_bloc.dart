@@ -4,25 +4,19 @@ void _tasksManagerBloc() {
   _tasksManagerDataSoruces();
   _tasksManagerRepositories();
   _tasksManagerUseCases();
-  serviceLocator
-
-    // Category
-    ..registerFactory(() => CreateBatchCategoriesUseCase(serviceLocator()))
-
-    // TasksManager
-    ..registerLazySingleton<TasksManagerBloc>(
-      () => TasksManagerBloc(
-        createTaskUseCase: serviceLocator(),
-        createSubTaskUseCase: serviceLocator(),
-        deleteTaskUseCase: serviceLocator(),
-        deleteSubTaskUseCase: serviceLocator(),
-        deleteBatchSubTasksByTaskIdUseCase: serviceLocator(),
-        updateTaskUseCase: serviceLocator(),
-        updateSubTaskUseCase: serviceLocator(),
-        getBatchSubTasksUseCase: serviceLocator(),
-        getBatchTasksUseCase: serviceLocator(),
-      ),
-    );
+  serviceLocator.registerLazySingleton<TasksManagerBloc>(
+    () => TasksManagerBloc(
+      createTaskUseCase: serviceLocator(),
+      createSubTaskUseCase: serviceLocator(),
+      deleteTaskUseCase: serviceLocator(),
+      deleteSubTaskUseCase: serviceLocator(),
+      deleteSubTasksByTaskIdUseCase: serviceLocator(),
+      updateTaskUseCase: serviceLocator(),
+      updateSubTaskUseCase: serviceLocator(),
+      getSubTasksUseCase: serviceLocator(),
+      getTasksUseCase: serviceLocator(),
+    ),
+  );
 }
 
 void _tasksManagerUseCases() {
@@ -31,14 +25,14 @@ void _tasksManagerUseCases() {
     // Task
     ..registerFactory(() => CreateTaskUseCase(serviceLocator()))
     ..registerFactory(() => DeleteTaskUseCase(serviceLocator()))
-    ..registerFactory(() => GetBatchTasksUseCase(serviceLocator()))
+    ..registerFactory(() => GetTasksUseCase(serviceLocator()))
     ..registerFactory(() => UpdateTaskUseCase(serviceLocator()))
 
     // SubTask
     ..registerFactory(() => CreateSubTaskUseCase(serviceLocator()))
     ..registerFactory(() => DeleteSubTaskUseCase(serviceLocator()))
     ..registerFactory(() => DeleteBatchSubTasksByTaskIdUseCase(serviceLocator()))
-    ..registerFactory(() => GetBatchSubTasksByTaskIdsUseCase(serviceLocator()))
+    ..registerFactory(() => GetSubTasksByTaskIdsUseCase(serviceLocator()))
     ..registerFactory(() => UpdateSubTaskUseCase(serviceLocator()));
 }
 
@@ -52,7 +46,7 @@ void _tasksManagerDataSoruces() {
     ..registerFactory<SupabaseDataSource<TaskSupabaseModel, TaskDataMapper>>(
       () => TaskSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.tasks,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -65,7 +59,7 @@ void _tasksManagerDataSoruces() {
     ..registerFactory<SupabaseDataSource<SubTaskSupabaseModel, SubTaskDataMapper>>(
       () => SubTaskSupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.subTask,
+        collectionPath: CollectionPaths.subTasks,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),

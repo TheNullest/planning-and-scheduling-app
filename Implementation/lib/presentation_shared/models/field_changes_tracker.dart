@@ -13,13 +13,15 @@ class FieldChangesTracker<T> {
   bool get isModified => _isModified;
 
   /// Updates the field tracker with a new value and returns whether it's changed.
-  void isChanged(T newValue) {
-    if (newValue is List) {
-      _isModified = (persistedValue as List) != newValue;
+  void isChanged(T newValue, [bool Function(dynamic)? isChanged]) {
+    if (isChanged != null) {
+      _isModified = isChanged(persistedValue);
     } else {
       _isModified = persistedValue != newValue;
     }
   }
+
+
 
   /// Returns a new tracker with updated persisted value.
   FieldChangesTracker<T> persistNewValue([T? newPersistedValue]) {

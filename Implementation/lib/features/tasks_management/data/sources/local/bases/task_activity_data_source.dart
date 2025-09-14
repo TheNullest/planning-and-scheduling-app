@@ -6,19 +6,19 @@ abstract class TaskActivityLocalDataSource<Model> extends BaseDataSource<Model> 
   // /// [taskId] - The main task ID to filter the tasks.
   // ///
   // /// Returns a [EResultFuture] containing a list of [Model] objects.
-  // EResultFuture<List<Model>> getBatchByTaskId(
+  // EResultFuture<List<Model>> getByTaskId(
   //   String taskId,
   // );
 
   // /// Retrieves a list of [Model] by main task IDs and date range.
   // ///
   // /// [taskId] - List of main task IDs to filter the time intervals.
-  // /// [startAt] - Start date of the date range.
+  // /// [startTime] - Start date of the date range.
   // /// [dueDate] - End date of the date range.
   // /// Returns a [EResultFuture] containing a list of [Model].
-  // EResultFuture<List<Model>> getBatchByTaskIdAndDateRange({
+  // EResultFuture<List<Model>> getByTaskIdAndDateRange({
   //   required String taskId,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   // });
 
@@ -26,7 +26,7 @@ abstract class TaskActivityLocalDataSource<Model> extends BaseDataSource<Model> 
   // ///
   // /// [subTaskId] - Sub task ID to filter the time intervals.
   // /// Returns a [EResultFuture] containing a list of [Model].
-  // EResultFuture<List<Model>> getBatchBySubTaskId(
+  // EResultFuture<List<Model>> getBySubTaskId(
   //   String subTaskId,
   // );
 }

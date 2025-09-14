@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/date_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/date_range.dart';
 
 part 'date_range_supabase_model.freezed.dart';
 part 'date_range_supabase_model.g.dart';
@@ -15,8 +15,8 @@ class DateRangeSupabaseModel with _$DateRangeSupabaseModel {
     @JsonKey(name: 'user_id') required String userId,
     @JsonKey(name: 'parent_id') required String parentId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'start_at') DateTime? start,
-    @JsonKey(name: 'end_at') DateTime? end,
+    @JsonKey(name: 'start_date') DateTime? startDate,
+    @JsonKey(name: 'end_date') DateTime? endDate,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _DateRangeSupabaseModel;
 
@@ -25,8 +25,8 @@ class DateRangeSupabaseModel with _$DateRangeSupabaseModel {
         userId: entity.userId,
         createdAt: entity.createdAt,
         updatedAt: entity.updatedAt,
-        start: entity.start,
-        end: entity.end,
+        startDate: entity.startDate,
+        endDate: entity.endDate,
         parentId: entity.parentId,
       );
 

@@ -32,19 +32,19 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
   // @override
-  // EResultFuture<List<TaskActivityEntity>> getBatchBySubTaskId(
+  // EResultFuture<List<TaskActivityEntity>> getBySubTaskId(
   //   String subTaskId, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchBySubTaskId(subTaskId);
+  //           final response = await _localDataSource.getBySubTaskId(subTaskId);
   //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchBySubTaskId(subTaskId);
+  //           final response = await _remoteDataSource.getBySubTaskId(subTaskId);
   //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -54,27 +54,27 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskActivityEntity>> getBatchByTaskIdAndDateRange({
+  // EResultFuture<List<TaskActivityEntity>> getByTaskIdAndDateRange({
   //   required String taskId,
-  //   required DateTime startAt,
+  //   required DateTime startTime,
   //   required DateTime dueDate,
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByTaskIdAndDateRange(
+  //           final response = await _localDataSource.getByTaskIdAndDateRange(
   //             taskId: taskId,
-  //             startAt: startAt,
+  //             startTime: startTime,
   //             dueDate: dueDate,
   //           );
   //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByTaskIdAndDateRange(
+  //           final response = await _remoteDataSource.getByTaskIdAndDateRange(
   //             taskId: taskId,
-  //             startAt: startAt,
+  //             startTime: startTime,
   //             dueDate: dueDate,
   //           );
   //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
@@ -86,19 +86,19 @@ class TaskActivityRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskActivityEntity>> getBatchByTaskId(
+  // EResultFuture<List<TaskActivityEntity>> getByTaskId(
   //   String taskId, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByTaskId(taskId);
+  //           final response = await _localDataSource.getByTaskId(taskId);
   //           final models = _dataMapperfoldEitherList<TaskActivityHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByTaskId(taskId);
+  //           final response = await _remoteDataSource.getByTaskId(taskId);
   //           final models = _dataMapperfoldEitherList<TaskActivitySupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }

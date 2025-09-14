@@ -13,5 +13,5 @@ class CategoriesManagerState with _$CategoriesManagerState {
 
   const factory CategoriesManagerState.deleted(String id) = _Deleted;
 
-  const factory CategoriesManagerState.fetched(List<CategoryEntity> categories) = _Fetched;
+  const factory CategoriesManagerState.loaded(List<CategoryEntity> categories) = _Geted;
 }

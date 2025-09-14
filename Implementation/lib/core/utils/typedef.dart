@@ -33,7 +33,7 @@ typedef EResult<T> = Either<Failure, T>;
 ///
 /// Example:
 /// ```dart
-/// EResultFuture<User> fetchUser() async {
+/// EResultFuture<User> getUser() async {
 ///   // Implementation
 /// }
 /// ```

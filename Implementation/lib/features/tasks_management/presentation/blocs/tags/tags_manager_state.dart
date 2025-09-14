@@ -13,5 +13,5 @@ class TagsManagerState with _$TagsManagerState {
 
   const factory TagsManagerState.deleted(String id) = _Deleted;
 
-  const factory TagsManagerState.fetched(List<TagEntity> goals) = _Fetched;
+  const factory TagsManagerState.loaded(List<TagEntity> goals) = _Geted;
 }

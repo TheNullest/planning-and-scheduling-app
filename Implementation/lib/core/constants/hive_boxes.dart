@@ -13,9 +13,9 @@ abstract class HiveBoxConstants {
   static const String categoriesBox = 'categoriesBox';
   static const String customMeasurementUnitsBox = 'customMeasurementUnitsBox';
   static const String scheduleConstraintsBox = 'scheduleConstraintsBox';
-  static const String scheduledDaysBox = 'scheduledDaysBox';
+  static const String scheduledDayTimesBox = 'scheduledDayTimesBox';
   static const String scheduledIntervalsBox = 'scheduledIntervalsBox';
-  static const String scheduledInstancesBox = 'scheduledInstancesBox';
+  static const String scheduledOccurrencesBox = 'scheduledOccurrencesBox';
   static const String dateRangesBox = 'dateRangesBox';
   static const String timeRangesBox = 'timeRangesBox';
   static const String tagsBox = 'tagsBox';

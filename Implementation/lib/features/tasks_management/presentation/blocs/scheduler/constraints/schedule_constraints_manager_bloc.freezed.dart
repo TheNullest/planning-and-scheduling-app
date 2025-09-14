@@ -23,8 +23,8 @@ mixin _$ScheduleConstraintsManagerEvent {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -33,8 +33,8 @@ mixin _$ScheduleConstraintsManagerEvent {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -43,8 +43,8 @@ mixin _$ScheduleConstraintsManagerEvent {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) =>
@@ -54,8 +54,8 @@ mixin _$ScheduleConstraintsManagerEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,8 +64,8 @@ mixin _$ScheduleConstraintsManagerEvent {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
@@ -74,8 +74,8 @@ mixin _$ScheduleConstraintsManagerEvent {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) =>
@@ -152,8 +152,8 @@ class _$StartedImpl implements _Started {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
     return started();
@@ -165,8 +165,8 @@ class _$StartedImpl implements _Started {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
     return started?.call();
@@ -178,8 +178,8 @@ class _$StartedImpl implements _Started {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
@@ -195,8 +195,8 @@ class _$StartedImpl implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
     return started(this);
@@ -208,8 +208,8 @@ class _$StartedImpl implements _Started {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
     return started?.call(this);
@@ -221,8 +221,8 @@ class _$StartedImpl implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -311,8 +311,8 @@ class _$CreateImpl implements _Create {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
     return create(scheduleConstraints);
@@ -324,8 +324,8 @@ class _$CreateImpl implements _Create {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
     return create?.call(scheduleConstraints);
@@ -337,8 +337,8 @@ class _$CreateImpl implements _Create {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
@@ -354,8 +354,8 @@ class _$CreateImpl implements _Create {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
     return create(this);
@@ -367,8 +367,8 @@ class _$CreateImpl implements _Create {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
     return create?.call(this);
@@ -380,8 +380,8 @@ class _$CreateImpl implements _Create {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -479,8 +479,8 @@ class _$UpdateImpl implements _Update {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
     return update(scheduleConstraints);
@@ -492,8 +492,8 @@ class _$UpdateImpl implements _Update {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
     return update?.call(scheduleConstraints);
@@ -505,8 +505,8 @@ class _$UpdateImpl implements _Update {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
@@ -522,8 +522,8 @@ class _$UpdateImpl implements _Update {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
     return update(this);
@@ -535,8 +535,8 @@ class _$UpdateImpl implements _Update {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
     return update?.call(this);
@@ -548,8 +548,8 @@ class _$UpdateImpl implements _Update {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -574,18 +574,16 @@ abstract class _Update implements ScheduleConstraintsManagerEvent {
 }
 
 /// @nodoc
-abstract class _$$FetchAllImplCopyWith<$Res> {
-  factory _$$FetchAllImplCopyWith(
-          _$FetchAllImpl value, $Res Function(_$FetchAllImpl) then) =
-      __$$FetchAllImplCopyWithImpl<$Res>;
+abstract class _$$GetImplCopyWith<$Res> {
+  factory _$$GetImplCopyWith(_$GetImpl value, $Res Function(_$GetImpl) then) =
+      __$$GetImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchAllImplCopyWithImpl<$Res>
-    extends _$ScheduleConstraintsManagerEventCopyWithImpl<$Res, _$FetchAllImpl>
-    implements _$$FetchAllImplCopyWith<$Res> {
-  __$$FetchAllImplCopyWithImpl(
-      _$FetchAllImpl _value, $Res Function(_$FetchAllImpl) _then)
+class __$$GetImplCopyWithImpl<$Res>
+    extends _$ScheduleConstraintsManagerEventCopyWithImpl<$Res, _$GetImpl>
+    implements _$$GetImplCopyWith<$Res> {
+  __$$GetImplCopyWithImpl(_$GetImpl _value, $Res Function(_$GetImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ScheduleConstraintsManagerEvent
@@ -594,18 +592,18 @@ class __$$FetchAllImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchAllImpl implements _FetchAll {
-  const _$FetchAllImpl();
+class _$GetImpl implements _Get {
+  const _$GetImpl();
 
   @override
   String toString() {
-    return 'ScheduleConstraintsManagerEvent.fetchAll()';
+    return 'ScheduleConstraintsManagerEvent.get()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchAllImpl);
+        (other.runtimeType == runtimeType && other is _$GetImpl);
   }
 
   @override
@@ -619,11 +617,11 @@ class _$FetchAllImpl implements _FetchAll {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
-    return fetchAll();
+    return get();
   }
 
   @override
@@ -632,11 +630,11 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
-    return fetchAll?.call();
+    return get?.call();
   }
 
   @override
@@ -645,13 +643,13 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
-    if (fetchAll != null) {
-      return fetchAll();
+    if (get != null) {
+      return get();
     }
     return orElse();
   }
@@ -662,11 +660,11 @@ class _$FetchAllImpl implements _FetchAll {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
-    return fetchAll(this);
+    return get(this);
   }
 
   @override
@@ -675,11 +673,11 @@ class _$FetchAllImpl implements _FetchAll {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
-    return fetchAll?.call(this);
+    return get?.call(this);
   }
 
   @override
@@ -688,37 +686,37 @@ class _$FetchAllImpl implements _FetchAll {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
-    if (fetchAll != null) {
-      return fetchAll(this);
+    if (get != null) {
+      return get(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchAll implements ScheduleConstraintsManagerEvent {
-  const factory _FetchAll() = _$FetchAllImpl;
+abstract class _Get implements ScheduleConstraintsManagerEvent {
+  const factory _Get() = _$GetImpl;
 }
 
 /// @nodoc
-abstract class _$$FetchByTaskIdImplCopyWith<$Res> {
-  factory _$$FetchByTaskIdImplCopyWith(
-          _$FetchByTaskIdImpl value, $Res Function(_$FetchByTaskIdImpl) then) =
-      __$$FetchByTaskIdImplCopyWithImpl<$Res>;
+abstract class _$$GetByTaskIdImplCopyWith<$Res> {
+  factory _$$GetByTaskIdImplCopyWith(
+          _$GetByTaskIdImpl value, $Res Function(_$GetByTaskIdImpl) then) =
+      __$$GetByTaskIdImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String id});
 }
 
 /// @nodoc
-class __$$FetchByTaskIdImplCopyWithImpl<$Res>
+class __$$GetByTaskIdImplCopyWithImpl<$Res>
     extends _$ScheduleConstraintsManagerEventCopyWithImpl<$Res,
-        _$FetchByTaskIdImpl> implements _$$FetchByTaskIdImplCopyWith<$Res> {
-  __$$FetchByTaskIdImplCopyWithImpl(
-      _$FetchByTaskIdImpl _value, $Res Function(_$FetchByTaskIdImpl) _then)
+        _$GetByTaskIdImpl> implements _$$GetByTaskIdImplCopyWith<$Res> {
+  __$$GetByTaskIdImplCopyWithImpl(
+      _$GetByTaskIdImpl _value, $Res Function(_$GetByTaskIdImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ScheduleConstraintsManagerEvent
@@ -728,7 +726,7 @@ class __$$FetchByTaskIdImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$FetchByTaskIdImpl(
+    return _then(_$GetByTaskIdImpl(
       null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -739,22 +737,22 @@ class __$$FetchByTaskIdImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchByTaskIdImpl implements _FetchByTaskId {
-  const _$FetchByTaskIdImpl(this.id);
+class _$GetByTaskIdImpl implements _GetByTaskId {
+  const _$GetByTaskIdImpl(this.id);
 
   @override
   final String id;
 
   @override
   String toString() {
-    return 'ScheduleConstraintsManagerEvent.fetchByTaskId(id: $id)';
+    return 'ScheduleConstraintsManagerEvent.getByTaskId(id: $id)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchByTaskIdImpl &&
+            other is _$GetByTaskIdImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -766,8 +764,8 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchByTaskIdImplCopyWith<_$FetchByTaskIdImpl> get copyWith =>
-      __$$FetchByTaskIdImplCopyWithImpl<_$FetchByTaskIdImpl>(this, _$identity);
+  _$$GetByTaskIdImplCopyWith<_$GetByTaskIdImpl> get copyWith =>
+      __$$GetByTaskIdImplCopyWithImpl<_$GetByTaskIdImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -777,11 +775,11 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
-    return fetchByTaskId(id);
+    return getByTaskId(id);
   }
 
   @override
@@ -790,11 +788,11 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
-    return fetchByTaskId?.call(id);
+    return getByTaskId?.call(id);
   }
 
   @override
@@ -803,13 +801,13 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
-    if (fetchByTaskId != null) {
-      return fetchByTaskId(id);
+    if (getByTaskId != null) {
+      return getByTaskId(id);
     }
     return orElse();
   }
@@ -820,11 +818,11 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
-    return fetchByTaskId(this);
+    return getByTaskId(this);
   }
 
   @override
@@ -833,11 +831,11 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
-    return fetchByTaskId?.call(this);
+    return getByTaskId?.call(this);
   }
 
   @override
@@ -846,27 +844,27 @@ class _$FetchByTaskIdImpl implements _FetchByTaskId {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
-    if (fetchByTaskId != null) {
-      return fetchByTaskId(this);
+    if (getByTaskId != null) {
+      return getByTaskId(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchByTaskId implements ScheduleConstraintsManagerEvent {
-  const factory _FetchByTaskId(final String id) = _$FetchByTaskIdImpl;
+abstract class _GetByTaskId implements ScheduleConstraintsManagerEvent {
+  const factory _GetByTaskId(final String id) = _$GetByTaskIdImpl;
 
   String get id;
 
   /// Create a copy of ScheduleConstraintsManagerEvent
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchByTaskIdImplCopyWith<_$FetchByTaskIdImpl> get copyWith =>
+  _$$GetByTaskIdImplCopyWith<_$GetByTaskIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -943,8 +941,8 @@ class _$DeleteImpl implements _Delete {
         create,
     required TResult Function(ScheduleConstraintsEntity scheduleConstraints)
         update,
-    required TResult Function() fetchAll,
-    required TResult Function(String id) fetchByTaskId,
+    required TResult Function() get,
+    required TResult Function(String id) getByTaskId,
     required TResult Function(String id) delete,
   }) {
     return delete(id);
@@ -956,8 +954,8 @@ class _$DeleteImpl implements _Delete {
     TResult? Function()? started,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult? Function()? fetchAll,
-    TResult? Function(String id)? fetchByTaskId,
+    TResult? Function()? get,
+    TResult? Function(String id)? getByTaskId,
     TResult? Function(String id)? delete,
   }) {
     return delete?.call(id);
@@ -969,8 +967,8 @@ class _$DeleteImpl implements _Delete {
     TResult Function()? started,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? create,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? update,
-    TResult Function()? fetchAll,
-    TResult Function(String id)? fetchByTaskId,
+    TResult Function()? get,
+    TResult Function(String id)? getByTaskId,
     TResult Function(String id)? delete,
     required TResult orElse(),
   }) {
@@ -986,8 +984,8 @@ class _$DeleteImpl implements _Delete {
     required TResult Function(_Started value) started,
     required TResult Function(_Create value) create,
     required TResult Function(_Update value) update,
-    required TResult Function(_FetchAll value) fetchAll,
-    required TResult Function(_FetchByTaskId value) fetchByTaskId,
+    required TResult Function(_Get value) get,
+    required TResult Function(_GetByTaskId value) getByTaskId,
     required TResult Function(_Delete value) delete,
   }) {
     return delete(this);
@@ -999,8 +997,8 @@ class _$DeleteImpl implements _Delete {
     TResult? Function(_Started value)? started,
     TResult? Function(_Create value)? create,
     TResult? Function(_Update value)? update,
-    TResult? Function(_FetchAll value)? fetchAll,
-    TResult? Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult? Function(_Get value)? get,
+    TResult? Function(_GetByTaskId value)? getByTaskId,
     TResult? Function(_Delete value)? delete,
   }) {
     return delete?.call(this);
@@ -1012,8 +1010,8 @@ class _$DeleteImpl implements _Delete {
     TResult Function(_Started value)? started,
     TResult Function(_Create value)? create,
     TResult Function(_Update value)? update,
-    TResult Function(_FetchAll value)? fetchAll,
-    TResult Function(_FetchByTaskId value)? fetchByTaskId,
+    TResult Function(_Get value)? get,
+    TResult Function(_GetByTaskId value)? getByTaskId,
     TResult Function(_Delete value)? delete,
     required TResult orElse(),
   }) {
@@ -1048,9 +1046,9 @@ mixin _$ScheduleConstraintsManagerState {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -1062,9 +1060,9 @@ mixin _$ScheduleConstraintsManagerState {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -1076,9 +1074,9 @@ mixin _$ScheduleConstraintsManagerState {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) =>
@@ -1090,8 +1088,8 @@ mixin _$ScheduleConstraintsManagerState {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -1102,8 +1100,8 @@ mixin _$ScheduleConstraintsManagerState {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) =>
       throw _privateConstructorUsedError;
@@ -1114,8 +1112,8 @@ mixin _$ScheduleConstraintsManagerState {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) =>
@@ -1195,9 +1193,9 @@ class _$InitialImpl implements _Initial {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return initial();
@@ -1212,9 +1210,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return initial?.call();
@@ -1229,9 +1227,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -1249,8 +1247,8 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return initial(this);
@@ -1264,8 +1262,8 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return initial?.call(this);
@@ -1279,8 +1277,8 @@ class _$InitialImpl implements _Initial {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
@@ -1344,9 +1342,9 @@ class _$LoadingImpl implements _Loading {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return loading();
@@ -1361,9 +1359,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return loading?.call();
@@ -1378,9 +1376,9 @@ class _$LoadingImpl implements _Loading {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -1398,8 +1396,8 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return loading(this);
@@ -1413,8 +1411,8 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return loading?.call(this);
@@ -1428,8 +1426,8 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
@@ -1523,9 +1521,9 @@ class _$FailedActionStateImpl implements _FailedActionState {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return failedAction(errorMessage);
@@ -1540,9 +1538,9 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return failedAction?.call(errorMessage);
@@ -1557,9 +1555,9 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -1577,8 +1575,8 @@ class _$FailedActionStateImpl implements _FailedActionState {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return failedAction(this);
@@ -1592,8 +1590,8 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return failedAction?.call(this);
@@ -1607,8 +1605,8 @@ class _$FailedActionStateImpl implements _FailedActionState {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
@@ -1708,9 +1706,9 @@ class _$CreatedImpl implements _Created {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return created(id);
@@ -1725,9 +1723,9 @@ class _$CreatedImpl implements _Created {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return created?.call(id);
@@ -1742,9 +1740,9 @@ class _$CreatedImpl implements _Created {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -1762,8 +1760,8 @@ class _$CreatedImpl implements _Created {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return created(this);
@@ -1777,8 +1775,8 @@ class _$CreatedImpl implements _Created {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return created?.call(this);
@@ -1792,8 +1790,8 @@ class _$CreatedImpl implements _Created {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
@@ -1893,9 +1891,9 @@ class _$UpdatedImpl implements _Updated {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return updated(scheduleConstraints);
@@ -1910,9 +1908,9 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return updated?.call(scheduleConstraints);
@@ -1927,9 +1925,9 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -1947,8 +1945,8 @@ class _$UpdatedImpl implements _Updated {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return updated(this);
@@ -1962,8 +1960,8 @@ class _$UpdatedImpl implements _Updated {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return updated?.call(this);
@@ -1977,8 +1975,8 @@ class _$UpdatedImpl implements _Updated {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
@@ -2003,20 +2001,20 @@ abstract class _Updated implements ScheduleConstraintsManagerState {
 }
 
 /// @nodoc
-abstract class _$$FetchedAllImplCopyWith<$Res> {
-  factory _$$FetchedAllImplCopyWith(
-          _$FetchedAllImpl value, $Res Function(_$FetchedAllImpl) then) =
-      __$$FetchedAllImplCopyWithImpl<$Res>;
+abstract class _$$GetedAllImplCopyWith<$Res> {
+  factory _$$GetedAllImplCopyWith(
+          _$GetedAllImpl value, $Res Function(_$GetedAllImpl) then) =
+      __$$GetedAllImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<ScheduleConstraintsEntity> scheduleConstraintsList});
 }
 
 /// @nodoc
-class __$$FetchedAllImplCopyWithImpl<$Res>
-    extends _$ScheduleConstraintsManagerStateCopyWithImpl<$Res,
-        _$FetchedAllImpl> implements _$$FetchedAllImplCopyWith<$Res> {
-  __$$FetchedAllImplCopyWithImpl(
-      _$FetchedAllImpl _value, $Res Function(_$FetchedAllImpl) _then)
+class __$$GetedAllImplCopyWithImpl<$Res>
+    extends _$ScheduleConstraintsManagerStateCopyWithImpl<$Res, _$GetedAllImpl>
+    implements _$$GetedAllImplCopyWith<$Res> {
+  __$$GetedAllImplCopyWithImpl(
+      _$GetedAllImpl _value, $Res Function(_$GetedAllImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ScheduleConstraintsManagerState
@@ -2026,7 +2024,7 @@ class __$$FetchedAllImplCopyWithImpl<$Res>
   $Res call({
     Object? scheduleConstraintsList = null,
   }) {
-    return _then(_$FetchedAllImpl(
+    return _then(_$GetedAllImpl(
       null == scheduleConstraintsList
           ? _value._scheduleConstraintsList
           : scheduleConstraintsList // ignore: cast_nullable_to_non_nullable
@@ -2037,8 +2035,8 @@ class __$$FetchedAllImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchedAllImpl implements _FetchedAll {
-  const _$FetchedAllImpl(
+class _$GetedAllImpl implements _GetedAll {
+  const _$GetedAllImpl(
       final List<ScheduleConstraintsEntity> scheduleConstraintsList)
       : _scheduleConstraintsList = scheduleConstraintsList;
 
@@ -2053,14 +2051,14 @@ class _$FetchedAllImpl implements _FetchedAll {
 
   @override
   String toString() {
-    return 'ScheduleConstraintsManagerState.fetchedAll(scheduleConstraintsList: $scheduleConstraintsList)';
+    return 'ScheduleConstraintsManagerState.loadedAll(scheduleConstraintsList: $scheduleConstraintsList)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchedAllImpl &&
+            other is _$GetedAllImpl &&
             const DeepCollectionEquality().equals(
                 other._scheduleConstraintsList, _scheduleConstraintsList));
   }
@@ -2074,8 +2072,8 @@ class _$FetchedAllImpl implements _FetchedAll {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchedAllImplCopyWith<_$FetchedAllImpl> get copyWith =>
-      __$$FetchedAllImplCopyWithImpl<_$FetchedAllImpl>(this, _$identity);
+  _$$GetedAllImplCopyWith<_$GetedAllImpl> get copyWith =>
+      __$$GetedAllImplCopyWithImpl<_$GetedAllImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2088,12 +2086,12 @@ class _$FetchedAllImpl implements _FetchedAll {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
-    return fetchedAll(scheduleConstraintsList);
+    return loadedAll(scheduleConstraintsList);
   }
 
   @override
@@ -2105,12 +2103,12 @@ class _$FetchedAllImpl implements _FetchedAll {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
-    return fetchedAll?.call(scheduleConstraintsList);
+    return loadedAll?.call(scheduleConstraintsList);
   }
 
   @override
@@ -2122,14 +2120,14 @@ class _$FetchedAllImpl implements _FetchedAll {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
-    if (fetchedAll != null) {
-      return fetchedAll(scheduleConstraintsList);
+    if (loadedAll != null) {
+      return loadedAll(scheduleConstraintsList);
     }
     return orElse();
   }
@@ -2142,11 +2140,11 @@ class _$FetchedAllImpl implements _FetchedAll {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
-    return fetchedAll(this);
+    return loadedAll(this);
   }
 
   @override
@@ -2157,11 +2155,11 @@ class _$FetchedAllImpl implements _FetchedAll {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
-    return fetchedAll?.call(this);
+    return loadedAll?.call(this);
   }
 
   @override
@@ -2172,47 +2170,47 @@ class _$FetchedAllImpl implements _FetchedAll {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
-    if (fetchedAll != null) {
-      return fetchedAll(this);
+    if (loadedAll != null) {
+      return loadedAll(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchedAll implements ScheduleConstraintsManagerState {
-  const factory _FetchedAll(
+abstract class _GetedAll implements ScheduleConstraintsManagerState {
+  const factory _GetedAll(
           final List<ScheduleConstraintsEntity> scheduleConstraintsList) =
-      _$FetchedAllImpl;
+      _$GetedAllImpl;
 
   List<ScheduleConstraintsEntity> get scheduleConstraintsList;
 
   /// Create a copy of ScheduleConstraintsManagerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchedAllImplCopyWith<_$FetchedAllImpl> get copyWith =>
+  _$$GetedAllImplCopyWith<_$GetedAllImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FetchedByTaskIdImplCopyWith<$Res> {
-  factory _$$FetchedByTaskIdImplCopyWith(_$FetchedByTaskIdImpl value,
-          $Res Function(_$FetchedByTaskIdImpl) then) =
-      __$$FetchedByTaskIdImplCopyWithImpl<$Res>;
+abstract class _$$GetedByTaskIdImplCopyWith<$Res> {
+  factory _$$GetedByTaskIdImplCopyWith(
+          _$GetedByTaskIdImpl value, $Res Function(_$GetedByTaskIdImpl) then) =
+      __$$GetedByTaskIdImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ScheduleConstraintsEntity? scheduleConstraints});
 }
 
 /// @nodoc
-class __$$FetchedByTaskIdImplCopyWithImpl<$Res>
+class __$$GetedByTaskIdImplCopyWithImpl<$Res>
     extends _$ScheduleConstraintsManagerStateCopyWithImpl<$Res,
-        _$FetchedByTaskIdImpl> implements _$$FetchedByTaskIdImplCopyWith<$Res> {
-  __$$FetchedByTaskIdImplCopyWithImpl(
-      _$FetchedByTaskIdImpl _value, $Res Function(_$FetchedByTaskIdImpl) _then)
+        _$GetedByTaskIdImpl> implements _$$GetedByTaskIdImplCopyWith<$Res> {
+  __$$GetedByTaskIdImplCopyWithImpl(
+      _$GetedByTaskIdImpl _value, $Res Function(_$GetedByTaskIdImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ScheduleConstraintsManagerState
@@ -2222,7 +2220,7 @@ class __$$FetchedByTaskIdImplCopyWithImpl<$Res>
   $Res call({
     Object? scheduleConstraints = freezed,
   }) {
-    return _then(_$FetchedByTaskIdImpl(
+    return _then(_$GetedByTaskIdImpl(
       freezed == scheduleConstraints
           ? _value.scheduleConstraints
           : scheduleConstraints // ignore: cast_nullable_to_non_nullable
@@ -2233,22 +2231,22 @@ class __$$FetchedByTaskIdImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
-  const _$FetchedByTaskIdImpl(this.scheduleConstraints);
+class _$GetedByTaskIdImpl implements _GetedByTaskId {
+  const _$GetedByTaskIdImpl(this.scheduleConstraints);
 
   @override
   final ScheduleConstraintsEntity? scheduleConstraints;
 
   @override
   String toString() {
-    return 'ScheduleConstraintsManagerState.fetchedByTaskId(scheduleConstraints: $scheduleConstraints)';
+    return 'ScheduleConstraintsManagerState.loadedByTaskId(scheduleConstraints: $scheduleConstraints)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchedByTaskIdImpl &&
+            other is _$GetedByTaskIdImpl &&
             (identical(other.scheduleConstraints, scheduleConstraints) ||
                 other.scheduleConstraints == scheduleConstraints));
   }
@@ -2261,9 +2259,8 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$FetchedByTaskIdImplCopyWith<_$FetchedByTaskIdImpl> get copyWith =>
-      __$$FetchedByTaskIdImplCopyWithImpl<_$FetchedByTaskIdImpl>(
-          this, _$identity);
+  _$$GetedByTaskIdImplCopyWith<_$GetedByTaskIdImpl> get copyWith =>
+      __$$GetedByTaskIdImplCopyWithImpl<_$GetedByTaskIdImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2276,12 +2273,12 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
-    return fetchedByTaskId(scheduleConstraints);
+    return loadedByTaskId(scheduleConstraints);
   }
 
   @override
@@ -2293,12 +2290,12 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
-    return fetchedByTaskId?.call(scheduleConstraints);
+    return loadedByTaskId?.call(scheduleConstraints);
   }
 
   @override
@@ -2310,14 +2307,14 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
-    if (fetchedByTaskId != null) {
-      return fetchedByTaskId(scheduleConstraints);
+    if (loadedByTaskId != null) {
+      return loadedByTaskId(scheduleConstraints);
     }
     return orElse();
   }
@@ -2330,11 +2327,11 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
-    return fetchedByTaskId(this);
+    return loadedByTaskId(this);
   }
 
   @override
@@ -2345,11 +2342,11 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
-    return fetchedByTaskId?.call(this);
+    return loadedByTaskId?.call(this);
   }
 
   @override
@@ -2360,29 +2357,29 @@ class _$FetchedByTaskIdImpl implements _FetchedByTaskId {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {
-    if (fetchedByTaskId != null) {
-      return fetchedByTaskId(this);
+    if (loadedByTaskId != null) {
+      return loadedByTaskId(this);
     }
     return orElse();
   }
 }
 
-abstract class _FetchedByTaskId implements ScheduleConstraintsManagerState {
-  const factory _FetchedByTaskId(
+abstract class _GetedByTaskId implements ScheduleConstraintsManagerState {
+  const factory _GetedByTaskId(
           final ScheduleConstraintsEntity? scheduleConstraints) =
-      _$FetchedByTaskIdImpl;
+      _$GetedByTaskIdImpl;
 
   ScheduleConstraintsEntity? get scheduleConstraints;
 
   /// Create a copy of ScheduleConstraintsManagerState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$FetchedByTaskIdImplCopyWith<_$FetchedByTaskIdImpl> get copyWith =>
+  _$$GetedByTaskIdImplCopyWith<_$GetedByTaskIdImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2435,9 +2432,9 @@ class _$DeletedImpl implements _Deleted {
         updated,
     required TResult Function(
             List<ScheduleConstraintsEntity> scheduleConstraintsList)
-        fetchedAll,
+        loadedAll,
     required TResult Function(ScheduleConstraintsEntity? scheduleConstraints)
-        fetchedByTaskId,
+        loadedByTaskId,
     required TResult Function() deleted,
   }) {
     return deleted();
@@ -2452,9 +2449,9 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(String id)? created,
     TResult? Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult? Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult? Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult? Function()? deleted,
   }) {
     return deleted?.call();
@@ -2469,9 +2466,9 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(String id)? created,
     TResult Function(ScheduleConstraintsEntity scheduleConstraints)? updated,
     TResult Function(List<ScheduleConstraintsEntity> scheduleConstraintsList)?
-        fetchedAll,
+        loadedAll,
     TResult Function(ScheduleConstraintsEntity? scheduleConstraints)?
-        fetchedByTaskId,
+        loadedByTaskId,
     TResult Function()? deleted,
     required TResult orElse(),
   }) {
@@ -2489,8 +2486,8 @@ class _$DeletedImpl implements _Deleted {
     required TResult Function(_FailedActionState value) failedAction,
     required TResult Function(_Created value) created,
     required TResult Function(_Updated value) updated,
-    required TResult Function(_FetchedAll value) fetchedAll,
-    required TResult Function(_FetchedByTaskId value) fetchedByTaskId,
+    required TResult Function(_GetedAll value) loadedAll,
+    required TResult Function(_GetedByTaskId value) loadedByTaskId,
     required TResult Function(_Deleted value) deleted,
   }) {
     return deleted(this);
@@ -2504,8 +2501,8 @@ class _$DeletedImpl implements _Deleted {
     TResult? Function(_FailedActionState value)? failedAction,
     TResult? Function(_Created value)? created,
     TResult? Function(_Updated value)? updated,
-    TResult? Function(_FetchedAll value)? fetchedAll,
-    TResult? Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult? Function(_GetedAll value)? loadedAll,
+    TResult? Function(_GetedByTaskId value)? loadedByTaskId,
     TResult? Function(_Deleted value)? deleted,
   }) {
     return deleted?.call(this);
@@ -2519,8 +2516,8 @@ class _$DeletedImpl implements _Deleted {
     TResult Function(_FailedActionState value)? failedAction,
     TResult Function(_Created value)? created,
     TResult Function(_Updated value)? updated,
-    TResult Function(_FetchedAll value)? fetchedAll,
-    TResult Function(_FetchedByTaskId value)? fetchedByTaskId,
+    TResult Function(_GetedAll value)? loadedAll,
+    TResult Function(_GetedByTaskId value)? loadedByTaskId,
     TResult Function(_Deleted value)? deleted,
     required TResult orElse(),
   }) {

@@ -5,8 +5,8 @@ import 'package:zamaan/domain/enums/hive/priority.dart';
 import 'package:zamaan/domain/enums/hive/task_status.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/tasks/tasks_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/task/sub_task_upsert_vm.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/action_buttons.dart';
-import 'package:zamaan/features/tasks_management/presentation/widgets/dropdown_button.dart';
+import 'package:zamaan/presentation_shared/widgets/action_buttons.dart';
+import 'package:zamaan/presentation_shared/widgets/dropdown_button.dart';
 
 class SubTaskUpsertFormWidget extends StatefulWidget {
   const SubTaskUpsertFormWidget({super.key});
@@ -50,7 +50,7 @@ class _SubTaskUpsertFormWidgetState extends State<SubTaskUpsertFormWidget> {
     return Column(
       children: [
         16.sizedBoxHeight,
-        Text(subTaskVM.viewStates.widgetTitle,
+        Text(subTaskVM.viewStates.widgetTitle(subTaskVM.isNewItem.value),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         16.sizedBoxHeight,
         Row(
@@ -126,24 +126,34 @@ class _SubTaskUpsertFormWidgetState extends State<SubTaskUpsertFormWidget> {
                     ),
                   ),
                   16.sizedBoxHeight,
-                  ActionButtonsWidget(
-                    viewStates: subTaskVM.viewStates,
-                    onSubmit: () => tasksManagerBloc.add(
-                      TasksManagerEvent.createSubTask(
-                        newSubTask: subTaskVM.toEntity,
-                      ),
-                    ),
-                    onUpdate: () => tasksManagerBloc.add(
-                      TasksManagerEvent.updateSubTask(
-                        subTask: subTaskVM.toEntity,
-                      ),
-                    ),
-                    onDelete: () => tasksManagerBloc.add(
-                      TasksManagerEvent.deleteSubTask(
-                        subTaskId: subTaskVM.id!,
-                      ),
-                    ),
-                    onReset: subTaskVM.resetValues,
+
+                  Selector<SubTaskUpsertVM, bool>(
+                    selector: (_, vm) => vm.isNewItem.value,
+                    builder: (_, isNewItem, __) {
+                      return ActionButtonsWidget(
+                        viewStates: subTaskVM.viewStates,
+                        onSubmit: () => tasksManagerBloc.add(
+                          TasksManagerEvent.createSubTask(
+                            newSubTask: subTaskVM.toEntity,
+                          ),
+                        ),
+                        onUpdate: () => tasksManagerBloc.add(
+                          TasksManagerEvent.updateSubTask(
+                            subTask: subTaskVM.toEntity,
+                          ),
+                        ),
+                        onDelete: () {
+                          subTaskVM.markAsSoftRemoved();
+                          tasksManagerBloc.add(
+                            TasksManagerEvent.deleteSubTask(
+                              subTaskId: subTaskVM.id!,
+                            ),
+                          );
+                        },
+                        onReset: subTaskVM.resetValues,
+                        isNewItem: isNewItem,
+                      );
+                    },
                   ),
                   16.sizedBoxHeight,
                 ],

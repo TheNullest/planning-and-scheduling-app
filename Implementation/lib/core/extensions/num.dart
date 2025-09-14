@@ -16,4 +16,6 @@ extension DoubleToSpaceExtension on num? {
 
   Widget get sliverSizedBoxHeight => SliverToBoxAdapter(child: sizedBoxHeight);
   Widget get sliverSizedBoxWidth => SliverToBoxAdapter(child: sizedBoxWidth);
+
+  int get asColorAlpha => (this! * 255).toInt();
 }

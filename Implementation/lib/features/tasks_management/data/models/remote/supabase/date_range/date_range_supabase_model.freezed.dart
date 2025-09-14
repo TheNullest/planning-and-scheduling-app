@@ -28,10 +28,10 @@ mixin _$DateRangeSupabaseModel {
   String get parentId => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'start_at')
-  DateTime? get start => throw _privateConstructorUsedError;
-  @JsonKey(name: 'end_at')
-  DateTime? get end => throw _privateConstructorUsedError;
+  @JsonKey(name: 'start_date')
+  DateTime? get startDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_date')
+  DateTime? get endDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
 
@@ -56,8 +56,8 @@ abstract class $DateRangeSupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'parent_id') String parentId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'start_at') DateTime? start,
-      @JsonKey(name: 'end_at') DateTime? end,
+      @JsonKey(name: 'start_date') DateTime? startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -81,8 +81,8 @@ class _$DateRangeSupabaseModelCopyWithImpl<$Res,
     Object? userId = null,
     Object? parentId = null,
     Object? createdAt = null,
-    Object? start = freezed,
-    Object? end = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -102,13 +102,13 @@ class _$DateRangeSupabaseModelCopyWithImpl<$Res,
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -132,8 +132,8 @@ abstract class _$$DateRangeSupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'parent_id') String parentId,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'start_at') DateTime? start,
-      @JsonKey(name: 'end_at') DateTime? end,
+      @JsonKey(name: 'start_date') DateTime? startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
 
@@ -156,8 +156,8 @@ class __$$DateRangeSupabaseModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? parentId = null,
     Object? createdAt = null,
-    Object? start = freezed,
-    Object? end = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
     Object? updatedAt = freezed,
   }) {
     return _then(_$DateRangeSupabaseModelImpl(
@@ -177,13 +177,13 @@ class __$$DateRangeSupabaseModelImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      start: freezed == start
-          ? _value.start
-          : start // ignore: cast_nullable_to_non_nullable
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      end: freezed == end
-          ? _value.end
-          : end // ignore: cast_nullable_to_non_nullable
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       updatedAt: freezed == updatedAt
           ? _value.updatedAt
@@ -201,8 +201,8 @@ class _$DateRangeSupabaseModelImpl implements _DateRangeSupabaseModel {
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'parent_id') required this.parentId,
       @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'start_at') this.start,
-      @JsonKey(name: 'end_at') this.end,
+      @JsonKey(name: 'start_date') this.startDate,
+      @JsonKey(name: 'end_date') this.endDate,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
   factory _$DateRangeSupabaseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -220,18 +220,18 @@ class _$DateRangeSupabaseModelImpl implements _DateRangeSupabaseModel {
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
-  @JsonKey(name: 'start_at')
-  final DateTime? start;
+  @JsonKey(name: 'start_date')
+  final DateTime? startDate;
   @override
-  @JsonKey(name: 'end_at')
-  final DateTime? end;
+  @JsonKey(name: 'end_date')
+  final DateTime? endDate;
   @override
   @JsonKey(name: 'updated_at')
   final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'DateRangeSupabaseModel(id: $id, userId: $userId, parentId: $parentId, createdAt: $createdAt, start: $start, end: $end, updatedAt: $updatedAt)';
+    return 'DateRangeSupabaseModel(id: $id, userId: $userId, parentId: $parentId, createdAt: $createdAt, startDate: $startDate, endDate: $endDate, updatedAt: $updatedAt)';
   }
 
   @override
@@ -245,16 +245,17 @@ class _$DateRangeSupabaseModelImpl implements _DateRangeSupabaseModel {
                 other.parentId == parentId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.start, start) || other.start == start) &&
-            (identical(other.end, end) || other.end == end) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, userId, parentId, createdAt, start, end, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, userId, parentId, createdAt,
+      startDate, endDate, updatedAt);
 
   /// Create a copy of DateRangeSupabaseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -279,8 +280,8 @@ abstract class _DateRangeSupabaseModel implements DateRangeSupabaseModel {
           @JsonKey(name: 'user_id') required final String userId,
           @JsonKey(name: 'parent_id') required final String parentId,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
-          @JsonKey(name: 'start_at') final DateTime? start,
-          @JsonKey(name: 'end_at') final DateTime? end,
+          @JsonKey(name: 'start_date') final DateTime? startDate,
+          @JsonKey(name: 'end_date') final DateTime? endDate,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$DateRangeSupabaseModelImpl;
 
@@ -299,11 +300,11 @@ abstract class _DateRangeSupabaseModel implements DateRangeSupabaseModel {
   @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  @JsonKey(name: 'start_at')
-  DateTime? get start;
+  @JsonKey(name: 'start_date')
+  DateTime? get startDate;
   @override
-  @JsonKey(name: 'end_at')
-  DateTime? get end;
+  @JsonKey(name: 'end_date')
+  DateTime? get endDate;
   @override
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt;

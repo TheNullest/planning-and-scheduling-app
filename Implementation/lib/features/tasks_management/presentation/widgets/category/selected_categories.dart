@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:zamaan/core/extensions/num.dart';
 import 'package:zamaan/features/tasks_management/presentation/blocs/categories/categories_manager_bloc.dart';
 import 'package:zamaan/features/tasks_management/presentation/dialogs/custom_show_modal_bottom_sheet.dart';
+import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_upsert_vm.dart';
 import 'package:zamaan/features/tasks_management/presentation/viewmodels/category/category_vms_manager.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/category/categories_chip_list.dart';
 import 'package:zamaan/features/tasks_management/presentation/widgets/category/category_chip.dart';
@@ -21,11 +22,11 @@ class SelectedCategoriesWidget extends StatelessWidget {
     return BlocListener<CategoriesManagerBloc, CategoriesManagerState>(
         listenWhen: (pervious, current) => current != pervious,
         listener: (context, state) => state.maybeWhen(
-            fetched: (cats) => categoryVMsManager
+            loaded: (cats) => categoryVMsManager
               ..initItems(cats)
-              ..initSelectedItems(selectedIds),
+              ..initSelectedItems(itemIds: selectedIds),
             created: (cat) {
-              categoryVMsManager.addNewPersistedItem(cat);
+              categoryVMsManager.onEntityCreated(cat);
               Navigator.pop(context);
               return;
             },
@@ -33,14 +34,14 @@ class SelectedCategoriesWidget extends StatelessWidget {
             deleted: (_) => Navigator.pop(context),
             orElse: () => null),
         child: SingleChildScrollView(
-          child: Selector<CategoryVmsManager, bool>(
-              selector: (_, vmsCategory) => vmsCategory.listUpdated,
-              builder: (_, __, ___) {
+          child: Selector<CategoryVmsManager, List<CategoryUpsertVM>>(
+              selector: (_, vmsCategory) => vmsCategory.selectedItems,
+              builder: (_, selectedCategories, ___) {
                 return Column(
                   children: [
                     Wrap(
                       children: [
-                        ...categoryVMsManager.selectedItems.map(
+                        ...selectedCategories.map(
                           (category) => CategoryChipWidget(
                             category: category,
                           ),
@@ -54,7 +55,10 @@ class SelectedCategoriesWidget extends StatelessWidget {
                             : 'Add More Categories'),
                         icon: const Icon(Icons.add),
                         onPressed: () async => customShowModalBottomSheetDialog<CategoryVmsManager>(
-                            context, categoryVMsManager, const CategoriesChipList())),
+                              context,
+                              categoryVMsManager,
+                              const CategoriesChipList(),
+                            )),
                   ],
                 );
               }),

@@ -13,41 +13,35 @@ class ScheduleConstraintsEntity extends BaseEntityAbstraction {
   /// Constructs a [ScheduleConstraintsEntity] with the given parameters.
   ///
   /// - [taskId]: The ID of the main task associated with this schedule.
-  /// - [startAt]: Defines the start and end dates for the schedule.
+  /// - [startDate]: Defines the start and end dates for the schedule.
   ScheduleConstraintsEntity({
     required super.userId,
     required super.createdAt,
     required super.description,
     required this.taskId,
     required this.enforceScheduleBounds,
-    required this.timeRangeExceptionIds,
-    required this.dateRangeExceptionIds,
-    required this.dateExceptions,
-    required this.weekDayExceptions,
-    required this.monthDayExceptions,
-    super.updatedAt,
-    this.startAt,
-    this.endAt,
-    super.id,
+    required this.exceptionDates,
+    required this.exceptionWeekDays,
+    required this.exceptionMonthDays,
+    required super.id, super.updatedAt,
+    this.startDate,
+    this.endDate,
   });
 
   /// The [taskId] of the main task associated with this schedule.
   final String taskId;
 
-  /// The [startAt] during which the schedule is active.
+  /// The [startDate] during which the schedule is active.
   ///
   /// This object encapsulates both the start and end times for the schedule.
-  final DateTime? startAt;
+  final DateTime? startDate;
 
-  final DateTime? endAt;
+  final DateTime? endDate;
 
-  final List<String> timeRangeExceptionIds;
-  final List<String> dateRangeExceptionIds;
+  final List<DateTime> exceptionDates;
 
-  final List<DateTime> dateExceptions;
-
-  final List<WeekDay> weekDayExceptions;
-  final List<int> monthDayExceptions;
+  final List<WeekDay> exceptionWeekDays;
+  final List<int> exceptionMonthDays;
 
   final bool enforceScheduleBounds;
 
@@ -62,13 +56,11 @@ class ScheduleConstraintsEntity extends BaseEntityAbstraction {
     DateTime? updatedAt,
     String? description,
     String? taskId,
-    DateTime? startAt,
-    DateTime? endAt,
-    List<String>? timeRangeExceptionIds,
-    List<String>? dateRangeExceptionIds,
-    List<DateTime>? dateExceptions,
-    List<WeekDay>? weekDayExceptions,
-    List<int>? monthDayExceptions,
+    DateTime? startDate,
+    DateTime? endDate,
+    List<DateTime>? exceptionDates,
+    List<WeekDay>? exceptionWeekDays,
+    List<int>? exceptionMonthDays,
     bool? enforceScheduleBounds,
   }) {
     return ScheduleConstraintsEntity(
@@ -78,13 +70,11 @@ class ScheduleConstraintsEntity extends BaseEntityAbstraction {
       updatedAt: updatedAt ?? this.updatedAt,
       description: description ?? this.description,
       taskId: taskId ?? this.taskId,
-      startAt: startAt ?? this.startAt,
-      endAt: endAt ?? this.endAt,
-      timeRangeExceptionIds: timeRangeExceptionIds ?? List.from(this.timeRangeExceptionIds),
-      dateRangeExceptionIds: dateRangeExceptionIds ?? List.from(this.dateRangeExceptionIds),
-      dateExceptions: dateExceptions ?? List.from(this.dateExceptions),
-      weekDayExceptions: weekDayExceptions ?? List.from(this.weekDayExceptions),
-      monthDayExceptions: monthDayExceptions ?? List.from(this.monthDayExceptions),
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+      exceptionDates: exceptionDates ?? List.from(this.exceptionDates),
+      exceptionWeekDays: exceptionWeekDays ?? List.from(this.exceptionWeekDays),
+      exceptionMonthDays: exceptionMonthDays ?? List.from(this.exceptionMonthDays),
       enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
     );
   }
@@ -96,12 +86,10 @@ class ScheduleConstraintsEntity extends BaseEntityAbstraction {
   List<Object?> get props => [
         ...super.props,
         taskId,
-        startAt,
+        startDate,
         enforceScheduleBounds,
-        dateRangeExceptionIds,
-        timeRangeExceptionIds,
-        weekDayExceptions,
-        monthDayExceptions,
-        dateExceptions,
+        exceptionWeekDays,
+        exceptionMonthDays,
+        exceptionDates,
       ];
 }

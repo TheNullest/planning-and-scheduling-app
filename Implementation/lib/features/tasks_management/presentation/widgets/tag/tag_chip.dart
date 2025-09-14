@@ -17,10 +17,10 @@ class TagChipWidget extends StatelessWidget {
 
     return ChangeNotifierProvider<TagUpsertVM>.value(
       value: tag,
-      child: ValueListenableBuilder<bool>(
+      child: ValueListenableBuilder<bool?>(
         valueListenable: tag.isSelected,
         builder: (_, isSelected, __) {
-          final chipBgColor = isSelected
+          final chipBgColor = isSelected!
               ? tagVM.color
               : Color.lerp(tagVM.color, Colors.black, 0.8)!; // 0.8 makes it much darker
           final brightness = ThemeData.estimateBrightnessForColor(chipBgColor);

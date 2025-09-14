@@ -1,91 +1,53 @@
 import 'package:zamaan/core/utils/typedef.dart';
 
-/// Abstract base repository interface for managing entities in local and remote data sources.
+/// Abstract base repository interface for managing domain entities with flexible data source strategy.
 ///
-/// This repository provides methods for basic CRUD operations and supports
-/// flexibility in choosing between local and remote data sources for each operation.
+/// This repository defines the contract for basic CRUD operations and supports
+/// configurable data source strategies (local, remote, or both) for each operation.
+/// It serves as the foundation for all domain-specific repositories in the application.
+///
+/// ## Key Features:
+/// - **Flexible Data Sources**: Each operation can use local, remote, or both data sources
+/// - **Comprehensive CRUD**: Full create, read, update, delete functionality
+/// - **Batch Operations**: Efficient bulk operations for multiple entities
+/// - **Error Handling**: Consistent error handling via [EResult] types
 ///
 /// ▸ **Type Parameter:**
-///   - **[Entity]**: The type of the domain entity managed by the repository.
+///   - **[Entity]**: The domain entity type managed by this repository
+///
+/// ## Implementation Notes:
+/// - Extend this class to create domain-specific repositories
+/// - Override methods to provide entity-specific business logic
+/// - Use [EResult] types for consistent error handling
+/// - Consider data synchronization between local and remote sources
 abstract class BaseRepository<Entity> {
-  /// Retrieves all entities from local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  ///
-  /// **Returns:**
-  /// - A future containing a list of nullable entities.
-  EResultFuture<List<Entity>> getAll();
+  /// Retrieves all entities without filtering.
+  EResultFuture<List<Entity>> get();
 
-  /// Retrieves a single entity by its unique identifier from local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [id]: The unique identifier of the entity to retrieve.
-  ///
-  /// **Returns:**
-  /// - A future containing the nullable entity.
+  /// Retrieves a single entity by ID. Returns null if not found.
   EResultFuture<Entity?> getById(String id);
 
-  /// Retrieves multiple entities by their unique identifiers from local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [ids]: The list of unique identifiers for the entities to retrieve.
-  ///
-  /// **Returns:**
-  /// - A future containing a list of nullable entities.
+  /// Retrieves multiple entities by their IDs.
   EResultFuture<List<Entity>> getByIds(List<String> ids);
 
-  /// Creates a single entity in local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [entity]: The entity to create.
-  ///
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Creates a new entity. Returns the generated ID.
   EResultFuture<String> create(Entity entity);
 
-  /// Updates a single entity in local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [entity]: The entity with updated data.
-  ///
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Updates an existing entity.
   EResultFutureVoid update(Entity entity);
 
-  /// Deletes a single entity by its unique identifier from local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [id]: The unique identifier of the entity to delete.
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Deletes a single entity by ID.
   EResultFutureVoid delete(String id);
 
-  /// Deletes multiple entities by their unique identifiers in local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [ids]: The list of unique identifiers for the entities to delete.
-  ///
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Deletes multiple entities by IDs.
   EResultFutureVoid deleteBatch(List<String> ids);
 
-  /// Creates multiple entities in a batch operation in local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [entities]: The list of entities to create.
-  ///
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Creates multiple entities in batch.
   EResultFutureVoid createBatch(List<Entity> entities);
 
-  /// Updates multiple entities in a batch operation in local, remote, or both data sources.
-  ///
-  /// **Parameters:**
-  /// - [entities]: The list of entities with updated data.
-  ///
-  /// **Returns:**
-  /// - A void future indicating success or failure of the operation.
+  /// Updates multiple entities in batch.
   EResultFutureVoid updateBatch(List<Entity> entities);
 
+  /// Checks if an entity with the given ID exists.
   EResultFuture<bool> exists(String id);
 }

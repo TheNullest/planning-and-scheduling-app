@@ -13,5 +13,5 @@ class GoalsManagerState with _$GoalsManagerState {
 
   const factory GoalsManagerState.deleted(String id) = _Deleted;
 
-  const factory GoalsManagerState.fetchedByRefIds(List<GoalEntity> goals) = _FetchedByRefIds;
+  const factory GoalsManagerState.loadedByRefIds(List<GoalEntity> goals) = _GetedByRefIds;
 }

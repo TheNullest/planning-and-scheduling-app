@@ -68,12 +68,15 @@ enum WeekDay {
     return inPersian ? item._inPersian : item.name;
   }
 
-  static WeekDay fromDateTimeIndex(int index) {
+  static String fromDateTimeIndex(int index) {
     if (index < 0 || index >= WeekDay.values.length) {
       throw Exception('The WeekDay index $index is not valid.');
     }
-    return WeekDay.values[index];
+    return WeekDay.values[index].name;
   }
+
+  /// Maps [WeekDay] enum values to short strings
+  String get threeWordsFormat => name.substring(0, 3);
 
   /// Returns the English name with proper capitalization.
   ///

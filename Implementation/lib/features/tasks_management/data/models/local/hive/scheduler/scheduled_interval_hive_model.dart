@@ -53,7 +53,6 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     required this.intervalValue,
     required this.repeatCount,
     required this.scheduledTimeIds,
-    required this.enforceScheduleBounds,
     required this.consecutiveOccurrences,
     required this.startDate,
     super.description,
@@ -81,12 +80,9 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
   final List<String> scheduledTimeIds;
 
   @HiveField(16)
-  final bool enforceScheduleBounds;
-
-  @HiveField(17)
   final DateTime startDate;
 
-  @HiveField(18)
+  @HiveField(17)
   final int consecutiveOccurrences;
 
   /// Returns a new instance of [ScheduledIntervalHiveModel] with updated values.
@@ -107,7 +103,6 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
     int? repeatCount,
     int? consecutiveOccurrences,
     List<String>? scheduledTimeIds,
-    bool? enforceScheduleBounds,
   }) {
     return ScheduledIntervalHiveModel(
       id: id ?? this.id,
@@ -119,7 +114,6 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
       intervalUnit: intervalUnit ?? this.intervalUnit,
       intervalValue: intervalValue ?? this.intervalValue,
       repeatCount: repeatCount ?? this.repeatCount,
-      enforceScheduleBounds: enforceScheduleBounds ?? this.enforceScheduleBounds,
       startDate: startDate ?? this.startDate,
       consecutiveOccurrences: consecutiveOccurrences ?? this.consecutiveOccurrences,
       scheduledTimeIds:
@@ -134,7 +128,6 @@ class ScheduledIntervalHiveModel extends BaseEntityAbstraction {
         intervalUnit,
         intervalValue,
         repeatCount,
-        enforceScheduleBounds,
         scheduledTimeIds,
         startDate,
         consecutiveOccurrences,

@@ -8,13 +8,12 @@ class CategoryVmsManager extends BaseVmsManager<CategoryEntity, CategoryUpsertVM
 
   @override
   void initItems(List<CategoryEntity> entities) {
-    items = entities.map((item) => CategoryUpsertVM.fromEntity(entity: item)).toList();
-    notifyListUpdated();
+    persistedItems = entities.map((item) => CategoryUpsertVM.fromEntity(entity: item)).toList();
+    notifyListeners();
   }
 
   @override
-  CategoryUpsertVM newItem([CategoryUpsertVM? item]) =>
-      super.newItem(CategoryUpsertVM(userId: userId));
+  CategoryUpsertVM newItem([CategoryUpsertVM? item]) => CategoryUpsertVM(userId: userId);
 
   @override
   CategoryUpsertVM toViewModel(CategoryEntity entity) =>

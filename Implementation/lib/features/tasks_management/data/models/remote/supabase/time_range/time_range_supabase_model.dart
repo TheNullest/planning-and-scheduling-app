@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:zamaan/domain/entities/date_time_ranges/time_range.dart';
+import 'package:zamaan/domain/entities/constraint_date_time_ranges/time_range.dart';
 
 part 'time_range_supabase_model.freezed.dart';
 part 'time_range_supabase_model.g.dart';

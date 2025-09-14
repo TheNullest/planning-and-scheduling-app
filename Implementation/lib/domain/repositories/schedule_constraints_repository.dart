@@ -4,19 +4,19 @@ import 'package:zamaan/domain/repositories/bases/base_repository.dart';
 
 abstract interface class ScheduleConstraintsRepository
     extends BaseRepository<ScheduleConstraintsEntity> {
-  // Additional search methods specific to ScheduledTimeEntity
+  // Additional search methods specific to ScheduleConstraintsEntity
 
   /// Retrieves scheduled times by the main task ID.
   ///
   /// - [taskId] - The ID of the main task.
-  /// Returns a `ResultFuture<ScheduledTimeEntity>` containing the matching scheduled times.
+  /// Returns a `ResultFuture<ScheduleConstraintsEntity>` containing the matching scheduled constraints.
   EResultFuture<ScheduleConstraintsEntity?> getByTaskId(String taskId);
 
   // /// Retrieves scheduled times by their start time.
   // ///
   // /// - [startTime] - The start time of the scheduled times.
   // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByStartTime(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByStartTime(
   //   DateTime startTime, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });
@@ -25,7 +25,7 @@ abstract interface class ScheduleConstraintsRepository
   // ///
   // /// - [repetitionType] - The repetition type of the scheduled times.
   // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByRepetitionType(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByRepetitionType(
   //   RepetitionType repetitionType, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });
@@ -42,7 +42,7 @@ abstract interface class ScheduleConstraintsRepository
   // /// - `5.TimeUnit.year`: Represents a year.
   // ///
   // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTimeUnit(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByTimeUnit(
   //   IntervalUnit timeUnit, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });
@@ -51,7 +51,7 @@ abstract interface class ScheduleConstraintsRepository
   // ///
   // /// [specificTimes] - The specific times of the scheduled times.
   // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchBySpecificTimes(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getBySpecificTimes(
   //   List<int> specificTimes, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });
@@ -60,14 +60,14 @@ abstract interface class ScheduleConstraintsRepository
   // ///
   // /// - [endTime] - The end time of the scheduled times.
   // /// Returns a `ResultFuture<List<ScheduledTimeEntity>>` containing the matching scheduled times.
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByDueDate(
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByDueDate(
   //   DateTime endTime, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });
 
-  // EResultFuture<List<ScheduleConstraintsEntity>> getBatchByTaskIdsAndDateRange({
+  // EResultFuture<List<ScheduleConstraintsEntity>> getByTaskIdsAndDateRange({
   //   required List<String> taskIds,
-  //   required DateTime? startAt,
+  //   required DateTime? startTime,
   //   required DateTime? dueDate,
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // });

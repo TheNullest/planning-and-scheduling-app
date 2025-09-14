@@ -71,7 +71,7 @@ abstract interface class DeviceRepository<T> {
 
   /// Retrieves a list of devices from the system.
   ///
-  /// The method fetches devices from the storage layer specified by the [isLocal(policy)] flag:
+  /// The method getes devices from the storage layer specified by the [isLocal(policy)] flag:
   /// - **Local Storage (Hive):** When [isLocal(policy)] is set to `true`, ensuring offline availability.
   /// - **Remote Database (Supabase):** When [isLocal(policy)] is set to `false` (this is the default),
   ///   relying on network-based data.
@@ -89,7 +89,7 @@ abstract interface class DeviceRepository<T> {
 
   /// Retrieves a specific device by its unique identifier.
   ///
-  /// This method fetches a single device record from the selected storage layer:
+  /// This method getes a single device record from the selected storage layer:
   /// - **Local Storage (Hive):** When [isLocal(policy)] is set to `true`, ensuring quick local access.
   /// - **Remote Database (Supabase):** When [isLocal(policy)] is set to `false` (default), requiring potential
   ///   network validations and error handling.

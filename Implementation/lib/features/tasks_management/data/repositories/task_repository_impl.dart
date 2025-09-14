@@ -32,19 +32,19 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   final NetworkConnectivityMonitorCubit _netConnectivity;
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchByCategories(
+  // EResultFuture<List<TaskEntity>> getByCategories(
   //   List<String> categoryIds, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByCategories(categoryIds);
+  //           final response = await _localDataSource.getByCategories(categoryIds);
   //           final result = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(result));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByCategories(categoryIds);
+  //           final response = await _remoteDataSource.getByCategories(categoryIds);
   //           final result = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(result));
   //         }
@@ -54,19 +54,19 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchByPriority(
+  // EResultFuture<List<TaskEntity>> getByPriority(
   //   Priority priority, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByPriority(priority);
+  //           final response = await _localDataSource.getByPriority(priority);
   //           final models = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByPriority(priority);
+  //           final response = await _remoteDataSource.getByPriority(priority);
   //           final models = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -76,19 +76,19 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchByStatus(
+  // EResultFuture<List<TaskEntity>> getByStatus(
   //   TaskStatus status, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByStatus(status);
+  //           final response = await _localDataSource.getByStatus(status);
   //           final models = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByStatus(status);
+  //           final response = await _remoteDataSource.getByStatus(status);
   //           final models = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }
@@ -98,19 +98,19 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchByTags(
+  // EResultFuture<List<TaskEntity>> getByTags(
   //   List<String> tagIds, {
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByFixedTags(tagIds);
+  //           final response = await _localDataSource.getByFixedTags(tagIds);
   //           final result = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(result));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByFixedTags(tagIds);
+  //           final response = await _remoteDataSource.getByFixedTags(tagIds);
   //           final result = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(result));
   //         }
@@ -120,7 +120,7 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchByDueDateRange({
+  // EResultFuture<List<TaskEntity>> getByDueDateRange({
   //   required DateTime dueDateFrom,
   //   required DateTime dueDateTo,
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
@@ -128,12 +128,12 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchByDueDateRange(dueDateFrom, dueDateTo);
+  //           final response = await _localDataSource.getByDueDateRange(dueDateFrom, dueDateTo);
   //           final result = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(result));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchByDueDateRange(dueDateFrom, dueDateTo);
+  //           final response = await _remoteDataSource.getByDueDateRange(dueDateFrom, dueDateTo);
   //           final result = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(result));
   //         }
@@ -143,18 +143,18 @@ class TaskRepositoryImpl extends BaseRepositoryImpl<
   //     );
 
   // @override
-  // EResultFuture<List<TaskEntity>> getBatchArchived({
+  // EResultFuture<List<TaskEntity>> getArchived({
   //   DataSourcePolicy policy = DataSourcePolicy.localOnly,
   // }) async =>
   //     tryCatchEither(
   //       action: () async {
   //         if (DataSourcePolicy.isLocal(policy)) {
-  //           final response = await _localDataSource.getBatchArchived();
+  //           final response = await _localDataSource.getArchived();
   //           final models = _dataMapperfoldEitherList<TaskHiveModel>(response);
   //           return Right(_dataMappertoEntitiesFromHive(models));
   //         }
   //         if (_netConnectivity.state is NetworkConnectivityMonitorSuccessState) {
-  //           final response = await _remoteDataSource.getBatchArchived();
+  //           final response = await _remoteDataSource.getArchived();
   //           final models = _dataMapperfoldEitherList<TaskSupabaseModel>(response);
   //           return Right(_dataMappertoEntitiesFromSupabase(models));
   //         }

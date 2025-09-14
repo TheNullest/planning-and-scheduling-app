@@ -17,14 +17,12 @@ class ScheduleConstraintDataMapperImpl extends ScheduleConstraintsDataMapper {
           updatedAt: model.updatedAt,
           userId: model.userId,
           taskId: model.taskId,
-          startAt: model.startAt,
-          endAt: model.endAt,
-          monthDayExceptions: model.monthDayExceptions,
-          weekDayExceptions: model.weekDayExceptions,
+          startDate: model.startDate,
+          endDate: model.endDate,
+          exceptionMonthDays: model.exceptionMonthDays,
+          exceptionWeekDays: model.exceptionWeekDays,
           enforceScheduleBounds: model.enforceScheduleBounds,
-          dateRangeExceptionIds: List.from(model.dateRangeExceptionIds),
-          timeRangeExceptionIds: List.from(model.timeRangeExceptionIds),
-          dateExceptions: List.from(model.dateExceptions));
+          exceptionDates: List.from(model.exceptionDates));
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);
     }
@@ -43,14 +41,12 @@ class ScheduleConstraintDataMapperImpl extends ScheduleConstraintsDataMapper {
         updatedAt: model.updatedAt,
         userId: model.userId,
         taskId: model.taskId,
-        startAt: model.startAt,
-        endAt: model.endAt,
-        monthDayExceptions: model.monthDayExceptions,
-        weekDayExceptions: model.weekDayExceptions.map(WeekDay.fromName).toList(),
+        startDate: model.startDate,
+        endDate: model.endDate,
+        exceptionMonthDays: model.exceptionMonthDays,
+        exceptionWeekDays: model.exceptionWeekDays.map(WeekDay.fromName).toList(),
         enforceScheduleBounds: model.enforceScheduleBounds,
-        dateRangeExceptionIds: List.from(model.dateRangeExceptionIds),
-        timeRangeExceptionIds: List.from(model.timeRangeExceptionIds),
-        dateExceptions: List.from(model.dateExceptions),
+        exceptionDates: List.from(model.exceptionDates),
       );
     } on Exception catch (e, stackTrace) {
       throw failureTypeDetector(e: e, stackTrace: stackTrace);

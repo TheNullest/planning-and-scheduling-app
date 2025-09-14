@@ -34,9 +34,9 @@ mixin _$TaskActivitySupabaseModel {
   String get userId => throw _privateConstructorUsedError;
   @JsonKey(name: 'variable_tag_ids')
   List<String> get variableTagIds => throw _privateConstructorUsedError;
-  @JsonKey(name: 'start_at')
+  @JsonKey(name: 'start_time')
   DateTime get startedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'end_at')
+  @JsonKey(name: 'end_time')
   DateTime? get endedAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   DateTime? get updatedAt => throw _privateConstructorUsedError;
@@ -70,8 +70,8 @@ abstract class $TaskActivitySupabaseModelCopyWith<$Res> {
       @JsonKey(name: 'task_status') String taskStatus,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'variable_tag_ids') List<String> variableTagIds,
-      @JsonKey(name: 'start_at') DateTime startedAt,
-      @JsonKey(name: 'end_at') DateTime? endedAt,
+      @JsonKey(name: 'start_time') DateTime startedAt,
+      @JsonKey(name: 'end_time') DateTime? endedAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') String? schedulerId,
       @JsonKey(name: 'scheduler_type') String? schedulerType,
@@ -182,8 +182,8 @@ abstract class _$$TaskActivitySupabaseModelImplCopyWith<$Res>
       @JsonKey(name: 'task_status') String taskStatus,
       @JsonKey(name: 'user_id') String userId,
       @JsonKey(name: 'variable_tag_ids') List<String> variableTagIds,
-      @JsonKey(name: 'start_at') DateTime startedAt,
-      @JsonKey(name: 'end_at') DateTime? endedAt,
+      @JsonKey(name: 'start_time') DateTime startedAt,
+      @JsonKey(name: 'end_time') DateTime? endedAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') String? schedulerId,
       @JsonKey(name: 'scheduler_type') String? schedulerType,
@@ -288,8 +288,8 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
       @JsonKey(name: 'user_id') required this.userId,
       @JsonKey(name: 'variable_tag_ids')
       required final List<String> variableTagIds,
-      @JsonKey(name: 'start_at') required this.startedAt,
-      @JsonKey(name: 'end_at') this.endedAt,
+      @JsonKey(name: 'start_time') required this.startedAt,
+      @JsonKey(name: 'end_time') this.endedAt,
       @JsonKey(name: 'updated_at') this.updatedAt,
       @JsonKey(name: 'scheduler_id') this.schedulerId,
       @JsonKey(name: 'scheduler_type') this.schedulerType,
@@ -326,10 +326,10 @@ class _$TaskActivitySupabaseModelImpl implements _TaskActivitySupabaseModel {
   }
 
   @override
-  @JsonKey(name: 'start_at')
+  @JsonKey(name: 'start_time')
   final DateTime startedAt;
   @override
-  @JsonKey(name: 'end_at')
+  @JsonKey(name: 'end_time')
   final DateTime? endedAt;
   @override
   @JsonKey(name: 'updated_at')
@@ -421,8 +421,8 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
       @JsonKey(name: 'user_id') required final String userId,
       @JsonKey(name: 'variable_tag_ids')
       required final List<String> variableTagIds,
-      @JsonKey(name: 'start_at') required final DateTime startedAt,
-      @JsonKey(name: 'end_at') final DateTime? endedAt,
+      @JsonKey(name: 'start_time') required final DateTime startedAt,
+      @JsonKey(name: 'end_time') final DateTime? endedAt,
       @JsonKey(name: 'updated_at') final DateTime? updatedAt,
       @JsonKey(name: 'scheduler_id') final String? schedulerId,
       @JsonKey(name: 'scheduler_type') final String? schedulerType,
@@ -452,10 +452,10 @@ abstract class _TaskActivitySupabaseModel implements TaskActivitySupabaseModel {
   @JsonKey(name: 'variable_tag_ids')
   List<String> get variableTagIds;
   @override
-  @JsonKey(name: 'start_at')
+  @JsonKey(name: 'start_time')
   DateTime get startedAt;
   @override
-  @JsonKey(name: 'end_at')
+  @JsonKey(name: 'end_time')
   DateTime? get endedAt;
   @override
   @JsonKey(name: 'updated_at')

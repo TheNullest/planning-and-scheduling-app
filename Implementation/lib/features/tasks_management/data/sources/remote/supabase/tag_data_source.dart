@@ -14,8 +14,8 @@ class TagSupabaseDataSourceImpl extends SupabaseDataSource<TagSupabaseModel, Tag
   });
 
   @override
-  EResultFuture<List<TagSupabaseModel>> fetchAllWithRelatedTask(String taskId) {
-    // TODO: implement fetchAllWithRelatedTask
+  EResultFuture<List<TagSupabaseModel>> getWithRelatedTask(String taskId) {
+    // TODO: implement getWithRelatedTask
     throw UnimplementedError();
   }
 }

@@ -17,7 +17,7 @@ class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
   final HiveBoxRunner<SubTaskHiveModel> _hiveBox;
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getBatchByPriority(
+  EResultFuture<List<SubTaskHiveModel>> getByPriority(
     Priority priority,
   ) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
@@ -25,7 +25,7 @@ class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getBatchByStatus(
+  EResultFuture<List<SubTaskHiveModel>> getByStatus(
     TaskStatus status,
   ) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
@@ -33,7 +33,7 @@ class SubTaskHiveDataSourceImpl extends HiveDataSource<SubTaskHiveModel>
       );
 
   @override
-  EResultFuture<List<SubTaskHiveModel>> getBatchByTaskIds(List<String> taskIds) async =>
+  EResultFuture<List<SubTaskHiveModel>> getByTaskIds(List<String> taskIds) async =>
       _hiveBox.runBoxOperation<List<SubTaskHiveModel>>(
         job: (box) async => box.values.where((item) => taskIds.contains(item.taskId)).toList(),
       );

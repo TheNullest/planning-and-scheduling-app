@@ -6,11 +6,11 @@ import 'package:zamaan/domain/entities/task.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/create_sub_task_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/delete_batch_sub_tasks_by_task_id_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/delete_sub_task_use_case.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_batch_sub_tasks_by_task_ids_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/get_sub_tasks_by_task_ids_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/sub_task/update_sub_task_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/create_task_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/delete_task_use_case.dart';
-import 'package:zamaan/features/tasks_management/domain/usecases/task/get_batch_tasks_use_case.dart';
+import 'package:zamaan/features/tasks_management/domain/usecases/task/get_tasks_use_case.dart';
 import 'package:zamaan/features/tasks_management/domain/usecases/task/update_task_use_case.dart';
 
 part 'tasks_manager_bloc.freezed.dart';
@@ -22,21 +22,21 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     required CreateTaskUseCase createTaskUseCase,
     required CreateSubTaskUseCase createSubTaskUseCase,
     required DeleteTaskUseCase deleteTaskUseCase,
-    required DeleteBatchSubTasksByTaskIdUseCase deleteBatchSubTasksByTaskIdUseCase,
+    required DeleteBatchSubTasksByTaskIdUseCase deleteSubTasksByTaskIdUseCase,
     required DeleteSubTaskUseCase deleteSubTaskUseCase,
     required UpdateTaskUseCase updateTaskUseCase,
     required UpdateSubTaskUseCase updateSubTaskUseCase,
-    required GetBatchTasksUseCase getBatchTasksUseCase,
-    required GetBatchSubTasksByTaskIdsUseCase getBatchSubTasksUseCase,
+    required GetTasksUseCase getTasksUseCase,
+    required GetSubTasksByTaskIdsUseCase getSubTasksUseCase,
   })  : _createTaskUseCase = createTaskUseCase,
         _createSubTaskUseCase = createSubTaskUseCase,
         _deleteTaskUseCase = deleteTaskUseCase,
         _deleteSubTaskUseCase = deleteSubTaskUseCase,
-        _deleteBatchSubTasksByTaskIdUseCase = deleteBatchSubTasksByTaskIdUseCase,
+        _deleteSubTasksByTaskIdUseCase = deleteSubTasksByTaskIdUseCase,
         _updateTaskUseCase = updateTaskUseCase,
         _updateSubTaskUseCase = updateSubTaskUseCase,
-        _getBatchTasksUseCase = getBatchTasksUseCase,
-        _getBatchSubTasksByIdsUseCase = getBatchSubTasksUseCase,
+        _getTasksUseCase = getTasksUseCase,
+        _getSubTasksByIdsUseCase = getSubTasksUseCase,
         super(const _Initial()) {
     on<TasksManagerEvent>((event, emit) async {
       await event.map(
@@ -45,9 +45,9 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         createSubTask: (e) async => _createSubTask(e, emit),
         deleteTask: (e) async => _deleteTask(e, emit),
         deleteSubTask: (e) async => _deleteSubTask(e, emit),
-        deleteBatchSubTasksByTaskId: (e) async => _deleteBatchSubTasks(e, emit),
+        deleteSubTasksByTaskId: (e) async => _deleteSubTasks(e, emit),
         updateTask: (e) async => _updateTask(e, emit),
-        fetchActiveTasks: (e) async => _fetchActiveTasks(e, emit),
+        getActiveTasks: (e) async => _getActiveTasks(e, emit),
         updateSubTask: (e) async => _updateSubTask(e, emit),
       );
     });
@@ -56,17 +56,17 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
   final CreateTaskUseCase _createTaskUseCase;
   final CreateSubTaskUseCase _createSubTaskUseCase;
   final DeleteTaskUseCase _deleteTaskUseCase;
-  final DeleteBatchSubTasksByTaskIdUseCase _deleteBatchSubTasksByTaskIdUseCase;
+  final DeleteBatchSubTasksByTaskIdUseCase _deleteSubTasksByTaskIdUseCase;
   final DeleteSubTaskUseCase _deleteSubTaskUseCase;
   final UpdateTaskUseCase _updateTaskUseCase;
   final UpdateSubTaskUseCase _updateSubTaskUseCase;
-  final GetBatchTasksUseCase _getBatchTasksUseCase;
-  final GetBatchSubTasksByTaskIdsUseCase _getBatchSubTasksByIdsUseCase;
+  final GetTasksUseCase _getTasksUseCase;
+  final GetSubTasksByTaskIdsUseCase _getSubTasksByIdsUseCase;
 
   FutureVoid _handleStarted(Emitter<TasksManagerState> emit) async {
     emit(const TasksManagerState.loading());
     emit(const TasksManagerState.initial());
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
@@ -85,7 +85,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
     final taskId = tasksResponse.getOrElse(() => '');
     emit(_TaskCreated(taskId));
 
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
@@ -101,7 +101,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         emit(_SubTaskCreated(event.newSubTask));
       },
     );
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
@@ -118,7 +118,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
       },
     );
 
-    await _deleteBatchSubTasks(
+    await _deleteSubTasks(
       _DeleteBatchSubTasksByTaskId(taskId: event.taskId),
       emit,
     );
@@ -137,23 +137,23 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         emit(_SubTaskDeleted(event.subTaskId));
       },
     );
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
-  FutureVoid _deleteBatchSubTasks(
+  FutureVoid _deleteSubTasks(
     _DeleteBatchSubTasksByTaskId event,
     Emitter<TasksManagerState> emit,
   ) async {
     emit(const TasksManagerState.loading());
-    final response = await _deleteBatchSubTasksByTaskIdUseCase(event.taskId);
+    final response = await _deleteSubTasksByTaskIdUseCase(event.taskId);
     response.fold(
       (failure) => emit(_FailedAction(failure.message)),
       (taskId) {
         emit(const _SuccessfulAction(''));
       },
     );
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
@@ -169,7 +169,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         emit(TasksManagerState.taskUpdated(event.task));
       },
     );
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
@@ -185,13 +185,13 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
         emit(TasksManagerState.subTaskUpdated(event.subTask));
       },
     );
-    await _fetchActiveTasks(const _FetchActiveTasks(), emit);
+    await _getActiveTasks(const _GetActiveTasks(), emit);
     return;
   }
 
-  FutureVoid _fetchActiveTasks(_FetchActiveTasks e, Emitter<TasksManagerState> emit) async {
+  FutureVoid _getActiveTasks(_GetActiveTasks e, Emitter<TasksManagerState> emit) async {
     emit(const TasksManagerState.loading());
-    final tasksResponse = await _getBatchTasksUseCase();
+    final tasksResponse = await _getTasksUseCase();
 
     if (tasksResponse.isLeft()) {
       final failure = tasksResponse.swap().getOrElse(() => throw Exception());
@@ -200,7 +200,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
 
     final tasks = tasksResponse.getOrElse(() => []);
     final taskIds = tasks.map((item) => item.id).toList();
-    final subTasksResponse = await _getBatchSubTasksByIdsUseCase(taskIds);
+    final subTasksResponse = await _getSubTasksByIdsUseCase(taskIds);
 
     if (subTasksResponse.isLeft()) {
       final failure = subTasksResponse.swap().getOrElse(() => throw Exception());
@@ -209,7 +209,7 @@ class TasksManagerBloc extends Bloc<TasksManagerEvent, TasksManagerState> {
 
     final allSubTasks = subTasksResponse.getOrElse(() => []);
 
-    emit(TasksManagerState.fetchedTasks(tasks: tasks, subTasks: allSubTasks));
+    emit(TasksManagerState.loadedTasks(tasks: tasks, subTasks: allSubTasks));
     return;
   }
 }

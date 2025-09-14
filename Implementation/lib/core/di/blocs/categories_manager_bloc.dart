@@ -9,7 +9,7 @@ void _categoriesManagerBloc() {
     ..registerFactory<SupabaseDataSource<CategorySupabaseModel, CategoryDataMapper>>(
       () => CategorySupabaseDataSourceImpl(
         client: serviceLocator(),
-        collectionPath: CollectionPaths.task,
+        collectionPath: CollectionPaths.categories,
         dataMapper: serviceLocator(),
         defaultPagination: const PaginationOptions(),
       ),
@@ -28,14 +28,14 @@ void _categoriesManagerBloc() {
     // UseCases
     ..registerFactory(() => CreateCategoryUseCase(serviceLocator()))
     ..registerFactory(() => DeleteCategoryUseCase(serviceLocator()))
-    ..registerFactory(() => FetchAllCategoriesUseCase(serviceLocator()))
+    ..registerFactory(() => GetCategoriesUseCase(serviceLocator()))
     ..registerFactory(() => UpdateCategoryUseCase(serviceLocator()))
 
     // CategoriesManagerBloc
     ..registerLazySingleton<CategoriesManagerBloc>(
       () => CategoriesManagerBloc(
         createUseCase: serviceLocator(),
-        fetchAllUseCase: serviceLocator(),
+        getUseCase: serviceLocator(),
         deleteUseCase: serviceLocator(),
         updateUseCase: serviceLocator(),
       ),

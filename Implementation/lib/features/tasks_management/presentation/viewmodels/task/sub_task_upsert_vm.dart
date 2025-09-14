@@ -33,7 +33,6 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
   /// Parameters:
   ///   [subTask] - Existing subtask entity to edit
   SubTaskUpsertVM.fromEntity({
-    required super.userId,
     required super.entity,
   })  : _totalSpentTime = entity!.totalSpentTime!,
         _title = entity.title,
@@ -42,6 +41,7 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
         _taskId = entity.taskId,
         super(
           viewModelTitle: 'SubTask',
+          userId: entity.userId,
         );
 
   final String _taskId; // Parent task ID (immutable)
@@ -96,7 +96,7 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
   set title(String value) {
     _title = value;
     // Process modification and update dirty state
-    processModification(#title, value);
+    processChanges(#title, value);
   }
 
   late Priority _priority;
@@ -106,7 +106,7 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
 
   set priority(Priority value) {
     _priority = value;
-    processModification(#priority, value);
+    processChanges(#priority, value);
   }
 
   late TaskStatus _status;
@@ -116,7 +116,7 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
 
   set status(TaskStatus value) {
     _status = value;
-    processModification(#status, value);
+    processChanges(#status, value);
   }
 
   //-------------------------
@@ -126,9 +126,9 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
   /// Resets form fields to their original values
   @override
   void resetValues() {
-    title = getOriginalValue<String>(#title);
-    priority = getOriginalValue<Priority>(#priority);
-    status = getOriginalValue<TaskStatus>(#status);
+    title = getOriginalSignleValue<String>(#title);
+    priority = getOriginalSignleValue<Priority>(#priority);
+    status = getOriginalSignleValue<TaskStatus>(#status);
     // Complete reset in base class
     super.resetValues();
   }
@@ -137,12 +137,12 @@ class SubTaskUpsertVM extends BaseViewModel<SubTaskEntity> {
   @override
   SubTaskEntity get toEntity {
     return SubTaskEntity(
-      id: getOriginalValue<String?>(#id),
-      userId: getOriginalValue<String>(#userId),
+      id: getOriginalSignleValue<String?>(#id)!,
+      userId: getOriginalSignleValue<String>(#userId),
       taskId: _taskId,
       createdAt: getCreatedAt,
       updatedAt: getUpdatedAt,
-      totalSpentTime: getOriginalValue<Duration?>(#totalSpentTime) ?? Duration.zero,
+      totalSpentTime: getOriginalSignleValue<Duration?>(#totalSpentTime) ?? Duration.zero,
       description: description.isNotEmpty ? description : null,
       priority: _priority,
       title: _title,

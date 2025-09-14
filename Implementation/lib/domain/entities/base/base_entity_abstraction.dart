@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zamaan/core/utils/uuid.dart';
 
 /// An abstract base class for entities, providing common fields and functionality.
 ///
@@ -14,11 +13,10 @@ abstract class BaseEntityAbstraction with EquatableMixin {
   BaseEntityAbstraction(
       {required this.userId,
       required this.createdAt,
-      String? id,
+      required this.id,
       this.description,
       this.updatedAt,
-      this.order})
-      : id = id ?? uuidGenerator;
+      this.order});
 
   /// Creates a new `BaseEntityAbstraction` with the specified properties.
   ///

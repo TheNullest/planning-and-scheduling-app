@@ -17,10 +17,10 @@ class CategoryChipWidget extends StatelessWidget {
 
     return ChangeNotifierProvider<CategoryUpsertVM>.value(
       value: category,
-      child: ValueListenableBuilder<bool>(
+      child: ValueListenableBuilder<bool?>(
         valueListenable: category.isSelected,
         builder: (_, isSelected, __) {
-          final chipBgColor = isSelected
+          final chipBgColor = isSelected!
               ? vmFormController.color
               : Color.lerp(vmFormController.color, Colors.black, 0.8)!; // 0.8 makes it much darker
           final brightness = ThemeData.estimateBrightnessForColor(chipBgColor);
@@ -125,7 +125,10 @@ class CategoryChipWidget extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () async => customShowModalBottomSheetDialog<CategoryUpsertVM>(
-            context, category, const CategoryUpsertFormWidget()),
+          context,
+          category,
+          const CategoryUpsertFormWidget(),
+        ),
         borderRadius: BorderRadius.circular(16),
         child: Padding(
           padding: const EdgeInsets.all(4),
